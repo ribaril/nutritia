@@ -1,8 +1,35 @@
 ﻿<Window x:Class="Nutritia.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <ContentPresenter Name="presenteurContenu" />
-    </Grid>
+        Title="MainWindow" Height="550" Width="650"
+		ResizeMode="NoResize">
+
+	<Canvas>
+		<Canvas.Background>
+			<ImageBrush Opacity="0.3" ImageSource="/Nutritia;component/UI/Images/background.jpg"/>
+		</Canvas.Background>
+		<DockPanel Width="650" Background="AliceBlue" Height="33">
+			<ToolBar Height="35">
+				<Button>
+					<DockPanel>
+						<Image Source="/Nutritia;component/UI/Images/aProposIcon.PNG"/>
+						<Label Content="Information" FontSize="15" FontFamily="Berlin"/>
+					</DockPanel>
+				</Button>
+				<Button>
+					<DockPanel>
+						<Image Source="/Nutritia;component/UI/Images/paramIcon.PNG"/>
+						<Label Content="Paramètre" FontSize="15" FontFamily="Berlin"/>
+					</DockPanel>
+				</Button>
+				<Button>
+					<DockPanel>
+						<Image Source="/Nutritia;component/UI/Images/HelpIcon.PNG"/>
+						<Label Content="Aide" FontSize="15" FontFamily="Berlin"/>
+					</DockPanel>
+				</Button>
+			</ToolBar>
+		</DockPanel>
+		<ContentPresenter Name="presenteurContenu" />
+    </Canvas>
 </Window>
