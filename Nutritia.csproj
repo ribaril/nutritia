@@ -34,7 +34,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.9.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\MySql.Data.6.9.7\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,6 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Logic\Model\Args\RetrieveMembreArgs.cs" />
     <Compile Include="Logic\Model\Entities\Aliments.cs" />
     <Compile Include="Logic\Model\Entities\Calculatrice.cs" />
     <Compile Include="Logic\Model\Entities\GenerateurMenu.cs" />
@@ -63,6 +69,9 @@
     <Compile Include="Logic\Model\Entities\Preference.cs" />
     <Compile Include="Logic\Model\Entities\RestrictionAlimentaire.cs" />
     <Compile Include="Logic\Model\Entities\UniteMesure.cs" />
+    <Compile Include="Logic\Services\Definitions\IMembreService.cs" />
+    <Compile Include="Logic\Services\Helpers\MySqlConnexion.cs" />
+    <Compile Include="Logic\Services\MySql\MySqlMembreService.cs" />
     <Compile Include="Toolkit\Services\Definitions\IApplicationService.cs" />
     <Compile Include="Toolkit\Services\ServiceFactory.cs" />
     <Page Include="MainWindow.xaml">
