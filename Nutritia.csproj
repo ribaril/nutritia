@@ -34,12 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Iesi.Collections">
-      <HintPath>packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate">
-      <HintPath>packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -69,7 +63,6 @@
     <Compile Include="Logic\Model\Entities\Preference.cs" />
     <Compile Include="Logic\Model\Entities\RestrictionAlimentaire.cs" />
     <Compile Include="Logic\Model\Entities\UniteMesure.cs" />
-    <Compile Include="Logic\Services\Helpers\NHibernateConnexion.cs" />
     <Compile Include="Toolkit\Services\Definitions\IApplicationService.cs" />
     <Compile Include="Toolkit\Services\ServiceFactory.cs" />
     <Page Include="MainWindow.xaml">
@@ -114,6 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Logic\Model\Args\" />
+    <Folder Include="Logic\Services\Helpers\" />
     <Folder Include="UI\Views\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
