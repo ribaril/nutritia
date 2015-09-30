@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,20 +25,18 @@ namespace Nutritia
         {
             InitializeComponent();
             Configurer();
-
-            //presenteurContenu.Content = new ProprieteView();
-
         }
 
         private void Configurer()
         {
             //Déclaration du ApplicationService
-            /*
+            ServiceFactory.Instance.Register<IRestrictionAlimentaireService, MySqlRestrictionAlimentaireService>(new MySqlRestrictionAlimentaireService());
+            ServiceFactory.Instance.Register<IObjectifService, MySqlObjectifService>(new MySqlObjectifService());
+            ServiceFactory.Instance.Register<IPreferenceService, MySqlPreferenceService>(new MySqlPreferenceService());
+            ServiceFactory.Instance.Register<IMenuService, MySqlMenuService>(new MySqlMenuService());
+            ServiceFactory.Instance.Register<IMembreService, MySqlMembreService>(new MySqlMembreService());
+            ServiceFactory.Instance.Register<IPlatService, MySqlPlatService>(new MySqlPlatService());
             ServiceFactory.Instance.Register<IApplicationService, MainWindow>(this);
-            ServiceFactory.Instance.Register<IClientService, SimpleClientService>(new SimpleClientService());
-            ServiceFactory.Instance.Register<IProprietaireService, SimpleProprietaireService>(new SimpleProprietaireService());
-            ServiceFactory.Instance.Register<IProprieteService, SimpleProprieteService>(new SimpleProprieteService());
-            */
         }
 
         public void ChangerVue<T>(T vue)

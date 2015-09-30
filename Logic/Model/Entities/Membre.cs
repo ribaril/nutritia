@@ -12,7 +12,7 @@ namespace Nutritia
         public int? IdMembre { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
-        public int Taille { get; set; }
+        public double Taille { get; set; }
         public double Masse { get; set; }
         public DateTime DateNaissance { get; set; }
         public string MotPasse { get; set; }
