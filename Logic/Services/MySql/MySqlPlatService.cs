@@ -49,7 +49,7 @@ namespace Nutritia
                 Nom = (string)plat["nom"],
                 Note = (int)plat["note"],
                 // TODO : À voir pour le 'EstType'
-                ListeIngredients = new List<Aliments>()
+                ListeIngredients = new List<Aliment>()
             };
         }
     }

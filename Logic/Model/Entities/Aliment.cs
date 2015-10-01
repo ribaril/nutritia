@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Nutritia
 {
-    public class Aliments
+    public class Aliment
     {
         #region Proprietes
         public int? IdAliment { get; set; }
