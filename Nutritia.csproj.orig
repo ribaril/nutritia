@@ -64,7 +64,7 @@
     <Compile Include="Logic\Model\Args\RetrievePlatArgs.cs" />
     <Compile Include="Logic\Model\Args\RetrievePreferenceArgs.cs" />
     <Compile Include="Logic\Model\Args\RetrieveRestrictionAlimentaireArgs.cs" />
-    <Compile Include="Logic\Model\Entities\Aliment.cs" />
+    <Compile Include="Logic\Model\Entities\Aliments.cs" />
     <Compile Include="Logic\Model\Entities\Calculatrice.cs" />
     <Compile Include="Logic\Model\Entities\GenerateurMenu.cs" />
     <Compile Include="Logic\Model\Entities\Membre.cs" />
@@ -89,11 +89,7 @@
     <Compile Include="Logic\Services\MySql\MySqlRestrictionAlimentaireService.cs" />
     <Compile Include="Toolkit\Services\Definitions\IApplicationService.cs" />
     <Compile Include="Toolkit\Services\ServiceFactory.cs" />
-    <Compile Include="UI\Views\CreationProfil.xaml.cs">
-      <DependentUpon>CreationProfil.xaml</DependentUpon>
-    </Compile>    <Compile Include="UI\Views\GenerateurMenus.xaml.cs">
-      <DependentUpon>GenerateurMenus.xaml</DependentUpon>
-    </Compile>    <Compile Include="UI\Views\MenuPrincipal.xaml.cs">
+    <Compile Include="UI\Views\MenuPrincipal.xaml.cs">
       <DependentUpon>MenuPrincipal.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
@@ -108,13 +104,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UI\Views\CreationProfil.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>    <Page Include="UI\Views\GenerateurMenus.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>    <Page Include="UI\Views\MenuPrincipal.xaml">
+    <Page Include="UI\Views\MenuPrincipal.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -147,6 +137,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+    <Folder Include="UI\Views\" />
+=======
+    <Folder Include="Logic\Model\Args\" />
+    <Folder Include="Logic\Services\Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="UI\Images\calcIcon.png" />
@@ -167,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="UI\Images\notifIcon.png" />
+>>>>>>> upstream/develop
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
