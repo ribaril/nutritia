@@ -95,6 +95,9 @@
     <Compile Include="UI\Views\GenerateurMenus.xaml.cs">
       <DependentUpon>GenerateurMenus.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Views\ListeEpicerie.xaml.cs">
+      <DependentUpon>ListeEpicerie.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\MenuPrincipal.xaml.cs">
       <DependentUpon>MenuPrincipal.xaml</DependentUpon>
     </Compile>
@@ -118,6 +121,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Views\GenerateurMenus.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\ListeEpicerie.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -158,6 +165,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="UI\Images\imprimanteIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="UI\Images\calcIcon.png" />
