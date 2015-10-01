@@ -91,10 +91,15 @@
     <Compile Include="Toolkit\Services\ServiceFactory.cs" />
     <Compile Include="UI\Views\CreationProfil.xaml.cs">
       <DependentUpon>CreationProfil.xaml</DependentUpon>
-    </Compile>    <Compile Include="UI\Views\GenerateurMenus.xaml.cs">
+    </Compile>
+    <Compile Include="UI\Views\GenerateurMenus.xaml.cs">
       <DependentUpon>GenerateurMenus.xaml</DependentUpon>
-    </Compile>    <Compile Include="UI\Views\MenuPrincipal.xaml.cs">
+    </Compile>
+    <Compile Include="UI\Views\MenuPrincipal.xaml.cs">
       <DependentUpon>MenuPrincipal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\ModificationProfil.xaml.cs">
+      <DependentUpon>ModificationProfil.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -111,12 +116,18 @@
     <Page Include="UI\Views\CreationProfil.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>    <Page Include="UI\Views\GenerateurMenus.xaml">
+    </Page>
+    <Page Include="UI\Views\GenerateurMenus.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>    <Page Include="UI\Views\MenuPrincipal.xaml">
+    </Page>
+    <Page Include="UI\Views\MenuPrincipal.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\ModificationProfil.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
