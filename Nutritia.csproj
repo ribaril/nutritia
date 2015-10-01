@@ -64,7 +64,7 @@
     <Compile Include="Logic\Model\Args\RetrievePlatArgs.cs" />
     <Compile Include="Logic\Model\Args\RetrievePreferenceArgs.cs" />
     <Compile Include="Logic\Model\Args\RetrieveRestrictionAlimentaireArgs.cs" />
-    <Compile Include="Logic\Model\Entities\Aliments.cs" />
+    <Compile Include="Logic\Model\Entities\Aliment.cs" />
     <Compile Include="Logic\Model\Entities\Calculatrice.cs" />
     <Compile Include="Logic\Model\Entities\GenerateurMenu.cs" />
     <Compile Include="Logic\Model\Entities\Membre.cs" />
