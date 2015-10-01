@@ -11,7 +11,6 @@ namespace Nutritia
         #region Proprietes
         public int? IdObjectif { get; set; }
         public string Nom { get; set; }
-        public bool EstSelectionne { get; set; }
         #endregion
     }
 }

@@ -53,7 +53,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Logic\Model\Entities\Aliments.cs" />
+    <Compile Include="Logic\Model\Entities\Aliment.cs" />
     <Compile Include="Logic\Model\Entities\Calculatrice.cs" />
     <Compile Include="Logic\Model\Entities\GenerateurMenu.cs" />
     <Compile Include="Logic\Model\Entities\Membre.cs" />
