@@ -33,8 +33,8 @@ namespace Nutritia
         /// <returns>Une liste contenant les membres.</returns>
         public IList<Membre> RetrieveAll()
         {
+        
             IList<Membre> resultat = new List<Membre>();
-
             try
             {
                 connexion = new MySqlConnexion();
