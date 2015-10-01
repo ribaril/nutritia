@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Nutritia.UI.Views;
 
 namespace Nutritia
 {
@@ -25,6 +26,9 @@ namespace Nutritia
         {
             InitializeComponent();
             Configurer();
+
+            presenteurContenu.Content = new MenuPrincipal();
+
         }
 
         private void Configurer()

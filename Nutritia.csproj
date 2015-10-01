@@ -89,6 +89,9 @@
     <Compile Include="Logic\Services\MySql\MySqlRestrictionAlimentaireService.cs" />
     <Compile Include="Toolkit\Services\Definitions\IApplicationService.cs" />
     <Compile Include="Toolkit\Services\ServiceFactory.cs" />
+    <Compile Include="UI\Views\MenuPrincipal.xaml.cs">
+      <DependentUpon>MenuPrincipal.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -101,6 +104,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UI\Views\MenuPrincipal.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -130,7 +137,26 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="UI\Views\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\calcIcon.png" />
+    <Resource Include="UI\Images\LogoIcon.PNG" />
+    <Resource Include="UI\Images\menuListIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\logInIcon.png" />
+    <Resource Include="UI\Images\SignInIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\aProposIcon.png" />
+    <Resource Include="UI\Images\HelpIcon.png" />
+    <Resource Include="UI\Images\paramIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\notifIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
