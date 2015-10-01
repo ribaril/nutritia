@@ -13,26 +13,28 @@ namespace Nutritia
 
         private readonly Dictionary<Type, object> _instancesRegistry = new Dictionary<Type, object>();
 
-        public void Register<TInterface, TClass>(TClass service) 
-            where TInterface : class 
-            where TClass :class
+        public void Register<TInterface, TClass>(TClass service)
+            where TInterface : class
+            where TClass : class
         {
             _instancesRegistry.Add(typeof(TInterface), service);
         }
 
-        public static ServiceFactory Instance 
+        public static ServiceFactory Instance
         {
-             get
+            get
             {
                 return _instance ?? (_instance = new ServiceFactory());
             }
         }
 
-        public T GetService<T>() 
-            where T : class 
+        public T GetService<T>()
+            where T : class
         {
             return (T)_instancesRegistry[typeof(T)];
         }
+
+        private ServiceFactory() { }
 
     }
 }
