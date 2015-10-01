@@ -18,7 +18,7 @@ namespace Nutritia
         public bool EstPrincipal { get; set; }
         public bool EstBreuvage { get; set; }
         public bool EstDessert { get; set; }
-        public IList<Aliments> ListeIngredients { get; set; }
+        public IList<Aliment> ListeIngredients { get; set; }
         public bool EstActif { get; set; }
         #endregion
     }
