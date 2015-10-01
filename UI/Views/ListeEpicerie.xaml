@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="Nutritia.UI.Views.ListeEpicerie"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="475" d:DesignWidth="650">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="400"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="375"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid Width="325" Height="350">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="25" Header=""></DataGridTextColumn>
+                <DataGridTextColumn Width="125" Header="Article"></DataGridTextColumn>
+                <DataGridTextColumn Width="75" Header="Quantité"></DataGridTextColumn>
+                <DataGridTextColumn Width="100" Header="Unité de mesure"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Grid.Row="1" Grid.Column="1" Width="150" Height="50">
+            <DockPanel>
+                <Label VerticalAlignment="Center">Imprimer</Label>
+                <Image Source="../Images/imprimanteIcon.png"/>
+            </DockPanel>
+        </Button>
+
+        <Rectangle Grid.Column="1" Width="225" Height="350" Stroke="Black"></Rectangle>
+
+    </Grid>
+</UserControl>
