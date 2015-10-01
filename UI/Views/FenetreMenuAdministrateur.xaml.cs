@@ -24,5 +24,37 @@ namespace Nutritia.UI.Views
         {
             InitializeComponent();
         }
+
+        private void btnRepertoire_Click(object sender, RoutedEventArgs e)
+        {
+
+            IApplicationService mainWindow = ServiceFactory.Instance.GetService<IApplicationService>();
+
+            if (mainWindow is MainWindow)
+            {
+                (mainWindow as MainWindow).ChangerVue(new GestionRepertoire());
+            }
+
+        }
+
+        private void btngestionAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            IApplicationService mainWindow = ServiceFactory.Instance.GetService<IApplicationService>();
+
+            if (mainWindow is MainWindow)
+            {
+                (mainWindow as MainWindow).ChangerVue(new GestionAdmin());
+            }
+        }
+
+        private void btnBanUtilisateur_Click(object sender, RoutedEventArgs e)
+        {
+            IApplicationService mainWindow = ServiceFactory.Instance.GetService<IApplicationService>();
+
+            if (mainWindow is MainWindow)
+            {
+                (mainWindow as MainWindow).ChangerVue(new Bannissement());
+            }
+        }
     }
 }
