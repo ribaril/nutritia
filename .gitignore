@@ -15,6 +15,10 @@
 
 #git conflit files
 *.orig
+*_BACKUP_*
+*_BASE_*
+*_LOCAL_*
+*_REMOTE_*
 
 # Build results
 [Dd]ebug/
