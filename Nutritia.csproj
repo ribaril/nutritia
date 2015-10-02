@@ -137,6 +137,9 @@
     <Compile Include="UI\Views\ListeEpicerie.xaml.cs">
       <DependentUpon>ListeEpicerie.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Views\MenuAdministrateur.xaml.cs">
+      <DependentUpon>MenuAdministrateur.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\MenuPrincipal.xaml.cs">
       <DependentUpon>MenuPrincipal.xaml</DependentUpon>
     </Compile>
@@ -218,6 +221,10 @@
     <Page Include="UI\Views\ListeEpicerie.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\MenuAdministrateur.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\Views\MenuPrincipal.xaml">
       <Generator>MSBuild:Compile</Generator>
