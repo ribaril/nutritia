@@ -89,8 +89,11 @@
     <Compile Include="Logic\Services\MySql\MySqlRestrictionAlimentaireService.cs" />
     <Compile Include="Toolkit\Services\Definitions\IApplicationService.cs" />
     <Compile Include="Toolkit\Services\ServiceFactory.cs" />
-    <Compile Include="UI\Views\AjoutPlat.xaml.cs">
-      <DependentUpon>AjoutPlat.xaml</DependentUpon>
+    <Compile Include="UI\Views\AjoutPlatAdmin.xaml.cs">
+      <DependentUpon>AjoutPlatAdmin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\AjoutPlatMembre.xaml.cs">
+      <DependentUpon>AjoutPlatMembre.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\APropos.xaml.cs">
       <DependentUpon>APropos.xaml</DependentUpon>
@@ -98,8 +101,8 @@
     <Compile Include="UI\Views\Bannissement.xaml.cs">
       <DependentUpon>Bannissement.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\CalculatriceNutrition.xaml.cs">
-      <DependentUpon>CalculatriceNutrition.xaml</DependentUpon>
+    <Compile Include="UI\Views\FenetreCalculatriceNutritionnelle.xaml.cs">
+      <DependentUpon>FenetreCalculatriceNutritionnelle.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\CreationProfil.xaml.cs">
       <DependentUpon>CreationProfil.xaml</DependentUpon>
@@ -119,8 +122,8 @@
     <Compile Include="UI\Views\FenetreInfoMembre.xaml.cs">
       <DependentUpon>FenetreInfoMembre.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\FenetreParametre.xaml.cs">
-      <DependentUpon>FenetreParametre.xaml</DependentUpon>
+    <Compile Include="UI\Views\FenetreParametres.xaml.cs">
+      <DependentUpon>FenetreParametres.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\GenerateurMenus.xaml.cs">
       <DependentUpon>GenerateurMenus.xaml</DependentUpon>
@@ -152,7 +155,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UI\Views\AjoutPlat.xaml">
+    <Page Include="UI\Views\AjoutPlatAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\AjoutPlatMembre.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -164,7 +171,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Views\CalculatriceNutrition.xaml">
+    <Page Include="UI\Views\FenetreCalculatriceNutritionnelle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -192,7 +199,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Views\FenetreParametre.xaml">
+    <Page Include="UI\Views\FenetreParametres.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
