@@ -89,11 +89,50 @@
     <Compile Include="Logic\Services\MySql\MySqlRestrictionAlimentaireService.cs" />
     <Compile Include="Toolkit\Services\Definitions\IApplicationService.cs" />
     <Compile Include="Toolkit\Services\ServiceFactory.cs" />
+    <Compile Include="UI\Views\AjoutPlatAdmin.xaml.cs">
+      <DependentUpon>AjoutPlatAdmin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\AjoutPlatMembre.xaml.cs">
+      <DependentUpon>AjoutPlatMembre.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\APropos.xaml.cs">
+      <DependentUpon>APropos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\Bannissement.xaml.cs">
+      <DependentUpon>Bannissement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FenetreCalculatriceNutritionnelle.xaml.cs">
+      <DependentUpon>FenetreCalculatriceNutritionnelle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\CreationProfil.xaml.cs">
       <DependentUpon>CreationProfil.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Views\Don.xaml.cs">
+      <DependentUpon>Don.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\EcranMenu.xaml.cs">
+      <DependentUpon>EcranMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FenetreAide.xaml.cs">
+      <DependentUpon>FenetreAide.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FenetreConnexion.xaml.cs">
+      <DependentUpon>FenetreConnexion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FenetreInfoMembre.xaml.cs">
+      <DependentUpon>FenetreInfoMembre.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FenetreParametres.xaml.cs">
+      <DependentUpon>FenetreParametres.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\GenerateurMenus.xaml.cs">
       <DependentUpon>GenerateurMenus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\GestionAdmin.xaml.cs">
+      <DependentUpon>GestionAdmin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\GestionRepertoire.xaml.cs">
+      <DependentUpon>GestionRepertoire.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\ListeEpicerie.xaml.cs">
       <DependentUpon>ListeEpicerie.xaml</DependentUpon>
@@ -116,11 +155,63 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UI\Views\AjoutPlatAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\AjoutPlatMembre.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\APropos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\Bannissement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\FenetreCalculatriceNutritionnelle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Views\CreationProfil.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Views\Don.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\EcranMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\FenetreAide.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\FenetreConnexion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\FenetreInfoMembre.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\FenetreParametres.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Views\GenerateurMenus.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\GestionAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\GestionRepertoire.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
