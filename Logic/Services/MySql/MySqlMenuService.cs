@@ -11,6 +11,12 @@ namespace Nutritia
     public class MySqlMenuService : IMenuService
     {
         private MySqlConnexion connexion;
+        private readonly IPlatService platService;
+
+        public MySqlMenuService()
+        {
+            platService = ServiceFactory.Instance.GetService<IPlatService>();
+        }
 
         public IList<Menu> RetrieveAll(RetrieveMenuArgs args)
         {
@@ -30,9 +36,23 @@ namespace Nutritia
                 DataSet dataSetMenus = connexion.Query(requete);
                 DataTable tableMenus = dataSetMenus.Tables[0];
 
-                foreach (DataRow menu in tableMenus.Rows)
+                foreach (DataRow rowMenu in tableMenus.Rows)
                 {
-                    resultat.Add(ConstruireMenu(menu));
+                    Menu menu = ConstruireMenu(rowMenu);
+                    
+                    // Ajout des plats du menu.
+                    requete = string.Format("SELECT * FROM MenusPlats WHERE idMenu = {0}", menu.IdMenu);
+
+                    DataSet dataSetPlats = connexion.Query(requete);
+                    DataTable tablePlats = dataSetPlats.Tables[0];
+
+                    foreach (DataRow rowPlat in tablePlats.Rows)
+                    {
+                        menu.ListePlats.Add(platService.Retrieve(new RetrievePlatArgs{IdPlat = (int)rowPlat["idPlat"]}));
+                    }
+
+                    resultat.Add(menu);
+
                 }
 
             }
@@ -45,6 +65,7 @@ namespace Nutritia
 
         }
 
+        // Ajouter les plats.
         public Menu Retrieve(RetrieveMenuArgs args)
         {
             Menu menu;
@@ -80,7 +101,8 @@ namespace Nutritia
             return new Menu()
             {
                 IdMenu = (int)menu["idMenu"],
-                DateCreation = (DateTime)menu["dateMenu"]
+                DateCreation = (DateTime)menu["dateMenu"],
+                ListePlats = new List<Plat>()
             };
         }
     }

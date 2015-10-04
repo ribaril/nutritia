@@ -35,6 +35,7 @@ namespace Nutritia
         {
         
             IList<Membre> resultat = new List<Membre>();
+
             try
             {
                 connexion = new MySqlConnexion();
@@ -170,6 +171,7 @@ namespace Nutritia
         /// <returns>Un objet Membre.</returns>
         private Membre ConstruireMembre(DataRow membre)
         {
+            // TODO : Manque le nom d'utilsateur.
             return new Membre()
             {
                 IdMembre = (int)membre["idMembre"],
