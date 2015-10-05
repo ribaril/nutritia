@@ -1,6 +1,7 @@
 ﻿<Window x:Class="Nutritia.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:resx="clr-namespace:Nutritia.Properties"
         Title="Nutritia" Icon="/Nutritia;component/UI/Images/LogoIcon.PNG" Height="550" Width="650"
 		ResizeMode="NoResize">
     <Grid>
@@ -19,19 +20,19 @@
                 <Button>
                     <DockPanel>
                         <Image Source="/Nutritia;component/UI/Images/aProposIcon.PNG"/>
-                        <Label Content="Information" FontSize="15" FontFamily="Berlin"/>
+                        <Label Content="{x:Static resx:Resources.Information}" FontSize="15" FontFamily="Berlin"/>
                     </DockPanel>
                 </Button>
                 <Button>
                     <DockPanel>
                         <Image Source="/Nutritia;component/UI/Images/paramIcon.PNG"/>
-                        <Label Content="Paramètre" FontSize="15" FontFamily="Berlin"/>
+                        <Label Content="{x:Static resx:Resources.Parametre}" FontSize="15" FontFamily="Berlin"/>
                     </DockPanel>
                 </Button>
                 <Button>
                     <DockPanel>
                         <Image Source="/Nutritia;component/UI/Images/HelpIcon.PNG"/>
-                        <Label Content="Aide" FontSize="15" FontFamily="Berlin"/>
+                        <Label Content="{x:Static resx:Resources.Aide}" FontSize="15" FontFamily="Berlin"/>
                     </DockPanel>
                 </Button>
             </ToolBar>
