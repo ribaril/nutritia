@@ -87,15 +87,15 @@
     <Compile Include="Logic\Services\MySql\MySqlPlatService.cs" />
     <Compile Include="Logic\Services\MySql\MySqlPreferenceService.cs" />
     <Compile Include="Logic\Services\MySql\MySqlRestrictionAlimentaireService.cs" />
-    <Compile Include="Ressource\en.Designer.cs">
+    <Compile Include="Ressource\strings.en.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>en.resx</DependentUpon>
+      <DependentUpon>strings.en.resx</DependentUpon>
     </Compile>
-    <Compile Include="Ressource\fr.Designer.cs">
+    <Compile Include="Ressource\strings.fr.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>fr.resx</DependentUpon>
+      <DependentUpon>strings.fr.resx</DependentUpon>
     </Compile>
     <Compile Include="Toolkit\Services\Definitions\IApplicationService.cs" />
     <Compile Include="Toolkit\Services\ServiceFactory.cs" />
@@ -263,13 +263,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Ressource\en.resx">
+    <EmbeddedResource Include="Ressource\strings.en.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>en.Designer.cs</LastGenOutput>
+      <LastGenOutput>strings.en.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Ressource\fr.resx">
+    <EmbeddedResource Include="Ressource\strings.fr.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>fr.Designer.cs</LastGenOutput>
+      <LastGenOutput>strings.fr.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
