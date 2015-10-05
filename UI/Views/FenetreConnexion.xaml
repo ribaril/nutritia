@@ -5,8 +5,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Nutritia.UI.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="475" d:DesignWidth="650">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Content="Connexion" Foreground="DarkGreen" FontSize="35" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Center" Margin="0,20,0,0"></Label>
+        <Label Grid.Row="0" Content="Nom d'utilisateur" Width="250" Height="30" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,95,0,0"></Label>
+        <TextBox Name="Nom_utilisateur" Grid.Row="0" SelectedText="" Width="250" Height="30" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,120,0,0"></TextBox>
+        <Label Grid.Row="0" Content="Mot de passe" Width="250" Height="30" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,155,0,0"></Label>
+        <PasswordBox Name="Mot_passe" Grid.Row="0" Width="250" Height="30" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,180,0,0"></PasswordBox>
+        <Button Name="Btn_connexion" Grid.Row="0" Content="Connexion" Height="30" Width="150" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,28"></Button>
+
+        <TextBlock Grid.Row="1" Width="400" Height="40" Foreground="DarkGreen" FontSize="14" FontFamily="Berlin Sans FB Demi" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0">Avez-vous déjà un compte Nutritia? Cliquez ci-bas pour vous inscrire et créer un compte Nutritia</TextBlock>
+        <Label Grid.Row="1" Content="S'inscrire" Foreground="DarkGreen" FontSize="20" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10"/>
+        <Button Grid.Row="1" Width="75" Height="75" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,45">
+            <Image Source="/Nutritia;component/UI/Images/SignInIcon.PNG"></Image>
+        </Button>
     </Grid>
 </UserControl>
