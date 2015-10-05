@@ -15,6 +15,7 @@ namespace Nutritia
         public double Taille { get; set; }
         public double Masse { get; set; }
         public DateTime DateNaissance { get; set; }
+        public string NomUtilisateur { get; set; }
         public string MotPasse { get; set; }
         public IList<RestrictionAlimentaire> ListeRestrictions { get; set; }
         public IList<Objectif> ListeObjectifs { get; set; }

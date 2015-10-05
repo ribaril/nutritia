@@ -14,13 +14,13 @@ namespace Nutritia
         public string Categorie { get; set; }
         public int Mesure { get; set; }
         public UniteMesure Symbole { get; set; }
-        public int Energie { get; set; }
-        public int Glucide { get; set; }
-        public int Fibre { get; set; }
-        public int Proteine { get; set; }
-        public int Lipide { get; set; }
-        public int Cholesterol { get; set; }
-        public int Sodium { get; set; }
+        public double Energie { get; set; }
+        public double Glucide { get; set; }
+        public double Fibre { get; set; }
+        public double Proteine { get; set; }
+        public double Lipide { get; set; }
+        public double Cholesterol { get; set; }
+        public double Sodium { get; set; }
         #endregion
     }
 }

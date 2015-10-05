@@ -9,9 +9,9 @@ namespace Nutritia
 {
     public class MySqlPlatService : IPlatService
     {
-        // TODO : Fonctionne pas
         private MySqlConnexion connexion;
 
+        // TODO : Voir quoi faire avec le créateur et il manque les aliments.
         public Plat Retrieve(RetrievePlatArgs args)
         {
 
@@ -26,7 +26,17 @@ namespace Nutritia
                 DataSet dataSetPlats = connexion.Query(requete);
                 DataTable tablePlats = dataSetPlats.Tables[0];
 
-                plat = ConstruirePlat(tablePlats.Rows[0]);
+                DataRow rowPlat = tablePlats.Rows[0];
+
+                // TODO : Pour le type.
+                requete = string.Format("SELECT * FROM TypesPlats WHERE idTypePlat = {0}", (int)rowPlat["idTypePlat"]);
+
+                DataSet dataSetTypes = connexion.Query(requete);
+                DataTable tableTypes = dataSetTypes.Tables[0];
+
+                DataRow rowType = tableTypes.Rows[0];
+
+                plat = ConstruirePlat(rowPlat, rowType);
 
             }
             catch (Exception)
@@ -38,18 +48,23 @@ namespace Nutritia
 
         }
 
-        private Plat ConstruirePlat(DataRow plat)
+        private Plat ConstruirePlat(DataRow plat, DataRow type)
         {
+            double? note = null;
+
+            if (!(plat["note"] is DBNull))
+            {
+                note = (double?)plat["note"];
+            }
+
             return new Plat()
             {
-                // TODO : Améliorer
                 IdPlat = (int)plat["idPlat"],
-                // TODO : Améliorer
+                // TODO Arranger sa.
                 Createur = new Membre(),
                 Nom = (string)plat["nom"],
-                Note = (int)plat["note"],
-                // TODO : À voir pour le 'EstType'
-                ListeIngredients = new List<Aliment>()
+                TypePlat = (string)type["typePlat"],
+                Note = note
             };
         }
     }

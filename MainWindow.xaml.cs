@@ -26,7 +26,7 @@ namespace Nutritia
         {
             InitializeComponent();
             Configurer();
-
+            
             /*presenteurContenu.Content = new MenuPrincipal();*/
             presenteurContenu.Content = new CreationProfil();
 
@@ -34,13 +34,15 @@ namespace Nutritia
 
         private void Configurer()
         {
-            //Déclaration du ApplicationService
+            // Inscription des différents services de l'application dans le ServiceFactory.
             ServiceFactory.Instance.Register<IRestrictionAlimentaireService, MySqlRestrictionAlimentaireService>(new MySqlRestrictionAlimentaireService());
             ServiceFactory.Instance.Register<IObjectifService, MySqlObjectifService>(new MySqlObjectifService());
+            ServiceFactory.Instance.Register<IUniteMesureService, MySqlUniteMesureService>(new MySqlUniteMesureService());
             ServiceFactory.Instance.Register<IPreferenceService, MySqlPreferenceService>(new MySqlPreferenceService());
+            ServiceFactory.Instance.Register<IAlimentService, MySqlAlimentService>(new MySqlAlimentService());
+            ServiceFactory.Instance.Register<IPlatService, MySqlPlatService>(new MySqlPlatService());
             ServiceFactory.Instance.Register<IMenuService, MySqlMenuService>(new MySqlMenuService());
             ServiceFactory.Instance.Register<IMembreService, MySqlMembreService>(new MySqlMembreService());
-            ServiceFactory.Instance.Register<IPlatService, MySqlPlatService>(new MySqlPlatService());
             ServiceFactory.Instance.Register<IApplicationService, MainWindow>(this);
         }
 
