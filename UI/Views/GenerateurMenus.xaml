@@ -5,6 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="475" d:DesignWidth="650">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Ressources/Ressource.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -12,7 +19,7 @@
             <RowDefinition Height="5*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Button Width="200" Height="25">Ouvrir un menu existant</Button>
+        <Button Style="{StaticResource nonTransparent}" Width="200" Height="25">Ouvrir un menu existant</Button>
         <GroupBox Grid.Row="1" Header="Informations préalables" Width="550" Foreground="DarkGreen" BorderBrush="DarkGreen">
             <Grid>
                 <Grid.RowDefinitions>
@@ -48,6 +55,6 @@
                 </Grid.ColumnDefinitions>
             </Grid>
         </GroupBox>
-        <Button Grid.Row="3" Width="200" Height="25">Liste d'épicerie</Button>
+        <Button Style="{StaticResource nonTransparent}" Grid.Row="3" Width="200" Height="25">Liste d'épicerie</Button>
     </Grid>
 </UserControl>
