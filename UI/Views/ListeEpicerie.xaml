@@ -6,34 +6,29 @@
              mc:Ignorable="d" 
              d:DesignHeight="475" d:DesignWidth="650">
     <Grid>
-
         <Grid.RowDefinitions>
-            <RowDefinition Height="400"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="8.5*"></RowDefinition>
+            <RowDefinition Height="1.5*"></RowDefinition>
         </Grid.RowDefinitions>
-
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="375"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="6*"></ColumnDefinition>
+            <ColumnDefinition Width="4*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-
-        <DataGrid Width="325" Height="350">
+        <DataGrid Width="365" Height="375">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="25" Header=""></DataGridTextColumn>
-                <DataGridTextColumn Width="125" Header="Article"></DataGridTextColumn>
-                <DataGridTextColumn Width="75" Header="Quantité"></DataGridTextColumn>
-                <DataGridTextColumn Width="100" Header="Unité de mesure"></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header=""></DataGridTextColumn>
+                <DataGridTextColumn Width="2*" Header="Article"></DataGridTextColumn>
+                <DataGridTextColumn Width="2*" Header="Quantité"></DataGridTextColumn>
+                <DataGridTextColumn Width="2*" Header="Unité de mesure"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-
+        <GroupBox Grid.Column="1" Header="Liste conviviale" Width="245" Height="375" BorderBrush="DarkGreen">
+        </GroupBox>
         <Button Grid.Row="1" Grid.Column="1" Width="150" Height="50">
             <DockPanel>
                 <Label VerticalAlignment="Center">Imprimer</Label>
                 <Image Source="../Images/imprimanteIcon.png"/>
             </DockPanel>
         </Button>
-
-        <Rectangle Grid.Column="1" Width="225" Height="350" Stroke="Black"></Rectangle>
-
     </Grid>
 </UserControl>
