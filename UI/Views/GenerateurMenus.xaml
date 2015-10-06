@@ -5,6 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="475" d:DesignWidth="650">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Ressources/Ressource.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
 
         <Grid.RowDefinitions>
@@ -14,7 +21,7 @@
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button Width="200" Height="25">Ouvrir un menu existant</Button>
+        <Button Style="{StaticResource nonTransparent}" Width="200" Height="25">Ouvrir un menu existant</Button>
 
         <Rectangle Grid.Row="1" Width="550"  Stroke="Black"></Rectangle>
 
@@ -28,11 +35,11 @@
         <Label Grid.Row="1" Margin="375, 0, 0, 0">Nombre de personne :</Label>
         <TextBox Grid.Row="1" Width="50" Height="20" VerticalAlignment="Top" Margin="425, 5, 0, 0"></TextBox>
 
-        <Button Grid.Row="1" Margin="0, 50, 0, 0" Width="200" Height="25">Générer</Button>
+        <Button Style="{StaticResource nonTransparent}" Grid.Row="1" Margin="0, 50, 0, 0" Width="200" Height="25">Générer</Button>
 
         <Rectangle Grid.Row="2" Width="550" Margin="0, 10, 0, 0"  Stroke="Black"></Rectangle>
 
-        <Button Grid.Row="3" Width="200" Height="25">Liste d'épicerie</Button>
+        <Button Style="{StaticResource nonTransparent}" Grid.Row="3" Width="200" Height="25">Liste d'épicerie</Button>
 
     </Grid>
 
