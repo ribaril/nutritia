@@ -5,8 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="650">
-	
-	<Canvas >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Ressources/Ressource.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+<Canvas >
 		<Label Content="S'inscrire" Foreground="DarkGreen" FontSize="30" FontFamily="Berlin Sans FB Demi" Canvas.Top="112" Canvas.Left="513"/>
 		<Button Width="75" Height="75" Canvas.Top="45" Canvas.Left="530">
 			<Image Source="/Nutritia;component/UI/Images/SignInIcon.PNG"></Image>
@@ -25,5 +31,4 @@
 			<Image Source="/Nutritia;component/UI/Images/menuListIcon.png"/>
 		</Button>
 		<Label Content="Menu &amp; liste d'épicerie" Foreground="DarkGreen" FontSize="30" FontFamily="Berlin Sans FB Demi" Canvas.Top="461" Canvas.Left="170"/>
-	</Canvas>
-</UserControl>
+	</Canvas></UserControl>

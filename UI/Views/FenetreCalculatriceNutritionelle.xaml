@@ -1,0 +1,150 @@
+﻿<UserControl x:Class="Nutritia.UI.Views.FenetreCalculatriceNutritionelle"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:layoutToolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Nutritia.UI.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="650">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Ressources/Ressource.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="55"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Calculatrice nutritionelle" Foreground="DarkGreen" FontSize="50" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Center" Grid.ColumnSpan="2"></Label>
+        <Rectangle Grid.Row="1" Grid.ColumnSpan="2" Stroke="DarkGreen" Width="625"/>
+        <ScrollViewer Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Height="200" Width="298">
+            <layoutToolkit:Accordion Width="288">
+                <layoutToolkit:AccordionItem Header="Entrée">
+                    <StackPanel Background="White" Width="284">
+                        <DockPanel>
+                            <Button Width="20" Height="20" VerticalAlignment="Top">
+                                <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                            </Button>
+                            <TextBlock Text="Escargot à l'ail" Foreground="DarkGreen" FontSize="20" FontFamily="Berlin Sans FB Demi" />
+                        </DockPanel>
+                        <DockPanel>
+                            <Button Width="20" Height="20" VerticalAlignment="Top">
+                                <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                            </Button>
+                            <TextBlock Text="Potage à la citrouille" Foreground="DarkGreen" FontSize="20" FontFamily="Berlin Sans FB Demi" />
+                        </DockPanel>
+                        <DockPanel>
+                            <Button Width="20" Height="20" VerticalAlignment="Top">
+                                <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                            </Button>
+                            <TextBlock Text="Salade grecque" Foreground="DarkGreen" FontSize="20" FontFamily="Berlin Sans FB Demi" />
+                        </DockPanel>
+                    </StackPanel>
+                </layoutToolkit:AccordionItem>
+                <layoutToolkit:AccordionItem Header="Plat">
+                    <StackPanel Background="White" Width="284">
+                        <DockPanel>
+                            <Button Width="20" Height="20" VerticalAlignment="Top">
+                                <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                            </Button>
+                            <TextBlock Text="Filets de poissons au four" Foreground="DarkGreen" FontSize="20" FontFamily="Berlin Sans FB Demi" />
+                        </DockPanel>
+                        <DockPanel>
+                            <Button Width="20" Height="20" VerticalAlignment="Top">
+                                <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                            </Button>
+                            <TextBlock Text="Filet mignon sauce aux champignons" Foreground="DarkGreen" FontSize="20" FontFamily="Berlin Sans FB Demi" />
+                        </DockPanel>
+                        <DockPanel>
+                            <Button Width="20" Height="20" VerticalAlignment="Top">
+                                <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                            </Button>
+                            <TextBlock Text="Macaroni chinois" Foreground="DarkGreen" FontSize="20" FontFamily="Berlin Sans FB Demi" />
+                        </DockPanel>
+                    </StackPanel>
+                </layoutToolkit:AccordionItem>
+                <layoutToolkit:AccordionItem Header="Boisson">
+                    <StackPanel Background="White" Width="284">
+                        <DockPanel>
+                            <Button Width="20" Height="20" VerticalAlignment="Top">
+                                <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                            </Button>
+                            <TextBlock Text="Eau" Foreground="DarkGreen" FontSize="20" FontFamily="Berlin Sans FB Demi" />
+                        </DockPanel>
+                        <DockPanel>
+                            <Button Width="20" Height="20" VerticalAlignment="Top">
+                                <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                            </Button>
+                            <TextBlock Text="Jus de pomme" Foreground="DarkGreen" FontSize="20" FontFamily="Berlin Sans FB Demi" />
+                        </DockPanel>
+                        <DockPanel>
+                            <Button Width="20" Height="20" VerticalAlignment="Top">
+                                <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                            </Button>
+                            <TextBlock Text="Jus de raisin" Foreground="DarkGreen" FontSize="20" FontFamily="Berlin Sans FB Demi" />
+                        </DockPanel>
+                        <DockPanel>
+                            <Button Width="20" Height="20" VerticalAlignment="Top">
+                                <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                            </Button>
+                            <TextBlock Text="Jus d'orange" Foreground="DarkGreen" FontSize="20" FontFamily="Berlin Sans FB Demi" />
+                        </DockPanel>
+                        <DockPanel>
+                            <Button Width="20" Height="20" VerticalAlignment="Top">
+                                <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                            </Button>
+                            <TextBlock Text="Soda gingembre" Foreground="DarkGreen" FontSize="20" FontFamily="Berlin Sans FB Demi" />
+                        </DockPanel>
+                        <DockPanel>
+                            <Button Width="20" Height="20" VerticalAlignment="Top">
+                                <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                            </Button>
+                            <TextBlock Text="Soda mousse" Foreground="DarkGreen" FontSize="20" FontFamily="Berlin Sans FB Demi" />
+                        </DockPanel>
+                    </StackPanel>
+                </layoutToolkit:AccordionItem>
+                <layoutToolkit:AccordionItem Header="Dessert">
+                    <StackPanel Background="White" Width="284">
+                        <DockPanel>
+                            <Button Width="20" Height="20" VerticalAlignment="Top">
+                                <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                            </Button>
+                            <TextBlock Text="Gâteau aux carottes" Foreground="DarkGreen" FontSize="20" FontFamily="Berlin Sans FB Demi" />
+                        </DockPanel>
+                        <DockPanel>
+                            <Button Width="20" Height="20" VerticalAlignment="Top">
+                                <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                            </Button>
+                            <TextBlock Text="Tarte au sucre" Foreground="DarkGreen" FontSize="20" FontFamily="Berlin Sans FB Demi" />
+                        </DockPanel>
+                        <DockPanel>
+                            <Button Width="20" Height="20" VerticalAlignment="Top">
+                                <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                            </Button>
+                            <TextBlock Text="Smoothie fraises et bananes" Foreground="DarkGreen" FontSize="20" FontFamily="Berlin Sans FB Demi" />
+                        </DockPanel>
+                    </StackPanel>
+                </layoutToolkit:AccordionItem>
+            </layoutToolkit:Accordion>
+        </ScrollViewer>
+        
+        <GroupBox x:Name="groupBox_Copy" Header="Plateau" HorizontalAlignment="Center"  Grid.Row="2" VerticalAlignment="Center" Height="170" Width="285"/>
+        <GroupBox x:Name="groupBox" Header="Valeurs nutritionelles du plateau" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Height="172" Width="290" Grid.Column="1"/>
+        
+
+
+
+    </Grid>
+</UserControl>
