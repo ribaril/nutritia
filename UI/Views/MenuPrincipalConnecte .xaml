@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="Nutritia.UI.Views.MenuPrincipalConnecte"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="515" d:DesignWidth="650">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Ressources/Ressource.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Canvas >
+        <Label Content="Bienvenue nomMembre" Foreground="DarkGreen" FontStyle="Italic" FontSize="30" FontFamily="Berlin Sans FB Demi" Canvas.Top="20" Canvas.Left="313" Width="319"/>
+        <Label Content="Nutritia" Foreground="DarkGreen" FontSize="45" FontFamily="Berlin Sans FB Demi" Canvas.Left="14" Canvas.Top="7"/>
+        <Image Source="/Nutritia;component/UI/Images/LogoIcon.PNG" Panel.ZIndex="-100" Width="100" Height="100" Canvas.Left="147" Canvas.Top="-5"/>
+        <Button Name="btnDeconnexion" Canvas.Left="451" Canvas.Top="91" Height="75" Width="75" Click="btnDeconnexion_Click">
+            <Image Source="/Nutritia;component/UI/Images/logInIcon.png" />
+        </Button>
+        <Label Content="Déconnexion" Foreground="DarkGreen" FontSize="30" FontFamily="Berlin Sans FB Demi" Canvas.Top="161" Canvas.Left="401" Width="178"/>
+        <Button Name="btnCalculatrice" Canvas.Left="112" Canvas.Top="223" Width="75" Height="75" Click="btnCalculatrice_Click">
+            <Image Source="/Nutritia;component/UI/Images/calcIcon.png" />
+        </Button>
+        <Label Content="Calculatrice Nutritionel" Foreground="DarkGreen" FontSize="30" FontFamily="Berlin Sans FB Demi" Canvas.Top="293" Canvas.Left="2"/>
+        <Button Name="btnMenuListe" Canvas.Left="454" Canvas.Top="222" Width="75" Height="75" Click="btnMenuListe_Click">
+            <Image Source="/Nutritia;component/UI/Images/menuListIcon.png"/>
+        </Button>
+        <Label Content="Menu &amp; liste d'épicerie" Foreground="DarkGreen" FontSize="30" FontFamily="Berlin Sans FB Demi" Canvas.Top="293" Canvas.Left="344"/>
+        <Button Name="btnAjoutPlat" Canvas.Left="112" Canvas.Top="359" Width="75" Height="75" Click="btnAjoutPlat_Click">
+            <Image Source="/Nutritia;component/UI/Images/AjoutIcon.png" />
+        </Button>
+        <Label Content="Ajouter un plat" Foreground="DarkGreen" FontSize="30" FontFamily="Berlin Sans FB Demi" Canvas.Top="429" Canvas.Left="46"/>
+        <Button Name="btnVoterPlat" Canvas.Left="454" Canvas.Top="358" Width="75" Height="75" Click="btnVoterPlat_Click">
+            <Image Source="/Nutritia;component/UI/Images/voterPlatIcon.png"/>
+        </Button>
+        <Label Content="Voter un plat" Foreground="DarkGreen" FontSize="30" FontFamily="Berlin Sans FB Demi" Canvas.Top="429" Canvas.Left="403"/>
+        <Button Name="btnProfil" Canvas.Left="112" Canvas.Top="91" Height="75" Width="75" Click="btnProfil_Click">
+            <Image Source="/Nutritia;component/UI/Images/ProfilIcon.png" />
+        </Button>
+        <Label Content="Mon profil" Foreground="DarkGreen" FontSize="30" FontFamily="Berlin Sans FB Demi" Canvas.Top="161" Canvas.Left="81" Width="134"/>
+    </Canvas>
+</UserControl>

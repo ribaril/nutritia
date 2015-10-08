@@ -3,6 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Nutritia" Icon="/Nutritia;component/UI/Images/LogoIcon.PNG" Height="550" Width="650"
 		ResizeMode="NoResize">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="UI/Ressources/Ressource.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
     
         <Grid.Background>
@@ -18,7 +26,7 @@
             <ToolBar Width="650">
                 <Button>
                     <DockPanel>
-                        <Image Source="/Nutritia;component/UI/Images/aProposIcon.PNG"/>
+                        <Image Width="24" Source="/Nutritia;component/UI/Images/aProposIcon.PNG"/>
                         <Label Content="Information" FontSize="15" FontFamily="Berlin"/>
                     </DockPanel>
                 </Button>

@@ -140,6 +140,9 @@
     <Compile Include="UI\Views\FenetreParametres.xaml.cs">
       <DependentUpon>FenetreParametres.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Views\FenetreVotes.xaml.cs">
+      <DependentUpon>FenetreVotes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\GenerateurMenus.xaml.cs">
       <DependentUpon>GenerateurMenus.xaml</DependentUpon>
     </Compile>
@@ -173,6 +176,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UI\Ressources\Ressource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Views\AjoutPlatAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -218,6 +225,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Views\FenetreParametres.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\FenetreVotes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -299,6 +310,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="UI\Images\notifIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\etoileIcon.png" />
+    <Resource Include="UI\Images\infoIcon.png" />
+    <Resource Include="UI\Images\journalIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\hamburger.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
