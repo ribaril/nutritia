@@ -32,18 +32,18 @@
                 </Grid.ColumnDefinitions>
                 <Label FontFamily="Berlin Sans FB Demi" Foreground="DarkGreen" FontSize="16">Période :</Label>
                 <StackPanel Margin="75, 2.5, 0, 0">
-                    <RadioButton Foreground="DarkGreen" Margin="0, 5, 0, 0">Un repas</RadioButton>
-                    <RadioButton Foreground="DarkGreen" Margin="0, 5, 0, 0">Un jour</RadioButton>
-                    <RadioButton Foreground="DarkGreen" Margin="0, 5, 0, 0">Une semaine</RadioButton>
+                    <RadioButton Name="rbMenuUnique" Foreground="DarkGreen" Margin="0, 5, 0, 0" IsChecked="True">Un repas</RadioButton>
+                    <RadioButton Name="rbMenuJournalier" Foreground="DarkGreen" Margin="0, 5, 0, 0">Un jour</RadioButton>
+                    <RadioButton Name="rbMenuHebdomadaire" Foreground="DarkGreen" Margin="0, 5, 0, 0">Une semaine</RadioButton>
                 </StackPanel>
                 <Label Grid.Column="1" FontFamily="Berlin Sans FB Demi" Foreground="DarkGreen" FontSize="16" Margin="50, 0, 0, 0">Nombre de personne :</Label>
-                <ComboBox Grid.Column="1" SelectedIndex="0" Width="50" Height="25" VerticalAlignment="Top" Margin="200, 0, 0, 0">
+                <ComboBox Name="cboNbPersonnes" Grid.Column="1" SelectedIndex="0" Width="50" Height="25" VerticalAlignment="Top" Margin="200, 0, 0, 0">
                     <ComboBoxItem>1</ComboBoxItem>
                     <ComboBoxItem>2</ComboBoxItem>
                     <ComboBoxItem>3</ComboBoxItem>
                     <ComboBoxItem>4</ComboBoxItem>
                 </ComboBox>
-                <Button Grid.Row="1" Grid.ColumnSpan="2" Width="200" Height="25">Générer</Button>
+                <Button Name="btnGenerer" Grid.Row="1" Grid.ColumnSpan="2" Width="200" Height="25" Click="btnGenerer_Click">Générer</Button>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="2" Header="Menus" Width="550" Foreground="DarkGreen" BorderBrush="DarkGreen">

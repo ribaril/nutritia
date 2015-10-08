@@ -20,9 +20,35 @@ namespace Nutritia.UI.Views
     /// </summary>
     public partial class GenerateurMenus : UserControl
     {
+        private int NbRepas { get; set; }
+        private int NbPersonnes { get; set; }
+
         public GenerateurMenus()
         {
             InitializeComponent();
+        }
+  
+        /// <summary>
+        /// Événement lancé sur un clique du bouton Générer.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnGenerer_Click(object sender, RoutedEventArgs e)
+        {
+            if (rbMenuUnique.IsChecked != null && (bool)rbMenuUnique.IsChecked) { NbRepas = 1; }
+            if (rbMenuJournalier.IsChecked != null && (bool)rbMenuJournalier.IsChecked) { NbRepas = 3; }
+            if (rbMenuHebdomadaire.IsChecked != null && (bool)rbMenuHebdomadaire.IsChecked) { NbRepas = 21; }
+            
+            NbPersonnes = Convert.ToInt32(((ComboBoxItem)cboNbPersonnes.SelectedItem).Content);
+        }
+
+        /// <summary>
+        /// Méthode permettant de générer les rows dans la grid contenant les menus.
+        /// </summary>
+        /// <param name="nbRows">Le nombre de rows a générées.</param>
+        private void GenererRows(int nbRows)
+        {
+            
         }
     }
 }
