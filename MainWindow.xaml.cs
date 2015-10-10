@@ -28,7 +28,7 @@ namespace Nutritia
             Configurer();
             
             /*presenteurContenu.Content = new MenuPrincipal();*/
-            presenteurContenu.Content = new ListeEpicerie();
+            presenteurContenu.Content = new MenuPrincipal();
 
         }
 
