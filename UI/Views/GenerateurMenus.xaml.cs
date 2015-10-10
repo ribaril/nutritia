@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace Nutritia.UI.Views
     {
         private int NbRepas { get; set; }
         private int NbPersonnes { get; set; }
+        private ObservableCollection<Plat> ListePlats;
 
         public GenerateurMenus()
         {
@@ -40,15 +42,44 @@ namespace Nutritia.UI.Views
             if (rbMenuHebdomadaire.IsChecked != null && (bool)rbMenuHebdomadaire.IsChecked) { NbRepas = 21; }
             
             NbPersonnes = Convert.ToInt32(((ComboBoxItem)cboNbPersonnes.SelectedItem).Content);
+
+            ListePlats = new ObservableCollection<Plat>(ServiceFactory.Instance.GetService<IPlatService>().RetrieveAll(new RetrievePlatArgs {Categorie = "Plat principal"}));
+
+            dgMenus.ItemsSource = ListePlats;
+            
+            // GenererRangees(NbRepas);
+
         }
 
-        /// <summary>
-        /// Méthode permettant de générer les rows dans la grid contenant les menus.
-        /// </summary>
-        /// <param name="nbRows">Le nombre de rows a générées.</param>
-        private void GenererRows(int nbRows)
+        private void btnIngredients_Click(object sender, RoutedEventArgs e)
         {
+            Plat platSelectionne = (Plat)dgMenus.SelectedItem;
             
+            StringBuilder sb = new StringBuilder();
+            foreach (Aliment aliment in platSelectionne.ListeIngredients)
+            {
+                sb.AppendLine(aliment.Nom);
+            }
+
+            MessageBox.Show(sb.ToString());
         }
+
+        /*
+        /// <summary>
+        /// Méthode permettant de générer les rangées de la grid contenant les menus.
+        /// </summary>
+        /// <param name="nbRangees">Le nombre de rangées a généré.</param>
+        private void GenererRangees(int nbRangees)
+        {
+            RowDefinition rowDefinition;
+
+            for (int i = 0; i < nbRangees; i++)
+            {
+                rowDefinition = new RowDefinition();
+                rowDefinition.Height = new GridLength(125);
+                grdMenu.RowDefinitions.Add(rowDefinition);
+            }
+        }
+        */
     }
 }

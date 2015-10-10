@@ -310,6 +310,23 @@
   <ItemGroup>
     <Resource Include="UI\Images\hamburger.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\regenererIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\couscousVege.png" />
+    <Resource Include="UI\Images\escargotsAil.png" />
+    <Resource Include="UI\Images\filetsPoissons.png" />
+    <Resource Include="UI\Images\jusOrange.png" />
+    <Resource Include="UI\Images\jusPomme.png" />
+    <Resource Include="UI\Images\omelette.png" />
+    <Resource Include="UI\Images\saladeFruits.png" />
+    <Resource Include="UI\Images\saladeGrecque.png" />
+    <Resource Include="UI\Images\smoothieFraisesBananes.png" />
+    <Resource Include="UI\Images\spaghetti.png" />
+    <Resource Include="UI\Images\theGlace.png" />
+    <Resource Include="UI\Images\wrapPoulet.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

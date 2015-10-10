@@ -8,6 +8,7 @@ namespace Nutritia
 {
     public class RetrievePlatArgs
     {
-        public int IdPlat { get; set; }
+        public int? IdPlat { get; set; }
+        public string Categorie { get; set; }
     }
 }
