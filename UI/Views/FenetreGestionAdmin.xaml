@@ -14,6 +14,18 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-            
+        <local:SearchBox x:Name="filterDataGrid" Margin="284,44,10,185" WatermarkContent="Compte" FilterMode="StartWith">
+            <local:SearchBox.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button>+</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Nom" Binding="{Binding Nom}" Width="*"/>
+                <DataGridTextColumn Header="Prenom" Binding="{Binding Prenom}" Width="*"/>
+            </local:SearchBox.Columns>
+        </local:SearchBox>
     </Grid>
 </UserControl>
