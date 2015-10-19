@@ -15,14 +15,14 @@ using System.Windows.Shapes;
 
 namespace Nutritia.UI.Views
 {
-    /// <summary>
-    /// Interaction logic for GestionRepertoire.xaml
-    /// </summary>
-    public partial class GestionRepertoire : UserControl
-    {
-        public GestionRepertoire()
-        {
-            InitializeComponent();
-        }
-    }
+	/// <summary>
+	/// Interaction logic for SousEcran2.xaml
+	/// </summary>
+	public partial class SousEcran2 : UserControl
+	{
+		public SousEcran2()
+		{
+			InitializeComponent();
+		}
+	}
 }

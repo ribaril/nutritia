@@ -12,23 +12,24 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-<Canvas >
-		<Label Content="S'inscrire" Foreground="DarkGreen" FontSize="30" FontFamily="Berlin Sans FB Demi" Canvas.Top="112" Canvas.Left="513"/>
-		<Button Width="75" Height="75" Canvas.Top="45" Canvas.Left="530">
-			<Image Source="/Nutritia;component/UI/Images/SignInIcon.PNG"></Image>
-		</Button>
-		<Label Content="Nutritia" Foreground="DarkGreen" FontSize="45" FontFamily="Berlin Sans FB Demi" Canvas.Left="22" Canvas.Top="55"/>
-		<Image Source="/Nutritia;component/UI/Images/LogoIcon.PNG" Panel.ZIndex="-100" Width="100" Height="100" Canvas.Top="43" Canvas.Left="155"/>
-		<Button Canvas.Left="280" Canvas.Top="140" Height="75" Width="75">
-			<Image Source="/Nutritia;component/UI/Images/logInIcon.png" />
-		</Button>
-		<Label Content="Se connecter" Foreground="DarkGreen" FontSize="30" FontFamily="Berlin Sans FB Demi" Canvas.Top="210" Canvas.Left="230"/>
-		<Button Canvas.Left="280" Canvas.Top="265" Width="75" Height="75">
-			<Image Source="/Nutritia;component/UI/Images/calcIcon.png" />
-		</Button>
-		<Label Content="Calculatrice Nutritionel" Foreground="DarkGreen" FontSize="30" FontFamily="Berlin Sans FB Demi" Canvas.Top="335" Canvas.Left="170"/>
-		<Button Canvas.Left="280" Canvas.Top="390" Width="75" Height="75">
-			<Image Source="/Nutritia;component/UI/Images/menuListIcon.png"/>
-		</Button>
-		<Label Content="Menu &amp; liste d'épicerie" Foreground="DarkGreen" FontSize="30" FontFamily="Berlin Sans FB Demi" Canvas.Top="461" Canvas.Left="170"/>
-	</Canvas></UserControl>
+    <Canvas >
+        <Label Content="S'inscrire" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="76" Canvas.Left="513"/>
+        <Button Name="btnInscription" Width="75" Height="75" Canvas.Top="9" Canvas.Left="530" Click="btnInscription_Click">
+            <Image Source="/Nutritia;component/UI/Images/SignInIcon.PNG"></Image>
+        </Button>
+        <Label Content="Nutritia" Style="{StaticResource fontNutritia}" FontSize="45"  Canvas.Left="22" Canvas.Top="19"/>
+        <Image Source="/Nutritia;component/UI/Images/LogoIcon.PNG" Panel.ZIndex="-100" Width="100" Height="100" Canvas.Top="7" Canvas.Left="155"/>
+        <Button Name="btnConnexion" Canvas.Left="280" Canvas.Top="104" Height="75" Width="75" Click="btnConnexion_Click">
+            <Image Source="/Nutritia;component/UI/Images/logInIcon.png" />
+        </Button>
+        <Label Content="Se connecter" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="174" Canvas.Left="230"/>
+        <Button Name="btnCalculatrice" Canvas.Left="280" Canvas.Top="229" Width="75" Height="75" Click="btnCalculatrice_Click">
+            <Image Source="/Nutritia;component/UI/Images/calcIcon.png" />
+        </Button>
+        <Label Content="Calculatrice Nutritionel" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="299" Canvas.Left="170"/>
+        <Button Name="btnMenuListe" Canvas.Left="280" Canvas.Top="354" Width="75" Height="75" Click="btnMenuListe_Click">
+            <Image Source="/Nutritia;component/UI/Images/menuListIcon.png"/>
+        </Button>
+        <Label Content="Menu &amp; liste d'épicerie" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="425" Canvas.Left="170"/>
+    </Canvas>
+</UserControl>

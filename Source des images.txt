@@ -9,12 +9,14 @@ Toolbar
 http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/256/Actions-help-about-icon.png aProposIcon
 https://cdn3.iconfinder.com/data/icons/musthave/128/Help.png helpIcon
 https://cdn2.iconfinder.com/data/icons/seo-web-optomization-ultimate-set/512/custom_settings-128.png paramIcon
+http://arthur30900.lescigales.org/image/button%20retour.png retour
 
 Fond decran application
 https://amazingpict.com/free-backgrounds-apples/ background
 
 ListeEpicerie : https://www.google.ca/search?q=imprimante+image&espv=2&biw=1920&bih=989&source=lnms&tbm=isch&sa=X&ved=0CAYQ_AUoAWoVChMI842f7eyhyAIViV0eCh2nLA5s#tbm=isch&q=imprimante+image+icon&imgrc=C6bxyZGRs_TZCM%3A
 
+<<<<<<< HEAD
 Ecran votes :
 https://www.google.ca/search?q=actualit%C3%A9s&espv=2&biw=1440&bih=809&source=lnms&tbm=isch&sa=X&ved=0CAcQ_AUoAmoVChMIo-Oc5eutyAIVAZkeCh2qqwkX#imgrc=LhBmLbunYPuSYM%3A
 https://www.google.ca/search?q=star&espv=2&biw=1440&bih=765&source=lnms&tbm=isch&sa=X&ved=0CAYQ_AUoAWoVChMIkMjVh-ytyAIVQR0eCh2tpAN2#imgrc=vVd9uF9w6uR0eM%3A
@@ -44,3 +46,5 @@ http://www.coupdepouce.com/recettes-cuisine/plats-principaux/viande/filets-migno
 https://www.google.com/search?q=verre+d%27eau&tbm=isch&imgil=RaT_GuYxMC1toM%253A%253BxoYAaCDZGm79WM%253Bhttp%25253A%25252F%25252Ffr.optimistan.org%25252F2013%25252F08%25252Fle-verre-deau%25252F&source=iu&pf=m&fir=RaT_GuYxMC1toM%253A%252CxoYAaCDZGm79WM%252C_&biw=1440&bih=789&usg=__06YOpoBzmP5dJyvjdloSlBWRw9c%3D&ved=0CCgQyjdqFQoTCIb6ws3jwsgCFUUdPgodGbAJcA&ei=6LceVobmA8W6-AGZ4KaABw#imgdii=RaT_GuYxMC1toM%3A%3BRaT_GuYxMC1toM%3A%3B175rXwix2xBuQM%3A&imgrc=RaT_GuYxMC1toM%3A&usg=__06YOpoBzmP5dJyvjdloSlBWRw9c%3D
 https://www.google.com/search?q=gateau+aux+carottes&source=lnms&tbm=isch&sa=X&ved=0CAcQ_AUoAWoVChMIg6i3zebCyAIVxhk-Ch2_QAQX&biw=1440&bih=789#tbm=isch&q=tourte+aux+carottes&imgrc=2L5g0FedWB627M%3A
 https://www.google.com/search?q=tarte+au+sucre&tbm=isch&imgil=KxEVT8xQQ4GwjM%253A%253Bvz6W2KPW5EpveM%253Bhttp%25253A%25252F%25252Fwww.youtube.com%25252Fwatch%25253Fv%2525253D6v6Kbg5gcKw&source=iu&pf=m&fir=KxEVT8xQQ4GwjM%253A%252Cvz6W2KPW5EpveM%252C_&biw=1440&bih=789&usg=__7XSnJyuRoigMdOsVYwqxol0pUEQ%3D&ved=0CJYBEMo3ahUKEwjs3oKq6MLIAhXEWz4KHYOfCcU&ei=27weVqyFMMS3-QGDv6aoDA#imgrc=tmdBqyckL1z-tM%3A&usg=__7XSnJyuRoigMdOsVYwqxol0pUEQ%3D
+=======
+>>>>>>> upstream/develop

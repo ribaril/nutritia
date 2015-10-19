@@ -24,27 +24,33 @@
 
         <DockPanel>
             <ToolBar Width="650">
-                <Button>
+                <Button Name="btnRetour" VerticalAlignment="Bottom" Click="btnRetour_Click">
+                    <DockPanel>
+                        <Image Source="/Nutritia;component/UI/Images/retour.PNG"/>
+                        <TextBlock Text=" Retour" FontSize="20" FontFamily="Berlin"/>
+                    </DockPanel>
+                </Button>
+                <Button Name="btnInfo" VerticalAlignment="Bottom" Click="btnInfo_Click">
                     <DockPanel>
                         <Image Width="24" Source="/Nutritia;component/UI/Images/aProposIcon.PNG"/>
-                        <Label Content="Information" FontSize="15" FontFamily="Berlin"/>
+                        <TextBlock Text=" À propos" FontSize="20" FontFamily="Berlin"/>
                     </DockPanel>
                 </Button>
-                <Button>
+                <Button Name="btnParam" Click="btnParam_Click">
                     <DockPanel>
                         <Image Source="/Nutritia;component/UI/Images/paramIcon.PNG"/>
-                        <Label Content="Paramètre" FontSize="15" FontFamily="Berlin"/>
+                        <TextBlock Text=" Paramètres" FontSize="20" FontFamily="Berlin"/>
                     </DockPanel>
                 </Button>
-                <Button>
+                <Button Name="btnAide" Click="btnAide_Click">
                     <DockPanel>
                         <Image Source="/Nutritia;component/UI/Images/HelpIcon.PNG"/>
-                        <Label Content="Aide" FontSize="15" FontFamily="Berlin"/>
+                        <TextBlock Text=" Aide" FontSize="20" FontFamily="Berlin"/>
                     </DockPanel>
                 </Button>
             </ToolBar>
         </DockPanel>
-
+	
         <ContentPresenter Grid.Row="1" Name="presenteurContenu" />
 
     </Grid>

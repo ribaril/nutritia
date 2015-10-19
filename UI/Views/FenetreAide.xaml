@@ -1,12 +1,122 @@
-﻿<UserControl x:Class="Nutritia.UI.Views.FenetreAide"
+﻿<Window x:Class="Nutritia.UI.Views.FenetreAide"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Nutritia.UI.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             Height="400" Width="600"
+             ResizeMode="NoResize">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Ressources/Ressource.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
-            
+		
+        <Grid.Background>
+            <ImageBrush Opacity="0.3" ImageSource="/Nutritia;component/UI/Images/background.jpg"/>
+        </Grid.Background>
+        <TabControl Name="tcAide" TabStripPlacement="Left" Background="Transparent">
+            <TabItem Name="tiAjoutPlat" Header="Ajout de plat">
+                <StackPanel>
+                    <Label Style="{StaticResource fontSousTitre}" Content="Ajout de plat" />
+                    <TextBlock>
+                            Mon texte
+                    </TextBlock>
+                </StackPanel>
+            </TabItem>
+            <TabItem Name="tiSuspenssion" Header="Suspenssion">
+                <StackPanel>
+                    <Label Style="{StaticResource fontSousTitre}" Content="Information sur la suspenssion" />
+                    <TextBlock>
+                            Mon texte
+                    </TextBlock>
+                </StackPanel>
+            </TabItem>
+            <TabItem Name="tiCalculatrice" Header="Calculatrice">
+                <StackPanel>
+                    <Label Style="{StaticResource fontSousTitre}" Content="Calculatrice nutritionelle" />
+                    <TextBlock>
+                            Mon texte
+                    </TextBlock>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Name="tiConnexion" Header="Connexion">
+                <StackPanel>
+                    <Label Style="{StaticResource fontSousTitre}" Content="Se connecter" />
+                    <TextBlock>
+                            Mon texte
+                    </TextBlock>
+                </StackPanel>
+            </TabItem>
+            <TabItem Name="tiDon" Header="Don">
+                <StackPanel>
+                    <Label Style="{StaticResource fontSousTitre}" Content="Envoyer un don" />
+                    <TextBlock>
+                            Mon texte
+                    </TextBlock>
+                </StackPanel>
+            </TabItem>
+            <TabItem Name="tiGenerationMenu" Header="Generation de menu">
+                <StackPanel>
+                    <Label Style="{StaticResource fontSousTitre}" Content="Génération de menu aléatoire" />
+                    <TextBlock>
+                            Mon texte
+                    </TextBlock>
+                </StackPanel>
+            </TabItem>
+            <TabItem Name="tiListeEpicerie" Header="Liste d'épicerie">
+                <StackPanel>
+                    <Label Style="{StaticResource fontSousTitre}" Content="Votre liste d'épicerie" />
+                    <TextBlock>
+                            Mon texte
+                    </TextBlock>
+                </StackPanel>
+            </TabItem>
+            <TabItem Name="tiMenuConnecte" Header="Menu connecté">
+                <StackPanel>
+                    <Label Style="{StaticResource fontSousTitre}" Content="Menu connécté" />
+                    <TextBlock>
+                            Mon texte
+                    </TextBlock>
+                </StackPanel>
+            </TabItem>
+            <TabItem Name="tiMenuPrincipal" Header="Menu pricipale">
+                <StackPanel>
+                    <Label Style="{StaticResource fontSousTitre}" Content="Menu pricipale" />
+                    <TextBlock>
+                            Mon texte
+                    </TextBlock>
+                </StackPanel>
+            </TabItem>
+            <TabItem Name="tiParametre" Header="Paramètre">
+                <StackPanel>
+                    <Label Style="{StaticResource fontSousTitre}" Content="Vos paramètres" />
+                    <TextBlock>
+                            Mon texte
+                    </TextBlock>
+                </StackPanel>
+            </TabItem>
+            <TabItem Name="tiProfil" Header="Profil">
+                <StackPanel>
+                    <Label Style="{StaticResource fontSousTitre}" Content="Mon profil" />
+                    <TextBlock>
+                            Mon texte
+                    </TextBlock>
+                </StackPanel>
+            </TabItem>
+            <TabItem Name="tiLangue" Header="Langage">
+                <StackPanel>
+                    <Label Style="{StaticResource fontSousTitre}" Content="Mon profil" />
+                    <TextBlock>
+                            Mon texte
+                    </TextBlock>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
     </Grid>
-</UserControl>
+</Window>
