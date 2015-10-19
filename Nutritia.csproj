@@ -128,6 +128,9 @@
     <Compile Include="UI\Views\FenetreInfoMembre.xaml.cs">
       <DependentUpon>FenetreInfoMembre.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Views\FenetreIngredients.xaml.cs">
+      <DependentUpon>FenetreIngredients.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\FenetreParametres.xaml.cs">
       <DependentUpon>FenetreParametres.xaml</DependentUpon>
     </Compile>
@@ -212,6 +215,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Views\FenetreInfoMembre.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\FenetreIngredients.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -326,6 +333,36 @@
     <Resource Include="UI\Images\spaghetti.png" />
     <Resource Include="UI\Images\theGlace.png" />
     <Resource Include="UI\Images\wrapPoulet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\logoIconPetit.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\macaroniChinois.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\pateChinoisVege.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\pizzaPochettes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\patesCrevettes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\filetMignonChampignons.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\eau.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\gateauCarottes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\tarteSucre.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\nonDisponible.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

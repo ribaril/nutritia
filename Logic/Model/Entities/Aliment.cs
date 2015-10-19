@@ -13,7 +13,8 @@ namespace Nutritia
         public string Nom { get; set; }
         public string Categorie { get; set; }
         public int Mesure { get; set; }
-        public UniteMesure Symbole { get; set; }
+        public double Quantite { get; set; }
+        public string UniteMesure { get; set; }
         public double Energie { get; set; }
         public double Glucide { get; set; }
         public double Fibre { get; set; }

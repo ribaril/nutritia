@@ -86,7 +86,7 @@ namespace Nutritia
                         membre.ListePreferences.Add(preferenceService.Retrieve(new RetrievePreferenceArgs { IdPreference = (int)rowPreference["idPreference"] }));
                     }
 
-                    membre.ListeMenus = menuService.RetrieveAll(new RetrieveMenuArgs { IdMembre = (int)membre.IdMembre });
+                    membre.ListeMenus = menuService.RetrieveSome(new RetrieveMenuArgs { IdMembre = (int)membre.IdMembre });
 
                     resultat.Add(membre);
 
@@ -161,7 +161,7 @@ namespace Nutritia
                     membre.ListePreferences.Add(preferenceService.Retrieve(new RetrievePreferenceArgs { IdPreference = (int)rowPreference["idPreference"] }));
                 }
 
-                membre.ListeMenus = menuService.RetrieveAll(new RetrieveMenuArgs { IdMembre = (int)membre.IdMembre });
+                membre.ListeMenus = menuService.RetrieveSome(new RetrieveMenuArgs { IdMembre = (int)membre.IdMembre });
 
             }
             catch (MySqlException)

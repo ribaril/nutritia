@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace Nutritia
 {
@@ -13,5 +14,14 @@ namespace Nutritia
         public DateTime DateCreation { get; set; }
         public IList<Plat> ListePlats { get; set; }
         #endregion
+
+        /// <summary>
+        /// Constructeur par défaut de la classe.
+        /// </summary>
+        public Menu()
+        {
+            DateCreation = DateTime.Now;
+            ListePlats = new ObservableCollection<Plat>();
+        }
     }
 }

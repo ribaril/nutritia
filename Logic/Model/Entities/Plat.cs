@@ -10,7 +10,7 @@ namespace Nutritia
     {
         #region Proprietes
         public int? IdPlat { get; set; }
-        public Membre Createur { get; set; }
+        public string Createur { get; set; }
         public string Nom { get; set; }
         public string TypePlat { get; set; }
         public double? Note { get; set; }

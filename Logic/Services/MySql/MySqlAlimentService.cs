@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Nutritia
 {
+    /// <summary>
+    /// Service MySql lié aux Aliments.
+    /// </summary>
     public class MySqlAlimentService : IAlimentService
     {
         private MySqlConnexion connexion;
@@ -16,6 +19,11 @@ namespace Nutritia
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Méthode permettant d'obtenir un aliment sauvegardé dans la base de données.
+        /// </summary>
+        /// <param name="args">Les arguments permettant de retrouver l'aliment.</param>
+        /// <returns>Un objet Aliment.</returns>
         public Aliment Retrieve(RetrieveAlimentArgs args)
         {
             Aliment aliment;
@@ -24,30 +32,13 @@ namespace Nutritia
             {
                 connexion = new MySqlConnexion();
 
-                string requete = string.Format("SELECT * FROM Aliments WHERE idAliment = {0}", args.IdAliment);
+                string requete = string.Format("SELECT * FROM Aliments a INNER JOIN groupesAlimentaires ga ON ga.idGroupeAlimentaire = a.idGroupeAlimentaire INNER JOIN UnitesMesure um ON um.idUniteMesure = a.idUniteMesure WHERE idAliment = {0}", args.IdAliment);
 
                 DataSet dataSetAliments = connexion.Query(requete);
                 DataTable tableAliments = dataSetAliments.Tables[0];
 
                 DataRow rowAliment = tableAliments.Rows[0];
 
-                // TODO : Groupe alimentaire.
-                requete = string.Format("SELECT * FROM GroupesAlimentaires WHERE idGroupeAlimentaire = {0}", (int)rowAliment["idGroupeAlimentaire"]);
-
-                DataSet dataSetGroupesAlimentaires = connexion.Query(requete);
-                DataTable tableGroupesAlimentaires = dataSetGroupesAlimentaires.Tables[0];
-
-                DataRow rowGroupeAlimentaire = tableGroupesAlimentaires.Rows[0];
-
-                // TODO : Voir pour services.
-                requete = string.Format("SELECT * FROM UnitesMesure WHERE idUniteMesure = {0}", (int)rowAliment["idUniteMesure"]);
-
-                DataSet dataSetUnitesMesure = connexion.Query(requete);
-                DataTable tableUnitesMesure = dataSetUnitesMesure.Tables[0];
-
-                DataRow rowUniteMesure = tableUnitesMesure.Rows[0];
-
-                // TODO : VOIR pour les valeurs nut.
                 requete = string.Format("SELECT quantite, valeurNutritionnelle FROM AlimentsValeursNutritionnelles avn INNER JOIN ValeursNutritionnelles vn ON avn.idValeurNutritionnelle = vn.idValeurNutritionnelle WHERE idAliment = {0}", (int)rowAliment["idAliment"]);
 
                 DataSet dataSetAlimentsValeursNut = connexion.Query(requete);
@@ -60,7 +51,7 @@ namespace Nutritia
                     valeurNut.Add((string)rowAlimentValeurNut["valeurNutritionnelle"], (double)rowAlimentValeurNut["quantite"]);
                 }
 
-                aliment = ConstruireAliment(rowAliment, rowGroupeAlimentaire, valeurNut);
+                aliment = ConstruireAliment(rowAliment, valeurNut);
 
             }
             catch (Exception)
@@ -71,15 +62,22 @@ namespace Nutritia
             return aliment;
         }
 
-
-        private Aliment ConstruireAliment(DataRow aliment, DataRow groupeAlimentaire, Dictionary<string,double> valeurNut)
+        /// <summary>
+        /// Méthode permettant de construire un objet Aliment.
+        /// </summary>
+        /// <param name="aliment">Un enregistrement de la table Aliment.</param>
+        /// <param name="valeurNut">Un dictionnaire des valeurs nutritionnelles de l'aliment.
+        /// (Clé = Nom de la valeur nut. et valeur = Quantité de celle-ci).</param>
+        /// <returns>Un objet Aliment.</returns>
+        private Aliment ConstruireAliment(DataRow aliment, Dictionary<string,double> valeurNut)
         {
             return new Aliment()
             {
-                // TODO : améliorer.
                 IdAliment = (int)aliment["idAliment"],
                 Nom = (string)aliment["nom"],
-                Categorie = (string)groupeAlimentaire["groupeAlimentaire"],
+                Categorie = (string)aliment["groupeAlimentaire"],
+                Mesure = (int)aliment["mesure"],
+                UniteMesure = (string)aliment["symbole"],
                 Energie = valeurNut["Calories"],
                 Glucide = valeurNut["Glucides"],
                 Fibre = valeurNut["Fibres"],

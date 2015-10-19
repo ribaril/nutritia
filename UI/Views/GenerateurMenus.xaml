@@ -6,11 +6,58 @@
              mc:Ignorable="d" 
              d:DesignHeight="475" d:DesignWidth="650">
     <UserControl.Resources>
+        <Style TargetType="DataGrid">
+            <Setter Property="CanUserAddRows" Value="False" />
+            <Setter Property="AutoGenerateColumns" Value="False" />
+            <Setter Property="HeadersVisibility" Value="None" />
+            <Setter Property="GridLinesVisibility" Value="None" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="RowBackground" Value="Transparent" />
+        </Style>
+        <Style TargetType="DataGridCell">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="200" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="DarkGreen" />
+            <Setter Property="FontFamily" Value="Berlin Sans FB Demi" />
+            <Setter Property="Foreground" Value="DarkGreen" />
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+        <Style TargetType="RadioButton">
+            <Setter Property="FontFamily" Value="Berlin Sans FB Demi" />
+            <Setter Property="Foreground" Value="DarkGreen" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Margin" Value="0, 5, 0, 0" />
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="DarkGreen" />
+            <Setter Property="FontFamily" Value="Berlin Sans FB Demi" />
+            <Setter Property="Foreground" Value="DarkGreen" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Berlin Sans FB Demi" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Foreground" Value="DarkGreen" />
+        </Style>
+        <Style TargetType="GroupBox">
+            <Setter Property="Width" Value="550" />
+            <Setter Property="Foreground" Value="DarkGreen" />
+            <Setter Property="BorderBrush" Value="DarkGreen" />
+        </Style>
+        <!--
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Ressources/Ressource.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
+        -->
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -19,8 +66,8 @@
             <RowDefinition Height="5*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Button Style="{StaticResource nonTransparent}" Width="200" Height="25">Ouvrir un menu existant</Button>
-        <GroupBox Grid.Row="1" Header="Informations préalables" Width="550" Foreground="DarkGreen" BorderBrush="DarkGreen">
+        <Button Name="btnOuvrirMenu">Ouvrir un menu existant</Button>
+        <GroupBox Grid.Row="1" Header="Informations préalables">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*"></RowDefinition>
@@ -30,71 +77,69 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Label FontFamily="Berlin Sans FB Demi" Foreground="DarkGreen" FontSize="16">Période :</Label>
+                <Label>Période :</Label>
                 <StackPanel Margin="75, 2.5, 0, 0">
-                    <RadioButton Name="rbMenuUnique" Foreground="DarkGreen" Margin="0, 5, 0, 0" IsChecked="True">Un repas</RadioButton>
-                    <RadioButton Name="rbMenuJournalier" Foreground="DarkGreen" Margin="0, 5, 0, 0">Un jour</RadioButton>
-                    <RadioButton Name="rbMenuHebdomadaire" Foreground="DarkGreen" Margin="0, 5, 0, 0">Une semaine</RadioButton>
+                    <RadioButton Name="rbMenuUnique" IsChecked="True">Un repas</RadioButton>
+                    <RadioButton Name="rbMenuJournalier">Un jour</RadioButton>
+                    <RadioButton Name="rbMenuHebdomadaire">Une semaine</RadioButton>
                 </StackPanel>
-                <Label Grid.Column="1" FontFamily="Berlin Sans FB Demi" Foreground="DarkGreen" FontSize="16" Margin="50, 0, 0, 0">Nombre de personne :</Label>
+                <Label Grid.Column="1" Margin="50, 0, 0, 0">Nombre de personne :</Label>
                 <ComboBox Name="cboNbPersonnes" Grid.Column="1" SelectedIndex="0" Width="50" Height="25" VerticalAlignment="Top" Margin="200, 0, 0, 0">
                     <ComboBoxItem>1</ComboBoxItem>
                     <ComboBoxItem>2</ComboBoxItem>
                     <ComboBoxItem>3</ComboBoxItem>
                     <ComboBoxItem>4</ComboBoxItem>
                 </ComboBox>
-                <Button Name="btnGenerer" Grid.Row="1" Grid.ColumnSpan="2" Width="200" Height="25" Click="btnGenerer_Click">Générer</Button>
+                <Button Name="btnGenerer" Grid.Row="1" Grid.ColumnSpan="2" Click="btnGenerer_Click">Générer</Button>
             </Grid>
         </GroupBox>
-        <GroupBox Grid.Row="2" Header="Menus" Width="550" Foreground="DarkGreen" BorderBrush="DarkGreen">
+        <GroupBox Grid.Row="2" Header="Menus">
             <ScrollViewer>
-                <DataGrid Name="dgMenus" CanUserAddRows="False" Background="Transparent" HeadersVisibility="None" BorderBrush="Transparent" AutoGenerateColumns="False" RowBackground="Transparent" GridLinesVisibility="None">
-                    <DataGrid.Resources>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Transparent"/>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
-                        <Style TargetType="DataGridCell">
-                            <Setter Property="BorderThickness" Value="0"/>
-                            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-                        </Style>
-                    </DataGrid.Resources>
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Width="2*" Binding="{Binding Nom}" IsReadOnly="True">
-                            <DataGridTextColumn.ElementStyle>
-                                <Style>
-                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-                                    <Setter Property="TextBlock.TextAlignment" Value="Center"/>
-                                    <Setter Property="TextBlock.VerticalAlignment" Value="Center"/>
-                                </Style>
-                            </DataGridTextColumn.ElementStyle>
-                        </DataGridTextColumn>
-                        <DataGridTemplateColumn Width="4*" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Image Width="125" Height="125" Source="{Binding ImageUrl}"></Image>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Width="2*">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button Width="50" Height="50">
-                                        <Image Source="pack://application:,,,/UI/Images/regenererIcon.png"></Image>
-                                    </Button>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Width="2*">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button Name="btnIngredients" Click="btnIngredients_Click" Width="100" Height="50">Ingrédients</Button>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <Grid Name="grdMenus">
+                    <DataGrid Name="dgMenus" VerticalScrollBarVisibility="Hidden" RowHeight="150">
+                        <DataGrid.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                            <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Transparent" />
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="2*" Binding="{Binding Nom}" FontFamily="Berlin Sans FB Demi" FontSize="16" Foreground="DarkGreen" IsReadOnly="True">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style>
+                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                        <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                                        <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTemplateColumn Width="4*" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Width="125" Height="110" Source="{Binding ImageUrl}"></Image>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="2*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Name="btnRegenerer" Width="50" Height="50" Click="btnRegenerer_Click">
+                                            <Image Source="pack://application:,,,/UI/Images/regenererIcon.png"></Image>
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="2*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Name="btnIngredients" Click="btnIngredients_Click" Width="100" Height="50">Ingrédients</Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
             </ScrollViewer>
         </GroupBox>
-        <Button Style="{StaticResource nonTransparent}" Grid.Row="3" Width="200" Height="25">Liste d'épicerie</Button>
+        <Button Name="btnListeEpicerie" Grid.Row="3" Click="btnListeEpicerie_Click">Liste d'épicerie</Button>
     </Grid>
 </UserControl>
