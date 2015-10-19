@@ -137,6 +137,9 @@
     <Compile Include="UI\Views\FenetreInfoMembre.xaml.cs">
       <DependentUpon>FenetreInfoMembre.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Views\FenetreIngredients.xaml.cs">
+      <DependentUpon>FenetreIngredients.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\FenetreParametres.xaml.cs">
       <DependentUpon>FenetreParametres.xaml</DependentUpon>
     </Compile>
@@ -227,6 +230,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Views\FenetreInfoMembre.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\FenetreIngredients.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -335,13 +342,56 @@
     <Resource Include="UI\Images\tooltip.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\Images\AjoutIcon.png" />
+    <Resource Include="UI\Images\regenererIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\couscousVege.png" />
+    <Resource Include="UI\Images\escargotsAil.png" />
+    <Resource Include="UI\Images\filetsPoissons.png" />
+    <Resource Include="UI\Images\jusOrange.png" />
+    <Resource Include="UI\Images\jusPomme.png" />
+    <Resource Include="UI\Images\omelette.png" />
+    <Resource Include="UI\Images\saladeFruits.png" />
+    <Resource Include="UI\Images\saladeGrecque.png" />
+    <Resource Include="UI\Images\smoothieFraisesBananes.png" />
+    <Resource Include="UI\Images\spaghetti.png" />
+    <Resource Include="UI\Images\theGlace.png" />
+    <Resource Include="UI\Images\wrapPoulet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\logoIconPetit.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\macaroniChinois.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\pateChinoisVege.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\pizzaPochettes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\patesCrevettes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\filetMignonChampignons.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\eau.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\gateauCarottes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\tarteSucre.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\nonDisponible.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="UI\Images\ProfilIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="UI\Images\voterPlatIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <Resource Include="UI\Images\AjoutIcon.png" />
     <Content Include="WPFToolkit\System.Windows.Controls.Layout.Toolkit.dll" />
     <Content Include="WPFToolkit\WPFToolkit.dll" />
   </ItemGroup>

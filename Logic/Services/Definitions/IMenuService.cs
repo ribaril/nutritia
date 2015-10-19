@@ -8,7 +8,7 @@ namespace Nutritia
 {
     public interface IMenuService
     {
-        IList<Menu> RetrieveAll(RetrieveMenuArgs args);
+        IList<Menu> RetrieveSome(RetrieveMenuArgs args);
         Menu Retrieve(RetrieveMenuArgs args);
     }
 }

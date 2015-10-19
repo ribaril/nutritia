@@ -8,6 +8,9 @@ using MySql.Data.MySqlClient;
 
 namespace Nutritia
 {
+    /// <summary>
+    /// Service MySql lié aux Membres.
+    /// </summary>
     public class MySqlMembreService : IMembreService
     {
         private MySqlConnexion connexion;
@@ -33,7 +36,7 @@ namespace Nutritia
         /// <returns>Une liste contenant les membres.</returns>
         public IList<Membre> RetrieveAll()
         {
-        
+
             IList<Membre> resultat = new List<Membre>();
 
             try
@@ -83,7 +86,7 @@ namespace Nutritia
                         membre.ListePreferences.Add(preferenceService.Retrieve(new RetrievePreferenceArgs { IdPreference = (int)rowPreference["idPreference"] }));
                     }
 
-                    membre.ListeMenus = menuService.RetrieveAll(new RetrieveMenuArgs { IdMembre = (int)membre.IdMembre });
+                    membre.ListeMenus = menuService.RetrieveSome(new RetrieveMenuArgs { IdMembre = (int)membre.IdMembre });
 
                     resultat.Add(membre);
 
@@ -113,6 +116,11 @@ namespace Nutritia
                 connexion = new MySqlConnexion();
 
                 string requete = string.Format("SELECT * FROM Membres WHERE idMembre = {0}", args.IdMembre);
+
+                if (args.NomUtilisateur != null && args.NomUtilisateur != string.Empty)
+                {
+                    requete = string.Format("SELECT * FROM Membres WHERE nomUtilisateur = '{0}'", args.NomUtilisateur);
+                }
 
                 DataSet dataSetMembres = connexion.Query(requete);
                 DataTable tableMembres = dataSetMembres.Tables[0];
@@ -153,7 +161,7 @@ namespace Nutritia
                     membre.ListePreferences.Add(preferenceService.Retrieve(new RetrievePreferenceArgs { IdPreference = (int)rowPreference["idPreference"] }));
                 }
 
-                membre.ListeMenus = menuService.RetrieveAll(new RetrieveMenuArgs { IdMembre = (int)membre.IdMembre });
+                membre.ListeMenus = menuService.RetrieveSome(new RetrieveMenuArgs { IdMembre = (int)membre.IdMembre });
 
             }
             catch (MySqlException)
@@ -163,7 +171,49 @@ namespace Nutritia
 
             return membre;
         }
-       
+
+        /// <summary>
+        /// Méthode permettant d'insérer un membre dans la base de données.
+        /// </summary>
+        /// <param name="membre">L'objet Membre a insérer.</param>
+        public void Insert(Membre membre)
+        {
+            try
+            {
+                connexion = new MySqlConnexion();
+
+                string requete = string.Format("INSERT INTO Membres (nom ,prenom, taille, masse, dateNaissance, nomUtilisateur, motPasse, estAdmin, estBanni) VALUES ('{0}', '{1}', {2}, {3}, '{4}', '{5}', '{6}', {7}, {8})", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance, membre.NomUtilisateur, membre.MotPasse, membre.EstAdministrateur, membre.EstBanni);
+                connexion.Query(requete);
+
+                int idMembre = (int)Retrieve(new RetrieveMembreArgs { NomUtilisateur = membre.NomUtilisateur }).IdMembre;
+
+                // Ajout des restrictions alimentaires du membre.
+                foreach (RestrictionAlimentaire restriction in membre.ListeRestrictions)
+                {
+                    requete = string.Format("INSERT INTO RestrictionsAlimentairesMembres (idRestrictionAlimentaire, idMembre) VALUES ({0}, {1})", restriction.IdRestrictionAlimentaire, idMembre);
+                    connexion.Query(requete);
+                }
+
+                // Ajout des objectifs du membre.
+                foreach (Objectif objectif in membre.ListeObjectifs)
+                {
+                    requete = string.Format("INSERT INTO ObjectifsMembres (idObjectif, idMembre) VALUES ({0}, {1})", objectif.IdObjectif, idMembre);
+                    connexion.Query(requete);
+                }
+
+                // Ajout des préférences du membre.
+                foreach (Preference preference in membre.ListePreferences)
+                {
+                    requete = string.Format("INSERT INTO PreferencesMembres (idPreference, idMembre) VALUES ({0}, {1})", preference.IdPreference, idMembre);
+                    connexion.Query(requete);
+                }
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+        }
+
         /// <summary>
         /// Méthode permettant de construire un objet Membre.
         /// </summary>
@@ -171,7 +221,6 @@ namespace Nutritia
         /// <returns>Un objet Membre.</returns>
         private Membre ConstruireMembre(DataRow membre)
         {
-            // TODO : Manque le nom d'utilsateur.
             return new Membre()
             {
                 IdMembre = (int)membre["idMembre"],
@@ -180,6 +229,7 @@ namespace Nutritia
                 Taille = (double)membre["taille"],
                 Masse = (double)membre["masse"],
                 DateNaissance = (DateTime)membre["dateNaissance"],
+                NomUtilisateur = (string)membre["nomUtilisateur"],
                 MotPasse = (string)membre["motPasse"],
                 ListeRestrictions = new List<RestrictionAlimentaire>(),
                 ListeObjectifs = new List<Objectif>(),

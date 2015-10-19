@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Nutritia.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Nutritia" Icon="/Nutritia;component/UI/Images/LogoIcon.PNG" Height="550" Width="650"
+        Title="Nutritia" Icon="/Nutritia;component/UI/Images/logoIconPetit.png" Height="550" Width="650"
 		ResizeMode="CanMinimize">
 
     <Window.Resources>
