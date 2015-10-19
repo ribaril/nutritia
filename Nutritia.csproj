@@ -41,6 +41,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Controls.Layout.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>WPFToolkit\System.Windows.Controls.Layout.Toolkit.dll</HintPath>
@@ -115,9 +116,6 @@
     <Compile Include="UI\Views\Bannissement.xaml.cs">
       <DependentUpon>Bannissement.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\FenetreCalculatriceNutritionnelle.xaml.cs">
-      <DependentUpon>FenetreCalculatriceNutritionnelle.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UI\Views\CreationProfil.xaml.cs">
       <DependentUpon>CreationProfil.xaml</DependentUpon>
     </Compile>
@@ -130,6 +128,9 @@
     <Compile Include="UI\Views\FenetreAide.xaml.cs">
       <DependentUpon>FenetreAide.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Views\FenetreCalculatriceNutritionelle.xaml.cs">
+      <DependentUpon>FenetreCalculatriceNutritionelle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\FenetreConnexion.xaml.cs">
       <DependentUpon>FenetreConnexion.xaml</DependentUpon>
     </Compile>
@@ -138,9 +139,6 @@
     </Compile>
     <Compile Include="UI\Views\FenetreParametres.xaml.cs">
       <DependentUpon>FenetreParametres.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Views\FenetreVotes.xaml.cs">
-      <DependentUpon>FenetreVotes.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\GenerateurMenus.xaml.cs">
       <DependentUpon>GenerateurMenus.xaml</DependentUpon>
@@ -160,8 +158,17 @@
     <Compile Include="UI\Views\MenuPrincipal.xaml.cs">
       <DependentUpon>MenuPrincipal.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Views\MenuPrincipalConnecte.xaml.cs">
+      <DependentUpon>MenuPrincipalConnecte.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\ModificationProfil.xaml.cs">
       <DependentUpon>ModificationProfil.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\SousEcran.xaml.cs">
+      <DependentUpon>SousEcran.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\SousEcran2.xaml.cs">
+      <DependentUpon>SousEcran2.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -195,10 +202,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Views\FenetreCalculatriceNutritionnelle.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UI\Views\CreationProfil.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -215,6 +218,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Views\FenetreCalculatriceNutritionelle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Views\FenetreConnexion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -224,10 +231,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Views\FenetreParametres.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Views\FenetreVotes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -255,7 +258,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="UI\Views\MenuPrincipalConnecte.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Views\ModificationProfil.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\SousEcran.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\SousEcran2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -278,6 +293,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -311,12 +327,23 @@
     <Resource Include="UI\Images\notifIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\Images\etoileIcon.png" />
-    <Resource Include="UI\Images\infoIcon.png" />
-    <Resource Include="UI\Images\journalIcon.png" />
+    <Resource Include="UI\Images\retour.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\Images\hamburger.png" />
+    <Resource Include="UI\Images\minusIcon.png" />
+    <Resource Include="UI\Images\plusIcon.png" />
+    <Resource Include="UI\Images\tooltip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\AjoutIcon.png" />
+    <Resource Include="UI\Images\ProfilIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\voterPlatIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WPFToolkit\System.Windows.Controls.Layout.Toolkit.dll" />
+    <Content Include="WPFToolkit\WPFToolkit.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

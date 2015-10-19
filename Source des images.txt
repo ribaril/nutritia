@@ -9,14 +9,10 @@ Toolbar
 http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/256/Actions-help-about-icon.png aProposIcon
 https://cdn3.iconfinder.com/data/icons/musthave/128/Help.png helpIcon
 https://cdn2.iconfinder.com/data/icons/seo-web-optomization-ultimate-set/512/custom_settings-128.png paramIcon
+http://arthur30900.lescigales.org/image/button%20retour.png retour
 
 Fond decran application
 https://amazingpict.com/free-backgrounds-apples/ background
 
 ListeEpicerie : https://www.google.ca/search?q=imprimante+image&espv=2&biw=1920&bih=989&source=lnms&tbm=isch&sa=X&ved=0CAYQ_AUoAWoVChMI842f7eyhyAIViV0eCh2nLA5s#tbm=isch&q=imprimante+image+icon&imgrc=C6bxyZGRs_TZCM%3A
 
-Ecran votes :
-https://www.google.ca/search?q=actualit%C3%A9s&espv=2&biw=1440&bih=809&source=lnms&tbm=isch&sa=X&ved=0CAcQ_AUoAmoVChMIo-Oc5eutyAIVAZkeCh2qqwkX#imgrc=LhBmLbunYPuSYM%3A
-https://www.google.ca/search?q=star&espv=2&biw=1440&bih=765&source=lnms&tbm=isch&sa=X&ved=0CAYQ_AUoAWoVChMIkMjVh-ytyAIVQR0eCh2tpAN2#imgrc=vVd9uF9w6uR0eM%3A
-https://www.google.ca/search?q=informations&espv=2&biw=1440&bih=765&source=lnms&tbm=isch&sa=X&ved=0CAYQ_AUoAWoVChMI_IS0k-ytyAIVB10eCh15_Qkc#imgdii=BxGC62cwwBwj1M%3A%3BBxGC62cwwBwj1M%3A%3BSAsK4WjV74rEtM%3A&imgrc=BxGC62cwwBwj1M%3A
-https://www.google.ca/search?q=hamburger&espv=2&biw=1440&bih=765&source=lnms&tbm=isch&sa=X&ved=0CAYQ_AUoAWoVChMIp-_D8u-tyAIVgu0eCh3pJwgC#tbm=isch&q=hamburger+png&imgdii=JZ3n2sRPTzdIPM%3A%3BJZ3n2sRPTzdIPM%3A%3B_eaChO8ADuufiM%3A&imgrc=JZ3n2sRPTzdIPM%3A

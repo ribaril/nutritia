@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace Nutritia.UI.Views
 {
     /// <summary>
-    /// Interaction logic for EcranMenu.xaml
+    /// Logique d'interaction pour MenuPrincipalConnecte.xaml
     /// </summary>
     public partial class EcranMenu : UserControl
     {
@@ -24,5 +24,7 @@ namespace Nutritia.UI.Views
         {
             InitializeComponent();
         }
+
+       
     }
 }

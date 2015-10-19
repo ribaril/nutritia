@@ -13,48 +13,34 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="2.5*"></RowDefinition>
-            <RowDefinition Height="5*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="275"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
+
         <Button Style="{StaticResource nonTransparent}" Width="200" Height="25">Ouvrir un menu existant</Button>
-        <GroupBox Grid.Row="1" Header="Informations préalables" Width="550" Foreground="DarkGreen" BorderBrush="DarkGreen">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Label FontFamily="Berlin Sans FB Demi" Foreground="DarkGreen" FontSize="16">Période :</Label>
-                <StackPanel Margin="75, 2.5, 0, 0">
-                    <RadioButton Foreground="DarkGreen" Margin="0, 5, 0, 0">Un repas</RadioButton>
-                    <RadioButton Foreground="DarkGreen" Margin="0, 5, 0, 0">Un jour</RadioButton>
-                    <RadioButton Foreground="DarkGreen" Margin="0, 5, 0, 0">Une semaine</RadioButton>
-                </StackPanel>
-                <Label Grid.Column="1" FontFamily="Berlin Sans FB Demi" Foreground="DarkGreen" FontSize="16" Margin="50, 0, 0, 0">Nombre de personne :</Label>
-                <ComboBox Grid.Column="1" SelectedIndex="0" Width="50" Height="25" VerticalAlignment="Top" Margin="200, 0, 0, 0">
-                    <ComboBoxItem>1</ComboBoxItem>
-                    <ComboBoxItem>2</ComboBoxItem>
-                    <ComboBoxItem>3</ComboBoxItem>
-                    <ComboBoxItem>4</ComboBoxItem>
-                </ComboBox>
-                <Button Grid.Row="1" Grid.ColumnSpan="2" Width="200" Height="25">Générer</Button>
-            </Grid>
-        </GroupBox>
-        <GroupBox Grid.Row="2" Header="Menus" Width="550" Foreground="DarkGreen" BorderBrush="DarkGreen">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="2*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-            </Grid>
-        </GroupBox>
+
+        <Rectangle Grid.Row="1" Width="550"  Stroke="Black"></Rectangle>
+
+        <Label Grid.Row="1" Margin="50, 0, 0, 0">Période :</Label>
+        <StackPanel Grid.Row="1" Margin="110, 0, 0, 0">
+            <RadioButton Margin="0, 5, 0, 0">Un repas</RadioButton>
+            <RadioButton Margin="0, 5, 0, 0">Un jour</RadioButton>
+            <RadioButton Margin="0, 5, 0, 0">Une semaine</RadioButton>
+        </StackPanel>
+
+        <Label Grid.Row="1" Margin="375, 0, 0, 0">Nombre de personne :</Label>
+        <TextBox Grid.Row="1" Width="50" Height="20" VerticalAlignment="Top" Margin="425, 5, 0, 0"></TextBox>
+
+        <Button Style="{StaticResource nonTransparent}" Grid.Row="1" Margin="0, 50, 0, 0" Width="200" Height="25">Générer</Button>
+
+        <Rectangle Grid.Row="2" Width="550" Margin="0, 10, 0, 0"  Stroke="Black"></Rectangle>
+
         <Button Style="{StaticResource nonTransparent}" Grid.Row="3" Width="200" Height="25">Liste d'épicerie</Button>
+
     </Grid>
+
 </UserControl>

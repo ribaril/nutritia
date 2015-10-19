@@ -24,5 +24,25 @@ namespace Nutritia.UI.Views
         {
             InitializeComponent();
         }
+
+        private void btnInscription_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new CreationProfil());
+        }
+
+        private void btnConnexion_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new FenetreConnexion());
+        }
+
+        private void btnCalculatrice_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new FenetreCalculatriceNutritionelle());
+        }
+
+        private void btnMenuListe_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new GenerateurMenu());
+        }
     }
 }
