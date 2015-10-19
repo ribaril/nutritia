@@ -160,6 +160,8 @@ namespace Nutritia.UI.Views
             dgMenus.ItemsSource = MenuGenere.ListePlats;
         }
 
+        
+
         /// <summary>
         /// Événement lancé sur un clique d'un bouton Ingrédients.
         /// </summary>

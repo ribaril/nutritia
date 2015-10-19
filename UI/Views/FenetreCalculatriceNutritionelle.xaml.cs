@@ -51,7 +51,7 @@ namespace Nutritia.UI.Views
 			ValeurNutritionellePlateau.Sodium = 0;
 
 			// TODO : A modifier quand les services mysql
-			for (int i = 1; i < 23; i++)
+			for (int i = 2; i < 23; i++)
 				LstPlat.Add(ServiceFactory.Instance.GetService<IPlatService>().Retrieve(new RetrievePlatArgs { IdPlat = i }));
 
 			// TODO : A modifier quand les services mysql
@@ -208,14 +208,14 @@ namespace Nutritia.UI.Views
 			Plat plat;
 			Aliment aliment;
 			stackLigne.Orientation = Orientation.Horizontal;
-			bool dessinerPlat = false;
+			bool EstPlat = false;
 
 
 			if (obj.GetType().ToString() == "Nutritia.Plat")
-				dessinerPlat = true;
+                EstPlat = true;
 
-			plat = (dessinerPlat ? (Plat)obj : null);
-			aliment = (!dessinerPlat ? (Aliment)obj : null);
+            plat = (EstPlat ? (Plat)obj : null);
+            aliment = (!EstPlat ? (Aliment)obj : null);
 
 			// Création du bouton pour supprimer ou ajouter un Plat/Aliment
 			Button btnControl = new Button();
@@ -231,7 +231,7 @@ namespace Nutritia.UI.Views
 				btnControl.Click += BtnControlAjout_Click;
 			else
 				btnControl.Click += BtnControlSupprimer_Click;
-			btnControl.Uid = (dessinerPlat ? plat.IdPlat : aliment.IdAliment).ToString();
+            btnControl.Uid = (EstPlat ? plat.IdPlat : aliment.IdAliment).ToString();
 			btnControl.Cursor = Cursors.Hand;
 			stackLigne.Children.Add(btnControl);
 
@@ -244,6 +244,50 @@ namespace Nutritia.UI.Views
 
 			return stackLigne;
 		}
+
+
+        /// <summary>
+        /// Méthode permettant de générer les valeurs nutritionnelles d'un aliment dans un tooltip. (Prise de Guillaume)
+        /// </summary>
+        /// <param name="item">Un aliment ou un plat dépendant du contexte de l'apelle</param>
+        /// <returns>Un tooltip contenant les valeurs nutritionnelles de l'aliment.</returns>
+        private ToolTip GenererValeursNutritionnelles(Object item)
+        {
+            ToolTip ttValeurNut = new ToolTip();
+            StackPanel spValeurNut = new StackPanel();
+            bool EstPlat = false;
+            if (item.GetType().ToString() == "Nutritia.Plat")
+            {
+                item = (Plat)item;
+                EstPlat = true;
+            }
+            
+            else
+            {
+                item = (Aliment)item;
+            }
+
+
+            Label lblEntete = new Label();
+            lblEntete.Content = "Valeurs nutritionnelles";
+            spValeurNut.Children.Add(lblEntete);
+
+            StringBuilder sbValeurNut = new StringBuilder();
+            sbValeurNut.Append("Énergie : ").Append(aliment.Energie * aliment.Quantite).Append(" cal").AppendLine();
+            sbValeurNut.Append("Glucides : ").Append(aliment.Glucide * aliment.Quantite).Append(" g").AppendLine();
+            sbValeurNut.Append("Fibres : ").Append(aliment.Fibre * aliment.Quantite).Append(" g").AppendLine();
+            sbValeurNut.Append("Protéines : ").Append(aliment.Proteine * aliment.Quantite).Append(" g").AppendLine();
+            sbValeurNut.Append("Lipides : ").Append(aliment.Lipide * aliment.Quantite).Append(" g").AppendLine();
+            sbValeurNut.Append("Cholestérol : ").Append(aliment.Cholesterol * aliment.Quantite).Append(" mg").AppendLine();
+            sbValeurNut.Append("Sodium : ").Append(aliment.Sodium * aliment.Quantite).Append(" mg");
+            Label lblValeurNut = new Label();
+            lblValeurNut.Content = sbValeurNut.ToString();
+
+            spValeurNut.Children.Add(lblValeurNut);
+            ttValeurNut.Content = spValeurNut;
+            return ttValeurNut;
+        }
+
 
 		void CalculerValeurNutritionelle()
 		{
