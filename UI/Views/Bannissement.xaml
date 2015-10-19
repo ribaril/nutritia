@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Nutritia.UI.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="475" d:DesignWidth="650">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -14,6 +14,51 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Gestion de banissement" Style="{StaticResource fontTitre}" VerticalAlignment="Center" Grid.ColumnSpan="2"></Label>
+        <Rectangle Grid.Row="1" Grid.ColumnSpan="2" Stroke="DarkGreen" Width="625"/>
+
+        <GroupBox x:Name="groupBox_Copy" Header="Membres bannis" Grid.Row="1" HorizontalAlignment="Center" Width="285" Margin="0,0,0,10" >
+            <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" Name="dgBanni" >
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Banni">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox VerticalAlignment="Center" IsChecked="{Binding Path=EstBanni, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn FontSize="10" Binding="{Binding Prenom}" Header="Prénom"/>
+                    <DataGridTextColumn FontSize="10" Binding="{Binding Nom}" Header="Nom"  />
+                    <DataGridTextColumn FontSize="10"  Binding="{Binding NomUtilisateur}" Header="Utilisateur"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="Membre" HorizontalAlignment="Center" Width="285" Margin="0,0,0,10">
+            <DataGrid Name="dgMembre" AutoGenerateColumns="False" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Banni">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox VerticalAlignment="Center" IsChecked="{Binding Path=EstBanni, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn FontSize="10" Binding="{Binding Prenom}" Header="Prénom"/>
+                    <DataGridTextColumn FontSize="10" Binding="{Binding Nom}" Header="Nom"  />
+                    <DataGridTextColumn FontSize="10"  Binding="{Binding NomUtilisateur}" Header="Utilisateur"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+        <Button Name="btnAppliquer" Style="{StaticResource nonTransparent}" Grid.Row="3" Grid.ColumnSpan="2" Width="200" Height="25" Click="btnAppliquer_Click">Appliquer</Button>
     </Grid>
 </UserControl>

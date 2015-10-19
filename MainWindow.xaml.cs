@@ -17,20 +17,21 @@ using Nutritia.UI.Views;
 
 namespace Nutritia
 {
-    /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window, IApplicationService
-    {
-        public MainWindow()
-        {
-            InitializeComponent();
-            Configurer();
-            
+	/// <summary>
+	/// Logique d'interaction pour MainWindow.xaml
+	/// </summary>
+	public partial class MainWindow : Window, IApplicationService
+	{
+
+		public MainWindow()
+		{
+			InitializeComponent();
+			Configurer();
+
             /*presenteurContenu.Content = new MenuPrincipal();*/
             presenteurContenu.Content = new MenuPrincipal();
+		}
 
-        }
 
         private void Configurer()
         {
@@ -46,9 +47,30 @@ namespace Nutritia
             ServiceFactory.Instance.Register<IApplicationService, MainWindow>(this);
         }
 
-        public void ChangerVue<T>(T vue)
-        {
-            presenteurContenu.Content = vue as UserControl;
-        }
-    }
+		public void ChangerVue<T>(T vue)
+		{
+			presenteurContenu.Content = vue as UserControl;
+		}
+
+		private void btnParam_Click(object sender, RoutedEventArgs e)
+		{
+			ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new FenetreParametre());
+		}
+
+		private void btnRetour_Click(object sender, RoutedEventArgs e)
+		{
+			ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
+		}
+
+		private void btnInfo_Click(object sender, RoutedEventArgs e)
+		{
+			ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new APropos());
+		}
+
+		private void btnAide_Click(object sender, RoutedEventArgs e)
+		{
+                FenetreAide fenetreAide = new FenetreAide(presenteurContenu.Content.GetType().Name);
+                fenetreAide.Show();
+		}
+	}
 }

@@ -17,80 +17,69 @@
             <RowDefinition Height="1.15*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Content="Données personnelles" Foreground="DarkGreen" FontSize="35" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Center"></Label>
-        <Label Grid.Row="0" Content="Nom" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,40,0,0"></Label>
-        <TextBox Name="Nom" Grid.Row="0" SelectedText="" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,60,0,0"></TextBox>
-        <Label Grid.Row="0" Content="Prenom" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,90,0,0"></Label>
-        <TextBox Name="Prenom" Grid.Row="0" SelectedText="" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,110,0,0"></TextBox>
-        <Label Grid.Row="0" Content="Nom d'utilisateur" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,140,0,0"></Label>
-        <TextBox Name="Nom_utilisateur" Grid.Row="0" SelectedText="" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,160,0,0"></TextBox>
-        <Label Grid.Row="0" Content="Mot de passe" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,190,0,0"></Label>
-        <PasswordBox Name="Mot_passe" Grid.Row="0" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,210,0,0"></PasswordBox>
+        <Label Grid.Row="0" Content="Données personnelles" Style="{StaticResource fontNutritia}" FontSize="35"  HorizontalAlignment="Center"></Label>
+        <Label Grid.Row="0" Content="Nom" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,40,0,0"></Label>
+        <TextBox Name="Nom" Grid.Row="0" SelectedText="" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,60,0,0"></TextBox>
+        <Label Grid.Row="0" Content="Prenom" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,90,0,0"></Label>
+        <TextBox Name="Prenom" Grid.Row="0" SelectedText="" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,110,0,0"></TextBox>
+        <Label Grid.Row="0" Content="Nom d'utilisateur" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,140,0,0"></Label>
+        <TextBox Name="Nom_utilisateur" Grid.Row="0" SelectedText="" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,160,0,0"></TextBox>
+        <Label Grid.Row="0" Content="Mot de passe" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,190,0,0"></Label>
+        <PasswordBox Name="Mot_passe" Grid.Row="0" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,210,0,0"></PasswordBox>
 
-        <Label Grid.Row="0" Content="Date de naissance" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,42,50,0"></Label>
-        <DatePicker Name="Date_naissance" Grid.Row="0" BorderBrush="Transparent" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,62,50,0"></DatePicker>
-        <Label Grid.Row="0" Content="Taille (cm)" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,90,50,0"></Label>
-        <ComboBox Name="Taille" Grid.Row="0" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,110,50,0">
-            <ComboBoxItem>120</ComboBoxItem>
-            <ComboBoxItem>130</ComboBoxItem>
-            <ComboBoxItem>140</ComboBoxItem>
-            <ComboBoxItem>150</ComboBoxItem>
-            <ComboBoxItem>160</ComboBoxItem>
-            <ComboBoxItem>170</ComboBoxItem>
-            <ComboBoxItem>180</ComboBoxItem>
-            <ComboBoxItem>190</ComboBoxItem>
-            <ComboBoxItem>200</ComboBoxItem>
-            <ComboBoxItem>210</ComboBoxItem>
-        </ComboBox>
-        <Label Grid.Row="0" Content="Masse (kg)" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,140,50,0"></Label>
-        <TextBox Name="Masse" Grid.Row="0" SelectedText="" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,160,50,0"></TextBox>
-        <Label Grid.Row="0" Content="Confirmation du mot de passe" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,190,50,0"></Label>
-        <PasswordBox Name="Validation_mdp" Grid.Row="0" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,210,50,0"></PasswordBox>
+        <Label Grid.Row="0" Content="Date de naissance" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,42,50,0"></Label>
+        <DatePicker Name="Date_naissance" Grid.Row="0" BorderBrush="Transparent" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,62,50,0"></DatePicker>
+        <Label Grid.Row="0" Content="Taille (cm)" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,90,50,0"></Label>
+        <TextBox Name="Taille" Grid.Row="0" SelectedText="" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,110,50,0"></TextBox>
+        <Label Grid.Row="0" Content="Masse (kg)" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,140,50,0"></Label>
+        <TextBox Name="Masse" Grid.Row="0" SelectedText="" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,160,50,0"></TextBox>
+        <Label Grid.Row="0" Content="Confirmation du mot de passe" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,190,50,0"></Label>
+        <PasswordBox Name="Validation_mdp" Grid.Row="0" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,210,50,0"></PasswordBox>
 
         <TabControl Grid.Row="1" Height="175" Width="625" VerticalAlignment="Top">
-            <TabItem Header="Restrictions alimentaires" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi">
+            <TabItem Header="Restrictions alimentaires" Style="{StaticResource fontNutritia}" FontSize="15" >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Label Content="-- Allergies --" Height="30" Width="100" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,0,0,0"></Label>
-                    <CheckBox Name="Lactose" Content="Lactose" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,35,0,0"></CheckBox>
-                    <CheckBox Name="Noix" Content="Arachides et noix" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,60,0,0"></CheckBox>
-                    <CheckBox Name="Gluten" Content="Gluten" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,85,0,0"></CheckBox>
-                    <CheckBox Name="Rest_poissons_mer" Content="Poissons et fruits de mer" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,110,0,0"></CheckBox>
+                    <Label Content="-- Allergies --" Height="30" Width="100" Style="{StaticResource fontNutritia}" FontSize="15"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,0,0,0"></Label>
+                    <CheckBox Name="Lactose" Content="Lactose" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,35,0,0"></CheckBox>
+                    <CheckBox Name="Noix" Content="Arachides et noix" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,60,0,0"></CheckBox>
+                    <CheckBox Name="Gluten" Content="Gluten" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,85,0,0"></CheckBox>
+                    <CheckBox Name="Rest_poissons_mer" Content="Poissons et fruits de mer" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,110,0,0"></CheckBox>
 
-                    <Label Content="-- Autres --" Height="30" Width="100" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,0,0,0"></Label>
-                    <CheckBox Name="Diabete" Content="Diabète" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,35,0,0"></CheckBox>
-                    <CheckBox Name="Cholesterol" Content="Cholestérol" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,60,0,0"></CheckBox>
-                    <CheckBox Name="Pression" Content="Haute/basse pression" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,85,0,0"></CheckBox>
+                    <Label Content="-- Autres --" Height="30" Width="100" Style="{StaticResource fontNutritia}" FontSize="15"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,0,0,0"></Label>
+                    <CheckBox Name="Diabete" Content="Diabète" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,35,0,0"></CheckBox>
+                    <CheckBox Name="Cholesterol" Content="Cholestérol" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,60,0,0"></CheckBox>
+                    <CheckBox Name="Pression" Content="Haute/basse pression" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,85,0,0"></CheckBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Objectifs" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi">
+            <TabItem Header="Objectifs" Style="{StaticResource fontNutritia}" FontSize="15" >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <CheckBox Name="Perte_poids" Content="Perte de poids" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,10,0,0"></CheckBox>
-                    <CheckBox Name="Gain_poids" Content="Gain de poids" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,35,0,0"></CheckBox>
-                    <CheckBox Name="Muscles" Content="Gain musculaire" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,60,0,0"></CheckBox>
-                    <CheckBox Name="Glycemie" Content="Contrôle glycémique" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,85,0,0"></CheckBox>
-                    <CheckBox Name="Ctrl_cholesterol" Content="Contrôle du cholestérol" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,110,0,0"></CheckBox>
+                    <CheckBox Name="Perte_poids" Content="Perte de poids" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,10,0,0"></CheckBox>
+                    <CheckBox Name="Gain_poids" Content="Gain de poids" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,35,0,0"></CheckBox>
+                    <CheckBox Name="Muscles" Content="Gain musculaire" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,60,0,0"></CheckBox>
+                    <CheckBox Name="Glycemie" Content="Contrôle glycémique" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,85,0,0"></CheckBox>
+                    <CheckBox Name="Ctrl_cholesterol" Content="Contrôle du cholestérol" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,110,0,0"></CheckBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Préférences" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi">
+            <TabItem Header="Préférences" Style="{StaticResource fontNutritia}" FontSize="15" >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <CheckBox Name="Vegetarien" Content="Végétarien" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,10,0,0"></CheckBox>
-                    <CheckBox Name="Vegetalien" Content="Végétalien" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,35,0,0"></CheckBox>
-                    <CheckBox Name="Viandes" Content="Viandes" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,60,0,0"></CheckBox>
-                    <CheckBox Name="Pates" Content="Pâtes" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,85,0,0"></CheckBox>
-                    <CheckBox Name="Pref_poissons_mer" Content="Poissons et fruits de mer" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,110,0,0"></CheckBox>
+                    <CheckBox Name="Vegetarien" Content="Végétarien" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,10,0,0"></CheckBox>
+                    <CheckBox Name="Vegetalien" Content="Végétalien" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,35,0,0"></CheckBox>
+                    <CheckBox Name="Viandes" Content="Viandes" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,60,0,0"></CheckBox>
+                    <CheckBox Name="Pates" Content="Pâtes" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,85,0,0"></CheckBox>
+                    <CheckBox Name="Pref_poissons_mer" Content="Poissons et fruits de mer" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,110,0,0"></CheckBox>
                 </Grid>
             </TabItem>
         </TabControl>
 
-        <Button Name="Btn_creer" Grid.Row="1" Content="Créer le profil" Height="30" Width="150" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10"></Button>
+        <Button Name="Btn_creer" Grid.Row="1" Content="Créer le profil" Height="30" Width="150" Style="{StaticResource fontNutritia}" FontSize="15"  HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10"></Button>
     </Grid>
 </UserControl>
