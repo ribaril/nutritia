@@ -24,10 +24,10 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <DataGrid Width="325" Height="350">
+        <DataGrid Name="dgListeEpicerie" Width="325" Height="350">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="25" Header=""></DataGridTextColumn>
-                <DataGridTextColumn Width="125" Header="Article"></DataGridTextColumn>
+                <DataGridTextColumn Width="125" Header="Article" Binding="{Binding Nom}"></DataGridTextColumn>
                 <DataGridTextColumn Width="75" Header="Quantité"></DataGridTextColumn>
                 <DataGridTextColumn Width="100" Header="Unité de mesure"></DataGridTextColumn>
             </DataGrid.Columns>

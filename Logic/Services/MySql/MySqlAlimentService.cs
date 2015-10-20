@@ -13,10 +13,48 @@ namespace Nutritia
     public class MySqlAlimentService : IAlimentService
     {
         private MySqlConnexion connexion;
-  
+
+        /// <summary>
+        /// Méthode permettant d'obtenir l'ensemble des aliments sauvegardés dans la base de données.
+        /// </summary>
+        /// <returns>Une liste contenant les aliments.</returns>
         public IList<Aliment> RetrieveAll()
         {
-            throw new NotImplementedException();
+            IList<Aliment> resultat = new List<Aliment>();
+
+            try
+            {
+                connexion = new MySqlConnexion();
+
+                string requete = "SELECT * FROM Aliments a INNER JOIN groupesAlimentaires ga ON ga.idGroupeAlimentaire = a.idGroupeAlimentaire INNER JOIN UnitesMesure um ON um.idUniteMesure = a.idUniteMesure";
+
+                DataSet dataSetAliments = connexion.Query(requete);
+                DataTable tableAliments = dataSetAliments.Tables[0];
+
+                foreach(DataRow rowAliment in tableAliments.Rows)
+                {
+                    requete = string.Format("SELECT quantite, valeurNutritionnelle FROM AlimentsValeursNutritionnelles avn INNER JOIN ValeursNutritionnelles vn ON avn.idValeurNutritionnelle = vn.idValeurNutritionnelle WHERE idAliment = {0}", (int)rowAliment["idAliment"]);
+
+                    DataSet dataSetAlimentsValeursNut = connexion.Query(requete);
+                    DataTable tableAlimentsValeursNut = dataSetAlimentsValeursNut.Tables[0];
+
+                    Dictionary<string, double> valeurNut = new Dictionary<string, double>();
+
+                    foreach (DataRow rowAlimentValeurNut in tableAlimentsValeursNut.Rows)
+                    {
+                        valeurNut.Add((string)rowAlimentValeurNut["valeurNutritionnelle"], (double)rowAlimentValeurNut["quantite"]);
+                    }
+
+                    resultat.Add(ConstruireAliment(rowAliment, valeurNut));
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return resultat;
         }
 
         /// <summary>

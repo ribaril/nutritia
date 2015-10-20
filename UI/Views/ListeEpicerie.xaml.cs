@@ -20,9 +20,35 @@ namespace Nutritia.UI.Views
     /// </summary>
     public partial class ListeEpicerie : UserControl
     {
-        public ListeEpicerie()
+        public Menu MenuGenere { get; set; }
+        public List<Aliment> ListeAliments { get; set; }
+        private IPlatService PlatService { get; set; }
+
+        /// <summary>
+        /// Constructeur par défaut de la classe.
+        /// </summary>
+        public ListeEpicerie(Menu menu)
         {
             InitializeComponent();
+
+            MenuGenere = menu;
+            PlatService = ServiceFactory.Instance.GetService<IPlatService>();
+
+            GenererListe();
+
+        }
+
+        /// <summary>
+        /// Méthode permettant de générer la liste d'épicerie.
+        /// </summary>
+        private void GenererListe()
+        {
+            foreach(Plat platCourant in MenuGenere.ListePlats)
+            {
+                // platCourant.ListeIngredient = PlatService.RetrieveAlimentsPlat(new RetrievePlatArgs { IdPlat = platCourant.IdPlat });
+            }
+
+            dgListeEpicerie.ItemsSource = ListeAliments;
         }
     }
 }

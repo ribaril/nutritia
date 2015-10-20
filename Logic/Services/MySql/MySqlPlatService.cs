@@ -67,8 +67,7 @@ namespace Nutritia
             {
                 connexion = new MySqlConnexion();
 
-
-                string requete = string.Format("SELECT * FROM Plats p INNER JOIN TypesPlats tp ON tp.idTypePlat = p.idTypePlat INNER JOIN Membres m ON m.idMembre = p.idMembre WHERE typePlat = '{0}'", args.Categorie);
+                string requete = string.Format("SELECT * FROM Plats p INNER JOIN TypesPlats tp ON tp.idTypePlat = p.idTypePlat INNER JOIN Membres m ON m.idMembre = p.idMembre WHERE idPlat = '{0}'", args.IdPlat);
 
                 DataSet dataSetPlats = connexion.Query(requete);
                 DataTable tablePlats = dataSetPlats.Tables[0];

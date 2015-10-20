@@ -266,7 +266,7 @@ namespace Nutritia.UI.Views
         /// <param name="e"></param>
         private void btnListeEpicerie_Click(object sender, RoutedEventArgs e)
         {
-            ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue<ListeEpicerie>(new ListeEpicerie());
+            ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue<ListeEpicerie>(new ListeEpicerie(MenuGenere));
         }
     }
 }
