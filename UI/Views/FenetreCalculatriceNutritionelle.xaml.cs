@@ -35,7 +35,7 @@ namespace Nutritia.UI.Views
 			Plateau = new SousEcran();
 			presenteurContenu2.Content = Plateau;
 			TabValeurNutritionelle = new SousEcran2();
-            presenteurContenu3.Content = TabValeurNutritionelle;
+			presenteurContenu3.Content = TabValeurNutritionelle;
 			LstPlat = new List<Plat>();
 			PlateauPlat = new List<Plat>();
 			PlateauAliment = new List<Aliment>();
@@ -50,6 +50,9 @@ namespace Nutritia.UI.Views
 			ValeurNutritionellePlateau.Cholesterol = 0;
 			ValeurNutritionellePlateau.Sodium = 0;
 
+			// On génere l'écran des valeurs nutritives
+			CalculerValeurNutritionelle();
+
 			// TODO : A modifier quand les services mysql
 			for (int i = 2; i < 23; i++)
 				LstPlat.Add(ServiceFactory.Instance.GetService<IPlatService>().Retrieve(new RetrievePlatArgs { IdPlat = i }));
@@ -58,7 +61,7 @@ namespace Nutritia.UI.Views
 			foreach (var item in LstPlat)
 			{
 				item.ListeIngredients = new List<Aliment>();
-				for (int i = 1; i < 10; i++)
+				for (int i = 1; i < 2; i++)
 					item.ListeIngredients.Add(ServiceFactory.Instance.GetService<IAlimentService>().Retrieve(new RetrieveAlimentArgs { IdAliment = i }));
 
 			}
@@ -212,10 +215,10 @@ namespace Nutritia.UI.Views
 
 
 			if (obj.GetType().ToString() == "Nutritia.Plat")
-                EstPlat = true;
+				EstPlat = true;
 
-            plat = (EstPlat ? (Plat)obj : null);
-            aliment = (!EstPlat ? (Aliment)obj : null);
+			plat = (EstPlat ? (Plat)obj : null);
+			aliment = (!EstPlat ? (Aliment)obj : null);
 
 			// Création du bouton pour supprimer ou ajouter un Plat/Aliment
 			Button btnControl = new Button();
@@ -231,9 +234,10 @@ namespace Nutritia.UI.Views
 				btnControl.Click += BtnControlAjout_Click;
 			else
 				btnControl.Click += BtnControlSupprimer_Click;
-            btnControl.Uid = (EstPlat ? plat.IdPlat : aliment.IdAliment).ToString();
+			btnControl.Uid = (EstPlat ? plat.IdPlat : aliment.IdAliment).ToString();
 			btnControl.Cursor = Cursors.Hand;
 			stackLigne.Children.Add(btnControl);
+			
 
 			// Génération du Label comportant le nom du Plat/Aliment
 			Label lblNom = new Label();
@@ -242,95 +246,91 @@ namespace Nutritia.UI.Views
 			lblNom.Content = plat.Nom;
 			stackLigne.Children.Add(lblNom);
 
+			// Insertion d'un hover tooltip sur le StackPanel
+			if(EstPlat)
+				stackLigne.ToolTip = GenererToolTipValeursNutritive(plat);
+			else
+				stackLigne.ToolTip = GenererToolTipValeursNutritive(aliment);
+
 			return stackLigne;
 		}
 
 
-        /// <summary>
-        /// Méthode permettant de générer les valeurs nutritionnelles d'un aliment dans un tooltip. (Prise de Guillaume)
-        /// </summary>
-        /// <param name="item">Un aliment ou un plat dépendant du contexte de l'apelle</param>
-        /// <returns>Un tooltip contenant les valeurs nutritionnelles de l'aliment.</returns>
-        private ToolTip GenererValeursNutritionnelles(Object item)
-        {
-            ToolTip ttValeurNut = new ToolTip();
-            StackPanel spValeurNut = new StackPanel();
-            bool EstPlat = false;
-            if (item.GetType().ToString() == "Nutritia.Plat")
-            {
-                item = (Plat)item;
-                EstPlat = true;
-            }
-            
-            else
-            {
-                item = (Aliment)item;
-            }
+		/// <summary>
+		/// Méthode permettant de générer les valeurs nutritionnelles d'un aliment dans un tooltip. (Prise de Guillaume)
+		/// </summary>
+		/// <param name="item">Un aliment ou un plat dépendant du contexte de l'apelle</param>
+		/// <returns>Un tooltip contenant les valeurs nutritionnelles de l'aliment.</returns>
+		private ToolTip GenererToolTipValeursNutritive(object item)
+		{
 
+			Plat plat = new Plat(); // Assignation temporaire ...
+			bool EstPlat = false;
+			if (item.GetType().ToString() == "Nutritia.Plat")
+			{
+				plat = (Plat)item;
+				EstPlat = true;
+			}
 
-            Label lblEntete = new Label();
-            lblEntete.Content = "Valeurs nutritionnelles";
-            spValeurNut.Children.Add(lblEntete);
+			if (!EstPlat) // On cast l'aliment dans la liste de notre plat vide
+			{
 
-            StringBuilder sbValeurNut = new StringBuilder();
-            sbValeurNut.Append("Énergie : ").Append(aliment.Energie * aliment.Quantite).Append(" cal").AppendLine();
-            sbValeurNut.Append("Glucides : ").Append(aliment.Glucide * aliment.Quantite).Append(" g").AppendLine();
-            sbValeurNut.Append("Fibres : ").Append(aliment.Fibre * aliment.Quantite).Append(" g").AppendLine();
-            sbValeurNut.Append("Protéines : ").Append(aliment.Proteine * aliment.Quantite).Append(" g").AppendLine();
-            sbValeurNut.Append("Lipides : ").Append(aliment.Lipide * aliment.Quantite).Append(" g").AppendLine();
-            sbValeurNut.Append("Cholestérol : ").Append(aliment.Cholesterol * aliment.Quantite).Append(" mg").AppendLine();
-            sbValeurNut.Append("Sodium : ").Append(aliment.Sodium * aliment.Quantite).Append(" mg");
-            Label lblValeurNut = new Label();
-            lblValeurNut.Content = sbValeurNut.ToString();
+				plat.ListeIngredients = new List<Aliment>();
+				plat.ListeIngredients.Add((Aliment)item);
 
-            spValeurNut.Children.Add(lblValeurNut);
-            ttValeurNut.Content = spValeurNut;
-            return ttValeurNut;
-        }
+			}
+
+			// Construction du Tooltip
+
+			ToolTip ttValeurNut = new ToolTip();
+			StackPanel spValeurNut = new StackPanel();
+
+			Label lblEntete = new Label();
+			lblEntete.Content = "Valeurs nutritionnelles";
+			spValeurNut.Children.Add(lblEntete);
+
+			Dictionary<string, double> valeurNutritive =
+				new Dictionary<string, double>();
+
+			ConstruireDicValeurNutritive(null, valeurNutritive);
+
+			foreach (var aliment in plat.ListeIngredients)
+				ConstruireDicValeurNutritive(aliment, valeurNutritive);
+			
+
+			StringBuilder sbValeurNut = new StringBuilder();
+			sbValeurNut.Append("Énergie : ").Append(valeurNutritive["Calorie"]).Append(" cal").AppendLine();
+			sbValeurNut.Append("Glucides : ").Append(valeurNutritive["Glucides"]).Append(" g").AppendLine();
+			sbValeurNut.Append("Fibres : ").Append(valeurNutritive["Fibres"]).Append(" g").AppendLine();
+			sbValeurNut.Append("Protéines : ").Append(valeurNutritive["Proteines"]).Append(" g").AppendLine();
+			sbValeurNut.Append("Lipides : ").Append(valeurNutritive["Lipides"]).Append(" g").AppendLine();
+			sbValeurNut.Append("Cholestérol : ").Append(valeurNutritive["Cholesterol"]).Append(" mg").AppendLine();
+			sbValeurNut.Append("Sodium : ").Append(valeurNutritive["Sodium"]).Append(" mg");
+			Label lblValeurNut = new Label();
+			lblValeurNut.Content = sbValeurNut.ToString();
+
+			spValeurNut.Children.Add(lblValeurNut);
+			ttValeurNut.Content = spValeurNut;
+			return ttValeurNut;
+		}
 
 
 		void CalculerValeurNutritionelle()
 		{
-			ValeurNutritionellePlateau.Energie = 0;
-			ValeurNutritionellePlateau.Glucide = 0;
-			ValeurNutritionellePlateau.Fibre = 0;
-			ValeurNutritionellePlateau.Proteine = 0;
-			ValeurNutritionellePlateau.Lipide = 0;
-			ValeurNutritionellePlateau.Cholesterol = 0;
-			ValeurNutritionellePlateau.Sodium = 0;
+			Dictionary<string, double> valeurNutritive =
+				new Dictionary<string, double>();
 
-			
-
+			ConstruireDicValeurNutritive(null, valeurNutritive);
 
 			foreach (var Plat in PlateauPlat)
 			{
 				if (Plat.ListeIngredients != null)
-					foreach (var Aliment in Plat.ListeIngredients)
-					{
-						// TODO : Convertir / 100g
-						ValeurNutritionellePlateau.Energie += Aliment.Energie;
-						ValeurNutritionellePlateau.Glucide += Aliment.Glucide;
-						ValeurNutritionellePlateau.Fibre += Aliment.Fibre;
-						ValeurNutritionellePlateau.Proteine += Aliment.Proteine;
-						ValeurNutritionellePlateau.Lipide += Aliment.Lipide;
-						ValeurNutritionellePlateau.Cholesterol += Aliment.Cholesterol;
-						ValeurNutritionellePlateau.Sodium += Aliment.Sodium;
-					}
+					foreach (var aliment in Plat.ListeIngredients)
+						ConstruireDicValeurNutritive(aliment, valeurNutritive);
 			}
 
-			foreach (var Aliment in PlateauAliment)
-			{
-				// TODO : Convertir / 100g
-				ValeurNutritionellePlateau.Energie += Aliment.Energie;
-				ValeurNutritionellePlateau.Glucide += Aliment.Glucide;
-				ValeurNutritionellePlateau.Fibre += Aliment.Fibre;
-				ValeurNutritionellePlateau.Proteine += Aliment.Proteine;
-				ValeurNutritionellePlateau.Lipide += Aliment.Lipide;
-				ValeurNutritionellePlateau.Cholesterol += Aliment.Cholesterol;
-				ValeurNutritionellePlateau.Sodium += Aliment.Sodium;
-			}
-
-			
+			foreach (var aliment in PlateauAliment)
+				ConstruireDicValeurNutritive(aliment, valeurNutritive);
 
 			DessinerTabValeurNutritionelle();
 
@@ -341,14 +341,41 @@ namespace Nutritia.UI.Views
 			TabValeurNutritionelle = new SousEcran2();
 			presenteurContenu3.Content = TabValeurNutritionelle;
 
-			TabValeurNutritionelle.vEnegie.Inlines.Add(Math.Round(ValeurNutritionellePlateau.Energie,2).ToString("#########0.00"));
+			TabValeurNutritionelle.vEnegie.Inlines.Add(Math.Round(ValeurNutritionellePlateau.Energie, 2).ToString("#########0.00"));
 			TabValeurNutritionelle.vGlucide.Inlines.Add(Math.Round(ValeurNutritionellePlateau.Glucide, 2).ToString("##########0.00"));
-            TabValeurNutritionelle.vFibre.Inlines.Add(Math.Round(ValeurNutritionellePlateau.Fibre, 2).ToString("##########0.00"));
+			TabValeurNutritionelle.vFibre.Inlines.Add(Math.Round(ValeurNutritionellePlateau.Fibre, 2).ToString("##########0.00"));
 			TabValeurNutritionelle.vProtein.Inlines.Add(Math.Round(ValeurNutritionellePlateau.Proteine, 2).ToString("##########0.00"));
 			TabValeurNutritionelle.vLipide.Inlines.Add(Math.Round(ValeurNutritionellePlateau.Lipide, 2).ToString("##########0.00"));
 			TabValeurNutritionelle.vCholesterol.Inlines.Add(Math.Round(ValeurNutritionellePlateau.Cholesterol, 2).ToString("##########0.00"));
 			TabValeurNutritionelle.vSodium.Inlines.Add(Math.Round(ValeurNutritionellePlateau.Sodium, 2).ToString("##########0.00"));
+
+		}
+
+		Dictionary<String, Double> ConstruireDicValeurNutritive(Aliment aliment,Dictionary<String,Double> dValeurNutritive)
+		{
+			if (dValeurNutritive.Count == 0)
+			{
+				dValeurNutritive.Add("Calorie", 0);
+				dValeurNutritive.Add("Glucides", 0);
+				dValeurNutritive.Add("Fibres", 0);
+				dValeurNutritive.Add("Proteines", 0);
+				dValeurNutritive.Add("Lipides", 0);
+				dValeurNutritive.Add("Cholesterol", 0);
+				dValeurNutritive.Add("Sodium", 0);
+			}
+			else
+			{
+				dValeurNutritive["Calorie"] += aliment.Energie; //* aliment.Quantite;
+				dValeurNutritive["Glucides"] += aliment.Glucide; //* aliment.Quantite;
+				dValeurNutritive["Fibres"] += aliment.Fibre; // * aliment.Quantite;
+				dValeurNutritive["Proteines"] += aliment.Proteine; // * aliment.Quantite;
+				dValeurNutritive["Lipides"] += aliment.Lipide; // * aliment.Quantite;
+				dValeurNutritive["Cholesterol"] += aliment.Cholesterol; // * aliment.Quantite;
+				dValeurNutritive["Sodium"] += aliment.Sodium; // * aliment.Quantite;
+            }
 			
+
+			return dValeurNutritive;
 		}
 
 
