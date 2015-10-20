@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,8 +22,7 @@ namespace Nutritia.UI.Views
     public partial class ListeEpicerie : UserControl
     {
         public Menu MenuGenere { get; set; }
-        public List<Aliment> ListeAliments { get; set; }
-        private IPlatService PlatService { get; set; }
+        public ObservableCollection<Aliment> ListeAliments { get; set; }
 
         /// <summary>
         /// Constructeur par défaut de la classe.
@@ -32,8 +32,8 @@ namespace Nutritia.UI.Views
             InitializeComponent();
 
             MenuGenere = menu;
-            PlatService = ServiceFactory.Instance.GetService<IPlatService>();
 
+            ListeAliments = new ObservableCollection<Aliment>();
             GenererListe();
 
         }
@@ -45,10 +45,14 @@ namespace Nutritia.UI.Views
         {
             foreach(Plat platCourant in MenuGenere.ListePlats)
             {
-                // platCourant.ListeIngredient = PlatService.RetrieveAlimentsPlat(new RetrievePlatArgs { IdPlat = platCourant.IdPlat });
+                foreach(Aliment ingredient in platCourant.ListeIngredients)
+                {
+                    ListeAliments.Add(ingredient);
+                }
             }
 
             dgListeEpicerie.ItemsSource = ListeAliments;
+
         }
     }
 }

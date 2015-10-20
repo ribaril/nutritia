@@ -6,11 +6,34 @@
              mc:Ignorable="d" 
              d:DesignHeight="475" d:DesignWidth="650">
     <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Ressources/Ressource.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+            <Style TargetType="DataGrid">
+                <Setter Property="CanUserAddRows" Value="False" />
+                <Setter Property="AutoGenerateColumns" Value="False" />
+                <Setter Property="HeadersVisibility" Value="All" />
+                <Setter Property="GridLinesVisibility" Value="None" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="DarkGreen" />
+                <Setter Property="RowBackground" Value="Transparent" />
+            </Style>
+            <Style TargetType="DataGridCell">
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            </Style>
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="200" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="DarkGreen" />
+            <Setter Property="FontFamily" Value="Berlin Sans FB Demi" />
+            <Setter Property="Foreground" Value="DarkGreen" />
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+        <Style TargetType="GroupBox">
+            <Setter Property="Width" Value="250" />
+            <Setter Property="Height" Value="350" />
+            <Setter Property="Foreground" Value="DarkGreen" />
+            <Setter Property="BorderBrush" Value="DarkGreen" />
+        </Style>
     </UserControl.Resources>
     <Grid>
 
@@ -24,14 +47,23 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <DataGrid Name="dgListeEpicerie" Width="325" Height="350">
+        <DataGrid Name="dgListeEpicerie" Width="325" Height="350" CanUserAddRows="False" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="25" Header=""></DataGridTextColumn>
+                <DataGridTemplateColumn Width="25">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="pack://application:,,,/UI/Images/poubelleIcon.png"></Image>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Width="125" Header="Article" Binding="{Binding Nom}"></DataGridTextColumn>
-                <DataGridTextColumn Width="75" Header="Quantité"></DataGridTextColumn>
-                <DataGridTextColumn Width="100" Header="Unité de mesure"></DataGridTextColumn>
+                <DataGridTextColumn Width="50" Header="Quantité" Binding="{Binding Quantite}"></DataGridTextColumn>
+                <DataGridTextColumn Width="115" Header="Unité de mesure" Binding="{Binding UniteMesure}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
+
+        <GroupBox Grid.Column="1" Header="Liste d'épicerie">
+        </GroupBox>
 
         <Button Grid.Row="1" Grid.Column="1" Width="150" Height="50">
             <DockPanel>
@@ -39,8 +71,6 @@
                 <Image Source="../Images/imprimanteIcon.png"/>
             </DockPanel>
         </Button>
-
-        <Rectangle Grid.Column="1" Width="225" Height="350" Stroke="Black"></Rectangle>
 
     </Grid>
 </UserControl>

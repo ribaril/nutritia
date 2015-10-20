@@ -43,7 +43,11 @@ namespace Nutritia
 
                 foreach (DataRow rowPlat in tablePlats.Rows)
                 {
-                    resultat.Add(ConstruirePlat(rowPlat));
+                    Plat plat = ConstruirePlat(rowPlat);
+                    
+                    plat.ListeIngredients = RetrieveAlimentsPlat(new RetrievePlatArgs{IdPlat = plat.IdPlat});
+
+                    resultat.Add(plat);
                 }
             }
             catch (Exception)

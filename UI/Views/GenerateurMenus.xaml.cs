@@ -169,17 +169,6 @@ namespace Nutritia.UI.Views
         {
             Plat platSelectionne = (Plat)dgMenus.SelectedItem;
 
-            Cursor = Cursors.Wait;
-
-            platSelectionne.ListeIngredients = PlatService.RetrieveAlimentsPlat(new RetrievePlatArgs { IdPlat = platSelectionne.IdPlat });
-
-            foreach(Aliment aliment in platSelectionne.ListeIngredients)
-            {
-                aliment.Quantite = aliment.Quantite * NbPersonnes;
-            }
-
-            Cursor = Cursors.Arrow;
-
             FenetreIngredients fenetreIngredients = new FenetreIngredients(platSelectionne);
             fenetreIngredients.ShowDialog();
         }

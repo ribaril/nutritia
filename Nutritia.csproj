@@ -392,6 +392,8 @@
     <Resource Include="UI\Images\ProfilIcon.png" />
     <Resource Include="UI\Images\voterPlatIcon.png" />
     <Resource Include="UI\Images\AjoutIcon.png" />
+    <Resource Include="UI\Images\poubelleIcon.png" />
+    <Resource Include="UI\Images\hamburger.png" />
     <Content Include="WPFToolkit\System.Windows.Controls.Layout.Toolkit.dll" />
     <Content Include="WPFToolkit\WPFToolkit.dll" />
   </ItemGroup>
