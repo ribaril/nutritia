@@ -53,7 +53,7 @@ namespace Nutritia.UI.Views
 
 		private void btnVoterPlat_Click(object sender, RoutedEventArgs e)
 		{
-			
+            ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new FenetreVotes());
 		}
 	}
 }

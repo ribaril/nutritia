@@ -104,7 +104,7 @@ namespace Nutritia
             foreach (DataRow rowPlatsAliments in tablePlatsAliments.Rows)
             {
                 Aliment alimentTmp = alimentService.Retrieve(new RetrieveAlimentArgs { IdAliment = (int)rowPlatsAliments["idAliment"] });
-                alimentTmp.Quantite = (double)rowPlatsAliments["quantite"];
+                alimentTmp.Quantite = (double)rowPlatsAliments["quantite"] * alimentTmp.Mesure;
                 listeIngredients.Add(alimentTmp);
             }
 

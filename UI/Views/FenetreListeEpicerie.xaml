@@ -8,8 +8,8 @@
     <UserControl.Resources>
             <Style TargetType="DataGrid">
                 <Setter Property="CanUserAddRows" Value="False" />
-                <Setter Property="AutoGenerateColumns" Value="False" />
-                <Setter Property="HeadersVisibility" Value="All" />
+            <Setter Property="AutoGenerateColumns" Value="False" />
+            <Setter Property="HeadersVisibility" Value="All" />
                 <Setter Property="GridLinesVisibility" Value="None" />
                 <Setter Property="Background" Value="Transparent" />
                 <Setter Property="BorderBrush" Value="DarkGreen" />
@@ -47,7 +47,7 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <DataGrid Name="dgListeEpicerie" Width="325" Height="350" CanUserAddRows="False" AutoGenerateColumns="False">
+        <DataGrid Name="dgListeEpicerie" Width="325" Height="350" CanUserAddRows="False" AutoGenerateColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Width="25">
                     <DataGridTemplateColumn.CellTemplate>
@@ -63,6 +63,10 @@
         </DataGrid>
 
         <GroupBox Grid.Column="1" Header="Liste d'épicerie">
+            <ScrollViewer>
+                <Grid Name="grdListeConviviale">
+                </Grid>
+            </ScrollViewer>
         </GroupBox>
 
         <Button Grid.Row="1" Grid.Column="1" Width="150" Height="50">
