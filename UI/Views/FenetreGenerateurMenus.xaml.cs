@@ -169,7 +169,7 @@ namespace Nutritia.UI.Views
         {
             Plat platSelectionne = (Plat)dgMenus.SelectedItem;
 
-            FenetreIngredients fenetreIngredients = new FenetreIngredients(platSelectionne);
+            FenetreIngredients fenetreIngredients = new FenetreIngredients(platSelectionne, NbPersonnes);
             fenetreIngredients.ShowDialog();
         }
 

@@ -10,10 +10,9 @@
                 <Setter Property="CanUserAddRows" Value="False" />
             <Setter Property="AutoGenerateColumns" Value="False" />
             <Setter Property="HeadersVisibility" Value="All" />
-                <Setter Property="GridLinesVisibility" Value="None" />
-                <Setter Property="Background" Value="Transparent" />
-                <Setter Property="BorderBrush" Value="DarkGreen" />
-                <Setter Property="RowBackground" Value="Transparent" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="RowBackground" Value="Transparent" />
             </Style>
             <Style TargetType="DataGridCell">
                 <Setter Property="BorderThickness" Value="0"/>
@@ -34,6 +33,11 @@
             <Setter Property="Foreground" Value="DarkGreen" />
             <Setter Property="BorderBrush" Value="DarkGreen" />
         </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Berlin Sans FB Demi" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="DarkGreen" />
+        </Style>
     </UserControl.Resources>
     <Grid>
 
@@ -47,18 +51,49 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <DataGrid Name="dgListeEpicerie" Width="325" Height="350" CanUserAddRows="False" AutoGenerateColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <DataGrid Name="dgListeEpicerie" Width="350" Height="350" CanUserAddRows="False" AutoGenerateColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <DataGrid.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Transparent" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
+            </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTemplateColumn Width="25">
+                <DataGridTemplateColumn Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="pack://application:,,,/UI/Images/poubelleIcon.png"></Image>
+                            <Button Name="btnSupprimer" Width="25" Height="25" Click="btnSupprimer_Click">
+                                <Image Source="pack://application:,,,/UI/Images/poubelleIcon.png"></Image>
+                            </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Width="125" Header="Article" Binding="{Binding Nom}"></DataGridTextColumn>
-                <DataGridTextColumn Width="50" Header="Quantité" Binding="{Binding Quantite}"></DataGridTextColumn>
-                <DataGridTextColumn Width="115" Header="Unité de mesure" Binding="{Binding UniteMesure}"></DataGridTextColumn>
+                <DataGridTextColumn Width="4*" Header="Article" Binding="{Binding Nom}" FontFamily="Berlin Sans FB Demi" FontSize="14" Foreground="DarkGreen" IsReadOnly="True">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                            <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width="2*" Header="Quantité" Binding="{Binding Quantite}" FontFamily="Berlin Sans FB Demi" FontSize="14" Foreground="DarkGreen" IsReadOnly="True">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                            <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width="3*" Header="Unité de mesure" Binding="{Binding UniteMesure}" FontFamily="Berlin Sans FB Demi" FontSize="14" Foreground="DarkGreen" IsReadOnly="True">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                            <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 

@@ -37,7 +37,6 @@ namespace Nutritia.UI.Views
 
             GenererListe();
             GenererListeConviviale();
-
         }
 
         /// <summary>
@@ -53,6 +52,7 @@ namespace Nutritia.UI.Views
                 }
             }
 
+            RetirerAlimentsDoublon();
             dgListeEpicerie.ItemsSource = ListeAliments;
 
         }
@@ -78,17 +78,92 @@ namespace Nutritia.UI.Views
         /// </summary>
         private void GenererListeConviviale()
         {
+            grdListeConviviale.RowDefinitions.Clear();
+            
+            if(grdListeConviviale.Children.Count != 0)
+            {
+                grdListeConviviale.Children.RemoveRange(0, grdListeConviviale.Children.Count);
+            }
+
             GenererRangees();
 
             Label lblArticle;
 
             for(int i = 0; i < ListeAliments.Count; i++)
             {
+                StringBuilder sbArticle = new StringBuilder();
+                sbArticle.Append(ListeAliments[i].Quantite);
+                sbArticle.Append(ListeAliments[i].UniteMesure);
+                ListeAliments[i].Nom = ListeAliments[i].Nom.ToLower();
+                if (ListeAliments[i].Nom[0] == 'a' || ListeAliments[i].Nom[0] == 'e' || ListeAliments[i].Nom[0] == 'h' ||
+                    ListeAliments[i].Nom[0] == 'i' || ListeAliments[i].Nom[0] == 'o' || ListeAliments[i].Nom[0] == 'u')
+                {
+                    sbArticle.Append(" d'");
+                }
+                else
+                {
+                    sbArticle.Append(" de ");
+                }
+                sbArticle.AppendLine(ListeAliments[i].Nom);
+
                 lblArticle = new Label();
-                lblArticle.Content = ListeAliments[i].Nom;
+                lblArticle.Content = sbArticle.ToString();
                 Grid.SetRow(lblArticle, i);
                 grdListeConviviale.Children.Add(lblArticle);
             }
+        }
+
+        /// <summary>
+        /// Méthode permettant de retirer les aliments doublons de la liste d'épicerie.
+        /// </summary>
+        private void RetirerAlimentsDoublon()
+        {
+            ObservableCollection<Aliment> listeAlimentsTmp = new ObservableCollection<Aliment>();
+
+            foreach(Aliment alimentCourant in ListeAliments)
+            {
+                bool dejaPresent = false;
+                double quantite = alimentCourant.Quantite;
+
+                foreach (Aliment alimentCourantTmp in listeAlimentsTmp)
+                {
+                    if (alimentCourant.IdAliment == alimentCourantTmp.IdAliment)
+                    {
+                        dejaPresent = true;
+                        quantite += alimentCourant.Quantite;
+                    }
+                }
+
+                if(!dejaPresent)
+                {
+                    listeAlimentsTmp.Add(alimentCourant);
+                }
+                else
+                {
+                    foreach (Aliment alimentCourantTmp in listeAlimentsTmp)
+                    {
+                        if(alimentCourantTmp.Nom == alimentCourant.Nom)
+                        {
+                            alimentCourantTmp.Quantite = quantite;
+                        }
+                    }
+                }
+            }
+
+            ListeAliments = listeAlimentsTmp;
+        }
+
+        /// <summary>
+        /// Méthode permettant de supprimer un article de la liste d'épicerie.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSupprimer_Click(object sender, RoutedEventArgs e)
+        {
+            Aliment alimentSelectionne = (Aliment)dgListeEpicerie.SelectedItem;
+
+            ListeAliments.Remove(alimentSelectionne);
+            GenererListeConviviale();
         }
     }
 }
