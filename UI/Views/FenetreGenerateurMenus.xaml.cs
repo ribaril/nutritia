@@ -17,9 +17,9 @@ using System.Windows.Shapes;
 namespace Nutritia.UI.Views
 {
     /// <summary>
-    /// Logique d'interaction pour GenerateurMenus.xaml
+    /// Logique d'interaction pour FenetreGenerateurMenus.xaml
     /// </summary>
-    public partial class GenerateurMenus : UserControl
+    public partial class FenetreGenerateurMenus : UserControl
     {
         private int NbJours { get; set; }
         private int NbPlats { get; set; }
@@ -35,7 +35,7 @@ namespace Nutritia.UI.Views
         /// <summary>
         /// Constructeur par défaut de la classe.
         /// </summary>
-        public GenerateurMenus()
+        public FenetreGenerateurMenus()
         {
             InitializeComponent();
 
@@ -255,7 +255,7 @@ namespace Nutritia.UI.Views
         /// <param name="e"></param>
         private void btnListeEpicerie_Click(object sender, RoutedEventArgs e)
         {
-            ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue<ListeEpicerie>(new ListeEpicerie(MenuGenere));
+            ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue<FenetreListeEpicerie>(new FenetreListeEpicerie(MenuGenere));
         }
     }
 }

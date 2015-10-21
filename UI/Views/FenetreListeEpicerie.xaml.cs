@@ -17,9 +17,9 @@ using System.Windows.Shapes;
 namespace Nutritia.UI.Views
 {
     /// <summary>
-    /// Logique d'interaction pour ListeEpicerie.xaml
+    /// Logique d'interaction pour FenetreListeEpicerie.xaml
     /// </summary>
-    public partial class ListeEpicerie : UserControl
+    public partial class FenetreListeEpicerie : UserControl
     {
         public Menu MenuGenere { get; set; }
         public ObservableCollection<Aliment> ListeAliments { get; set; }
@@ -27,7 +27,7 @@ namespace Nutritia.UI.Views
         /// <summary>
         /// Constructeur par défaut de la classe.
         /// </summary>
-        public ListeEpicerie(Menu menu)
+        public FenetreListeEpicerie(Menu menu)
         {
             InitializeComponent();
 

@@ -77,7 +77,6 @@
     <Compile Include="Logic\Model\Args\RetrieveUniteMesureArgs.cs" />
     <Compile Include="Logic\Model\Entities\Aliment.cs" />
     <Compile Include="Logic\Model\Entities\Calculatrice.cs" />
-    <Compile Include="Logic\Model\Entities\GenerateurMenu.cs" />
     <Compile Include="Logic\Model\Entities\Membre.cs" />
     <Compile Include="Logic\Model\Entities\Menu.cs" />
     <Compile Include="Logic\Model\Entities\Objectif.cs" />
@@ -121,9 +120,6 @@
     </Compile>
     <Compile Include="UI\Views\FenetreDon.xaml.cs">
       <DependentUpon>FenetreDon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Views\FenetreEcranMenu.xaml.cs">
-      <DependentUpon>FenetreEcranMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\FenetreAide.xaml.cs">
       <DependentUpon>FenetreAide.xaml</DependentUpon>
@@ -218,10 +214,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Views\FenetreDon.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Views\FenetreEcranMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
