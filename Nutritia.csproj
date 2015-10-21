@@ -176,6 +176,11 @@
     <Compile Include="UI\Views\RenommeMoiSaCorantin2.xaml.cs">
       <DependentUpon>RenommeMoiSaCorantin2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Views\SearchBox.xaml.cs">
+      <DependentUpon>SearchBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Watermark\WatermarkAdorner.cs" />
+    <Compile Include="UI\Watermark\WatermarkService.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -285,6 +290,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Views\RenommeMoiSaCorantin2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\SearchBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

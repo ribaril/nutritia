@@ -5,15 +5,28 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Nutritia.UI.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Ressources/Ressource.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
+             d:DesignHeight="550" d:DesignWidth="650">
     <Grid>
-            
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="0, 10, 0, 0"/>
+                </Style>
+            </StackPanel.Resources>
+            <Label HorizontalAlignment="Center" Foreground="DarkGreen" FontSize="30" FontFamily="Berlin Sans FB Demi">Administration</Label>
+            <Button Name="btnRepertoire" Width="100" Height="100" Click="btnRepertoire_Click">
+                <Rectangle Width="100" Height="100" Fill="CornflowerBlue" ToolTip="Image répertoire"></Rectangle>
+            </Button>
+            <Label HorizontalAlignment="Center" Foreground="DarkGreen" FontSize="24" FontFamily="Berlin Sans FB Demi">Gestion de répertoire de données</Label>
+            <Button Name="btngestionAdmin" Width="100" Height="100" Click="btngestionAdmin_Click">
+                <Rectangle Width="100" Height="100" Fill="CornflowerBlue" ToolTip="Image cadenas"></Rectangle>
+            </Button>
+            <Label HorizontalAlignment="Center" Foreground="DarkGreen" FontSize="24" FontFamily="Berlin Sans FB Demi">Gestion des administrateurs</Label>
+            <Button Name="btnBanUtilisateur" Width="100" Height="100" Click="btnBanUtilisateur_Click">
+                <Rectangle Width="100" Height="100" Fill="CornflowerBlue" ToolTip="Image banhammer"></Rectangle>
+            </Button>
+            <Label HorizontalAlignment="Center" Foreground="DarkGreen" FontSize="24" FontFamily="Berlin Sans FB Demi">Bannissement de membres</Label>
+
+        </StackPanel>
     </Grid>
 </UserControl>
