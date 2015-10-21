@@ -405,6 +405,7 @@
     <Resource Include="UI\Images\nonDisponible.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="UI\Images\poubelleIcon.png" />
     <Resource Include="UI\Images\panierIcon.png" />
     <Resource Include="UI\Images\journalIcon.png" />
     <Resource Include="UI\Images\infoIcon.png" />

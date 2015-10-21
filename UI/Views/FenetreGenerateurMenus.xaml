@@ -60,12 +60,11 @@
         -->
     </UserControl.Resources>
     <Grid>
-
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="100"></RowDefinition>
-            <RowDefinition Height="275"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="2.5*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Button Name="btnOuvrirMenu">Ouvrir un menu existant</Button>
         <GroupBox Grid.Row="1" Header="Informations préalables">
@@ -142,7 +141,5 @@
             </ScrollViewer>
         </GroupBox>
         <Button Name="btnListeEpicerie" Grid.Row="3" Click="btnListeEpicerie_Click">Liste d'épicerie</Button>
-
     </Grid>
-
 </UserControl>

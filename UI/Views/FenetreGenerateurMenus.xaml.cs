@@ -169,18 +169,7 @@ namespace Nutritia.UI.Views
         {
             Plat platSelectionne = (Plat)dgMenus.SelectedItem;
 
-            Cursor = Cursors.Wait;
-
-            platSelectionne.ListeIngredients = PlatService.RetrieveAlimentsPlat(new RetrievePlatArgs { IdPlat = platSelectionne.IdPlat });
-
-            foreach(Aliment aliment in platSelectionne.ListeIngredients)
-            {
-                aliment.Quantite = aliment.Quantite * NbPersonnes;
-            }
-
-            Cursor = Cursors.Arrow;
-
-            FenetreIngredients fenetreIngredients = new FenetreIngredients(platSelectionne);
+            FenetreIngredients fenetreIngredients = new FenetreIngredients(platSelectionne, NbPersonnes);
             fenetreIngredients.ShowDialog();
         }
 
@@ -266,7 +255,7 @@ namespace Nutritia.UI.Views
         /// <param name="e"></param>
         private void btnListeEpicerie_Click(object sender, RoutedEventArgs e)
         {
-            ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue<ListeEpicerie>(new ListeEpicerie());
+            ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue<ListeEpicerie>(new ListeEpicerie(MenuGenere));
         }
     }
 }
