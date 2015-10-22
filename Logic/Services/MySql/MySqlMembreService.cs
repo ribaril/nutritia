@@ -109,7 +109,7 @@ namespace Nutritia
         public Membre Retrieve(RetrieveMembreArgs args)
         {
 
-            Membre membre;
+            Membre membre = new Membre();
 
             try
             {
@@ -126,42 +126,48 @@ namespace Nutritia
                 DataTable tableMembres = dataSetMembres.Tables[0];
 
                 // Construction de l'objet Membre.
-                membre = ConstruireMembre(tableMembres.Rows[0]);
-
-                // Ajout des restrictions alimentaires du membre.
-                requete = string.Format("SELECT idRestrictionAlimentaire FROM RestrictionsAlimentairesMembres WHERE idMembre = {0}", membre.IdMembre);
-
-                DataSet dataSetRestrictions = connexion.Query(requete);
-                DataTable tableRestrictions = dataSetRestrictions.Tables[0];
-
-                foreach (DataRow rowRestriction in tableRestrictions.Rows)
+                if (tableMembres.Rows.Count != 0)
                 {
-                    membre.ListeRestrictions.Add(restrictionAlimentaireService.Retrieve(new RetrieveRestrictionAlimentaireArgs { IdRestrictionAlimentaire = (int)rowRestriction["idRestrictionAlimentaire"] }));
+                    membre = ConstruireMembre(tableMembres.Rows[0]);
+
+                    // Ajout des restrictions alimentaires du membre.
+                    requete = string.Format("SELECT idRestrictionAlimentaire FROM RestrictionsAlimentairesMembres WHERE idMembre = {0}", membre.IdMembre);
+
+                    DataSet dataSetRestrictions = connexion.Query(requete);
+                    DataTable tableRestrictions = dataSetRestrictions.Tables[0];
+
+                    foreach (DataRow rowRestriction in tableRestrictions.Rows)
+                    {
+                        membre.ListeRestrictions.Add(restrictionAlimentaireService.Retrieve(new RetrieveRestrictionAlimentaireArgs { IdRestrictionAlimentaire = (int)rowRestriction["idRestrictionAlimentaire"] }));
+                    }
+
+                    // Ajout des objectifs du membre.
+                    requete = string.Format("SELECT idObjectif FROM ObjectifsMembres WHERE idMembre = {0}", membre.IdMembre);
+
+                    DataSet dataSetObjectifs = connexion.Query(requete);
+                    DataTable tableObjectifs = dataSetObjectifs.Tables[0];
+
+                    foreach (DataRow rowObjectif in tableObjectifs.Rows)
+                    {
+                        membre.ListeObjectifs.Add(objectifService.Retrieve(new RetrieveObjectifArgs { IdObjectif = (int)rowObjectif["idObjectif"] }));
+                    }
+
+                    // Ajout des préférences du membre.
+                    requete = string.Format("SELECT idPreference FROM PreferencesMembres WHERE idMembre = {0}", membre.IdMembre);
+
+                    DataSet dataSetPreferences = connexion.Query(requete);
+                    DataTable tablePreferences = dataSetPreferences.Tables[0];
+
+                    foreach (DataRow rowPreference in tablePreferences.Rows)
+                    {
+                        membre.ListePreferences.Add(preferenceService.Retrieve(new RetrievePreferenceArgs { IdPreference = (int)rowPreference["idPreference"] }));
+                    }
+
+                    membre.ListeMenus = menuService.RetrieveSome(new RetrieveMenuArgs { IdMembre = (int)membre.IdMembre });
                 }
+                
 
-                // Ajout des objectifs du membre.
-                requete = string.Format("SELECT idObjectif FROM ObjectifsMembres WHERE idMembre = {0}", membre.IdMembre);
-
-                DataSet dataSetObjectifs = connexion.Query(requete);
-                DataTable tableObjectifs = dataSetObjectifs.Tables[0];
-
-                foreach (DataRow rowObjectif in tableObjectifs.Rows)
-                {
-                    membre.ListeObjectifs.Add(objectifService.Retrieve(new RetrieveObjectifArgs { IdObjectif = (int)rowObjectif["idObjectif"] }));
-                }
-
-                // Ajout des préférences du membre.
-                requete = string.Format("SELECT idPreference FROM PreferencesMembres WHERE idMembre = {0}", membre.IdMembre);
-
-                DataSet dataSetPreferences = connexion.Query(requete);
-                DataTable tablePreferences = dataSetPreferences.Tables[0];
-
-                foreach (DataRow rowPreference in tablePreferences.Rows)
-                {
-                    membre.ListePreferences.Add(preferenceService.Retrieve(new RetrievePreferenceArgs { IdPreference = (int)rowPreference["idPreference"] }));
-                }
-
-                membre.ListeMenus = menuService.RetrieveSome(new RetrieveMenuArgs { IdMembre = (int)membre.IdMembre });
+                
 
             }
             catch (MySqlException)

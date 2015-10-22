@@ -13,7 +13,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Canvas >
-        <Label Content="Bienvenue nomMembre" Style="{StaticResource fontNutritia}" FontStyle="Italic" FontSize="30"  Canvas.Top="20" Canvas.Left="313" Width="319"/>
+        <Label Name="lbl_nom_membre" Content="Bienvenue nomMembre" Style="{StaticResource fontNutritia}" FontStyle="Italic" FontSize="30"  Canvas.Top="20" Canvas.Left="313" Width="319"/>
         <Label Content="Nutritia" Style="{StaticResource fontNutritia}" FontSize="45"  Canvas.Left="14" Canvas.Top="7"/>
         <Image Source="/Nutritia;component/UI/Images/LogoIcon.PNG" Panel.ZIndex="-100" Width="100" Height="100" Canvas.Left="147" Canvas.Top="-5"/>
         <Button Name="btnDeconnexion" Canvas.Left="451" Canvas.Top="91" Height="75" Width="75" Click="btnDeconnexion_Click">
