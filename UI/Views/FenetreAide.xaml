@@ -20,7 +20,7 @@
             <ImageBrush Opacity="0.3" ImageSource="/Nutritia;component/UI/Images/background.jpg"/>
         </Grid.Background>
         <TabControl Name="tcAide" TabStripPlacement="Left" Background="Transparent">
-            <TabItem Name="tiAjoutPlat" Header="Ajout de plat">
+            <TabItem Style="{StaticResource tabItem}" Name="tiAjoutPlat" Header="Ajout de plat">
                 <StackPanel>
                     <Label Style="{StaticResource fontSousTitre}" Content="Ajout de plat" />
                     <TextBlock>
@@ -28,7 +28,7 @@
                     </TextBlock>
                 </StackPanel>
             </TabItem>
-            <TabItem Name="tiSuspenssion" Header="Suspenssion">
+            <TabItem Style="{StaticResource tabItem}" Name="tiSuspenssion" Header="Suspenssion">
                 <StackPanel>
                     <Label Style="{StaticResource fontSousTitre}" Content="Information sur la suspenssion" />
                     <TextBlock>
@@ -36,7 +36,7 @@
                     </TextBlock>
                 </StackPanel>
             </TabItem>
-            <TabItem Name="tiCalculatrice" Header="Calculatrice">
+            <TabItem Style="{StaticResource tabItem}" Name="tiCalculatrice" Header="Calculatrice">
                 <StackPanel>
                     <Label Style="{StaticResource fontSousTitre}" Content="Calculatrice nutritionelle" />
                     <TextBlock>
@@ -45,7 +45,7 @@
                 </StackPanel>
             </TabItem>
 
-            <TabItem Name="tiConnexion" Header="Connexion">
+            <TabItem Style="{StaticResource tabItem}" Name="tiConnexion" Header="Connexion">
                 <StackPanel>
                     <Label Style="{StaticResource fontSousTitre}" Content="Se connecter" />
                     <TextBlock>
@@ -53,7 +53,7 @@
                     </TextBlock>
                 </StackPanel>
             </TabItem>
-            <TabItem Name="tiDon" Header="Don">
+            <TabItem Style="{StaticResource tabItem}" Name="tiDon" Header="Don">
                 <StackPanel>
                     <Label Style="{StaticResource fontSousTitre}" Content="Envoyer un don" />
                     <TextBlock>
@@ -61,7 +61,7 @@
                     </TextBlock>
                 </StackPanel>
             </TabItem>
-            <TabItem Name="tiGenerationMenu" Header="Generation de menu">
+            <TabItem Style="{StaticResource tabItem}" Name="tiGenerationMenu" Header="Generation de menu">
                 <StackPanel>
                     <Label Style="{StaticResource fontSousTitre}" Content="Génération de menu aléatoire" />
                     <TextBlock>
@@ -69,7 +69,7 @@
                     </TextBlock>
                 </StackPanel>
             </TabItem>
-            <TabItem Name="tiListeEpicerie" Header="Liste d'épicerie">
+            <TabItem Style="{StaticResource tabItem}" Name="tiListeEpicerie" Header="Liste d'épicerie">
                 <StackPanel>
                     <Label Style="{StaticResource fontSousTitre}" Content="Votre liste d'épicerie" />
                     <TextBlock>
@@ -77,7 +77,7 @@
                     </TextBlock>
                 </StackPanel>
             </TabItem>
-            <TabItem Name="tiMenuConnecte" Header="Menu connecté">
+            <TabItem Style="{StaticResource tabItem}" Name="tiMenuConnecte" Header="Menu connecté">
                 <StackPanel>
                     <Label Style="{StaticResource fontSousTitre}" Content="Menu connécté" />
                     <TextBlock>
@@ -85,7 +85,7 @@
                     </TextBlock>
                 </StackPanel>
             </TabItem>
-            <TabItem Name="tiMenuPrincipal" Header="Menu pricipale">
+            <TabItem Style="{StaticResource tabItem}" Name="tiMenuPrincipal" Header="Menu pricipale">
                 <StackPanel>
                     <Label Style="{StaticResource fontSousTitre}" Content="Menu pricipale" />
                     <TextBlock>
@@ -93,7 +93,7 @@
                     </TextBlock>
                 </StackPanel>
             </TabItem>
-            <TabItem Name="tiParametre" Header="Paramètre">
+            <TabItem Style="{StaticResource tabItem}" Name="tiParametre" Header="Paramètre">
                 <StackPanel>
                     <Label Style="{StaticResource fontSousTitre}" Content="Vos paramètres" />
                     <TextBlock>
@@ -101,7 +101,7 @@
                     </TextBlock>
                 </StackPanel>
             </TabItem>
-            <TabItem Name="tiProfil" Header="Profil">
+            <TabItem Style="{StaticResource tabItem}" Name="tiProfil" Header="Profil">
                 <StackPanel>
                     <Label Style="{StaticResource fontSousTitre}" Content="Mon profil" />
                     <TextBlock>
@@ -109,7 +109,7 @@
                     </TextBlock>
                 </StackPanel>
             </TabItem>
-            <TabItem Name="tiLangue" Header="Langage">
+            <TabItem Style="{StaticResource tabItem}" Name="tiLangue" Header="Langage">
                 <StackPanel>
                     <Label Style="{StaticResource fontSousTitre}" Content="Mon profil" />
                     <TextBlock>

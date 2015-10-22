@@ -13,5 +13,6 @@ namespace Nutritia
     /// </summary>
     public partial class App : Application
     {
+        static public Membre MembreCourant = new Membre();
     }
 }

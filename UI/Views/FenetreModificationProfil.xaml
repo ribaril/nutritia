@@ -17,7 +17,7 @@
             <RowDefinition Height="1.15*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Content="Données personnelles" FontSize="35" HorizontalAlignment="Center"></Label>
+        <Label Grid.Row="0" Content="Données personnelles" FontSize="35" Style="{StaticResource fontNutritia}" HorizontalAlignment="Center"></Label>
         <Label Grid.Row="0" Content="Nom" Width="250" Height="30"  FontSize="13" Style="{StaticResource fontNutritia}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,40,0,0"></Label>
         <TextBox Name="Nom" Grid.Row="0" SelectedText="" Width="250" Height="30"  FontSize="13" Style="{StaticResource fontNutritia}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,60,0,0"></TextBox>
         <Label Grid.Row="0" Content="Prenom" Width="250" Height="30"  FontSize="13" Style="{StaticResource fontNutritia}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,90,0,0"></Label>
@@ -30,9 +30,34 @@
         <Label Grid.Row="0" Content="Date de naissance" Width="250" Height="30"  FontSize="13" Style="{StaticResource fontNutritia}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,42,50,0"></Label>
         <DatePicker Name="Date_naissance" Grid.Row="0" BorderBrush="Transparent" Width="250" Height="30"  FontSize="13" Style="{StaticResource fontNutritia}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,62,50,0"></DatePicker>
         <Label Grid.Row="0" Content="Taille (cm)" Width="250" Height="30"  FontSize="13" Style="{StaticResource fontNutritia}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,90,50,0"></Label>
-        <TextBox Name="Taille" Grid.Row="0" SelectedText="" Width="250" Height="30"  FontSize="13" Style="{StaticResource fontNutritia}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,110,50,0"></TextBox>
+        <ComboBox Name="Taille" Grid.Row="0" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,110,50,0" SelectedValuePath="Content">
+            <ComboBoxItem>120</ComboBoxItem>
+            <ComboBoxItem>130</ComboBoxItem>
+            <ComboBoxItem>150</ComboBoxItem>
+            <ComboBoxItem>150</ComboBoxItem>
+            <ComboBoxItem>160</ComboBoxItem>
+            <ComboBoxItem>170</ComboBoxItem>
+            <ComboBoxItem>180</ComboBoxItem>
+            <ComboBoxItem>190</ComboBoxItem>
+            <ComboBoxItem>200</ComboBoxItem>
+            <ComboBoxItem>210</ComboBoxItem>
+        </ComboBox>
         <Label Grid.Row="0" Content="Masse (kg)" Width="250" Height="30"  FontSize="13" Style="{StaticResource fontNutritia}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,140,50,0"></Label>
-        <TextBox Name="Masse" Grid.Row="0" SelectedText="" Width="250" Height="30"  FontSize="13" Style="{StaticResource fontNutritia}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,160,50,0"></TextBox>
+        <ComboBox Name="Masse" Grid.Row="0" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,160,50,0" SelectedValuePath="Content">
+            <ComboBoxItem>40</ComboBoxItem>
+            <ComboBoxItem>50</ComboBoxItem>
+            <ComboBoxItem>60</ComboBoxItem>
+            <ComboBoxItem>70</ComboBoxItem>
+            <ComboBoxItem>80</ComboBoxItem>
+            <ComboBoxItem>90</ComboBoxItem>
+            <ComboBoxItem>100</ComboBoxItem>
+            <ComboBoxItem>110</ComboBoxItem>
+            <ComboBoxItem>120</ComboBoxItem>
+            <ComboBoxItem>130</ComboBoxItem>
+            <ComboBoxItem>140</ComboBoxItem>
+            <ComboBoxItem>150</ComboBoxItem>
+            <ComboBoxItem>160</ComboBoxItem>
+        </ComboBox>
         <Label Grid.Row="0" Content="Nouveau mot de passe" Width="250" Height="30"  FontSize="13" Style="{StaticResource fontNutritia}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,190,50,0"></Label>
         <PasswordBox Name="Nouveau_mdp" Grid.Row="0" Width="250" Height="30"  FontSize="13" Style="{StaticResource fontNutritia}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,210,50,0"></PasswordBox>
 
