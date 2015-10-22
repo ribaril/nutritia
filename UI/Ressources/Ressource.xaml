@@ -27,9 +27,9 @@
         <Setter Property="HorizontalAlignment" Value="Center"/>
     </Style>
 
-	
-	
-    <Style TargetType="TabItem">
+
+
+    <Style TargetType="TabItem" x:Key="tabItem">
         <Setter x:Name="fondBleu" Property="Background" Value="AliceBlue"></Setter>
         <Setter Property="Template">
             <Setter.Value>

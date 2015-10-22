@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Nutritia
 {
@@ -70,12 +71,11 @@ namespace Nutritia
             try
             {
                 connexion = new MySqlConnexion();
-
                 string requete = string.Format("SELECT * FROM Plats p INNER JOIN TypesPlats tp ON tp.idTypePlat = p.idTypePlat INNER JOIN Membres m ON m.idMembre = p.idMembre WHERE idPlat = '{0}'", args.IdPlat);
 
                 DataSet dataSetPlats = connexion.Query(requete);
                 DataTable tablePlats = dataSetPlats.Tables[0];
-
+                
                 plat = ConstruirePlat(tablePlats.Rows[0]);
 
             }
