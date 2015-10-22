@@ -61,30 +61,30 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="2.5*"></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition Height="1.5*"></RowDefinition>
             <RowDefinition Height="5*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
         </Grid.RowDefinitions>
         <Button Name="btnOuvrirMenu">Ouvrir un menu existant</Button>
         <GroupBox Grid.Row="1" Header="Informations préalables">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="1.25*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Label>Période :</Label>
-                <StackPanel Margin="75, 2.5, 0, 0">
-                    <RadioButton Name="rbMenuUnique" IsChecked="True">Un repas</RadioButton>
-                    <RadioButton Name="rbMenuJournalier">Un jour</RadioButton>
-                    <RadioButton Name="rbMenuHebdomadaire">Une semaine</RadioButton>
+                <StackPanel Margin="75, 0, 0, 0" Orientation="Horizontal">
+                    <RadioButton Name="rbMenuUnique" Margin="0, 6.5, 10 , 0" IsChecked="True">Un repas</RadioButton>
+                    <RadioButton Name="rbMenuJournalier" Margin="0, 6.5, 10 , 0">Un jour</RadioButton>
+                    <RadioButton Name="rbMenuHebdomadaire" Margin="0, 6.5, 10 , 0">Une semaine</RadioButton>
                 </StackPanel>
-                <Label Grid.Column="1" Margin="50, 0, 0, 0">Nombre de personne :</Label>
-                <ComboBox Name="cboNbPersonnes" Grid.Column="1" SelectedIndex="0" Width="50" Height="25" VerticalAlignment="Top" Margin="200, 0, 0, 0">
+                <Label Grid.Column="1">Nombre de personne :</Label>
+                <ComboBox Name="cboNbPersonnes" Grid.Column="1" SelectedIndex="0" Width="50" Height="25" VerticalAlignment="Top" Margin="150, 0, 0 , 0">
                     <ComboBoxItem>1</ComboBoxItem>
                     <ComboBoxItem>2</ComboBoxItem>
                     <ComboBoxItem>3</ComboBoxItem>

@@ -41,6 +41,7 @@ namespace Nutritia.UI.Views
 
             NbPlats = 4;
             btnOuvrirMenu.IsEnabled = false;
+            btnListeEpicerie.IsEnabled = false;
             PlatService = ServiceFactory.Instance.GetService<IPlatService>();
         }
         
@@ -158,6 +159,7 @@ namespace Nutritia.UI.Views
             Cursor = Cursors.Arrow;
 
             dgMenus.ItemsSource = MenuGenere.ListePlats;
+            btnListeEpicerie.IsEnabled = true;
         }
 
         
