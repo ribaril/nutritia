@@ -21,67 +21,58 @@ namespace Nutritia.UI.Views
     /// </summary>
     public partial class Bannissement : UserControl
     {
-		public ObservableCollection<Membre> lstMembre { get; set; }
-		public ObservableCollection<Membre> lstBanni { get; set; }
-		public Bannissement()
+        public ObservableCollection<Membre> LstMembre { get; set; }
+        public ObservableCollection<Membre> LstBanni { get; set; }
+        public List<Membre> TousLesMembres { get; set; }
+        public Bannissement()
         {
             InitializeComponent();
-			lstMembre = new ObservableCollection<Membre>();
-			lstBanni = new ObservableCollection<Membre>();
-			List<Membre> lstTemp = new List<Membre>(ServiceFactory.Instance.GetService<IMembreService>().RetrieveAll());
+            LstMembre = new ObservableCollection<Membre>();
+            LstBanni = new ObservableCollection<Membre>();
+            TousLesMembres = new List<Membre>(ServiceFactory.Instance.GetService<IMembreService>().RetrieveAll());
 
-			Membre membre = new Membre();
-			membre.Prenom = "Jacque";
-			membre.Nom = "Roll";
-			membre.NomUtilisateur = "ElJackoLantern";
+            RemplirListe();
 
-			Membre membre2 = new Membre();
-			membre2.Prenom = "Guillaume";
-			membre2.Nom = "Leblond";
-			membre2.NomUtilisateur = "ElSceauxDeau";
-			membre2.EstBanni = true;
+        }
 
-			Membre membre3 = new Membre();
-			membre3.Prenom = "Coco";
-			membre3.Nom = "Nolo";
-			membre3.NomUtilisateur = "Lapoire";
-			membre3.EstBanni = true;
+        private void btnAppliquer_Click(object sender, RoutedEventArgs e)
+        {
+            List<Membre> lstAvModif = TousLesMembres;
+            TousLesMembres = new List<Membre>(LstBanni);
+            TousLesMembres.AddRange(LstMembre);
 
-			lstTemp.Add(membre);
-			lstTemp.Add(membre2);
-			lstTemp.Add(membre3);
+            RemplirListe();
 
-			RemplirListe(lstTemp);
+            foreach (var membre in TousLesMembres)
+            {
+                //Membre ancienMembre = lstAvModif.FirstOrDefault(x => x.IdMembre == membre.IdMembre);
+                //if(membre.EstBanni != ancienMembre.EstBanni)
+                ServiceFactory.Instance.GetService<IMembreService>().Update(membre);
+            }
+        }
 
-			
+        void RemplirListe()
+        {
+            LstMembre.Clear();
+            LstBanni.Clear();
 
-			
-		}
+            foreach (var membre in TousLesMembres)
+            {
 
-		private void btnAppliquer_Click(object sender, RoutedEventArgs e)
-		{
-			List<Membre> lstTemp = new List<Membre>(lstBanni);
-			lstTemp.AddRange(lstMembre);
+                if (membre.EstBanni)
+                {
+                    membre.EstBanni = true;
+                    LstBanni.Add(membre);
+                }
+                else
+                {
+                    membre.EstBanni = false;
+                    LstMembre.Add(membre);
+                }
+            }
 
-			RemplirListe(lstTemp);
-		}
-
-		void RemplirListe(List<Membre> lstTemp)
-		{
-			lstMembre.Clear();
-			lstBanni.Clear();
-
-			foreach (var membre in lstTemp)
-			{
-
-				if (membre.EstBanni)
-					lstBanni.Add(membre);
-				else
-					lstMembre.Add(membre);
-			}
-
-			dgBanni.ItemsSource = lstBanni;
-			dgMembre.ItemsSource = lstMembre;
-		}
-	}
+            dgBanni.ItemsSource = LstBanni;
+            dgMembre.ItemsSource = LstMembre;
+        }
+    }
 }

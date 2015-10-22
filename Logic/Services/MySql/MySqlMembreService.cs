@@ -213,6 +213,47 @@ namespace Nutritia
                 throw;
             }
         }
+        
+        
+        /// <summary>
+        /// Méthode permettant de mettre à jour un membre dans la base de données.
+        /// </summary>
+        /// <param name="membre">L'objet Membre à mettre à jour.</param>
+        public void Update(Membre membre)
+        {
+            try
+            {
+                connexion = new MySqlConnexion();
+
+                string requete = string.Format("UPDATE Membres SET nom = '{0}' ,prenom = '{1}', taille = {2}, masse = {3}, dateNaissance = '{4}', nomUtilisateur = '{5}', motPasse = '{6}', estAdmin = '{7}', estBanni = '{8}' WHERE idMembre = {9}", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance, membre.NomUtilisateur, membre.MotPasse, membre.EstAdministrateur, membre.EstBanni, membre.IdMembre);
+                connexion.Query(requete);
+
+                // Ajout des restrictions alimentaires du membre.
+                foreach (RestrictionAlimentaire restriction in membre.ListeRestrictions)
+                {
+                    requete = string.Format("UPDATE RestrictionsAlimentairesMembres SET idRestrictionAlimentaire = {0}, idMembre = {1} WHERE idMembre = {1}", restriction.IdRestrictionAlimentaire, membre.IdMembre);
+                    connexion.Query(requete);
+                }
+
+                // Ajout des objectifs du membre.
+                foreach (Objectif objectif in membre.ListeObjectifs)
+                {
+                    requete = string.Format("UPDATE ObjectifsMembres SET idObjectif = {0}, idMembre = {1} WHERE idMembre = {1}", objectif.IdObjectif, membre.IdMembre);
+                    connexion.Query(requete);
+                }
+
+                // Ajout des préférences du membre.
+                foreach (Preference preference in membre.ListePreferences)
+                {
+                    requete = string.Format("UPDATE PreferencesMembres SET idPreference = {0}, idMembre = {1} WHERE idMembre = {1}", preference.IdPreference, membre.IdMembre);
+                    connexion.Query(requete);
+                }
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+        }
 
         /// <summary>
         /// Méthode permettant de construire un objet Membre.

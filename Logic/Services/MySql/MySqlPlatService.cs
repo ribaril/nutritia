@@ -25,6 +25,40 @@ namespace Nutritia
 	    }
 
         /// <summary>
+        /// Méthode permettant d'obtenir l'ensemble des plats sauvegardé dans la base de données.
+        /// </summary>
+        /// <returns>Une liste contenant les plats.</returns>
+        public IList<Plat> RetrieveAll()
+        {
+            List<Plat> resultat = new List<Plat>();
+
+            try
+            {
+                connexion = new MySqlConnexion();
+
+                string requete = "SELECT * FROM Plats p INNER JOIN TypesPlats tp ON tp.idTypePlat = p.idTypePlat INNER JOIN Membres m ON m.idMembre = p.idMembre";
+
+                DataSet dataSetPlats = connexion.Query(requete);
+                DataTable tablePlats = dataSetPlats.Tables[0];
+
+                foreach (DataRow rowPlat in tablePlats.Rows)
+                {
+                    Plat plat = ConstruirePlat(rowPlat);
+
+                    plat.ListeIngredients = RetrieveAlimentsPlat(new RetrievePlatArgs { IdPlat = plat.IdPlat });
+
+                    resultat.Add(plat);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return resultat;
+        }
+
+        /// <summary>
         /// Méthode permettant d'obtenir un ensemble de plats sauvegardé dans la base de données.
         /// </summary>
         /// <param name="args">Les arguments permettant de retrouver les plats.</param>
