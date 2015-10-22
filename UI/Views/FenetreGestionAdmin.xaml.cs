@@ -39,7 +39,7 @@ namespace Nutritia.UI.Views
             {
                 if (!string.IsNullOrEmpty(filterDataGrid.FilterString))
                 {
-                    return filterDataGrid.Filter(data.Nom);
+                    return filterDataGrid.Filter(data.NomUtilisateur);
                 }
                 return true;
             }

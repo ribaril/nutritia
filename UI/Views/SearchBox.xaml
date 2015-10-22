@@ -5,8 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Nutritia.UI.Views"
              xmlns:watermark="clr-namespace:Nutritia.UI.Watermark"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Name="UI">
+             mc:Ignorable="d" d:DesignWidth="300" Name="UI" Height="150">
 
     <Grid Height="302" Margin="0,0,0,-2" DataContext="{Binding ElementName=UI}">
         <Grid.Resources>
@@ -15,7 +14,7 @@
             </Style>
         </Grid.Resources>
         <AdornerDecorator Margin="0,0,86,257">
-            <TextBox Name="txtRecherche" Margin="0,0,0,20" TextChanged="txtRecherche_TextChanged">
+            <TextBox Name="txtRecherche" Margin="0,0,-86,20" TextChanged="txtRecherche_TextChanged">
                 <TextBox.Resources>
                     <DiscreteObjectKeyFrame x:Key="proxy"
                                             Value="{Binding Path=WatermarkContent,
@@ -31,15 +30,15 @@
             </TextBox>
         </AdornerDecorator>
 
-        <DataGrid Name="dgResults" IsReadOnly="True" AutoGenerateColumns="False" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" 
+        <DataGrid ColumnWidth="*" Name="dgResults" IsReadOnly="False" AutoGenerateColumns="False" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" 
                      ItemsSource="{Binding DataGridCollection}" Margin="0,45,0,155"/>
-                  <!--ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor,
+        <!--ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor,
                                 AncestorType=local:ucFilterDataGrid,
                                 AncestorLevel=1},
                                 Path=DataGridCollection}"
             -->
-            
-         
+
+
     </Grid>
 
 </UserControl>
