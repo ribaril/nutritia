@@ -24,10 +24,16 @@ namespace Nutritia.UI.Views
         public MenuPrincipalConnecte()
         {
             InitializeComponent();
+
+            if(App.MembreCourant.Nom != "")
+            {
+                lbl_nom_membre.Content = "Bienvenue " + App.MembreCourant.NomUtilisateur;
+            }
         }
 
         private void btnDeconnexion_Click(object sender, RoutedEventArgs e)
         {
+            App.MembreCourant = new Membre();
             ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipal());
         }
 

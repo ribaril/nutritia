@@ -21,9 +21,8 @@ namespace Nutritia
 	/// Logique d'interaction pour MainWindow.xaml
 	/// </summary>
 	public partial class MainWindow : Window, IApplicationService
-	{
-
-		public MainWindow()
+	{        
+        public MainWindow()
 		{
 			InitializeComponent();
 			Configurer();

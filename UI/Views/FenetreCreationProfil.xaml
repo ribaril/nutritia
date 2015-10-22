@@ -18,22 +18,47 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Label Grid.Row="0" Content="Données personnelles" Style="{StaticResource fontNutritia}" FontSize="35"  HorizontalAlignment="Center"></Label>
-        <Label Grid.Row="0" Content="Nom" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,40,0,0"></Label>
+        <Label Name="lbl_nom" Grid.Row="0" Content="Nom" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,40,0,0"></Label>
         <TextBox Name="Nom" Grid.Row="0" SelectedText="" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,60,0,0"></TextBox>
-        <Label Grid.Row="0" Content="Prenom" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,90,0,0"></Label>
+        <Label Name="lbl_prenom" Grid.Row="0" Content="Prenom" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,90,0,0"></Label>
         <TextBox Name="Prenom" Grid.Row="0" SelectedText="" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,110,0,0"></TextBox>
-        <Label Grid.Row="0" Content="Nom d'utilisateur" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,140,0,0"></Label>
+        <Label Name="lbl_utilisateur" Grid.Row="0" Content="Nom d'utilisateur" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,140,0,0"></Label>
         <TextBox Name="Nom_utilisateur" Grid.Row="0" SelectedText="" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,160,0,0"></TextBox>
-        <Label Grid.Row="0" Content="Mot de passe" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,190,0,0"></Label>
+        <Label Name="lbl_mdp" Grid.Row="0" Content="Mot de passe" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,190,0,0"></Label>
         <PasswordBox Name="Mot_passe" Grid.Row="0" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,210,0,0"></PasswordBox>
 
-        <Label Grid.Row="0" Content="Date de naissance" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,42,50,0"></Label>
+        <Label Name="lbl_date" Grid.Row="0" Content="Date de naissance" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,42,50,0"></Label>
         <DatePicker Name="Date_naissance" Grid.Row="0" BorderBrush="Transparent" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,62,50,0"></DatePicker>
-        <Label Grid.Row="0" Content="Taille (cm)" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,90,50,0"></Label>
-        <TextBox Name="Taille" Grid.Row="0" SelectedText="" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,110,50,0"></TextBox>
-        <Label Grid.Row="0" Content="Masse (kg)" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,140,50,0"></Label>
-        <TextBox Name="Masse" Grid.Row="0" SelectedText="" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,160,50,0"></TextBox>
-        <Label Grid.Row="0" Content="Confirmation du mot de passe" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,190,50,0"></Label>
+        <Label Name="lbl_taille" Grid.Row="0" Content="Taille (cm)" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,90,50,0"></Label>
+        <ComboBox Name="Taille" Grid.Row="0" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,110,50,0">
+            <ComboBoxItem>120</ComboBoxItem>
+            <ComboBoxItem>130</ComboBoxItem>
+            <ComboBoxItem>150</ComboBoxItem>
+            <ComboBoxItem>150</ComboBoxItem>
+            <ComboBoxItem>160</ComboBoxItem>
+            <ComboBoxItem>170</ComboBoxItem>
+            <ComboBoxItem>180</ComboBoxItem>
+            <ComboBoxItem>190</ComboBoxItem>
+            <ComboBoxItem>200</ComboBoxItem>
+            <ComboBoxItem>210</ComboBoxItem>
+        </ComboBox>        
+        <Label Name="lbl_masse" Grid.Row="0" Content="Masse (kg)" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,140,50,0"></Label>
+        <ComboBox Name="Masse" Grid.Row="0" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,160,50,0">
+            <ComboBoxItem>40</ComboBoxItem>
+            <ComboBoxItem>50</ComboBoxItem>
+            <ComboBoxItem>60</ComboBoxItem>
+            <ComboBoxItem>70</ComboBoxItem>
+            <ComboBoxItem>80</ComboBoxItem>
+            <ComboBoxItem>90</ComboBoxItem>
+            <ComboBoxItem>100</ComboBoxItem>
+            <ComboBoxItem>110</ComboBoxItem>
+            <ComboBoxItem>120</ComboBoxItem>
+            <ComboBoxItem>130</ComboBoxItem>
+            <ComboBoxItem>140</ComboBoxItem>
+            <ComboBoxItem>150</ComboBoxItem>
+            <ComboBoxItem>160</ComboBoxItem>
+        </ComboBox>
+        <Label Name="lbl_conf_mdp" Grid.Row="0" Content="Confirmation du mot de passe" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,190,50,0"></Label>
         <PasswordBox Name="Validation_mdp" Grid.Row="0" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,210,50,0"></PasswordBox>
 
         <TabControl Grid.Row="1" Height="175" Width="625" VerticalAlignment="Top">
@@ -80,6 +105,6 @@
             </TabItem>
         </TabControl>
 
-        <Button Name="Btn_creer" Grid.Row="1" Content="Créer le profil" Height="30" Width="150" Style="{StaticResource fontNutritia}" FontSize="15"  HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10"></Button>
+        <Button Name="Btn_creer" Grid.Row="1" Content="Créer le profil" Height="30" Width="150" Style="{StaticResource fontNutritia}" FontSize="15"  HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10" Click="Valider_Inserer"></Button>
     </Grid>
 </UserControl>
