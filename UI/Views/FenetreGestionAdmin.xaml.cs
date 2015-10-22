@@ -20,11 +20,13 @@ namespace Nutritia.UI.Views
     /// </summary>
     public partial class GestionAdmin : UserControl
     {
+        private IMembreService serviceMembre = ServiceFactory.Instance.GetService<IMembreService>();
+
         public GestionAdmin()
         {
             InitializeComponent();
             //filterDataGrid.ItemsSource = s.ConvertAll(x => new { Value = x });
-            filterDataGrid.DataGridCollection = CollectionViewSource.GetDefaultView(TestData);
+            filterDataGrid.DataGridCollection = CollectionViewSource.GetDefaultView(serviceMembre.RetrieveAll());
             filterDataGrid.DataGridCollection.Filter = new Predicate<object>(Filter);
         }
 
@@ -44,22 +46,5 @@ namespace Nutritia.UI.Views
             return false;
         }
 
-
-        public IEnumerable<Membre> TestData
-        {
-            get
-            {
-                yield return new Membre { Nom = "Lecteur", Prenom = "Archibal" };
-                yield return new Membre { Nom = "Charron", Prenom = "Yannick" };
-                yield return new Membre { Nom = "Benedict", Prenom = "Sophie" };
-                yield return new Membre { Nom = "DiBonzo", Prenom = "Alphonzo" };
-                yield return new Membre { Nom = "Desjardin", Prenom = "Richard" };
-                yield return new Membre { Nom = "Galilo", Prenom = "Constantin" };
-                yield return new Membre { Nom = "Hellsing", Prenom = "Alucard" };
-                yield return new Membre { Nom = "Qwerty", Prenom = "Vlad" };
-                yield return new Membre { Nom = "Dickingson", Prenom = "Jojo" };
-                yield return new Membre { Nom = "Pepito", Prenom = "Alfred" };
-            }
-        }
     }
 }
