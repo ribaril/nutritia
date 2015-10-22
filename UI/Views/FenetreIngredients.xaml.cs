@@ -24,7 +24,7 @@ namespace Nutritia.UI.Views
         /// Constructeur par défaut de la classe.
         /// </summary>
         /// <param name="listeIngredients">La liste des ingrédients du plat.</param>
-        public FenetreIngredients(Plat plat)
+        public FenetreIngredients(Plat plat, int nbPersonnes)
         {
             InitializeComponent();
 
@@ -36,7 +36,7 @@ namespace Nutritia.UI.Views
             entete.Content = plat.Nom;
             grdIngredients.Children.Add(entete);
 
-            AfficherIngredients(new List<Aliment>(plat.ListeIngredients));
+            AfficherIngredients(new List<Aliment>(plat.ListeIngredients), nbPersonnes);
         }
 
         /// <summary>
@@ -60,14 +60,14 @@ namespace Nutritia.UI.Views
         /// Méthode permettant d'afficher des ingrédients.
         /// </summary>
         /// <param name="listeIngredients">La liste des aliments.</param>
-        private void AfficherIngredients(List<Aliment> listeIngredients)
+        private void AfficherIngredients(List<Aliment> listeIngredients, int nbPersonnes)
         {
             for (int i = 0; i < listeIngredients.Count; i++)
             {
                 Aliment alimentCourant = listeIngredients[i];
 
                 StringBuilder sbIngredients = new StringBuilder();
-                sbIngredients.Append((alimentCourant.Mesure * alimentCourant.Quantite).ToString());
+                sbIngredients.Append(alimentCourant.Quantite * nbPersonnes).ToString();
                 sbIngredients.Append(alimentCourant.UniteMesure);
                 alimentCourant.Nom = alimentCourant.Nom.ToLower();
                 if (alimentCourant.Nom[0] == 'a' || alimentCourant.Nom[0] == 'e' || alimentCourant.Nom[0] == 'h' || 

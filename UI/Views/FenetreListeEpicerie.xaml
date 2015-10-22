@@ -1,0 +1,115 @@
+﻿<UserControl x:Class="Nutritia.UI.Views.FenetreListeEpicerie"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="475" d:DesignWidth="650">
+    <UserControl.Resources>
+            <Style TargetType="DataGrid">
+                <Setter Property="CanUserAddRows" Value="False" />
+            <Setter Property="AutoGenerateColumns" Value="False" />
+            <Setter Property="HeadersVisibility" Value="All" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="RowBackground" Value="Transparent" />
+            </Style>
+            <Style TargetType="DataGridCell">
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            </Style>
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="200" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="DarkGreen" />
+            <Setter Property="FontFamily" Value="Berlin Sans FB Demi" />
+            <Setter Property="Foreground" Value="DarkGreen" />
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+        <Style TargetType="GroupBox">
+            <Setter Property="Width" Value="250" />
+            <Setter Property="Height" Value="350" />
+            <Setter Property="Foreground" Value="DarkGreen" />
+            <Setter Property="BorderBrush" Value="DarkGreen" />
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Berlin Sans FB Demi" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="DarkGreen" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="400"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="375"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid Name="dgListeEpicerie" Width="350" Height="350" CanUserAddRows="False" AutoGenerateColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <DataGrid.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Transparent" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="btnSupprimer" Width="25" Height="25" Click="btnSupprimer_Click">
+                                <Image Source="pack://application:,,,/UI/Images/poubelleIcon.png"></Image>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Width="4*" Header="Article" Binding="{Binding Nom}" FontFamily="Berlin Sans FB Demi" FontSize="14" Foreground="DarkGreen" IsReadOnly="True">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                            <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width="2*" Header="Quantité" Binding="{Binding Quantite}" FontFamily="Berlin Sans FB Demi" FontSize="14" Foreground="DarkGreen" IsReadOnly="True">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                            <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width="3*" Header="Unité de mesure" Binding="{Binding UniteMesure}" FontFamily="Berlin Sans FB Demi" FontSize="14" Foreground="DarkGreen" IsReadOnly="True">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                            <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <GroupBox Grid.Column="1" Header="Liste d'épicerie">
+            <ScrollViewer>
+                <Grid Name="grdListeConviviale">
+                </Grid>
+            </ScrollViewer>
+        </GroupBox>
+
+        <Button Grid.Row="1" Grid.Column="1" Width="150" Height="50">
+            <DockPanel>
+                <Label VerticalAlignment="Center">Imprimer</Label>
+                <Image Source="../Images/imprimanteIcon.png"/>
+            </DockPanel>
+        </Button>
+
+    </Grid>
+</UserControl>

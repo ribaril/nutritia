@@ -1,0 +1,357 @@
+﻿<UserControl x:Class="Nutritia.UI.Views.GestionRepertoire"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:layoutToolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Nutritia.UI.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="475" d:DesignWidth="650">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Ressources/Ressource.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.25*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Content="Gestion des aliments et plats" Foreground="DarkGreen" FontSize="30" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Center"></Label>
+
+        <StackPanel Grid.Row="0" Width="150" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,50,0,0">
+            <RadioButton Name="rdb_ajout" Checked="rdb_ajout_Checked" IsChecked="True" Content="Ajout" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="0,0,0,0"></RadioButton>
+            <RadioButton Name="rdb_modif" Checked="rdb_modif_Checked" Content="Modification" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="0,5,0,0"></RadioButton>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Width="150" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,50,150,0">
+            <RadioButton Name="rdb_aliment" Checked="rdb_aliment_Checked" Content="Aliment" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="0,0,0,0"></RadioButton>
+            <RadioButton Name="rdb_plat" Checked="rdb_plat_Checked" IsChecked="True" Content="Plat / Breuvage" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="0,5,0,0"></RadioButton>
+        </StackPanel>
+
+        <Grid Grid.Row="1" Name="grid_ajout_plat" Visibility="Hidden">
+            <GroupBox Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="10,10,10,10" BorderBrush="DarkGreen">
+                <GroupBox.Header>Ajout d'un plat / breuvage</GroupBox.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Content="Nom du plat" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,5,0,0"></Label>
+                    <TextBox Name="Nom_plat" Grid.Row="0" SelectedText="" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,25,0,0"></TextBox>
+                    <Label Grid.Row="0" Content="Type de plat" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,55,0,0"></Label>
+                    <ComboBox Grid.Row="0" Name="cbo_type" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,75,0,0">
+                        <ComboBoxItem>Entrée</ComboBoxItem>
+                        <ComboBoxItem>Plat principal</ComboBoxItem>
+                        <ComboBoxItem>Breuvage</ComboBoxItem>
+                        <ComboBoxItem>Déssert</ComboBoxItem>
+                    </ComboBox>
+                    <Button Name="Btn_ajout_image" Grid.Row="1" Content="Ajouter une image" Height="30" Width="150" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,115,0,0"></Button>
+
+                    <Label Grid.Row="0" Content="Description" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,20,0"></Label>
+                    <TextBox Name="Description" Grid.Row="0" Width="250" Height="100" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" TextWrapping="WrapWithOverflow" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,25,20,0"></TextBox>
+
+                    <Label Grid.Row="0" Content="Composition du plat" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,155,20,0"></Label>
+                    <DataGrid Name="composition_plat" HeadersVisibility="None" Width="250" Height="120" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,175,20,0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="50"></DataGridTextColumn>
+                            <DataGridTextColumn Width="200"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Button Name="Btn_confirmer_ajout_plat" Grid.Row="1" Content="Confirmer l'ajout" Height="30" Width="150" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"></Button>
+
+                    <Label Grid.Row="0" Content="Aliments disponibles par groupe" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,155,0,0"></Label>
+                    <ScrollViewer Name="aliments_ajout" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="120" Width="250" FontSize="14" FontFamily="Berlin Sans FB Demi" Margin="20,135,0,0">
+                        <layoutToolkit:Accordion Width="288">
+                            <layoutToolkit:AccordionItem Header="Boissons" Foreground="White" Background="Green">
+                                <StackPanel Background="White" Width="230">
+                                    <DockPanel>
+                                        <Button Width="20" Height="20" VerticalAlignment="Top">
+                                            <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                                        </Button>
+                                        <TextBlock Text="Eau" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    </DockPanel>
+                                </StackPanel>
+                            </layoutToolkit:AccordionItem>
+                            <layoutToolkit:AccordionItem Header="Céréales" Foreground="White" Background="Green">
+                                <StackPanel Background="White" Width="230">
+                                    <DockPanel>
+                                        <Button Width="20" Height="20" VerticalAlignment="Top">
+                                            <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                                        </Button>
+                                        <TextBlock Text="Mini Wheats" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    </DockPanel>
+                                </StackPanel>
+                            </layoutToolkit:AccordionItem>
+                            <layoutToolkit:AccordionItem Header="Fruits et légumes" Foreground="White" Background="Green">
+                                <StackPanel Background="White" Width="230">
+                                    <DockPanel>
+                                        <Button Width="20" Height="20" VerticalAlignment="Top">
+                                            <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                                        </Button>
+                                        <TextBlock Text="Pomme" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    </DockPanel>
+                                </StackPanel>
+                            </layoutToolkit:AccordionItem>
+                            <layoutToolkit:AccordionItem Header="Produits laitiers" Foreground="White" Background="Green">
+                                <StackPanel Background="White" Width="230">
+                                    <DockPanel>
+                                        <Button Width="20" Height="20" VerticalAlignment="Top">
+                                            <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                                        </Button>
+                                        <TextBlock Text="Lait" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    </DockPanel>
+                                </StackPanel>
+                            </layoutToolkit:AccordionItem>
+                            <layoutToolkit:AccordionItem Header="Protéines animales" Foreground="White" Background="Green">
+                                <StackPanel Background="White" Width="230">
+                                    <DockPanel>
+                                        <Button Width="20" Height="20" VerticalAlignment="Top">
+                                            <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                                        </Button>
+                                        <TextBlock Text="Cuisse de poulet" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    </DockPanel>
+                                </StackPanel>
+                            </layoutToolkit:AccordionItem>
+                            <layoutToolkit:AccordionItem Header="Matières grasses" Foreground="White" Background="Green">
+                                <StackPanel Background="White" Width="230">
+                                    <DockPanel>
+                                        <Button Width="20" Height="20" VerticalAlignment="Top">
+                                            <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                                        </Button>
+                                        <TextBlock Text="Huile d'olive" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    </DockPanel>
+                                </StackPanel>
+                            </layoutToolkit:AccordionItem>
+                            <layoutToolkit:AccordionItem Header="Produits sucrés" Foreground="White" Background="Green">
+                                <StackPanel Background="White" Width="230">
+                                    <DockPanel>
+                                        <Button Width="20" Height="20" VerticalAlignment="Top">
+                                            <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                                        </Button>
+                                        <TextBlock Text="Splenda" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    </DockPanel>
+                                </StackPanel>
+                            </layoutToolkit:AccordionItem>
+                            <layoutToolkit:AccordionItem Header="Autres" Foreground="White" Background="Green">
+                                <StackPanel Background="White" Width="230">
+                                    <DockPanel>
+                                        <Button Width="20" Height="20" VerticalAlignment="Top">
+                                            <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                                        </Button>
+                                        <TextBlock Text="Bière" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    </DockPanel>
+                                </StackPanel>
+                            </layoutToolkit:AccordionItem>
+                        </layoutToolkit:Accordion>
+                    </ScrollViewer>
+                </Grid>
+            </GroupBox>
+        </Grid>
+
+        <Grid Grid.Row="1" Name="grid_modification_plat" Visibility="Visible">
+            <GroupBox Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="10,10,10,10" BorderBrush="DarkGreen">
+                <GroupBox.Header>Modification d'un plat / breuvage</GroupBox.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Content="Nom du plat" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,5,0,0"></Label>
+                    <TextBox Name="Nom_plat_modif" Grid.Row="0" SelectedText="" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,25,0,0"></TextBox>
+                    <Label Grid.Row="0" Content="Type de plat" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,55,0,0"></Label>
+                    <ComboBox Grid.Row="0" Name="cbo_type_modif" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,75,0,0">
+                        <ComboBoxItem>Entrée</ComboBoxItem>
+                        <ComboBoxItem>Plat principal</ComboBoxItem>
+                        <ComboBoxItem>Breuvage</ComboBoxItem>
+                        <ComboBoxItem>Déssert</ComboBoxItem>
+                    </ComboBox>
+                    <Button Name="Btn_ajout_image_modif" Grid.Row="1" Content="Ajouter une image" Height="30" Width="150" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,115,0,0"></Button>
+
+                    <Label Grid.Row="0" Content="Description" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,20,0"></Label>
+                    <TextBox Name="Description_modif" Grid.Row="0" Width="250" Height="100" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" TextWrapping="WrapWithOverflow" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,25,20,0"></TextBox>
+
+                    <Label Grid.Row="0" Content="Composition du plat" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,155,20,0"></Label>
+                    <DataGrid Name="composition_plat_modif" HeadersVisibility="None" Width="250" Height="120" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,175,20,0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="50"></DataGridTextColumn>
+                            <DataGridTextColumn Width="200"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Button Name="Btn_confirmer_modif_plat" Grid.Row="1" Content="Confirmer la modification" Height="30" Width="150" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"></Button>
+
+                    <Label Grid.Row="0" Content="Aliments disponibles par groupe" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,155,0,0"></Label>
+                    <ScrollViewer Name="aliments_modif" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="120" Width="250" FontSize="14" FontFamily="Berlin Sans FB Demi" Margin="20,135,0,0">
+                        <layoutToolkit:Accordion Width="288">
+                            <layoutToolkit:AccordionItem Header="Boissons" Foreground="White" Background="Green">
+                                <StackPanel Background="White" Width="230">
+                                    <DockPanel>
+                                        <Button Width="20" Height="20" VerticalAlignment="Top">
+                                            <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                                        </Button>
+                                        <TextBlock Text="Eau" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    </DockPanel>
+                                </StackPanel>
+                            </layoutToolkit:AccordionItem>
+                            <layoutToolkit:AccordionItem Header="Céréales" Foreground="White" Background="Green">
+                                <StackPanel Background="White" Width="230">
+                                    <DockPanel>
+                                        <Button Width="20" Height="20" VerticalAlignment="Top">
+                                            <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                                        </Button>
+                                        <TextBlock Text="Mini Wheats" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    </DockPanel>
+                                </StackPanel>
+                            </layoutToolkit:AccordionItem>
+                            <layoutToolkit:AccordionItem Header="Fruits et légumes" Foreground="White" Background="Green">
+                                <StackPanel Background="White" Width="230">
+                                    <DockPanel>
+                                        <Button Width="20" Height="20" VerticalAlignment="Top">
+                                            <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                                        </Button>
+                                        <TextBlock Text="Pomme" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    </DockPanel>
+                                </StackPanel>
+                            </layoutToolkit:AccordionItem>
+                            <layoutToolkit:AccordionItem Header="Produits laitiers" Foreground="White" Background="Green">
+                                <StackPanel Background="White" Width="230">
+                                    <DockPanel>
+                                        <Button Width="20" Height="20" VerticalAlignment="Top">
+                                            <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                                        </Button>
+                                        <TextBlock Text="Lait" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    </DockPanel>
+                                </StackPanel>
+                            </layoutToolkit:AccordionItem>
+                            <layoutToolkit:AccordionItem Header="Protéines animales" Foreground="White" Background="Green">
+                                <StackPanel Background="White" Width="230">
+                                    <DockPanel>
+                                        <Button Width="20" Height="20" VerticalAlignment="Top">
+                                            <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                                        </Button>
+                                        <TextBlock Text="Cuisse de poulet" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    </DockPanel>
+                                </StackPanel>
+                            </layoutToolkit:AccordionItem>
+                            <layoutToolkit:AccordionItem Header="Matières grasses" Foreground="White" Background="Green">
+                                <StackPanel Background="White" Width="230">
+                                    <DockPanel>
+                                        <Button Width="20" Height="20" VerticalAlignment="Top">
+                                            <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                                        </Button>
+                                        <TextBlock Text="Huile d'olive" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    </DockPanel>
+                                </StackPanel>
+                            </layoutToolkit:AccordionItem>
+                            <layoutToolkit:AccordionItem Header="Produits sucrés" Foreground="White" Background="Green">
+                                <StackPanel Background="White" Width="230">
+                                    <DockPanel>
+                                        <Button Width="20" Height="20" VerticalAlignment="Top">
+                                            <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                                        </Button>
+                                        <TextBlock Text="Splenda" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    </DockPanel>
+                                </StackPanel>
+                            </layoutToolkit:AccordionItem>
+                            <layoutToolkit:AccordionItem Header="Autres" Foreground="White" Background="Green">
+                                <StackPanel Background="White" Width="230">
+                                    <DockPanel>
+                                        <Button Width="20" Height="20" VerticalAlignment="Top">
+                                            <Image Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                                        </Button>
+                                        <TextBlock Text="Bière" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    </DockPanel>
+                                </StackPanel>
+                            </layoutToolkit:AccordionItem>
+                        </layoutToolkit:Accordion>
+                    </ScrollViewer>
+                </Grid>
+            </GroupBox>
+        </Grid>
+        <Grid Grid.Row="1" Name="grid_ajout_aliment" Visibility="Hidden">
+            <GroupBox Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="10,10,10,10" BorderBrush="DarkGreen">
+                <GroupBox.Header>Ajout d'un aliment</GroupBox.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="Nom de l'aliment" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,55,0,0"></Label>
+                    <TextBox Name="Nom_alim" Grid.Row="0" SelectedText="" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,75,0,0"></TextBox>
+                    <Label Grid.Row="0" Content="Groupe alimentaire" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,105,0,0"></Label>
+                    <ComboBox Grid.Row="0" Name="cbo_grp_alim" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,125,0,0">
+                        <ComboBoxItem>Boissons</ComboBoxItem>
+                        <ComboBoxItem>Céréales</ComboBoxItem>
+                        <ComboBoxItem>Fruits et légumes</ComboBoxItem>
+                        <ComboBoxItem>Produits laitiers</ComboBoxItem>
+                        <ComboBoxItem>Protéines animales</ComboBoxItem>
+                        <ComboBoxItem>Matières grasses</ComboBoxItem>
+                        <ComboBoxItem>Produits sucrés</ComboBoxItem>
+                        <ComboBoxItem>Autres</ComboBoxItem>
+                    </ComboBox>
+                    <Label Grid.Row="0" Content="Valeurs nutritionnelles" Width="265" Height="30" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,20,0"></Label>
+                    <Label Grid.Row="0" Content="Énergie (calories)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,160,0"></Label>
+                    <TextBox Name="Calories" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,50,160,0"></TextBox>
+                    <Label Grid.Row="0" Content="Protéines (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,80,160,0"></Label>
+                    <TextBox Name="Proteines" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,100,160,0"></TextBox>
+                    <Label Grid.Row="0" Content="Glucides (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,130,160,0"></Label>
+                    <TextBox Name="Glucides" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,150,160,0"></TextBox>
+                    <Label Grid.Row="0" Content="Fibres (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,20,0"></Label>
+                    <TextBox Name="Fibres" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,50,20,0"></TextBox>
+                    <Label Grid.Row="0" Content="Lipides (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,80,20,0"></Label>
+                    <TextBox Name="Lipides" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,100,20,0"></TextBox>
+                    <Label Grid.Row="0" Content="Cholestérol (mg)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,130,20,0"></Label>
+                    <TextBox Name="Cholestérol" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,150,20,0"></TextBox>
+                    <Label Grid.Row="0" Content="Sodium (mg)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,180,160,0"></Label>
+                    <TextBox Name="Sodium" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,200,160,0"></TextBox>
+                </Grid>
+            </GroupBox>
+            <Button Name="Btn_creer" Grid.Row="0" Content="Ajouter l'aliment" Height="30" Width="150" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,30"></Button>
+        </Grid>
+
+        <Grid Grid.Row="1" Name="grid_modif_aliment" Visibility="Hidden">
+            <GroupBox Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="10,10,10,10" BorderBrush="DarkGreen">
+                <GroupBox.Header>Modification d'un aliment</GroupBox.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="Nom de l'aliment" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,55,0,0"></Label>
+                    <TextBox Name="Nom_alim_modif" Grid.Row="0" SelectedText="" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,75,0,0"></TextBox>
+                    <Label Grid.Row="0" Content="Groupe alimentaire" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,105,0,0"></Label>
+                    <ComboBox Grid.Row="0" Name="cbo_grp_alim_modif" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,125,0,0">
+                        <ComboBoxItem>Boissons</ComboBoxItem>
+                        <ComboBoxItem>Céréales</ComboBoxItem>
+                        <ComboBoxItem>Fruits et légumes</ComboBoxItem>
+                        <ComboBoxItem>Produits laitiers</ComboBoxItem>
+                        <ComboBoxItem>Protéines animales</ComboBoxItem>
+                        <ComboBoxItem>Matières grasses</ComboBoxItem>
+                        <ComboBoxItem>Produits sucrés</ComboBoxItem>
+                        <ComboBoxItem>Autres</ComboBoxItem>
+                    </ComboBox>
+                    <Label Grid.Row="0" Content="Valeurs nutritionnelles" Width="265" Height="30" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,20,0"></Label>
+                    <Label Grid.Row="0" Content="Énergie (calories)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,160,0"></Label>
+                    <TextBox Name="Calories_modif" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,50,160,0"></TextBox>
+                    <Label Grid.Row="0" Content="Protéines (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,80,160,0"></Label>
+                    <TextBox Name="Proteines_modif" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,100,160,0"></TextBox>
+                    <Label Grid.Row="0" Content="Glucides (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,130,160,0"></Label>
+                    <TextBox Name="Glucides_modif" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,150,160,0"></TextBox>
+                    <Label Grid.Row="0" Content="Fibres (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,20,0"></Label>
+                    <TextBox Name="Fibres_modif" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,50,20,0"></TextBox>
+                    <Label Grid.Row="0" Content="Lipides (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,80,20,0"></Label>
+                    <TextBox Name="Lipides_modif" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,100,20,0"></TextBox>
+                    <Label Grid.Row="0" Content="Cholestérol (mg)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,130,20,0"></Label>
+                    <TextBox Name="Cholestérol_modif" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,150,20,0"></TextBox>
+                    <Label Grid.Row="0" Content="Sodium (mg)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,180,160,0"></Label>
+                    <TextBox Name="Sodium_modif" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,200,160,0"></TextBox>
+                </Grid>
+            </GroupBox>
+            <Button Name="Btn_modif" Grid.Row="0" Content="Modifier l'aliment" Height="30" Width="150" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,30"></Button>
+        </Grid>
+
+    </Grid>
+</UserControl>

@@ -43,7 +43,7 @@ namespace Nutritia.UI.Views
 
 		private void btnMenuListe_Click(object sender, RoutedEventArgs e)
 		{
-			ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new GenerateurMenus());
+			ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new FenetreGenerateurMenus());
 		}
 
 		private void btnAjoutPlat_Click(object sender, RoutedEventArgs e)
@@ -53,7 +53,7 @@ namespace Nutritia.UI.Views
 
 		private void btnVoterPlat_Click(object sender, RoutedEventArgs e)
 		{
-			
+            ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new FenetreVotes());
 		}
 	}
 }

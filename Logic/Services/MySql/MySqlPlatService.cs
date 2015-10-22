@@ -44,7 +44,11 @@ namespace Nutritia
 
                 foreach (DataRow rowPlat in tablePlats.Rows)
                 {
-                    resultat.Add(ConstruirePlat(rowPlat));
+                    Plat plat = ConstruirePlat(rowPlat);
+                    
+                    plat.ListeIngredients = RetrieveAlimentsPlat(new RetrievePlatArgs{IdPlat = plat.IdPlat});
+
+                    resultat.Add(plat);
                 }
             }
             catch (Exception)
@@ -100,7 +104,7 @@ namespace Nutritia
             foreach (DataRow rowPlatsAliments in tablePlatsAliments.Rows)
             {
                 Aliment alimentTmp = alimentService.Retrieve(new RetrieveAlimentArgs { IdAliment = (int)rowPlatsAliments["idAliment"] });
-                alimentTmp.Quantite = (double)rowPlatsAliments["quantite"];
+                alimentTmp.Quantite = (double)rowPlatsAliments["quantite"] * alimentTmp.Mesure;
                 listeIngredients.Add(alimentTmp);
             }
 

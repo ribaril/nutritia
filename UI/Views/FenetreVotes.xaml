@@ -5,6 +5,31 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="475" d:DesignWidth="650">
+    <UserControl.Resources>
+        <Style TargetType="DataGrid">
+            <Setter Property="CanUserAddRows" Value="False" />
+            <Setter Property="AutoGenerateColumns" Value="False" />
+            <Setter Property="HeadersVisibility" Value="None" />
+            <Setter Property="GridLinesVisibility" Value="None" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="RowBackground" Value="Transparent" />
+        </Style>
+        <Style TargetType="DataGridCell">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Berlin Sans FB Demi" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Foreground" Value="DarkGreen" />
+        </Style>
+        <Style TargetType="GroupBox">
+            <Setter Property="Width" Value="550" />
+            <Setter Property="Foreground" Value="DarkGreen" />
+            <Setter Property="BorderBrush" Value="DarkGreen" />
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -13,42 +38,69 @@
         </Grid.RowDefinitions>
         <Label Foreground="DarkGreen" FontSize="35" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Center">Voter sur des plats</Label>
         <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" Margin="0, 10, 0, 0">
-            <Button Margin="0, 0, 250, 0">
+            <Button Name="btnNouveautes" Margin="0, 0, 250, 0" Click="btnNouveautes_Click">
                 <Image Source="pack://application:,,,/UI/Images/journalIcon.png"></Image>
             </Button>
-            <Button>
+            <Button Name="btnPlusPopulaires" Click="btnPlusPopulaires_Click">
                 <Image Source="pack://application:,,,/UI/Images/etoileIcon.png"></Image>
             </Button>
         </StackPanel>
-        <GroupBox Grid.Row="2" Header="Nouveautés" Width="555" Height="305" BorderBrush="DarkGreen">
+        <GroupBox Name="gbContenu" Grid.Row="2" Header="Nouveautés" Width="555" Height="305" BorderBrush="DarkGreen">
             <ScrollViewer>
-                <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" Background="Transparent">
+                <DataGrid Name="dgPlats" AutoGenerateColumns="False" CanUserAddRows="False" Background="Transparent">
+                    <DataGrid.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Transparent" />
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
+                    </DataGrid.Resources>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Width="2*" Header="Nom du plat"></DataGridTextColumn>
-                        <DataGridTextColumn Width="3*" Header="Aperçu"></DataGridTextColumn>
-                        <DataGridTextColumn Width="2*" Header="Note"></DataGridTextColumn>
-                        <DataGridTextColumn Width="2*" Header="Informations"></DataGridTextColumn>
-                        <DataGridTextColumn Width="2*" Header="Vote"></DataGridTextColumn>
+                        <DataGridTextColumn Width="2*" Binding="{Binding Nom}" FontFamily="Berlin Sans FB Demi" FontSize="16" Foreground="DarkGreen" IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                                    <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTemplateColumn Width="3*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Width="125" Height="110" Source="{Binding ImageUrl}"></Image>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="2*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel VerticalAlignment="Center">
+                                        <Label Name="lbl" HorizontalAlignment="Center">Note : 5/5</Label>
+                                        <Label HorizontalAlignment="Center">Ajouté par</Label>
+                                        <Label HorizontalAlignment="Center">riBaril</Label>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="2*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Width="50" Height="50">
+                                        <Image Source="pack://application:,,,/UI/Images/infoIcon.png"></Image>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="2*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Width="50" Height="50">
+                                        <Image Source="pack://application:,,,/UI/Images/voterPlatIcon.png"></Image>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-                <!--
-                Version avec grid
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"></ColumnDefinition>
-                        <ColumnDefinition Width="4*"></ColumnDefinition>
-                        <ColumnDefinition Width="2.5*"></ColumnDefinition>
-                        <ColumnDefinition Width="2.5*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Image Source="pack://application:,,,/UI/Images/hamburger.png" VerticalAlignment="Top" Margin="0, 10, 0, 0"></Image>
-                    <Label Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Berlin Sans FB Demi" Foreground="DarkGreen" FontSize="18" Margin="0, 10, 0, 0">Note : 3/5</Label>
-                    <Label Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0, 35, 0, 0" FontFamily="Berlin Sans FB Demi" Foreground="DarkGreen" FontSize="18">Ajouté par ribaril</Label>
-                    <Button Grid.Column="2" Width="75" Height="75" VerticalAlignment="Top" Margin="0, 10, 0, 0">
-                        <Image Source="pack://application:,,,/UI/Images/infoIcon.png" VerticalAlignment="Top"></Image>
-                    </Button>
-                    <Button Grid.Column="3" Width="75" Height="75" VerticalAlignment="Top" Margin="0, 10, 0, 0">Coeur</Button>
-                </Grid>
-                -->
             </ScrollViewer>
         </GroupBox>
     </Grid>
