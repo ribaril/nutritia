@@ -95,8 +95,8 @@
         </GroupBox>
         <GroupBox Grid.Row="2" Header="Menus">
             <ScrollViewer>
-                <Grid Name="grdMenus">
-                    <DataGrid Name="dgMenus" VerticalScrollBarVisibility="Hidden" RowHeight="150">
+                <Grid Name="grdMenus" ScrollViewer.CanContentScroll="False">
+                    <DataGrid Name="dgMenus" VerticalScrollBarVisibility="Hidden" RowHeight="150" ScrollViewer.CanContentScroll="False">
                         <DataGrid.Resources>
                             <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
                             <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Transparent" />
