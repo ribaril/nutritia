@@ -46,5 +46,14 @@ namespace Nutritia.UI.Views
             return false;
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
