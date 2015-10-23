@@ -24,8 +24,18 @@ namespace Nutritia
         public bool EstConnecte { get; set; }
         public bool EstAdministrateur { get; set; }
         public bool EstBanni { get; set; }
-		#endregion
 
+        public int Age
+        {
+            get
+            {
+                int age = DateTime.Now.Year - DateNaissance.Year;
+                if (DateTime.Now.Month < DateNaissance.Month || (DateTime.Now.Month == DateNaissance.Month && DateTime.Now.Day < DateNaissance.Day))
+                    age--;
+                return age;
+            }
+        }
+        #endregion
 		/// <summary>
 		/// Méthode qui retourne une copie indépendente de cette objet
 		/// </summary>
