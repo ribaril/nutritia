@@ -22,6 +22,8 @@ namespace Nutritia.UI.Views
     public partial class FenetreInfoMembre : UserControl, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        public static readonly DependencyProperty MembreProperty = DependencyProperty.Register("MembreContent", typeof(Membre), typeof(FenetreInfoMembre), new FrameworkPropertyMetadata(null, PropertyChangedCallback));
+
 
         public Membre membre { get; set; }
 
@@ -37,26 +39,68 @@ namespace Nutritia.UI.Views
             set
             {
                 SetValue(MembreProperty, value);
-                NotifyPropertyChanged("MembreContent");
+                OnPropertyChanged("MembreContent");
             }
         }
 
-        private void NotifyPropertyChanged(string property)
+        private void OnPropertyChanged(string property)
         {
-            if (PropertyChanged != null)
+            OnPropertyChanged(new PropertyChangedEventArgs(property));
+        }
+
+        private void OnPropertyChanged(PropertyChangedEventArgs e)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+                handler(this, e);
+        }
+
+
+
+        private static void PropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
+        {
+            // this is the method that is called whenever the dependency property's value has changed
+            FenetreInfoMembre f = dependencyObject as FenetreInfoMembre;
+            f.txtBlock.Inlines.Clear();
+            Membre m;
+            if (args.NewValue is Membre)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
+                m = args.NewValue as Membre;
+                foreach (Inline item in MemberToDisplay(m))
+                {
+                    f.txtBlock.Inlines.Add(item);
+                }
             }
         }
 
-        public static readonly DependencyProperty MembreProperty = DependencyProperty.Register("MembreContent", typeof(Membre), typeof(FenetreInfoMembre), new FrameworkPropertyMetadata(null));
 
-
-
-        private void TextBlock_MouseEnter(object sender, MouseEventArgs e)
+        private static string Indent(int level)
         {
-            Membre m = MembreContent as Membre;
-            Console.WriteLine("");
+            return "     ".PadLeft(level);
+        }
+
+        private static List<Inline> MemberToDisplay(Membre m)
+        {
+
+            //StringBuilder sb = new StringBuilder(" ", 0, nbrIndentSpace * indentLevel);
+
+            List<Inline> ic = new List<Inline>();
+            ic.Add(new Run(m.NomUtilisateur));
+            ic.Add(new LineBreak());
+            ic.Add(new Run(Indent(1)));
+            ic.Add(new Run(m.Prenom + " " + m.Nom));
+            ic.Add(new LineBreak());
+            ic.Add(new Run(Indent(1)));
+            ic.Add(new Run(m.Age.ToString()));
+            ic.Add(new Run(" ans"));
+
+            //ic.Add(new Bold(new Run(" my")));
+            //ic.Add(new Run(" faithful"));
+            //ic.Add(new Underline(new Run(" computer")));
+            //ic.Add(new Run(". "));
+            //ic.Add(new Italic(new Run("You rock!")));
+
+            return ic;
         }
     }
 }

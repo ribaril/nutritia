@@ -17,7 +17,7 @@
                 <DataGridTemplateColumn Header="Admin" IsReadOnly="False" Width="50">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <CheckBox IsChecked="{Binding EstAdministrateur}" IsEnabled="{Binding EstBanni, Converter={StaticResource oppositeConverter}}" Checked="CheckBox_Checked"></CheckBox>
+                            <CheckBox IsChecked="{Binding EstAdministrateur}" IsEnabled="{Binding EstBanni, Converter={StaticResource oppositeConverter}}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"></CheckBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

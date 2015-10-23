@@ -53,7 +53,12 @@ namespace Nutritia.UI.Views
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("checked");
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("uncheked");
         }
     }
 }
