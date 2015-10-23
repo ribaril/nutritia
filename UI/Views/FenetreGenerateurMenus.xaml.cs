@@ -162,7 +162,34 @@ namespace Nutritia.UI.Views
             btnListeEpicerie.IsEnabled = true;
         }
 
-        
+        /// <summary>
+        /// Méthode permettant de générer dynamiquement les rangées de la grid contenant le menu.
+        /// </summary>
+        /// <param name="nbRangees">Le nombre de rangées.</param>
+        private void GenererRangees(int nbRangees)
+        {
+            RowDefinition rowDefinition;
+
+            for (int i = 0; i < nbRangees; i++)
+            {
+                rowDefinition = new RowDefinition();
+                rowDefinition.Height = new GridLength(150);
+
+                grdMenus.RowDefinitions.Add(rowDefinition);
+            }
+        }
+
+        /// <summary>
+        /// Événement lancé lorsque la roulette de la souris est utilisée dans la DataGrid contenant le menu.
+        /// Explicement, cet événement permet de gérer le "scroll" avec la roulette correctement sur toute la surface de la DataGrid.
+        /// Si on ne le gère pas, il est seulement possible de "scroller" lorsque le pointeur de la souris est situé sur la "scrollbar".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgMenus_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            svMenus.ScrollToVerticalOffset(svMenus.VerticalOffset - e.Delta);
+        }
 
         /// <summary>
         /// Événement lancé sur un clique d'un bouton Ingrédients.
@@ -232,23 +259,6 @@ namespace Nutritia.UI.Views
                     }
                     MenuGenere.ListePlats[index] = platRegenere;
                 break;
-            }
-        }
-
-        /// <summary>
-        /// Méthode permettant de générer les rangées de la grid contenant le menu.
-        /// </summary>
-        /// <param name="nbRangees">Le nombre de rangées.</param>
-        private void GenererRangees(int nbRangees)
-        {
-            RowDefinition rowDefinition;
-
-            for (int i = 0; i < nbRangees; i++)
-            {
-                rowDefinition = new RowDefinition();
-                rowDefinition.Height = new GridLength(150);
-
-                grdMenus.RowDefinitions.Add(rowDefinition);
             }
         }
 
