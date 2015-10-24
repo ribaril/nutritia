@@ -25,15 +25,18 @@
             </local:SearchBox.Columns>
         </local:SearchBox>
         <local:FenetreInfoMembre Margin="399,68,27,252" MembreContent="{Binding ElementName=filterDataGrid, Path=SelectedItem}">
-
         </local:FenetreInfoMembre>
+
+
         <Label Margin="274,236,265,212">Administrateurs</Label>
-        <DataGrid Name="dgAdmin" Margin="206,263,222,109" CanUserAddRows="False" AutoGenerateColumns="False">
+
+
+        <DataGrid Name="dgAdmin" Margin="206,263,222,109" CanUserAddRows="False" AutoGenerateColumns="False" EnableRowVirtualization="False">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Admin" IsReadOnly="False" Width="50">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <CheckBox HorizontalAlignment="Center" IsChecked="{Binding EstAdministrateur}"></CheckBox>
+                            <CheckBox HorizontalAlignment="Center" IsChecked="{Binding EstAdministrateur}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"></CheckBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

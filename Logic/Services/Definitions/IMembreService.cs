@@ -9,6 +9,7 @@ namespace Nutritia
     public interface IMembreService
     {
         IList<Membre> RetrieveAll();
+        IList<Membre> RetrieveAdmins();
         Membre Retrieve(RetrieveMembreArgs args);
         void Insert(Membre membre);
         void Update(Membre membre);
