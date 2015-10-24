@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using System.Windows;
 
 namespace Nutritia
 {
@@ -225,8 +226,9 @@ namespace Nutritia
             {
                 connexion = new MySqlConnexion();
 
-                string requete = string.Format("UPDATE Membres SET nom = '{0}' ,prenom = '{1}', taille = {2}, masse = {3}, dateNaissance = '{4}', nomUtilisateur = '{5}', motPasse = '{6}', estAdmin = '{7}', estBanni = '{8}' WHERE idMembre = {9}", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance, membre.NomUtilisateur, membre.MotPasse, membre.EstAdministrateur, membre.EstBanni, membre.IdMembre);
-                connexion.Query(requete);
+                string requete = string.Format("UPDATE Membres SET nom = '{0}' ,prenom = '{1}', taille = {2}, masse = {3}, dateNaissance = '{4}', nomUtilisateur = '{5}', motPasse = '{6}', estAdmin = {7}, estBanni = {8} WHERE idMembre = {9}", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance, membre.NomUtilisateur, membre.MotPasse, membre.EstAdministrateur, membre.EstBanni, membre.IdMembre);
+
+				connexion.Query(requete);
 
                 // Ajout des restrictions alimentaires du membre.
                 foreach (RestrictionAlimentaire restriction in membre.ListeRestrictions)

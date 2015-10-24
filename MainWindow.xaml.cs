@@ -28,7 +28,7 @@ namespace Nutritia
 			InitializeComponent();
 			Configurer();
 
-            presenteurContenu.Content = new Bannissement();
+            presenteurContenu.Content = new MenuPrincipal();
 		}
 
 

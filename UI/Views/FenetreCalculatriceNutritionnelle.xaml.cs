@@ -263,9 +263,6 @@ namespace Nutritia.UI.Views
                 StackPanel stackLigne = new StackPanel();
                 stackLigne.Orientation = Orientation.Horizontal;
                 stackLigne.HorizontalAlignment = HorizontalAlignment.Left;
-                Thickness margin2 = stackLigne.Margin;
-                margin2.Left = 30;
-                stackLigne.Margin = margin;
                 stackLigne.Width = 275;
                 // Image de bouton
                 Image imgBouton = new Image();
@@ -385,13 +382,13 @@ namespace Nutritia.UI.Views
             TabValeurNutritionelle = new SousEcran2();
             presenteurContenu3.Content = TabValeurNutritionelle;
 
-            TabValeurNutritionelle.vEnegie.Inlines.Add(Math.Round(ValeurNutritive["Calorie"], 2).ToString("#########0.00"));
-            TabValeurNutritionelle.vGlucide.Inlines.Add(Math.Round(ValeurNutritive["Glucides"], 2).ToString("##########0.00"));
-            TabValeurNutritionelle.vFibre.Inlines.Add(Math.Round(ValeurNutritive["Fibres"], 2).ToString("##########0.00"));
-            TabValeurNutritionelle.vProtein.Inlines.Add(Math.Round(ValeurNutritive["Proteines"], 2).ToString("##########0.00"));
-            TabValeurNutritionelle.vLipide.Inlines.Add(Math.Round(ValeurNutritive["Lipides"], 2).ToString("##########0.00"));
-            TabValeurNutritionelle.vCholesterol.Inlines.Add(Math.Round(ValeurNutritive["Cholesterol"], 2).ToString("##########0.00"));
-            TabValeurNutritionelle.vSodium.Inlines.Add(Math.Round(ValeurNutritive["Sodium"], 2).ToString("##########0.00"));
+            TabValeurNutritionelle.vEnegie.Inlines.Add(Math.Round(ValeurNutritive["Calorie"], 2).ToString("###########0.0"));
+            TabValeurNutritionelle.vGlucide.Inlines.Add(Math.Round(ValeurNutritive["Glucides"], 2).ToString("############0.0"));
+            TabValeurNutritionelle.vFibre.Inlines.Add(Math.Round(ValeurNutritive["Fibres"], 2).ToString("############0.0"));
+            TabValeurNutritionelle.vProtein.Inlines.Add(Math.Round(ValeurNutritive["Proteines"], 2).ToString("############0.0"));
+            TabValeurNutritionelle.vLipide.Inlines.Add(Math.Round(ValeurNutritive["Lipides"], 2).ToString("############0.0"));
+            TabValeurNutritionelle.vCholesterol.Inlines.Add(Math.Round(ValeurNutritive["Cholesterol"], 2).ToString("############0.0"));
+            TabValeurNutritionelle.vSodium.Inlines.Add(Math.Round(ValeurNutritive["Sodium"], 2).ToString("############0.0"));
 
         }
 
