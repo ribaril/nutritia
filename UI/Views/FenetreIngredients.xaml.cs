@@ -24,7 +24,7 @@ namespace Nutritia.UI.Views
         /// Constructeur par défaut de la classe.
         /// </summary>
         /// <param name="listeIngredients">La liste des ingrédients du plat.</param>
-        public FenetreIngredients(Plat plat)
+        public FenetreIngredients(Plat plat, int nbPersonnes)
         {
             InitializeComponent();
 
@@ -36,7 +36,7 @@ namespace Nutritia.UI.Views
             entete.Content = plat.Nom;
             grdIngredients.Children.Add(entete);
 
-            AfficherIngredients(new List<Aliment>(plat.ListeIngredients));
+            AfficherIngredients(new List<Aliment>(plat.ListeIngredients), nbPersonnes);
         }
 
         /// <summary>
@@ -60,14 +60,14 @@ namespace Nutritia.UI.Views
         /// Méthode permettant d'afficher des ingrédients.
         /// </summary>
         /// <param name="listeIngredients">La liste des aliments.</param>
-        private void AfficherIngredients(List<Aliment> listeIngredients)
+        private void AfficherIngredients(List<Aliment> listeIngredients, int nbPersonnes)
         {
             for (int i = 0; i < listeIngredients.Count; i++)
             {
                 Aliment alimentCourant = listeIngredients[i];
 
                 StringBuilder sbIngredients = new StringBuilder();
-                sbIngredients.Append(alimentCourant.Quantite).ToString();
+                sbIngredients.Append(alimentCourant.Quantite * nbPersonnes).ToString();
                 sbIngredients.Append(alimentCourant.UniteMesure);
                 alimentCourant.Nom = alimentCourant.Nom.ToLower();
                 if (alimentCourant.Nom[0] == 'a' || alimentCourant.Nom[0] == 'e' || alimentCourant.Nom[0] == 'h' || 
@@ -83,7 +83,7 @@ namespace Nutritia.UI.Views
 
                 Label lblIngredients = new Label();
                 lblIngredients.Content = sbIngredients.ToString();
-                lblIngredients.ToolTip = GenererValeursNutritionnelles(alimentCourant);
+                lblIngredients.ToolTip = GenererValeursNutritionnelles(alimentCourant, nbPersonnes);
                 Grid.SetRow(lblIngredients, i + 1);
 
                 grdIngredients.Children.Add(lblIngredients);
@@ -95,7 +95,7 @@ namespace Nutritia.UI.Views
         /// </summary>
         /// <param name="aliment">Un aliment.</param>
         /// <returns>Un tooltip contenant les valeurs nutritionnelles de l'aliment.</returns>
-        private ToolTip GenererValeursNutritionnelles(Aliment aliment)
+        private ToolTip GenererValeursNutritionnelles(Aliment aliment, int nbPersonnes)
         {
             ToolTip ttValeurNut = new ToolTip();
             StackPanel spValeurNut = new StackPanel();
@@ -104,14 +104,16 @@ namespace Nutritia.UI.Views
             lblEntete.Content = "Valeurs nutritionnelles";
             spValeurNut.Children.Add(lblEntete);
 
+            double multiplicateurValeur = (aliment.Quantite * nbPersonnes)/aliment.Mesure;
+
             StringBuilder sbValeurNut = new StringBuilder();
-            sbValeurNut.Append("Énergie : ").Append(aliment.Energie * (aliment.Quantite/aliment.Mesure)).AppendLine(" cal");
-            sbValeurNut.Append("Glucides : ").Append(aliment.Glucide * (aliment.Quantite / aliment.Mesure)).AppendLine(" g");
-            sbValeurNut.Append("Fibres : ").Append(aliment.Fibre * (aliment.Quantite / aliment.Mesure)).AppendLine(" g");
-            sbValeurNut.Append("Protéines : ").Append(aliment.Proteine * (aliment.Quantite / aliment.Mesure)).AppendLine(" g");
-            sbValeurNut.Append("Lipides : ").Append(aliment.Lipide * (aliment.Quantite / aliment.Mesure)).AppendLine(" g");
-            sbValeurNut.Append("Cholestérol : ").Append(aliment.Cholesterol * (aliment.Quantite / aliment.Mesure)).AppendLine(" mg");
-            sbValeurNut.Append("Sodium : ").Append(aliment.Sodium * (aliment.Quantite / aliment.Mesure)).Append(" mg");
+            sbValeurNut.Append("Énergie : ").Append(aliment.Energie * multiplicateurValeur).AppendLine(" cal");
+            sbValeurNut.Append("Glucides : ").Append(aliment.Glucide * multiplicateurValeur).AppendLine(" g");
+            sbValeurNut.Append("Fibres : ").Append(aliment.Fibre * multiplicateurValeur).AppendLine(" g");
+            sbValeurNut.Append("Protéines : ").Append(aliment.Proteine * multiplicateurValeur).AppendLine(" g");
+            sbValeurNut.Append("Lipides : ").Append(aliment.Lipide * multiplicateurValeur).AppendLine(" g");
+            sbValeurNut.Append("Cholestérol : ").Append(aliment.Cholesterol * multiplicateurValeur).AppendLine(" mg");
+            sbValeurNut.Append("Sodium : ").Append(aliment.Sodium * multiplicateurValeur).Append(" mg");
             Label lblValeurNut = new Label();
             lblValeurNut.Content = sbValeurNut.ToString();
 

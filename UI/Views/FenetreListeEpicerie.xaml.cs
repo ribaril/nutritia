@@ -45,16 +45,23 @@ namespace Nutritia.UI.Views
         /// </summary>
         private void GenererListe()
         {
-            foreach(Plat platCourant in MenuGenere.ListePlats)
+            foreach (Plat platCourant in MenuGenere.ListePlats)
             {
-                foreach(Aliment ingredient in platCourant.ListeIngredients)
+                foreach (Aliment ingredientCourant in platCourant.ListeIngredients)
                 {
-                    ListeAliments.Add(ingredient);
+                    Aliment ingredientCourantClone = (Aliment)ingredientCourant.Clone();
+                    ingredientCourantClone.Quantite *= MenuGenere.NbPersonnes;
+
+                    if(!ListeAliments.Contains(ingredientCourant))
+                    {
+                        ListeAliments.Add(ingredientCourantClone);
+                    }
+                    else
+                    {
+                        ListeAliments[ListeAliments.IndexOf(ingredientCourant)].Quantite += ingredientCourantClone.Quantite;
+                    }
                 }
             }
-
-            RetirerAlimentsDoublon();
-
         }
 
         /// <summary>
@@ -111,49 +118,6 @@ namespace Nutritia.UI.Views
                 Grid.SetRow(lblArticle, i);
                 grdListeConviviale.Children.Add(lblArticle);
             }
-        }
-
-        /// <summary>
-        /// Méthode permettant de retirer les aliments doublons de la liste d'épicerie.
-        /// </summary>
-        private void RetirerAlimentsDoublon()
-        {
-            ObservableCollection<Aliment> listeAlimentsTmp = new ObservableCollection<Aliment>();
-
-            foreach(Aliment alimentCourant in ListeAliments)
-            {
-                bool dejaPresent = false;
-                //double quantite = alimentCourant.Quantite;
-
-                foreach (Aliment alimentCourantTmp in listeAlimentsTmp)
-                {
-                    if (alimentCourant.IdAliment == alimentCourantTmp.IdAliment)
-                    {
-                        dejaPresent = true;
-                        alimentCourantTmp.Quantite += alimentCourant.Quantite;
-                        break;
-                    }
-                }
-
-                if(!dejaPresent)
-                {
-                    listeAlimentsTmp.Add(alimentCourant);
-                }
-                    /*
-                else
-                {
-                    foreach (Aliment alimentCourantTmp in listeAlimentsTmp)
-                    {
-                        if(alimentCourantTmp.Nom == alimentCourant.Nom)
-                        {
-                            alimentCourantTmp.Quantite = quantite;
-                        }
-                    }
-                }
-                     */
-            }
-
-            ListeAliments = listeAlimentsTmp;
         }
 
         /// <summary>

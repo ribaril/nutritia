@@ -91,7 +91,7 @@
                             <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
                         </DataGrid.Resources>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="2*" Binding="{Binding Nom}" FontFamily="Berlin Sans FB Demi" FontSize="16" Foreground="DarkGreen" IsReadOnly="True">
+                            <DataGridTextColumn Width="3*" Binding="{Binding Nom}" FontFamily="Berlin Sans FB Demi" FontSize="16" Foreground="DarkGreen" IsReadOnly="True">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style>
                                         <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
@@ -108,7 +108,7 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Width="2.5*">
+                            <DataGridTemplateColumn Width="2*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button Name="btnRegenerer" Width="50" Height="50" Margin="0, 15, 0, 0" Click="btnRegenerer_Click">
@@ -117,7 +117,7 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Width="2.5*">
+                            <DataGridTemplateColumn Width="2*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button Name="btnIngredients" Click="btnIngredients_Click" Width="100" Height="50" Margin="0, 15, 0, 0">Ingrédients</Button>

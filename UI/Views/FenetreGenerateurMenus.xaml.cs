@@ -39,10 +39,16 @@ namespace Nutritia.UI.Views
         {
             InitializeComponent();
 
-            NbPlats = 4;
             btnOuvrirMenu.IsEnabled = false;
             btnListeEpicerie.IsEnabled = false;
             PlatService = ServiceFactory.Instance.GetService<IPlatService>();
+            Mouse.OverrideCursor = Cursors.Wait;
+            ListeDejeuners = new ObservableCollection<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Déjeuner" }));
+            ListeEntrees = new ObservableCollection<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Entrée" }));
+            ListePlatPrincipaux = new ObservableCollection<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Plat principal" }));
+            ListeBreuvages = new ObservableCollection<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Breuvage" }));
+            ListeDesserts = new ObservableCollection<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Déssert" }));
+            Mouse.OverrideCursor = null;
         }
 
         /// <summary>
@@ -92,51 +98,63 @@ namespace Nutritia.UI.Views
             MenuGenere = new Menu();
             Random rand = new Random();
 
+            if (rbDejeuner.IsChecked != null && (bool)rbDejeuner.IsChecked) { NbJours = 0; NbPlats = 2; }
             if (rbDinerSouper.IsChecked != null && (bool)rbDinerSouper.IsChecked) { NbJours = 0; NbPlats = 4; }
             if (rbMenuJournalier.IsChecked != null && (bool)rbMenuJournalier.IsChecked) { NbJours = 1; NbPlats = 10; }
             if (rbMenuHebdomadaire.IsChecked != null && (bool)rbMenuHebdomadaire.IsChecked) { NbJours = 7; NbPlats = 70; }
             
             NbPersonnes = Convert.ToInt32(((ComboBoxItem)cboNbPersonnes.SelectedItem).Content);
+            MenuGenere.NbPersonnes = NbPersonnes;
 
             InitialiserSectionMenu();
-
-            Cursor = Cursors.Wait;
-
-            ListeDejeuners = new ObservableCollection<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Déjeuner" }));
-            ListeEntrees = new ObservableCollection<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Entrée" }));
-            ListePlatPrincipaux = new ObservableCollection<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Plat principal" }));
-            ListeBreuvages = new ObservableCollection<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Breuvage" }));
-            ListeDesserts = new ObservableCollection<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Déssert" }));
 
             if(NbJours == 0)
             {
                 Label lblSeparateur = new Label();
-                
-                MenuGenere.ListePlats.Add(ListeEntrees[rand.Next(0, ListeEntrees.Count)]);
-                lblSeparateur.Content = "Entrée";
-                lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
-                grdMenus.Children.Add(lblSeparateur);
 
-                MenuGenere.ListePlats.Add(ListePlatPrincipaux[rand.Next(0, ListePlatPrincipaux.Count)]);
-                lblSeparateur = new Label();
-                lblSeparateur.Content = "Plat principal";
-                lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
-                Grid.SetRow(lblSeparateur, 1);
-                grdMenus.Children.Add(lblSeparateur);
+                if(NbPlats == 2)
+                {
+                    MenuGenere.ListePlats.Add(ListeDejeuners[rand.Next(0, ListeDejeuners.Count)]);
+                    lblSeparateur.Content = "Déjeuner";
+                    lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
+                    grdMenus.Children.Add(lblSeparateur);
 
-                MenuGenere.ListePlats.Add(ListeBreuvages[rand.Next(0, ListeBreuvages.Count)]);
-                lblSeparateur = new Label();
-                lblSeparateur.Content = "Breuvage";
-                lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
-                Grid.SetRow(lblSeparateur, 2);
-                grdMenus.Children.Add(lblSeparateur);
+                    MenuGenere.ListePlats.Add(ListeBreuvages[rand.Next(0, ListeBreuvages.Count)]);
+                    lblSeparateur = new Label();
+                    lblSeparateur.Content = "Breuvage";
+                    lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
+                    Grid.SetRow(lblSeparateur, 1);
+                    grdMenus.Children.Add(lblSeparateur);
+                }
+                else if(NbPlats == 4)
+                {
+                    MenuGenere.ListePlats.Add(ListeEntrees[rand.Next(0, ListeEntrees.Count)]);
+                    lblSeparateur = new Label();
+                    lblSeparateur.Content = "Entrée";
+                    lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
+                    grdMenus.Children.Add(lblSeparateur);
 
-                MenuGenere.ListePlats.Add(ListeDesserts[rand.Next(0, ListeDesserts.Count)]);
-                lblSeparateur = new Label();
-                lblSeparateur.Content = "Déssert";
-                lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
-                Grid.SetRow(lblSeparateur, 3);
-                grdMenus.Children.Add(lblSeparateur);
+                    MenuGenere.ListePlats.Add(ListePlatPrincipaux[rand.Next(0, ListePlatPrincipaux.Count)]);
+                    lblSeparateur = new Label();
+                    lblSeparateur.Content = "Plat principal";
+                    lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
+                    Grid.SetRow(lblSeparateur, 1);
+                    grdMenus.Children.Add(lblSeparateur);
+
+                    MenuGenere.ListePlats.Add(ListeBreuvages[rand.Next(0, ListeBreuvages.Count)]);
+                    lblSeparateur = new Label();
+                    lblSeparateur.Content = "Breuvage";
+                    lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
+                    Grid.SetRow(lblSeparateur, 2);
+                    grdMenus.Children.Add(lblSeparateur);
+
+                    MenuGenere.ListePlats.Add(ListeDesserts[rand.Next(0, ListeDesserts.Count)]);
+                    lblSeparateur = new Label();
+                    lblSeparateur.Content = "Déssert";
+                    lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
+                    Grid.SetRow(lblSeparateur, 3);
+                    grdMenus.Children.Add(lblSeparateur);
+                }
             }
             else
             {
@@ -191,25 +209,8 @@ namespace Nutritia.UI.Views
                 }
             }
 
-            Cursor = Cursors.Arrow;
-
-            AjusterQuantites();
             dgMenus.ItemsSource = MenuGenere.ListePlats;
             btnListeEpicerie.IsEnabled = true;
-        }
-
-        /// <summary>
-        /// Méthode permettant d'ajuster les quantités des ingrédients des plats en fonction du nombre de personnes.
-        /// </summary>
-        private void AjusterQuantites()
-        {
-            foreach (Plat platCourant in MenuGenere.ListePlats)
-            {
-                foreach (Aliment alimentCourant in platCourant.ListeIngredients)
-                {
-                    alimentCourant.Quantite *= NbPersonnes;
-                }
-            }
         }
 
         /// <summary>
@@ -233,7 +234,7 @@ namespace Nutritia.UI.Views
         {
             Plat platSelectionne = (Plat)dgMenus.SelectedItem;
 
-            FenetreIngredients fenetreIngredients = new FenetreIngredients(platSelectionne);
+            FenetreIngredients fenetreIngredients = new FenetreIngredients(platSelectionne, NbPersonnes);
             fenetreIngredients.ShowDialog();
         }
 

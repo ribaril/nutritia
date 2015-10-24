@@ -25,7 +25,7 @@ namespace Nutritia
         public MainWindow()
 		{
 			InitializeComponent();
-			Configurer();
+            Configurer();
 
             presenteurContenu.Content = new MenuPrincipal();
 		}
