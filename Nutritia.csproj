@@ -166,11 +166,11 @@
     <Compile Include="UI\Views\FenetreVotes.xaml.cs">
       <DependentUpon>FenetreVotes.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\RenommeMoiSaCorantin.xaml.cs">
-      <DependentUpon>RenommeMoiSaCorantin.xaml</DependentUpon>
+    <Compile Include="UI\Views\StackPlatAliment.xaml.cs">
+      <DependentUpon>StackPlatAliment.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\RenommeMoiSaCorantin2.xaml.cs">
-      <DependentUpon>RenommeMoiSaCorantin2.xaml</DependentUpon>
+    <Compile Include="UI\Views\TabValeurNutri.xaml.cs">
+      <DependentUpon>TabValeurNutri.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\SearchBox.xaml.cs">
       <DependentUpon>SearchBox.xaml</DependentUpon>
@@ -277,11 +277,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Views\RenommeMoiSaCorantin.xaml">
+    <Page Include="UI\Views\StackPlatAliment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Views\RenommeMoiSaCorantin2.xaml">
+    <Page Include="UI\Views\TabValeurNutri.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

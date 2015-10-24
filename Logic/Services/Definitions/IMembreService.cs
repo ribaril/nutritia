@@ -11,5 +11,6 @@ namespace Nutritia
         IList<Membre> RetrieveAll();
         Membre Retrieve(RetrieveMembreArgs args);
         void Insert(Membre membre);
+        void Update(Membre membre);
     }
 }
