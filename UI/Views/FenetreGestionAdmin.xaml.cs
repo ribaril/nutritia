@@ -26,8 +26,11 @@ namespace Nutritia.UI.Views
         {
             InitializeComponent();
             //filterDataGrid.ItemsSource = s.ConvertAll(x => new { Value = x });
-            filterDataGrid.DataGridCollection = CollectionViewSource.GetDefaultView(serviceMembre.RetrieveAll());
+            IList<Membre> listMembres = serviceMembre.RetrieveAll();
+            filterDataGrid.DataGridCollection = CollectionViewSource.GetDefaultView(listMembres);
             filterDataGrid.DataGridCollection.Filter = new Predicate<object>(Filter);
+            List<Membre> admins = listMembres.Where(m => m.EstAdministrateur).ToList();
+            dgAdmin.ItemsSource = admins;
         }
 
 

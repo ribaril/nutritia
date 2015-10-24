@@ -17,7 +17,7 @@
                 <DataGridTemplateColumn Header="Admin" IsReadOnly="False" Width="50">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <CheckBox IsChecked="{Binding EstAdministrateur}" IsEnabled="{Binding EstBanni, Converter={StaticResource oppositeConverter}}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"></CheckBox>
+                            <CheckBox HorizontalAlignment="Center" IsChecked="{Binding EstAdministrateur}" IsEnabled="{Binding EstBanni, Converter={StaticResource oppositeConverter}}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"></CheckBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -25,12 +25,20 @@
             </local:SearchBox.Columns>
         </local:SearchBox>
         <local:FenetreInfoMembre Margin="399,68,27,252" MembreContent="{Binding ElementName=filterDataGrid, Path=SelectedItem}">
-            
+
         </local:FenetreInfoMembre>
-        <Label Margin="317,236,222,212">Administrateurs</Label>
-        <DataGrid Name="dgInfoMembre" Margin="206,263,222,109">
-            <DataGridCheckBoxColumn IsReadOnly="False" Header="Admin" Width="50" />
-            <DataGridTextColumn IsReadOnly="True" Header="Compte"/>
+        <Label Margin="274,236,265,212">Administrateurs</Label>
+        <DataGrid Name="dgAdmin" Margin="206,263,222,109" CanUserAddRows="False" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Admin" IsReadOnly="False" Width="50">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox HorizontalAlignment="Center" IsChecked="{Binding EstAdministrateur}"></CheckBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Width="*" IsReadOnly="True" Header="Compte" Binding="{Binding NomUtilisateur}"/>
+            </DataGrid.Columns>
         </DataGrid>
         <Button Margin="274,384,280,58" Click="Button_Click">Accepter</Button>
     </Grid>
