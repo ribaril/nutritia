@@ -36,6 +36,7 @@ namespace Nutritia.UI.Views
             ListeAliments = new ObservableCollection<Aliment>();
 
             GenererListe();
+            dgListeEpicerie.ItemsSource = ListeAliments;
             GenererListeConviviale();
         }
 
@@ -53,7 +54,6 @@ namespace Nutritia.UI.Views
             }
 
             RetirerAlimentsDoublon();
-            dgListeEpicerie.ItemsSource = ListeAliments;
 
         }
 
@@ -123,14 +123,15 @@ namespace Nutritia.UI.Views
             foreach(Aliment alimentCourant in ListeAliments)
             {
                 bool dejaPresent = false;
-                double quantite = alimentCourant.Quantite;
+                //double quantite = alimentCourant.Quantite;
 
                 foreach (Aliment alimentCourantTmp in listeAlimentsTmp)
                 {
                     if (alimentCourant.IdAliment == alimentCourantTmp.IdAliment)
                     {
                         dejaPresent = true;
-                        quantite += alimentCourant.Quantite;
+                        alimentCourantTmp.Quantite += alimentCourant.Quantite;
+                        break;
                     }
                 }
 
@@ -138,6 +139,7 @@ namespace Nutritia.UI.Views
                 {
                     listeAlimentsTmp.Add(alimentCourant);
                 }
+                    /*
                 else
                 {
                     foreach (Aliment alimentCourantTmp in listeAlimentsTmp)
@@ -148,6 +150,7 @@ namespace Nutritia.UI.Views
                         }
                     }
                 }
+                     */
             }
 
             ListeAliments = listeAlimentsTmp;

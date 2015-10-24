@@ -24,7 +24,7 @@ namespace Nutritia.UI.Views
         /// Constructeur par défaut de la classe.
         /// </summary>
         /// <param name="listeIngredients">La liste des ingrédients du plat.</param>
-        public FenetreIngredients(Plat plat, int nbPersonnes)
+        public FenetreIngredients(Plat plat)
         {
             InitializeComponent();
 
@@ -36,7 +36,7 @@ namespace Nutritia.UI.Views
             entete.Content = plat.Nom;
             grdIngredients.Children.Add(entete);
 
-            AfficherIngredients(new List<Aliment>(plat.ListeIngredients), nbPersonnes);
+            AfficherIngredients(new List<Aliment>(plat.ListeIngredients));
         }
 
         /// <summary>
@@ -60,14 +60,14 @@ namespace Nutritia.UI.Views
         /// Méthode permettant d'afficher des ingrédients.
         /// </summary>
         /// <param name="listeIngredients">La liste des aliments.</param>
-        private void AfficherIngredients(List<Aliment> listeIngredients, int nbPersonnes)
+        private void AfficherIngredients(List<Aliment> listeIngredients)
         {
             for (int i = 0; i < listeIngredients.Count; i++)
             {
                 Aliment alimentCourant = listeIngredients[i];
 
                 StringBuilder sbIngredients = new StringBuilder();
-                sbIngredients.Append(alimentCourant.Quantite * nbPersonnes).ToString();
+                sbIngredients.Append(alimentCourant.Quantite).ToString();
                 sbIngredients.Append(alimentCourant.UniteMesure);
                 alimentCourant.Nom = alimentCourant.Nom.ToLower();
                 if (alimentCourant.Nom[0] == 'a' || alimentCourant.Nom[0] == 'e' || alimentCourant.Nom[0] == 'h' || 
@@ -105,13 +105,13 @@ namespace Nutritia.UI.Views
             spValeurNut.Children.Add(lblEntete);
 
             StringBuilder sbValeurNut = new StringBuilder();
-            sbValeurNut.Append("Énergie : ").Append(aliment.Energie * aliment.Quantite).Append(" cal").AppendLine();
-            sbValeurNut.Append("Glucides : ").Append(aliment.Glucide * aliment.Quantite).Append(" g").AppendLine();
-            sbValeurNut.Append("Fibres : ").Append(aliment.Fibre * aliment.Quantite).Append(" g").AppendLine();
-            sbValeurNut.Append("Protéines : ").Append(aliment.Proteine * aliment.Quantite).Append(" g").AppendLine();
-            sbValeurNut.Append("Lipides : ").Append(aliment.Lipide * aliment.Quantite).Append(" g").AppendLine();
-            sbValeurNut.Append("Cholestérol : ").Append(aliment.Cholesterol * aliment.Quantite).Append(" mg").AppendLine();
-            sbValeurNut.Append("Sodium : ").Append(aliment.Sodium * aliment.Quantite).Append(" mg");
+            sbValeurNut.Append("Énergie : ").Append(aliment.Energie * (aliment.Quantite/aliment.Mesure)).AppendLine(" cal");
+            sbValeurNut.Append("Glucides : ").Append(aliment.Glucide * (aliment.Quantite / aliment.Mesure)).AppendLine(" g");
+            sbValeurNut.Append("Fibres : ").Append(aliment.Fibre * (aliment.Quantite / aliment.Mesure)).AppendLine(" g");
+            sbValeurNut.Append("Protéines : ").Append(aliment.Proteine * (aliment.Quantite / aliment.Mesure)).AppendLine(" g");
+            sbValeurNut.Append("Lipides : ").Append(aliment.Lipide * (aliment.Quantite / aliment.Mesure)).AppendLine(" g");
+            sbValeurNut.Append("Cholestérol : ").Append(aliment.Cholesterol * (aliment.Quantite / aliment.Mesure)).AppendLine(" mg");
+            sbValeurNut.Append("Sodium : ").Append(aliment.Sodium * (aliment.Quantite / aliment.Mesure)).Append(" mg");
             Label lblValeurNut = new Label();
             lblValeurNut.Content = sbValeurNut.ToString();
 

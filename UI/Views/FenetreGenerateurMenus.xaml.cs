@@ -44,6 +44,43 @@ namespace Nutritia.UI.Views
             btnListeEpicerie.IsEnabled = false;
             PlatService = ServiceFactory.Instance.GetService<IPlatService>();
         }
+
+        /// <summary>
+        /// Méthode permettant de générer dynamiquement les rangées de la grid contenant le menu.
+        /// </summary>
+        /// <param name="nbRangees">Le nombre de rangées.</param>
+        private void GenererRangees(int nbRangees)
+        {
+            RowDefinition rowDefinition;
+
+            for (int i = 0; i < nbRangees; i++)
+            {
+                rowDefinition = new RowDefinition();
+                rowDefinition.Height = new GridLength(110);
+
+                grdMenus.RowDefinitions.Add(rowDefinition);
+            }
+        }
+
+        /// <summary>
+        /// Méthode permettant d'initialiser la section des menus.
+        /// </summary>
+        private void InitialiserSectionMenu()
+        {
+            svMenus.ScrollToTop();
+            grdMenus.RowDefinitions.Clear();
+            GenererRangees(NbPlats);
+            Grid.SetRowSpan(dgMenus, NbPlats);
+
+            List<Label> separateurs = new List<Label>();
+
+            separateurs = new List<Label>(grdMenus.Children.OfType<Label>());
+
+            foreach (Label separateurCourant in separateurs)
+            {
+                grdMenus.Children.Remove(separateurCourant);
+            }
+        }
         
         /// <summary>
         /// Événement lancé sur un clique du bouton Générer.
@@ -55,15 +92,13 @@ namespace Nutritia.UI.Views
             MenuGenere = new Menu();
             Random rand = new Random();
 
-            if (rbMenuUnique.IsChecked != null && (bool)rbMenuUnique.IsChecked) { NbJours = 0; NbPlats = 4; }
+            if (rbDinerSouper.IsChecked != null && (bool)rbDinerSouper.IsChecked) { NbJours = 0; NbPlats = 4; }
             if (rbMenuJournalier.IsChecked != null && (bool)rbMenuJournalier.IsChecked) { NbJours = 1; NbPlats = 10; }
             if (rbMenuHebdomadaire.IsChecked != null && (bool)rbMenuHebdomadaire.IsChecked) { NbJours = 7; NbPlats = 70; }
             
             NbPersonnes = Convert.ToInt32(((ComboBoxItem)cboNbPersonnes.SelectedItem).Content);
 
-            grdMenus.RowDefinitions.Clear();
-            GenererRangees(NbPlats);
-            Grid.SetRowSpan(dgMenus, NbPlats);
+            InitialiserSectionMenu();
 
             Cursor = Cursors.Wait;
 
@@ -158,35 +193,33 @@ namespace Nutritia.UI.Views
 
             Cursor = Cursors.Arrow;
 
+            AjusterQuantites();
             dgMenus.ItemsSource = MenuGenere.ListePlats;
             btnListeEpicerie.IsEnabled = true;
         }
 
         /// <summary>
-        /// Méthode permettant de générer dynamiquement les rangées de la grid contenant le menu.
+        /// Méthode permettant d'ajuster les quantités des ingrédients des plats en fonction du nombre de personnes.
         /// </summary>
-        /// <param name="nbRangees">Le nombre de rangées.</param>
-        private void GenererRangees(int nbRangees)
+        private void AjusterQuantites()
         {
-            RowDefinition rowDefinition;
-
-            for (int i = 0; i < nbRangees; i++)
+            foreach (Plat platCourant in MenuGenere.ListePlats)
             {
-                rowDefinition = new RowDefinition();
-                rowDefinition.Height = new GridLength(150);
-
-                grdMenus.RowDefinitions.Add(rowDefinition);
+                foreach (Aliment alimentCourant in platCourant.ListeIngredients)
+                {
+                    alimentCourant.Quantite *= NbPersonnes;
+                }
             }
         }
 
         /// <summary>
-        /// Événement lancé lorsque la roulette de la souris est utilisée dans la DataGrid contenant le menu.
-        /// Explicement, cet événement permet de gérer le "scroll" avec la roulette correctement sur toute la surface de la DataGrid.
+        /// Événement lancé lorsque la roulette de la souris est utilisée dans le "scrollviewer" contenant le menu.
+        /// Explicement, cet événement permet de gérer le "scroll" avec la roulette correctement sur toute la surface du "scrollviewer".
         /// Si on ne le gère pas, il est seulement possible de "scroller" lorsque le pointeur de la souris est situé sur la "scrollbar".
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgMenus_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        private void svMenus_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             svMenus.ScrollToVerticalOffset(svMenus.VerticalOffset - e.Delta);
         }
@@ -200,7 +233,7 @@ namespace Nutritia.UI.Views
         {
             Plat platSelectionne = (Plat)dgMenus.SelectedItem;
 
-            FenetreIngredients fenetreIngredients = new FenetreIngredients(platSelectionne, NbPersonnes);
+            FenetreIngredients fenetreIngredients = new FenetreIngredients(platSelectionne);
             fenetreIngredients.ShowDialog();
         }
 
@@ -215,8 +248,6 @@ namespace Nutritia.UI.Views
             Plat platRegenere;
             Random rand = new Random();
 
-            int index = MenuGenere.ListePlats.IndexOf(platSelectionne);
-
             switch(platSelectionne.TypePlat)
             {
                 case "Déjeuner":
@@ -225,7 +256,7 @@ namespace Nutritia.UI.Views
                     {
                         platRegenere = ListeDejeuners[rand.Next(0, ListeDejeuners.Count)];
                     }
-                    MenuGenere.ListePlats[index] = platRegenere;
+                    MenuGenere.ListePlats[dgMenus.SelectedIndex] = platRegenere;
                 break;
                 case "Entrée":
                     platRegenere = ListeEntrees[rand.Next(0, ListeEntrees.Count)];
@@ -233,7 +264,7 @@ namespace Nutritia.UI.Views
                     {
                         platRegenere = ListeEntrees[rand.Next(0, ListeEntrees.Count)];
                     }
-                    MenuGenere.ListePlats[index] = platRegenere;
+                    MenuGenere.ListePlats[dgMenus.SelectedIndex] = platRegenere;
                 break;
                 case "Plat principal":
                     platRegenere = ListePlatPrincipaux[rand.Next(0, ListePlatPrincipaux.Count)];
@@ -241,7 +272,7 @@ namespace Nutritia.UI.Views
                     {
                         platRegenere = ListePlatPrincipaux[rand.Next(0, ListePlatPrincipaux.Count)];
                     }
-                    MenuGenere.ListePlats[index] = platRegenere;
+                    MenuGenere.ListePlats[dgMenus.SelectedIndex] = platRegenere;
                 break;
                 case "Breuvage":
                     platRegenere = ListeBreuvages[rand.Next(0, ListeBreuvages.Count)];
@@ -249,7 +280,7 @@ namespace Nutritia.UI.Views
                     {
                         platRegenere = ListeBreuvages[rand.Next(0, ListeBreuvages.Count)];
                     }
-                    MenuGenere.ListePlats[index] = platRegenere;
+                    MenuGenere.ListePlats[dgMenus.SelectedIndex] = platRegenere;
                 break;
                 case "Déssert":
                     platRegenere = ListeDesserts[rand.Next(0, ListeDesserts.Count)];
@@ -257,7 +288,7 @@ namespace Nutritia.UI.Views
                     {
                         platRegenere = ListeDesserts[rand.Next(0, ListeDesserts.Count)];
                     }
-                    MenuGenere.ListePlats[index] = platRegenere;
+                    MenuGenere.ListePlats[dgMenus.SelectedIndex] = platRegenere;
                 break;
             }
         }
