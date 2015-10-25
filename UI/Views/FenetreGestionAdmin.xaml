@@ -4,21 +4,45 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Nutritia.UI.Views"
+             xmlns:converter="clr-namespace:Nutritia.UI.Converter"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="475" d:DesignWidth="650">
+    <UserControl.Resources>
+        <converter:BoolToOppositeBoolConverter x:Key="oppositeConverter" />
+    </UserControl.Resources>
     <Grid>
-        <local:SearchBox x:Name="filterDataGrid" Margin="284,44,10,185" WatermarkContent="Compte" FilterMode="StartWith">
+        <Label Margin="61,41,432,407">Rechercher un membre</Label>
+        <local:SearchBox x:Name="filterDataGrid" Margin="20,73,406,252" WatermarkContent="Nom de compte" FilterMode="StartWith" SelectionMode="Single">
             <local:SearchBox.Columns>
-                <DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Admin" IsReadOnly="False" Width="50">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button>+</Button>
+                            <CheckBox HorizontalAlignment="Center" IsChecked="{Binding EstAdministrateur}" IsEnabled="{Binding EstBanni, Converter={StaticResource oppositeConverter}}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"></CheckBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Nom" Binding="{Binding Nom}" Width="*"/>
-                <DataGridTextColumn Header="Prenom" Binding="{Binding Prenom}" Width="*"/>
+                <DataGridTextColumn IsReadOnly="True" Header="Compte" Binding="{Binding NomUtilisateur}"/>
             </local:SearchBox.Columns>
         </local:SearchBox>
+        <local:FenetreInfoMembre Margin="399,68,27,252" MembreContent="{Binding ElementName=filterDataGrid, Path=SelectedItem}">
+        </local:FenetreInfoMembre>
+
+
+        <Label Margin="274,236,265,212">Administrateurs</Label>
+
+
+        <DataGrid Name="dgAdmin" Margin="206,263,222,109" CanUserAddRows="False" AutoGenerateColumns="False" EnableRowVirtualization="False">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Admin" IsReadOnly="False" Width="50">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox HorizontalAlignment="Center" IsChecked="{Binding EstAdministrateur}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"></CheckBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Width="*" IsReadOnly="True" Header="Compte" Binding="{Binding NomUtilisateur}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Margin="274,384,280,58" Click="Button_Click">Accepter</Button>
     </Grid>
 </UserControl>

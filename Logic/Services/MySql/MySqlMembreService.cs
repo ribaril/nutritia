@@ -189,7 +189,7 @@ namespace Nutritia
             {
                 connexion = new MySqlConnexion();
 
-                string requete = string.Format("INSERT INTO Membres (nom ,prenom, taille, masse, dateNaissance, nomUtilisateur, motPasse, estAdmin, estBanni) VALUES ('{0}', '{1}', {2}, {3}, '{4}', '{5}', '{6}', {7}, {8})", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance, membre.NomUtilisateur, membre.MotPasse, membre.EstAdministrateur, membre.EstBanni);
+                string requete = string.Format("INSERT INTO Membres (nom ,prenom, taille, masse, dateNaissance, nomUtilisateur, motPasse, estAdmin, estBanni) VALUES ('{0}', '{1}', {2}, {3}, '{4}', '{5}', '{6}', {7}, {8})", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance.ToString("yyyy-MM-dd"), membre.NomUtilisateur, membre.MotPasse, membre.EstAdministrateur, membre.EstBanni);
                 connexion.Query(requete);
 
                 int idMembre = (int)Retrieve(new RetrieveMembreArgs { NomUtilisateur = membre.NomUtilisateur }).IdMembre;
@@ -232,7 +232,7 @@ namespace Nutritia
             {
                 connexion = new MySqlConnexion();
 
-                string requete = string.Format("UPDATE Membres SET nom = '{0}' ,prenom = '{1}', taille = {2}, masse = {3}, dateNaissance = '{4}', nomUtilisateur = '{5}', motPasse = '{6}', estAdmin = {7}, estBanni = {8} WHERE idMembre = {9}", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance, membre.NomUtilisateur, membre.MotPasse, membre.EstAdministrateur, membre.EstBanni, membre.IdMembre);
+                string requete = string.Format("UPDATE Membres SET nom = '{0}' ,prenom = '{1}', taille = {2}, masse = {3}, dateNaissance = '{4}', nomUtilisateur = '{5}', motPasse = '{6}', estAdmin = {7}, estBanni = {8} WHERE idMembre = {9}", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance.ToString("yyyy-MM-dd"), membre.NomUtilisateur, membre.MotPasse, membre.EstAdministrateur, membre.EstBanni, membre.IdMembre);
 
 				connexion.Query(requete);
 
@@ -287,6 +287,72 @@ namespace Nutritia
                 EstAdministrateur = (bool)membre["estAdmin"],
                 EstBanni = (bool)membre["estBanni"]
             };
+        }
+
+        public IList<Membre> RetrieveAdmins()
+        {
+            IList<Membre> resultat = new List<Membre>();
+
+            try
+            {
+                connexion = new MySqlConnexion();
+
+                string requete = "SELECT * FROM Membres WHERE estAdmin = True";
+
+                DataSet dataSetMembres = connexion.Query(requete);
+                DataTable tableMembres = dataSetMembres.Tables[0];
+
+                // Construction de chaque objet Membre.
+                foreach (DataRow rowMembre in tableMembres.Rows)
+                {
+                    Membre membre = ConstruireMembre(rowMembre);
+
+                    // Ajout des restrictions alimentaires du membre.
+                    requete = string.Format("SELECT idRestrictionAlimentaire FROM RestrictionsAlimentairesMembres WHERE idMembre = {0}", membre.IdMembre);
+
+                    DataSet dataSetRestrictions = connexion.Query(requete);
+                    DataTable tableRestrictions = dataSetRestrictions.Tables[0];
+
+                    foreach (DataRow rowRestriction in tableRestrictions.Rows)
+                    {
+                        membre.ListeRestrictions.Add(restrictionAlimentaireService.Retrieve(new RetrieveRestrictionAlimentaireArgs { IdRestrictionAlimentaire = (int)rowRestriction["idRestrictionAlimentaire"] }));
+                    }
+
+                    // Ajout des objectifs du membre.
+                    requete = string.Format("SELECT idObjectif FROM ObjectifsMembres WHERE idMembre = {0}", membre.IdMembre);
+
+                    DataSet dataSetObjectifs = connexion.Query(requete);
+                    DataTable tableObjectifs = dataSetObjectifs.Tables[0];
+
+                    foreach (DataRow rowObjectif in tableObjectifs.Rows)
+                    {
+                        membre.ListeObjectifs.Add(objectifService.Retrieve(new RetrieveObjectifArgs { IdObjectif = (int)rowObjectif["idObjectif"] }));
+                    }
+
+                    // Ajout des préférences du membre.
+                    requete = string.Format("SELECT idPreference FROM PreferencesMembres WHERE idMembre = {0}", membre.IdMembre);
+
+                    DataSet dataSetPreferences = connexion.Query(requete);
+                    DataTable tablePreferences = dataSetPreferences.Tables[0];
+
+                    foreach (DataRow rowPreference in tablePreferences.Rows)
+                    {
+                        membre.ListePreferences.Add(preferenceService.Retrieve(new RetrievePreferenceArgs { IdPreference = (int)rowPreference["idPreference"] }));
+                    }
+
+                    membre.ListeMenus = menuService.RetrieveSome(new RetrieveMenuArgs { IdMembre = (int)membre.IdMembre });
+
+                    resultat.Add(membre);
+
+                }
+
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+
+            return resultat;
         }
     }
 }

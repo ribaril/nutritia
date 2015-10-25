@@ -46,6 +46,10 @@ namespace Nutritia.UI.Views
         #region DependencyProperty
         //ItemsSource de la dataGrid
         public static readonly DependencyProperty ItemsSourceProperty = DataGrid.ItemsSourceProperty.AddOwner(typeof(SearchBox));
+        //SelectedItem de la dataGrid
+        public static readonly DependencyProperty SelectedItemProperty = DataGrid.SelectedItemProperty.AddOwner(typeof(SearchBox));
+        //SelectionMode de la dataGrid
+        public static readonly DependencyProperty SelectionModeProperty = DataGrid.SelectionModeProperty.AddOwner(typeof(SearchBox));
         //Propriété du texte du Watermark de la boite de recherche. Valeur par défault à string.Empty pour le contrôle (lors de la création).
         public static readonly DependencyProperty WatermarkContentProperty = DependencyProperty.Register("WatermarkContent", typeof(string), typeof(SearchBox), new FrameworkPropertyMetadata(string.Empty));
         
@@ -91,10 +95,22 @@ namespace Nutritia.UI.Views
             set { SetValue(FilterModeProperty, value); }
         }
 
+        public DataGridSelectionMode SelectionMode
+        {
+            get { return (DataGridSelectionMode)GetValue(SelectionModeProperty); }
+            set { SetValue(SelectionModeProperty, value); }
+        }
+
         public IEnumerable ItemsSource
         {
             get { return (IEnumerable)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
+        }
+
+        public Object SelectedItem
+        {
+            get { return (Object)GetValue(SelectedItemProperty); }
+            set { SetValue(SelectedItemProperty, value); }
         }
 
 
