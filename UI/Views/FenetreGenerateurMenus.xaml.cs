@@ -116,12 +116,16 @@ namespace Nutritia.UI.Views
                 {
                     MenuGenere.ListePlats.Add(ListeDejeuners[rand.Next(0, ListeDejeuners.Count)]);
                     lblSeparateur.Content = "Déjeuner";
+                    lblSeparateur.Style = FindResource("fontNutritia") as Style;
+                    lblSeparateur.FontSize = 16;
                     lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
                     grdMenus.Children.Add(lblSeparateur);
 
                     MenuGenere.ListePlats.Add(ListeBreuvages[rand.Next(0, ListeBreuvages.Count)]);
                     lblSeparateur = new Label();
                     lblSeparateur.Content = "Breuvage";
+                    lblSeparateur.Style = FindResource("fontNutritia") as Style;
+                    lblSeparateur.FontSize = 16;
                     lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
                     Grid.SetRow(lblSeparateur, 1);
                     grdMenus.Children.Add(lblSeparateur);
@@ -131,12 +135,16 @@ namespace Nutritia.UI.Views
                     MenuGenere.ListePlats.Add(ListeEntrees[rand.Next(0, ListeEntrees.Count)]);
                     lblSeparateur = new Label();
                     lblSeparateur.Content = "Entrée";
+                    lblSeparateur.Style = FindResource("fontNutritia") as Style;
+                    lblSeparateur.FontSize = 16;
                     lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
                     grdMenus.Children.Add(lblSeparateur);
 
                     MenuGenere.ListePlats.Add(ListePlatPrincipaux[rand.Next(0, ListePlatPrincipaux.Count)]);
                     lblSeparateur = new Label();
                     lblSeparateur.Content = "Plat principal";
+                    lblSeparateur.Style = FindResource("fontNutritia") as Style;
+                    lblSeparateur.FontSize = 16;
                     lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
                     Grid.SetRow(lblSeparateur, 1);
                     grdMenus.Children.Add(lblSeparateur);
@@ -144,6 +152,8 @@ namespace Nutritia.UI.Views
                     MenuGenere.ListePlats.Add(ListeBreuvages[rand.Next(0, ListeBreuvages.Count)]);
                     lblSeparateur = new Label();
                     lblSeparateur.Content = "Breuvage";
+                    lblSeparateur.Style = FindResource("fontNutritia") as Style;
+                    lblSeparateur.FontSize = 16;
                     lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
                     Grid.SetRow(lblSeparateur, 2);
                     grdMenus.Children.Add(lblSeparateur);
@@ -151,6 +161,8 @@ namespace Nutritia.UI.Views
                     MenuGenere.ListePlats.Add(ListeDesserts[rand.Next(0, ListeDesserts.Count)]);
                     lblSeparateur = new Label();
                     lblSeparateur.Content = "Déssert";
+                    lblSeparateur.Style = FindResource("fontNutritia") as Style;
+                    lblSeparateur.FontSize = 16;
                     lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
                     Grid.SetRow(lblSeparateur, 3);
                     grdMenus.Children.Add(lblSeparateur);
@@ -164,6 +176,8 @@ namespace Nutritia.UI.Views
 
                     MenuGenere.ListePlats.Add(ListeDejeuners[rand.Next(0, ListeDejeuners.Count)]);
                     lblSeparateur.Content = "Jour " + (i + 1) + " (Déjeuner)";
+                    lblSeparateur.Style = FindResource("fontNutritia") as Style;
+                    lblSeparateur.FontSize = 16;
                     lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
                     Grid.SetRow(lblSeparateur, i * (NbPlats / NbJours));
                     grdMenus.Children.Add(lblSeparateur);
@@ -171,6 +185,8 @@ namespace Nutritia.UI.Views
                     MenuGenere.ListePlats.Add(ListeBreuvages[rand.Next(0, ListeBreuvages.Count)]);
                     lblSeparateur = new Label();
                     lblSeparateur.Content = "Jour " + (i + 1) + " (Breuvage)";
+                    lblSeparateur.Style = FindResource("fontNutritia") as Style;
+                    lblSeparateur.FontSize = 16;
                     lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
                     Grid.SetRow(lblSeparateur, i * (NbPlats / NbJours) + 1);
                     grdMenus.Children.Add(lblSeparateur);
@@ -181,6 +197,8 @@ namespace Nutritia.UI.Views
 
                         MenuGenere.ListePlats.Add(ListeEntrees[rand.Next(0, ListeEntrees.Count)]);
                         lblSeparateur.Content = "Jour " + (i + 1) + " (Entrée)";
+                        lblSeparateur.Style = FindResource("fontNutritia") as Style;
+                        lblSeparateur.FontSize = 16;
                         lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
                         Grid.SetRow(lblSeparateur, (i * (NbPlats / NbJours) + 2 + (j * 4)));
                         grdMenus.Children.Add(lblSeparateur);
@@ -188,6 +206,8 @@ namespace Nutritia.UI.Views
                         MenuGenere.ListePlats.Add(ListePlatPrincipaux[rand.Next(0, ListePlatPrincipaux.Count)]);
                         lblSeparateur = new Label();
                         lblSeparateur.Content = "Jour " + (i + 1) + " (Plat principal)";
+                        lblSeparateur.Style = FindResource("fontNutritia") as Style;
+                        lblSeparateur.FontSize = 16;
                         lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
                         Grid.SetRow(lblSeparateur, (i * (NbPlats / NbJours) + 3 + (j * 4)));
                         grdMenus.Children.Add(lblSeparateur);
@@ -195,6 +215,8 @@ namespace Nutritia.UI.Views
                         MenuGenere.ListePlats.Add(ListeBreuvages[rand.Next(0, ListeBreuvages.Count)]);
                         lblSeparateur = new Label();
                         lblSeparateur.Content = "Jour " + (i + 1) + " (Breuvage)";
+                        lblSeparateur.Style = FindResource("fontNutritia") as Style;
+                        lblSeparateur.FontSize = 16;
                         lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
                         Grid.SetRow(lblSeparateur, (i * (NbPlats / NbJours) + 4 + (j * 4)));
                         grdMenus.Children.Add(lblSeparateur);
@@ -202,6 +224,8 @@ namespace Nutritia.UI.Views
                         MenuGenere.ListePlats.Add(ListeDesserts[rand.Next(0, ListeDesserts.Count)]);
                         lblSeparateur = new Label();
                         lblSeparateur.Content = "Jour " + (i + 1) + " (Déssert)";
+                        lblSeparateur.Style = FindResource("fontNutritia") as Style;
+                        lblSeparateur.FontSize = 16;
                         lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
                         Grid.SetRow(lblSeparateur, (i * (NbPlats / NbJours) + 5 + (j * 4)));
                         grdMenus.Children.Add(lblSeparateur);
