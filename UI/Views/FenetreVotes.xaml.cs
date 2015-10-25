@@ -33,12 +33,26 @@ namespace Nutritia.UI.Views
 
             PlatService = ServiceFactory.Instance.GetService<IPlatService>();
             ListePlats = new ObservableCollection<Plat>();
-            // Plat "hardcodé" en guise de preuve de concept ...
+            // Plats "hardcodés" en guise de preuve de concept ...
             Plat plat = PlatService.Retrieve(new RetrievePlatArgs { IdPlat = 1 });
+            plat.Createur = "ribaril";
+            plat.Note = 3;
             ListePlats.Add(plat);
             plat = PlatService.Retrieve(new RetrievePlatArgs { IdPlat = 2 });
+            plat.Createur = "cNoll";
+            plat.Note = 5;
             ListePlats.Add(plat);
             dgPlats.ItemsSource = ListePlats;
+        }
+
+        /// <summary>
+        /// Événement lancé sur un clique du bouton "Tous les plats".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSelectionComplete_Click(object sender, RoutedEventArgs e)
+        {
+            gbContenu.Header = "Tous les plats";
         }
 
         /// <summary>

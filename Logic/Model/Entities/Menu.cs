@@ -11,6 +11,7 @@ namespace Nutritia
     {
         #region Proprietes
         public int? IdMenu { get; set; }
+        public int NbPersonnes { get; set; }
         public DateTime DateCreation { get; set; }
         public IList<Plat> ListePlats { get; set; }
         #endregion

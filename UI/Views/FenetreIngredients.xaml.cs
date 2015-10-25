@@ -83,7 +83,7 @@ namespace Nutritia.UI.Views
 
                 Label lblIngredients = new Label();
                 lblIngredients.Content = sbIngredients.ToString();
-                lblIngredients.ToolTip = GenererValeursNutritionnelles(alimentCourant);
+                lblIngredients.ToolTip = GenererValeursNutritionnelles(alimentCourant, nbPersonnes);
                 Grid.SetRow(lblIngredients, i + 1);
 
                 grdIngredients.Children.Add(lblIngredients);
@@ -95,7 +95,7 @@ namespace Nutritia.UI.Views
         /// </summary>
         /// <param name="aliment">Un aliment.</param>
         /// <returns>Un tooltip contenant les valeurs nutritionnelles de l'aliment.</returns>
-        private ToolTip GenererValeursNutritionnelles(Aliment aliment)
+        private ToolTip GenererValeursNutritionnelles(Aliment aliment, int nbPersonnes)
         {
             ToolTip ttValeurNut = new ToolTip();
             StackPanel spValeurNut = new StackPanel();
@@ -104,14 +104,16 @@ namespace Nutritia.UI.Views
             lblEntete.Content = "Valeurs nutritionnelles";
             spValeurNut.Children.Add(lblEntete);
 
+            double multiplicateurValeur = (aliment.Quantite * nbPersonnes)/aliment.Mesure;
+
             StringBuilder sbValeurNut = new StringBuilder();
-            sbValeurNut.Append("Énergie : ").Append(aliment.Energie * aliment.Quantite).Append(" cal").AppendLine();
-            sbValeurNut.Append("Glucides : ").Append(aliment.Glucide * aliment.Quantite).Append(" g").AppendLine();
-            sbValeurNut.Append("Fibres : ").Append(aliment.Fibre * aliment.Quantite).Append(" g").AppendLine();
-            sbValeurNut.Append("Protéines : ").Append(aliment.Proteine * aliment.Quantite).Append(" g").AppendLine();
-            sbValeurNut.Append("Lipides : ").Append(aliment.Lipide * aliment.Quantite).Append(" g").AppendLine();
-            sbValeurNut.Append("Cholestérol : ").Append(aliment.Cholesterol * aliment.Quantite).Append(" mg").AppendLine();
-            sbValeurNut.Append("Sodium : ").Append(aliment.Sodium * aliment.Quantite).Append(" mg");
+            sbValeurNut.Append("Énergie : ").Append(aliment.Energie * multiplicateurValeur).AppendLine(" cal");
+            sbValeurNut.Append("Glucides : ").Append(aliment.Glucide * multiplicateurValeur).AppendLine(" g");
+            sbValeurNut.Append("Fibres : ").Append(aliment.Fibre * multiplicateurValeur).AppendLine(" g");
+            sbValeurNut.Append("Protéines : ").Append(aliment.Proteine * multiplicateurValeur).AppendLine(" g");
+            sbValeurNut.Append("Lipides : ").Append(aliment.Lipide * multiplicateurValeur).AppendLine(" g");
+            sbValeurNut.Append("Cholestérol : ").Append(aliment.Cholesterol * multiplicateurValeur).AppendLine(" mg");
+            sbValeurNut.Append("Sodium : ").Append(aliment.Sodium * multiplicateurValeur).Append(" mg");
             Label lblValeurNut = new Label();
             lblValeurNut.Content = sbValeurNut.ToString();
 
