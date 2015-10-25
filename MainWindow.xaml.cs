@@ -57,7 +57,12 @@ namespace Nutritia
 
 		private void btnRetour_Click(object sender, RoutedEventArgs e)
 		{
-			ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
+			if(App.MembreCourant.IdMembre == null)
+				ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipal());
+			else if(App.MembreCourant.EstAdministrateur)
+				ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuAdministrateur());
+			else
+				ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
 		}
 
 		private void btnInfo_Click(object sender, RoutedEventArgs e)

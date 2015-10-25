@@ -30,9 +30,9 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+                    <DataGridTextColumn FontSize="10"  Binding="{Binding NomUtilisateur}" Header="Nom Utilisateur"/>
                     <DataGridTextColumn FontSize="10" Binding="{Binding Prenom}" Header="Prénom"/>
                     <DataGridTextColumn FontSize="10" Binding="{Binding Nom}" Header="Nom"  />
-                    <DataGridTextColumn FontSize="10"  Binding="{Binding NomUtilisateur}" Header="Utilisateur"/>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
@@ -46,9 +46,9 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+                    <DataGridTextColumn FontSize="10"  Binding="{Binding NomUtilisateur}" Header="Nom Utilisateur"/>
                     <DataGridTextColumn FontSize="10" Binding="{Binding Prenom}" Header="Prénom"/>
                     <DataGridTextColumn FontSize="10" Binding="{Binding Nom}" Header="Nom"  />
-                    <DataGridTextColumn FontSize="10"  Binding="{Binding NomUtilisateur}" Header="Utilisateur"/>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>

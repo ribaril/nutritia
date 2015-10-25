@@ -20,7 +20,7 @@
 
         <Label Content="Calculatrice nutritionelle" Style="{StaticResource fontNutritia}" FontSize="50"  HorizontalAlignment="Center" Grid.ColumnSpan="2"></Label>
         <Rectangle Grid.Row="1" Grid.ColumnSpan="2" Stroke="DarkGreen" Width="625"/>
-        <ScrollViewer Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Height="200" Width="298" >
+        <ScrollViewer Name="svAccordeon" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Height="200" Width="298" PreviewMouseWheel="ScrollFocus">
             <layoutToolkit:Accordion Name="accPlat" Width="288" />
         </ScrollViewer>
         <GroupBox x:Name="groupBox_Copy" Header="Plateau" HorizontalAlignment="Center"  Grid.Row="2" VerticalAlignment="Center" Height="170" Width="285">

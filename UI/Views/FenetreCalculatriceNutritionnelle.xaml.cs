@@ -89,7 +89,9 @@ namespace Nutritia.UI.Views
             stackDejeuner.Background = Brushes.White;
             stackDejeuner.Width = 284;
 
-            // Dispatch des aliment dans les différentes parties de l'accordéon
+			// Dispatch des aliment trié par nom dans les différentes parties de l'accordéon
+			LstPlat = LstPlat.OrderBy(plat => plat.Nom).ToList();
+
 
             foreach (var plat in LstPlat)
             {
@@ -392,6 +394,12 @@ namespace Nutritia.UI.Views
 
         }
 
+		/// <summary>
+		/// Constructeur et remplisseur d'un dictionnaire de donnée concernant les valeurs nutritionnelles
+		/// </summary>
+		/// <param name="aliment"></param>
+		/// <param name="dValeurNutritive"></param>
+		/// <returns></returns>
         Dictionary<String, Double> ConstruireDicValeurNutritive(Aliment aliment, Dictionary<String, Double> dValeurNutritive)
         {
             if (dValeurNutritive.Count == 0)
@@ -414,15 +422,23 @@ namespace Nutritia.UI.Views
                 dValeurNutritive["Cholesterol"] += aliment.Cholesterol; // * aliment.Quantite;
                 dValeurNutritive["Sodium"] += aliment.Sodium; // * aliment.Quantite;
             }
-
-
+			
             return dValeurNutritive;
         }
 
-        void DessinerResultatRecherche ()
-        {
-            
-        }
+		/// <summary>
+		/// Code de Guillaume (légerement modifié pour qu'il soit compatible avec un apel de tous les SV):
+		/// Événement lancé lorsque la roulette de la souris est utilisée dans le "scrollviewer" contenant le menu.
+		/// Explicitement, cet événement permet de gérer le "scroll" avec la roulette correctement sur toute la surface du "scrollviewer".
+		/// Si on ne le gère pas, il est seulement possible de "scroller" lorsque le pointeur de la souris est situé sur la "scrollbar".
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void ScrollFocus(object sender, MouseWheelEventArgs e)
+		{
+			ScrollViewer scrollViewer = (ScrollViewer)sender;
+			scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - e.Delta);
+		}
 
-    }
+	}
 }
