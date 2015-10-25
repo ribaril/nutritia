@@ -24,17 +24,21 @@ namespace Nutritia.UI.Views
         private IMembreService serviceMembre = ServiceFactory.Instance.GetService<IMembreService>();
         private ObservableCollection<Membre> listMembres;
         private ObservableCollection<Membre> listAdmins;
+        private List<Membre> adminDepart;
+        private List<Membre> adminFin;
+        private List<Membre> membreModifie;
 
         public GestionAdmin()
         {
             InitializeComponent();
             //filterDataGrid.ItemsSource = s.ConvertAll(x => new { Value = x });
-            listMembres =  new ObservableCollection<Membre>(serviceMembre.RetrieveAll());
+            listMembres = new ObservableCollection<Membre>(serviceMembre.RetrieveAll());
             filterDataGrid.DataGridCollection = CollectionViewSource.GetDefaultView(listMembres);
             filterDataGrid.DataGridCollection.Filter = new Predicate<object>(Filter);
             listAdmins = new ObservableCollection<Membre>(listMembres.Where(m => m.EstAdministrateur).ToList());
             //adminsSysteme = new ObservableCollection<Membre>(serviceMembre.RetrieveAdmins());
             dgAdmin.ItemsSource = listAdmins;
+            adminDepart = listAdmins.ToList();
         }
 
 
@@ -55,7 +59,16 @@ namespace Nutritia.UI.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            adminFin = listAdmins.ToList();
+            membreModifie = adminDepart.Union(adminFin).Except(adminDepart.Intersect(adminFin)).ToList();
+            //membreModifie = adminDepart.Except(adminFin).ToList();
+
+            foreach (Membre m in membreModifie)
+            {
+                serviceMembre.Update(m);
+            }
+            if (membreModifie.Count != 0)
+                adminDepart = listAdmins.ToList();
         }
 
         private Membre MemberFromDataContext(CheckBox box)
