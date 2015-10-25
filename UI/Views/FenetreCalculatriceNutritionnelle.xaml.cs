@@ -122,11 +122,33 @@ namespace Nutritia.UI.Views
 
             itemDessert.Content = stackDessert;
             accPlat.Items.Add(itemDessert);
+
+            //Setting de dgRecherche
+
+            dgRecherche.DataGridCollection = CollectionViewSource.GetDefaultView(ServiceFactory.Instance.GetService<IAlimentService>().RetrieveAll());
+            dgRecherche.DataGridCollection.Filter = new Predicate<object>(Filter);
+            
         }
 
 
-
-
+        /// <summary>
+        /// Méthode qui défini le filtre de recherche d'un Aliment pour SearchBox
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public bool Filter(object obj)
+        {
+            var data = obj as Aliment;
+            if (data != null)
+            {
+                if (!string.IsNullOrEmpty(dgRecherche.FilterString))
+                {
+                    return dgRecherche.Filter(data.Nom);
+                }
+                return true;
+            }
+            return false;
+        }
 
 
         /// <summary>
@@ -424,5 +446,28 @@ namespace Nutritia.UI.Views
             
         }
 
+        private Aliment AlimentFromDataContext(Button box)
+        {
+            var context = box.DataContext;
+            if (context is Aliment)
+            {
+                return context as Aliment;
+            }
+            return null;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button)
+            {
+                Button btn = sender as Button;
+                Aliment aliment = AlimentFromDataContext(btn);
+                if (aliment != null)
+                {
+                    //Le rajouter au plateau, etc.
+                }
+            }
+            throw new NotImplementedException();
+        }
     }
 }
