@@ -32,7 +32,7 @@
 
         <DataGrid ColumnWidth="*" Name="dgResults" IsReadOnly="False" AutoGenerateColumns="False" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" 
                      ItemsSource="{Binding DataGridCollection}" SelectedItem="{Binding SelectedItem}" SelectionMode="{Binding SelectionMode}" Margin="0,45,0,155"
-                     EnableRowVirtualization="False"/>
+                     EnableRowVirtualization="False" CanUserAddRows="False"/>
         <!--ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor,
                                 AncestorType=local:ucFilterDataGrid,
                                 AncestorLevel=1},
