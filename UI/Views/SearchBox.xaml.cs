@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,7 +39,11 @@ namespace Nutritia.UI.Views
      
         // Enum pour pouvoir faire du binding sur le mode de filtrage.
         public enum Mode { StartWith, Contains }
-       
+
+        public bool IsCaseSensitive { get; set; }
+
+        private CompareOptions compareOptions;
+
         #endregion
 
         //Permet de faire du Binding avec des propriétés personalisées ou juste d'exposé des propriétés d'un contrôle
@@ -60,6 +65,8 @@ namespace Nutritia.UI.Views
         //Propriété FilterMode pour spécifier le mode de filtrage. Par défault c'est une recherche à savoir s'il commence par la chaine.
         public static readonly DependencyProperty FilterModeProperty = DependencyProperty.Register("FilterMode", typeof(Mode), typeof(SearchBox), new FrameworkPropertyMetadata(Mode.StartWith));
 
+        public static readonly DependencyProperty IsCaseSensitiveProperty = DependencyProperty.Register("IsCaseSensitive", typeof(bool), typeof(SearchBox), new FrameworkPropertyMetadata(false));
+
         #endregion
 
         public SearchBox()
@@ -74,6 +81,10 @@ namespace Nutritia.UI.Views
                     dgResults.Columns.Add(column);
             };
             InitializeComponent();
+            if (IsCaseSensitive)
+                compareOptions = CompareOptions.None;
+            else
+                compareOptions = CompareOptions.IgnoreCase;
 
         }
 
@@ -180,13 +191,14 @@ namespace Nutritia.UI.Views
         /// <returns>True si valide, False sinon</returns>
         public bool Filter(string entre)
         {
+            
             if (FilterMode == Mode.Contains)
             {
-                return entre.Contains(FilterString);
+                return App.culture.CompareInfo.IndexOf(entre, FilterString, compareOptions) >= 0;
             }
             else if (FilterMode == Mode.StartWith)
             {
-                return entre.StartsWith(FilterString);
+                return App.culture.CompareInfo.IndexOf(entre, FilterString, compareOptions) == 0;
             }
             throw new InvalidEnumArgumentException("Mode non implémenté");
         }

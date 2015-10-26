@@ -33,9 +33,27 @@ namespace Nutritia.UI.Views
 			
 			RemplirListe();
 
-		}
+            //SearchBox
+            dgRecherche.DataGridCollection = CollectionViewSource.GetDefaultView(LstMembre);
+            dgRecherche.DataGridCollection.Filter = new Predicate<object>(Filter);
 
-		private void btnAppliquer_Click(object sender, RoutedEventArgs e)
+        }
+
+        private bool Filter(object obj)
+        {
+            var data = obj as Membre;
+            if (data != null)
+            {
+                if (!string.IsNullOrEmpty(dgRecherche.FilterString))
+                {
+                    return dgRecherche.Filter(data.NomUtilisateur);
+                }
+                return true;
+            }
+            return false;
+        }
+
+        private void btnAppliquer_Click(object sender, RoutedEventArgs e)
 		{
 			List<Membre> lstAncienMembre = new List<Membre>(TousLesMembres);
 			TousLesMembres = new List<Membre>(LstBanni);
@@ -72,7 +90,7 @@ namespace Nutritia.UI.Views
 
 
 			dgBanni.ItemsSource = LstBanni;
-			dgMembre.ItemsSource = LstMembre;
+			//dgMembre.ItemsSource = LstMembre;
 		}
-	}
+    }
 }
