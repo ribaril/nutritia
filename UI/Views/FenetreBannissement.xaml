@@ -37,20 +37,20 @@
             </DataGrid>
         </GroupBox>
         <GroupBox Grid.Row="1" Grid.Column="1" Header="Membre" HorizontalAlignment="Center" Width="285" Margin="0,0,0,10">
-            <DataGrid Name="dgMembre" AutoGenerateColumns="False" CanUserAddRows="False">
-                <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="Banni">
+            <local:SearchBox x:Name="dgRecherche" Margin="0,0,-2,143" WatermarkContent="Nom de compte" FilterMode="StartWith" SelectionMode="Single">
+                <local:SearchBox.Columns>
+                    <DataGridTemplateColumn Header="Banni" IsReadOnly="False" Width="50">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox VerticalAlignment="Center" IsChecked="{Binding Path=EstBanni, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <CheckBox HorizontalAlignment="Center" IsChecked="{Binding EstBanni}" Checked="CheckBox_Checked"  Unchecked="CheckBox_Unchecked"></CheckBox>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn FontSize="10" Binding="{Binding Prenom}" Header="Prénom"/>
-                    <DataGridTextColumn FontSize="10" Binding="{Binding Nom}" Header="Nom"  />
-                    <DataGridTextColumn FontSize="10"  Binding="{Binding NomUtilisateur}" Header="Utilisateur"/>
-                </DataGrid.Columns>
-            </DataGrid>
+                    <DataGridTextColumn IsReadOnly="True" Header="Prénom" Binding="{Binding Prenom}"/>
+                    <DataGridTextColumn IsReadOnly="True" Header="Nom" Binding="{Binding Nom}"/>
+                    <DataGridTextColumn IsReadOnly="True" Header="Utilisateur" Binding="{Binding NomUtilisateur}"/>
+                </local:SearchBox.Columns>
+            </local:SearchBox>
         </GroupBox>
         <Button Name="btnAppliquer" Style="{StaticResource nonTransparent}" Grid.Row="3" Grid.ColumnSpan="2" Width="200" Height="25" Click="btnAppliquer_Click">Appliquer</Button>
     </Grid>
