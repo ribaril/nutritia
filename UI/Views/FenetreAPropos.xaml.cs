@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nutritia.UI.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,28 @@ namespace Nutritia.UI.Views
         public FenetreAPropos()
         {
             InitializeComponent();
+            FrmNavigation.Navigate(new Information());
+        }
+
+        private void btnInformation_Click(object sender, RoutedEventArgs e)
+        {
+            FrmNavigation.NavigationService.Navigate(new Uri("UI/Pages/Information.xaml", UriKind.Relative));
+        }
+
+        private void btnDon_Click(object sender, RoutedEventArgs e)
+        {
+            FrmNavigation.NavigationService.Navigate(new Uri("UI/Pages/Don.xaml", UriKind.Relative));
+        }
+
+        private void ChangeColor(object sender, RoutedEventArgs e)
+        {
+            btnDon.Background = Brushes.Transparent;
+            btnInformation.Background = Brushes.Transparent;
+            if (sender is Button)
+            {
+                Button btn = sender as Button;
+                btn.Background = Brushes.Gray;
+            }
         }
     }
 }

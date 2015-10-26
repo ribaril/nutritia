@@ -12,10 +12,27 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
-        <Rectangle Grid.Column="0" Stroke="Black" Fill="Transparent"/>
-        <StackPanel Grid.Column="0">
-            <Button>Informations</Button>
-            <Button>Faire un don</Button>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Rectangle Grid.Column="0" Grid.Row="0" Stroke="Black" Fill="Transparent"/>
+        <StackPanel Grid.Column="0" Grid.Row="0">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Padding" Value="0, 5, 0, 5"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Focusable" Value="False"/>
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                    <EventSetter Event="Button.Click" Handler="ChangeColor"/>
+                </Style>
+            </StackPanel.Resources>
+            <Button Name="btnInformation" Click="btnInformation_Click" Background="Gray">Informations</Button>
+            <Button Name="btnDon" Click="btnDon_Click">Faire un don</Button>
         </StackPanel>
+        <Rectangle Grid.Row="1" Grid.ColumnSpan="2" Stroke="Black" Fill="Transparent"/>
+        <DockPanel Name="dockContent"  Grid.Column="1" Grid.Row="0">
+            <Frame x:Name="FrmNavigation" NavigationUIVisibility="Hidden" />
+        </DockPanel>
     </Grid>
 </Window>

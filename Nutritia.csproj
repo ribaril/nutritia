@@ -104,6 +104,12 @@
     <Compile Include="Toolkit\Services\Definitions\IApplicationService.cs" />
     <Compile Include="Toolkit\Services\ServiceFactory.cs" />
     <Compile Include="UI\Converter\BoolToOppositeBoolConverter.cs" />
+    <Compile Include="UI\Pages\Don.xaml.cs">
+      <DependentUpon>Don.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\Information.xaml.cs">
+      <DependentUpon>Information.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\FenetreAjoutPlatAdmin.xaml.cs">
       <DependentUpon>FenetreAjoutPlatAdmin.xaml</DependentUpon>
     </Compile>
@@ -190,6 +196,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UI\Pages\Don.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\Information.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Ressources\Style.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
