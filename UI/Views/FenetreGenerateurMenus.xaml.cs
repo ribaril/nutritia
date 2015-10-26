@@ -21,9 +21,6 @@ namespace Nutritia.UI.Views
     /// </summary>
     public partial class FenetreGenerateurMenus : UserControl
     {
-        private int NbJours { get; set; }
-        private int NbPlats { get; set; }
-        private int NbPersonnes { get; set; }
         private IPlatService PlatService { get; set; }
         private ObservableCollection<Plat> ListeDejeuners { get; set; }
         private ObservableCollection<Plat> ListeEntrees { get; set; }
@@ -41,7 +38,10 @@ namespace Nutritia.UI.Views
 
             btnOuvrirMenu.IsEnabled = false;
             btnListeEpicerie.IsEnabled = false;
+
             PlatService = ServiceFactory.Instance.GetService<IPlatService>();
+
+            // Chargement des plats.
             Mouse.OverrideCursor = Cursors.Wait;
             ListeDejeuners = new ObservableCollection<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Déjeuner" }));
             ListeEntrees = new ObservableCollection<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Entrée" }));
@@ -71,164 +71,111 @@ namespace Nutritia.UI.Views
         /// <summary>
         /// Méthode permettant d'initialiser la section des menus.
         /// </summary>
-        private void InitialiserSectionMenu()
+        private void InitialiserSectionMenu(int nbPlats)
         {
             svMenus.ScrollToTop();
+            // Génération des rangées de la grid.
             grdMenus.RowDefinitions.Clear();
-            GenererRangees(NbPlats);
-            Grid.SetRowSpan(dgMenus, NbPlats);
-
-            List<Label> separateurs = new List<Label>();
-
-            separateurs = new List<Label>(grdMenus.Children.OfType<Label>());
+            GenererRangees(nbPlats);
+            Grid.SetRowSpan(dgMenus, nbPlats);
+            
+            // Retrait des séparateurs s'il y a lieu.
+            List<Label> separateurs = new List<Label>(grdMenus.Children.OfType<Label>());
 
             foreach (Label separateurCourant in separateurs)
             {
                 grdMenus.Children.Remove(separateurCourant);
             }
         }
+
+        /// <summary>
+        /// Méthode permettant d'ajouter un séparateur entre les plats.
+        /// </summary>
+        /// <param name="contenu">Le contenu du séparateur.</param>
+        /// <param name="index">L'index du séparateur dans la Grid.</param>
+        private void AjouterSeparateurPlat(string contenu, int index)
+        {
+            Label lblSeparateur = new Label();
+            lblSeparateur.Content = contenu;
+            lblSeparateur.Style = FindResource("fontNutritia") as Style;
+            lblSeparateur.FontSize = 16;
+            lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
+            Grid.SetRow(lblSeparateur, index);
+            grdMenus.Children.Add(lblSeparateur);
+        }
         
         /// <summary>
         /// Événement lancé sur un clique du bouton Générer.
+        /// Permet de générer un menu en fonction des informations préalables.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnGenerer_Click(object sender, RoutedEventArgs e)
         {
             MenuGenere = new Menu();
+            int nbJours = 0;
+            int nbPlats = 4;
             Random rand = new Random();
 
-            if (rbDejeuner.IsChecked != null && (bool)rbDejeuner.IsChecked) { NbJours = 0; NbPlats = 2; }
-            if (rbDinerSouper.IsChecked != null && (bool)rbDinerSouper.IsChecked) { NbJours = 0; NbPlats = 4; }
-            if (rbMenuJournalier.IsChecked != null && (bool)rbMenuJournalier.IsChecked) { NbJours = 1; NbPlats = 10; }
-            if (rbMenuHebdomadaire.IsChecked != null && (bool)rbMenuHebdomadaire.IsChecked) { NbJours = 7; NbPlats = 70; }
+            if (rbDejeuner.IsChecked != null && (bool)rbDejeuner.IsChecked) { nbPlats = 2; }
+            if (rbDinerSouper.IsChecked != null && (bool)rbDinerSouper.IsChecked) { nbPlats = 4; }
+            if (rbMenuJournalier.IsChecked != null && (bool)rbMenuJournalier.IsChecked) { nbJours = 1; nbPlats = 10; }
+            if (rbMenuHebdomadaire.IsChecked != null && (bool)rbMenuHebdomadaire.IsChecked) { nbJours = 7; nbPlats = 70; }
             
-            NbPersonnes = Convert.ToInt32(((ComboBoxItem)cboNbPersonnes.SelectedItem).Content);
-            MenuGenere.NbPersonnes = NbPersonnes;
+            MenuGenere.NbPersonnes = Convert.ToInt32(((ComboBoxItem)cboNbPersonnes.SelectedItem).Content);
 
-            InitialiserSectionMenu();
+            InitialiserSectionMenu(nbPlats);
 
-            if(NbJours == 0)
+            // Il s'agit d'un déjeuner.
+            if(nbPlats == 2)
             {
-                Label lblSeparateur = new Label();
+                MenuGenere.ListePlats.Add(ListeDejeuners[rand.Next(0, ListeDejeuners.Count)]);
+                AjouterSeparateurPlat("Déjeuner", 0);
 
-                if(NbPlats == 2)
-                {
-                    MenuGenere.ListePlats.Add(ListeDejeuners[rand.Next(0, ListeDejeuners.Count)]);
-                    lblSeparateur.Content = "Déjeuner";
-                    lblSeparateur.Style = FindResource("fontNutritia") as Style;
-                    lblSeparateur.FontSize = 16;
-                    lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
-                    grdMenus.Children.Add(lblSeparateur);
-
-                    MenuGenere.ListePlats.Add(ListeBreuvages[rand.Next(0, ListeBreuvages.Count)]);
-                    lblSeparateur = new Label();
-                    lblSeparateur.Content = "Breuvage";
-                    lblSeparateur.Style = FindResource("fontNutritia") as Style;
-                    lblSeparateur.FontSize = 16;
-                    lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
-                    Grid.SetRow(lblSeparateur, 1);
-                    grdMenus.Children.Add(lblSeparateur);
-                }
-                else if(NbPlats == 4)
-                {
-                    MenuGenere.ListePlats.Add(ListeEntrees[rand.Next(0, ListeEntrees.Count)]);
-                    lblSeparateur = new Label();
-                    lblSeparateur.Content = "Entrée";
-                    lblSeparateur.Style = FindResource("fontNutritia") as Style;
-                    lblSeparateur.FontSize = 16;
-                    lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
-                    grdMenus.Children.Add(lblSeparateur);
-
-                    MenuGenere.ListePlats.Add(ListePlatPrincipaux[rand.Next(0, ListePlatPrincipaux.Count)]);
-                    lblSeparateur = new Label();
-                    lblSeparateur.Content = "Plat principal";
-                    lblSeparateur.Style = FindResource("fontNutritia") as Style;
-                    lblSeparateur.FontSize = 16;
-                    lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
-                    Grid.SetRow(lblSeparateur, 1);
-                    grdMenus.Children.Add(lblSeparateur);
-
-                    MenuGenere.ListePlats.Add(ListeBreuvages[rand.Next(0, ListeBreuvages.Count)]);
-                    lblSeparateur = new Label();
-                    lblSeparateur.Content = "Breuvage";
-                    lblSeparateur.Style = FindResource("fontNutritia") as Style;
-                    lblSeparateur.FontSize = 16;
-                    lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
-                    Grid.SetRow(lblSeparateur, 2);
-                    grdMenus.Children.Add(lblSeparateur);
-
-                    MenuGenere.ListePlats.Add(ListeDesserts[rand.Next(0, ListeDesserts.Count)]);
-                    lblSeparateur = new Label();
-                    lblSeparateur.Content = "Déssert";
-                    lblSeparateur.Style = FindResource("fontNutritia") as Style;
-                    lblSeparateur.FontSize = 16;
-                    lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
-                    Grid.SetRow(lblSeparateur, 3);
-                    grdMenus.Children.Add(lblSeparateur);
-                }
+                MenuGenere.ListePlats.Add(ListeBreuvages[rand.Next(0, ListeBreuvages.Count)]);
+                AjouterSeparateurPlat("Breuvage", 1);
             }
-            else
-            {
-                for (int i = 0; i < NbJours; i++)
-                {
-                    Label lblSeparateur = new Label();
 
+            // Il s'agit d'un diner/souper.
+            if(nbPlats == 4)
+            {
+                MenuGenere.ListePlats.Add(ListeEntrees[rand.Next(0, ListeEntrees.Count)]);
+                AjouterSeparateurPlat("Entrée", 0);
+
+                MenuGenere.ListePlats.Add(ListePlatPrincipaux[rand.Next(0, ListePlatPrincipaux.Count)]);
+                AjouterSeparateurPlat("Plat principal", 1);
+
+                MenuGenere.ListePlats.Add(ListeBreuvages[rand.Next(0, ListeBreuvages.Count)]);
+                AjouterSeparateurPlat("Breuvage", 2);
+
+                MenuGenere.ListePlats.Add(ListeDesserts[rand.Next(0, ListeDesserts.Count)]);
+                AjouterSeparateurPlat("Déssert", 3);
+            }
+
+            // Il s'agit d'une journée ou encore d'une semaine.
+            if(nbJours > 0)
+            {
+                for (int i = 0; i < nbJours; i++)
+                {
                     MenuGenere.ListePlats.Add(ListeDejeuners[rand.Next(0, ListeDejeuners.Count)]);
-                    lblSeparateur.Content = "Jour " + (i + 1) + " (Déjeuner)";
-                    lblSeparateur.Style = FindResource("fontNutritia") as Style;
-                    lblSeparateur.FontSize = 16;
-                    lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
-                    Grid.SetRow(lblSeparateur, i * (NbPlats / NbJours));
-                    grdMenus.Children.Add(lblSeparateur);
+                    AjouterSeparateurPlat("Jour " + (i + 1) + " (Déjeuner)", i * (nbPlats / nbJours));
 
                     MenuGenere.ListePlats.Add(ListeBreuvages[rand.Next(0, ListeBreuvages.Count)]);
-                    lblSeparateur = new Label();
-                    lblSeparateur.Content = "Jour " + (i + 1) + " (Breuvage)";
-                    lblSeparateur.Style = FindResource("fontNutritia") as Style;
-                    lblSeparateur.FontSize = 16;
-                    lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
-                    Grid.SetRow(lblSeparateur, i * (NbPlats / NbJours) + 1);
-                    grdMenus.Children.Add(lblSeparateur);
+                    AjouterSeparateurPlat("Jour " + (i + 1) + " (Breuvage)", i * (nbPlats / nbJours) + 1);
 
                     for (int j = 0; j < 2; j++)
                     {
-                        lblSeparateur = new Label();
-
                         MenuGenere.ListePlats.Add(ListeEntrees[rand.Next(0, ListeEntrees.Count)]);
-                        lblSeparateur.Content = "Jour " + (i + 1) + " (Entrée)";
-                        lblSeparateur.Style = FindResource("fontNutritia") as Style;
-                        lblSeparateur.FontSize = 16;
-                        lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
-                        Grid.SetRow(lblSeparateur, (i * (NbPlats / NbJours) + 2 + (j * 4)));
-                        grdMenus.Children.Add(lblSeparateur);
+                        AjouterSeparateurPlat("Jour " + (i + 1) + " (Entrée)", (i * (nbPlats / nbJours) + 2 + (j * 4)));
 
                         MenuGenere.ListePlats.Add(ListePlatPrincipaux[rand.Next(0, ListePlatPrincipaux.Count)]);
-                        lblSeparateur = new Label();
-                        lblSeparateur.Content = "Jour " + (i + 1) + " (Plat principal)";
-                        lblSeparateur.Style = FindResource("fontNutritia") as Style;
-                        lblSeparateur.FontSize = 16;
-                        lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
-                        Grid.SetRow(lblSeparateur, (i * (NbPlats / NbJours) + 3 + (j * 4)));
-                        grdMenus.Children.Add(lblSeparateur);
+                        AjouterSeparateurPlat("Jour " + (i + 1) + " (Plat principal)", (i * (nbPlats / nbJours) + 3 + (j * 4)));
 
                         MenuGenere.ListePlats.Add(ListeBreuvages[rand.Next(0, ListeBreuvages.Count)]);
-                        lblSeparateur = new Label();
-                        lblSeparateur.Content = "Jour " + (i + 1) + " (Breuvage)";
-                        lblSeparateur.Style = FindResource("fontNutritia") as Style;
-                        lblSeparateur.FontSize = 16;
-                        lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
-                        Grid.SetRow(lblSeparateur, (i * (NbPlats / NbJours) + 4 + (j * 4)));
-                        grdMenus.Children.Add(lblSeparateur);
+                        AjouterSeparateurPlat("Jour " + (i + 1) + " (Breuvage)", (i * (nbPlats / nbJours) + 4 + (j * 4)));
 
                         MenuGenere.ListePlats.Add(ListeDesserts[rand.Next(0, ListeDesserts.Count)]);
-                        lblSeparateur = new Label();
-                        lblSeparateur.Content = "Jour " + (i + 1) + " (Déssert)";
-                        lblSeparateur.Style = FindResource("fontNutritia") as Style;
-                        lblSeparateur.FontSize = 16;
-                        lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
-                        Grid.SetRow(lblSeparateur, (i * (NbPlats / NbJours) + 5 + (j * 4)));
-                        grdMenus.Children.Add(lblSeparateur);
+                        AjouterSeparateurPlat("Jour " + (i + 1) + " (Déssert)", (i * (nbPlats / nbJours) + 5 + (j * 4)));
                     }
                 }
             }
@@ -239,7 +186,7 @@ namespace Nutritia.UI.Views
 
         /// <summary>
         /// Événement lancé lorsque la roulette de la souris est utilisée dans le "scrollviewer" contenant le menu.
-        /// Explicement, cet événement permet de gérer le "scroll" avec la roulette correctement sur toute la surface du "scrollviewer".
+        /// Explicitement, cet événement permet de gérer le "scroll" avec la roulette correctement sur toute la surface du "scrollviewer".
         /// Si on ne le gère pas, il est seulement possible de "scroller" lorsque le pointeur de la souris est situé sur la "scrollbar".
         /// </summary>
         /// <param name="sender"></param>
@@ -251,6 +198,7 @@ namespace Nutritia.UI.Views
 
         /// <summary>
         /// Événement lancé sur un clique d'un bouton Ingrédients.
+        /// Permet d'afficher les ingrédients du plat lié à ce bouton.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -258,12 +206,13 @@ namespace Nutritia.UI.Views
         {
             Plat platSelectionne = (Plat)dgMenus.SelectedItem;
 
-            FenetreIngredients fenetreIngredients = new FenetreIngredients(platSelectionne, NbPersonnes);
+            FenetreIngredients fenetreIngredients = new FenetreIngredients(platSelectionne, MenuGenere.NbPersonnes);
             fenetreIngredients.ShowDialog();
         }
 
         /// <summary>
         /// Événement lancé sur un clique d'un bouton regénérer.
+        /// Permet de régénérer le plat lié à ce bouton.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -320,6 +269,7 @@ namespace Nutritia.UI.Views
 
         /// <summary>
         /// Événement lancé sur un clique du bouton Liste d'épicerie.
+        /// Permet de générer la liste d'épicerie du menu précédemment généré.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

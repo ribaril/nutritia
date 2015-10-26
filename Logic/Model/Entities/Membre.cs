@@ -24,7 +24,6 @@ namespace Nutritia
         public bool EstConnecte { get; set; }
         public bool EstAdministrateur { get; set; }
         public bool EstBanni { get; set; }
-
         public int Age
         {
             get
@@ -36,6 +35,7 @@ namespace Nutritia
             }
         }
         #endregion
+
 		/// <summary>
 		/// Méthode qui retourne une copie indépendente de cette objet
 		/// </summary>

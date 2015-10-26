@@ -6,45 +6,42 @@
              mc:Ignorable="d" 
              d:DesignHeight="475" d:DesignWidth="650">
     <UserControl.Resources>
-        <Style TargetType="Button" x:Key="btnTexte">
-            <Setter Property="FontFamily" Value="Berlin Sans FB Demi" />
-            <Setter Property="Foreground" Value="DarkGreen" />
+        <Style TargetType="Button" x:Key="btnTexte" BasedOn="{StaticResource fontNutritia}">
             <Setter Property="FontSize" Value="16" />
         </Style>
-        <Style TargetType="RadioButton">
-            <Setter Property="FontFamily" Value="Berlin Sans FB Demi" />
-            <Setter Property="Foreground" Value="DarkGreen" />
+        <Style TargetType="RadioButton" BasedOn="{StaticResource fontNutritia}">
             <Setter Property="FontSize" Value="14" />
-            <Setter Property="Margin" Value="0, 5, 0, 0" />
+            <Setter Property="Margin" Value="0, 0, 7.5, 0" />
+            <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
-        <Style TargetType="ComboBox">
-            <Setter Property="FontFamily" Value="Berlin Sans FB Demi" />
-            <Setter Property="Foreground" Value="DarkGreen" />
+        <Style TargetType="ComboBox" BasedOn="{StaticResource fontNutritia}">
             <Setter Property="FontSize" Value="14" />
+            <Setter Property="SelectedIndex" Value="0" />
+            <Setter Property="Width" Value="32.5" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Margin" Value="530, 0, 0 , 0" />
         </Style>
-        <Style TargetType="GroupBox">
+        <Style TargetType="GroupBox" BasedOn="{StaticResource groupBoxNutritia}">
             <Setter Property="Width" Value="575" />
-            <Setter Property="Foreground" Value="DarkGreen" />
-            <Setter Property="BorderBrush" Value="DarkGreen" />
         </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1.25*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="0.75*"></RowDefinition>
-            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height="8.25*"></RowDefinition>
         </Grid.RowDefinitions>
-        <GroupBox Header="Informations préalables à la génération" Height="50">
+        <GroupBox Header="Informations préalables à la génération">
             <Grid>
                 <Label Style="{StaticResource fontNutritia}" FontSize="14">Période :</Label>
                 <StackPanel Margin="60, 0, 0, 0" Orientation="Horizontal">
-                    <RadioButton Name="rbDejeuner" Margin="0, 0, 7.5, 0" VerticalAlignment="Center">Un déjeuner</RadioButton>
-                    <RadioButton Name="rbDinerSouper" Margin="0, 0, 7.5, 0" IsChecked="True" VerticalAlignment="Center">Un diner/souper</RadioButton>
-                    <RadioButton Name="rbMenuJournalier" Margin="0, 0, 7.5, 0" VerticalAlignment="Center">Un jour</RadioButton>
-                    <RadioButton Name="rbMenuHebdomadaire" Margin="0, 0, 7.5, 0" VerticalAlignment="Center">Une semaine</RadioButton>
+                    <RadioButton Name="rbDejeuner">Un déjeuner</RadioButton>
+                    <RadioButton Name="rbDinerSouper" IsChecked="True">Un diner/souper</RadioButton>
+                    <RadioButton Name="rbMenuJournalier">Un jour</RadioButton>
+                    <RadioButton Name="rbMenuHebdomadaire">Une semaine</RadioButton>
                 </StackPanel>
                 <Label Style="{StaticResource fontNutritia}" FontSize="14" Margin="457.5, 0, 0, 0">Personnes :</Label>
-                <ComboBox Name="cboNbPersonnes" SelectedIndex="0" Width="32.5" Height="25" Margin="530, 0, 0 , 0">
+                <ComboBox Name="cboNbPersonnes">
                     <ComboBoxItem>1</ComboBoxItem>
                     <ComboBoxItem>2</ComboBoxItem>
                     <ComboBoxItem>3</ComboBoxItem>
@@ -57,12 +54,12 @@
             <Button Name="btnGenerer" Style="{StaticResource btnTexte}" Width="183" Height="25" Margin="0, 0, 12.5, 0" Click="btnGenerer_Click">Générer</Button>
             <Button Name="btnListeEpicerie" Style="{StaticResource btnTexte}" Width="183" Height="25" Click="btnListeEpicerie_Click">Liste d'épicerie</Button>
         </StackPanel>
-        <GroupBox Grid.Row="2" Header="Menus" Height="375" VerticalAlignment="Top">
+        <GroupBox Grid.Row="2" Header="Menus" Height="385" VerticalAlignment="Top">
             <ScrollViewer Name="svMenus" PreviewMouseWheel="svMenus_PreviewMouseWheel">
                 <Grid Name="grdMenus" ScrollViewer.CanContentScroll="False">
-                    <DataGrid Name="dgMenus" Style="{StaticResource dgPlats}" RowHeight="110" VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
+                    <DataGrid Name="dgMenus" Style="{StaticResource dataGridPlats}" RowHeight="110" VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="3*" Binding="{Binding Nom}" IsReadOnly="True">
+                            <DataGridTextColumn Width="3*" Binding="{Binding Nom}" Foreground="DarkGreen" IsReadOnly="True">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style>
                                         <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
