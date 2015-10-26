@@ -33,6 +33,7 @@ namespace Nutritia.UI.Views
 
             PlatService = ServiceFactory.Instance.GetService<IPlatService>();
             ListePlats = new ObservableCollection<Plat>();
+
             // Plats "hardcodés" en guise de preuve de concept ...
             Plat plat = PlatService.Retrieve(new RetrievePlatArgs { IdPlat = 1 });
             plat.Createur = "ribaril";
@@ -73,6 +74,26 @@ namespace Nutritia.UI.Views
         private void btnPlusPopulaires_Click(object sender, RoutedEventArgs e)
         {
             gbContenu.Header = "Les plus populaires";
+        }
+
+        /// <summary>
+        /// Événement lancé sur un clique du bouton "Informations".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnInformations_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Fonctionnalité à venir dans la version 1 de Nutritia.");
+        }
+
+        /// <summary>
+        /// Événement lancé sur un clique du bouton "Voter".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnVoter_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Fonctionnalité à venir dans la version 1 de Nutritia.");
         }
     }
 }

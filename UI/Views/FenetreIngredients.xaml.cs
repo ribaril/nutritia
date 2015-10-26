@@ -23,7 +23,7 @@ namespace Nutritia.UI.Views
         /// <summary>
         /// Constructeur par défaut de la classe.
         /// </summary>
-        /// <param name="listeIngredients">La liste des ingrédients du plat.</param>
+        /// <param name="plat">Un plat.</param>
         public FenetreIngredients(Plat plat, int nbPersonnes)
         {
             InitializeComponent();
@@ -57,7 +57,7 @@ namespace Nutritia.UI.Views
         }
 
         /// <summary>
-        /// Méthode permettant d'afficher des ingrédients.
+        /// Méthode permettant d'afficher les ingrédients d'un plat.
         /// </summary>
         /// <param name="listeIngredients">La liste des aliments.</param>
         private void AfficherIngredients(List<Aliment> listeIngredients, int nbPersonnes)
@@ -98,6 +98,7 @@ namespace Nutritia.UI.Views
         private ToolTip GenererValeursNutritionnelles(Aliment aliment, int nbPersonnes)
         {
             ToolTip ttValeurNut = new ToolTip();
+            ttValeurNut.Style = FindResource("toolTipNutritia") as Style;
             StackPanel spValeurNut = new StackPanel();
 
             Label lblEntete = new Label();

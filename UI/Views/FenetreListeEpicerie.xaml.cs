@@ -49,6 +49,7 @@ namespace Nutritia.UI.Views
             {
                 foreach (Aliment ingredientCourant in platCourant.ListeIngredients)
                 {
+                    // L'aliment doit être clôné puisque chaque plat qui contient cet aliment pointe sur le même.
                     Aliment ingredientCourantClone = (Aliment)ingredientCourant.Clone();
                     ingredientCourantClone.Quantite *= MenuGenere.NbPersonnes;
 
@@ -114,6 +115,8 @@ namespace Nutritia.UI.Views
                 sbArticle.AppendLine(ListeAliments[i].Nom);
 
                 lblArticle = new Label();
+                lblArticle.Style = FindResource("fontNutritia") as Style;
+                lblArticle.FontSize = 14;
                 lblArticle.Content = sbArticle.ToString();
                 Grid.SetRow(lblArticle, i);
                 grdListeConviviale.Children.Add(lblArticle);

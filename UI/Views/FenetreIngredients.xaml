@@ -4,15 +4,9 @@
         Title="Ingrédients" Height="350" Width="400"
         Icon="/Nutritia;component/UI/Images/logoIconPetit.png" ResizeMode="NoResize">
     <Window.Resources>
-        <Style TargetType="Label">
-            <Setter Property="FontFamily" Value="Berlin Sans FB Demi" />
+        <Style TargetType="Label" BasedOn="{StaticResource fontNutritia}">
             <Setter Property="FontSize" Value="16" />
-            <Setter Property="Foreground" Value="DarkGreen" />
             <Setter Property="HorizontalAlignment" Value="Center" />
-        </Style>
-        <Style TargetType="ToolTip">
-            <Setter Property="HasDropShadow" Value="True" />
-            <Setter Property="BorderBrush" Value="DarkGreen" />
         </Style>
     </Window.Resources>
     <Grid Name="grdIngredients">
