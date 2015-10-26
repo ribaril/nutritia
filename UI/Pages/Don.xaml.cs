@@ -20,9 +20,25 @@ namespace Nutritia.UI.Pages
     /// </summary>
     public partial class Don : Page
     {
+        private int valeurDon;
+
         public Don()
         {
             InitializeComponent();
+        }
+
+        private void btnConfirmer_Click(object sender, RoutedEventArgs e)
+        {
+            RadioButton btnChecked = wrapMontant.Children.OfType<RadioButton>().FirstOrDefault(r => r.IsChecked == true);
+
+            int valeurRadio;
+            string stringContent = btnChecked.Content.ToString();
+            bool IsInt = int.TryParse(stringContent.Remove(stringContent.Length - 1), out valeurRadio);
+            if (IsInt)
+            {
+                valeurDon = valeurRadio;
+                //Etc...
+            }
         }
     }
 }
