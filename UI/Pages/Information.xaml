@@ -1,0 +1,32 @@
+﻿<Page x:Class="Nutritia.UI.Pages.Information"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Nutritia.UI.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="Information">
+
+    <Grid>
+        <StackPanel VerticalAlignment="Center" Orientation="Vertical">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type StackPanel}">
+                    <Setter Property="Margin" Value="0, 20, 0, 5"/>
+                </Style>
+            </StackPanel.Resources>
+            <StackPanel HorizontalAlignment="Center">
+                <Label>Version:</Label>
+                <Label Name="lblVersion"></Label>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Center">
+                <Label HorizontalAlignment="Center">Auteurs:</Label>
+                <Label Name="lblAuteurs">Corantin N., Guillaume L. S., Richard B., Tristan S.</Label>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Center">
+                <Label HorizontalAlignment="Center">License:</Label>
+                <Label Name="lblLicense">Mozilla Public License, version 2.0</Label>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>
