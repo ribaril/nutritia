@@ -165,8 +165,10 @@
                     </ComboBox>
                     <Button Name="Btn_ajout_image_modif" Grid.Row="1" Content="Ajouter une image" Height="30" Width="150" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,115,0,0"></Button>
 
-                    <Label Grid.Row="0" Content="Description" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,20,0"></Label>
-                    <TextBox Name="Description_modif" Grid.Row="0" Width="250" Height="100" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" TextWrapping="WrapWithOverflow" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,25,20,0"></TextBox>
+                    <Label Grid.Row="0" Content="Rechercher un plat" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,20,0"></Label>
+                    <TextBox Name="Plat_modif" Grid.Row="0" SelectedText="" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,25,20,0"></TextBox>
+                    <Label Grid.Row="0" Content="Description" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,55,20,0"></Label>
+                    <TextBox Name="Description_modif" Grid.Row="0" Width="250" Height="75" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" TextWrapping="WrapWithOverflow" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,75,20,0"></TextBox>
 
                     <Label Grid.Row="0" Content="Composition du plat" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,155,20,0"></Label>
                     <DataGrid Name="composition_plat_modif" HeadersVisibility="None" Width="250" Height="120" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,175,20,0">
@@ -313,10 +315,12 @@
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Content="Nom de l'aliment" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,55,0,0"></Label>
-                    <TextBox Name="Nom_alim_modif" Grid.Row="0" SelectedText="" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,75,0,0"></TextBox>
-                    <Label Grid.Row="0" Content="Groupe alimentaire" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,105,0,0"></Label>
-                    <ComboBox Grid.Row="0" Name="cbo_grp_alim_modif" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,125,0,0">
+                    <Label Grid.Row="0" Content="Rechercher un aliment" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,55,0,0"></Label>
+                    <TextBox Name="Search_alim" Grid.Row="0" SelectedText="" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,75,0,0"></TextBox>
+                    <Label Grid.Row="0" Content="Nom de l'aliment" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,105,0,0"></Label>
+                    <TextBox Name="Nom_alim_modif" Grid.Row="0" SelectedText="" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,125,0,0"></TextBox>
+                    <Label Grid.Row="0" Content="Groupe alimentaire" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,155,0,0"></Label>
+                    <ComboBox Grid.Row="0" Name="cbo_grp_alim_modif" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,175,0,0">
                         <ComboBoxItem>Boissons</ComboBoxItem>
                         <ComboBoxItem>Céréales</ComboBoxItem>
                         <ComboBoxItem>Fruits et légumes</ComboBoxItem>
