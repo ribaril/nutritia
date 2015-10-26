@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Nutritia.UI.Views
 {
     /// <summary>
-    /// Interaction logic for APropos.xaml
+    /// Interaction logic for FenetreAPropos.xaml
     /// </summary>
-    public partial class APropos : UserControl
+    public partial class FenetreAPropos : Window
     {
-        public APropos()
+        public FenetreAPropos()
         {
             InitializeComponent();
         }
