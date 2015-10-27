@@ -205,8 +205,13 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UI\Ressources\Ressource.xaml">
+    <Page Include="UI\Ressources\Style.xaml">
     <Page Include="UI\Pages\Don.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+	<Page Include="UI\Ressources\Style.xaml">      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Pages\Information.xaml">

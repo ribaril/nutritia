@@ -6,7 +6,8 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Threading;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Nutritia
 {
@@ -18,4 +19,6 @@ namespace Nutritia
         static public Membre MembreCourant = new Membre();
         static public CultureInfo culture = new CultureInfo(String.Empty);
     }
+
+	
 }
