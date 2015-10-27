@@ -62,7 +62,7 @@ namespace Nutritia
 
 		private void btnInfo_Click(object sender, RoutedEventArgs e)
 		{
-            (new FenetreAPropos()).Show();
+            (new FenetreAPropos()).ShowDialog();
 			//ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new FenetreAPropos());
 		}
 

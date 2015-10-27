@@ -412,6 +412,9 @@
     <Resource Include="UI\Images\nonDisponible.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="UI\Images\Cartes_Credit\amex.png" />
+    <Resource Include="UI\Images\Cartes_Credit\mastercard.png" />
+    <Resource Include="UI\Images\Cartes_Credit\visa.png" />
     <Resource Include="UI\Images\platsIcon.png" />
     <Resource Include="UI\Images\poubelleIcon.png" />
     <Resource Include="UI\Images\panierIcon.png" />
@@ -426,6 +429,7 @@
     <Content Include="Toolkit\WPFToolkit\System.Windows.Controls.Layout.Toolkit.dll" />
     <Content Include="Toolkit\WPFToolkit\WPFToolkit.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
