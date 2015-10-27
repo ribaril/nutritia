@@ -110,7 +110,8 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.en.resx</DependentUpon>
-    </Compile>    <Compile Include="Toolkit\Services\Definitions\IApplicationService.cs" />
+    </Compile>
+    <Compile Include="Toolkit\Services\Definitions\IApplicationService.cs" />
     <Compile Include="Toolkit\Services\ServiceFactory.cs" />
     <Compile Include="UI\Converter\BoolToOppositeBoolConverter.cs" />
     <Compile Include="UI\Pages\Don.xaml.cs">
@@ -420,6 +421,9 @@
     <Resource Include="UI\Images\nonDisponible.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="UI\Images\ban.png" />
+    <Resource Include="UI\Images\baseDonnee.png" />
+    <Resource Include="UI\Images\cadenas.png" />
     <Resource Include="UI\Images\Cartes_Credit\amex.png" />
     <Resource Include="UI\Images\Cartes_Credit\mastercard.png" />
     <Resource Include="UI\Images\Cartes_Credit\visa.png" />
