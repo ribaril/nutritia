@@ -1,6 +1,7 @@
 ﻿<Window x:Class="Nutritia.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:resx="clr-namespace:Nutritia.Properties"
         Title="Nutritia" Icon="/Nutritia;component/UI/Images/logoIconPetit.png" Height="550" Width="650"
 		ResizeMode="CanMinimize">
     
@@ -20,25 +21,25 @@
                 <Button Name="btnRetour" VerticalAlignment="Bottom" Click="btnRetour_Click">
                     <DockPanel>
                         <Image Source="/Nutritia;component/UI/Images/retour.PNG"/>
-                        <TextBlock Text=" Retour" FontSize="20" FontFamily="Berlin"/>
+                        <TextBlock Text="{x:Static resx:Resources.Retour}" FontSize="20" FontFamily="Berlin"/>
                     </DockPanel>
                 </Button>
                 <Button Name="btnInfo" VerticalAlignment="Bottom" Click="btnInfo_Click">
                     <DockPanel>
                         <Image Width="24" Source="/Nutritia;component/UI/Images/aProposIcon.PNG"/>
-                        <TextBlock Text=" À propos" FontSize="20" FontFamily="Berlin"/>
+                        <TextBlock Text="{x:Static resx:Resources.APropos}" FontSize="20" FontFamily="Berlin"/>
                     </DockPanel>
                 </Button>
                 <Button Name="btnParam" Click="btnParam_Click">
                     <DockPanel>
                         <Image Source="/Nutritia;component/UI/Images/paramIcon.PNG"/>
-                        <TextBlock Text=" Paramètres" FontSize="20" FontFamily="Berlin"/>
+                        <TextBlock Text="{x:Static resx:Resources.Parametres}" FontSize="20" FontFamily="Berlin"/>
                     </DockPanel>
                 </Button>
                 <Button Name="btnAide" Click="btnAide_Click">
                     <DockPanel>
                         <Image Source="/Nutritia;component/UI/Images/HelpIcon.PNG"/>
-                        <TextBlock Text=" Aide" FontSize="20" FontFamily="Berlin"/>
+                        <TextBlock Text="{x:Static resx:Resources.Aide}" FontSize="20" FontFamily="Berlin"/>
                     </DockPanel>
                 </Button>
             </ToolBar>

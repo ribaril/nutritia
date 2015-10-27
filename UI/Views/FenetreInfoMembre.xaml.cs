@@ -92,7 +92,7 @@ namespace Nutritia.UI.Views
             ic.Add(new LineBreak());
             ic.Add(new Run(Indent(1)));
             ic.Add(new Run(m.Age.ToString()));
-            ic.Add(new Run(" ans"));
+            ic.Add(new Run(" " + Properties.Resources.An));
 
             //ic.Add(new Bold(new Run(" my")));
             //ic.Add(new Run(" faithful"));

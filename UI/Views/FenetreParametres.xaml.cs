@@ -45,15 +45,25 @@ namespace Nutritia.UI.Views
         public FenetreParametres()
         {
             mapLangue = new ObservableCollection<Langue>();
-            Langue francais = new Langue("Français", "fr", true);
-            Langue anglais = new Langue("Anglais", "fr");
+            Langue francais = new Langue("Français", "fr");
+            Langue anglais = new Langue("Anglais", "en");
+            string codeLangueActif = Properties.Settings.Default.Langue;
 
             mapLangue.Add(francais);
             mapLangue.Add(anglais);
+            mapLangue.FirstOrDefault(l => l.CodeISO == codeLangueActif).Actif = true;
 
             InitializeComponent();
 
             dgLangues.ItemsSource = mapLangue;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Langue langue = mapLangue.FirstOrDefault(l => l.Actif == true);
+            Properties.Settings.Default.Langue = langue.CodeISO;
+            Properties.Settings.Default.Save();
+            MessageBox.Show("Veuillez redémarrer l'application\n pour que le changement s'applique.");
         }
     }
 }

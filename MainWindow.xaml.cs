@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Nutritia.UI.Views;
+using System.Globalization;
+using System.Threading;
 
 namespace Nutritia
 {
@@ -24,11 +26,12 @@ namespace Nutritia
 	{        
         public MainWindow()
 		{
-			InitializeComponent();
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.Langue);
+            InitializeComponent();
             Configurer();
 
             presenteurContenu.Content = new MenuPrincipal();
-		}
+        }
 
 
         private void Configurer()

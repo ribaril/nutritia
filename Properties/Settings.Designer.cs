@@ -23,12 +23,15 @@ namespace Nutritia.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Français")]
+        [global::System.Configuration.DefaultSettingValueAttribute("fr")]
         public string Langue {
             get {
                 return ((string)(this["Langue"]));
+            }
+            set {
+                this["Langue"] = value;
             }
         }
     }
