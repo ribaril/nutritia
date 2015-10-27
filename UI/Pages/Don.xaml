@@ -18,6 +18,11 @@
                         <Setter Property="Width" Value="51" />
                         <Setter Property="Height" Value="32" />
                         <Setter Property="Margin" Value="20,10,20,10" />
+                        <Style.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                        </Style.Triggers>
                     </Style>
                 </WrapPanel.Resources>
                 <Image Name="imgVisa" Source="/Nutritia;component/UI/Images/Cartes_Credit/visa.png"></Image>
@@ -26,39 +31,51 @@
             </WrapPanel>
             <UniformGrid HorizontalAlignment="Center" Columns="2">
                 <UniformGrid.Resources>
-                    <Style TargetType="{x:Type AdornerDecorator}">
+                    <Style TargetType="{x:Type StackPanel}">
                         <Setter Property="Width" Value="120"/>
-                        <Setter Property="Margin" Value="10,10,10,10"/>
+                        <Setter Property="Margin" Value="10,0,10,10"/>
                     </Style>
                 </UniformGrid.Resources>
-                <AdornerDecorator>
-                    <TextBox Name="txtProprietaire">
-                        <watermark:WatermarkService.Watermark>
-                            <TextBlock>Nom du propriétaire</TextBlock>
-                        </watermark:WatermarkService.Watermark>
-                    </TextBox>
-                </AdornerDecorator>
-                <AdornerDecorator>
-                    <TextBox Name="txtNoCarte">
-                        <watermark:WatermarkService.Watermark>
-                            <TextBlock>Numéro de carte</TextBlock>
-                        </watermark:WatermarkService.Watermark>
-                    </TextBox>
-                </AdornerDecorator>
-                <AdornerDecorator>
-                    <TextBox Name="txtDateExpiration">
-                        <watermark:WatermarkService.Watermark>
-                            <TextBlock>Date d'expiration</TextBlock>
-                        </watermark:WatermarkService.Watermark>
-                    </TextBox>
-                </AdornerDecorator>
-                <AdornerDecorator>
-                    <TextBox Name="txtCSC">
-                        <watermark:WatermarkService.Watermark>
-                            <TextBlock>Code de sécurité</TextBlock>
-                        </watermark:WatermarkService.Watermark>
-                    </TextBox>
-                </AdornerDecorator>
+                <StackPanel Orientation="Vertical">
+                    <Label Name="lblErreurNom" Visibility="Hidden" FontSize="10" Foreground="Red" HorizontalAlignment="Center">* Nom invalide</Label>
+                    <AdornerDecorator>
+                        <TextBox Name="txtProprietaire" LostFocus="txtProprietaire_LostFocus">
+                            <watermark:WatermarkService.Watermark>
+                                <TextBlock>Nom du propriétaire</TextBlock>
+                            </watermark:WatermarkService.Watermark>
+                        </TextBox>
+                    </AdornerDecorator>
+                </StackPanel>
+                <StackPanel>
+                    <Label Name="lblErreurNoCarte" Visibility="Hidden" FontSize="10" Foreground="Red" HorizontalAlignment="Center">* No Carte invalide</Label>
+                    <AdornerDecorator>
+                        <TextBox Name="txtNoCarte" LostFocus="txtNoCarte_LostFocus">
+                            <watermark:WatermarkService.Watermark>
+                                <TextBlock>Numéro de carte</TextBlock>
+                            </watermark:WatermarkService.Watermark>
+                        </TextBox>
+                    </AdornerDecorator>
+                </StackPanel>
+                <StackPanel>
+                    <Label Name="lblErreurExpiration" Visibility="Hidden"  FontSize="10" Foreground="Red" HorizontalAlignment="Center">* Expiration invalide</Label>
+                    <AdornerDecorator>
+                        <TextBox Name="txtDateExpiration" LostFocus="txtDateExpiration_LostFocus">
+                            <watermark:WatermarkService.Watermark>
+                                <TextBlock>Expiration MM/YY</TextBlock>
+                            </watermark:WatermarkService.Watermark>
+                        </TextBox>
+                    </AdornerDecorator>
+                </StackPanel>
+                <StackPanel>
+                    <Label Name="lblErreurCSC" Visibility="Hidden" FontSize="10" Foreground="Red" HorizontalAlignment="Center">* CSC invalide</Label>
+                    <AdornerDecorator>
+                        <TextBox Name="txtCSC" LostFocus="txtCSC_LostFocus">
+                            <watermark:WatermarkService.Watermark>
+                                <TextBlock>Code de sécurité</TextBlock>
+                            </watermark:WatermarkService.Watermark>
+                        </TextBox>
+                    </AdornerDecorator>
+                </StackPanel>
             </UniformGrid>
             <GroupBox HorizontalAlignment="Center" Header="Montant">
                 <WrapPanel Name="wrapMontant" Orientation="Horizontal">
