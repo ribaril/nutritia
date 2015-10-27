@@ -26,6 +26,8 @@ namespace Nutritia.UI.Views
 		// Cet Aliment sert de totaux de tous les Aliments/Ingrédients du plateau
 		private Dictionary<string, double> ValeurNutritive { get; set; }
 		private List<Plat> LstPlat { get; set; }
+		private List<Aliment> LstAliment { get; set; }
+
 		private List<int?> lstIdPresent { get; set; }
 		private SousEcran Plateau { get; set; }
 		private SousEcran2 TabValeurNutritionelle { get; set; }
@@ -41,6 +43,7 @@ namespace Nutritia.UI.Views
 			TabValeurNutritionelle = new SousEcran2();
 			presenteurContenu3.Content = TabValeurNutritionelle;
 			LstPlat = new List<Plat>();
+			LstAliment = new List<Aliment>();
 			PlateauPlat = new List<Plat>();
 			PlateauAliment = new List<Aliment>();
 			ValeurNutritive = new Dictionary<string, double>();
@@ -51,6 +54,7 @@ namespace Nutritia.UI.Views
 			Mouse.OverrideCursor = Cursors.Wait;
 
 			LstPlat.AddRange(ServiceFactory.Instance.GetService<IPlatService>().RetrieveAll());
+			LstAliment.AddRange(ServiceFactory.Instance.GetService<IAlimentService>().RetrieveAll());
 
 			Mouse.OverrideCursor = null;
 
@@ -96,7 +100,7 @@ namespace Nutritia.UI.Views
 			foreach (var plat in LstPlat)
 			{
 
-				Button btnPlat = FormerListeLignePlat(true, plat, null);
+				Button btnPlat = FormerListeLignePlatAliment(true, plat, null);
 
 				if (plat.TypePlat == "Entrée")
 					stackEntree.Children.Add(btnPlat);
@@ -162,21 +166,37 @@ namespace Nutritia.UI.Views
 			presenteurContenu2.Content = Plateau;
 			lstIdPresent = new List<int?>();
 
+			TextBlock tbSectionPl = new TextBlock();
+			tbSectionPl.Style = (Style)(this.Resources["fontNutitia"]);
+			tbSectionPl.FontSize = 12;
+
+			tbSectionPl.Text = "Plats :";
+			Plateau.stackEcran.Children.Add(tbSectionPl);
+
+
 			foreach (var plat in PlateauPlat)
 			{
-				Button btnPlat = FormerListeLignePlat(false, plat, lstIdPresent);
+				Button btnPlat = FormerListeLignePlatAliment(false, plat, lstIdPresent);
 
 				if (btnPlat != null)
 					Plateau.stackEcran.Children.Add(btnPlat);
 			}
 
+			TextBlock tbSectionAl = new TextBlock();
+			tbSectionAl.Style = (Style)(this.Resources["fontNutitia"]);
+			tbSectionAl.FontSize = 12;
+
+			tbSectionAl.Text = "Aliment :";
+			Plateau.stackEcran.Children.Add(tbSectionAl);
+			
+
 			foreach (var aliment in PlateauAliment)
 			{
 
-				Button btnPlat = FormerListeLignePlat(false, aliment, lstIdPresent);
+				Button btnAliment = FormerListeLignePlatAliment(false, aliment, lstIdPresent);
 
-				if (btnPlat != null)
-					Plateau.stackEcran.Children.Add(btnPlat);
+				if (btnAliment != null)
+					Plateau.stackEcran.Children.Add(btnAliment);
 			}
 
 			// On met à jour le tableau de valeur nutritionel
@@ -195,11 +215,10 @@ namespace Nutritia.UI.Views
 		{
 			Button btn = (Button)sender;
 
-			foreach (var plat in LstPlat)
-			{
-				if (plat.IdPlat == Convert.ToInt32(btn.Uid))
-					PlateauPlat.Remove(plat);
-			}
+			if (Convert.ToInt32(btn.Uid) > 0)
+				PlateauPlat.Remove(LstPlat.First(plat => plat.IdPlat == Convert.ToInt32(btn.Uid)));
+			else
+				PlateauAliment.Remove(LstAliment.First(aliment => aliment.IdAliment == Convert.ToInt32(btn.Uid) * -1));
 
 			DessinerPlateau();
 		}
@@ -230,7 +249,7 @@ namespace Nutritia.UI.Views
 		/// est appelé pour faire une ligne avec un bouton plus ou un bouton moins</param>
 		/// <param name="obj">Plat ou Aliment</param>
 		/// <returns></returns>
-		Button FormerListeLignePlat(bool plus, Object obj, List<int?> lstIdPresent)
+		Button FormerListeLignePlatAliment(bool plus, Object obj, List<int?> lstIdPresent)
 		{
 
 			// Les plats seront positif et les aliment, négatif
@@ -265,7 +284,7 @@ namespace Nutritia.UI.Views
 					if (EstPlat)
 						lstIdPresent.Add(plat.IdPlat);
 					else
-						lstIdPresent.Add(aliment.IdAliment);
+						lstIdPresent.Add(aliment.IdAliment * -1);
 				}
 
 
@@ -280,7 +299,7 @@ namespace Nutritia.UI.Views
 					btnControl.Click += BtnControlAjout_Click;
 				else
 					btnControl.Click += BtnControlSupprimer_Click;
-				btnControl.Uid = (EstPlat ? plat.IdPlat : aliment.IdAliment).ToString();
+				btnControl.Uid = (EstPlat ? plat.IdPlat : aliment.IdAliment * -1).ToString();
 				btnControl.Cursor = Cursors.Hand;
 
 
@@ -301,9 +320,19 @@ namespace Nutritia.UI.Views
 				lblNom.FontSize = 12;
 
 				//Compte le nombre d'item dans la liste qui correspondent à la condition
-				int nbrMemePlat = PlateauPlat.Count(x => x.IdPlat == plat.IdPlat);
-				lblNom.Content = (nbrMemePlat > 0 ? nbrMemePlat.ToString() + " " : "") + plat.Nom;
-				stackLigne.Children.Add(lblNom);
+				if (EstPlat)
+				{
+					int nbrMemePlat = PlateauPlat.Count(x => x.IdPlat == plat.IdPlat);
+					lblNom.Content = (nbrMemePlat > 0 ? nbrMemePlat.ToString() + " " : "") + plat.Nom;
+					stackLigne.Children.Add(lblNom);
+				}
+				else
+				{
+					int nbrMemeAliment = PlateauAliment.Count(x => x.IdAliment == aliment.IdAliment);
+					lblNom.Content = (nbrMemeAliment > 0 ? nbrMemeAliment.ToString() + " " : "") + aliment.Nom;
+					stackLigne.Children.Add(lblNom);
+				}
+
 
 				// Insertion d'un hover tooltip sur le StackPanel
 				if (EstPlat)
@@ -480,7 +509,7 @@ namespace Nutritia.UI.Views
 				Aliment aliment = AlimentFromDataContext(btn);
 				if (aliment != null)
 				{
-					PlateauAliment.Add(PlateauAliment.First(a => a.IdAliment == Convert.ToInt32(btn.Uid)));
+					PlateauAliment.Add(aliment);
 					DessinerPlateau();
 				}
 			}
@@ -490,5 +519,5 @@ namespace Nutritia.UI.Views
 
 
 
-	
+
 }

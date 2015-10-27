@@ -6,28 +6,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="475" d:DesignWidth="650">
     <UserControl.Resources>
-        <Style TargetType="DataGrid">
-            <Setter Property="CanUserAddRows" Value="False" />
-            <Setter Property="AutoGenerateColumns" Value="False" />
-            <Setter Property="HeadersVisibility" Value="None" />
-            <Setter Property="GridLinesVisibility" Value="None" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-            <Setter Property="RowBackground" Value="Transparent" />
-        </Style>
-        <Style TargetType="DataGridCell">
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-        </Style>
-        <Style TargetType="Label">
-            <Setter Property="FontFamily" Value="Berlin Sans FB Demi" />
-            <Setter Property="FontSize" Value="16" />
-            <Setter Property="Foreground" Value="DarkGreen" />
-        </Style>
-        <Style TargetType="GroupBox">
-            <Setter Property="Width" Value="550" />
-            <Setter Property="Foreground" Value="DarkGreen" />
-            <Setter Property="BorderBrush" Value="DarkGreen" />
+        <Style TargetType="Image" x:Key="btnFiltre">
+            <Setter Property="Width" Value="100"></Setter>
+            <Setter Property="Height" Value="75"></Setter>
         </Style>
     </UserControl.Resources>
     <Grid>
@@ -36,31 +17,32 @@
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="7*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Foreground="DarkGreen" FontSize="35" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Center">Voter sur des plats</Label>
-        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" Margin="0, 10, 0, 0">
+        <Label Style="{StaticResource fontSousTitre}">Voter sur des plats</Label>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
             <Button Name="btnSelectionComplete" Margin="0, 0, 75, 0" Click="btnSelectionComplete_Click">
-                <Image Width="100" Height="75" Source="pack://application:,,,/UI/Images/hamburger.png"></Image>
-                <Button.ToolTip>Tous les plats</Button.ToolTip>
+                <Image Style="{StaticResource btnFiltre}" Source="pack://application:,,,/UI/Images/platsIcon.png"></Image>
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource toolTipNutritia}">Tous les plats</ToolTip>
+                </Button.ToolTip>
             </Button>
             <Button Name="btnNouveautes" Margin="0, 0, 75, 0" Click="btnNouveautes_Click">
-                <Image Width="100" Height="75" Source="pack://application:,,,/UI/Images/journalIcon.png"></Image>
-                <Button.ToolTip>Les plus récents</Button.ToolTip>
+                <Image Style="{StaticResource btnFiltre}" Source="pack://application:,,,/UI/Images/journalIcon.png"></Image>
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource toolTipNutritia}">Les plus récents</ToolTip>
+                </Button.ToolTip>
             </Button>
             <Button Name="btnPlusPopulaires" Click="btnPlusPopulaires_Click">
-                <Image Width="100" Height="75" Source="pack://application:,,,/UI/Images/etoileIcon.png"></Image>
-                <Button.ToolTip>Les plus populaires</Button.ToolTip>
+                <Image Style="{StaticResource btnFiltre}" Source="pack://application:,,,/UI/Images/etoileIcon.png"></Image>
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource toolTipNutritia}">Les plus populaires</ToolTip>
+                </Button.ToolTip>
             </Button>
         </StackPanel>
-        <GroupBox Name="gbContenu" Grid.Row="2" Header="Tous les plats" Width="555" Height="305" BorderBrush="DarkGreen">
+        <GroupBox Name="gbContenu" Grid.Row="2" Header="Tous les plats" Style="{StaticResource groupBoxNutritia}" Width="555" Height="305">
             <ScrollViewer>
-                <DataGrid Name="dgPlats" AutoGenerateColumns="False" CanUserAddRows="False" Background="Transparent">
-                    <DataGrid.Resources>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
-                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Transparent" />
-                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
-                    </DataGrid.Resources>
+                <DataGrid Name="dgPlats" Style="{StaticResource dataGridPlats}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Width="2*" Binding="{Binding Nom}" FontFamily="Berlin Sans FB Demi" FontSize="16" Foreground="DarkGreen" IsReadOnly="True">
+                        <DataGridTextColumn Width="2*" Binding="{Binding Nom}" Foreground="DarkGreen" IsReadOnly="True">
                             <DataGridTextColumn.ElementStyle>
                                 <Style>
                                     <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
@@ -81,11 +63,11 @@
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center">
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <Label>Note (Sur 5) : </Label>
-                                            <Label Content="{Binding Note}"></Label>
+                                            <Label Style="{StaticResource fontNutritia}">Note (Sur 5) : </Label>
+                                            <Label Style="{StaticResource fontNutritia}" Content="{Binding Note}"></Label>
                                         </StackPanel>
-                                        <Label HorizontalAlignment="Center">Ajouté par</Label>
-                                        <Label Content="{Binding Createur}" HorizontalAlignment="Center"></Label>
+                                        <Label Style="{StaticResource fontNutritia}" HorizontalAlignment="Center">Ajouté par</Label>
+                                        <Label Style="{StaticResource fontNutritia}" Content="{Binding Createur}" HorizontalAlignment="Center"></Label>
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -93,7 +75,7 @@
                         <DataGridTemplateColumn Width="1.5*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Width="50" Height="50">
+                                    <Button Name="btnInformations" Width="50" Height="50" Click="btnInformations_Click">
                                         <Image Source="pack://application:,,,/UI/Images/infoIcon.png"></Image>
                                     </Button>
                                 </DataTemplate>
@@ -102,7 +84,7 @@
                         <DataGridTemplateColumn Width="1.5*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Width="50" Height="50">
+                                    <Button Name="btnVoter" Width="50" Height="50" Click="btnVoter_Click">
                                         <Image Source="pack://application:,,,/UI/Images/voterPlatIcon.png"></Image>
                                     </Button>
                                 </DataTemplate>

@@ -6,54 +6,49 @@
              mc:Ignorable="d" 
              d:DesignHeight="475" d:DesignWidth="650">
     <UserControl.Resources>
-            <Style TargetType="DataGrid">
-                <Setter Property="CanUserAddRows" Value="False" />
+        <Style TargetType="DataGrid">
+            <Setter Property="CanUserAddRows" Value="False" />
             <Setter Property="AutoGenerateColumns" Value="False" />
-            <Setter Property="HeadersVisibility" Value="All" />
+            <Setter Property="HeadersVisibility" Value="Column" />
+            <Setter Property="GridLinesVisibility" Value="Vertical" />
+            <Setter Property="VerticalGridLinesBrush" Value="DarkGreen" />
             <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="DarkGreen" />
+            <Setter Property="AlternatingRowBackground" Value="LightGreen" />
             <Setter Property="RowBackground" Value="Transparent" />
-            </Style>
-            <Style TargetType="DataGridCell">
-                <Setter Property="BorderThickness" Value="0"/>
-                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-            </Style>
-        <Style TargetType="Button">
-            <Setter Property="Width" Value="200" />
-            <Setter Property="Height" Value="25" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderBrush" Value="DarkGreen" />
-            <Setter Property="FontFamily" Value="Berlin Sans FB Demi" />
-            <Setter Property="Foreground" Value="DarkGreen" />
-            <Setter Property="FontSize" Value="16" />
-        </Style>
-        <Style TargetType="GroupBox">
-            <Setter Property="Width" Value="250" />
+            <Setter Property="TextElement.FontFamily" Value="Berlin Sans FB Demi" />
+            <Setter Property="TextElement.FontSize" Value="14" />
+            <Setter Property="Width" Value="350" />
             <Setter Property="Height" Value="350" />
-            <Setter Property="Foreground" Value="DarkGreen" />
-            <Setter Property="BorderBrush" Value="DarkGreen" />
-        </Style>
-        <Style TargetType="Label">
-            <Setter Property="FontFamily" Value="Berlin Sans FB Demi" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="Foreground" Value="DarkGreen" />
+            <Style.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Transparent" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
+                <Style TargetType="DataGridCell">
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                </Style>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    <Setter Property="FontFamily" Value="Berlin Sans FB Demi" />
+                    <Setter Property="FontSize" Value="16" />
+                    <Setter Property="Foreground" Value="DarkGreen" />
+                </Style>
+            </Style.Resources>
         </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="400"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="7.75*"></RowDefinition>
+            <RowDefinition Height="1.25*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="375"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="5.75*"></ColumnDefinition>
+            <ColumnDefinition Width="4.25*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <DataGrid Name="dgListeEpicerie" Width="350" Height="350" CanUserAddRows="False" AutoGenerateColumns="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-            <DataGrid.Resources>
-                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
-                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Transparent" />
-                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
-            </DataGrid.Resources>
+        <Label Style="{StaticResource fontSousTitre}" Grid.ColumnSpan="2">Liste d'épicerie</Label>
+        <DataGrid Name="dgListeEpicerie" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Width="*">
                     <DataGridTemplateColumn.CellTemplate>
@@ -64,7 +59,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Width="4*" Header="Article" Binding="{Binding Nom}" FontFamily="Berlin Sans FB Demi" FontSize="14" Foreground="DarkGreen" IsReadOnly="True">
+                <DataGridTextColumn Width="3.25*" Header="Article" Binding="{Binding Nom}" Foreground="DarkGreen" IsReadOnly="True">
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
@@ -73,7 +68,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Width="2*" Header="Quantité" Binding="{Binding Quantite}" FontFamily="Berlin Sans FB Demi" FontSize="14" Foreground="DarkGreen" IsReadOnly="True">
+                <DataGridTextColumn Width="2.25*" Header="Quantité" Binding="{Binding Quantite}" Foreground="DarkGreen" IsReadOnly="True">
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
@@ -82,7 +77,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Width="3*" Header="Unité de mesure" Binding="{Binding UniteMesure}" FontFamily="Berlin Sans FB Demi" FontSize="14" Foreground="DarkGreen" IsReadOnly="True">
+                <DataGridTextColumn Width="3.75*" Header="Unité de mesure" Binding="{Binding UniteMesure}" Foreground="DarkGreen" IsReadOnly="True">
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
@@ -93,17 +88,17 @@
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <GroupBox Grid.Column="1" Header="Liste d'épicerie">
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="Liste d'épicerie" Style="{StaticResource groupBoxNutritia}" Width="260" Height="355">
             <ScrollViewer>
                 <Grid Name="grdListeConviviale">
                 </Grid>
             </ScrollViewer>
         </GroupBox>
-        <Button Grid.Row="1" Grid.Column="1" Width="150" Height="50">
-            <DockPanel>
-                <Label VerticalAlignment="Center">Imprimer</Label>
-                <Image Source="../Images/imprimanteIcon.png"/>
-            </DockPanel>
+        <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource nonTransparent}" Width="150" Height="50" FontSize="16" VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal">
+                <Label Style="{StaticResource fontNutritia}" VerticalAlignment="Center">Imprimer</Label>
+                <Image Source="pack://application:,,,/UI/Images/imprimanteIcon.png" />
+            </StackPanel>
         </Button>
     </Grid>
 </UserControl>

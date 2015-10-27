@@ -42,7 +42,7 @@
                     <DataGridTemplateColumn Header="Banni" IsReadOnly="True" Width="50">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox HorizontalAlignment="Center" IsChecked="{Binding EstBanni}" Checked="CheckBox_Checked"  Unchecked="CheckBox_Unchecked"></CheckBox>
+                                <CheckBox HorizontalAlignment="Center" IsChecked="{Binding Path=EstBanni, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

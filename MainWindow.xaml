@@ -3,14 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Nutritia" Icon="/Nutritia;component/UI/Images/logoIconPetit.png" Height="550" Width="650"
 		ResizeMode="CanMinimize">
-
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="UI/Ressources/Ressource.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
+    
     <Grid>
     
         <Grid.Background>

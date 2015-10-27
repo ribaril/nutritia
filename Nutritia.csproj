@@ -190,7 +190,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UI\Ressources\Ressource.xaml">
+    <Page Include="UI\Ressources\Style.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -398,6 +398,7 @@
     <Resource Include="UI\Images\nonDisponible.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="UI\Images\platsIcon.png" />
     <Resource Include="UI\Images\poubelleIcon.png" />
     <Resource Include="UI\Images\panierIcon.png" />
     <Resource Include="UI\Images\journalIcon.png" />

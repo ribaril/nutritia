@@ -34,7 +34,7 @@ namespace Nutritia.UI.Views
 			RemplirListe();
 
             //SearchBox
-            dgRecherche.DataGridCollection = CollectionViewSource.GetDefaultView(TousLesMembres);
+            dgRecherche.DataGridCollection = CollectionViewSource.GetDefaultView(LstMembre);
             dgRecherche.DataGridCollection.Filter = new Predicate<object>(Filter);
 
         }
@@ -94,15 +94,5 @@ namespace Nutritia.UI.Views
 			dgBanni.ItemsSource = LstBanni;
 			//dgMembre.ItemsSource = LstMembre;
 		}
-
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
