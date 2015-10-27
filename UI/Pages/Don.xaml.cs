@@ -34,7 +34,6 @@ namespace Nutritia.UI.Pages
 
         private void btnConfirmer_Click(object sender, RoutedEventArgs e)
         {
-
             RadioButton btnChecked = wrapMontant.Children.OfType<RadioButton>().FirstOrDefault(r => r.IsChecked == true);
 
             int valeurRadio;
@@ -43,23 +42,16 @@ namespace Nutritia.UI.Pages
             if (IsInt)
             {
                 valeurDon = valeurRadio;
-                if (ValidationDon())
-                    MessageBox.Show("Merci pour le don", "Don - Confirmation");
+                MessageBox.Show("Merci pour le don", "Don - Confirmation");
 
             }
         }
 
-        private bool ValidationDon()
+        private void ValidationChamps()
         {
-            //Mauvais code à changer.
-            // Au cas où on clique sur le bouton sans avoir rien écrit dans les champs.
-            // Les champs ont jamais eu le focus, donc les validations ne sont pas exécutés
-            ValidationCSC();
-            ValidationDateExpiration();
-            ValidationNom();
-            ValidationNoCarte();
-            return isCSCGood && isExpirationGood && isNoCarteGood && isNomGood;
+            btnConfirmer.IsEnabled = isNomGood && isNoCarteGood && isExpirationGood && isCSCGood;
         }
+
 
         private void ValidationNom()
         {
@@ -153,22 +145,47 @@ namespace Nutritia.UI.Pages
 
         private void txtProprietaire_LostFocus(object sender, RoutedEventArgs e)
         {
-            ValidationNom();
+            //ValidationNom();
         }
 
         private void txtNoCarte_LostFocus(object sender, RoutedEventArgs e)
         {
-            ValidationNoCarte();
+            //ValidationNoCarte();
         }
 
         private void txtDateExpiration_LostFocus(object sender, RoutedEventArgs e)
         {
-            ValidationDateExpiration();
+            // ValidationDateExpiration();
         }
 
         private void txtCSC_LostFocus(object sender, RoutedEventArgs e)
         {
-            ValidationCSC();
+            //ValidationCSC();
         }
+
+        private void txtCSC_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidationCSC();
+            ValidationChamps();
+        }
+
+        private void txtDateExpiration_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidationDateExpiration();
+            ValidationChamps();
+        }
+
+        private void txtNoCarte_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidationNoCarte();
+            ValidationChamps();
+        }
+
+        private void txtProprietaire_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ValidationNom();
+            ValidationChamps();
+        }
+
     }
 }
