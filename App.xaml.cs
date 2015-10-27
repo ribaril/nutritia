@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,6 +16,8 @@ namespace Nutritia
     /// </summary>
     public partial class App : Application
     {
+        static public Membre MembreCourant = new Membre();
+        static public CultureInfo culture = new CultureInfo(String.Empty);
         protected override void OnStartup(StartupEventArgs e)
         {
             //Thread.CurrentThread.CurrentCulture = new CultureInfo("fr");

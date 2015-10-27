@@ -10,14 +10,11 @@ namespace Nutritia
     {
         #region Proprietes
         public int? IdPlat { get; set; }
-        public Membre Createur { get; set; }
+        public string Createur { get; set; }
         public string Nom { get; set; }
-        public int Note { get; set; }
-        public bool EstDejeuner { get; set; }
-        public bool EstEntree { get; set; }
-        public bool EstPrincipal { get; set; }
-        public bool EstBreuvage { get; set; }
-        public bool EstDessert { get; set; }
+        public string TypePlat { get; set; }
+        public double? Note { get; set; }
+        public string ImageUrl { get; set; }
         public IList<Aliment> ListeIngredients { get; set; }
         public bool EstActif { get; set; }
         #endregion

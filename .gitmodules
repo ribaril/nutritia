@@ -1,0 +1,3 @@
+[submodule "nutritia_database"]
+	path = nutritia_database
+	url = https://github.com/Nutritia/nutritia_database.git

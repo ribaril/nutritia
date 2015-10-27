@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="Nutritia.UI.Views.SousEcran2"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Nutritia.UI.Views"
+             mc:Ignorable="d" Width="290" Height="145">
+    <Grid>
+        <StackPanel>
+            <StackPanel Background="LightBlue" Orientation="Horizontal">
+                <TextBlock FontSize="9pt" Width="75" FontWeight="Bold">Énergie</TextBlock>
+                <TextBlock FontSize="9pt" Width="10" FontWeight="Bold">:</TextBlock>
+                <TextBlock Name="vEnegie" FontSize="9pt" TextAlignment="Right" Width="50"></TextBlock>
+                <TextBlock FontSize="9pt" Width="10"></TextBlock>
+                <TextBlock FontSize="9pt" Width="75">cal</TextBlock>
+            </StackPanel>
+            <StackPanel Background="White" Orientation="Horizontal">
+                <TextBlock FontSize="9pt" Width="75" FontWeight="Bold">Glucide</TextBlock>
+                <TextBlock FontSize="9pt" Width="10"  FontWeight="Bold">:</TextBlock>
+                <TextBlock Name="vGlucide" FontSize="9pt" TextAlignment="Right" Width="50"></TextBlock>
+                <TextBlock FontSize="9pt" Width="10"></TextBlock>
+                <TextBlock FontSize="9pt" >g</TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Background="LightBlue">
+                <TextBlock FontSize="9pt" Width="75" FontWeight="Bold">Fibre</TextBlock>
+                <TextBlock FontSize="9pt" Width="10" FontWeight="Bold">:</TextBlock>
+                <TextBlock Name="vFibre" FontSize="9pt" TextAlignment="Right" Width="50"></TextBlock>
+                <TextBlock FontSize="9pt" Width="10"></TextBlock>
+                <TextBlock FontSize="9pt">g</TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Background="White">
+                <TextBlock FontSize="9pt" Width="75"  FontWeight="Bold">Protéine</TextBlock>
+                <TextBlock FontSize="9pt" Width="10"  FontWeight="Bold">:</TextBlock>
+                <TextBlock Name="vProtein" FontSize="9pt" TextAlignment="Right" Width="50"></TextBlock>
+                <TextBlock FontSize="9pt" Width="10"></TextBlock>
+                <TextBlock FontSize="9pt">g</TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Background="LightBlue">
+                <TextBlock FontSize="9pt" Width="75"  FontWeight="Bold">Lipide</TextBlock>
+                <TextBlock FontSize="9pt" Width="10"  FontWeight="Bold">:</TextBlock>
+                <TextBlock Name="vLipide" FontSize="9pt" TextAlignment="Right" Width="50"></TextBlock>
+                <TextBlock FontSize="9pt" Width="10"></TextBlock>
+                <TextBlock FontSize="9pt" >g</TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Background="White">
+                <TextBlock FontSize="9pt" Width="75"  FontWeight="Bold">Choléstérol</TextBlock>
+                <TextBlock FontSize="9pt" Width="10"  FontWeight="Bold">:</TextBlock>
+                <TextBlock Name="vCholesterol" FontSize="9pt" TextAlignment="Right" Width="50"></TextBlock>
+                <TextBlock FontSize="9pt" Width="10"></TextBlock>
+                <TextBlock FontSize="9pt" Width="75">mg</TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Background="LightBlue">
+                <TextBlock FontSize="9pt" Width="75"  FontWeight="Bold">Sodium</TextBlock>
+                <TextBlock FontSize="9pt" Width="10"  FontWeight="Bold">:</TextBlock>
+                <TextBlock Name="vSodium" FontSize="9pt" TextAlignment="Right" Width="50"></TextBlock>
+                <TextBlock FontSize="9pt" Width="10"></TextBlock>
+                <TextBlock FontSize="9pt" Width="75">mg</TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Background="White">
+                <TextBlock></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Background="LightBlue">
+                <TextBlock></TextBlock>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

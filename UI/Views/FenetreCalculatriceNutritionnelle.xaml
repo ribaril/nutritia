@@ -1,12 +1,46 @@
-﻿<UserControl x:Class="Nutritia.UI.Views.CalculatriceNutrition"
+﻿<UserControl x:Class="Nutritia.UI.Views.FenetreCalculatriceNutritionelle"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:layoutToolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Nutritia.UI.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="550" d:DesignWidth="650">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="55"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Calculatrice nutritionelle" Style="{StaticResource fontNutritia}" FontSize="50"  HorizontalAlignment="Center" Grid.ColumnSpan="2"></Label>
+        <local:SearchBox x:Name="dgRecherche" Grid.Row="1" Grid.Column="1" WatermarkContent="Aliment à rechercher" FilterMode="Contains"  SelectionMode="Single" Margin="33,24,34,24">
+            <local:SearchBox.Columns>
+                <DataGridTemplateColumn Header="Rajouter" IsReadOnly="False" Width="60">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Width="50" HorizontalAlignment="Center" Click="Button_Click">+</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn IsReadOnly="True" Header="Nom" Binding="{Binding Nom}"></DataGridTextColumn>
+            </local:SearchBox.Columns>
+        </local:SearchBox>
+        
+        <Rectangle Grid.Row="1" Grid.ColumnSpan="2" Stroke="DarkGreen" Width="625"/>
+            <ScrollViewer Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Height="200" Width="298" >
+            <layoutToolkit:Accordion Name="accPlat" Width="288" />
+        </ScrollViewer>
+        <GroupBox x:Name="groupBox_Copy" Header="Plateau" HorizontalAlignment="Center"  Grid.Row="2" VerticalAlignment="Center" Height="170" Width="285">
+            <ContentPresenter Name="presenteurContenu2" />
+        </GroupBox>
+        <GroupBox x:Name="groupBox" Header="Valeurs nutritionelles du plateau" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Height="172" Width="290" Grid.Column="1">
+            <ContentPresenter Name="presenteurContenu3" VerticalAlignment="Top"/>
+        </GroupBox>
     </Grid>
 </UserControl>

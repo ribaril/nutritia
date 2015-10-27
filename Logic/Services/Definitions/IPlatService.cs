@@ -8,8 +8,9 @@ namespace Nutritia
 {
     public interface IPlatService
     {
-        // TODO : Implementer
-        //IList<Plat> RetrieveAll();
+        IList<Plat> RetrieveAll();
+        IList<Plat> RetrieveSome(RetrievePlatArgs args);
         Plat Retrieve(RetrievePlatArgs args);
+        IList<Aliment> RetrieveAlimentsPlat(RetrievePlatArgs args);
     }
 }

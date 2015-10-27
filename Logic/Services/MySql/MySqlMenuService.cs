@@ -8,11 +8,28 @@ using System.Threading.Tasks;
 
 namespace Nutritia
 {
+    /// <summary>
+    /// Service MySql lié aux Menus.
+    /// </summary>
     public class MySqlMenuService : IMenuService
     {
         private MySqlConnexion connexion;
+        private readonly IPlatService platService;
 
-        public IList<Menu> RetrieveAll(RetrieveMenuArgs args)
+        /// <summary>
+        /// Constructeur par défaut de la classe.
+        /// </summary>
+        public MySqlMenuService()
+        {
+            platService = ServiceFactory.Instance.GetService<IPlatService>();
+        }
+
+        /// <summary>
+        /// Méthode permettant d'obtenir un ensemble de menus sauvegardé dans la base de données.
+        /// </summary>
+        /// <param name="args">Les arguments permettant de retrouver les menus.</param>
+        /// <returns>Une liste contenant les menus.</returns>
+        public IList<Menu> RetrieveSome(RetrieveMenuArgs args)
         {
             IList<Menu> resultat = new List<Menu>();
 
@@ -30,9 +47,23 @@ namespace Nutritia
                 DataSet dataSetMenus = connexion.Query(requete);
                 DataTable tableMenus = dataSetMenus.Tables[0];
 
-                foreach (DataRow menu in tableMenus.Rows)
+                foreach (DataRow rowMenu in tableMenus.Rows)
                 {
-                    resultat.Add(ConstruireMenu(menu));
+                    Menu menu = ConstruireMenu(rowMenu);
+                    
+                    // Ajout des plats du menu.
+                    requete = string.Format("SELECT * FROM MenusPlats WHERE idMenu = {0}", menu.IdMenu);
+
+                    DataSet dataSetPlats = connexion.Query(requete);
+                    DataTable tablePlats = dataSetPlats.Tables[0];
+
+                    foreach (DataRow rowPlat in tablePlats.Rows)
+                    {
+                        menu.ListePlats.Add(platService.Retrieve(new RetrievePlatArgs{IdPlat = (int)rowPlat["idPlat"]}));
+                    }
+
+                    resultat.Add(menu);
+
                 }
 
             }
@@ -45,6 +76,11 @@ namespace Nutritia
 
         }
 
+        /// <summary>
+        /// Méthode permettant d'obtenir un menu sauvegardé dans la base de données.
+        /// </summary>
+        /// <param name="args">Les arguments permettant de retrouver le menu.</param>
+        /// <returns>Un objet Menu.</returns>
         public Menu Retrieve(RetrieveMenuArgs args)
         {
             Menu menu;
@@ -65,6 +101,17 @@ namespace Nutritia
 
                 menu = ConstruireMenu(tableMenus.Rows[0]);
 
+                // Ajout des plats du menu.
+                requete = string.Format("SELECT * FROM MenusPlats WHERE idMenu = {0}", menu.IdMenu);
+
+                DataSet dataSetPlats = connexion.Query(requete);
+                DataTable tablePlats = dataSetPlats.Tables[0];
+
+                foreach (DataRow rowPlat in tablePlats.Rows)
+                {
+                    menu.ListePlats.Add(platService.Retrieve(new RetrievePlatArgs { IdPlat = (int)rowPlat["idPlat"] }));
+                }
+
             }
             catch (MySqlException)
             {
@@ -75,12 +122,18 @@ namespace Nutritia
 
         }
 
+        /// <summary>
+        /// Méthode permettant de construire un objet Menu.
+        /// </summary>
+        /// <param name="menu">Un enregistrement de la table Menus.</param>
+        /// <returns>Un objet Menu.</returns>
         private Menu ConstruireMenu(DataRow menu)
         {
             return new Menu()
             {
                 IdMenu = (int)menu["idMenu"],
-                DateCreation = (DateTime)menu["dateMenu"]
+                DateCreation = (DateTime)menu["dateMenu"],
+                ListePlats = new List<Plat>()
             };
         }
     }

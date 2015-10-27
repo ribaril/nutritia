@@ -5,8 +5,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Nutritia.UI.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="475" d:DesignWidth="650">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Content="Connexion" Style="{StaticResource fontNutritia}" FontSize="35"  HorizontalAlignment="Center" Margin="0,20,0,0"></Label>
+        <Label Name="lbl_utilisateur" Grid.Row="0" Content="Nom d'utilisateur" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="15"  HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,95,0,0"></Label>
+        <TextBox Name="Nom_utilisateur" Grid.Row="0" SelectedText="" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="15"  HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,120,0,0"></TextBox>
+        <Label Name="lbl_mdp" Grid.Row="0" Content="Mot de passe" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="15"  HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,155,0,0"></Label>
+        <PasswordBox Name="Mot_passe" Grid.Row="0" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="15"  HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,180,0,0"></PasswordBox>
+        <Button Grid.Row="0" Content="Connexion" Height="30" Width="150" Style="{StaticResource fontNutritia}" FontSize="15"  HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,28" Click="btn_connexion"></Button>
+
+        <TextBlock Grid.Row="1" Width="400" Height="40"  FontSize="14" Foreground="DarkGreen" FontFamily="Berlin Sans FB Demi"  TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0">Avez-vous déjà un compte Nutritia? Cliquez ci-bas pour vous inscrire et créer un compte Nutritia</TextBlock>
+        <Label Grid.Row="1" Content="S'inscrire" Style="{StaticResource fontNutritia}" FontSize="20"  HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10"/>
+        <Button Grid.Row="1" Width="75" Height="75" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,45" Click="btn_inscrire">
+            <Image Source="/Nutritia;component/UI/Images/SignInIcon.PNG"></Image>
+        </Button>
     </Grid>
 </UserControl>

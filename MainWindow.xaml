@@ -1,9 +1,9 @@
 ﻿<Window x:Class="Nutritia.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:resx="clr-namespace:Nutritia.Properties"
-        Title="Nutritia" Icon="/Nutritia;component/UI/Images/LogoIcon.PNG" Height="550" Width="650"
-		ResizeMode="NoResize">
+        Title="Nutritia" Icon="/Nutritia;component/UI/Images/logoIconPetit.png" Height="550" Width="650"
+		ResizeMode="CanMinimize">
+    
     <Grid>
     
         <Grid.Background>
@@ -17,27 +17,33 @@
 
         <DockPanel>
             <ToolBar Width="650">
-                <Button>
+                <Button Name="btnRetour" VerticalAlignment="Bottom" Click="btnRetour_Click">
                     <DockPanel>
-                        <Image Source="/Nutritia;component/UI/Images/aProposIcon.PNG"/>
-                        <Label Content="{x:Static resx:Resources.Information}" FontSize="15" FontFamily="Berlin"/>
+                        <Image Source="/Nutritia;component/UI/Images/retour.PNG"/>
+                        <TextBlock Text=" Retour" FontSize="20" FontFamily="Berlin"/>
                     </DockPanel>
                 </Button>
-                <Button>
+                <Button Name="btnInfo" VerticalAlignment="Bottom" Click="btnInfo_Click">
+                    <DockPanel>
+                        <Image Width="24" Source="/Nutritia;component/UI/Images/aProposIcon.PNG"/>
+                        <TextBlock Text=" À propos" FontSize="20" FontFamily="Berlin"/>
+                    </DockPanel>
+                </Button>
+                <Button Name="btnParam" Click="btnParam_Click">
                     <DockPanel>
                         <Image Source="/Nutritia;component/UI/Images/paramIcon.PNG"/>
-                        <Label Content="{x:Static resx:Resources.Parametre}" FontSize="15" FontFamily="Berlin"/>
+                        <TextBlock Text=" Paramètres" FontSize="20" FontFamily="Berlin"/>
                     </DockPanel>
                 </Button>
-                <Button>
+                <Button Name="btnAide" Click="btnAide_Click">
                     <DockPanel>
                         <Image Source="/Nutritia;component/UI/Images/HelpIcon.PNG"/>
-                        <Label Content="{x:Static resx:Resources.Aide}" FontSize="15" FontFamily="Berlin"/>
+                        <TextBlock Text=" Aide" FontSize="20" FontFamily="Berlin"/>
                     </DockPanel>
                 </Button>
             </ToolBar>
         </DockPanel>
-
+	
         <ContentPresenter Grid.Row="1" Name="presenteurContenu" />
 
     </Grid>

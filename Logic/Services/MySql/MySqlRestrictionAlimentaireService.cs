@@ -8,11 +8,18 @@ using System.Threading.Tasks;
 
 namespace Nutritia
 {
+    /// <summary>
+    /// Service MySql lié aux restrictions alimentaires.
+    /// </summary>
     public class MySqlRestrictionAlimentaireService : IRestrictionAlimentaireService
     {
 
         private MySqlConnexion connexion;
 
+        /// <summary>
+        /// Méthode permettant d'obtenir l'ensemble des restrictions alimentaires de la base de données.
+        /// </summary>
+        /// <returns>Une liste contenant les restrictions alimentaires.</returns>
         public IList<RestrictionAlimentaire> RetrieveAll()
         {
             IList<RestrictionAlimentaire> resultat = new List<RestrictionAlimentaire>();
@@ -40,6 +47,11 @@ namespace Nutritia
             return resultat;
         }
 
+        /// <summary>
+        /// Méthode permettant d'obtenir une restriction alimentaire de la base de données.
+        /// </summary>
+        /// <param name="args">Les arguments permettant de récupérer la restriction alimentaire.</param>
+        /// <returns>Un objet RestrictionAlimentaire.</returns>
         public RestrictionAlimentaire Retrieve(RetrieveRestrictionAlimentaireArgs args)
         {
 
@@ -66,13 +78,17 @@ namespace Nutritia
 
         }
 
-        private RestrictionAlimentaire ConstruireRestrictionAlimentaire(DataRow res)
+        /// <summary>
+        /// Méthode permettant de construire un objet RestrictionAlimentaire.
+        /// </summary>
+        /// <param name="restriction">Un enregistrement de la table RestrictionsAlimentaires.</param>
+        /// <returns>Un objet RestrictionAlimentaire.</returns>
+        private RestrictionAlimentaire ConstruireRestrictionAlimentaire(DataRow restriction)
         {
             return new RestrictionAlimentaire()
             {
-                // TODO : ENlever l'attribut estSelectionne des classes.
-                IdRestrictionAlimentaire = (int)res["idRestrictionAlimentaire"],
-                Nom = (string)res["restrictionAlimentaire"]
+                IdRestrictionAlimentaire = (int)restriction["idRestrictionAlimentaire"],
+                Nom = (string)restriction["restrictionAlimentaire"]
             };
         }
     }

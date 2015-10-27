@@ -1,0 +1,98 @@
+﻿<UserControl x:Class="Nutritia.UI.Views.FenetreVotes"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="475" d:DesignWidth="650">
+    <UserControl.Resources>
+        <Style TargetType="Image" x:Key="btnFiltre">
+            <Setter Property="Width" Value="100"></Setter>
+            <Setter Property="Height" Value="75"></Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="7*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Style="{StaticResource fontSousTitre}">Voter sur des plats</Label>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <Button Name="btnSelectionComplete" Margin="0, 0, 75, 0" Click="btnSelectionComplete_Click">
+                <Image Style="{StaticResource btnFiltre}" Source="pack://application:,,,/UI/Images/platsIcon.png"></Image>
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource toolTipNutritia}">Tous les plats</ToolTip>
+                </Button.ToolTip>
+            </Button>
+            <Button Name="btnNouveautes" Margin="0, 0, 75, 0" Click="btnNouveautes_Click">
+                <Image Style="{StaticResource btnFiltre}" Source="pack://application:,,,/UI/Images/journalIcon.png"></Image>
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource toolTipNutritia}">Les plus récents</ToolTip>
+                </Button.ToolTip>
+            </Button>
+            <Button Name="btnPlusPopulaires" Click="btnPlusPopulaires_Click">
+                <Image Style="{StaticResource btnFiltre}" Source="pack://application:,,,/UI/Images/etoileIcon.png"></Image>
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource toolTipNutritia}">Les plus populaires</ToolTip>
+                </Button.ToolTip>
+            </Button>
+        </StackPanel>
+        <GroupBox Name="gbContenu" Grid.Row="2" Header="Tous les plats" Style="{StaticResource groupBoxNutritia}" Width="555" Height="305">
+            <ScrollViewer>
+                <DataGrid Name="dgPlats" Style="{StaticResource dataGridPlats}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="2*" Binding="{Binding Nom}" Foreground="DarkGreen" IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                                    <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTemplateColumn Width="3*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Width="125" Height="110" Source="{Binding ImageUrl}"></Image>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="3*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel VerticalAlignment="Center">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <Label Style="{StaticResource fontNutritia}">Note (Sur 5) : </Label>
+                                            <Label Style="{StaticResource fontNutritia}" Content="{Binding Note}"></Label>
+                                        </StackPanel>
+                                        <Label Style="{StaticResource fontNutritia}" HorizontalAlignment="Center">Ajouté par</Label>
+                                        <Label Style="{StaticResource fontNutritia}" Content="{Binding Createur}" HorizontalAlignment="Center"></Label>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="1.5*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Name="btnInformations" Width="50" Height="50" Click="btnInformations_Click">
+                                        <Image Source="pack://application:,,,/UI/Images/infoIcon.png"></Image>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="1.5*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Name="btnVoter" Width="50" Height="50" Click="btnVoter_Click">
+                                        <Image Source="pack://application:,,,/UI/Images/voterPlatIcon.png"></Image>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </ScrollViewer>
+        </GroupBox>
+    </Grid>
+</UserControl>

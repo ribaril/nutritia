@@ -4,28 +4,112 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Nutritia
 {
+    /// <summary>
+    /// Service MySql lié aux Plats.
+    /// </summary>
     public class MySqlPlatService : IPlatService
     {
-        // TODO : Fonctionne pas
         private MySqlConnexion connexion;
+        private readonly IAlimentService alimentService;
 
-        public Plat Retrieve(RetrievePlatArgs args)
+        /// <summary>
+        /// Constructeur par défaut de la classe.
+        /// </summary>
+        public MySqlPlatService ()
+	    {
+            alimentService = ServiceFactory.Instance.GetService<IAlimentService>();
+	    }
+
+        /// <summary>
+        /// Méthode permettant d'obtenir l'ensemble des plats sauvegardé dans la base de données.
+        /// </summary>
+        /// <returns>Une liste contenant les plats.</returns>
+        public IList<Plat> RetrieveAll()
         {
-
-            Plat plat;
+            List<Plat> resultat = new List<Plat>();
 
             try
             {
                 connexion = new MySqlConnexion();
 
-                string requete = string.Format("SELECT * FROM Plats WHERE idPlat = {0}", args.IdPlat);
+                string requete = "SELECT * FROM Plats p INNER JOIN TypesPlats tp ON tp.idTypePlat = p.idTypePlat INNER JOIN Membres m ON m.idMembre = p.idMembre";
 
                 DataSet dataSetPlats = connexion.Query(requete);
                 DataTable tablePlats = dataSetPlats.Tables[0];
 
+                foreach (DataRow rowPlat in tablePlats.Rows)
+                {
+                    Plat plat = ConstruirePlat(rowPlat);
+
+                    plat.ListeIngredients = RetrieveAlimentsPlat(new RetrievePlatArgs { IdPlat = plat.IdPlat });
+
+                    resultat.Add(plat);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return resultat;
+        }
+
+        /// <summary>
+        /// Méthode permettant d'obtenir un ensemble de plats sauvegardé dans la base de données.
+        /// </summary>
+        /// <param name="args">Les arguments permettant de retrouver les plats.</param>
+        /// <returns>Une liste contenant les plats.</returns>
+        public IList<Plat> RetrieveSome(RetrievePlatArgs args)
+        {
+            List<Plat> resultat = new List<Plat>();
+
+            try
+            {
+                connexion = new MySqlConnexion();
+
+                string requete = string.Format("SELECT * FROM Plats p INNER JOIN TypesPlats tp ON tp.idTypePlat = p.idTypePlat INNER JOIN Membres m ON m.idMembre = p.idMembre WHERE typePlat = '{0}'", args.Categorie);
+
+                DataSet dataSetPlats = connexion.Query(requete);
+                DataTable tablePlats = dataSetPlats.Tables[0];
+
+                foreach (DataRow rowPlat in tablePlats.Rows)
+                {
+                    Plat plat = ConstruirePlat(rowPlat);
+                    
+                    plat.ListeIngredients = RetrieveAlimentsPlat(new RetrievePlatArgs{IdPlat = plat.IdPlat});
+
+                    resultat.Add(plat);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return resultat;
+        }
+
+        /// <summary>
+        /// Méthode permettant d'obtenir un plat sauvegardé dans la base de données.
+        /// </summary>
+        /// <param name="args">Les arguments permettant de retrouver le plat.</param>
+        /// <returns>Un objet Plat.</returns>
+        public Plat Retrieve(RetrievePlatArgs args)
+        {
+            Plat plat;
+
+            try
+            {
+                connexion = new MySqlConnexion();
+                string requete = string.Format("SELECT * FROM Plats p INNER JOIN TypesPlats tp ON tp.idTypePlat = p.idTypePlat INNER JOIN Membres m ON m.idMembre = p.idMembre WHERE idPlat = '{0}'", args.IdPlat);
+
+                DataSet dataSetPlats = connexion.Query(requete);
+                DataTable tablePlats = dataSetPlats.Tables[0];
+                
                 plat = ConstruirePlat(tablePlats.Rows[0]);
 
             }
@@ -35,20 +119,54 @@ namespace Nutritia
             }
 
             return plat;
-
         }
 
+        /// <summary>
+        /// Méthode permettant d'obtenir les aliments d'un plat.
+        /// </summary>
+        /// <param name="args">Les arguments permettant de retrouver les aliments du plat.</param>
+        /// <returns>Une liste contenant les aliments.</returns>
+        public IList<Aliment> RetrieveAlimentsPlat(RetrievePlatArgs args)
+        {
+            List<Aliment> listeIngredients = new List<Aliment>();
+
+            string requete = string.Format("SELECT * FROM PlatsAliments WHERE idPlat = {0}", args.IdPlat);
+
+            DataSet dataSetPlatsAliments = connexion.Query(requete);
+            DataTable tablePlatsAliments = dataSetPlatsAliments.Tables[0];
+
+            foreach (DataRow rowPlatsAliments in tablePlatsAliments.Rows)
+            {
+                Aliment alimentTmp = alimentService.Retrieve(new RetrieveAlimentArgs { IdAliment = (int)rowPlatsAliments["idAliment"] });
+                alimentTmp.Quantite = (double)rowPlatsAliments["quantite"] * alimentTmp.Mesure;
+                listeIngredients.Add(alimentTmp);
+            }
+
+            return listeIngredients;
+        }
+
+        /// <summary>
+        /// Méthode permettant de construire un objet Plat.
+        /// </summary>
+        /// <param name="plat">Un enregistrement de la table Plats.</param>
+        /// <returns>Un objet Plat.</returns>
         private Plat ConstruirePlat(DataRow plat)
         {
+            double? note = null;
+
+            if (!(plat["note"] is DBNull))
+            {
+                note = (double?)plat["note"];
+            }
+
             return new Plat()
             {
-                // TODO : Améliorer
                 IdPlat = (int)plat["idPlat"],
-                // TODO : Améliorer
-                Createur = new Membre(),
+                Createur = (string)plat["nomUtilisateur"],
                 Nom = (string)plat["nom"],
-                Note = (int)plat["note"],
-                // TODO : À voir pour le 'EstType'
+                TypePlat = (string)plat["typePlat"],
+                Note = note,
+                ImageUrl = (string)plat["imageUrl"],
                 ListeIngredients = new List<Aliment>()
             };
         }

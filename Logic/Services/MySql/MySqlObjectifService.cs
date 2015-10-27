@@ -8,10 +8,17 @@ using System.Threading.Tasks;
 
 namespace Nutritia
 {
+    /// <summary>
+    /// Service MySql lié aux Objectifs.
+    /// </summary>
     public class MySqlObjectifService : IObjectifService
     {
         private MySqlConnexion connexion;
 
+        /// <summary>
+        /// Méthode permettant d'obtenir l'ensemble des Objectifs sauvegardés dans la base de données.
+        /// </summary>
+        /// <returns>Une liste contenant les objectifs.</returns>
         public IList<Objectif> RetrieveAll()
         {
             IList<Objectif> resultat = new List<Objectif>();
@@ -40,6 +47,11 @@ namespace Nutritia
 
         }
 
+        /// <summary>
+        /// Méthode permettant d'obtenir un objectif sauvegardé dans la base de données.
+        /// </summary>
+        /// <param name="args">Les arguments permettant de retrouver l'objectif.</param>
+        /// <returns>Un objet Objectif.</returns>
         public Objectif Retrieve(RetrieveObjectifArgs args)
         {
 
@@ -66,11 +78,15 @@ namespace Nutritia
 
         }
 
+        /// <summary>
+        /// Méthode permettant de construire un objet Objectif.
+        /// </summary>
+        /// <param name="objectif">Un enregistrement de la table Objectifs.</param>
+        /// <returns>Un objet Objectif.</returns>
         private Objectif ConstruireObjectif(DataRow objectif)
         {
             return new Objectif()
             {
-                // TODO : ENlever l'attribut estSelectionne des classes.
                 IdObjectif = (int)objectif["idObjectif"],
                 Nom = (string)objectif["objectif"]
             };

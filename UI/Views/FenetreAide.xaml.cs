@@ -18,11 +18,53 @@ namespace Nutritia.UI.Views
     /// <summary>
     /// Interaction logic for FenetreAide.xaml
     /// </summary>
-    public partial class FenetreAide : UserControl
+    public partial class FenetreAide : Window
     {
-        public FenetreAide()
+        public FenetreAide(String nomFenetre)
         {
             InitializeComponent();
-        }
+			switch (nomFenetre)
+			{
+				case "AjoutPlatMembre":
+					tcAide.SelectedItem = tiAjoutPlat;
+					break;
+				case "APropos":
+					tcAide.SelectedItem = tiLangue;
+					break;
+				case "CreationProfil":
+					tcAide.SelectedItem = tiProfil;
+					break;
+				case "Don":
+					tcAide.SelectedItem = tiDon;
+					break;
+				case "FenetreCalculatriceNutritionelle":
+					tcAide.SelectedItem = tiCalculatrice;
+					break;
+				case "FenetreConnexion":
+					tcAide.SelectedItem = tiConnexion;
+					break;
+				case "FenetreParametre":
+					tcAide.SelectedItem = tiParametre;
+					break;
+				case "GenerateurMenus":
+					tcAide.SelectedItem = tiGenerationMenu;
+					break;
+				case "ListeEpicerie":
+					tcAide.SelectedItem = tiListeEpicerie;
+					break;
+				case "MenuPrincipal":
+					tcAide.SelectedItem = tiMenuPrincipal;
+					break;
+				case "MenuPrincipalConnecte":
+					tcAide.SelectedItem = tiMenuConnecte;
+					break;
+				case "ModificationProfil":
+					tcAide.SelectedItem = tiProfil;
+					break;
+				default:
+					tcAide.SelectedItem = tiMenuPrincipal;
+					break;
+			}
+		}
     }
 }

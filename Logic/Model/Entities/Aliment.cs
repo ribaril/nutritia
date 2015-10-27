@@ -6,21 +6,49 @@ using System.Threading.Tasks;
 
 namespace Nutritia
 {
-    public class Aliment
+    public class Aliment : ICloneable
     {
         #region Proprietes
         public int? IdAliment { get; set; }
         public string Nom { get; set; }
         public string Categorie { get; set; }
         public int Mesure { get; set; }
-        public UniteMesure Symbole { get; set; }
-        public int Energie { get; set; }
-        public int Glucide { get; set; }
-        public int Fibre { get; set; }
-        public int Proteine { get; set; }
-        public int Lipide { get; set; }
-        public int Cholesterol { get; set; }
-        public int Sodium { get; set; }
+        public double Quantite { get; set; }
+        public string UniteMesure { get; set; }
+        public double Energie { get; set; }
+        public double Glucide { get; set; }
+        public double Fibre { get; set; }
+        public double Proteine { get; set; }
+        public double Lipide { get; set; }
+        public double Cholesterol { get; set; }
+        public double Sodium { get; set; }
         #endregion
+    
+        /// <summary>
+        /// Méthode permettant de comparer deux objets Aliment ensemble.
+        /// Contrairement à la méthode de base, elle compare seulement avec l'id.
+        /// </summary>
+        /// <param name="objet"></param>
+        /// <returns></returns>
+        public override bool Equals(Object objet)
+        {
+            if(objet == null || GetType() != objet.GetType())
+            {
+                return false;
+            }
+
+            Aliment aliment = (Aliment)objet;
+
+            return (IdAliment == aliment.IdAliment);
+        }
+
+        /// <summary>
+        ///  Méthode permettant de créer un clone d'un objet Aliment.
+        /// </summary>
+        /// <returns></returns>
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
     }
 }

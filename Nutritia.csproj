@@ -41,6 +41,11 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Controls.Layout.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>WPFToolkit\System.Windows.Controls.Layout.Toolkit.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -52,21 +57,26 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>WPFToolkit\WPFToolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Logic\Model\Args\RetrieveAlimentArgs.cs" />
     <Compile Include="Logic\Model\Args\RetrieveMembreArgs.cs" />
     <Compile Include="Logic\Model\Args\RetrieveMenuArgs.cs" />
     <Compile Include="Logic\Model\Args\RetrieveObjectifArgs.cs" />
     <Compile Include="Logic\Model\Args\RetrievePlatArgs.cs" />
     <Compile Include="Logic\Model\Args\RetrievePreferenceArgs.cs" />
     <Compile Include="Logic\Model\Args\RetrieveRestrictionAlimentaireArgs.cs" />
+    <Compile Include="Logic\Model\Args\RetrieveUniteMesureArgs.cs" />
     <Compile Include="Logic\Model\Entities\Aliment.cs" />
     <Compile Include="Logic\Model\Entities\Calculatrice.cs" />
-    <Compile Include="Logic\Model\Entities\GenerateurMenu.cs" />
     <Compile Include="Logic\Model\Entities\Membre.cs" />
     <Compile Include="Logic\Model\Entities\Menu.cs" />
     <Compile Include="Logic\Model\Entities\Objectif.cs" />
@@ -74,19 +84,23 @@
     <Compile Include="Logic\Model\Entities\Preference.cs" />
     <Compile Include="Logic\Model\Entities\RestrictionAlimentaire.cs" />
     <Compile Include="Logic\Model\Entities\UniteMesure.cs" />
+    <Compile Include="Logic\Services\Definitions\IAlimentService.cs" />
     <Compile Include="Logic\Services\Definitions\IMembreService.cs" />
     <Compile Include="Logic\Services\Definitions\IMenuService.cs" />
     <Compile Include="Logic\Services\Definitions\IObjectifService.cs" />
     <Compile Include="Logic\Services\Definitions\IPlatService.cs" />
     <Compile Include="Logic\Services\Definitions\IPreferenceService.cs" />
     <Compile Include="Logic\Services\Definitions\IRestrictionAlimentaireService.cs" />
+    <Compile Include="Logic\Services\Definitions\IUniteMesureService.cs" />
     <Compile Include="Logic\Services\Helpers\MySqlConnexion.cs" />
+    <Compile Include="Logic\Services\MySql\MySqlAlimentService.cs" />
     <Compile Include="Logic\Services\MySql\MySqlMembreService.cs" />
     <Compile Include="Logic\Services\MySql\MySqlMenuService.cs" />
     <Compile Include="Logic\Services\MySql\MySqlObjectifService.cs" />
     <Compile Include="Logic\Services\MySql\MySqlPlatService.cs" />
     <Compile Include="Logic\Services\MySql\MySqlPreferenceService.cs" />
     <Compile Include="Logic\Services\MySql\MySqlRestrictionAlimentaireService.cs" />
+    <Compile Include="Logic\Services\MySql\MySqlUniteMesureService.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -96,35 +110,38 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.en.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Toolkit\Services\Definitions\IApplicationService.cs" />
+    </Compile>    <Compile Include="Toolkit\Services\Definitions\IApplicationService.cs" />
     <Compile Include="Toolkit\Services\ServiceFactory.cs" />
-    <Compile Include="UI\Views\AjoutPlatAdmin.xaml.cs">
-      <DependentUpon>AjoutPlatAdmin.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Views\AjoutPlatMembre.xaml.cs">
-      <DependentUpon>AjoutPlatMembre.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Views\APropos.xaml.cs">
-      <DependentUpon>APropos.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Views\Bannissement.xaml.cs">
-      <DependentUpon>Bannissement.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Views\FenetreCalculatriceNutritionnelle.xaml.cs">
-      <DependentUpon>FenetreCalculatriceNutritionnelle.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Views\CreationProfil.xaml.cs">
-      <DependentUpon>CreationProfil.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Views\Don.xaml.cs">
+    <Compile Include="UI\Converter\BoolToOppositeBoolConverter.cs" />
+    <Compile Include="UI\Pages\Don.xaml.cs">
       <DependentUpon>Don.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\EcranMenu.xaml.cs">
-      <DependentUpon>EcranMenu.xaml</DependentUpon>
+    <Compile Include="UI\Pages\Information.xaml.cs">
+      <DependentUpon>Information.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FenetreAjoutPlatAdmin.xaml.cs">
+      <DependentUpon>FenetreAjoutPlatAdmin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FenetreAjoutPlatMembre.xaml.cs">
+      <DependentUpon>FenetreAjoutPlatMembre.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FenetreAPropos.xaml.cs">
+      <DependentUpon>FenetreAPropos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FenetreBannissement.xaml.cs">
+      <DependentUpon>FenetreBannissement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FenetreCreationProfil.xaml.cs">
+      <DependentUpon>FenetreCreationProfil.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FenetreDon.xaml.cs">
+      <DependentUpon>FenetreDon.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\FenetreAide.xaml.cs">
       <DependentUpon>FenetreAide.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FenetreCalculatriceNutritionnelle.xaml.cs">
+      <DependentUpon>FenetreCalculatriceNutritionnelle.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\FenetreConnexion.xaml.cs">
       <DependentUpon>FenetreConnexion.xaml</DependentUpon>
@@ -132,30 +149,50 @@
     <Compile Include="UI\Views\FenetreInfoMembre.xaml.cs">
       <DependentUpon>FenetreInfoMembre.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Views\FenetreIngredients.xaml.cs">
+      <DependentUpon>FenetreIngredients.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FenetreGenerateurMenus.xaml.cs">
+      <DependentUpon>FenetreGenerateurMenus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FenetreGestionAdmin.xaml.cs">
+      <DependentUpon>FenetreGestionAdmin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FenetreGestionRepertoire.xaml.cs">
+      <DependentUpon>FenetreGestionRepertoire.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FenetreListeEpicerie.xaml.cs">
+      <DependentUpon>FenetreListeEpicerie.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FenetreMenuAdministrateur.xaml.cs">
+      <DependentUpon>FenetreMenuAdministrateur.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FenetreMenuPrincipal.xaml.cs">
+      <DependentUpon>FenetreMenuPrincipal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FenetreMenuPrincipalConnecte.xaml.cs">
+      <DependentUpon>FenetreMenuPrincipalConnecte.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FenetreModificationProfil.xaml.cs">
+      <DependentUpon>FenetreModificationProfil.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\FenetreParametres.xaml.cs">
       <DependentUpon>FenetreParametres.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\GenerateurMenus.xaml.cs">
-      <DependentUpon>GenerateurMenus.xaml</DependentUpon>
+    <Compile Include="UI\Views\FenetreVotes.xaml.cs">
+      <DependentUpon>FenetreVotes.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\GestionAdmin.xaml.cs">
-      <DependentUpon>GestionAdmin.xaml</DependentUpon>
+    <Compile Include="UI\Views\StackPlatAliment.xaml.cs">
+      <DependentUpon>StackPlatAliment.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\GestionRepertoire.xaml.cs">
-      <DependentUpon>GestionRepertoire.xaml</DependentUpon>
+    <Compile Include="UI\Views\TabValeurNutri.xaml.cs">
+      <DependentUpon>TabValeurNutri.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\ListeEpicerie.xaml.cs">
-      <DependentUpon>ListeEpicerie.xaml</DependentUpon>
+    <Compile Include="UI\Views\SearchBox.xaml.cs">
+      <DependentUpon>SearchBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\MenuAdministrateur.xaml.cs">
-      <DependentUpon>MenuAdministrateur.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Views\MenuPrincipal.xaml.cs">
-      <DependentUpon>MenuPrincipal.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Views\ModificationProfil.xaml.cs">
-      <DependentUpon>ModificationProfil.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="UI\Watermark\WatermarkAdorner.cs" />
+    <Compile Include="UI\Watermark\WatermarkService.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -168,39 +205,47 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UI\Views\AjoutPlatAdmin.xaml">
+    <Page Include="UI\Pages\Don.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Views\AjoutPlatMembre.xaml">
+    <Page Include="UI\Pages\Information.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Views\APropos.xaml">
+    <Page Include="UI\Ressources\Style.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Views\Bannissement.xaml">
+    <Page Include="UI\Views\FenetreAjoutPlatAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Views\FenetreCalculatriceNutritionnelle.xaml">
+    <Page Include="UI\Views\FenetreAjoutPlatMembre.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Views\CreationProfil.xaml">
+    <Page Include="UI\Views\FenetreAPropos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Views\Don.xaml">
+    <Page Include="UI\Views\FenetreBannissement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Views\EcranMenu.xaml">
+    <Page Include="UI\Views\FenetreCreationProfil.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\FenetreDon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Views\FenetreAide.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\FenetreCalculatriceNutritionnelle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -212,35 +257,59 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Views\FenetreIngredients.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\FenetreGenerateurMenus.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\FenetreGestionAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\FenetreGestionRepertoire.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\FenetreListeEpicerie.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\FenetreMenuAdministrateur.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\FenetreMenuPrincipal.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\FenetreMenuPrincipalConnecte.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\FenetreModificationProfil.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Views\FenetreParametres.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Views\GenerateurMenus.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Views\GestionAdmin.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Views\GestionRepertoire.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Views\ListeEpicerie.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Views\MenuAdministrateur.xaml">
+    <Page Include="UI\Views\FenetreVotes.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UI\Views\MenuPrincipal.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="UI\Views\StackPlatAliment.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Views\ModificationProfil.xaml">
+    <Page Include="UI\Views\TabValeurNutri.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\SearchBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -262,6 +331,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -294,6 +364,80 @@
   <ItemGroup>
     <Resource Include="UI\Images\notifIcon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\retour.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\minusIcon.png" />
+    <Resource Include="UI\Images\plusIcon.png" />
+    <Resource Include="UI\Images\tooltip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\regenererIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\couscousVege.png" />
+    <Resource Include="UI\Images\escargotsAil.png" />
+    <Resource Include="UI\Images\filetsPoissons.png" />
+    <Resource Include="UI\Images\jusOrange.png" />
+    <Resource Include="UI\Images\jusPomme.png" />
+    <Resource Include="UI\Images\omelette.png" />
+    <Resource Include="UI\Images\saladeFruits.png" />
+    <Resource Include="UI\Images\saladeGrecque.png" />
+    <Resource Include="UI\Images\smoothieFraisesBananes.png" />
+    <Resource Include="UI\Images\spaghetti.png" />
+    <Resource Include="UI\Images\theGlace.png" />
+    <Resource Include="UI\Images\wrapPoulet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\logoIconPetit.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\macaroniChinois.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\pateChinoisVege.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\pizzaPochettes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\patesCrevettes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\filetMignonChampignons.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\eau.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\gateauCarottes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\tarteSucre.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\nonDisponible.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\Images\Cartes_Credit\amex.png" />
+    <Resource Include="UI\Images\Cartes_Credit\mastercard.png" />
+    <Resource Include="UI\Images\Cartes_Credit\visa.png" />
+    <Resource Include="UI\Images\platsIcon.png" />
+    <Resource Include="UI\Images\poubelleIcon.png" />
+    <Resource Include="UI\Images\panierIcon.png" />
+    <Resource Include="UI\Images\journalIcon.png" />
+    <Resource Include="UI\Images\infoIcon.png" />
+    <Resource Include="UI\Images\hamburger.png" />
+    <Resource Include="UI\Images\etoileIcon.png" />
+    <Resource Include="UI\Images\engrenageIcon.png" />
+    <Resource Include="UI\Images\ProfilIcon.png" />
+    <Resource Include="UI\Images\voterPlatIcon.png" />
+    <Resource Include="UI\Images\AjoutIcon.png" />
+    <Content Include="Toolkit\WPFToolkit\System.Windows.Controls.Layout.Toolkit.dll" />
+    <Content Include="Toolkit\WPFToolkit\WPFToolkit.dll" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
