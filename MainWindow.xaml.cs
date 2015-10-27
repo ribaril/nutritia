@@ -52,7 +52,7 @@ namespace Nutritia
 
 		private void btnParam_Click(object sender, RoutedEventArgs e)
 		{
-			ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new FenetreParametre());
+            (new FenetreParametres()).ShowDialog();
 		}
 
 		private void btnRetour_Click(object sender, RoutedEventArgs e)

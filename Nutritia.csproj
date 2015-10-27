@@ -143,9 +143,6 @@
     <Compile Include="UI\Views\FenetreIngredients.xaml.cs">
       <DependentUpon>FenetreIngredients.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\FenetreParametres.xaml.cs">
-      <DependentUpon>FenetreParametres.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UI\Views\FenetreGenerateurMenus.xaml.cs">
       <DependentUpon>FenetreGenerateurMenus.xaml</DependentUpon>
     </Compile>
@@ -169,6 +166,9 @@
     </Compile>
     <Compile Include="UI\Views\FenetreModificationProfil.xaml.cs">
       <DependentUpon>FenetreModificationProfil.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FenetreParametres.xaml.cs">
+      <DependentUpon>FenetreParametres.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\FenetreVotes.xaml.cs">
       <DependentUpon>FenetreVotes.xaml</DependentUpon>
@@ -252,10 +252,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Views\FenetreParametres.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UI\Views\FenetreGenerateurMenus.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -285,6 +281,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Views\FenetreModificationProfil.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\FenetreParametres.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
