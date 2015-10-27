@@ -180,6 +180,9 @@
     <Compile Include="UI\Views\FenetreParametres.xaml.cs">
       <DependentUpon>FenetreParametres.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Views\FenetreVote.xaml.cs">
+      <DependentUpon>FenetreVote.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\FenetreVotes.xaml.cs">
       <DependentUpon>FenetreVotes.xaml</DependentUpon>
     </Compile>
@@ -295,6 +298,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Views\FenetreParametres.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\FenetreVote.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
