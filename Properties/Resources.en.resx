@@ -118,171 +118,171 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Aide" xml:space="preserve">
-    <value> Aide</value>
+    <value> Help</value>
   </data>
   <data name="Allergie" xml:space="preserve">
     <value>Allergies</value>
   </data>
   <data name="ArachideNoix" xml:space="preserve">
-    <value>Arachides et noix</value>
+    <value>Peanuts and walnuts</value>
   </data>
   <data name="Article" xml:space="preserve">
-    <value>Article</value>
+    <value>Item</value>
   </data>
   <data name="Autre" xml:space="preserve">
-    <value>Autres</value>
+    <value>Others</value>
   </data>
   <data name="CalculatriceNutritionnelle" xml:space="preserve">
-    <value>Calculatrice Nutritionnelle</value>
+    <value>Nutritional Calculator</value>
   </data>
   <data name="Cholesterol" xml:space="preserve">
-    <value>Cholestérol</value>
+    <value>Cholesterol</value>
   </data>
   <data name="Connecter" xml:space="preserve">
-    <value>Se connecter</value>
+    <value>Connect</value>
   </data>
   <data name="CreerProfil" xml:space="preserve">
-    <value>Créer le profil</value>
+    <value>Create profil</value>
   </data>
   <data name="CtrlCholecterol" xml:space="preserve">
-    <value>Contrôle du cholestérol</value>
+    <value>Cholesterol control</value>
   </data>
   <data name="CtrlGlycemique" xml:space="preserve">
-    <value>Contrôle glycémique</value>
+    <value>Glycemic control</value>
   </data>
   <data name="DateNaissance" xml:space="preserve">
-    <value>Date de naissance</value>
+    <value>Date of birth</value>
   </data>
   <data name="Diabete" xml:space="preserve">
-    <value>Diabète</value>
+    <value>Diabetes</value>
   </data>
   <data name="GainMusculaire" xml:space="preserve">
-    <value>Gain musculaire</value>
+    <value>Muscular gain</value>
   </data>
   <data name="GainPoids" xml:space="preserve">
-    <value>Gain de poids</value>
+    <value>Weight gain</value>
   </data>
   <data name="Generer" xml:space="preserve">
-    <value>Générer</value>
+    <value>Generate</value>
   </data>
   <data name="Gluten" xml:space="preserve">
     <value>Gluten</value>
   </data>
   <data name="HauteBassePression" xml:space="preserve">
-    <value>Haute/basse pression</value>
+    <value>High/low pressure</value>
   </data>
   <data name="Imprimer" xml:space="preserve">
-    <value>Imprimer</value>
+    <value>Print</value>
   </data>
   <data name="Inscrire" xml:space="preserve">
-    <value>S'inscrire</value>
+    <value>Register</value>
   </data>
   <data name="Lactose" xml:space="preserve">
     <value>Lactose</value>
   </data>
   <data name="ListeEpicerie" xml:space="preserve">
-    <value>Liste d'épicerie</value>
+    <value>Shopping list</value>
   </data>
   <data name="Masse" xml:space="preserve">
-    <value>Masse (kg)</value>
+    <value>Mass (kg)</value>
   </data>
   <data name="MenuEpicerie" xml:space="preserve">
-    <value>Menu &amp; liste d'épicerie</value>
+    <value>Menu &amp; shopping list</value>
   </data>
   <data name="MotDePasse" xml:space="preserve">
-    <value>Mot de passe actuel</value>
+    <value>Current password</value>
   </data>
   <data name="NbrPersonne" xml:space="preserve">
-    <value>Nombre de personne</value>
+    <value>Number of people</value>
   </data>
   <data name="Nom" xml:space="preserve">
-    <value>Nom</value>
+    <value>Name</value>
   </data>
   <data name="NomUtilisateur" xml:space="preserve">
-    <value>Nom d'utilisateur</value>
+    <value>Username</value>
   </data>
   <data name="NvMotDePasse" xml:space="preserve">
-    <value>Nouveau mot de passe</value>
+    <value>New password</value>
   </data>
   <data name="Objectif" xml:space="preserve">
-    <value>Objectifs</value>
+    <value>Goals</value>
   </data>
   <data name="OuvrirMenu" xml:space="preserve">
-    <value>Ouvrir un menu existant</value>
+    <value>Open existing menu</value>
   </data>
   <data name="Parametres" xml:space="preserve">
-    <value> Paramètres</value>
+    <value> Settings</value>
   </data>
   <data name="Pate" xml:space="preserve">
-    <value>Pâtes</value>
+    <value>Pasta</value>
   </data>
   <data name="Periode" xml:space="preserve">
-    <value>Période</value>
+    <value>Period</value>
   </data>
   <data name="PertePoids" xml:space="preserve">
-    <value>Perte de poids</value>
+    <value>Weight lost</value>
   </data>
   <data name="PoissonFruitMer" xml:space="preserve">
-    <value>Poissons et fruits de mer</value>
+    <value>Fish and seafood</value>
   </data>
   <data name="Preference" xml:space="preserve">
-    <value>Préférences</value>
+    <value>Preferences</value>
   </data>
   <data name="Prenom" xml:space="preserve">
-    <value>Prénom</value>
+    <value>First name</value>
   </data>
   <data name="Quantite" xml:space="preserve">
-    <value>Quantité</value>
+    <value>Quantity</value>
   </data>
   <data name="RestrictionAlimentaire" xml:space="preserve">
-    <value>Restrictions alimentaires</value>
+    <value>Dietary restrictions</value>
   </data>
   <data name="Taille" xml:space="preserve">
-    <value>Taille (cm)</value>
+    <value>Height (cm)</value>
   </data>
   <data name="UneSemaine" xml:space="preserve">
-    <value>Une semaine</value>
+    <value>One week</value>
   </data>
   <data name="UniteMesure" xml:space="preserve">
-    <value>Unité de mesure</value>
+    <value>Unit of measure</value>
   </data>
   <data name="UnJour" xml:space="preserve">
-    <value>Un jour</value>
+    <value>One day</value>
   </data>
   <data name="UnRepas" xml:space="preserve">
-    <value>Un repas</value>
+    <value>One meal</value>
   </data>
   <data name="Vegetalien" xml:space="preserve">
-    <value>Végétalien</value>
+    <value>Vegan</value>
   </data>
   <data name="Vegetarien" xml:space="preserve">
-    <value>Végétarien</value>
+    <value>Vegetarian</value>
   </data>
   <data name="Viande" xml:space="preserve">
-    <value>Viandes</value>
+    <value>Meats</value>
   </data>
   <data name="Accepter" xml:space="preserve">
-    <value>Accepter</value>
+    <value>Accept</value>
   </data>
   <data name="Admin" xml:space="preserve">
     <value>Admin</value>
   </data>
   <data name="Administrateurs" xml:space="preserve">
-    <value>Administrateurs</value>
+    <value>Administrators</value>
   </data>
   <data name="Compte" xml:space="preserve">
-    <value>Compte</value>
+    <value>Account</value>
   </data>
   <data name="RechercheMembre" xml:space="preserve">
-    <value>Rechercher un membre</value>
+    <value>Search for a member</value>
   </data>
   <data name="APropos" xml:space="preserve">
-    <value> À propos</value>
+    <value> About</value>
   </data>
   <data name="Retour" xml:space="preserve">
-    <value> Retour</value>
+    <value> Return</value>
   </data>
   <data name="An" xml:space="preserve">
-    <value>an</value>
+    <value>year</value>
   </data>
 </root>

@@ -11,17 +11,17 @@
             <Label HorizontalAlignment="Center" FontWeight="Bold" Margin="0,30,0,20">Langues d'affichage du logiciel</Label>
             <DataGrid Name="dgLangues" HorizontalAlignment="Center" Width="200" CanUserAddRows="False" AutoGenerateColumns="False" CanUserDeleteRows="False" SelectionMode="Single">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Langue" Width="6*" Binding="{Binding Nom}"/>
-                    <DataGridTemplateColumn Header="Active" Width="2*">
+                    <DataGridTextColumn Header="Langue" IsReadOnly="True" Width="6*" Binding="{Binding Nom}"/>
+                    <DataGridTemplateColumn IsReadOnly="False" Header="Active" Width="2*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <RadioButton HorizontalAlignment="Center" GroupName="grpActif" IsChecked="{Binding Actif}"/>
+                                <RadioButton HorizontalAlignment="Center" GroupName="grpActif" IsChecked="{Binding Actif, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Style="{StaticResource nonTransparent}" Margin="0,40,0,0" HorizontalAlignment="Center">Enregistrer</Button>
+            <Button Style="{StaticResource nonTransparent}" IsDefault="True" Margin="0,40,0,0" HorizontalAlignment="Center" Click="Button_Click">Enregistrer</Button>
         </StackPanel>
     </Grid>
 </Window>
