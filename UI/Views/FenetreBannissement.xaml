@@ -30,25 +30,27 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+                    <DataGridTextColumn FontSize="10"  Binding="{Binding NomUtilisateur}" Header="Nom Utilisateur"/>
                     <DataGridTextColumn FontSize="10" Binding="{Binding Prenom}" Header="Prénom"/>
                     <DataGridTextColumn FontSize="10" Binding="{Binding Nom}" Header="Nom"  />
-                    <DataGridTextColumn FontSize="10"  Binding="{Binding NomUtilisateur}" Header="Utilisateur"/>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
         <GroupBox Grid.Row="1" Grid.Column="1" Header="Membre" HorizontalAlignment="Center" Width="285" Margin="0,0,0,10">
-            <local:SearchBox x:Name="dgRecherche" Margin="0,0,-2,143" WatermarkContent="Nom de compte" FilterMode="StartWith" SelectionMode="Single">
+            <local:SearchBox x:Name="dgRecherche" Margin="0,0,-2,-12" WatermarkContent="Nom de compte" FilterMode="StartWith" SelectionMode="Single">
                 <local:SearchBox.Columns>
-                    <DataGridTemplateColumn Header="Banni" IsReadOnly="False" Width="50">
+                    <DataGridTemplateColumn Header="Banni" IsReadOnly="True" Width="50">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <CheckBox HorizontalAlignment="Center" IsChecked="{Binding Path=EstBanni, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+                    <DataGridTextColumn IsReadOnly="True" Header="Utilisateur" Binding="{Binding NomUtilisateur}"/>
                     <DataGridTextColumn IsReadOnly="True" Header="Prénom" Binding="{Binding Prenom}"/>
                     <DataGridTextColumn IsReadOnly="True" Header="Nom" Binding="{Binding Nom}"/>
-                    <DataGridTextColumn IsReadOnly="True" Header="Utilisateur" Binding="{Binding NomUtilisateur}"/>
+                    
+
                 </local:SearchBox.Columns>
             </local:SearchBox>
         </GroupBox>
