@@ -166,14 +166,6 @@ namespace Nutritia.UI.Views
 			presenteurContenu2.Content = Plateau;
 			lstIdPresent = new List<int?>();
 
-			TextBlock tbSectionPl = new TextBlock();
-			tbSectionPl.Style = (Style)(this.Resources["fontNutitia"]);
-			tbSectionPl.FontSize = 12;
-
-			tbSectionPl.Text = "Plats :";
-			Plateau.stackEcran.Children.Add(tbSectionPl);
-
-
 			foreach (var plat in PlateauPlat)
 			{
 				Button btnPlat = FormerListeLignePlatAliment(false, plat, lstIdPresent);
@@ -181,14 +173,6 @@ namespace Nutritia.UI.Views
 				if (btnPlat != null)
 					Plateau.stackEcran.Children.Add(btnPlat);
 			}
-
-			TextBlock tbSectionAl = new TextBlock();
-			tbSectionAl.Style = (Style)(this.Resources["fontNutitia"]);
-			tbSectionAl.FontSize = 12;
-
-			tbSectionAl.Text = "Aliment :";
-			Plateau.stackEcran.Children.Add(tbSectionAl);
-			
 
 			foreach (var aliment in PlateauAliment)
 			{
