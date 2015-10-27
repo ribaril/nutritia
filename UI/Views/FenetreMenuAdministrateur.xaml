@@ -13,20 +13,21 @@
                     <Setter Property="Margin" Value="0, 10, 0, 0"/>
                 </Style>
             </StackPanel.Resources>
-            <Label HorizontalAlignment="Center" Foreground="DarkGreen" FontSize="30" FontFamily="Berlin Sans FB Demi">Administration</Label>
-            <Button Name="btnRepertoire" Width="100" Height="100" Click="btnRepertoire_Click">
-                <Rectangle Width="100" Height="100" Fill="CornflowerBlue" ToolTip="Image répertoire"></Rectangle>
-            </Button>
-            <Label HorizontalAlignment="Center" Foreground="DarkGreen" FontSize="24" FontFamily="Berlin Sans FB Demi">Gestion de répertoire de données</Label>
-            <Button Name="btngestionAdmin" Width="100" Height="100" Click="btngestionAdmin_Click">
-                <Rectangle Width="100" Height="100" Fill="CornflowerBlue" ToolTip="Image cadenas"></Rectangle>
-            </Button>
-            <Label HorizontalAlignment="Center" Foreground="DarkGreen" FontSize="24" FontFamily="Berlin Sans FB Demi">Gestion des administrateurs</Label>
-            <Button Name="btnBanUtilisateur" Width="100" Height="100" Click="btnBanUtilisateur_Click">
-                <Rectangle Width="100" Height="100" Fill="CornflowerBlue" ToolTip="Image banhammer"></Rectangle>
-            </Button>
-            <Label HorizontalAlignment="Center" Foreground="DarkGreen" FontSize="24" FontFamily="Berlin Sans FB Demi">Bannissement de membres</Label>
+            <Label HorizontalAlignment="Center" Foreground="DarkGreen" Margin="0,-10,0,10" FontSize="30" FontFamily="Berlin Sans FB Demi">Administration</Label>
 
+            <Label HorizontalAlignment="Center" Foreground="DarkGreen" FontSize="22" FontFamily="Berlin Sans FB Demi">Gestion de répertoire de données</Label>
+            <Button Name="btnRepertoire" Width="80" Height="80" Click="btnRepertoire_Click">
+                <Image Width="64" Height="75" Source="/Nutritia;component/UI/Images/baseDonnee.PNG"/>
+            </Button>
+
+            <Label HorizontalAlignment="Center" Foreground="DarkGreen" FontSize="22" FontFamily="Berlin Sans FB Demi">Gestion des administrateurs</Label>
+            <Button Name="btngestionAdmin" Width="80" Height="80" Click="btngestionAdmin_Click">
+                <Image Width="64" Height="75" Source="/Nutritia;component/UI/Images/cadenas.PNG"/>
+            </Button>
+            <Label HorizontalAlignment="Center" Foreground="DarkGreen" FontSize="22" FontFamily="Berlin Sans FB Demi">Bannissement de membres</Label>
+            <Button Name="btnBanUtilisateur" Width="80" Height="80" Click="btnBanUtilisateur_Click">
+                <Image Width="75" Height="75" Source="/Nutritia;component/UI/Images/ban.PNG"/>
+            </Button>
         </StackPanel>
     </Grid>
 </UserControl>
