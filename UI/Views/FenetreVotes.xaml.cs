@@ -93,7 +93,8 @@ namespace Nutritia.UI.Views
         /// <param name="e"></param>
         private void btnVoter_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Fonctionnalité à venir dans la version 1 de Nutritia.");
+            FenetreVote popupVote = new FenetreVote();
+            popupVote.ShowDialog();
         }
     }
 }
