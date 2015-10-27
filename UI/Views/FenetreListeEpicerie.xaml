@@ -9,6 +9,7 @@
         <Style TargetType="DataGrid">
             <Setter Property="CanUserAddRows" Value="False" />
             <Setter Property="AutoGenerateColumns" Value="False" />
+            <Setter Property="HorizontalScrollBarVisibility" Value="Disabled" />
             <Setter Property="HeadersVisibility" Value="Column" />
             <Setter Property="GridLinesVisibility" Value="Vertical" />
             <Setter Property="VerticalGridLinesBrush" Value="DarkGreen" />

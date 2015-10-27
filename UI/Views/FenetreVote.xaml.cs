@@ -45,6 +45,7 @@ namespace Nutritia.UI.Views
         private void btnConfirmer_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Fonctionnalité à venir dans la version 1.");
+            Close();
         }
     }
 }
