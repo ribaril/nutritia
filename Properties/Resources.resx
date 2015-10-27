@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Aide" xml:space="preserve">
-    <value>Aide</value>
+    <value> Aide</value>
   </data>
   <data name="Allergie" xml:space="preserve">
     <value>Allergies</value>
@@ -174,9 +174,6 @@
   <data name="Imprimer" xml:space="preserve">
     <value>Imprimer</value>
   </data>
-  <data name="Information" xml:space="preserve">
-    <value>Information</value>
-  </data>
   <data name="Inscrire" xml:space="preserve">
     <value>S'inscrire</value>
   </data>
@@ -213,8 +210,8 @@
   <data name="OuvrirMenu" xml:space="preserve">
     <value>Ouvrir un menu existant</value>
   </data>
-  <data name="Parametre" xml:space="preserve">
-    <value>Paramètre</value>
+  <data name="Parametres" xml:space="preserve">
+    <value> Paramètres</value>
   </data>
   <data name="Pate" xml:space="preserve">
     <value>Pâtes</value>
@@ -263,5 +260,29 @@
   </data>
   <data name="Viande" xml:space="preserve">
     <value>Viandes</value>
+  </data>
+  <data name="Accepter" xml:space="preserve">
+    <value>Accepter</value>
+  </data>
+  <data name="Admin" xml:space="preserve">
+    <value>Admin</value>
+  </data>
+  <data name="Administrateurs" xml:space="preserve">
+    <value>Administrateurs</value>
+  </data>
+  <data name="Compte" xml:space="preserve">
+    <value>Compte</value>
+  </data>
+  <data name="RechercheMembre" xml:space="preserve">
+    <value>Rechercher un membre</value>
+  </data>
+  <data name="APropos" xml:space="preserve">
+    <value> À propos</value>
+  </data>
+  <data name="Retour" xml:space="preserve">
+    <value> Retour</value>
+  </data>
+  <data name="An" xml:space="preserve">
+    <value>an</value>
   </data>
 </root>

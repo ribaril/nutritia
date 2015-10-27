@@ -61,7 +61,34 @@ namespace Nutritia.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Aide.
+        ///   Looks up a localized string similar to Accepter.
+        /// </summary>
+        public static string Accepter {
+            get {
+                return ResourceManager.GetString("Accepter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Admin.
+        /// </summary>
+        public static string Admin {
+            get {
+                return ResourceManager.GetString("Admin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Administrateurs.
+        /// </summary>
+        public static string Administrateurs {
+            get {
+                return ResourceManager.GetString("Administrateurs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  Aide.
         /// </summary>
         public static string Aide {
             get {
@@ -75,6 +102,24 @@ namespace Nutritia.Properties {
         public static string Allergie {
             get {
                 return ResourceManager.GetString("Allergie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to an.
+        /// </summary>
+        public static string An {
+            get {
+                return ResourceManager.GetString("An", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  À propos.
+        /// </summary>
+        public static string APropos {
+            get {
+                return ResourceManager.GetString("APropos", resourceCulture);
             }
         }
         
@@ -120,6 +165,15 @@ namespace Nutritia.Properties {
         public static string Cholesterol {
             get {
                 return ResourceManager.GetString("Cholesterol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compte.
+        /// </summary>
+        public static string Compte {
+            get {
+                return ResourceManager.GetString("Compte", resourceCulture);
             }
         }
         
@@ -232,15 +286,6 @@ namespace Nutritia.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Information.
-        /// </summary>
-        public static string Information {
-            get {
-                return ResourceManager.GetString("Information", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to S&apos;inscrire.
         /// </summary>
         public static string Inscrire {
@@ -349,11 +394,11 @@ namespace Nutritia.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Paramètre.
+        ///   Looks up a localized string similar to  Paramètres.
         /// </summary>
-        public static string Parametre {
+        public static string Parametres {
             get {
-                return ResourceManager.GetString("Parametre", resourceCulture);
+                return ResourceManager.GetString("Parametres", resourceCulture);
             }
         }
         
@@ -421,11 +466,29 @@ namespace Nutritia.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rechercher un membre.
+        /// </summary>
+        public static string RechercheMembre {
+            get {
+                return ResourceManager.GetString("RechercheMembre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Restrictions alimentaires.
         /// </summary>
         public static string RestrictionAlimentaire {
             get {
                 return ResourceManager.GetString("RestrictionAlimentaire", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  Retour.
+        /// </summary>
+        public static string Retour {
+            get {
+                return ResourceManager.GetString("Retour", resourceCulture);
             }
         }
         
