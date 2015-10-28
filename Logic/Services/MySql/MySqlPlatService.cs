@@ -198,7 +198,7 @@ namespace Nutritia
                 DataTable tableType = dataSetType.Tables[0];
                 int idTypePlat = (int)(tableType.Rows[0]["idTypePlat"]);
 
-                requete = string.Format("UPDATE Plats SET idTypePlat = {0} nom = '{1}', imageUrl = '{2}', note = {3} WHERE idPlat = {4}", idTypePlat, plat.Nom, plat.ImageUrl, plat.Nom, plat.IdPlat);
+                requete = string.Format("UPDATE Plats SET idTypePlat = {0}, nom = '{1}', imageUrl = '{2}', note = {3}, nbVotes = {4} WHERE idPlat = {5}", idTypePlat, plat.Nom, plat.ImageUrl, plat.Note, plat.NbVotes, plat.IdPlat);
 
                 connexion.Query(requete);
 
@@ -235,6 +235,7 @@ namespace Nutritia
                 Nom = (string)plat["nom"],
                 TypePlat = (string)plat["typePlat"],
                 Note = note,
+                NbVotes = (int)plat["nbVotes"],
                 ImageUrl = (string)plat["imageUrl"],
                 ListeIngredients = new List<Aliment>()
             };

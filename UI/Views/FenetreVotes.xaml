@@ -79,6 +79,10 @@
                                                 </Label.Style>
                                             </Label>
                                         </StackPanel>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <Label Style="{StaticResource fontNutritia}">Nombre de votes :</Label>
+                                            <Label Style="{StaticResource fontNutritia}" Content="{Binding NbVotes}"></Label>
+                                        </StackPanel>
                                         <Label Style="{StaticResource fontNutritia}" HorizontalAlignment="Center">Ajouté par</Label>
                                         <Label Style="{StaticResource fontNutritia}" Content="{Binding Createur}" HorizontalAlignment="Center"></Label>
                                     </StackPanel>

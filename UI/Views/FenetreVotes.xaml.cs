@@ -105,7 +105,9 @@ namespace Nutritia.UI.Views
         /// <param name="e"></param>
         private void btnVoter_Click(object sender, RoutedEventArgs e)
         {
-            FenetreVote popupVote = new FenetreVote();
+            Plat platSelectionne = (Plat)dgPlats.SelectedItem;
+
+            FenetreVote popupVote = new FenetreVote(platSelectionne);
             popupVote.ShowDialog();
         }
     }

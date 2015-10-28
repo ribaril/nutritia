@@ -166,9 +166,6 @@ namespace Nutritia
 
                     membre.ListeMenus = menuService.RetrieveSome(new RetrieveMenuArgs { IdMembre = (int)membre.IdMembre });
                 }
-                
-
-                
 
             }
             catch (MySqlException)
