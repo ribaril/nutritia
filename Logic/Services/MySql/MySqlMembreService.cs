@@ -236,21 +236,21 @@ namespace Nutritia
 
 				connexion.Query(requete);
 
-                // Ajout des restrictions alimentaires du membre.
+                // Mise à jour des restrictions alimentaires du membre.
                 foreach (RestrictionAlimentaire restriction in membre.ListeRestrictions)
                 {
                     requete = string.Format("UPDATE RestrictionsAlimentairesMembres SET idRestrictionAlimentaire = {0}, idMembre = {1} WHERE idMembre = {1}", restriction.IdRestrictionAlimentaire, membre.IdMembre);
                     connexion.Query(requete);
                 }
 
-                // Ajout des objectifs du membre.
+                // Mise à jour des objectifs du membre.
                 foreach (Objectif objectif in membre.ListeObjectifs)
                 {
                     requete = string.Format("UPDATE ObjectifsMembres SET idObjectif = {0}, idMembre = {1} WHERE idMembre = {1}", objectif.IdObjectif, membre.IdMembre);
                     connexion.Query(requete);
                 }
 
-                // Ajout des préférences du membre.
+                // Mise à jour des préférences du membre.
                 foreach (Preference preference in membre.ListePreferences)
                 {
                     requete = string.Format("UPDATE PreferencesMembres SET idPreference = {0}, idMembre = {1} WHERE idMembre = {1}", preference.IdPreference, membre.IdMembre);

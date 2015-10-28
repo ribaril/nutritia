@@ -32,17 +32,8 @@ namespace Nutritia.UI.Views
             InitializeComponent();
 
             PlatService = ServiceFactory.Instance.GetService<IPlatService>();
-            ListePlats = new ObservableCollection<Plat>();
 
-            // Plats "hardcodés" en guise de preuve de concept ...
-            Plat plat = PlatService.Retrieve(new RetrievePlatArgs { IdPlat = 1 });
-            plat.Createur = "ribaril";
-            plat.Note = 3;
-            ListePlats.Add(plat);
-            plat = PlatService.Retrieve(new RetrievePlatArgs { IdPlat = 2 });
-            plat.Createur = "cNoll";
-            plat.Note = 5;
-            ListePlats.Add(plat);
+            ListePlats = new ObservableCollection<Plat>(PlatService.RetrieveAll());
             dgPlats.ItemsSource = ListePlats;
         }
 
@@ -54,6 +45,8 @@ namespace Nutritia.UI.Views
         private void btnSelectionComplete_Click(object sender, RoutedEventArgs e)
         {
             gbContenu.Header = "Tous les plats";
+            ListePlats = new ObservableCollection<Plat>(PlatService.RetrieveAll());
+            dgPlats.ItemsSource = ListePlats;
         }
 
         /// <summary>
@@ -64,6 +57,8 @@ namespace Nutritia.UI.Views
         private void btnNouveautes_Click(object sender, RoutedEventArgs e)
         {
             gbContenu.Header = "Nouveautés";
+            ListePlats = new ObservableCollection<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { NbResultats = 10, Depart = "Fin" }));
+            dgPlats.ItemsSource = ListePlats;
         }
 
         /// <summary>
@@ -74,6 +69,20 @@ namespace Nutritia.UI.Views
         private void btnPlusPopulaires_Click(object sender, RoutedEventArgs e)
         {
             gbContenu.Header = "Les plus populaires";
+            ListePlats = new ObservableCollection<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { NbResultats = 10, PlusPopulaires = true }));
+            dgPlats.ItemsSource = ListePlats;
+        }
+
+        /// <summary>
+        /// Événement lancé lorsque la roulette de la souris est utilisée dans le "scrollviewer" contenant les plats.
+        /// Explicitement, cet événement permet de gérer le "scroll" avec la roulette correctement sur toute la surface du "scrollviewer".
+        /// Si on ne le gère pas, il est seulement possible de "scroller" lorsque le pointeur de la souris est situé sur la "scrollbar".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void svPlats_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            svPlats.ScrollToVerticalOffset(svPlats.VerticalOffset - e.Delta);
         }
 
         /// <summary>
@@ -83,7 +92,10 @@ namespace Nutritia.UI.Views
         /// <param name="e"></param>
         private void btnInformations_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Fonctionnalité à venir dans la version 1 de Nutritia.");
+            Plat platSelectionne = (Plat)dgPlats.SelectedItem;
+
+            FenetreIngredients fenetreIngredients = new FenetreIngredients(platSelectionne, 1);
+            fenetreIngredients.ShowDialog();
         }
 
         /// <summary>

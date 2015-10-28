@@ -44,7 +44,11 @@ namespace Nutritia.UI.Views
         /// <param name="e"></param>
         private void btnConfirmer_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Fonctionnalité à venir dans la version 1.");
+            // TODO : Ajouter le nb de votes dans le code et dans la bd.
+            // TODO : Ajouter une méthode update dans le service de plats.
+            // TODO : La maj des aliments dans le service update.
+            // TODO : Retirer les affaires des unites de mesures.
+            int note = Convert.ToInt32(((ComboBoxItem)cboNote.SelectedItem).Content);
             Close();
         }
     }

@@ -2,7 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
              d:DesignHeight="475" d:DesignWidth="650">
     <UserControl.Resources>
@@ -19,13 +19,13 @@
         </Grid.RowDefinitions>
         <Label Style="{StaticResource fontSousTitre}">Voter sur des plats</Label>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-            <Button Name="btnSelectionComplete" Margin="0, 0, 75, 0" Click="btnSelectionComplete_Click">
+            <Button Name="btnSelectionComplete" Margin="0, 0, 90, 0" Click="btnSelectionComplete_Click">
                 <Image Style="{StaticResource btnFiltre}" Source="pack://application:,,,/UI/Images/platsIcon.png"></Image>
                 <Button.ToolTip>
                     <ToolTip Style="{StaticResource toolTipNutritia}">Tous les plats</ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button Name="btnNouveautes" Margin="0, 0, 75, 0" Click="btnNouveautes_Click">
+            <Button Name="btnNouveautes" Margin="0, 0, 90, 0" Click="btnNouveautes_Click">
                 <Image Style="{StaticResource btnFiltre}" Source="pack://application:,,,/UI/Images/journalIcon.png"></Image>
                 <Button.ToolTip>
                     <ToolTip Style="{StaticResource toolTipNutritia}">Les plus récents</ToolTip>
@@ -38,11 +38,11 @@
                 </Button.ToolTip>
             </Button>
         </StackPanel>
-        <GroupBox Name="gbContenu" Grid.Row="2" Header="Tous les plats" Style="{StaticResource groupBoxNutritia}" Width="555" Height="305">
-            <ScrollViewer>
+        <GroupBox Name="gbContenu" Grid.Row="2" Header="Tous les plats" Style="{StaticResource groupBoxNutritia}" Width="575" Height="305">
+            <ScrollViewer Name="svPlats" PreviewMouseWheel="svPlats_PreviewMouseWheel">
                 <DataGrid Name="dgPlats" Style="{StaticResource dataGridPlats}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Width="2*" Binding="{Binding Nom}" Foreground="DarkGreen" IsReadOnly="True">
+                        <DataGridTextColumn Width="2.25*" Binding="{Binding Nom}" Foreground="DarkGreen" IsReadOnly="True">
                             <DataGridTextColumn.ElementStyle>
                                 <Style>
                                     <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
@@ -51,20 +51,33 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTemplateColumn Width="3*">
+                        <DataGridTemplateColumn Width="2.25*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Width="125" Height="110" Source="{Binding ImageUrl}"></Image>
+                                    <Image Width="100" Height="75" Source="{Binding ImageUrl}"></Image>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Width="3*">
+                        <DataGridTemplateColumn Width="3.5*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center">
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <Label Style="{StaticResource fontNutritia}">Note (Sur 5) : </Label>
-                                            <Label Style="{StaticResource fontNutritia}" Content="{Binding Note}"></Label>
+                                            <Label>
+                                                <Label.Style>
+                                                    <Style TargetType="{x:Type Label}" BasedOn="{StaticResource fontNutritia}">
+                                                        <Style.Setters>
+                                                            <Setter Property="Content" Value="{Binding Note}" />
+                                                        </Style.Setters>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Note}" Value="{x:Null}">
+                                                                <Setter Property="Content" Value="Aucune" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Label.Style>
+                                            </Label>
                                         </StackPanel>
                                         <Label Style="{StaticResource fontNutritia}" HorizontalAlignment="Center">Ajouté par</Label>
                                         <Label Style="{StaticResource fontNutritia}" Content="{Binding Createur}" HorizontalAlignment="Center"></Label>
