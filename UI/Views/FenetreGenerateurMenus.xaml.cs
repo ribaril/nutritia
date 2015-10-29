@@ -36,8 +36,10 @@ namespace Nutritia.UI.Views
         {
             InitializeComponent();
 
-            btnOuvrirMenu.IsEnabled = false;
-            btnListeEpicerie.IsEnabled = false;
+            if(String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
+            {
+                btnOuvrirMenu.IsEnabled = false;
+            }
 
             PlatService = ServiceFactory.Instance.GetService<IPlatService>();
 
@@ -102,6 +104,18 @@ namespace Nutritia.UI.Views
             lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
             Grid.SetRow(lblSeparateur, index);
             grdMenus.Children.Add(lblSeparateur);
+        }
+
+        /// <summary>
+        /// Événement lancé sur un clique du bouton "Ouvrir un menu".
+        /// Permet d'ouvrir un menu précédemment généré par un membre.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnOuvrirMenu_Click(object sender, RoutedEventArgs e)
+        {
+            FenetreOuvrirMenu popupOuvertureMenu = new FenetreOuvrirMenu();
+            popupOuvertureMenu.ShowDialog();
         }
         
         /// <summary>
@@ -181,7 +195,19 @@ namespace Nutritia.UI.Views
             }
 
             dgMenus.ItemsSource = MenuGenere.ListePlats;
+            btnSauvegarder.IsEnabled = true;
             btnListeEpicerie.IsEnabled = true;
+        }
+
+        /// <summary>
+        /// Événement lancé sur un clique du bouton Sauvegarder.
+        /// Permet de sauvegarder un menu.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSauvegarder_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Fonctionnalité à venir");
         }
 
         /// <summary>

@@ -177,6 +177,9 @@
     <Compile Include="UI\Views\FenetreModificationProfil.xaml.cs">
       <DependentUpon>FenetreModificationProfil.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Views\FenetreOuvrirMenu.xaml.cs">
+      <DependentUpon>FenetreOuvrirMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\FenetreParametres.xaml.cs">
       <DependentUpon>FenetreParametres.xaml</DependentUpon>
     </Compile>
@@ -294,6 +297,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Views\FenetreModificationProfil.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\FenetreOuvrirMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -428,6 +435,7 @@
     <Resource Include="UI\Images\nonDisponible.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="UI\Images\disquetteIcon.png" />
     <Resource Include="UI\Images\ban.png" />
     <Resource Include="UI\Images\baseDonnee.png" />
     <Resource Include="UI\Images\cadenas.png" />

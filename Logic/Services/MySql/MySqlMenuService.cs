@@ -132,6 +132,7 @@ namespace Nutritia
             return new Menu()
             {
                 IdMenu = (int)menu["idMenu"],
+                Nom = (string)menu["nom"],
                 DateCreation = (DateTime)menu["dateMenu"],
                 ListePlats = new List<Plat>()
             };
