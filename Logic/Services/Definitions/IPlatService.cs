@@ -12,5 +12,6 @@ namespace Nutritia
         IList<Plat> RetrieveSome(RetrievePlatArgs args);
         Plat Retrieve(RetrievePlatArgs args);
         IList<Aliment> RetrieveAlimentsPlat(RetrievePlatArgs args);
+        void Update(Plat plat);
     }
 }

@@ -71,7 +71,43 @@ namespace Nutritia
             {
                 connexion = new MySqlConnexion();
 
-                string requete = string.Format("SELECT * FROM Plats p INNER JOIN TypesPlats tp ON tp.idTypePlat = p.idTypePlat INNER JOIN Membres m ON m.idMembre = p.idMembre WHERE typePlat = '{0}'", args.Categorie);
+                string requete = "SELECT * FROM Plats p INNER JOIN TypesPlats tp ON tp.idTypePlat = p.idTypePlat INNER JOIN Membres m ON m.idMembre = p.idMembre";
+
+                if(args.Categorie != null && args.Categorie != string.Empty)
+                {
+                    requete += string.Format(" WHERE typePlat = '{0}'", args.Categorie);
+                }
+
+                if(args.NbResultats != null)
+                {
+                    if(args.PlusPopulaires == true)
+                    {
+                        requete += " ORDER BY note DESC ";
+                    }
+                    else if (args.PlusPopulaires == false)
+                    {
+                        requete += " ORDER BY note ASC ";
+                    }
+                    else if(args.PlusPopulaires == null)
+                    {
+                        if (args.Depart != null && args.Depart != string.Empty)
+                        {
+                            requete += " ORDER BY idPlat ";
+
+                            if (args.Depart == "Fin")
+                            {
+                                requete += "DESC";
+                            }
+                            else
+                            {
+                                requete += "ASC";
+                            }
+                        }
+                    }
+
+                    requete += string.Format(" LIMIT {0} ", args.NbResultats);
+
+                }
 
                 DataSet dataSetPlats = connexion.Query(requete);
                 DataTable tablePlats = dataSetPlats.Tables[0];
@@ -146,6 +182,45 @@ namespace Nutritia
         }
 
         /// <summary>
+        /// Méthode permettant de mettre à jour un plat dans la base de données.
+        /// </summary>
+        /// <param name="plat">Le plat à mettre à jour.</param>
+        public void Update(Plat plat)
+        {
+            try
+            {
+                connexion = new MySqlConnexion();
+
+                // Obtenir le idTypePlat.
+                string requete = string.Format("SELECT idTypePlat FROM TypesPlats WHERE typePlat = '{0}'", plat.TypePlat);
+
+                DataSet dataSetType = connexion.Query(requete);
+                DataTable tableType = dataSetType.Tables[0];
+                int idTypePlat = (int)(tableType.Rows[0]["idTypePlat"]);
+
+                string note = plat.Note.ToString();
+                
+                if(note.Contains(","))
+                {
+                    note = note.Replace(",", ".");
+                }
+
+                requete = string.Format("UPDATE Plats SET idTypePlat = {0}, nom = '{1}', imageUrl = '{2}', note = {3}, nbVotes = {4} WHERE idPlat = {5}", idTypePlat, plat.Nom.Replace("'", "''"), plat.ImageUrl, note, plat.NbVotes, plat.IdPlat);
+                connexion.Query(requete);
+
+                // Mise à jour des aliments du plat.
+                foreach (Aliment aliment in plat.ListeIngredients)
+                {
+                    
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Méthode permettant de construire un objet Plat.
         /// </summary>
         /// <param name="plat">Un enregistrement de la table Plats.</param>
@@ -166,6 +241,7 @@ namespace Nutritia
                 Nom = (string)plat["nom"],
                 TypePlat = (string)plat["typePlat"],
                 Note = note,
+                NbVotes = (int)plat["nbVotes"],
                 ImageUrl = (string)plat["imageUrl"],
                 ListeIngredients = new List<Aliment>()
             };

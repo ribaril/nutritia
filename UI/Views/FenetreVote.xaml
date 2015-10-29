@@ -19,7 +19,7 @@
             <RowDefinition Height="4*"></RowDefinition>
         </Grid.RowDefinitions>
         <Label Style="{StaticResource fontNutritia}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14">Quelle note donneriez-vous à ce plat (0-5) ?</Label>
-        <ComboBox Grid.Row="1" Style="{StaticResource fontNutritia}" SelectedIndex="0" Width="50" Height="25">
+        <ComboBox Name="cboNote" Grid.Row="1" Style="{StaticResource fontNutritia}" SelectedIndex="0" Width="50" Height="25">
             <ComboBoxItem>0</ComboBoxItem>
             <ComboBoxItem>1</ComboBoxItem>
             <ComboBoxItem>2</ComboBoxItem>
