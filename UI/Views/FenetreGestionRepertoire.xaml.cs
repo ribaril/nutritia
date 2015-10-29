@@ -29,6 +29,9 @@ namespace Nutritia.UI.Views
         {
             InitializeComponent();
 
+            // Header de la fenetre
+            App.Current.MainWindow.Title = "Nutritia - Gestion de répertoire";
+
             ModifierContexte();
         }
 

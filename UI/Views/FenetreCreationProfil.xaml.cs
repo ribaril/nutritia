@@ -26,6 +26,9 @@ namespace Nutritia.UI.Views
         public CreationProfil()
         {
             InitializeComponent();
+            // Header de la fenetre
+            App.Current.MainWindow.Title = "Nutritia - Création de profil";
+
             Erreur = false;
         }
 

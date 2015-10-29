@@ -25,6 +25,8 @@ namespace Nutritia.UI.Views
         public FenetreVote()
         {
             InitializeComponent();
+
+
         }
 
         /// <summary>

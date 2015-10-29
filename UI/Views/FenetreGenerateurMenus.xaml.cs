@@ -36,6 +36,9 @@ namespace Nutritia.UI.Views
         {
             InitializeComponent();
 
+            // Header de la fenetre
+            App.Current.MainWindow.Title = "Nutritia - Génération de menus";
+
             btnOuvrirMenu.IsEnabled = false;
             btnListeEpicerie.IsEnabled = false;
 

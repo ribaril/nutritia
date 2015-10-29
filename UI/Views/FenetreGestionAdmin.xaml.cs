@@ -31,6 +31,10 @@ namespace Nutritia.UI.Views
         public GestionAdmin()
         {
             InitializeComponent();
+
+            // Header de la fenetre
+            App.Current.MainWindow.Title = "Nutritia - Gestion administrateur";
+
             //filterDataGrid.ItemsSource = s.ConvertAll(x => new { Value = x });
             listMembres = new ObservableCollection<Membre>(serviceMembre.RetrieveAll());
             filterDataGrid.DataGridCollection = CollectionViewSource.GetDefaultView(listMembres);

@@ -25,6 +25,8 @@ namespace Nutritia.UI.Views
 
         public class Langue
         {
+           
+
             public string Nom { get; set; }
             public string CodeISO { get; set; }
             public bool Actif { get; set; }

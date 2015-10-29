@@ -23,6 +23,7 @@ namespace Nutritia.UI.Views
         public Don()
         {
             InitializeComponent();
+
         }
     }
 }

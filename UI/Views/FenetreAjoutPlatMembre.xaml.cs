@@ -23,6 +23,8 @@ namespace Nutritia.UI.Views
         public AjoutPlat()
         {
             InitializeComponent();
+            // Header de la fenetre
+            App.Current.MainWindow.Title = "Nutritia - Ajout de membre";
         }
     }
 }

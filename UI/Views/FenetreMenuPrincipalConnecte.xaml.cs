@@ -25,6 +25,9 @@ namespace Nutritia.UI.Views
         {
             InitializeComponent();
 
+            // Header de la fenetre
+            App.Current.MainWindow.Title = "Nutritia - Menu Principal Membre";
+
             if(App.MembreCourant.Nom != "")
             {
                 lbl_nom_membre.Content = "Bienvenue " + App.MembreCourant.NomUtilisateur;
