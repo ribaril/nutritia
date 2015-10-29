@@ -109,6 +109,22 @@ namespace Nutritia.UI.Views
 
             FenetreVote popupVote = new FenetreVote(platSelectionne);
             popupVote.ShowDialog();
+
+            switch(gbContenu.Header.ToString())
+            {
+                case "Tous les plats" : 
+                    ListePlats = new ObservableCollection<Plat>(PlatService.RetrieveAll());
+                break;
+                case "Nouveautés" : 
+                    ListePlats = new ObservableCollection<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { NbResultats = 10, Depart = "Fin" }));
+                break;
+                case "Les plus populaires" :
+                    ListePlats = new ObservableCollection<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { NbResultats = 10, PlusPopulaires = true }));
+                break;
+            }
+
+            dgPlats.ItemsSource = ListePlats;
+
         }
     }
 }
