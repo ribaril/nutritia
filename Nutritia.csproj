@@ -117,6 +117,7 @@
     </Compile>
     <Compile Include="Toolkit\Services\Definitions\IApplicationService.cs" />
     <Compile Include="Toolkit\Services\ServiceFactory.cs" />
+    <Compile Include="Toolkit\QrCodeHelper.cs" />
     <Compile Include="UI\Converter\BoolToOppositeBoolConverter.cs" />
     <Compile Include="UI\Pages\Don.xaml.cs">
       <DependentUpon>Don.xaml</DependentUpon>
