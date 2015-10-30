@@ -23,7 +23,6 @@ namespace Nutritia.UI.Views
         public FenetreAPropos()
         {
             InitializeComponent();
-
             FrmNavigation.Navigate(new Information());
         }
 
