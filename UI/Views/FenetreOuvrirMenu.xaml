@@ -11,11 +11,15 @@
             <Setter Property="Width" Value="150" />
             <Setter Property="Height" Value="25" />
         </Style>
+        <Style TargetType="RadioButton">
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="8.5*"></RowDefinition>
-            <RowDefinition Height="1.5*"></RowDefinition>
+            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.Background>
             <ImageBrush Opacity="0.3" ImageSource="pack://application:,,,/UI/Images/background.jpg"/>
@@ -29,9 +33,16 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Binding="{Binding Nom}"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Nom}" Foreground="DarkGreen" IsReadOnly="True">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Name="btnOuvrir" Grid.Row="1" Click="btnOuvrir_Click">Ouvrir</Button>
+        <Button Name="btnOuvrir" Grid.Row="1" Style="{StaticResource fontNutritia}" Width="150" Height="25" Click="btnOuvrir_Click">Ouvrir</Button>
     </Grid>
 </Window>

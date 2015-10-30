@@ -39,11 +39,6 @@ namespace Nutritia
 
                 string requete = string.Format("SELECT * FROM Menus WHERE idMembre = {0}", args.IdMembre);
 
-                if(args.DateMenu != DateTime.MinValue)
-                {
-                    requete += string.Format(" AND dateMenu = {0}", args.DateMenu);
-                }
-
                 DataSet dataSetMenus = connexion.Query(requete);
                 DataTable tableMenus = dataSetMenus.Tables[0];
 
@@ -83,35 +78,32 @@ namespace Nutritia
         /// <returns>Un objet Menu.</returns>
         public Menu Retrieve(RetrieveMenuArgs args)
         {
-            Menu menu;
+            Menu menu = new Menu();
 
             try
             {
                 connexion = new MySqlConnexion();
 
-                string requete = string.Format("SELECT * FROM Menus WHERE idMembre = {0}", args.IdMembre);
-
-                if (args.DateMenu != DateTime.MinValue)
-                {
-                    requete += string.Format(" AND dateMenu = {0}", args.DateMenu);
-                }
+                string requete = string.Format("SELECT * FROM Menus WHERE Nom = '{0}'", args.Nom);
 
                 DataSet dataSetMenus = connexion.Query(requete);
                 DataTable tableMenus = dataSetMenus.Tables[0];
 
-                menu = ConstruireMenu(tableMenus.Rows[0]);
-
-                // Ajout des plats du menu.
-                requete = string.Format("SELECT * FROM MenusPlats WHERE idMenu = {0}", menu.IdMenu);
-
-                DataSet dataSetPlats = connexion.Query(requete);
-                DataTable tablePlats = dataSetPlats.Tables[0];
-
-                foreach (DataRow rowPlat in tablePlats.Rows)
+                if(tableMenus.Rows.Count != 0)
                 {
-                    menu.ListePlats.Add(platService.Retrieve(new RetrievePlatArgs { IdPlat = (int)rowPlat["idPlat"] }));
-                }
+                    menu = ConstruireMenu(tableMenus.Rows[0]);
 
+                    // Ajout des plats du menu.
+                    requete = string.Format("SELECT * FROM MenusPlats WHERE idMenu = {0}", menu.IdMenu);
+
+                    DataSet dataSetPlats = connexion.Query(requete);
+                    DataTable tablePlats = dataSetPlats.Tables[0];
+
+                    foreach (DataRow rowPlat in tablePlats.Rows)
+                    {
+                        menu.ListePlats.Add(platService.Retrieve(new RetrievePlatArgs { IdPlat = (int)rowPlat["idPlat"] }));
+                    }
+                }
             }
             catch (MySqlException)
             {
@@ -120,6 +112,31 @@ namespace Nutritia
 
             return menu;
 
+        }
+
+        /// <summary>
+        /// Méthode permettant d'insérer un menu dans la base de données.
+        /// </summary>
+        /// <param name="menu">Le menu à insérer.</param>
+        public void Insert(Menu menu)
+        {
+            try
+            {
+                connexion = new MySqlConnexion();
+
+                string requete = string.Format("INSERT INTO Menus (idMembre, nom, dateMenu) VALUES ({0}, '{1}', '{2}')", App.MembreCourant.IdMembre, menu.Nom, menu.DateCreation.ToString("yyyy-MM-dd"));
+                connexion.Query(requete);
+
+                foreach(Plat platCourant in menu.ListePlats)
+                {
+                    requete = string.Format("INSERT INTO MenusPlats (idMenu, idPlat) VALUES ({0}, {1})", Retrieve(new RetrieveMenuArgs { Nom = menu.Nom }).IdMenu,  platCourant.IdPlat);
+                    connexion.Query(requete);
+                }
+            }
+            catch(MySqlException)
+            {
+                throw;
+            }
         }
 
         /// <summary>

@@ -597,6 +597,9 @@ namespace Nutritia.UI.Views
 
             /*-----------------------------------Insertion dans la base de données-----------------------------------*/
             ServiceFactory.Instance.GetService<IMembreService>().Insert(App.MembreCourant);
+
+            /*-----------------------------------Ajouter l'id au membre-------------------------------------*/
+            App.MembreCourant = ServiceFactory.Instance.GetService<IMembreService>().Retrieve(new RetrieveMembreArgs { NomUtilisateur = App.MembreCourant.NomUtilisateur });
         }
     }
 }

@@ -20,9 +20,9 @@ namespace Nutritia.UI.Views
     /// </summary>
     public partial class FenetreOuvrirMenu : Window
     {
-        private IMembreService MembreService { get; set; }
         private IMenuService MenuService { get; set; }
         private ObservableCollection<Menu> ListeMenus { get; set; }
+        public Menu MenuSelectionne { get; set; }
         
         /// <summary>
         /// Constructeur par défaut de la classe.
@@ -31,14 +31,9 @@ namespace Nutritia.UI.Views
         {
             InitializeComponent();
 
-            MembreService = ServiceFactory.Instance.GetService<IMembreService>();
             MenuService = ServiceFactory.Instance.GetService<IMenuService>();
-
-            // Prévenir une erreur dans le cas où la connexion est établie à partir d'une création de compte.
-            // Dans ce cas, quand un membre est créé, aucun id ne lui est associé.
-            Membre membreCourant = MembreService.Retrieve(new RetrieveMembreArgs{ NomUtilisateur = App.MembreCourant.NomUtilisateur });
             
-            ListeMenus = new ObservableCollection<Menu>(MenuService.RetrieveSome(new RetrieveMenuArgs { IdMembre = (int)membreCourant.IdMembre }));
+            ListeMenus = new ObservableCollection<Menu>(MenuService.RetrieveSome(new RetrieveMenuArgs { IdMembre = (int)App.MembreCourant.IdMembre }));
 
             dgMenus.ItemsSource = ListeMenus;
         }
@@ -50,6 +45,8 @@ namespace Nutritia.UI.Views
         /// <param name="e"></param>
         private void btnOuvrir_Click(object sender, RoutedEventArgs e)
         {
+            MenuSelectionne = (Menu)dgMenus.SelectedItem;
+            DialogResult = true;
             Close();
         }
     }

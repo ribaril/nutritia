@@ -8,7 +8,7 @@ namespace Nutritia
 {
     public class RetrieveMenuArgs
     {
-        public int IdMembre { get; set; }
-        public DateTime DateMenu  { get; set; }
+        public string Nom { get; set; }
+        public int? IdMembre { get; set; }
     }
 }

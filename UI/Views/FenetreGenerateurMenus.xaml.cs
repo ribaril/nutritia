@@ -22,6 +22,7 @@ namespace Nutritia.UI.Views
     public partial class FenetreGenerateurMenus : UserControl
     {
         private IPlatService PlatService { get; set; }
+        private IMenuService MenuService { get; set; }
         private ObservableCollection<Plat> ListeDejeuners { get; set; }
         private ObservableCollection<Plat> ListeEntrees { get; set; }
         private ObservableCollection<Plat> ListePlatPrincipaux { get; set; }
@@ -42,6 +43,7 @@ namespace Nutritia.UI.Views
             }
 
             PlatService = ServiceFactory.Instance.GetService<IPlatService>();
+            MenuService = ServiceFactory.Instance.GetService<IMenuService>();
 
             // Chargement des plats.
             Mouse.OverrideCursor = Cursors.Wait;
@@ -116,6 +118,14 @@ namespace Nutritia.UI.Views
         {
             FenetreOuvrirMenu popupOuvertureMenu = new FenetreOuvrirMenu();
             popupOuvertureMenu.ShowDialog();
+
+            if(popupOuvertureMenu.DialogResult == true)
+            {
+                MenuGenere = popupOuvertureMenu.MenuSelectionne;
+                dgMenus.ItemsSource = MenuGenere.ListePlats;
+                btnSauvegarder.IsEnabled = true;
+                btnListeEpicerie.IsEnabled = true;
+            }
         }
         
         /// <summary>
@@ -207,7 +217,14 @@ namespace Nutritia.UI.Views
         /// <param name="e"></param>
         private void btnSauvegarder_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Fonctionnalité à venir");
+            FenetreSauvegarderMenu popupSauvegarde = new FenetreSauvegarderMenu();
+            popupSauvegarde.ShowDialog();
+
+            if(popupSauvegarde.DialogResult == true)
+            {
+                MenuGenere.Nom = popupSauvegarde.txtNom.Text;
+                MenuService.Insert(MenuGenere);
+            }
         }
 
         /// <summary>
