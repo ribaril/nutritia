@@ -34,6 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Gma.QrCodeNet.Encoding.Net45, Version=0.4.0.0, Culture=neutral, PublicKeyToken=e8a75d24b142be49, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Toolkit\QrCode.Net\Gma.QrCodeNet.Encoding.Net45.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data, Version=6.9.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>packages\MySql.Data.6.9.7\lib\net45\MySql.Data.dll</HintPath>
@@ -113,6 +117,7 @@
     </Compile>
     <Compile Include="Toolkit\Services\Definitions\IApplicationService.cs" />
     <Compile Include="Toolkit\Services\ServiceFactory.cs" />
+    <Compile Include="Toolkit\QrCodeHelper.cs" />
     <Compile Include="UI\Converter\BoolToOppositeBoolConverter.cs" />
     <Compile Include="UI\Pages\Don.xaml.cs">
       <DependentUpon>Don.xaml</DependentUpon>
@@ -453,6 +458,9 @@
     <Resource Include="UI\Images\ProfilIcon.png" />
     <Resource Include="UI\Images\voterPlatIcon.png" />
     <Resource Include="UI\Images\AjoutIcon.png" />
+    <Content Include="Toolkit\QrCode.Net\Gma.QrCodeNet.Encoding.Net45.dll" />
+    <Content Include="Toolkit\QrCode.Net\Gma.QrCodeNet.Encoding.Net45.pdb" />
+    <Resource Include="Toolkit\QrCode.Net\Gma.QrCodeNet.Encoding.Net45.XML" />
     <Content Include="Toolkit\WPFToolkit\System.Windows.Controls.Layout.Toolkit.dll" />
     <Content Include="Toolkit\WPFToolkit\WPFToolkit.dll" />
   </ItemGroup>
