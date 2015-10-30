@@ -10,5 +10,6 @@ namespace Nutritia
     {
         IList<Menu> RetrieveSome(RetrieveMenuArgs args);
         Menu Retrieve(RetrieveMenuArgs args);
+        void Insert(Menu menu);
     }
 }

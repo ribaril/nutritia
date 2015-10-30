@@ -148,6 +148,8 @@ namespace Nutritia
                 
                 plat = ConstruirePlat(tablePlats.Rows[0]);
 
+                plat.ListeIngredients = RetrieveAlimentsPlat(new RetrievePlatArgs { IdPlat = plat.IdPlat });
+
             }
             catch (Exception)
             {
