@@ -83,10 +83,12 @@
     <Compile Include="Logic\Model\Entities\Calculatrice.cs" />
     <Compile Include="Logic\Model\Entities\Membre.cs" />
     <Compile Include="Logic\Model\Entities\Menu.cs" />
+    <Compile Include="Logic\Model\Entities\ModePaiement.cs" />
     <Compile Include="Logic\Model\Entities\Objectif.cs" />
     <Compile Include="Logic\Model\Entities\Plat.cs" />
     <Compile Include="Logic\Model\Entities\Preference.cs" />
     <Compile Include="Logic\Model\Entities\RestrictionAlimentaire.cs" />
+    <Compile Include="Logic\Model\Entities\Transaction.cs" />
     <Compile Include="Logic\Model\Entities\UniteMesure.cs" />
     <Compile Include="Logic\Services\Definitions\IAlimentService.cs" />
     <Compile Include="Logic\Services\Definitions\IMembreService.cs" />
@@ -196,6 +198,9 @@
     </Compile>
     <Compile Include="UI\Views\FenetreVotes.xaml.cs">
       <DependentUpon>FenetreVotes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FenetreRecuDon.xaml.cs">
+      <DependentUpon>FenetreRecuDon.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\StackPlatAliment.xaml.cs">
       <DependentUpon>StackPlatAliment.xaml</DependentUpon>
@@ -327,6 +332,10 @@
     <Page Include="UI\Views\FenetreVotes.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Views\FenetreRecuDon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Views\StackPlatAliment.xaml">
       <SubType>Designer</SubType>
