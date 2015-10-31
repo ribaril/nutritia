@@ -21,6 +21,7 @@ namespace Nutritia.UI.Views
     /// </summary>
     public partial class FenetreGenerateurMenus : UserControl
     {
+        private IAlimentService AlimentService { get; set; }
         private IPlatService PlatService { get; set; }
         private IMenuService MenuService { get; set; }
         private ObservableCollection<Plat> ListeDejeuners { get; set; }
@@ -42,6 +43,7 @@ namespace Nutritia.UI.Views
                 btnOuvrirMenu.IsEnabled = false;
             }
 
+            AlimentService = ServiceFactory.Instance.GetService<IAlimentService>();
             PlatService = ServiceFactory.Instance.GetService<IPlatService>();
             MenuService = ServiceFactory.Instance.GetService<IMenuService>();
 
@@ -128,6 +130,34 @@ namespace Nutritia.UI.Views
             }
         }
         
+        /*
+        private void DefinirSpecificites()
+        {
+            // Récupération de tous les aliments dans le but de définir ceux qui préconisés
+            // ainsi que ceux qui doivent être proscrit pour le membre connecté.
+            List<Aliment> listeAliments = new List<Aliment>(AlimentService.RetrieveAll());
+            List<Aliment> listeAlimentsPreconises = new List<Aliment>();
+            List<Aliment> listeAlimentsProscrits = new List<Aliment>();
+
+            foreach(Aliment aliment in listeAliments)
+            {
+                // Lactose.
+                if(aliment.Categorie == "Produits laitiers")
+                {
+                    if (App.MembreCourant.ListeRestrictions.Contains(new RestrictionAlimentaire { Nom = "Lactose" }))
+                    {
+                        listeAlimentsProscrits.Add(aliment);
+                    }
+                }
+
+                // TODO : Arachides, gluten
+
+                
+
+            }
+        }
+        */
+
         /// <summary>
         /// Événement lancé sur un clique du bouton Générer.
         /// Permet de générer un menu en fonction des informations préalables.
