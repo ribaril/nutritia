@@ -129,34 +129,6 @@ namespace Nutritia.UI.Views
                 btnListeEpicerie.IsEnabled = true;
             }
         }
-        
-        /*
-        private void DefinirSpecificites()
-        {
-            // Récupération de tous les aliments dans le but de définir ceux qui préconisés
-            // ainsi que ceux qui doivent être proscrit pour le membre connecté.
-            List<Aliment> listeAliments = new List<Aliment>(AlimentService.RetrieveAll());
-            List<Aliment> listeAlimentsPreconises = new List<Aliment>();
-            List<Aliment> listeAlimentsProscrits = new List<Aliment>();
-
-            foreach(Aliment aliment in listeAliments)
-            {
-                // Lactose.
-                if(aliment.Categorie == "Produits laitiers")
-                {
-                    if (App.MembreCourant.ListeRestrictions.Contains(new RestrictionAlimentaire { Nom = "Lactose" }))
-                    {
-                        listeAlimentsProscrits.Add(aliment);
-                    }
-                }
-
-                // TODO : Arachides, gluten
-
-                
-
-            }
-        }
-        */
 
         /// <summary>
         /// Événement lancé sur un clique du bouton Générer.
