@@ -10,5 +10,8 @@ namespace Nutritia
     {
         public int? IdPlat { get; set; }
         public string Categorie { get; set; }
+        public int? NbResultats { get; set; }
+        public string Depart { get; set; }
+        public bool? PlusPopulaires { get; set; }
     }
 }

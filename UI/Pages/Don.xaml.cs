@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Nutritia.Logic.Model.Entities;
+using Nutritia.UI.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +28,7 @@ namespace Nutritia.UI.Pages
         public bool isNoCarteGood = false;
         public bool isExpirationGood = false;
         public bool isCSCGood = false;
+        private ModePaiement modePaiement;
 
         public Don()
         {
@@ -42,8 +45,8 @@ namespace Nutritia.UI.Pages
             if (IsInt)
             {
                 valeurDon = valeurRadio;
-                MessageBox.Show("Merci pour le don", "Don - Confirmation");
-
+                Transaction transaction = new Transaction(txtProprietaire.Text,valeurDon, modePaiement);
+                (new FenetreRecuDon(transaction)).ShowDialog();
             }
         }
 
@@ -81,6 +84,19 @@ namespace Nutritia.UI.Pages
             imgAmex.IsEnabled = isAmex;
             imgVisa.IsEnabled = isVisa;
             imgMasterCard.IsEnabled = isMastercard;
+
+            if (isAmex)
+            {
+                modePaiement = ModePaiement.Amex;
+            }
+            else if (isVisa)
+            {
+                modePaiement = ModePaiement.Visa;
+            }
+            else if (isMastercard)
+            {
+                modePaiement = ModePaiement.MasterCard;
+            }
 
             if (isMastercard || isVisa || isAmex)
             {
