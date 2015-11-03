@@ -23,6 +23,9 @@ namespace Nutritia.UI.Views
         public MenuAdministrateur()
         {
             InitializeComponent();
+
+            // Header de la fenetre
+            App.Current.MainWindow.Title = "Nutritia - Menu Administrateur";
         }
 
         private void btnRepertoire_Click(object sender, RoutedEventArgs e)

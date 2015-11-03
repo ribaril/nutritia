@@ -28,6 +28,9 @@ namespace Nutritia.UI.Views
         {
             InitializeComponent();
 
+            // Header de la fenetre
+            App.Current.MainWindow.Title = "Nutritia - Ingrédients";
+
             GenererRangees(plat.ListeIngredients.Count + 1);
 
             Label entete = new Label();

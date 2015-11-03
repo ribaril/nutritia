@@ -6,9 +6,9 @@
              xmlns:local="clr-namespace:Nutritia.UI.Views"
              mc:Ignorable="d" 
              Height="400" Width="600"
-             ResizeMode="NoResize">
+             ResizeMode="NoResize"
+             Title="Nutritia - Aide">
     <Grid>
-		
         <Grid.Background>
             <ImageBrush Opacity="0.3" ImageSource="/Nutritia;component/UI/Images/background.jpg"/>
         </Grid.Background>

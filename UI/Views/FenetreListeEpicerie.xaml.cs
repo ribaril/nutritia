@@ -31,6 +31,9 @@ namespace Nutritia.UI.Views
         {
             InitializeComponent();
 
+            // Header de la fenetre
+            App.Current.MainWindow.Title = "Nutritia - Liste épicerie";
+
             MenuGenere = menu;
 
             ListeAliments = new ObservableCollection<Aliment>();
