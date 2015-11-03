@@ -26,6 +26,10 @@ namespace Nutritia.UI.Views
         public ModificationProfil()
         {
             InitializeComponent();
+
+            // Header de la fenetre
+            App.Current.MainWindow.Title = "Nutritia - Modification Profil";
+
             Erreur = false;
 
             /*-----------------------------------Intégration des données du membre connecté-----------------------------------*/

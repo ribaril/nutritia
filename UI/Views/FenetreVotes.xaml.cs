@@ -31,6 +31,9 @@ namespace Nutritia.UI.Views
         {
             InitializeComponent();
 
+            // Header de la fenetre
+            App.Current.MainWindow.Title = "Nutritia - Vote";
+
             PlatService = ServiceFactory.Instance.GetService<IPlatService>();
 
             ListePlats = new ObservableCollection<Plat>(PlatService.RetrieveAll());

@@ -27,6 +27,10 @@ namespace Nutritia.UI.Views
 		public Bannissement()
 		{
 			InitializeComponent();
+
+            // Header de la fenetre
+            App.Current.MainWindow.Title = "Nutritia - Banissement";
+
 			LstMembre = new ObservableCollection<Membre>();
 			LstBanni = new ObservableCollection<Membre>();
 			TousLesMembres = new List<Membre>(ServiceFactory.Instance.GetService<IMembreService>().RetrieveAll());

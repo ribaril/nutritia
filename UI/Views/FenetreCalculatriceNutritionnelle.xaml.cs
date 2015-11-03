@@ -38,6 +38,9 @@ namespace Nutritia.UI.Views
         {
             InitializeComponent();
 
+            // Header de la fenetre
+            App.Current.MainWindow.Title = "Nutritia - Calculatrice nutritionnelle";
+
             Plateau = new SousEcran();
             presenteurContenu2.Content = Plateau;
             TabValeurNutritionelle = new SousEcran2();

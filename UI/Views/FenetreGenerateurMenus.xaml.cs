@@ -42,7 +42,8 @@ namespace Nutritia.UI.Views
             {
                 btnOuvrirMenu.IsEnabled = false;
             }
-
+ 			// Header de la fenetre
+            App.Current.MainWindow.Title = "Nutritia - Génération de menus";
             AlimentService = ServiceFactory.Instance.GetService<IAlimentService>();
             PlatService = ServiceFactory.Instance.GetService<IPlatService>();
             MenuService = ServiceFactory.Instance.GetService<IMenuService>();

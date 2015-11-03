@@ -23,6 +23,9 @@ namespace Nutritia.UI.Views
         public FenetreAide(String nomFenetre)
         {
             InitializeComponent();
+
+            
+
 			switch (nomFenetre)
 			{
 				case "AjoutPlatMembre":

@@ -19,7 +19,7 @@
         <Button Name="btnCalculatrice" Canvas.Left="280" Canvas.Top="229" Width="75" Height="75" Click="btnCalculatrice_Click">
             <Image Source="/Nutritia;component/UI/Images/calcIcon.png" />
         </Button>
-        <Label Content="Calculatrice Nutritionel" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="299" Canvas.Left="170"/>
+        <Label Content="Calculatrice Nutritionnelle" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="299" Canvas.Left="152"/>
         <Button Name="btnMenuListe" Canvas.Left="280" Canvas.Top="354" Width="75" Height="75" Click="btnMenuListe_Click">
             <Image Source="/Nutritia;component/UI/Images/menuListIcon.png"/>
         </Button>

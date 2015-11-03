@@ -26,6 +26,8 @@ namespace Nutritia.UI.Views
         public FenetreConnexion()
         {
             InitializeComponent();
+            // Header de la fenetre
+            App.Current.MainWindow.Title = "Nutritia - Connexion";
             Erreur = false;
         }
 

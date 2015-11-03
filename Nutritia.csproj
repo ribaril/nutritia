@@ -90,6 +90,7 @@
     <Compile Include="Logic\Model\Entities\RestrictionAlimentaire.cs" />
     <Compile Include="Logic\Model\Entities\Transaction.cs" />
     <Compile Include="Logic\Model\Entities\UniteMesure.cs" />
+    <Compile Include="Logic\Model\Entities\VersionLogiciel.cs" />
     <Compile Include="Logic\Services\Definitions\IAlimentService.cs" />
     <Compile Include="Logic\Services\Definitions\IMembreService.cs" />
     <Compile Include="Logic\Services\Definitions\IMenuService.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Logic\Services\Definitions\IPreferenceService.cs" />
     <Compile Include="Logic\Services\Definitions\IRestrictionAlimentaireService.cs" />
     <Compile Include="Logic\Services\Definitions\IUniteMesureService.cs" />
+    <Compile Include="Logic\Services\Definitions\IVersionLogicielService.cs" />
     <Compile Include="Logic\Services\Helpers\MySqlConnexion.cs" />
     <Compile Include="Logic\Services\MySql\MySqlAlimentService.cs" />
     <Compile Include="Logic\Services\MySql\MySqlMembreService.cs" />
@@ -107,6 +109,7 @@
     <Compile Include="Logic\Services\MySql\MySqlPreferenceService.cs" />
     <Compile Include="Logic\Services\MySql\MySqlRestrictionAlimentaireService.cs" />
     <Compile Include="Logic\Services\MySql\MySqlUniteMesureService.cs" />
+    <Compile Include="Logic\Services\MySql\MySqlVersionLogicielService.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -141,9 +144,6 @@
     </Compile>
     <Compile Include="UI\Views\FenetreCreationProfil.xaml.cs">
       <DependentUpon>FenetreCreationProfil.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Views\FenetreDon.xaml.cs">
-      <DependentUpon>FenetreDon.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\FenetreAide.xaml.cs">
       <DependentUpon>FenetreAide.xaml</DependentUpon>
@@ -254,10 +254,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Views\FenetreCreationProfil.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Views\FenetreDon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
