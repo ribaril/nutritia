@@ -32,9 +32,8 @@ namespace Nutritia
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.StackTrace);
                 Console.WriteLine(e.Message);
-                return new VersionLogiciel();
+                return new VersionLogiciel("0.0.0.0", "Empty", "Empty", DateTime.MinValue);
             }
 
         }

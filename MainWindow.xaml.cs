@@ -97,6 +97,11 @@ namespace Nutritia
             VersionLogiciel latestVersionLogiciel = serviceMembre.RetrieveLatest();
 
             Thread.Sleep(SLEEP_NOTIFICATION_TIME);
+
+            if (latestVersionLogiciel.Version.Equals("0.0.0.0"))
+            {
+                return;
+            }
     
             if (latestVersionLogiciel.Version.Equals(FileVersionInfo.GetVersionInfo(App.ResourceAssembly.Location).FileVersion) == false )
             {
