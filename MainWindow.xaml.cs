@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using Nutritia.UI.Views;
 using System.Globalization;
 using System.Threading;
+using System.Diagnostics;
 
 namespace Nutritia
 {
@@ -23,7 +24,9 @@ namespace Nutritia
 	/// Logique d'interaction pour MainWindow.xaml
 	/// </summary>
 	public partial class MainWindow : Window, IApplicationService
-	{        
+	{
+        private const int SLEEP_NOTIFICATION_TIME = 10000;
+
         public MainWindow()
 		{
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.Langue);
@@ -45,6 +48,7 @@ namespace Nutritia
             ServiceFactory.Instance.Register<IPlatService, MySqlPlatService>(new MySqlPlatService());
             ServiceFactory.Instance.Register<IMenuService, MySqlMenuService>(new MySqlMenuService());
             ServiceFactory.Instance.Register<IMembreService, MySqlMembreService>(new MySqlMembreService());
+            ServiceFactory.Instance.Register<IVersionLogicielService, MySqlVersionLogicielService>(new MySqlVersionLogicielService());
             ServiceFactory.Instance.Register<IApplicationService, MainWindow>(this);
         }
 
@@ -79,5 +83,30 @@ namespace Nutritia
                 FenetreAide fenetreAide = new FenetreAide(presenteurContenu.Content.GetType().Name);
                 fenetreAide.Show();
 		}
-	}
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Thread newThread = new Thread(LastestVersionPopUp);
+            newThread.Start();
+        }
+
+        private void LastestVersionPopUp()
+        {
+            IVersionLogicielService serviceMembre = ServiceFactory.Instance.GetService<IVersionLogicielService>();
+
+            VersionLogiciel latestVersionLogiciel = serviceMembre.RetrieveLatest();
+
+            Thread.Sleep(SLEEP_NOTIFICATION_TIME);
+    
+            if (latestVersionLogiciel.Version.Equals(FileVersionInfo.GetVersionInfo(App.ResourceAssembly.Location).FileVersion) == false )
+            {
+                string message = "Version: " + latestVersionLogiciel.Version + " disponible.\nLien de téléchargement: " + latestVersionLogiciel.DownloadLink;
+                MessageBox.Show(
+                    message,
+                    "Nouvelle version disponible",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+            }
+        }
+    }
 }
