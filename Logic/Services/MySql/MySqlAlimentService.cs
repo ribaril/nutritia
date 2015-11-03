@@ -241,7 +241,14 @@ namespace Nutritia
             {
                 connexion = new MySqlConnexion();
 
-                string requeteInsert = string.Format("INSERT INTO AlimentsValeursNutritionnelles (idAliment ,idValeurNutritionnelle, quantite) VALUES ({0}, {1}, {2})", idAliment, idValeur, valeur);
+                string uneValeur = valeur.ToString();
+
+                if (uneValeur.Contains(","))
+                {
+                    uneValeur = uneValeur.Replace(",", ".");
+                }
+
+                string requeteInsert = string.Format("INSERT INTO AlimentsValeursNutritionnelles (idAliment ,idValeurNutritionnelle, quantite) VALUES ({0}, {1}, {2})", idAliment, idValeur, uneValeur);
                 connexion.Query(requeteInsert);
             }
             catch(Exception)
