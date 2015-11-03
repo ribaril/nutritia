@@ -56,7 +56,7 @@
             </TabItem>
             <TabItem Style="{StaticResource tabItem}" Name="tiGenerationMenu" Header="Generation de menu">
                 <StackPanel>
-                    <Label Style="{StaticResource fontSousTitre}" Content="Génération de menu aléatoire" />
+                    <Label Style="{StaticResource fontSousTitre}" Content="Génération de menu" />
                     <TextBlock>
                             Mon texte
                     </TextBlock>

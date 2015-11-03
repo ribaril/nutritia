@@ -452,6 +452,7 @@
     <Resource Include="UI\Images\nonDisponible.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="UI\Images\AdminIcon.png" />
     <Resource Include="UI\Images\disquetteIcon.png" />
     <Resource Include="UI\Images\ban.png" />
     <Resource Include="UI\Images\baseDonnee.png" />
