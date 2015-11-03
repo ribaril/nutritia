@@ -233,24 +233,32 @@ namespace Nutritia
 
 				connexion.Query(requete);
 
-                // Mise à jour des restrictions alimentaires du membre.
+                string requeteEffacerRestrictions = string.Format("DELETE FROM RestrictionsAlimentairesMembres WHERE idMembre = {0}", membre.IdMembre);
+                string requeteEffacerObjectifs = string.Format("DELETE FROM ObjectifsMembres WHERE idMembre = {0}", membre.IdMembre);
+                string requeteEffacerPreferences = string.Format("DELETE FROM PreferencesMembres WHERE idMembre = {0}", membre.IdMembre);
+                
+                connexion.Query(requeteEffacerRestrictions);
+                connexion.Query(requeteEffacerObjectifs);
+                connexion.Query(requeteEffacerPreferences);
+
+                // Ajout des restrictions alimentaires du membre.
                 foreach (RestrictionAlimentaire restriction in membre.ListeRestrictions)
                 {
-                    requete = string.Format("UPDATE RestrictionsAlimentairesMembres SET idRestrictionAlimentaire = {0}, idMembre = {1} WHERE idMembre = {1}", restriction.IdRestrictionAlimentaire, membre.IdMembre);
+                    requete = string.Format("INSERT INTO RestrictionsAlimentairesMembres (idRestrictionAlimentaire, idMembre) VALUES ({0}, {1})", restriction.IdRestrictionAlimentaire, membre.IdMembre);
                     connexion.Query(requete);
                 }
 
-                // Mise à jour des objectifs du membre.
+                // Ajout des objectifs du membre.
                 foreach (Objectif objectif in membre.ListeObjectifs)
                 {
-                    requete = string.Format("UPDATE ObjectifsMembres SET idObjectif = {0}, idMembre = {1} WHERE idMembre = {1}", objectif.IdObjectif, membre.IdMembre);
+                    requete = string.Format("INSERT INTO ObjectifsMembres (idObjectif, idMembre) VALUES ({0}, {1})", objectif.IdObjectif, membre.IdMembre);
                     connexion.Query(requete);
                 }
 
-                // Mise à jour des préférences du membre.
+                // Ajout des préférences du membre.
                 foreach (Preference preference in membre.ListePreferences)
                 {
-                    requete = string.Format("UPDATE PreferencesMembres SET idPreference = {0}, idMembre = {1} WHERE idMembre = {1}", preference.IdPreference, membre.IdMembre);
+                    requete = string.Format("INSERT INTO PreferencesMembres (idPreference, idMembre) VALUES ({0}, {1})", preference.IdPreference, membre.IdMembre);
                     connexion.Query(requete);
                 }
             }

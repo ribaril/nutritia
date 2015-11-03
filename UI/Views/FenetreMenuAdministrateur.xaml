@@ -15,7 +15,7 @@
             </StackPanel.Resources>
             <Label HorizontalAlignment="Center" Foreground="DarkGreen" Margin="0,-10,0,10" FontSize="30" FontFamily="Berlin Sans FB Demi">Administration</Label>
 
-            <Label HorizontalAlignment="Center" Foreground="DarkGreen" FontSize="22" FontFamily="Berlin Sans FB Demi">Gestion de répertoire de données</Label>
+            <Label HorizontalAlignment="Center" Foreground="DarkGreen" FontSize="22" FontFamily="Berlin Sans FB Demi">Gestion des aliments et plats</Label>
             <Button Name="btnRepertoire" Width="80" Height="80" Click="btnRepertoire_Click">
                 <Image Width="64" Height="75" Source="/Nutritia;component/UI/Images/baseDonnee.PNG"/>
             </Button>
