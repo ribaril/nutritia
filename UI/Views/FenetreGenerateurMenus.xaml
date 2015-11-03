@@ -31,7 +31,7 @@
             <RowDefinition Height="0.75*"></RowDefinition>
             <RowDefinition Height="8.25*"></RowDefinition>
         </Grid.RowDefinitions>
-        <GroupBox Header="Informations préalables à la génération">
+        <GroupBox Grid.Row="0" Header="Informations préalables à la génération">
             <Grid>
                 <Label Style="{StaticResource fontNutritia}" FontSize="14">Période :</Label>
                 <StackPanel Margin="60, 0, 0, 0" Orientation="Horizontal">
