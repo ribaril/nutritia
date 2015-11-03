@@ -26,7 +26,7 @@ namespace Nutritia
             {
                 connexion = new MySqlConnexion();
 
-                string requete = "SELECT * FROM Aliments a INNER JOIN groupesAlimentaires ga ON ga.idGroupeAlimentaire = a.idGroupeAlimentaire INNER JOIN UnitesMesure um ON um.idUniteMesure = a.idUniteMesure";
+                string requete = "SELECT * FROM Aliments a INNER JOIN CategoriesAlimentaires ca ON ca.idCategorieAlimentaire = a.idCategorieAlimentaire INNER JOIN UnitesMesure um ON um.idUniteMesure = a.idUniteMesure";
 
                 DataSet dataSetAliments = connexion.Query(requete);
                 DataTable tableAliments = dataSetAliments.Tables[0];
@@ -70,7 +70,7 @@ namespace Nutritia
             {
                 connexion = new MySqlConnexion();
 
-                string requete = string.Format("SELECT * FROM Aliments a INNER JOIN groupesAlimentaires ga ON ga.idGroupeAlimentaire = a.idGroupeAlimentaire INNER JOIN UnitesMesure um ON um.idUniteMesure = a.idUniteMesure WHERE idAliment = {0}", args.IdAliment);
+                string requete = string.Format("SELECT * FROM Aliments a INNER JOIN CategoriesAlimentaires ca ON ca.idCategorieAlimentaire = a.idCategorieAlimentaire INNER JOIN UnitesMesure um ON um.idUniteMesure = a.idUniteMesure WHERE idAliment = {0}", args.IdAliment);
 
                 DataSet dataSetAliments = connexion.Query(requete);
                 DataTable tableAliments = dataSetAliments.Tables[0];
@@ -113,7 +113,7 @@ namespace Nutritia
             {
                 IdAliment = (int)aliment["idAliment"],
                 Nom = (string)aliment["nom"],
-                Categorie = (string)aliment["groupeAlimentaire"],
+                Categorie = (string)aliment["categorieAlimentaire"],
                 Mesure = (int)aliment["mesure"],
                 UniteMesure = (string)aliment["symbole"],
                 Energie = valeurNut["Calories"],
