@@ -125,5 +125,129 @@ namespace Nutritia
                 Sodium = valeurNut["Sodium"]
             };
         }
+
+        /// <summary>
+        /// Méthode d'insertion d'un nouvel aliment dans la base de données.
+        /// </summary>
+        /// <param name="unAliment"></param>
+        public void Insert(Aliment unAliment)
+        {
+            try
+            {
+                connexion = new MySqlConnexion();
+
+                string requeteCategoriesAlim = string.Format("SELECT * FROM CategoriesAlimentaires WHERE categorieAlimentaire = '{0}'", unAliment.Categorie);
+
+                DataSet dataSetCategories = connexion.Query(requeteCategoriesAlim);
+                DataTable tableCategories = dataSetCategories.Tables[0];
+
+                int idCategorie = 0;
+
+                foreach (DataRow rowCategories in tableCategories.Rows)
+                {
+                    idCategorie = (int)rowCategories["idCategorieAlimentaire"];
+                }
+
+                string requeteUnitesMesure = string.Format("SELECT * FROM UnitesMesure WHERE uniteMesure = '{0}'", unAliment.UniteMesure);
+
+                DataSet dataSetUnites = connexion.Query(requeteUnitesMesure);
+                DataTable tableUnites = dataSetUnites.Tables[0];
+
+                int idUnite = 0;
+
+                foreach (DataRow rowUnites in tableUnites.Rows)
+                {
+                    idUnite = (int)rowUnites["idUniteMesure"];
+                }
+
+                string requeteInsert = string.Format("INSERT INTO Aliments (idUniteMesure ,idCategorieAlimentaire, nom, mesure) VALUES ({0}, {1}, '{2}', {3})", idUnite, idCategorie, unAliment.Nom, unAliment.Mesure);
+                connexion.Query(requeteInsert);
+
+                string requeteAlim = string.Format("SELECT * FROM Aliments WHERE nom = '{0}'", unAliment.Nom);
+
+                DataSet dataSetAlim = connexion.Query(requeteAlim);
+                DataTable tableAlim = dataSetAlim.Tables[0];
+
+                int idAliment = 0;
+
+                foreach (DataRow rowAlim in tableAlim.Rows)
+                {
+                    idAliment = (int)rowAlim["idAliment"];
+                }
+
+                int idEnergie = Associer_Valeur_Nutritionnelle("Calories");
+                int idProteine = Associer_Valeur_Nutritionnelle("Protéines");
+                int idGlucide = Associer_Valeur_Nutritionnelle("Glucides");
+                int idFibre = Associer_Valeur_Nutritionnelle("Fibres");
+                int idLipide = Associer_Valeur_Nutritionnelle("Lipides");
+                int idSodium = Associer_Valeur_Nutritionnelle("Sodium");
+                int idCholesterol = Associer_Valeur_Nutritionnelle("Cholestérol");
+                
+                Inserer_Valeur_Nutritionnelle(idEnergie, idAliment, unAliment.Energie);
+                Inserer_Valeur_Nutritionnelle(idProteine, idAliment, unAliment.Proteine);
+                Inserer_Valeur_Nutritionnelle(idGlucide, idAliment, unAliment.Glucide);
+                Inserer_Valeur_Nutritionnelle(idFibre, idAliment, unAliment.Fibre);
+                Inserer_Valeur_Nutritionnelle(idLipide, idAliment, unAliment.Lipide);
+                Inserer_Valeur_Nutritionnelle(idSodium, idAliment, unAliment.Sodium);
+                Inserer_Valeur_Nutritionnelle(idCholesterol, idAliment, unAliment.Cholesterol);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Méthode permettant d'obtenir l'id pour une valeur nutritionnelle désirée.
+        /// </summary>
+        /// <param name="uneValeur"></param>
+        /// <returns></returns>
+        private int Associer_Valeur_Nutritionnelle(String uneValeur)
+        {
+            try
+            {
+                connexion = new MySqlConnexion();
+
+                string requeteValeur = string.Format("SELECT * FROM ValeursNutritionnelles WHERE valeurNutritionnelle = '{0}'", uneValeur);
+
+                DataSet dataSetValeur = connexion.Query(requeteValeur);
+                DataTable tableValeur = dataSetValeur.Tables[0];
+
+                int idValeur = 0;
+
+                foreach (DataRow rowValeur in tableValeur.Rows)
+                {
+                    idValeur = (int)rowValeur["idValeurNutritionnelle"];
+                }
+
+                return idValeur;
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Insertion d'une valeur nutritionnelle dans la table de correspondance "AlimentsValeursNutritionnelles".
+        /// </summary>
+        /// <param name="idValeur"></param>
+        /// <param name="idAliment"></param>
+        /// <param name="valeur"></param>
+        private void Inserer_Valeur_Nutritionnelle(int idValeur, int idAliment, double valeur)
+        {
+            try
+            {
+                connexion = new MySqlConnexion();
+
+                string requeteInsert = string.Format("INSERT INTO AlimentsValeursNutritionnelles (idAliment ,idValeurNutritionnelle, quantite) VALUES ({0}, {1}, {2})", idAliment, idValeur, valeur);
+                connexion.Query(requeteInsert);
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+        }
     }
 }
