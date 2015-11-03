@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             d:DesignHeight="475" d:DesignWidth="650">
+             mc:Ignorable="d" d:DesignHeight="475" d:DesignWidth="650">
     <UserControl.Resources>
         <Style TargetType="Button" x:Key="btnTexte" BasedOn="{StaticResource fontNutritia}">
             <Setter Property="FontSize" Value="16" />
@@ -22,7 +21,8 @@
             <Setter Property="Margin" Value="530, 0, 0 , 0" />
         </Style>
         <Style TargetType="GroupBox" BasedOn="{StaticResource groupBoxNutritia}">
-            <Setter Property="Width" Value="575" />
+            <Setter Property="MinWidth" Value="575" />
+            <Setter Property="MaxWidth" Value="950" />
         </Style>
     </UserControl.Resources>
     <Grid>
@@ -31,7 +31,12 @@
             <RowDefinition Height="0.75*"></RowDefinition>
             <RowDefinition Height="8.25*"></RowDefinition>
         </Grid.RowDefinitions>
-        <GroupBox Grid.Row="0" Header="Informations préalables à la génération">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+            <ColumnDefinition Width="9.5*"></ColumnDefinition>
+            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <GroupBox Grid.Column="1" Header="Informations préalables à la génération">
             <Grid>
                 <Label Style="{StaticResource fontNutritia}" FontSize="14">Période :</Label>
                 <StackPanel Margin="60, 0, 0, 0" Orientation="Horizontal">
@@ -49,7 +54,7 @@
                 </ComboBox>
             </Grid>
         </GroupBox>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Name="btnSauvegarder" Width="25" Height="25" Margin="0, 0, 12.5, 0" IsEnabled="False" Click="btnSauvegarder_Click">
                 <Image Source="pack://application:,,,/UI/Images/disquetteIcon.png"></Image>
             </Button>
@@ -57,7 +62,7 @@
             <Button Name="btnGenerer" Style="{StaticResource btnTexte}" Width="170" Height="25" Margin="0, 0, 12.5, 0" Click="btnGenerer_Click">Générer</Button>
             <Button Name="btnListeEpicerie" Style="{StaticResource btnTexte}" Width="170" Height="25" IsEnabled="False" Click="btnListeEpicerie_Click">Liste d'épicerie</Button>
         </StackPanel>
-        <GroupBox Grid.Row="2" Header="Menus" Height="385" VerticalAlignment="Top">
+        <GroupBox Grid.Row="2" Grid.Column="1" Header="Menus" MinHeight="385" MaxHeight="650" VerticalAlignment="Top">
             <ScrollViewer Name="svMenus" PreviewMouseWheel="svMenus_PreviewMouseWheel">
                 <Grid Name="grdMenus" ScrollViewer.CanContentScroll="False">
                     <DataGrid Name="dgMenus" Style="{StaticResource dataGridPlats}" RowHeight="110" VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">

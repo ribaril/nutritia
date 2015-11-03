@@ -39,6 +39,8 @@ namespace Nutritia.UI.Views
             InitializeComponent();
 
             App.Current.MainWindow.ResizeMode = ResizeMode.CanResize;
+            App.Current.MainWindow.MinWidth = 650;
+            App.Current.MainWindow.MinHeight = 550;
 
             AlimentService = ServiceFactory.Instance.GetService<IAlimentService>();
             PlatService = ServiceFactory.Instance.GetService<IPlatService>();
