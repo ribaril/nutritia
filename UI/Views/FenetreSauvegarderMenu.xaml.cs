@@ -19,43 +19,48 @@ namespace Nutritia.UI.Views
     /// </summary>
     public partial class FenetreSauvegarderMenu : Window
     {
+        private bool Erreur { get; set; }
+
         /// <summary>
         /// Constructeur par défaut de la classe.
         /// </summary>
         public FenetreSauvegarderMenu()
         {
             InitializeComponent();
+            Erreur = false;
         }
 
         /// <summary>
         /// Méthode permettant de valider le nom du menu.
         /// </summary>
-        /// <returns>Vrai si valide. Faux dans le cas contraire.</returns>
-        private bool ValiderNom()
+        private void ValiderNom()
         {
+            Erreur = false;
             string nom = txtNom.Text;
 
             if(!string.IsNullOrEmpty(nom))
             {
-                if(nom.Length < 2 || nom.Length > 15)
+                if(nom.Length < 2 || nom.Length > 10)
                 {
-                    return false;
+                    Erreur = true;
+                    lblNom.Content = "Nom (Min 2 carac. Max 10 carac.)";
+                    lblNom.Foreground = Brushes.Red;
                 }
                 else
                 {
                     if (!string.IsNullOrEmpty(ServiceFactory.Instance.GetService<IMenuService>().Retrieve(new RetrieveMenuArgs { Nom = nom }).Nom))
                     {
-                        return false;
-                    }
-                    else
-                    {
-                        return true;
+                        Erreur = true;
+                        lblNom.Content = "Nom (Nom déjà utilisé)";
+                        lblNom.Foreground = Brushes.Red;
                     }
                 }
             }
             else
             {
-                return false;
+                Erreur = true;
+                lblNom.Content = "Nom (Champ vide)";
+                lblNom.Foreground = Brushes.Red;
             }
         }
 
@@ -66,14 +71,12 @@ namespace Nutritia.UI.Views
         /// <param name="e"></param>
         private void btnSauvegarder_Click(object sender, RoutedEventArgs e)
         {
-            if(ValiderNom())
+            ValiderNom();
+
+            if(!Erreur)
             {
                 DialogResult = true;
                 Close();
-            }
-            else
-            {
-                lblNom.Foreground = Brushes.Red;
             }
         }
     }
