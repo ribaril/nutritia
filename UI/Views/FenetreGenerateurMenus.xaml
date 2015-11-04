@@ -63,46 +63,50 @@
             <Button Name="btnGenerer" Style="{StaticResource btnTexte}" Width="180" Height="25" Margin="0, 0, 12.5, 0" Click="btnGenerer_Click">Générer</Button>
             <Button Name="btnListeEpicerie" Style="{StaticResource btnTexte}" Width="180" Height="25" IsEnabled="False" Click="btnListeEpicerie_Click">Liste d'épicerie</Button>
         </StackPanel>
-        <Image Name="imgInfos" Grid.Row="2" Grid.Column="1" Width="225" Source="pack://application:,,,/UI/Images/infoIcon.png">
-            <Image.ToolTip>
-                <ToolTip Style="{StaticResource toolTipNutritia}" Content="Vous devez remplir la section Informations préalables à la génération &#x0a; et appuyer sur le bouton Générer pour générer un menu. &#x0a; Lors de l'appuie sur le bouton, le menu apparaîtra."></ToolTip>
-            </Image.ToolTip>
-        </Image>
+        <StackPanel Name="spInfosSup" Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Image Width="225" HorizontalAlignment="Left" Source="pack://application:,,,/UI/Images/infoIcon.png">
+                <Image.ToolTip>
+                    <ToolTip Style="{StaticResource toolTipNutritia}" Content="Vous devez remplir la section Informations préalables à la génération &#x0a; et appuyer sur le bouton Générer pour générer un menu. &#x0a; Lors de l'appuie sur le bouton, le menu apparaîtra."></ToolTip>
+                </Image.ToolTip>
+            </Image>
+            <Label Style="{StaticResource fontNutritia}" FontSize="22" VerticalAlignment="Center">Afficher les images des plats ?</Label>
+            <CheckBox Name="chbAfficherImages" IsChecked="True" VerticalAlignment="Center"></CheckBox>
+        </StackPanel>
         <GroupBox Name="gbMenus" Grid.Row="2" Grid.Column="1" Header="Menus" VerticalAlignment="Top" Visibility="Hidden">
             <ScrollViewer Name="svMenus" PreviewMouseWheel="svMenus_PreviewMouseWheel">
                 <Grid Name="grdMenus" ScrollViewer.CanContentScroll="False">
-                    <DataGrid Name="dgMenus" Style="{StaticResource dataGridPlats}" RowHeight="110" VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
+                    <DataGrid Name="dgMenus" Style="{StaticResource dataGridPlats}" RowHeight="80" VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="3*" Binding="{Binding Nom}" Foreground="DarkGreen" IsReadOnly="True">
+                            <DataGridTextColumn x:Name="dgtcNom" Width="3*" Binding="{Binding Nom}" Foreground="DarkGreen" IsReadOnly="True">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style>
                                         <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
                                         <Setter Property="TextBlock.TextAlignment" Value="Center" />
                                         <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
-                                        <Setter Property="TextBlock.Margin" Value="0, 15, 0, 0" />
+                                        <Setter Property="TextBlock.Margin" Value="0, 20, 0, 0" />
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTemplateColumn Width="3*" IsReadOnly="True">
+                            <DataGridTemplateColumn x:Name="dgtcImage" Width="3*" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Image Width="100" Height="70" Margin="0, 15, 0, 0" Source="{Binding ImageUrl}"></Image>
+                                        <Image Width="100" Height="70" Source="{Binding ImageUrl}"></Image>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Width="2*">
+                            <DataGridTemplateColumn x:Name="dgtcRegenerer" Width="2*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Name="btnRegenerer" Width="50" Height="50" Margin="0, 15, 0, 0" Click="btnRegenerer_Click">
+                                        <Button Name="btnRegenerer" Width="45" Height="45" Click="btnRegenerer_Click">
                                             <Image Source="pack://application:,,,/UI/Images/regenererIcon.png"></Image>
                                         </Button>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Width="2*">
+                            <DataGridTemplateColumn x:Name="dgtcIngredient" Width="2*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Name="btnIngredients" Style="{StaticResource btnTexte}" Width="100" Height="50" Margin="0, 15, 0, 0" Click="btnIngredients_Click">Ingrédients</Button>
+                                        <Button Name="btnIngredients" Style="{StaticResource btnTexte}" Width="100" Height="45" Click="btnIngredients_Click">Ingrédients</Button>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
