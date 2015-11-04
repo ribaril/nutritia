@@ -30,6 +30,7 @@ namespace Nutritia.UI.Views
         private ObservableCollection<Plat> ListeBreuvages { get; set; }
         private ObservableCollection<Plat> ListeDesserts { get; set; }
         private Menu MenuGenere { get; set; }
+        private int NbColonnes { get; set; }
 
         /// <summary>
         /// Constructeur par défaut de la classe.
@@ -72,29 +73,74 @@ namespace Nutritia.UI.Views
         /// Méthode permettant de générer dynamiquement les rangées de la grid contenant le menu.
         /// </summary>
         /// <param name="nbRangees">Le nombre de rangées.</param>
-        private void GenererRangees(int nbRangees)
+        private void GenererRangees(int nbRangees, int hauteur)
         {
             RowDefinition rowDefinition;
 
             for (int i = 0; i < nbRangees; i++)
             {
                 rowDefinition = new RowDefinition();
-                rowDefinition.Height = new GridLength(110);
+                rowDefinition.Height = new GridLength(hauteur);
 
                 grdMenus.RowDefinitions.Add(rowDefinition);
             }
         }
 
         /// <summary>
+        /// Méthode permettant de générer dynamiquement les colonnes de la grid contenant le menu.
+        /// </summary>
+        /// <param name="nbRangees">Le nombre de colonnes.</param>
+        private void GenererColonnes()
+        {
+            ColumnDefinition columnDefinition;
+
+            if(NbColonnes == 3)
+            {
+                for (int i = 0; i < NbColonnes; i++)
+                {
+                    columnDefinition = new ColumnDefinition();
+                    if(i == 0)
+                    {
+                        columnDefinition.Width = new GridLength(2, GridUnitType.Star);
+                    }
+                    else
+                    {
+                        columnDefinition.Width = new GridLength(1, GridUnitType.Star);
+                    }
+                    grdMenus.ColumnDefinitions.Add(columnDefinition);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < NbColonnes; i++)
+                {
+                    columnDefinition = new ColumnDefinition();
+                    if(i < 2)
+                    {
+                        columnDefinition.Width = new GridLength(3, GridUnitType.Star);
+                    }
+                    else
+                    {
+                        columnDefinition.Width = new GridLength(2, GridUnitType.Star);
+                    }
+                    grdMenus.ColumnDefinitions.Add(columnDefinition);
+                }
+            }
+        }
+
+        /// <summary>
         /// Méthode permettant d'initialiser la section des menus.
         /// </summary>
-        private void InitialiserSectionMenu(int nbPlats)
+        private void InitialiserSectionMenu(int nbPlats, int hauteurRangees)
         {
             svMenus.ScrollToTop();
             // Génération des rangées de la grid.
             grdMenus.RowDefinitions.Clear();
-            GenererRangees(nbPlats);
+            GenererRangees(nbPlats, hauteurRangees);
+            grdMenus.ColumnDefinitions.Clear();
+            GenererColonnes();
             Grid.SetRowSpan(dgMenus, nbPlats);
+            Grid.SetColumnSpan(dgMenus, grdMenus.ColumnDefinitions.Count);
             
             // Retrait des séparateurs s'il y a lieu.
             List<Label> separateurs = new List<Label>(grdMenus.Children.OfType<Label>());
@@ -115,8 +161,13 @@ namespace Nutritia.UI.Views
             Label lblSeparateur = new Label();
             lblSeparateur.Content = contenu;
             lblSeparateur.Style = FindResource("fontNutritia") as Style;
+            lblSeparateur.Foreground = Brushes.Red;
             lblSeparateur.FontSize = 16;
             lblSeparateur.HorizontalAlignment = HorizontalAlignment.Center;
+            Thickness margin = lblSeparateur.Margin;
+            margin.Left = 10;
+            margin.Top = 10;
+            lblSeparateur.Margin = margin;
             Grid.SetRow(lblSeparateur, index);
             grdMenus.Children.Add(lblSeparateur);
         }
@@ -138,7 +189,7 @@ namespace Nutritia.UI.Views
                 dgMenus.ItemsSource = MenuGenere.ListePlats;
                 btnSauvegarder.IsEnabled = true;
                 btnListeEpicerie.IsEnabled = true;
-                imgInfos.Visibility = Visibility.Hidden;
+                spInfosSup.Visibility = Visibility.Hidden;
                 gbMenus.Visibility = Visibility.Visible;
             }
         }
@@ -350,6 +401,7 @@ namespace Nutritia.UI.Views
         private void btnGenerer_Click(object sender, RoutedEventArgs e)
         {
             MenuGenere = new Menu();
+            NbColonnes = 4;
             int nbJours = 0;
             int nbPlats = 4;
             Random rand = new Random();
@@ -361,7 +413,17 @@ namespace Nutritia.UI.Views
             
             MenuGenere.NbPersonnes = Convert.ToInt32(((ComboBoxItem)cboNbPersonnes.SelectedItem).Content);
 
-            InitialiserSectionMenu(nbPlats);
+            if(chbAfficherImages.IsChecked == null || chbAfficherImages.IsChecked == false)
+            {
+                dgMenus.RowHeight = 60;
+                dgtcNom.Width = new DataGridLength(2, DataGridLengthUnitType.Star);
+                dgtcImage.Visibility = Visibility.Hidden;
+                dgtcRegenerer.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+                dgtcIngredient.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+                NbColonnes = 3;
+            }
+
+            InitialiserSectionMenu(nbPlats, (Convert.ToInt32(dgMenus.RowHeight)));
 
             // Il s'agit d'un déjeuner.
             if(nbPlats == 2)
@@ -420,7 +482,7 @@ namespace Nutritia.UI.Views
             dgMenus.ItemsSource = MenuGenere.ListePlats;
             btnSauvegarder.IsEnabled = true;
             btnListeEpicerie.IsEnabled = true;
-            imgInfos.Visibility = Visibility.Hidden;
+            spInfosSup.Visibility = Visibility.Hidden;
             gbMenus.Visibility = Visibility.Visible;
         }
 
