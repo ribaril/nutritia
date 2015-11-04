@@ -138,6 +138,8 @@ namespace Nutritia.UI.Views
                 dgMenus.ItemsSource = MenuGenere.ListePlats;
                 btnSauvegarder.IsEnabled = true;
                 btnListeEpicerie.IsEnabled = true;
+                imgInfos.Visibility = Visibility.Hidden;
+                gbMenus.Visibility = Visibility.Visible;
             }
         }
 
@@ -418,6 +420,8 @@ namespace Nutritia.UI.Views
             dgMenus.ItemsSource = MenuGenere.ListePlats;
             btnSauvegarder.IsEnabled = true;
             btnListeEpicerie.IsEnabled = true;
+            imgInfos.Visibility = Visibility.Hidden;
+            gbMenus.Visibility = Visibility.Visible;
         }
 
         /// <summary>

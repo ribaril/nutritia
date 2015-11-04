@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
 
         <DockPanel>
-            <ToolBar Width="650">
+            <ToolBar>
                 <Button Name="btnRetour" VerticalAlignment="Bottom" Click="btnRetour_Click">
                     <DockPanel>
                         <Image Source="/Nutritia;component/UI/Images/retour.PNG"/>
