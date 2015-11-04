@@ -5,6 +5,10 @@
 
 [![Join the chat at https://gitter.im/Nutritia/nutritia](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Nutritia/nutritia?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+### Progression du travail
+
+[![Throughput Graph](https://graphs.waffle.io/nutritia/nutritia/throughput.svg)](https://waffle.io/nutritia/nutritia/metrics)
+
 ### Procédure de déploiement du logiciel Nutritia
 
 #### Note de départ
