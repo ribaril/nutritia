@@ -10,5 +10,6 @@ namespace Nutritia
     {
         IList<Aliment> RetrieveAll();
         Aliment Retrieve(RetrieveAlimentArgs args);
+        void Insert(Aliment unAliment);
     }
 }
