@@ -1,5 +1,7 @@
 ﻿# Nutritia
 
+[![Join the chat at https://gitter.im/Nutritia/nutritia](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Nutritia/nutritia?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ### Procédure de déploiement du logiciel Nutritia
 
 #### Note de départ
