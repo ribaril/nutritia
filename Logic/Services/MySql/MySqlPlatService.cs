@@ -245,7 +245,6 @@ namespace Nutritia
                 Note = note,
                 NbVotes = (int)plat["nbVotes"],
                 ImageUrl = (string)plat["imageUrl"],
-                ListeIngredients = new List<Aliment>()
             };
         }
     }

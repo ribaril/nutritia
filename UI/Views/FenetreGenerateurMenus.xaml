@@ -77,16 +77,30 @@
                 <Grid Name="grdMenus" ScrollViewer.CanContentScroll="False">
                     <DataGrid Name="dgMenus" Style="{StaticResource dataGridPlats}" RowHeight="80" VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn x:Name="dgtcNom" Width="3*" Binding="{Binding Nom}" Foreground="DarkGreen" IsReadOnly="True">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style>
-                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-                                        <Setter Property="TextBlock.TextAlignment" Value="Center" />
-                                        <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
-                                        <Setter Property="TextBlock.Margin" Value="0, 20, 0, 0" />
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
+                            <DataGridTemplateColumn x:Name="dgtcNom" Width="3*" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Foreground="DarkGreen">
+                                            <TextBlock.Style>
+                                                <Style TargetType="{x:Type TextBlock}">
+                                                    <Style.Setters>
+                                                        <Setter Property="Text" Value="{Binding Nom}" />
+                                                        <Setter Property="TextWrapping" Value="Wrap" />
+                                                        <Setter Property="TextAlignment" Value="Center" />
+                                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                                        <Setter Property="Margin" Value="0, 20, 0, 0" />
+                                                    </Style.Setters>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Nom}" Value="{x:Null}">
+                                                            <Setter Property="Text" Value="Aucune correspondance" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                             <DataGridTemplateColumn x:Name="dgtcImage" Width="3*" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -99,6 +113,15 @@
                                     <DataTemplate>
                                         <Button Name="btnRegenerer" Width="45" Height="45" Click="btnRegenerer_Click">
                                             <Image Source="pack://application:,,,/UI/Images/regenererIcon.png"></Image>
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Nom}" Value="{x:Null}">
+                                                            <Setter Property="Visibility" Value="Hidden" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
                                         </Button>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -106,7 +129,17 @@
                             <DataGridTemplateColumn x:Name="dgtcIngredient" Width="2*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Name="btnIngredients" Style="{StaticResource btnTexte}" Width="100" Height="45" Click="btnIngredients_Click">Ingrédients</Button>
+                                        <Button Name="btnIngredients" Width="100" Height="45" Content="Ingrédients" Click="btnIngredients_Click">
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource btnTexte}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Nom}" Value="{x:Null}">
+                                                            <Setter Property="Visibility" Value="Hidden" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

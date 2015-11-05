@@ -21,6 +21,14 @@ namespace Nutritia
         #endregion
 
         /// <summary>
+        /// Constructeur par défaut de la classe.
+        /// </summary>
+        public Plat()
+        {
+            ListeIngredients = new List<Aliment>();
+        }
+
+        /// <summary>
         /// Méthode permettant de calculer les valeurs nutritionnelles d'un plat.
         /// </summary>
         /// <param name="plat">Le plat à analyser.</param>
