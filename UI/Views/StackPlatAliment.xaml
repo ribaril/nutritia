@@ -9,7 +9,6 @@
     <Grid>
         <ScrollViewer>
             <StackPanel Name="stackEcran">
-				
             </StackPanel>
         </ScrollViewer>
     </Grid>

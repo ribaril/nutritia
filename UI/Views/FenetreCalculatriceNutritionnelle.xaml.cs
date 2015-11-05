@@ -243,7 +243,7 @@ namespace Nutritia.UI.Views
 
             foreach (var aliment in BoiteRechAliment)
             {
-                Button btnAliment = FormerListeLignePlatAliment(true, aliment, lstIdPresent);
+                Button btnAliment = FormerListeLignePlatAliment(true, aliment, null);
 
                 if (btnAliment != null)
                     BoiteResultat.stackEcran.Children.Add(btnAliment);
@@ -416,7 +416,7 @@ namespace Nutritia.UI.Views
                 if (EstPlat)
                 {
                     int nbrMemePlat = PlateauPlat.Count(x => x.IdPlat == plat.IdPlat);
-                    lblNom.Content = (nbrMemePlat > 0 ? nbrMemePlat.ToString() + " " : "") + plat.Nom;
+                    lblNom.Content = (nbrMemePlat > 0 && lstIdPresent != null ? nbrMemePlat.ToString() + " " : "") + plat.Nom;
                     stackLigne.Children.Add(lblNom);
                 }
                 else
@@ -520,12 +520,19 @@ namespace Nutritia.UI.Views
 
             ValeurNutritive = ConstruireDicValeurNutritive(null, ValeurNutritive);
 
-            foreach (var aliment in plat.ListeIngredients)
-                ValeurNutritive = ConstruireDicValeurNutritive(aliment, ValeurNutritive);
+			int poidPlat = 0;
 
+            foreach (var aliment in plat.ListeIngredients)
+			{
+				ValeurNutritive = ConstruireDicValeurNutritive(aliment, ValeurNutritive);
+				poidPlat += aliment.Mesure;
+			}
+                
+
+			
 
             StringBuilder sbValeurNut = new StringBuilder();
-            sbValeurNut.Append("1 ").AppendLine(EstPlat ? plat.Nom : plat.ListeIngredients[0].Nom).AppendLine(); // Affichage du nom du plat ou de l'aliment
+            sbValeurNut.Append("1 ").Append(EstPlat ? plat.Nom : plat.ListeIngredients[0].Nom).AppendLine(" de " + poidPlat + " g").AppendLine(); // Affichage du nom du plat ou de l'aliment
             sbValeurNut.Append("Énergie : ").Append(ValeurNutritive["Calorie"].ToString("N")).AppendLine(" cal");
             sbValeurNut.Append("Glucides : ").Append(ValeurNutritive["Glucides"].ToString("N")).AppendLine(" g");
             sbValeurNut.Append("Fibres : ").Append(ValeurNutritive["Fibres"].ToString("N")).AppendLine(" g");
