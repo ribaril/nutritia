@@ -146,7 +146,7 @@
             </GroupBox>
         </Grid>
 
-        <Grid Grid.Row="1" Name="grid_modification_plat" Visibility="Visible">
+        <Grid Grid.Row="1" Name="grid_modification_plat" Visibility="Hidden">
             <GroupBox Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="10,10,10,10" BorderBrush="DarkGreen">
                 <GroupBox.Header>Modification d'un plat / breuvage</GroupBox.Header>
                 <Grid>
@@ -268,44 +268,58 @@
                 </Grid>
             </GroupBox>
         </Grid>
-        <Grid Grid.Row="1" Name="grid_ajout_aliment" Visibility="Hidden">
+        <Grid Grid.Row="1" Name="grid_ajout_aliment" Visibility="Visible">
             <GroupBox Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="10,10,10,10" BorderBrush="DarkGreen">
                 <GroupBox.Header>Ajout d'un aliment</GroupBox.Header>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Content="Nom de l'aliment" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,55,0,0"></Label>
+                    <Label Name="lbl_nom" Grid.Row="0" Content="Nom de l'aliment" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,55,0,0"></Label>
                     <TextBox Name="Nom_alim" Grid.Row="0" SelectedText="" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,75,0,0"></TextBox>
-                    <Label Grid.Row="0" Content="Groupe alimentaire" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,105,0,0"></Label>
+                    <Label Name="lbl_grp_alim" Grid.Row="0" Content="Catégorie alimentaire" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,105,0,0"></Label>
                     <ComboBox Grid.Row="0" Name="cbo_grp_alim" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,125,0,0">
+                        <ComboBoxItem></ComboBoxItem>
                         <ComboBoxItem>Boissons</ComboBoxItem>
+                        <ComboBoxItem>Arachides et noix</ComboBoxItem>
                         <ComboBoxItem>Céréales</ComboBoxItem>
+                        <ComboBoxItem>Épices</ComboBoxItem>
                         <ComboBoxItem>Fruits et légumes</ComboBoxItem>
                         <ComboBoxItem>Produits laitiers</ComboBoxItem>
-                        <ComboBoxItem>Protéines animales</ComboBoxItem>
+                        <ComboBoxItem>Poissons et fruits de mers</ComboBoxItem>
+                        <ComboBoxItem>Pâtes</ComboBoxItem>
+                        <ComboBoxItem>Viandes et substituts</ComboBoxItem>
                         <ComboBoxItem>Matières grasses</ComboBoxItem>
                         <ComboBoxItem>Produits sucrés</ComboBoxItem>
                         <ComboBoxItem>Autres</ComboBoxItem>
                     </ComboBox>
+                    <Label Name="lbl_unite_mesure" Grid.Row="0" Content="Unité de mesure" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,155,0,0"></Label>
+                    <ComboBox Grid.Row="0" Name="cbo_unite_mesure" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,175,0,0">
+                        <ComboBoxItem>Millilitre</ComboBoxItem>
+                        <ComboBoxItem>Gramme</ComboBoxItem>
+                        <ComboBoxItem>Unite</ComboBoxItem>
+                    </ComboBox>
+                    <Label Name="lbl_mesure" Grid.Row="0" Content="Mesure de la portion" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,205,0,0"></Label>
+                    <TextBox Name="Mesure" Grid.Row="0" MaxLength="3" SelectedText="" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="82.5,225,0,0"></TextBox>
+
                     <Label Grid.Row="0" Content="Valeurs nutritionnelles" Width="265" Height="30" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,20,0"></Label>
-                    <Label Grid.Row="0" Content="Énergie (calories)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,160,0"></Label>
-                    <TextBox Name="Calories" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,50,160,0"></TextBox>
-                    <Label Grid.Row="0" Content="Protéines (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,80,160,0"></Label>
-                    <TextBox Name="Proteines" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,100,160,0"></TextBox>
-                    <Label Grid.Row="0" Content="Glucides (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,130,160,0"></Label>
-                    <TextBox Name="Glucides" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,150,160,0"></TextBox>
-                    <Label Grid.Row="0" Content="Fibres (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,20,0"></Label>
-                    <TextBox Name="Fibres" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,50,20,0"></TextBox>
-                    <Label Grid.Row="0" Content="Lipides (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,80,20,0"></Label>
-                    <TextBox Name="Lipides" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,100,20,0"></TextBox>
-                    <Label Grid.Row="0" Content="Cholestérol (mg)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,130,20,0"></Label>
-                    <TextBox Name="Cholestérol" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,150,20,0"></TextBox>
-                    <Label Grid.Row="0" Content="Sodium (mg)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,180,160,0"></Label>
-                    <TextBox Name="Sodium" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,200,160,0"></TextBox>
+                    <Label Name="lbl_calories" Grid.Row="0" Content="Énergie (calories)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,160,0"></Label>
+                    <TextBox Name="Calories" Grid.Row="0"  MaxLength="6" SelectedText="" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,50,160,0"></TextBox>
+                    <Label Name="lbl_proteines" Grid.Row="0" Content="Protéines (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,80,160,0"></Label>
+                    <TextBox Name="Proteines" Grid.Row="0"  MaxLength="6" SelectedText="" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,100,160,0"></TextBox>
+                    <Label Name="lbl_glucides" Grid.Row="0" Content="Glucides (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,130,160,0"></Label>
+                    <TextBox Name="Glucides" Grid.Row="0"  MaxLength="6" SelectedText="" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,150,160,0"></TextBox>
+                    <Label Name="lbl_fibres" Grid.Row="0" Content="Fibres (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,20,0"></Label>
+                    <TextBox Name="Fibres" Grid.Row="0"  MaxLength="6" SelectedText="" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,50,20,0"></TextBox>
+                    <Label Name="lbl_lipides" Grid.Row="0" Content="Lipides (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,80,20,0"></Label>
+                    <TextBox Name="Lipides" Grid.Row="0"  MaxLength="6" SelectedText="" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,100,20,0"></TextBox>
+                    <Label Name="lbl_cholesterol" Grid.Row="0" Content="Cholestérol (mg)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,130,20,0"></Label>
+                    <TextBox Name="Cholesterol" Grid.Row="0"  MaxLength="6" SelectedText="" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,150,20,0"></TextBox>
+                    <Label Name="lbl_sodium" Grid.Row="0" Content="Sodium (mg)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,180,160,0"></Label>
+                    <TextBox Name="Sodium" Grid.Row="0"  MaxLength="6" SelectedText="" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,200,160,0"></TextBox>
                 </Grid>
             </GroupBox>
-            <Button Name="Btn_creer" Grid.Row="0" Content="Ajouter l'aliment" Height="30" Width="150" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,30"></Button>
+            <Button Name="btn_creer" Grid.Row="0" Content="Ajouter l'aliment" Height="30" Width="150" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,30" Click="Valider_Inserer_Aliment"></Button>
         </Grid>
 
         <Grid Grid.Row="1" Name="grid_modif_aliment" Visibility="Hidden">
@@ -332,22 +346,22 @@
                     </ComboBox>
                     <Label Grid.Row="0" Content="Valeurs nutritionnelles" Width="265" Height="30" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,20,0"></Label>
                     <Label Grid.Row="0" Content="Énergie (calories)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,160,0"></Label>
-                    <TextBox Name="Calories_modif" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,50,160,0"></TextBox>
+                    <TextBox Name="Calories_modif" Grid.Row="0"  MaxLength="6" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,50,160,0"></TextBox>
                     <Label Grid.Row="0" Content="Protéines (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,80,160,0"></Label>
-                    <TextBox Name="Proteines_modif" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,100,160,0"></TextBox>
+                    <TextBox Name="Proteines_modif" Grid.Row="0"  MaxLength="6" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,100,160,0"></TextBox>
                     <Label Grid.Row="0" Content="Glucides (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,130,160,0"></Label>
-                    <TextBox Name="Glucides_modif" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,150,160,0"></TextBox>
+                    <TextBox Name="Glucides_modif" Grid.Row="0"  MaxLength="6" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,150,160,0"></TextBox>
                     <Label Grid.Row="0" Content="Fibres (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,20,0"></Label>
-                    <TextBox Name="Fibres_modif" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,50,20,0"></TextBox>
+                    <TextBox Name="Fibres_modif" Grid.Row="0"  MaxLength="6" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,50,20,0"></TextBox>
                     <Label Grid.Row="0" Content="Lipides (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,80,20,0"></Label>
-                    <TextBox Name="Lipides_modif" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,100,20,0"></TextBox>
+                    <TextBox Name="Lipides_modif" Grid.Row="0"  MaxLength="6" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,100,20,0"></TextBox>
                     <Label Grid.Row="0" Content="Cholestérol (mg)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,130,20,0"></Label>
-                    <TextBox Name="Cholestérol_modif" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,150,20,0"></TextBox>
+                    <TextBox Name="Cholesterol_modif" Grid.Row="0"  MaxLength="6" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,150,20,0"></TextBox>
                     <Label Grid.Row="0" Content="Sodium (mg)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,180,160,0"></Label>
-                    <TextBox Name="Sodium_modif" Grid.Row="0" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,200,160,0"></TextBox>
+                    <TextBox Name="Sodium_modif" Grid.Row="0"  MaxLength="6" SelectedText="0" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,200,160,0"></TextBox>
                 </Grid>
             </GroupBox>
-            <Button Name="Btn_modif" Grid.Row="0" Content="Modifier l'aliment" Height="30" Width="150" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,30"></Button>
+            <Button Name="btn_modif" Grid.Row="0" Content="Modifier l'aliment" Height="30" Width="150" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,30"></Button>
         </Grid>
 
     </Grid>

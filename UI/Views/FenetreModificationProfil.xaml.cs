@@ -175,7 +175,13 @@ namespace Nutritia.UI.Views
             Valider_Prenom();
             Valider_Utilisateur();
             Valider_Mot_Passe();
-            Valider_Confirmation_Mot_Passe();
+
+            //On ne valide la confirmation que si la mot de passe est différent de l'original.
+            if(Mot_passe.Password != App.MembreCourant.MotPasse)
+            {
+                Valider_Confirmation_Mot_Passe();
+            }
+            
             Valider_Si_Taille();
             Valider_Si_Masse();
             Valider_Si_Date();
@@ -252,10 +258,10 @@ namespace Nutritia.UI.Views
                         Regex RgxApostropheDebut = new Regex("^[']");
                         bool ContientApostropheDebut = RgxApostropheDebut.IsMatch(Nom.Text);
 
-                        if (char.IsLower(Nom.Text[0]) || ContientApostropheDebut)
+                        if (ContientApostropheDebut)
                         {
                             lbl_nom.Foreground = Brushes.Red;
-                            lbl_nom.Content = "Nom (Doit débuter avec une majuscule)";
+                            lbl_nom.Content = "Nom (Doit débuter avec une lettre)";
                             Erreur = true;
                         }
                         else
@@ -307,10 +313,10 @@ namespace Nutritia.UI.Views
                         Regex RgxApostropheDebut = new Regex("^[']");
                         bool ContientApostropheDebut = RgxApostropheDebut.IsMatch(Prenom.Text);
 
-                        if (char.IsLower(Prenom.Text[0]) || ContientApostropheDebut)
+                        if (ContientApostropheDebut)
                         {
                             lbl_prenom.Foreground = Brushes.Red;
-                            lbl_prenom.Content = "Prénom (Doit débuter avec une majuscule)";
+                            lbl_prenom.Content = "Prénom (Doit débuter avec une lettre)";
                             Erreur = true;
                         }
                         else
@@ -499,6 +505,17 @@ namespace Nutritia.UI.Views
         /// </summary>
         private void Modifier_Donnees()
         {
+            // Conversion automatisée de la première lettre du nom et du prénom en majuscule si nécessaire.
+            if (char.IsLower(Nom.Text[0]))
+            {
+                Nom.Text = char.ToUpper(Nom.Text[0]) + Nom.Text.Substring(1);
+            }
+
+            if (char.IsLower(Prenom.Text[0]))
+            {
+                Prenom.Text = char.ToUpper(Prenom.Text[0]) + Prenom.Text.Substring(1);
+            }
+            
             App.MembreCourant.Nom = Nom.Text;
             App.MembreCourant.Prenom = Prenom.Text;
             App.MembreCourant.NomUtilisateur = Nom_utilisateur.Text;
@@ -733,5 +750,126 @@ namespace Nutritia.UI.Views
             /*-----------------------------------Modifications dans la base de données-----------------------------------*/
             ServiceFactory.Instance.GetService<IMembreService>().Update(App.MembreCourant);
         }
+
+        #region ObjectifsPreferences
+
+        /// <summary>
+        /// Méthode permettant de décocher l'option "Végétalien" si l'option "Végétarien" est cochée.
+        /// Désactive les options "Viandes" et "Poissons et fruits de mer".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Vegetarien_Checked(object sender, RoutedEventArgs e)
+        {
+            if (Vegetarien.IsChecked == true)
+            {
+                Vegetalien.IsChecked = false;
+
+                Viandes.IsEnabled = false;
+                Pref_poissons_mer.IsEnabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Méthode permettant de décocher l'option "Végétarien" si l'option "Végétalien" est cochée.
+        /// /// Désactive les options "Viandes" et "Poissons et fruits de mer".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Vegetalien_Checked(object sender, RoutedEventArgs e)
+        {
+            if (Vegetalien.IsChecked == true)
+            {
+                Vegetarien.IsChecked = false;
+
+                Viandes.IsEnabled = false;
+                Pref_poissons_mer.IsEnabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Méthode permettant de décocher les autres préférences si "Viandes" est cochée.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Viandes_Checked(object sender, RoutedEventArgs e)
+        {
+            if (Viandes.IsChecked == true)
+            {
+                Pates.IsChecked = false;
+                Pref_poissons_mer.IsChecked = false;
+            }
+        }
+
+        /// <summary>
+        /// Méthode permettant de décocher les autres préférences si "Pâtes" est cochée.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Pates_Checked(object sender, RoutedEventArgs e)
+        {
+            if (Pates.IsChecked == true)
+            {
+                Viandes.IsChecked = false;
+                Pref_poissons_mer.IsChecked = false;
+            }
+        }
+
+        /// <summary>
+        /// Méthode permettant de décocher les autres préférences si "Poissons et fruits de mer" est cochée.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Pref_poissons_mer_Checked(object sender, RoutedEventArgs e)
+        {
+            if (Pref_poissons_mer.IsChecked == true)
+            {
+                Pates.IsChecked = false;
+                Viandes.IsChecked = false;
+            }
+        }
+
+        /// <summary>
+        /// Méthode de réactivation des préférences "Viandes" et "Poissons et fruits de mer" 
+        /// si le membre n'est pas végétarien ou végétalien.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Vegetarien_Vegetalien_Dechoche(object sender, RoutedEventArgs e)
+        {
+            if (Vegetarien.IsChecked == false && Vegetalien.IsChecked == false)
+            {
+                Viandes.IsEnabled = true;
+                Pref_poissons_mer.IsEnabled = true;
+            }
+        }
+
+        /// <summary>
+        /// Méthode permettant de décocher l'option "Gain de poids" si "Perte de poids" est cochée.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Perte_poids_Checked(object sender, RoutedEventArgs e)
+        {
+            if (Perte_poids.IsChecked == true)
+            {
+                Gain_poids.IsChecked = false;
+            }
+        }
+
+        /// <summary>
+        /// Méthode permettant de décocher l'option "Perte de poids" si "Gain de poids" est cochée.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Gain_poids_Checked(object sender, RoutedEventArgs e)
+        {
+            if (Gain_poids.IsChecked == true)
+            {
+                Perte_poids.IsChecked = false;
+            }
+        }
+
+        #endregion
     }
 }

@@ -124,7 +124,7 @@ namespace Nutritia
             {
                 connexion = new MySqlConnexion();
 
-                string requete = string.Format("INSERT INTO Menus (idMembre, nom, dateMenu) VALUES ({0}, '{1}', '{2}')", App.MembreCourant.IdMembre, menu.Nom, menu.DateCreation.ToString("yyyy-MM-dd"));
+                string requete = string.Format("INSERT INTO Menus (idMembre, nom, nbPersonnes, dateMenu) VALUES ({0}, '{1}', {2}, '{3}')", App.MembreCourant.IdMembre, menu.Nom, menu.NbPersonnes, menu.DateCreation.ToString("yyyy-MM-dd"));
                 connexion.Query(requete);
 
                 foreach(Plat platCourant in menu.ListePlats)
@@ -150,6 +150,7 @@ namespace Nutritia
             {
                 IdMenu = (int)menu["idMenu"],
                 Nom = (string)menu["nom"],
+                NbPersonnes = (int)menu["nbPersonnes"],
                 DateCreation = (DateTime)menu["dateMenu"],
                 ListePlats = new List<Plat>()
             };

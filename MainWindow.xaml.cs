@@ -20,15 +20,15 @@ using System.Diagnostics;
 
 namespace Nutritia
 {
-	/// <summary>
-	/// Logique d'interaction pour MainWindow.xaml
-	/// </summary>
-	public partial class MainWindow : Window, IApplicationService
-	{
+    /// <summary>
+    /// Logique d'interaction pour MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window, IApplicationService
+    {
         private const int SLEEP_NOTIFICATION_TIME = 10000;
 
         public MainWindow()
-		{
+        {
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.Langue);
             InitializeComponent();
             Configurer();
@@ -52,15 +52,15 @@ namespace Nutritia
             ServiceFactory.Instance.Register<IApplicationService, MainWindow>(this);
         }
 
-		public void ChangerVue<T>(T vue)
-		{
-			presenteurContenu.Content = vue as UserControl;
-		}
+        public void ChangerVue<T>(T vue)
+        {
+            presenteurContenu.Content = vue as UserControl;
+        }
 
-		private void btnParam_Click(object sender, RoutedEventArgs e)
-		{
+        private void btnParam_Click(object sender, RoutedEventArgs e)
+        {
             (new FenetreParametres()).ShowDialog();
-		}
+        }
 
 		private void btnRetour_Click(object sender, RoutedEventArgs e)
 		{
@@ -75,17 +75,17 @@ namespace Nutritia
             }
 		}
 
-		private void btnInfo_Click(object sender, RoutedEventArgs e)
-		{
+        private void btnInfo_Click(object sender, RoutedEventArgs e)
+        {
             (new FenetreAPropos()).ShowDialog();
-			//ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new FenetreAPropos());
-		}
+            //ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new FenetreAPropos());
+        }
 
-		private void btnAide_Click(object sender, RoutedEventArgs e)
-		{
-                FenetreAide fenetreAide = new FenetreAide(presenteurContenu.Content.GetType().Name);
-                fenetreAide.Show();
-		}
+        private void btnAide_Click(object sender, RoutedEventArgs e)
+        {
+            FenetreAide fenetreAide = new FenetreAide(presenteurContenu.Content.GetType().Name);
+            fenetreAide.Show();
+        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -95,18 +95,28 @@ namespace Nutritia
 
         private void LastestVersionPopUp()
         {
+            bool isOlder = false;
             IVersionLogicielService serviceMembre = ServiceFactory.Instance.GetService<IVersionLogicielService>();
 
             VersionLogiciel latestVersionLogiciel = serviceMembre.RetrieveLatest();
 
-            Thread.Sleep(SLEEP_NOTIFICATION_TIME);
-
-            if (latestVersionLogiciel.Version.Equals("0.0.0.0"))
+            if (String.IsNullOrEmpty(latestVersionLogiciel.Version))
             {
                 return;
             }
-    
-            if (latestVersionLogiciel.Version.Equals(FileVersionInfo.GetVersionInfo(App.ResourceAssembly.Location).FileVersion) == false )
+
+            Version versionBD = new Version(latestVersionLogiciel.Version);
+            Version versionLocal = new Version(FileVersionInfo.GetVersionInfo(App.ResourceAssembly.Location).FileVersion);
+
+            if (versionBD.Major > versionLocal.Major || versionBD.Minor > versionLocal.Minor || versionBD.Build > versionLocal.Build || versionBD.Revision > versionLocal.Revision)
+            {
+                isOlder = true;
+            }
+            
+
+            Thread.Sleep(SLEEP_NOTIFICATION_TIME);
+
+            if (isOlder)
             {
                 string message = "Version: " + latestVersionLogiciel.Version + " disponible.\nLien de téléchargement: " + latestVersionLogiciel.DownloadLink;
                 MessageBox.Show(
