@@ -24,8 +24,6 @@ namespace Nutritia.UI.Views
         {
             InitializeComponent();
 
-            
-
 			switch (nomFenetre)
 			{
 				case "AjoutPlatMembre":
@@ -49,7 +47,7 @@ namespace Nutritia.UI.Views
 				case "FenetreParametre":
 					tcAide.SelectedItem = tiParametre;
 					break;
-				case "GenerateurMenus":
+                case "FenetreGenerateurMenus":
 					tcAide.SelectedItem = tiGenerationMenu;
 					break;
 				case "ListeEpicerie":

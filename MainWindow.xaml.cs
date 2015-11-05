@@ -62,15 +62,18 @@ namespace Nutritia
             (new FenetreParametres()).ShowDialog();
         }
 
-        private void btnRetour_Click(object sender, RoutedEventArgs e)
-        {
-            if (App.MembreCourant.IdMembre == null)
-                ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipal());
-            else if (App.MembreCourant.EstAdministrateur)
-                ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuAdministrateur());
-            else
-                ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
-        }
+		private void btnRetour_Click(object sender, RoutedEventArgs e)
+		{
+			if(App.MembreCourant.IdMembre == null)
+				ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipal());
+			else
+            {
+                if(presenteurContenu.Content is Bannissement || presenteurContenu.Content is GestionAdmin || presenteurContenu.Content is GestionRepertoire)
+                        ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuAdministrateur());
+                else
+                    ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
+            }
+		}
 
         private void btnInfo_Click(object sender, RoutedEventArgs e)
         {

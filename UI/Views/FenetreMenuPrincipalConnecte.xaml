@@ -33,5 +33,12 @@
             <Image Source="/Nutritia;component/UI/Images/ProfilIcon.png" />
         </Button>
         <Label Content="Mon profil" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="161" Canvas.Left="81" Width="134"/>
+        <Button x:Name="btnGestAdmin" Visibility="Hidden" Canvas.Left="370" Canvas.Top="19" Click="btnGestAdmin_Click">
+            <StackPanel Orientation="Horizontal">
+                <Image  Height="40" Source="/Nutritia;component/UI/Images/adminIcon.png" />
+                <Label Content="Gestion admin" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="20" Canvas.Left="395" Width="188"/>
+            </StackPanel>
+        </Button>
+
     </Canvas>
 </UserControl>

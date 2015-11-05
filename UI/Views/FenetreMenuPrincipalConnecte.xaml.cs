@@ -28,7 +28,12 @@ namespace Nutritia.UI.Views
             // Header de la fenetre
             App.Current.MainWindow.Title = "Nutritia - Menu Principal Membre";
 
-            if(App.MembreCourant.Nom != "")
+            if(App.MembreCourant.EstAdministrateur)
+            {
+                lbl_nom_membre.Visibility = Visibility.Hidden;
+                btnGestAdmin.Visibility = Visibility.Visible;
+            }
+            else
             {
                 lbl_nom_membre.Content = "Bienvenue " + App.MembreCourant.NomUtilisateur;
             }
@@ -64,5 +69,10 @@ namespace Nutritia.UI.Views
 		{
             ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new FenetreVotes());
 		}
+
+        private void btnGestAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuAdministrateur());
+        }
 	}
 }
