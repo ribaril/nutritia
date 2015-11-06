@@ -34,5 +34,41 @@ namespace Nutritia.Properties {
                 this["Langue"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool NewVersionNotification {
+            get {
+                return ((bool)(this["NewVersionNotification"]));
+            }
+            set {
+                this["NewVersionNotification"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("server=localhost;userid=root;password=;database=420-5A5-A15_Nutritia")]
+        public string Sessions {
+            get {
+                return ((string)(this["Sessions"]));
+            }
+            set {
+                this["Sessions"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("server=localhost;userid=root;password=;database=420-5A5-A15_Nutritia")]
+        public string ActiveSession {
+            get {
+                return ((string)(this["ActiveSession"]));
+            }
+            set {
+                this["ActiveSession"] = value;
+            }
+        }
     }
 }

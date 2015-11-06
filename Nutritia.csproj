@@ -88,6 +88,7 @@
     <Compile Include="Logic\Model\Entities\Plat.cs" />
     <Compile Include="Logic\Model\Entities\Preference.cs" />
     <Compile Include="Logic\Model\Entities\RestrictionAlimentaire.cs" />
+    <Compile Include="Logic\Model\Entities\Session.cs" />
     <Compile Include="Logic\Model\Entities\Transaction.cs" />
     <Compile Include="Logic\Model\Entities\UniteMesure.cs" />
     <Compile Include="Logic\Model\Entities\VersionLogiciel.cs" />
@@ -129,6 +130,12 @@
     </Compile>
     <Compile Include="UI\Pages\Information.xaml.cs">
       <DependentUpon>Information.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\MenuConnexion.xaml.cs">
+      <DependentUpon>MenuConnexion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\MenuGeneral.xaml.cs">
+      <DependentUpon>MenuGeneral.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\FenetreAjoutPlatAdmin.xaml.cs">
       <DependentUpon>FenetreAjoutPlatAdmin.xaml</DependentUpon>
@@ -229,6 +236,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UI\Pages\Don.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\MenuConnexion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\MenuGeneral.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
