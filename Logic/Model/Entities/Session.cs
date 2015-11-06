@@ -22,6 +22,7 @@ namespace Nutritia.Logic.Model.Entities
         public string DatabaseName { get; private set; }
 
         public Session(string host, string nom, string user, string password, string database, int port = 3306)
+        :this()
         {
             HostName_IP = host;
             Nom = nom;
