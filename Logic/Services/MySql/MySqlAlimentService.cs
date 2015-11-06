@@ -256,5 +256,95 @@ namespace Nutritia
                 throw;
             }
         }
+
+        /// <summary>
+        /// Méthode de mise à jour d'un aliment dans la base de données.
+        /// </summary>
+        /// <param name="unAliment"></param>
+        public void Update(Aliment unAliment)
+        {
+            try
+            {
+                connexion = new MySqlConnexion();
+
+                string requeteCategoriesAlim = string.Format("SELECT * FROM CategoriesAlimentaires WHERE categorieAlimentaire = '{0}'", unAliment.Categorie);
+
+                DataSet dataSetCategories = connexion.Query(requeteCategoriesAlim);
+                DataTable tableCategories = dataSetCategories.Tables[0];
+
+                int idCategorie = 0;
+
+                foreach (DataRow rowCategories in tableCategories.Rows)
+                {
+                    idCategorie = (int)rowCategories["idCategorieAlimentaire"];
+                }
+
+                string requeteUnitesMesure = string.Format("SELECT * FROM UnitesMesure WHERE uniteMesure = '{0}'", unAliment.UniteMesure);
+
+                DataSet dataSetUnites = connexion.Query(requeteUnitesMesure);
+                DataTable tableUnites = dataSetUnites.Tables[0];
+
+                int idUnite = 0;
+
+                foreach (DataRow rowUnites in tableUnites.Rows)
+                {
+                    idUnite = (int)rowUnites["idUniteMesure"];
+                }
+
+                int idAliment = (int)unAliment.IdAliment;
+
+                string requeteUpdate = string.Format("UPDATE Aliments SET idUniteMesure = {0}, idCategorieAlimentaire = {1}, nom = '{2}', mesure = {3} WHERE idAliment = {4}", idUnite, idCategorie, unAliment.Nom, unAliment.Mesure, unAliment.IdAliment);
+                connexion.Query(requeteUpdate);
+
+                int idEnergie = Associer_Valeur_Nutritionnelle("Calories");
+                int idProteine = Associer_Valeur_Nutritionnelle("Protéines");
+                int idGlucide = Associer_Valeur_Nutritionnelle("Glucides");
+                int idFibre = Associer_Valeur_Nutritionnelle("Fibres");
+                int idLipide = Associer_Valeur_Nutritionnelle("Lipides");
+                int idSodium = Associer_Valeur_Nutritionnelle("Sodium");
+                int idCholesterol = Associer_Valeur_Nutritionnelle("Cholestérol");
+
+                Modifier_Valeur_Nutritionnelle(idEnergie, idAliment, unAliment.Energie);
+                Modifier_Valeur_Nutritionnelle(idProteine, idAliment, unAliment.Proteine);
+                Modifier_Valeur_Nutritionnelle(idGlucide, idAliment, unAliment.Glucide);
+                Modifier_Valeur_Nutritionnelle(idFibre, idAliment, unAliment.Fibre);
+                Modifier_Valeur_Nutritionnelle(idLipide, idAliment, unAliment.Lipide);
+                Modifier_Valeur_Nutritionnelle(idSodium, idAliment, unAliment.Sodium);
+                Modifier_Valeur_Nutritionnelle(idCholesterol, idAliment, unAliment.Cholesterol);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Méthode permettant de modifier une valeur nutritionnelle.
+        /// </summary>
+        /// <param name="idValeur"></param>
+        /// <param name="idAliment"></param>
+        /// <param name="valeur"></param>
+        private void Modifier_Valeur_Nutritionnelle(int idValeur, int idAliment, double valeur)
+        {
+            try
+            {
+                connexion = new MySqlConnexion();
+
+                string uneValeur = valeur.ToString();
+
+                if (uneValeur.Contains(","))
+                {
+                    uneValeur = uneValeur.Replace(",", ".");
+                }
+
+                string requeteUpdate = string.Format("UPDATE AlimentsValeursNutritionnelles SET idValeurNutritionnelle = {0}, quantite = {1} WHERE idAliment = {2}", idValeur, uneValeur, idAliment);
+                connexion.Query(requeteUpdate);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
