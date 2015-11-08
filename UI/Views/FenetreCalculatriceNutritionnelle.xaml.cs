@@ -156,21 +156,7 @@ namespace Nutritia.UI.Views
             itemDessert.Content = stackDessert;
             accPlat.Items.Add(itemDessert);
 
-            //Setting de dgRecherche
-
-            /*dgRecherche.DataGridCollection = CollectionViewSource.GetDefaultView(ServiceFactory.Instance.GetService<IAlimentService>().RetrieveAll());
-            dgRecherche.DataGridCollection.Filter = new Predicate<object>(Filter);
-            DataGrid teste = dgRecherche.FindName("dgResults") as DataGrid;
-            List<object> listObject = new List<object>();
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(teste); i++)
-            {
-                DependencyObject child = VisualTreeHelper.GetChild(teste, i);
-                if (child != null)
-                {
-                    listObject.Add(child);
-                }
-            }
-            //listBtn.ForEach(x => x.ToolTip = GenererToolTipValeursNutritive(AlimentFromDataContext(x)));*/
+          
         }
 
 
@@ -181,10 +167,9 @@ namespace Nutritia.UI.Views
         /// <returns></returns>
         public void FiltrerChampRecherche(string champ)
         {
-
-            BoiteRechAliment = LstAliment.FindAll(A => EnleverAccent(A.Nom).ToLower().Contains(EnleverAccent(champ).ToLower()));
-            BoiteRechPlat = LstPlat.FindAll(P => EnleverAccent(P.Nom).ToLower().Contains(EnleverAccent(champ).ToLower()));
-        }
+			BoiteRechAliment = LstAliment.FindAll(A => EnleverAccent(A.Nom).ToLower().Contains(EnleverAccent(champ).ToLower())).OrderBy(aliment => aliment.Nom).ToList();
+            BoiteRechPlat = LstPlat.FindAll(P => EnleverAccent(P.Nom).ToLower().Contains(EnleverAccent(champ).ToLower())).OrderBy(plat => plat.Nom).ToList();
+		}
 
         public string EnleverAccent(string text)
         {
@@ -249,36 +234,6 @@ namespace Nutritia.UI.Views
                     BoiteResultat.stackEcran.Children.Add(btnAliment);
             }
         }
-
-        /*/// <summary>
-        /// Evenement d'ajout d'un aliment au plateau pour la barre de recherche
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void AjoutItem_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender is Button)
-            {
-                Button btn = sender as Button;
-                Aliment aliment = AlimentFromDataContext(btn);
-                if (aliment != null)
-                {
-                    int iteration = 1;
-                    if (Keyboard.Modifiers == ModifierKeys.Control)
-                        iteration = 10;
-
-                    int posAlimentActuel = PlateauAliment.FindIndex(A => A == aliment);
-                    
-
-                    for (int i = 0; i < iteration; i++)
-                    {
-                        PlateauAliment.Insert(posAlimentActuel+1,aliment);
-                    }
-
-                    DessinerPlateau();
-                }
-            }
-        }*/
 
 
         /// <summary>
@@ -411,9 +366,12 @@ namespace Nutritia.UI.Views
                 Label lblNom = new Label();
                 lblNom.Style = (Style)(this.Resources["fontNutitia"]);
                 lblNom.FontSize = 12;
+				lblNom.Width = 230;
 
-                //Compte le nombre d'item dans la liste qui correspondent à la condition
-                if (EstPlat)
+				
+
+				//Compte le nombre d'item dans la liste qui correspondent à la condition
+				if (EstPlat)
                 {
                     int nbrMemePlat = PlateauPlat.Count(x => x.IdPlat == plat.IdPlat);
                     lblNom.Content = (nbrMemePlat > 0 && lstIdPresent != null ? nbrMemePlat.ToString() + " " : "") + plat.Nom;
@@ -426,9 +384,15 @@ namespace Nutritia.UI.Views
                     stackLigne.Children.Add(lblNom);
                 }
 
+				// Image pour détérminer si c'est un plat ou un aliment
+				Image imgTypeElement = new Image();
+				imgTypeElement.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/" + (EstPlat ? "PlatIcon" : "IngredientsIcon") + ".png"));
+				
+				imgTypeElement.Height = 15;
+				stackLigne.Children.Add(imgTypeElement);				
 
-                // Insertion d'un hover tooltip sur le StackPanel
-                if (EstPlat)
+				// Insertion d'un hover tooltip sur le StackPanel
+				if (EstPlat)
                     btnControl.ToolTip = GenererToolTipValeursNutritive(plat);
                 else
                     btnControl.ToolTip = GenererToolTipValeursNutritive(aliment);
