@@ -14,101 +14,148 @@
         </Grid.Background>
         <TabControl Name="tcAide" TabStripPlacement="Left" Background="Transparent">
             <TabItem Style="{StaticResource tabItem}" Name="tiAjoutPlat" Header="Ajout de plat">
-                <StackPanel>
-                    <Label Style="{StaticResource fontSousTitre}" Content="Ajout de plat" />
-                    <TextBlock>
+                <ScrollViewer>
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="Ajout de plat" />
+                        <TextBlock>
                             Mon texte
-                    </TextBlock>
-                </StackPanel>
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
             <TabItem Style="{StaticResource tabItem}" Name="tiSuspenssion" Header="Suspenssion">
-                <StackPanel>
-                    <Label Style="{StaticResource fontSousTitre}" Content="Information sur la suspenssion" />
-                    <TextBlock>
+                <ScrollViewer>
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="Information sur la suspenssion" />
+                        <TextBlock>
                             Mon texte
-                    </TextBlock>
-                </StackPanel>
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
             <TabItem Style="{StaticResource tabItem}" Name="tiCalculatrice" Header="Calculatrice">
-                <StackPanel>
-                    <Label Style="{StaticResource fontSousTitre}" Content="Calculatrice nutritionelle" />
-                    <TextBlock>
-                            Mon texte
-                    </TextBlock>
-                </StackPanel>
+                <ScrollViewer>
+                    <ScrollViewer>
+                        <StackPanel>
+                            <Label Style="{StaticResource fontSousTitre}" Content="Calculatrice nutritionelle" />
+                            <TextBlock TextWrapping="Wrap">
+                            Bienvenue dans la calculatrice nutritionnelle. Elle vous confère l'aperçu d'un menu que vous avez créer vous même.<LineBreak></LineBreak>
+                            
+                                Cette écran est divisé entre quatre sections. Chacune a son utilité.<LineBreak></LineBreak> 
+							<LineBreak></LineBreak> 
+							1- L'accordéon : <LineBreak></LineBreak> 
+							Cette section vous permet d'ajouter un plat dans votre plateau (Section 3). L'accordéon se divise en plusieurs catégories de plats, à savoir, des déjeuners, des breuvages, des entrées, des plats principaux et des desserts  Il suffit de cliquer sur une catégorie pour la dérouler puis de cliquer sur un plat (Voir raccourcis) et il se placera automatiquement dans la section du plateau.<LineBreak></LineBreak> 
+							<LineBreak></LineBreak> 
+							2- La barre de recherche intélligente :<LineBreak></LineBreak>
+							Cette outil vous permet de rechercher un aliment en entrant des mots clés dans la barre de recherche.<LineBreak></LineBreak>
+							Il vous suffira de cliquer(Raccourcis disponible) sur l'icone d'ajout pour envoyer l'aliment dans le plateau au dessous des plats. <LineBreak></LineBreak>
+							<LineBreak></LineBreak>
+							3-Le plateau :<LineBreak></LineBreak>        
+							Cette boite contient tous les plats et aliments que vous avez ajouter avec les sections 1 et 2. Il sont groupés par plat et aliment et ordonnés dans l'ordre d'ajout. Il vous est aussi possible de retirer un plat ou aliment du plateau en cliquant dessus (Raccourcis disponible).<LineBreak></LineBreak>
+							<LineBreak></LineBreak>
+							4-Le tableau de valeur nutritive : <LineBreak></LineBreak>
+							Cette section visuel affiche chaques valeurs nutritives (calories, fibres, cholestérol, ... ) du total de tous les ingrédients de tous les plats et aliment présents dans le plateau.
+							<LineBreak></LineBreak><LineBreak></LineBreak>
+							Raccourcis : <LineBreak></LineBreak>
+							Ctrl + clique gauche sur l'accordéon ou la boite de recherche -> Ajoute un plat ou aliment au plateau à coup de 10.<LineBreak></LineBreak>
+							Ctrl + clique gauche sur le plateau -> Supprime 10 plat ou aliment du plateau en même temps.<LineBreak></LineBreak>
+							Maj + clique gauche sur le plateau-> Supprime tous les plat ou aliment du même nom.<LineBreak></LineBreak>
+							Survoler les plats et aliments pour voir la valeur nutritive atomique de l'élément, de son poid totale et de ses mensuration nutritives.
+                            </TextBlock>
+                        </StackPanel>
+                    </ScrollViewer>
+                </ScrollViewer>
             </TabItem>
 
             <TabItem Style="{StaticResource tabItem}" Name="tiConnexion" Header="Connexion">
-                <StackPanel>
-                    <Label Style="{StaticResource fontSousTitre}" Content="Se connecter" />
-                    <TextBlock>
+                <ScrollViewer>
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="Se connecter" />
+                        <TextBlock>
                             Mon texte
-                    </TextBlock>
-                </StackPanel>
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
             <TabItem Style="{StaticResource tabItem}" Name="tiDon" Header="Don">
-                <StackPanel>
-                    <Label Style="{StaticResource fontSousTitre}" Content="Envoyer un don" />
-                    <TextBlock>
+                <ScrollViewer>
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="Envoyer un don" />
+                        <TextBlock>
                             Mon texte
-                    </TextBlock>
-                </StackPanel>
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
             <TabItem Style="{StaticResource tabItem}" Name="tiGenerationMenu" Header="Generation de menu">
-                <StackPanel>
-                    <Label Style="{StaticResource fontSousTitre}" Content="Génération de menu" />
-                    <TextBlock>
+                <ScrollViewer>
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="Génération de menu" />
+                        <TextBlock>
                             Mon texte
-                    </TextBlock>
-                </StackPanel>
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
             <TabItem Style="{StaticResource tabItem}" Name="tiListeEpicerie" Header="Liste d'épicerie">
-                <StackPanel>
-                    <Label Style="{StaticResource fontSousTitre}" Content="Votre liste d'épicerie" />
-                    <TextBlock>
+                <ScrollViewer>
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="Votre liste d'épicerie" />
+                        <TextBlock>
                             Mon texte
-                    </TextBlock>
-                </StackPanel>
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
             <TabItem Style="{StaticResource tabItem}" Name="tiMenuConnecte" Header="Menu connecté">
-                <StackPanel>
-                    <Label Style="{StaticResource fontSousTitre}" Content="Menu connécté" />
-                    <TextBlock>
+                <ScrollViewer>
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="Menu connécté" />
+                        <TextBlock>
                             Mon texte
-                    </TextBlock>
-                </StackPanel>
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
             <TabItem Style="{StaticResource tabItem}" Name="tiMenuPrincipal" Header="Menu pricipale">
-                <StackPanel>
-                    <Label Style="{StaticResource fontSousTitre}" Content="Menu pricipale" />
-                    <TextBlock>
+                <ScrollViewer>
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="Menu pricipale" />
+                        <TextBlock>
                             Mon texte
-                    </TextBlock>
-                </StackPanel>
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
             <TabItem Style="{StaticResource tabItem}" Name="tiParametre" Header="Paramètre">
-                <StackPanel>
-                    <Label Style="{StaticResource fontSousTitre}" Content="Vos paramètres" />
-                    <TextBlock>
+                <ScrollViewer>
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="Vos paramètres" />
+                        <TextBlock>
                             Mon texte
-                    </TextBlock>
-                </StackPanel>
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
             <TabItem Style="{StaticResource tabItem}" Name="tiProfil" Header="Profil">
-                <StackPanel>
-                    <Label Style="{StaticResource fontSousTitre}" Content="Mon profil" />
-                    <TextBlock>
+                <ScrollViewer>
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="Mon profil" />
+                        <TextBlock>
                             Mon texte
-                    </TextBlock>
-                </StackPanel>
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
             <TabItem Style="{StaticResource tabItem}" Name="tiLangue" Header="Langage">
-                <StackPanel>
-                    <Label Style="{StaticResource fontSousTitre}" Content="Mon profil" />
-                    <TextBlock>
+                <ScrollViewer>
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="Mon profil" />
+                        <TextBlock>
                             Mon texte
-                    </TextBlock>
-                </StackPanel>
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
         </TabControl>
     </Grid>
