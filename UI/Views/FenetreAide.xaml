@@ -14,7 +14,7 @@
         </Grid.Background>
         <TabControl Name="tcAide" TabStripPlacement="Left" Background="Transparent">
             <TabItem Style="{StaticResource tabItem}" Name="tiAjoutPlat" Header="Ajout de plat">
-                <ScrollViewer>
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="Ajout de plat" />
                         <TextBlock>
@@ -24,7 +24,7 @@
                 </ScrollViewer>
             </TabItem>
             <TabItem Style="{StaticResource tabItem}" Name="tiSuspenssion" Header="Suspenssion">
-                <ScrollViewer>
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="Information sur la suspenssion" />
                         <TextBlock>
@@ -34,11 +34,10 @@
                 </ScrollViewer>
             </TabItem>
             <TabItem Style="{StaticResource tabItem}" Name="tiCalculatrice" Header="Calculatrice">
-                <ScrollViewer>
-                    <ScrollViewer>
-                        <StackPanel>
-                            <Label Style="{StaticResource fontSousTitre}" Content="Calculatrice nutritionelle" />
-                            <TextBlock TextWrapping="Wrap">
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="Calculatrice nutritionelle" />
+                        <TextBlock TextWrapping="Wrap">
                             Bienvenue dans la calculatrice nutritionnelle. Elle vous confère l'aperçu d'un menu que vous avez créer vous même.<LineBreak></LineBreak>
                             
                                 Cette écran est divisé entre quatre sections. Chacune a son utilité.<LineBreak></LineBreak> 
@@ -51,24 +50,24 @@
 							Il vous suffira de cliquer(Raccourcis disponible) sur l'icone d'ajout pour envoyer l'aliment dans le plateau au dessous des plats. <LineBreak></LineBreak>
 							<LineBreak></LineBreak>
 							3-Le plateau :<LineBreak></LineBreak>        
-							Cette boite contient tous les plats et aliments que vous avez ajouter avec les sections 1 et 2. Il sont groupés par plat et aliment et ordonnés dans l'ordre d'ajout. Il vous est aussi possible de retirer un plat ou aliment du plateau en cliquant dessus (Raccourcis disponible).<LineBreak></LineBreak>
+							Cette boite contient tous les plats et aliments que vous avez ajouter avec les sections 1 et 2. Il sont groupés par plat et aliment et ordonnés dans l'ordre d'ajout. Il vous est aussi possible de retirer un plat ou aliment du plateau en cliquant dessus (Raccourcis disponible). Vous pouvez aussi aperçevoir un compteur à gauche qui indique le nombre d'élément présent dans le plateau.<LineBreak></LineBreak>
 							<LineBreak></LineBreak>
 							4-Le tableau de valeur nutritive : <LineBreak></LineBreak>
 							Cette section visuel affiche chaques valeurs nutritives (calories, fibres, cholestérol, ... ) du total de tous les ingrédients de tous les plats et aliment présents dans le plateau.
 							<LineBreak></LineBreak><LineBreak></LineBreak>
-							Raccourcis : <LineBreak></LineBreak>
+							Conseil (raccourcis et autres) : <LineBreak></LineBreak>
 							Ctrl + clique gauche sur l'accordéon ou la boite de recherche -> Ajoute un plat ou aliment au plateau à coup de 10.<LineBreak></LineBreak>
 							Ctrl + clique gauche sur le plateau -> Supprime 10 plat ou aliment du plateau en même temps.<LineBreak></LineBreak>
 							Maj + clique gauche sur le plateau-> Supprime tous les plat ou aliment du même nom.<LineBreak></LineBreak>
 							Survoler les plats et aliments pour voir la valeur nutritive atomique de l'élément, de son poid totale et de ses mensuration nutritives.
-                            </TextBlock>
-                        </StackPanel>
-                    </ScrollViewer>
+							Vous pouvez aperçevoire un icone à droite dans une ligne de plat ou d'aliment, elle indique si l'élément est un plat (couteau fourchette) ou un aliment (panier d'épicerie)
+                        </TextBlock>
+                    </StackPanel>
                 </ScrollViewer>
             </TabItem>
 
             <TabItem Style="{StaticResource tabItem}" Name="tiConnexion" Header="Connexion">
-                <ScrollViewer>
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="Se connecter" />
                         <TextBlock>
@@ -78,7 +77,7 @@
                 </ScrollViewer>
             </TabItem>
             <TabItem Style="{StaticResource tabItem}" Name="tiDon" Header="Don">
-                <ScrollViewer>
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="Envoyer un don" />
                         <TextBlock>
@@ -88,7 +87,7 @@
                 </ScrollViewer>
             </TabItem>
             <TabItem Style="{StaticResource tabItem}" Name="tiGenerationMenu" Header="Generation de menu">
-                <ScrollViewer>
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="Génération de menu" />
                         <TextBlock>
@@ -98,7 +97,7 @@
                 </ScrollViewer>
             </TabItem>
             <TabItem Style="{StaticResource tabItem}" Name="tiListeEpicerie" Header="Liste d'épicerie">
-                <ScrollViewer>
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="Votre liste d'épicerie" />
                         <TextBlock>
@@ -108,7 +107,7 @@
                 </ScrollViewer>
             </TabItem>
             <TabItem Style="{StaticResource tabItem}" Name="tiMenuConnecte" Header="Menu connecté">
-                <ScrollViewer>
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="Menu connécté" />
                         <TextBlock>
@@ -118,7 +117,7 @@
                 </ScrollViewer>
             </TabItem>
             <TabItem Style="{StaticResource tabItem}" Name="tiMenuPrincipal" Header="Menu pricipale">
-                <ScrollViewer>
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="Menu pricipale" />
                         <TextBlock>
@@ -128,7 +127,7 @@
                 </ScrollViewer>
             </TabItem>
             <TabItem Style="{StaticResource tabItem}" Name="tiParametre" Header="Paramètre">
-                <ScrollViewer>
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="Vos paramètres" />
                         <TextBlock>
@@ -138,7 +137,7 @@
                 </ScrollViewer>
             </TabItem>
             <TabItem Style="{StaticResource tabItem}" Name="tiProfil" Header="Profil">
-                <ScrollViewer>
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="Mon profil" />
                         <TextBlock>
@@ -148,7 +147,7 @@
                 </ScrollViewer>
             </TabItem>
             <TabItem Style="{StaticResource tabItem}" Name="tiLangue" Header="Langage">
-                <ScrollViewer>
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="Mon profil" />
                         <TextBlock>

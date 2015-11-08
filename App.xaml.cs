@@ -21,7 +21,8 @@ namespace Nutritia
         //static public readonly int CHOLESTEROL_REPAS = 75;
         //static public readonly int HAUTE_PRESSION_REPAS = 75;
         static public CultureInfo culture = new CultureInfo(String.Empty);
-    }
+
+	}
 
 	
 }

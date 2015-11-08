@@ -67,5 +67,19 @@ namespace Nutritia.UI.Views
 					break;
 			}
 		}
-    }
+
+		/// <summary>
+		/// Code de Guillaume (légerement modifié pour qu'il soit compatible avec un apel de tous les SV):
+		/// Événement lancé lorsque la roulette de la souris est utilisée dans le "scrollviewer" contenant le menu.
+		/// Explicitement, cet événement permet de gérer le "scroll" avec la roulette correctement sur toute la surface du "scrollviewer".
+		/// Si on ne le gère pas, il est seulement possible de "scroller" lorsque le pointeur de la souris est situé sur la "scrollbar".
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void ScrollFocus(object sender, MouseWheelEventArgs e)
+		{
+			ScrollViewer scrollViewer = (ScrollViewer)sender;
+			scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - e.Delta);
+		}
+	}
 }
