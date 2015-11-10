@@ -6,10 +6,13 @@
         ResizeMode="NoResize">
     <Window.Resources>
         <Style TargetType="DataGrid" BasedOn="{StaticResource dataGridPlats}">
+            <Setter Property="GridLinesVisibility" Value="None" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
         </Style>
-        <Style TargetType="Button" BasedOn="{StaticResource nonTransparent}">
+        <Style TargetType="Button" BasedOn="{StaticResource fontNutritia}">
             <Setter Property="Width" Value="150" />
             <Setter Property="Height" Value="25" />
+            <Setter Property="FontSize" Value="16" />
         </Style>
         <Style TargetType="RadioButton">
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
@@ -24,12 +27,13 @@
         <Grid.Background>
             <ImageBrush Opacity="0.3" ImageSource="pack://application:,,,/UI/Images/background.jpg"/>
         </Grid.Background>
+        <Label Name="lblAucunMenu" Style="{StaticResource fontNutritia}" FontSize="16" HorizontalAlignment="Center" Visibility="Hidden">Vous n'avez sauvegardé aucun menu.</Label>
         <DataGrid Name="dgMenus">
             <DataGrid.Columns>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <RadioButton GroupName="rbSelection"></RadioButton>
+                            <RadioButton Name="rbSelection" GroupName="rbSelection" Checked="rbSelection_Checked"></RadioButton>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -38,11 +42,21 @@
                         <Style>
                             <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
                             <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+                            <Setter Property="TextBlock.Margin" Value="2.5, 0, 0, 0" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding DateCreation, StringFormat=yyyy-dd-MM}" Foreground="DarkGreen" IsReadOnly="True">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+                            <Setter Property="TextBlock.Margin" Value="7.5, 0, 0, 0" />
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Name="btnOuvrir" Grid.Row="1" Style="{StaticResource fontNutritia}" Width="150" Height="25" Click="btnOuvrir_Click">Ouvrir</Button>
+        <Button Name="btnOuvrir" Grid.Row="1" Width="150" Height="25" IsEnabled="False" Click="btnOuvrir_Click">Ouvrir</Button>
     </Grid>
 </Window>

@@ -59,7 +59,7 @@
             <Button Name="btnSauvegarder" Width="25" Height="25" Margin="0, 0, 12.5, 0" IsEnabled="False" Click="btnSauvegarder_Click">
                 <Image Source="pack://application:,,,/UI/Images/disquetteIcon.png"></Image>
             </Button>
-            <Button Name="btnOuvrirMenu" Style="{StaticResource btnTexte}" Width="180" Height="25" Margin="0, 0, 12.5, 0" Click="btnOuvrirMenu_Click">Ouvrir un menu existant</Button>
+            <Button Name="btnOuvrirMenu" Style="{StaticResource btnTexte}" Width="180" Height="25" Margin="0, 0, 12.5, 0" IsEnabled="False" Click="btnOuvrirMenu_Click">Ouvrir un menu existant</Button>
             <Button Name="btnGenerer" Style="{StaticResource btnTexte}" Width="180" Height="25" Margin="0, 0, 12.5, 0" Click="btnGenerer_Click">Générer</Button>
             <Button Name="btnListeEpicerie" Style="{StaticResource btnTexte}" Width="180" Height="25" IsEnabled="False" Click="btnListeEpicerie_Click">Liste d'épicerie</Button>
         </StackPanel>

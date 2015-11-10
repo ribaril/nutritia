@@ -48,7 +48,7 @@ namespace Nutritia.UI.Views
                 }
                 else
                 {
-                    if (!string.IsNullOrEmpty(ServiceFactory.Instance.GetService<IMenuService>().Retrieve(new RetrieveMenuArgs { Nom = nom }).Nom))
+                    if (!string.IsNullOrEmpty(ServiceFactory.Instance.GetService<IMenuService>().Retrieve(new RetrieveMenuArgs { IdMembre = App.MembreCourant.IdMembre, Nom = nom }).Nom))
                     {
                         Erreur = true;
                         lblNom.Content = "Nom (Nom déjà utilisé)";

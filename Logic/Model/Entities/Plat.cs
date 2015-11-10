@@ -48,13 +48,13 @@ namespace Nutritia
 
             foreach (Aliment alimentCourant in ListeIngredients)
             {
-                dictionnaireValeursNut["Energie"] += alimentCourant.Energie;
-                dictionnaireValeursNut["Glucide"] += alimentCourant.Glucide;
-                dictionnaireValeursNut["Fibre"] += alimentCourant.Fibre;
-                dictionnaireValeursNut["Proteine"] += alimentCourant.Proteine;
-                dictionnaireValeursNut["Lipide"] += alimentCourant.Lipide;
-                dictionnaireValeursNut["Cholesterol"] += alimentCourant.Cholesterol;
-                dictionnaireValeursNut["Sodium"] += alimentCourant.Sodium;
+                dictionnaireValeursNut["Energie"] += alimentCourant.Energie * (alimentCourant.Quantite/alimentCourant.Mesure);
+                dictionnaireValeursNut["Glucide"] += alimentCourant.Glucide * (alimentCourant.Quantite / alimentCourant.Mesure);
+                dictionnaireValeursNut["Fibre"] += alimentCourant.Fibre * (alimentCourant.Quantite / alimentCourant.Mesure);
+                dictionnaireValeursNut["Proteine"] += alimentCourant.Proteine * (alimentCourant.Quantite / alimentCourant.Mesure);
+                dictionnaireValeursNut["Lipide"] += alimentCourant.Lipide * (alimentCourant.Quantite / alimentCourant.Mesure);
+                dictionnaireValeursNut["Cholesterol"] += alimentCourant.Cholesterol * (alimentCourant.Quantite / alimentCourant.Mesure);
+                dictionnaireValeursNut["Sodium"] += alimentCourant.Sodium * (alimentCourant.Quantite / alimentCourant.Mesure);
             }
 
             return dictionnaireValeursNut;
