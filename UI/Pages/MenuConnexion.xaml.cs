@@ -1,4 +1,5 @@
 ﻿using Nutritia.Logic.Model.Entities;
+using Nutritia.Toolkit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,23 +25,12 @@ namespace Nutritia.UI.Pages
         public MenuConnexion()
         {
             InitializeComponent();
-            string stringConnexion = Properties.Settings.Default.ActiveSession;
-            String[] words = stringConnexion.Split(';');
-            Session s = new Session(words[0], null, words[1], words[2], words[3]);
+            string stringConnexion = Properties.Settings.Default.Sessions;
+            List<Session> ss = SessionHelper.StringToSessions(stringConnexion);
+
             Console.WriteLine();
-            for (int i = 0; i < words.Length; i++)
-            {
-                if (! String.IsNullOrEmpty(words[i]))
-                {
-                    int index = words[i].IndexOf('=');
-                    if (index != -1)
-                    {
-                        words[i] = words[i].Substring(index +1);
-                    }
-                }
-            }
-            Console.WriteLine(words);
-            Console.WriteLine();
+            Console.WriteLine(SessionHelper.SessionsToString(ss));
+
         }
     }
 }
