@@ -32,8 +32,6 @@ namespace Nutritia.UI.Views
         private Menu MenuGenere { get; set; }
         private int NbColonnes { get; set; }
         private Random Rand { get; set; }
-        // private const int GLUCIDE_REPAS = 75;
-        private const double POURCENTAGE_PREFERENCE = 0.25;
         private bool EstNouveauMenu { get; set; }
 
         /// <summary>
@@ -556,9 +554,9 @@ namespace Nutritia.UI.Views
         /// Méthode permettant de calculer des statistiques à propos du menu généré.
         /// </summary>
         /// <returns>Un dictionnaire contenant les statistiques de certaines préférences.</returns>
-        private Dictionary<string, double> CalculerStatistiques()
+        private Dictionary<string, int> CalculerStatistiques()
         {
-            Dictionary<string, double> stats = new Dictionary<string, double>();
+            Dictionary<string, int> stats = new Dictionary<string, int>();
 
             stats["viande"] = 0;
             stats["pate"] = 0;
@@ -566,76 +564,35 @@ namespace Nutritia.UI.Views
 
             foreach(Plat platCourant in MenuGenere.ListePlats)
             {
-                if (platCourant.TypePlat == "Déjeuner")
+                bool contientDejaViande = false;
+                bool contientDejaPate = false;
+                bool contientDejaPoisson = false;
+
+                foreach(Aliment alimentCourant in platCourant.ListeIngredients)
                 {
-                    bool contientDejaViande = false;
-                    bool contientDejaPate = false;
-                    bool contientDejaPoisson = false;
-
-                    foreach(Aliment alimentCourant in platCourant.ListeIngredients)
+                    if(alimentCourant.Categorie == "Viandes et substituts" && !contientDejaViande)
                     {
-                        if(alimentCourant.Categorie == "Viandes et substituts" && !contientDejaViande)
-                        {
-                            stats["viande"]++;
-                            contientDejaViande = true;
-                        }
+                        stats["viande"]++;
+                        contientDejaViande = true;
+                    }
 
-                        if(alimentCourant.Categorie == "Pâtes" && !contientDejaPate)
-                        {
-                            stats["pate"]++;
-                            contientDejaPate = true;
-                        }
+                    if(alimentCourant.Categorie == "Pâtes" && !contientDejaPate)
+                    {
+                        stats["pate"]++;
+                        contientDejaPate = true;
+                    }
 
-                        if (alimentCourant.Categorie == "Poissons et fruits de mers" && !contientDejaPoisson)
-                        {
-                            stats["poisson"]++;
-                            contientDejaPoisson = true;
+                    if (alimentCourant.Categorie == "Poissons et fruits de mers" && !contientDejaPoisson)
+                    {
+                        stats["poisson"]++;
+                        contientDejaPoisson = true;
 
-                        }
                     }
                 }
             }
 
-            stats["viande"] /= MenuGenere.ListePlats.Count;
-            stats["pate"] /= MenuGenere.ListePlats.Count;
-            stats["poisson"] /= MenuGenere.ListePlats.Count;
-
             return stats;
         }
-
-        /*
-        /// <summary>
-        /// Méthode permettant de calculer les valeurs nutritionnelles d'un repas.
-        /// </summary>
-        /// <param name="repas">La liste des plats composant le repas.</param>
-        /// <returns>Un dictionnaire contenant les valeurs nutritionnelles.</returns>
-        private Dictionary<string, double> CalculerValeursNutritionnellesRepas(ObservableCollection<Plat> repas)
-        {
-            // Initialisation du dictionnaire.
-            Dictionary<string, double> dictionnaireValeursNut = new Dictionary<string, double>();
-
-            dictionnaireValeursNut.Add("Energie", 0);
-            dictionnaireValeursNut.Add("Glucide", 0);
-            dictionnaireValeursNut.Add("Fibre", 0);
-            dictionnaireValeursNut.Add("Proteine", 0);
-            dictionnaireValeursNut.Add("Lipide", 0);
-            dictionnaireValeursNut.Add("Cholesterol", 0);
-            dictionnaireValeursNut.Add("Sodium", 0);
-
-            foreach(Plat platCourant in repas)
-            {
-                dictionnaireValeursNut["Energie"] += platCourant.CalculerValeursNutritionnelles()["Energie"];
-                dictionnaireValeursNut["Glucide"] += platCourant.CalculerValeursNutritionnelles()["Glucide"];
-                dictionnaireValeursNut["Fibre"] += platCourant.CalculerValeursNutritionnelles()["Fibre"];
-                dictionnaireValeursNut["Proteine"] += platCourant.CalculerValeursNutritionnelles()["Proteine"];
-                dictionnaireValeursNut["Lipide"] += platCourant.CalculerValeursNutritionnelles()["Lipide"];
-                dictionnaireValeursNut["Cholesterol"] += platCourant.CalculerValeursNutritionnelles()["Cholesterol"];
-                dictionnaireValeursNut["Sodium"] += platCourant.CalculerValeursNutritionnelles()["Sodium"];
-            }
-
-            return dictionnaireValeursNut;
-        }
-        */
 
         /// <summary>
         /// Événement lancé sur un clique du bouton Générer.
@@ -716,345 +673,220 @@ namespace Nutritia.UI.Views
             EstNouveauMenu = true;
         }
 
-        /*
-        // TODO : Changer le nom plus tard.
-        // en fait c comme le diabète pi toute.
-        private void AffecterJserPasTropCommentLappeler()
-        {
-            if (App.MembreCourant.ListeRestrictions.Contains(new RestrictionAlimentaire { Nom = "Diabète" }))
-            {
-                double nbGlucide = 0;
-
-                if (MenuGenere.ListePlats.Count == 2)
-                {
-                    while (CalculerValeursNutritionnellesRepas((ObservableCollection<Plat>)MenuGenere.ListePlats)["Glucide"] > GLUCIDE_REPAS)
-                    {
-                        MenuGenere.ListePlats[0] = ListeDejeuners[Rand.Next(0, ListeDejeuners.Count)];
-                        MenuGenere.ListePlats[1] = ListeBreuvages[Rand.Next(0, ListeBreuvages.Count)];
-                    }
-                }
-                else if (MenuGenere.ListePlats.Count == 4)
-                {
-                    while (CalculerValeursNutritionnellesRepas((ObservableCollection<Plat>)MenuGenere.ListePlats)["Glucide"] > GLUCIDE_REPAS)
-                    {
-                        MenuGenere.ListePlats[0] = ListeEntrees[Rand.Next(0, ListeEntrees.Count)];
-                        MenuGenere.ListePlats[1] = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
-                        MenuGenere.ListePlats[2] = ListeBreuvages[Rand.Next(0, ListeBreuvages.Count)];
-                        MenuGenere.ListePlats[3] = ListeDesserts[Rand.Next(0, ListeDesserts.Count)];
-                    }
-                }
-                else if (MenuGenere.ListePlats.Count == 10)
-                {
-                    // TODO : VOIR POUR UTILISER LA Méthode.
-                    nbGlucide = 0;
-
-                    for (int i = 0; i < 2; i++)
-                    {
-                        nbGlucide += MenuGenere.ListePlats[i].CalculerValeursNutritionnelles()["Glucide"];
-                    }
-
-                    while (nbGlucide > GLUCIDE_REPAS)
-                    {
-                        MenuGenere.ListePlats[0] = ListeDejeuners[Rand.Next(0, ListeDejeuners.Count)];
-                        MenuGenere.ListePlats[1] = ListeBreuvages[Rand.Next(0, ListeBreuvages.Count)];
-
-                        nbGlucide = 0;
-                        for (int i = 0; i < 2; i++)
-                        {
-                            nbGlucide += MenuGenere.ListePlats[i].CalculerValeursNutritionnelles()["Glucide"];
-                        }
-                    }
-
-                    nbGlucide = 0;
-
-                    for (int i = 2; i < 6; i++)
-                    {
-                        nbGlucide += MenuGenere.ListePlats[i].CalculerValeursNutritionnelles()["Glucide"];
-                    }
-
-                    while (nbGlucide > GLUCIDE_REPAS)
-                    {
-                        MenuGenere.ListePlats[2] = ListeEntrees[Rand.Next(0, ListeEntrees.Count)];
-                        MenuGenere.ListePlats[3] = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
-                        MenuGenere.ListePlats[4] = ListeBreuvages[Rand.Next(0, ListeBreuvages.Count)];
-                        MenuGenere.ListePlats[5] = ListeDesserts[Rand.Next(0, ListeDesserts.Count)];
-
-                        nbGlucide = 0;
-                        for (int i = 2; i < 6; i++)
-                        {
-                            nbGlucide += MenuGenere.ListePlats[i].CalculerValeursNutritionnelles()["Glucide"];
-                        }
-                    }
-
-                    nbGlucide = 0;
-
-                    for (int i = 6; i < 10; i++)
-                    {
-                        nbGlucide += MenuGenere.ListePlats[i].CalculerValeursNutritionnelles()["Glucide"];
-                    }
-
-                    while (nbGlucide > GLUCIDE_REPAS)
-                    {
-                        MenuGenere.ListePlats[6] = ListeEntrees[Rand.Next(0, ListeEntrees.Count)];
-                        MenuGenere.ListePlats[7] = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
-                        MenuGenere.ListePlats[8] = ListeBreuvages[Rand.Next(0, ListeBreuvages.Count)];
-                        MenuGenere.ListePlats[9] = ListeDesserts[Rand.Next(0, ListeDesserts.Count)];
-
-                        nbGlucide = 0;
-                        for (int i = 6; i < 10; i++)
-                        {
-                            nbGlucide += MenuGenere.ListePlats[i].CalculerValeursNutritionnelles()["Glucide"];
-                        }
-                    }
-                }
-                else if (MenuGenere.ListePlats.Count == 70)
-                {
-                    for (int i = 0; i < 7; i++)
-                    {
-                        nbGlucide = 0;
-
-                        for (int j = i * 10; j < i * 10 + 2; j++)
-                        {
-                            nbGlucide += MenuGenere.ListePlats[j].CalculerValeursNutritionnelles()["Glucide"];
-                        }
-
-                        while (nbGlucide > GLUCIDE_REPAS)
-                        {
-                            MenuGenere.ListePlats[i * 10] = ListeDejeuners[Rand.Next(0, ListeDejeuners.Count)];
-                            MenuGenere.ListePlats[i * 10 + 1] = ListeBreuvages[Rand.Next(0, ListeBreuvages.Count)];
-
-                            nbGlucide = 0;
-                            for (int j = i * 10; j < i * 10 + 2; j++)
-                            {
-                                nbGlucide += MenuGenere.ListePlats[j].CalculerValeursNutritionnelles()["Glucide"];
-                            }
-                        }
-
-                        nbGlucide = 0;
-
-                        for (int j = (i * 10) + 2; j < (i * 10) + 6; i++)
-                        {
-                            nbGlucide += MenuGenere.ListePlats[j].CalculerValeursNutritionnelles()["Glucide"];
-                        }
-
-                        while (nbGlucide > GLUCIDE_REPAS)
-                        {
-                            MenuGenere.ListePlats[i * 10 + 2] = ListeEntrees[Rand.Next(0, ListeEntrees.Count)];
-                            MenuGenere.ListePlats[i * 10 + 3] = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
-                            MenuGenere.ListePlats[i * 10 + 4] = ListeBreuvages[Rand.Next(0, ListeBreuvages.Count)];
-                            MenuGenere.ListePlats[i * 10 + 5] = ListeDesserts[Rand.Next(0, ListeDesserts.Count)];
-
-                            nbGlucide = 0;
-                            for (int j = (i * 10) + 2; j < (i * 10) + 6; i++)
-                            {
-                                nbGlucide += MenuGenere.ListePlats[j].CalculerValeursNutritionnelles()["Glucide"];
-                            }
-                        }
-
-                        nbGlucide = 0;
-
-                        for (int j = (i * 10) + 6; j < (i * 10) + 10; j++)
-                        {
-                            nbGlucide += MenuGenere.ListePlats[j].CalculerValeursNutritionnelles()["Glucide"];
-                        }
-
-                        while (nbGlucide > GLUCIDE_REPAS)
-                        {
-                            MenuGenere.ListePlats[i * 10 + 6] = ListeEntrees[Rand.Next(0, ListeEntrees.Count)];
-                            MenuGenere.ListePlats[i * 10 + 7] = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
-                            MenuGenere.ListePlats[i * 10 + 8] = ListeBreuvages[Rand.Next(0, ListeBreuvages.Count)];
-                            MenuGenere.ListePlats[i * 10 + 9] = ListeDesserts[Rand.Next(0, ListeDesserts.Count)];
-
-                            nbGlucide = 0;
-                            for (int j = (i * 10) + 6; j < (i * 10) + 10; j++)
-                            {
-                                nbGlucide += MenuGenere.ListePlats[j].CalculerValeursNutritionnelles()["Glucide"];
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        */
-
         /// <summary>
         /// Méthode permettant d'affecter les préférences d'un membre a un menu généré.
         /// </summary>
         private void AffecterPreferences()
         {
-            Dictionary<string, double> stats = CalculerStatistiques();
-            int nbPlatsCorrespondant;
-            int nbPlatsVoulus;
-            int difference;
-
-            if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Viandes" }))
+            if(MenuGenere.ListePlats.Count == 2)
             {
-                nbPlatsCorrespondant = Convert.ToInt32(stats["viande"] * MenuGenere.ListePlats.Count);
-                nbPlatsVoulus = Convert.ToInt32(nbPlatsCorrespondant + Math.Ceiling(POURCENTAGE_PREFERENCE * nbPlatsCorrespondant));
-                difference = nbPlatsVoulus - nbPlatsCorrespondant;
-
-                List<int> positionsPlatsSansViande = new List<int>();
-
-                if (difference > 0)
+                if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Viandes" }))
                 {
-                    for (int i = 0; i < MenuGenere.ListePlats.Count; i++)
+                    while(!MenuGenere.ListePlats[0].ObtenirCategoriesIngredients().Contains("Viandes et substituts"))
                     {
-                        if (!MenuGenere.ListePlats[i].ObtenirCategoriesIngredients().Contains("Viandes et substituts"))
-                        {
-                            if(MenuGenere.ListePlats[i].TypePlat == "Déjeuner"
-                               || MenuGenere.ListePlats[i].TypePlat == "Entrée"
-                               || MenuGenere.ListePlats[i].TypePlat == "Plat principal")
-                            {
-                                positionsPlatsSansViande.Add(i);
-                            }
-                        }
-                    }
-
-                    for (int i = 0; i < difference; i++)
-                    {
-                        int positionAleatoire = Rand.Next(0, positionsPlatsSansViande.Count);
-                        int positionPlatSansViandeActuelle = positionsPlatsSansViande[positionAleatoire];
-                        positionsPlatsSansViande.RemoveAt(positionAleatoire);
-
-                        Plat platAChanger = MenuGenere.ListePlats[positionPlatSansViandeActuelle];
-
-                        switch (platAChanger.TypePlat)
-                        {
-                            case "Déjeuner":
-                                while (!platAChanger.ObtenirCategoriesIngredients().Contains("Viandes et substituts"))
-                                {
-                                    platAChanger = ListeDejeuners[Rand.Next(0, ListeDejeuners.Count)];
-                                }
-                                break;
-                            case "Entrée":
-                                while (!platAChanger.ObtenirCategoriesIngredients().Contains("Viandes et substituts"))
-                                {
-                                    platAChanger = ListeEntrees[Rand.Next(0, ListeEntrees.Count)];
-                                }
-                                break;
-                            case "Plat principal":
-                                while (!platAChanger.ObtenirCategoriesIngredients().Contains("Viandes et substituts"))
-                                {
-                                    platAChanger = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
-                                }
-                                break;
-                        }
-
-                        MenuGenere.ListePlats[positionPlatSansViandeActuelle] = platAChanger;
+                        MenuGenere.ListePlats[0] = ListeDejeuners[Rand.Next(0, ListeDejeuners.Count)];
                     }
                 }
             }
-            else if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Pâtes" }))
+            else if (MenuGenere.ListePlats.Count == 4)
             {
-                nbPlatsCorrespondant = Convert.ToInt32(stats["pate"] * MenuGenere.ListePlats.Count);
-                nbPlatsVoulus = Convert.ToInt32(nbPlatsCorrespondant + Math.Ceiling(POURCENTAGE_PREFERENCE * nbPlatsCorrespondant));
-                difference = nbPlatsVoulus - nbPlatsCorrespondant;
-
-                List<int> positionsPlatsSansPate = new List<int>();
-
-                if (difference > 0)
+                if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Viandes" }))
                 {
-                    for (int i = 0; i < MenuGenere.ListePlats.Count; i++)
+                    while (!MenuGenere.ListePlats[1].ObtenirCategoriesIngredients().Contains("Viandes et substituts"))
                     {
-                        if (!MenuGenere.ListePlats[i].ObtenirCategoriesIngredients().Contains("Pâtes"))
-                        {
-                            if (MenuGenere.ListePlats[i].TypePlat == "Déjeuner"
-                                   || MenuGenere.ListePlats[i].TypePlat == "Entrée"
-                                   || MenuGenere.ListePlats[i].TypePlat == "Plat principal")
-                            {
-                                positionsPlatsSansPate.Add(i);
-                            }
-                        }
+                        MenuGenere.ListePlats[1] = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
                     }
-
-                    for (int i = 0; i < difference; i++)
+                }
+                else if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Pâtes" }))
+                {
+                    while (!MenuGenere.ListePlats[1].ObtenirCategoriesIngredients().Contains("Pâtes"))
                     {
-                        int positionAleatoire = Rand.Next(0, positionsPlatsSansPate.Count);
-                        int positionPlatSansPateActuelle = positionsPlatsSansPate[positionAleatoire];
-                        positionsPlatsSansPate.RemoveAt(positionAleatoire);
-
-                        Plat platAChanger = MenuGenere.ListePlats[positionPlatSansPateActuelle];
-
-                        switch (platAChanger.TypePlat)
-                        {
-                            case "Déjeuner":
-                                while (!platAChanger.ObtenirCategoriesIngredients().Contains("Pâtes"))
-                                {
-                                    platAChanger = ListeDejeuners[Rand.Next(0, ListeDejeuners.Count)];
-                                }
-                                break;
-                            case "Entrée":
-                                while (!platAChanger.ObtenirCategoriesIngredients().Contains("Pâtes"))
-                                {
-                                    platAChanger = ListeEntrees[Rand.Next(0, ListeEntrees.Count)];
-                                }
-                                break;
-                            case "Plat principal":
-                                while (!platAChanger.ObtenirCategoriesIngredients().Contains("Pâtes"))
-                                {
-                                    platAChanger = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
-                                }
-                                break;
-                        }
-
-                        MenuGenere.ListePlats[positionPlatSansPateActuelle] = platAChanger;
+                        MenuGenere.ListePlats[1] = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
+                    }
+                }
+                else if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Poissons et fruits de mers" }))
+                {
+                    while (!MenuGenere.ListePlats[1].ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers"))
+                    {
+                        MenuGenere.ListePlats[1] = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
                     }
                 }
             }
-            else if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Poissons et fruits de mers" }))
+            else if (MenuGenere.ListePlats.Count == 10)
             {
-                nbPlatsCorrespondant = Convert.ToInt32(stats["poisson"] * MenuGenere.ListePlats.Count);
-                nbPlatsVoulus = Convert.ToInt32(nbPlatsCorrespondant + Math.Ceiling(POURCENTAGE_PREFERENCE * nbPlatsCorrespondant));
-                difference = nbPlatsVoulus - nbPlatsCorrespondant;
+                int nbPlatsCorrespondant;
 
-                List<int> positionsPlatsSansPoisson = new List<int>();
-
-                if (difference > 0)
+                if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Viandes" }))
                 {
-                    for (int i = 0; i < MenuGenere.ListePlats.Count; i++)
+                    nbPlatsCorrespondant = CalculerStatistiques()["viande"];
+
+                    while (nbPlatsCorrespondant < 1)
                     {
-                        if (!MenuGenere.ListePlats[i].ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers"))
+                        int positionAleatoire = Rand.Next(0, MenuGenere.ListePlats.Count);
+
+                        switch (MenuGenere.ListePlats[positionAleatoire].TypePlat)
                         {
-                            if (MenuGenere.ListePlats[i].TypePlat == "Déjeuner"
-                                   || MenuGenere.ListePlats[i].TypePlat == "Entrée"
-                                   || MenuGenere.ListePlats[i].TypePlat == "Plat principal")
-                            {
-                                positionsPlatsSansPoisson.Add(i);
-                            }
-                        }
-                    }
-
-                    for (int i = 0; i < difference; i++)
-                    {
-                        int positionAleatoire = Rand.Next(0, positionsPlatsSansPoisson.Count);
-                        int positionPlatSansPateActuelle = positionsPlatsSansPoisson[positionAleatoire];
-                        positionsPlatsSansPoisson.RemoveAt(positionAleatoire);
-
-                        Plat platAChanger = MenuGenere.ListePlats[positionPlatSansPateActuelle];
-
-                        switch (platAChanger.TypePlat)
-                        {
-                            case "Déjeuner":
-                                while (!platAChanger.ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers"))
-                                {
-                                    platAChanger = ListeDejeuners[Rand.Next(0, ListeDejeuners.Count)];
-                                }
-                                break;
                             case "Entrée":
-                                while (!platAChanger.ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers"))
+                                if (ListeEntrees.Count > 1)
                                 {
-                                    platAChanger = ListeEntrees[Rand.Next(0, ListeEntrees.Count)];
+                                    MenuGenere.ListePlats[positionAleatoire] = ListeEntrees[Rand.Next(0, ListeEntrees.Count)];
                                 }
                                 break;
                             case "Plat principal":
-                                while (!platAChanger.ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers"))
+                                if (ListeEntrees.Count > 1)
                                 {
-                                    platAChanger = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
+                                    MenuGenere.ListePlats[positionAleatoire] = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
                                 }
                                 break;
                         }
 
-                        MenuGenere.ListePlats[positionPlatSansPateActuelle] = platAChanger;
+                        nbPlatsCorrespondant = CalculerStatistiques()["viande"];
+
+                    }
+                }
+                else if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Pâtes" }))
+                {
+                    nbPlatsCorrespondant = CalculerStatistiques()["pate"];
+
+                    while (nbPlatsCorrespondant < 1)
+                    {
+                        int positionAleatoire = Rand.Next(0, MenuGenere.ListePlats.Count);
+
+                        switch (MenuGenere.ListePlats[positionAleatoire].TypePlat)
+                        {
+                            case "Entrée":
+                                if (ListeEntrees.Count > 1)
+                                {
+                                    MenuGenere.ListePlats[positionAleatoire] = ListeEntrees[Rand.Next(0, ListeEntrees.Count)];
+                                }
+                                break;
+                            case "Plat principal":
+                                if (ListeEntrees.Count > 1)
+                                {
+                                    MenuGenere.ListePlats[positionAleatoire] = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
+                                }
+                                break;
+                        }
+
+                        nbPlatsCorrespondant = CalculerStatistiques()["pate"];
+
+                    }
+                }
+                else if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Poissons et fruits de mers" }))
+                {
+                    nbPlatsCorrespondant = CalculerStatistiques()["poisson"];
+
+                    while (nbPlatsCorrespondant < 1)
+                    {
+                        int positionAleatoire = Rand.Next(0, MenuGenere.ListePlats.Count);
+
+                        switch (MenuGenere.ListePlats[positionAleatoire].TypePlat)
+                        {
+                            case "Entrée":
+                                if (ListeEntrees.Count > 1)
+                                {
+                                    MenuGenere.ListePlats[positionAleatoire] = ListeEntrees[Rand.Next(0, ListeEntrees.Count)];
+                                }
+                                break;
+                            case "Plat principal":
+                                if (ListeEntrees.Count > 1)
+                                {
+                                    MenuGenere.ListePlats[positionAleatoire] = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
+                                }
+                                break;
+                        }
+
+                        nbPlatsCorrespondant = CalculerStatistiques()["poisson"];
+
+                    }
+                }
+            }
+            else if (MenuGenere.ListePlats.Count == 70)
+            {
+                int nbPlatsCorrespondant;
+
+                if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Viandes" }))
+                {
+                    nbPlatsCorrespondant = CalculerStatistiques()["viande"];
+
+                    while (nbPlatsCorrespondant < 7)
+                    {
+                        int positionAleatoire = Rand.Next(0, MenuGenere.ListePlats.Count);
+
+                        switch (MenuGenere.ListePlats[positionAleatoire].TypePlat)
+                        {
+                            case "Entrée":
+                                if (ListeEntrees.Count > 1)
+                                {
+                                    MenuGenere.ListePlats[positionAleatoire] = ListeEntrees[Rand.Next(0, ListeEntrees.Count)];
+                                }
+                                break;
+                            case "Plat principal":
+                                if (ListeEntrees.Count > 1)
+                                {
+                                    MenuGenere.ListePlats[positionAleatoire] = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
+                                }
+                                break;
+                        }
+
+                        nbPlatsCorrespondant = CalculerStatistiques()["viande"];
+
+                    }
+                }
+                else if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Pâtes" }))
+                {
+                    nbPlatsCorrespondant = CalculerStatistiques()["pate"];
+
+                    while (nbPlatsCorrespondant < 7)
+                    {
+                        int positionAleatoire = Rand.Next(0, MenuGenere.ListePlats.Count);
+
+                        switch (MenuGenere.ListePlats[positionAleatoire].TypePlat)
+                        {
+                            case "Entrée":
+                                if (ListeEntrees.Count > 1)
+                                {
+                                    MenuGenere.ListePlats[positionAleatoire] = ListeEntrees[Rand.Next(0, ListeEntrees.Count)];
+                                }
+                                break;
+                            case "Plat principal":
+                                if (ListeEntrees.Count > 1)
+                                {
+                                    MenuGenere.ListePlats[positionAleatoire] = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
+                                }
+                                break;
+                        }
+
+                        nbPlatsCorrespondant = CalculerStatistiques()["pate"];
+
+                    }
+                }
+                else if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Poissons et fruits de mers" }))
+                {
+                    nbPlatsCorrespondant = CalculerStatistiques()["poisson"];
+
+                    while (nbPlatsCorrespondant < 7)
+                    {
+                        int positionAleatoire = Rand.Next(0, MenuGenere.ListePlats.Count);
+
+                        switch (MenuGenere.ListePlats[positionAleatoire].TypePlat)
+                        {
+                            case "Entrée":
+                                if (ListeEntrees.Count > 1)
+                                {
+                                    MenuGenere.ListePlats[positionAleatoire] = ListeEntrees[Rand.Next(0, ListeEntrees.Count)];
+                                }
+                                break;
+                            case "Plat principal":
+                                if (ListeEntrees.Count > 1)
+                                {
+                                    MenuGenere.ListePlats[positionAleatoire] = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
+                                }
+                                break;
+                        }
+
+                        nbPlatsCorrespondant = CalculerStatistiques()["poisson"];
+
                     }
                 }
             }
