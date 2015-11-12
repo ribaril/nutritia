@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
 
         <DockPanel>
-            <ToolBar>
+            <ToolBar Width="650" HorizontalAlignment="Center">
                 <Button Name="btnRetour" VerticalAlignment="Bottom" Click="btnRetour_Click">
                     <DockPanel>
                         <Image Source="/Nutritia;component/UI/Images/retour.PNG"/>
@@ -43,11 +43,24 @@
                         <TextBlock Text="{x:Static resx:Resources.Aide}" FontSize="20" FontFamily="Berlin"/>
                     </DockPanel>
                 </Button>
+                <Button Name="btnNotification" Click="btnNotification_Click"  VerticalAlignment="Top">
+                    <DockPanel>
+                        <Image ToolTipService.ShowDuration="12000" Width="30" Source="UI/Images/notifIcon.png" >
+                            <Image.ToolTip>
+                                <ToolTip StaysOpen="True" HorizontalOffset="10"
+                                    ToolTipService.InitialShowDelay="0" ToolTipService.BetweenShowDelay="0">
+                                    <TextBlock>Nouvelle Notification</TextBlock>
+                                </ToolTip>
+                            </Image.ToolTip>
+                        </Image>
+                        <TextBlock Text="2" Foreground="DarkGreen"/>                        
+                    </DockPanel>
+                </Button>
             </ToolBar>
         </DockPanel>
 	
         <ContentPresenter Grid.Row="1" Name="presenteurContenu" />
-
+        
     </Grid>
 
 </Window>
