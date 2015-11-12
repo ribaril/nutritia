@@ -452,6 +452,9 @@
     <Resource Include="UI\Images\nonDisponible.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="UI\Images\baseDonnee.svg" />
+    <Resource Include="UI\Images\IngredientsIcon.png" />
+    <Resource Include="UI\Images\PlatIcon.png" />
     <Resource Include="UI\Images\AdminIcon.png" />
     <Resource Include="UI\Images\disquetteIcon.png" />
     <Resource Include="UI\Images\ban.png" />
