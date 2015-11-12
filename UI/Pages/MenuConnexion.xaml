@@ -30,11 +30,15 @@
                     <PasswordBox Name="pswPassowrd" IsEnabled="False" Width="76"></PasswordBox>
                 </StackPanel>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+            <StackPanel>
+                <Label>Database Name</Label>
+                <TextBox Width="146" HorizontalAlignment="Left"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
                 <StackPanel>
                     <Label HorizontalAlignment="Center">Sessions</Label>
-                    <DataGrid Name="dgSessions" Width="200" Height="120" 
-                              CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" 
+                    <DataGrid Name="dgSessions" Width="200" Height="100" 
+                              CanUserAddRows="False" CanUserDeleteRows="False" 
                               HeadersVisibility="None" GridLinesVisibility="None" AutoGenerateColumns="False"
                               SelectionMode="Single" Background="White">
                         <DataGrid.Columns>
@@ -48,10 +52,10 @@
                             <Setter Property="Margin" Value="0, 3, 0, 0"/>
                         </Style>
                     </StackPanel.Resources>
-                    <Button Name="btnConnect" Margin="0,27,0,0">Connect</Button>
+                    <Button Name="btnConnect" Margin="0,27,0,0" Click="btnConnect_Click">Connect</Button>
                     <Button Name="btnLoad" Click="btnLoad_Click">Load</Button>
-                    <Button Name="btnSave">Save</Button>
-                    <Button Name="btnDelete">Delete</Button>
+                    <Button Name="btnSave" Click="btnSave_Click">Save</Button>
+                    <Button Name="btnDelete" Click="btnDelete_Click">Delete</Button>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

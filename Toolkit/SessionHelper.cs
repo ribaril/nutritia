@@ -73,20 +73,13 @@ namespace Nutritia.Toolkit
 
             if (listS.Count == 1)
             {
-                sb.AppendFormat("name={0};server={1};userid={2};password={3};database={4}", listS[0].Name, listS[0].HostName_IP, listS[0].User, listS[0].Password, listS[0].DatabaseName);
+                sb.Append(listS[0]);
             }
             else
                 foreach (Session s in listS)
                 {
-                    sb.AppendFormat("{{name={0};server={1};userid={2};password={3};database={4}}}", s.Name, s.HostName_IP, s.User, s.Password, s.DatabaseName);
+                    sb.Append("{"+ s +"}");
                 }
-            return sb.ToString();
-        }
-
-        public static string ConnexionString(Session s)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("server={1};userid={2};password={3};database={4}", s.HostName_IP, s.User, s.Password, s.DatabaseName);
             return sb.ToString();
         }
     }

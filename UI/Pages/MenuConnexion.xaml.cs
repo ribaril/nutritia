@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace Nutritia.UI.Pages
 {
@@ -22,16 +23,16 @@ namespace Nutritia.UI.Pages
     /// </summary>
     public partial class MenuConnexion : Page
     {
+        private Session SessionActive { get; set; }
+        private ObservableCollection<Session> obsSessions;
+
         public MenuConnexion()
         {
             InitializeComponent();
             string stringConnexion = Properties.Settings.Default.Sessions;
-            List<Session> ss = SessionHelper.StringToSessions(stringConnexion);
+            obsSessions = new ObservableCollection<Session>(SessionHelper.StringToSessions(stringConnexion));
 
-            Console.WriteLine();
-            Console.WriteLine(SessionHelper.SessionsToString(ss));
-
-            dgSessions.ItemsSource = ss;
+            dgSessions.ItemsSource = obsSessions;
 
         }
 
@@ -40,12 +41,32 @@ namespace Nutritia.UI.Pages
             if (dgSessions.SelectedItem is Session)
             {
                 //Non-nulleable (struct), dont forced cast. Type déjà vérifié juste avant.
-                Session session = (Session)dgSessions.SelectedItem;
-                txHostname.Text = session.HostName_IP;
-                txPort.Text = session.Port.ToString();
-                txUsername.Text = session.User;
-                pswPassowrd.Password = session.Password;
+                SessionActive = (Session)dgSessions.SelectedItem;
+                txHostname.Text = SessionActive.HostName_IP;
+                txPort.Text = SessionActive.Port.ToString();
+                txUsername.Text = SessionActive.User;
+                pswPassowrd.Password = SessionActive.Password;
             }
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            Session s = new Session("newSession",txHostname.Text, txUsername.Text, pswPassowrd.Password, "toDo", int.Parse(txPort.Text));
+            obsSessions.Add(s);
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgSessions.SelectedItem is Session)
+            {
+                Session s = (Session)dgSessions.SelectedItem;
+                obsSessions.Remove(s);
+            }
+        }
+
+        private void btnConnect_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
