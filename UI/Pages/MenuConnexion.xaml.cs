@@ -31,6 +31,21 @@ namespace Nutritia.UI.Pages
             Console.WriteLine();
             Console.WriteLine(SessionHelper.SessionsToString(ss));
 
+            dgSessions.ItemsSource = ss;
+
+        }
+
+        private void btnLoad_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgSessions.SelectedItem is Session)
+            {
+                //Non-nulleable (struct), dont forced cast. Type déjà vérifié juste avant.
+                Session session = (Session)dgSessions.SelectedItem;
+                txHostname.Text = session.HostName_IP;
+                txPort.Text = session.Port.ToString();
+                txUsername.Text = session.User;
+                pswPassowrd.Password = session.Password;
+            }
         }
     }
 }
