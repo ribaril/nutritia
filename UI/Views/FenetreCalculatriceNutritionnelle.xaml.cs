@@ -192,11 +192,16 @@ namespace Nutritia.UI.Views
         /// </summary>
         private void DessinerPlateau()
         {
+			double scrollActuel = 0;
+            if (Plateau != null)
+				scrollActuel = Plateau.svPlateau.VerticalOffset;
             Plateau = new SousEcran();
             presenteurContenu2.Content = Plateau;
             lstIdPresent = new List<int?>();
+			if (Plateau != null)
+				Plateau.svPlateau.ScrollToVerticalOffset(scrollActuel);
 
-            foreach (var plat in PlateauPlat)
+			foreach (var plat in PlateauPlat)
             {
                 Button btnPlat = FormerListeLignePlatAliment(false, plat, lstIdPresent);
 
@@ -217,7 +222,6 @@ namespace Nutritia.UI.Views
 
             foreach (var aliment in PlateauAliment)
             {
-
                 Button btnAliment = FormerListeLignePlatAliment(false, aliment, lstIdPresent);
 
                 if (btnAliment != null)
@@ -234,8 +238,13 @@ namespace Nutritia.UI.Views
         /// </summary>
         private void DessinerBoiteResultat()
         {
+			double scrollActuel = 0;
+            if (BoiteResultat != null)
+				scrollActuel = BoiteResultat.svPlateau.VerticalOffset;
             BoiteResultat = new SousEcran();
             presenteurContenu4.Content = BoiteResultat;
+			if (BoiteResultat != null)
+				BoiteResultat.svPlateau.ScrollToVerticalOffset(scrollActuel);
 
             foreach (var plat in BoiteRechPlat)
             {
@@ -356,7 +365,6 @@ namespace Nutritia.UI.Views
                         lstIdPresent.Add(aliment.IdAliment * -1);
                 }
 
-
                 // Création du bouton pour supprimer ou ajouter un Plat/Aliment
                 btnControl.HorizontalContentAlignment = HorizontalAlignment.Left;
                 if (plus == null)
@@ -382,10 +390,10 @@ namespace Nutritia.UI.Views
                         btnControl.Click += BtnControlSupprimer_Click;
                         btnControl.MouseRightButtonDown += BtnControlDerouler_Click;
                     }
+
                     btnControl.Uid = (EstPlat ? plat.IdPlat : aliment.IdAliment * -1).ToString();
                     btnControl.Cursor = Cursors.Hand;
                 }
-
 
                 StackPanel stackLigne = new StackPanel();
                 stackLigne.Orientation = Orientation.Horizontal;
@@ -419,7 +427,9 @@ namespace Nutritia.UI.Views
                 else
                 {
                     int nbrMemeAliment = PlateauAliment.Count(x => x.IdAliment == aliment.IdAliment);
-                    lblNom.Content = (nbrMemeAliment > 0 ? nbrMemeAliment.ToString() + " " : "") + aliment.Nom;
+					if (lstIdPresent == null)
+						nbrMemeAliment = 0;
+					lblNom.Content = (nbrMemeAliment > 0 ? nbrMemeAliment.ToString() + " " : "") + aliment.Nom;
                     stackLigne.Children.Add(lblNom);
                 }
 
@@ -458,8 +468,11 @@ namespace Nutritia.UI.Views
             int idPlatCourrant = Convert.ToInt32(btnPlat.Uid);
             if (Keyboard.Modifiers == ModifierKeys.Shift)
             {
-                if(LstIdPlatADerouler.Count == 0)
-                    LstIdPlatADerouler.Clear();
+				if (LstIdPlatADerouler.Count != 0)
+					LstIdPlatADerouler.Clear();
+				else
+					foreach (var plat in PlateauPlat)
+						LstIdPlatADerouler.Add((int)plat.IdPlat);
             }
 
             else
@@ -485,8 +498,10 @@ namespace Nutritia.UI.Views
             Plat monPlat = new Plat();
             Aliment monAliment = new Aliment();
 
-            // On compte le nbr de plat ou aliment présent dans le plateau pour controller sa suppréssion
-            int nbrItemActuel = (Convert.ToInt32(btn.Uid) > 0 ?
+			bool estPlat = Convert.ToInt32(btn.Uid) > 0;
+
+			// On compte le nbr de plat ou aliment présent dans le plateau pour controller sa suppréssion
+			int nbrItemActuel = (estPlat ?
                                 PlateauPlat.Count(P => P.IdPlat == Convert.ToInt32(btn.Uid)) :
                                 PlateauAliment.Count(A => A.IdAliment == Convert.ToInt32(btn.Uid) * -1));
             int iteration = 1;
@@ -497,12 +512,19 @@ namespace Nutritia.UI.Views
 
             else if (Keyboard.Modifiers == ModifierKeys.Shift)
                 iteration = nbrItemActuel;
-
+			
 
             // On supprime 1 / 10 / ou tous le items qui correspondent à l'objet cliqué
-            if (Convert.ToInt32(btn.Uid) > 0)
-                for (int i = 0; i < iteration; i++)
-                    PlateauPlat.Remove(PlateauPlat.Last(P => P.IdPlat == Convert.ToInt32(btn.Uid)));
+            if (estPlat)
+			{
+				// Si on vide ce plat, il faut enlever son id de la liste des plats à dérouler
+				if (nbrItemActuel == iteration)
+					LstIdPlatADerouler.Remove(Convert.ToInt32(btn.Uid));
+				for (int i = 0; i < iteration; i++)
+					PlateauPlat.Remove(PlateauPlat.Last(P => P.IdPlat == Convert.ToInt32(btn.Uid)));
+				
+			}
+                
 
             else
                 for (int i = 0; i < iteration; i++)
@@ -557,9 +579,6 @@ namespace Nutritia.UI.Views
                 ValeurNutritive = ConstruireDicValeurNutritive(aliment, ValeurNutritive);
                 poidPlat += aliment.Mesure;
             }
-
-
-
 
             StringBuilder sbValeurNut = new StringBuilder();
             sbValeurNut.Append("1 ").Append(EstPlat ? plat.Nom : plat.ListeIngredients[0].Nom).AppendLine(" de " + poidPlat + " g").AppendLine(); // Affichage du nom du plat ou de l'aliment

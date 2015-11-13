@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <ScrollViewer>
+        <ScrollViewer Name="svPlateau">
             <StackPanel Name="stackEcran" Width="290">
             </StackPanel>
         </ScrollViewer>
