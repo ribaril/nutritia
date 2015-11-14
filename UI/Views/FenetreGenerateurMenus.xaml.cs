@@ -33,6 +33,12 @@ namespace Nutritia.UI.Views
         private int NbColonnes { get; set; }
         private Random Rand { get; set; }
         private bool EstNouveauMenu { get; set; }
+        private const int NB_PLATS_DEJEUNER = 2;
+        private const int NB_PLATS_DINER_SOUPER = 4;
+        private const int NB_PLATS_JOURNEE = 10;
+        private const int NB_PLATS_SEMAINE = 70;
+        private const int NB_COLONNES_AVEC_IMAGES = 4;
+        private const int NB_COLONNES_SANS_IMAGES = 3;
 
         /// <summary>
         /// Constructeur par défaut de la classe.
@@ -44,8 +50,6 @@ namespace Nutritia.UI.Views
             Rand = new Random();
 
             App.Current.MainWindow.ResizeMode = ResizeMode.CanResize;
-            App.Current.MainWindow.MinWidth = 650;
-            App.Current.MainWindow.MinHeight = 550;
 
             AlimentService = ServiceFactory.Instance.GetService<IAlimentService>();
             PlatService = ServiceFactory.Instance.GetService<IPlatService>();
@@ -70,7 +74,7 @@ namespace Nutritia.UI.Views
             }
 
             EstNouveauMenu = true;
-            NbColonnes = 4;
+            NbColonnes = NB_COLONNES_AVEC_IMAGES;
         }
 
         /// <summary>
@@ -389,12 +393,11 @@ namespace Nutritia.UI.Views
         /// <summary>
         /// Méthode permettant de générer dynamiquement les colonnes de la grid contenant le menu.
         /// </summary>
-        /// <param name="nbRangees">Le nombre de colonnes.</param>
         private void GenererColonnes()
         {
             ColumnDefinition columnDefinition;
 
-            if(NbColonnes == 3)
+            if(NbColonnes == NB_COLONNES_SANS_IMAGES)
             {
                 for (int i = 0; i < NbColonnes; i++)
                 {
@@ -410,7 +413,7 @@ namespace Nutritia.UI.Views
                     grdMenus.ColumnDefinitions.Add(columnDefinition);
                 }
             }
-            else
+            else if(NbColonnes == NB_COLONNES_AVEC_IMAGES)
             {
                 for (int i = 0; i < NbColonnes; i++)
                 {
@@ -481,14 +484,14 @@ namespace Nutritia.UI.Views
             int nbJours = nbPlats / 10;
 
             // Il s'agit d'un déjeuner.
-            if (nbPlats == 2)
+            if (nbPlats == NB_PLATS_DEJEUNER)
             {
                 GenererSeparateurPlat("Déjeuner", 0);
                 GenererSeparateurPlat("Breuvage", 1);
             }
 
             // Il s'agit d'un diner/souper.
-            if (nbPlats == 4)
+            if (nbPlats == NB_PLATS_DINER_SOUPER)
             {
                 GenererSeparateurPlat("Entrée", 0);
                 GenererSeparateurPlat("Plat principal", 1);
@@ -604,12 +607,12 @@ namespace Nutritia.UI.Views
         {
             MenuGenere = new Menu();
             int nbJours = 0;
-            int nbPlats = 4;
+            int nbPlats = NB_PLATS_DINER_SOUPER;
 
-            if (rbDejeuner.IsChecked != null && (bool)rbDejeuner.IsChecked) { nbPlats = 2; }
-            if (rbDinerSouper.IsChecked != null && (bool)rbDinerSouper.IsChecked) { nbPlats = 4; }
-            if (rbMenuJournalier.IsChecked != null && (bool)rbMenuJournalier.IsChecked) { nbJours = 1; nbPlats = 10; }
-            if (rbMenuHebdomadaire.IsChecked != null && (bool)rbMenuHebdomadaire.IsChecked) { nbJours = 7; nbPlats = 70; }
+            if (rbDejeuner.IsChecked != null && (bool)rbDejeuner.IsChecked) { nbPlats = NB_PLATS_DEJEUNER; }
+            if (rbDinerSouper.IsChecked != null && (bool)rbDinerSouper.IsChecked) { nbPlats = NB_PLATS_DINER_SOUPER; }
+            if (rbMenuJournalier.IsChecked != null && (bool)rbMenuJournalier.IsChecked) { nbJours = 1; nbPlats = NB_PLATS_JOURNEE; }
+            if (rbMenuHebdomadaire.IsChecked != null && (bool)rbMenuHebdomadaire.IsChecked) { nbJours = 7; nbPlats = NB_PLATS_SEMAINE; }
             
             MenuGenere.NbPersonnes = Convert.ToInt32(((ComboBoxItem)cboNbPersonnes.SelectedItem).Content);
 
@@ -626,14 +629,14 @@ namespace Nutritia.UI.Views
             InitialiserSectionMenu(nbPlats, (Convert.ToInt32(dgMenus.RowHeight)));
 
             // Il s'agit d'un déjeuner.
-            if(nbPlats == 2)
+            if(nbPlats == NB_PLATS_DEJEUNER)
             {
                 MenuGenere.ListePlats.Add(ListeDejeuners.Count > 0 ? ListeDejeuners[Rand.Next(0, ListeDejeuners.Count)] : new Plat());
                 MenuGenere.ListePlats.Add(ListeBreuvages.Count > 0 ? ListeBreuvages[Rand.Next(0, ListeBreuvages.Count)] : new Plat());
             }
 
             // Il s'agit d'un diner/souper.
-            if(nbPlats == 4)
+            if(nbPlats == NB_PLATS_DINER_SOUPER)
             {
                 MenuGenere.ListePlats.Add(ListeEntrees.Count > 0 ? ListeEntrees[Rand.Next(0, ListeEntrees.Count)] : new Plat());
                 MenuGenere.ListePlats.Add(ListePlatPrincipaux.Count > 0 ? ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)] : new Plat());
@@ -661,12 +664,12 @@ namespace Nutritia.UI.Views
 
             if(!string.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
             {
+                btnSauvegarder.IsEnabled = true;
                 AffecterPreferences();
             }
 
             dgMenus.ItemsSource = MenuGenere.ListePlats;
             AjouterSeparateursPlats();
-            btnSauvegarder.IsEnabled = true;
             btnListeEpicerie.IsEnabled = true;
             spInfosSup.Visibility = Visibility.Hidden;
             gbMenus.Visibility = Visibility.Visible;
@@ -678,7 +681,7 @@ namespace Nutritia.UI.Views
         /// </summary>
         private void AffecterPreferences()
         {
-            if(MenuGenere.ListePlats.Count == 2)
+            if(MenuGenere.ListePlats.Count == NB_PLATS_DEJEUNER)
             {
                 if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Viandes" }))
                 {
@@ -688,7 +691,7 @@ namespace Nutritia.UI.Views
                     }
                 }
             }
-            else if (MenuGenere.ListePlats.Count == 4)
+            else if (MenuGenere.ListePlats.Count == NB_PLATS_DINER_SOUPER)
             {
                 if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Viandes" }))
                 {
@@ -712,7 +715,7 @@ namespace Nutritia.UI.Views
                     }
                 }
             }
-            else if (MenuGenere.ListePlats.Count == 10)
+            else if (MenuGenere.ListePlats.Count == NB_PLATS_JOURNEE)
             {
                 int nbPlatsCorrespondant;
 
@@ -801,7 +804,7 @@ namespace Nutritia.UI.Views
                     }
                 }
             }
-            else if (MenuGenere.ListePlats.Count == 70)
+            else if (MenuGenere.ListePlats.Count == NB_PLATS_SEMAINE)
             {
                 int nbPlatsCorrespondant;
 
@@ -1022,6 +1025,11 @@ namespace Nutritia.UI.Views
         /// <param name="e"></param>
         private void btnListeEpicerie_Click(object sender, RoutedEventArgs e)
         {
+            App.Current.MainWindow.ResizeMode = ResizeMode.CanMinimize;
+            App.Current.MainWindow.Width = App.APP_WIDTH;
+            App.Current.MainWindow.Height = App.APP_HEIGHT;
+            App.Current.MainWindow.WindowState = WindowState.Normal;
+
             ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue<FenetreListeEpicerie>(new FenetreListeEpicerie(MenuGenere));
         }
     }
