@@ -19,29 +19,37 @@
         </Grid.ColumnDefinitions>
 
         <Label Content="Calculatrice nutritionnelle" Style="{StaticResource fontNutritia}" FontSize="50"  HorizontalAlignment="Center" Grid.ColumnSpan="2"></Label>
-        <local:SearchBox x:Name="dgRecherche" Grid.Row="1" Grid.Column="1" WatermarkContent="Aliment à rechercher" FilterMode="Contains"  SelectionMode="Single" Margin="33,24,34,24">
+        <!--<local:SearchBox x:Name="dgRecherche" Grid.Row="1" Grid.Column="1" WatermarkContent="Aliment à rechercher" FilterMode="Contains"  SelectionMode="Single" Margin="33,24,34,24">
             <local:SearchBox.Columns>
                 <DataGridTemplateColumn Header="Rajouter" IsReadOnly="False" Width="60">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Width="50" HorizontalAlignment="Center" Click="Button_Click">+</Button>
+                            <Button HorizontalAlignment="Center" Click="AjoutItem_Click">
+                                <Image Width="15" Source="/Nutritia;component/UI/Images/plusIcon.png"/>
+                            </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn IsReadOnly="True" Header="Nom" Binding="{Binding Nom}"></DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="True" Header="Nom" Binding="{Binding Nom}" ToolTipService.ToolTip=""></DataGridTextColumn>
             </local:SearchBox.Columns>
-        </local:SearchBox>
+        </local:SearchBox>-->
 
         <Rectangle Grid.Row="1" Grid.ColumnSpan="2" Stroke="DarkGreen" Width="625"/>
 
-        <ScrollViewer Name="svAccordeon" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Height="200" Width="298" PreviewMouseWheel="ScrollFocus">
-            <layoutToolkit:Accordion Name="accPlat" Width="288" />
+        <ScrollViewer Name="svAccordeon" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Height="200" Width="300" PreviewMouseWheel="ScrollFocus">
+            <layoutToolkit:Accordion Name="accPlat" Width="290" />
         </ScrollViewer>
-        <GroupBox x:Name="groupBox_Copy" Header="Plateau" HorizontalAlignment="Center"  Grid.Row="2" VerticalAlignment="Center" Height="170" Width="285">
+        <GroupBox x:Name="gbPlateau" Header="Plateau" HorizontalAlignment="Center"  Grid.Row="2" VerticalAlignment="Center" Height="170" Width="300">
             <ContentPresenter Name="presenteurContenu2" />
         </GroupBox>
-        <GroupBox x:Name="groupBox" Header="Valeurs nutritionelles du plateau" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Height="172" Width="290" Grid.Column="1">
+        <GroupBox x:Name="gbValeurNutri" Header="Valeurs nutritionelles du plateau" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Height="170" Width="290" Grid.Column="1">
             <ContentPresenter Name="presenteurContenu3" VerticalAlignment="Top"/>
+        </GroupBox>
+        <GroupBox x:Name="gbBoiteRecherche" Header="Barre de recherche" HorizontalAlignment="Center"  Grid.Row="1" Grid.Column="1" Height="200" Width="300" VerticalAlignment="Center" >
+            <StackPanel Background="White">
+                <TextBox Name="txtRecherche" PreviewKeyUp="txtRecherche_KeyDown" ></TextBox>
+                <ContentPresenter Name="presenteurContenu4" Height="160" Width="290"/>
+            </StackPanel>
         </GroupBox>
     </Grid>
 </UserControl>

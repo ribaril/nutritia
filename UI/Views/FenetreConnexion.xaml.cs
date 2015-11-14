@@ -54,15 +54,7 @@ namespace Nutritia.UI.Views
                 {
                     App.MembreCourant = membreValidation;
 
-                    // Redirection du membre en fonction de son statut d'administrateur.
-                    if (App.MembreCourant.EstAdministrateur)
-                    {
-                        ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuAdministrateur());
-                    }
-                    else
-                    {
-                        ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
-                    }
+                    ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
                 }   
             }
         }

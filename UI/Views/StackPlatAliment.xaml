@@ -8,8 +8,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <ScrollViewer>
-            <StackPanel Name="stackEcran">
-				
+            <StackPanel Name="stackEcran" Width="290">
             </StackPanel>
         </ScrollViewer>
     </Grid>

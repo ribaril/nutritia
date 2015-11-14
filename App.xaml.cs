@@ -21,6 +21,4 @@ namespace Nutritia
         static public int APP_WIDTH = 650;
         static public int APP_HEIGHT = 550;
     }
-
-	
 }
