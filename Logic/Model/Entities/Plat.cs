@@ -18,6 +18,7 @@ namespace Nutritia
         public string ImageUrl { get; set; }
         public IList<Aliment> ListeIngredients { get; set; }
         public bool EstActif { get; set; }
-        #endregion
-    }
+		public String DateAjout { get; set; }
+		#endregion
+	}
 }

@@ -72,7 +72,7 @@ namespace Nutritia.UI.Views
 
             LstPlat.AddRange(ServiceFactory.Instance.GetService<IPlatService>().RetrieveAll());
             LstAliment.AddRange(ServiceFactory.Instance.GetService<IAlimentService>().RetrieveAll());
-
+			
             BoiteRechPlat.AddRange(LstPlat);
             BoiteRechAliment.AddRange(ServiceFactory.Instance.GetService<IAlimentService>().RetrieveAll());
 
@@ -163,8 +163,6 @@ namespace Nutritia.UI.Views
 
             itemDessert.Content = stackDessert;
             accPlat.Items.Add(itemDessert);
-
-
         }
 
 
@@ -257,7 +255,7 @@ namespace Nutritia.UI.Views
             foreach (var aliment in BoiteRechAliment)
             {
                 Button btnAliment = FormerListeLignePlatAliment(true, aliment, null);
-
+				
                 if (btnAliment != null)
                     BoiteResultat.stackEcran.Children.Add(btnAliment);
             }
@@ -544,14 +542,12 @@ namespace Nutritia.UI.Views
         {
 
             Plat plat = new Plat(); // Assignation temporaire ...
-            bool EstPlat = false;
-            if (item.GetType().ToString() == "Nutritia.Plat")
+            if (item is Plat)
             {
                 plat = (Plat)item;
-                EstPlat = true;
             }
 
-            if (!EstPlat) // On cast l'aliment dans la liste de notre plat vide
+            else // On cast l'aliment dans la liste de notre plat vide
             {
 
                 plat.ListeIngredients = new List<Aliment>();
@@ -581,7 +577,7 @@ namespace Nutritia.UI.Views
             }
 
             StringBuilder sbValeurNut = new StringBuilder();
-            sbValeurNut.Append("1 ").Append(EstPlat ? plat.Nom : plat.ListeIngredients[0].Nom).AppendLine(" de " + poidPlat + " g").AppendLine(); // Affichage du nom du plat ou de l'aliment
+            sbValeurNut.Append("1 ").Append(item is Plat ? plat.Nom : plat.ListeIngredients[0].Nom).AppendLine(" de " + poidPlat + " g").AppendLine(); // Affichage du nom du plat ou de l'aliment
             sbValeurNut.Append("Énergie : ").Append(ValeurNutritive["Calorie"].ToString("N")).AppendLine(" cal");
             sbValeurNut.Append("Glucides : ").Append(ValeurNutritive["Glucides"].ToString("N")).AppendLine(" g");
             sbValeurNut.Append("Fibres : ").Append(ValeurNutritive["Fibres"].ToString("N")).AppendLine(" g");
@@ -658,13 +654,21 @@ namespace Nutritia.UI.Views
             }
             else
             {
-                dValeurNutritive["Calorie"] += aliment.Energie * aliment.Quantite / aliment.Mesure;
-                dValeurNutritive["Glucides"] += aliment.Glucide * aliment.Quantite / aliment.Mesure;
-                dValeurNutritive["Fibres"] += aliment.Fibre * aliment.Quantite / aliment.Mesure;
-                dValeurNutritive["Proteines"] += aliment.Proteine * aliment.Quantite / aliment.Mesure;
-                dValeurNutritive["Lipides"] += aliment.Lipide * aliment.Quantite / aliment.Mesure;
-                dValeurNutritive["Cholesterol"] += aliment.Cholesterol * aliment.Quantite / aliment.Mesure;
-                dValeurNutritive["Sodium"] += aliment.Sodium * aliment.Quantite / aliment.Mesure;
+				double mesure = aliment.Mesure;
+				double quantite = aliment.Quantite;
+                if (quantite / mesure <= 1) // Cas ou c'Est un simple aliment atomique qui est calculé et pas un plat
+				{
+					mesure = 1;
+					quantite = 1;
+                }
+					
+                dValeurNutritive["Calorie"] += aliment.Energie * quantite / mesure;
+                dValeurNutritive["Glucides"] += aliment.Glucide * quantite / mesure;
+                dValeurNutritive["Fibres"] += aliment.Fibre * quantite / mesure;
+                dValeurNutritive["Proteines"] += aliment.Proteine * quantite / mesure;
+                dValeurNutritive["Lipides"] += aliment.Lipide * quantite / mesure;
+                dValeurNutritive["Cholesterol"] += aliment.Cholesterol * quantite / mesure;
+                dValeurNutritive["Sodium"] += aliment.Sodium * quantite / mesure;
             }
 
             return dValeurNutritive;
@@ -699,7 +703,13 @@ namespace Nutritia.UI.Views
             scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - e.Delta);
         }
 
-    }
+		private void btnVider_Click(object sender, RoutedEventArgs e)
+		{
+			PlateauAliment.Clear();
+			PlateauPlat.Clear();
+			DessinerPlateau();
+		}
+	}
 
 
 

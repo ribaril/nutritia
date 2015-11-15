@@ -53,8 +53,9 @@ namespace Nutritia.UI.Views
                 else
                 {
                     App.MembreCourant = membreValidation;
-
+					
                     ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
+
                 }   
             }
         }

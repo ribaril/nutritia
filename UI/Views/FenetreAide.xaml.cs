@@ -12,17 +12,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace Nutritia.UI.Views
 {
-    /// <summary>
-    /// Interaction logic for FenetreAide.xaml
-    /// </summary>
-    public partial class FenetreAide : Window
-    {
-        public FenetreAide(String nomFenetre)
-        {
-            InitializeComponent();
+	/// <summary>
+	/// Interaction logic for FenetreAide.xaml
+	/// </summary>
+	public partial class FenetreAide : Window
+	{
+		public FenetreAide(String nomFenetre)
+		{
+			InitializeComponent();
 
 			switch (nomFenetre)
 			{
@@ -47,7 +48,7 @@ namespace Nutritia.UI.Views
 				case "FenetreParametre":
 					tcAide.SelectedItem = tiParametre;
 					break;
-                case "FenetreGenerateurMenus":
+				case "FenetreGenerateurMenus":
 					tcAide.SelectedItem = tiGenerationMenu;
 					break;
 				case "ListeEpicerie":
@@ -65,6 +66,37 @@ namespace Nutritia.UI.Views
 				default:
 					tcAide.SelectedItem = tiMenuPrincipal;
 					break;
+			}
+
+			AppliquerText();
+		}
+
+		void AppliquerText()
+		{
+			// Placer tous le contenu du fichier en mémoire dans une liste de ligne
+			List<String> lstLigne = System.IO.File.ReadAllLines("FichierAide.txt").ToList();
+			Dictionary<String, String> dicAide = new Dictionary<String, String>();
+			String section = "";
+			List<String> lstSting = new List<string>();
+
+			foreach (var ligne in lstLigne)
+			{
+				if (ligne.Contains("#"))
+				{
+					section = ligne.Replace("#", "");
+					dicAide.Add(section, "");
+					lstSting.Add(section);
+                }
+				else
+				{
+					dicAide[section] += ligne + "\n";
+				}
+				
+			}
+
+			foreach (var texte in dicAide)
+			{
+				((TextBlock)this.FindName(texte.Key)).Text = texte.Value;
 			}
 		}
 

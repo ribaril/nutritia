@@ -53,7 +53,7 @@
                                 </ToolTip>
                             </Image.ToolTip>
                         </Image>
-                        <TextBlock Text="2" Foreground="DarkGreen"/>                        
+                        <TextBlock Name="nbrNotif" Text="2" Foreground="DarkGreen"/>                        
                     </DockPanel>
                 </Button>
             </ToolBar>

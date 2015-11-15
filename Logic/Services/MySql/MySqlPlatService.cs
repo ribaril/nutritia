@@ -8,245 +8,246 @@ using System.Windows;
 
 namespace Nutritia
 {
-    /// <summary>
-    /// Service MySql lié aux Plats.
-    /// </summary>
-    public class MySqlPlatService : IPlatService
-    {
-        private MySqlConnexion connexion;
-        private readonly IAlimentService alimentService;
+	/// <summary>
+	/// Service MySql lié aux Plats.
+	/// </summary>
+	public class MySqlPlatService : IPlatService
+	{
+		private MySqlConnexion connexion;
+		private readonly IAlimentService alimentService;
 
-        /// <summary>
-        /// Constructeur par défaut de la classe.
-        /// </summary>
-        public MySqlPlatService ()
-	    {
-            alimentService = ServiceFactory.Instance.GetService<IAlimentService>();
-	    }
+		/// <summary>
+		/// Constructeur par défaut de la classe.
+		/// </summary>
+		public MySqlPlatService()
+		{
+			alimentService = ServiceFactory.Instance.GetService<IAlimentService>();
+		}
 
-        /// <summary>
-        /// Méthode permettant d'obtenir l'ensemble des plats sauvegardé dans la base de données.
-        /// </summary>
-        /// <returns>Une liste contenant les plats.</returns>
-        public IList<Plat> RetrieveAll()
-        {
-            List<Plat> resultat = new List<Plat>();
+		/// <summary>
+		/// Méthode permettant d'obtenir l'ensemble des plats sauvegardé dans la base de données.
+		/// </summary>
+		/// <returns>Une liste contenant les plats.</returns>
+		public IList<Plat> RetrieveAll()
+		{
+			List<Plat> resultat = new List<Plat>();
 
-            try
-            {
-                connexion = new MySqlConnexion();
+			try
+			{
+				connexion = new MySqlConnexion();
 
-                string requete = "SELECT * FROM Plats p INNER JOIN TypesPlats tp ON tp.idTypePlat = p.idTypePlat INNER JOIN Membres m ON m.idMembre = p.idMembre";
+				string requete = "SELECT * FROM Plats p INNER JOIN TypesPlats tp ON tp.idTypePlat = p.idTypePlat INNER JOIN Membres m ON m.idMembre = p.idMembre";
 
-                DataSet dataSetPlats = connexion.Query(requete);
-                DataTable tablePlats = dataSetPlats.Tables[0];
+				DataSet dataSetPlats = connexion.Query(requete);
+				DataTable tablePlats = dataSetPlats.Tables[0];
 
-                foreach (DataRow rowPlat in tablePlats.Rows)
-                {
-                    Plat plat = ConstruirePlat(rowPlat);
+				foreach (DataRow rowPlat in tablePlats.Rows)
+				{
+					Plat plat = ConstruirePlat(rowPlat);
 
-                    plat.ListeIngredients = RetrieveAlimentsPlat(new RetrievePlatArgs { IdPlat = plat.IdPlat });
+					plat.ListeIngredients = RetrieveAlimentsPlat(new RetrievePlatArgs { IdPlat = plat.IdPlat });
 
-                    resultat.Add(plat);
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+					resultat.Add(plat);
+				}
+			}
+			catch (Exception)
+			{
+				throw;
+			}
 
-            return resultat;
-        }
+			return resultat;
+		}
 
-        /// <summary>
-        /// Méthode permettant d'obtenir un ensemble de plats sauvegardé dans la base de données.
-        /// </summary>
-        /// <param name="args">Les arguments permettant de retrouver les plats.</param>
-        /// <returns>Une liste contenant les plats.</returns>
-        public IList<Plat> RetrieveSome(RetrievePlatArgs args)
-        {
-            List<Plat> resultat = new List<Plat>();
+		/// <summary>
+		/// Méthode permettant d'obtenir un ensemble de plats sauvegardé dans la base de données.
+		/// </summary>
+		/// <param name="args">Les arguments permettant de retrouver les plats.</param>
+		/// <returns>Une liste contenant les plats.</returns>
+		public IList<Plat> RetrieveSome(RetrievePlatArgs args)
+		{
+			List<Plat> resultat = new List<Plat>();
 
-            try
-            {
-                connexion = new MySqlConnexion();
+			try
+			{
+				connexion = new MySqlConnexion();
 
-                string requete = "SELECT * FROM Plats p INNER JOIN TypesPlats tp ON tp.idTypePlat = p.idTypePlat INNER JOIN Membres m ON m.idMembre = p.idMembre";
+				string requete = "SELECT * FROM Plats p INNER JOIN TypesPlats tp ON tp.idTypePlat = p.idTypePlat INNER JOIN Membres m ON m.idMembre = p.idMembre";
 
-                if(args.Categorie != null && args.Categorie != string.Empty)
-                {
-                    requete += string.Format(" WHERE typePlat = '{0}'", args.Categorie);
-                }
+				if (args.Categorie != null && args.Categorie != string.Empty)
+				{
+					requete += string.Format(" WHERE typePlat = '{0}'", args.Categorie);
+				}
 
-                if(args.NbResultats != null)
-                {
-                    if(args.PlusPopulaires == true)
-                    {
-                        requete += " ORDER BY note DESC ";
-                    }
-                    else if (args.PlusPopulaires == false)
-                    {
-                        requete += " ORDER BY note ASC ";
-                    }
-                    else if(args.PlusPopulaires == null)
-                    {
-                        if (args.Depart != null && args.Depart != string.Empty)
-                        {
-                            requete += " ORDER BY idPlat ";
+				if (args.NbResultats != null)
+				{
+					if (args.PlusPopulaires == true)
+					{
+						requete += " ORDER BY note DESC ";
+					}
+					else if (args.PlusPopulaires == false)
+					{
+						requete += " ORDER BY note ASC ";
+					}
+					else if (args.PlusPopulaires == null)
+					{
+						if (args.Depart != null && args.Depart != string.Empty)
+						{
+							requete += " ORDER BY idPlat ";
 
-                            if (args.Depart == "Fin")
-                            {
-                                requete += "DESC";
-                            }
-                            else
-                            {
-                                requete += "ASC";
-                            }
-                        }
-                    }
+							if (args.Depart == "Fin")
+							{
+								requete += "DESC";
+							}
+							else
+							{
+								requete += "ASC";
+							}
+						}
+					}
 
-                    requete += string.Format(" LIMIT {0} ", args.NbResultats);
+					requete += string.Format(" LIMIT {0} ", args.NbResultats);
 
-                }
+				}
 
-                DataSet dataSetPlats = connexion.Query(requete);
-                DataTable tablePlats = dataSetPlats.Tables[0];
+				DataSet dataSetPlats = connexion.Query(requete);
+				DataTable tablePlats = dataSetPlats.Tables[0];
 
-                foreach (DataRow rowPlat in tablePlats.Rows)
-                {
-                    Plat plat = ConstruirePlat(rowPlat);
-                    
-                    plat.ListeIngredients = RetrieveAlimentsPlat(new RetrievePlatArgs{IdPlat = plat.IdPlat});
+				foreach (DataRow rowPlat in tablePlats.Rows)
+				{
+					Plat plat = ConstruirePlat(rowPlat);
 
-                    resultat.Add(plat);
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+					plat.ListeIngredients = RetrieveAlimentsPlat(new RetrievePlatArgs { IdPlat = plat.IdPlat });
 
-            return resultat;
-        }
+					resultat.Add(plat);
+				}
+			}
+			catch (Exception)
+			{
+				throw;
+			}
 
-        /// <summary>
-        /// Méthode permettant d'obtenir un plat sauvegardé dans la base de données.
-        /// </summary>
-        /// <param name="args">Les arguments permettant de retrouver le plat.</param>
-        /// <returns>Un objet Plat.</returns>
-        public Plat Retrieve(RetrievePlatArgs args)
-        {
-            Plat plat;
+			return resultat;
+		}
 
-            try
-            {
-                connexion = new MySqlConnexion();
-                string requete = string.Format("SELECT * FROM Plats p INNER JOIN TypesPlats tp ON tp.idTypePlat = p.idTypePlat INNER JOIN Membres m ON m.idMembre = p.idMembre WHERE idPlat = '{0}'", args.IdPlat);
+		/// <summary>
+		/// Méthode permettant d'obtenir un plat sauvegardé dans la base de données.
+		/// </summary>
+		/// <param name="args">Les arguments permettant de retrouver le plat.</param>
+		/// <returns>Un objet Plat.</returns>
+		public Plat Retrieve(RetrievePlatArgs args)
+		{
+			Plat plat;
 
-                DataSet dataSetPlats = connexion.Query(requete);
-                DataTable tablePlats = dataSetPlats.Tables[0];
-                
-                plat = ConstruirePlat(tablePlats.Rows[0]);
+			try
+			{
+				connexion = new MySqlConnexion();
+				string requete = string.Format("SELECT * FROM Plats p INNER JOIN TypesPlats tp ON tp.idTypePlat = p.idTypePlat INNER JOIN Membres m ON m.idMembre = p.idMembre WHERE idPlat = '{0}'", args.IdPlat);
 
-                plat.ListeIngredients = RetrieveAlimentsPlat(new RetrievePlatArgs { IdPlat = plat.IdPlat });
+				DataSet dataSetPlats = connexion.Query(requete);
+				DataTable tablePlats = dataSetPlats.Tables[0];
 
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+				plat = ConstruirePlat(tablePlats.Rows[0]);
 
-            return plat;
-        }
+				plat.ListeIngredients = RetrieveAlimentsPlat(new RetrievePlatArgs { IdPlat = plat.IdPlat });
 
-        /// <summary>
-        /// Méthode permettant d'obtenir les aliments d'un plat.
-        /// </summary>
-        /// <param name="args">Les arguments permettant de retrouver les aliments du plat.</param>
-        /// <returns>Une liste contenant les aliments.</returns>
-        public IList<Aliment> RetrieveAlimentsPlat(RetrievePlatArgs args)
-        {
-            List<Aliment> listeIngredients = new List<Aliment>();
+			}
+			catch (Exception)
+			{
+				throw;
+			}
 
-            string requete = string.Format("SELECT * FROM PlatsAliments WHERE idPlat = {0}", args.IdPlat);
+			return plat;
+		}
 
-            DataSet dataSetPlatsAliments = connexion.Query(requete);
-            DataTable tablePlatsAliments = dataSetPlatsAliments.Tables[0];
+		/// <summary>
+		/// Méthode permettant d'obtenir les aliments d'un plat.
+		/// </summary>
+		/// <param name="args">Les arguments permettant de retrouver les aliments du plat.</param>
+		/// <returns>Une liste contenant les aliments.</returns>
+		public IList<Aliment> RetrieveAlimentsPlat(RetrievePlatArgs args)
+		{
+			List<Aliment> listeIngredients = new List<Aliment>();
 
-            foreach (DataRow rowPlatsAliments in tablePlatsAliments.Rows)
-            {
-                Aliment alimentTmp = alimentService.Retrieve(new RetrieveAlimentArgs { IdAliment = (int)rowPlatsAliments["idAliment"] });
-                alimentTmp.Quantite = (double)rowPlatsAliments["quantite"] * alimentTmp.Mesure;
-                listeIngredients.Add(alimentTmp);
-            }
+			string requete = string.Format("SELECT * FROM PlatsAliments WHERE idPlat = {0}", args.IdPlat);
 
-            return listeIngredients;
-        }
+			DataSet dataSetPlatsAliments = connexion.Query(requete);
+			DataTable tablePlatsAliments = dataSetPlatsAliments.Tables[0];
 
-        /// <summary>
-        /// Méthode permettant de mettre à jour un plat dans la base de données.
-        /// </summary>
-        /// <param name="plat">Le plat à mettre à jour.</param>
-        public void Update(Plat plat)
-        {
-            try
-            {
-                connexion = new MySqlConnexion();
+			foreach (DataRow rowPlatsAliments in tablePlatsAliments.Rows)
+			{
+				Aliment alimentTmp = alimentService.Retrieve(new RetrieveAlimentArgs { IdAliment = (int)rowPlatsAliments["idAliment"] });
+				alimentTmp.Quantite = (double)rowPlatsAliments["quantite"] * alimentTmp.Mesure;
+				listeIngredients.Add(alimentTmp);
+			}
 
-                // Obtenir le idTypePlat.
-                string requete = string.Format("SELECT idTypePlat FROM TypesPlats WHERE typePlat = '{0}'", plat.TypePlat);
+			return listeIngredients;
+		}
 
-                DataSet dataSetType = connexion.Query(requete);
-                DataTable tableType = dataSetType.Tables[0];
-                int idTypePlat = (int)(tableType.Rows[0]["idTypePlat"]);
+		/// <summary>
+		/// Méthode permettant de mettre à jour un plat dans la base de données.
+		/// </summary>
+		/// <param name="plat">Le plat à mettre à jour.</param>
+		public void Update(Plat plat)
+		{
+			try
+			{
+				connexion = new MySqlConnexion();
 
-                string note = plat.Note.ToString();
-                
-                if(note.Contains(","))
-                {
-                    note = note.Replace(",", ".");
-                }
+				// Obtenir le idTypePlat.
+				string requete = string.Format("SELECT idTypePlat FROM TypesPlats WHERE typePlat = '{0}'", plat.TypePlat);
 
-                requete = string.Format("UPDATE Plats SET idTypePlat = {0}, nom = '{1}', imageUrl = '{2}', note = {3}, nbVotes = {4} WHERE idPlat = {5}", idTypePlat, plat.Nom.Replace("'", "''"), plat.ImageUrl, note, plat.NbVotes, plat.IdPlat);
-                connexion.Query(requete);
+				DataSet dataSetType = connexion.Query(requete);
+				DataTable tableType = dataSetType.Tables[0];
+				int idTypePlat = (int)(tableType.Rows[0]["idTypePlat"]);
 
-                // Mise à jour des aliments du plat.
-                foreach (Aliment aliment in plat.ListeIngredients)
-                {
-                    
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+				string note = plat.Note.ToString();
 
-        /// <summary>
-        /// Méthode permettant de construire un objet Plat.
-        /// </summary>
-        /// <param name="plat">Un enregistrement de la table Plats.</param>
-        /// <returns>Un objet Plat.</returns>
-        private Plat ConstruirePlat(DataRow plat)
-        {
-            double? note = null;
+				if (note.Contains(","))
+				{
+					note = note.Replace(",", ".");
+				}
 
-            if (!(plat["note"] is DBNull))
-            {
-                note = (double?)plat["note"];
-            }
+				requete = string.Format("UPDATE Plats SET idTypePlat = {0}, nom = '{1}', imageUrl = '{2}', note = {3}, nbVotes = {4} WHERE idPlat = {5}", idTypePlat, plat.Nom.Replace("'", "''"), plat.ImageUrl, note, plat.NbVotes, plat.IdPlat);
+				connexion.Query(requete);
 
-            return new Plat()
-            {
-                IdPlat = (int)plat["idPlat"],
-                Createur = (string)plat["nomUtilisateur"],
-                Nom = (string)plat["nom"],
-                TypePlat = (string)plat["typePlat"],
-                Note = note,
-                NbVotes = (int)plat["nbVotes"],
-                ImageUrl = (string)plat["imageUrl"],
-                ListeIngredients = new List<Aliment>()
-            };
-        }
-    }
+				// Mise à jour des aliments du plat.
+				foreach (Aliment aliment in plat.ListeIngredients)
+				{
+
+				}
+			}
+			catch (Exception)
+			{
+				throw;
+			}
+		}
+
+		/// <summary>
+		/// Méthode permettant de construire un objet Plat.
+		/// </summary>
+		/// <param name="plat">Un enregistrement de la table Plats.</param>
+		/// <returns>Un objet Plat.</returns>
+		private Plat ConstruirePlat(DataRow plat)
+		{
+			double? note = null;
+
+			if (!(plat["note"] is DBNull))
+			{
+				note = (double?)plat["note"];
+			}
+
+			return new Plat()
+			{
+				IdPlat = (int)plat["idPlat"],
+				Createur = (string)plat["nomUtilisateur"],
+				Nom = (string)plat["nom"],
+				TypePlat = (string)plat["typePlat"],
+				Note = note,
+				NbVotes = (int)plat["nbVotes"],
+				ImageUrl = (string)plat["imageUrl"],
+				ListeIngredients = new List<Aliment>(),
+				DateAjout = plat["dateAjout"].ToString()
+			};
+		}
+	}
 }

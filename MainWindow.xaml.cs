@@ -27,17 +27,52 @@ namespace Nutritia
     {
         private const int SLEEP_NOTIFICATION_TIME = 10000;
 
-        public MainWindow()
+		
+		public MainWindow()
         {
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.Langue);
-            InitializeComponent();
-            Configurer();
+			InitializeComponent();
+			Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.Langue);
+
+			
+			Configurer();
 
             presenteurContenu.Content = new MenuPrincipal();
+			
         }
 
+		private  void VerifierChangement()
+		{
+			String derniereMaj;
+            List<Plat> lstPlat;
+			while (true)
+			{
+				if (App.MembreCourant.NomUtilisateur != "")
+				{
+					derniereMaj = "0000-00-00 00:00:00";//ServiceFactory.Instance.GetService<IMembreService>().RetrieveMiseAJOur();
+														//lstPlat = ServiceFactory.Instance.GetService<IPlatService>().RetrieveAll().ToList();
+					for (int i = 0; i < 25; i++)
+					{
+						if (((String)"0000-00-00 00:00:00").CompareTo(derniereMaj) > -1)
+						{
+							CreerNotification();
+						}
+					}	
 
-        private void Configurer()
+				}
+
+			}
+		}
+
+		private void CreerNotification()
+		{
+			
+			int i = Convert.ToInt32(nbrNotif.Text == null ? "0" : nbrNotif.Text);
+			// On ajoute 1 pour le nombre de notification
+			i += 1;	
+            nbrNotif.Text = i.ToString();
+		}
+
+		private void Configurer()
         {
             // Inscription des différents services de l'application dans le ServiceFactory.
             ServiceFactory.Instance.Register<IRestrictionAlimentaireService, MySqlRestrictionAlimentaireService>(new MySqlRestrictionAlimentaireService());
@@ -129,7 +164,7 @@ namespace Nutritia
 
         private void btnNotification_Click(object sender, RoutedEventArgs e)
         {
-
+			nbrNotif.Text = "";
         }
 
 

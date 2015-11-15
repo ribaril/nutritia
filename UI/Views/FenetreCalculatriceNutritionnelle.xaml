@@ -42,6 +42,9 @@
         <GroupBox x:Name="gbPlateau" Header="Plateau" HorizontalAlignment="Center"  Grid.Row="2" VerticalAlignment="Center" Height="170" Width="300">
             <ContentPresenter Name="presenteurContenu2" />
         </GroupBox>
+        <Button Visibility="Collapsed" Name="btnVider" Grid.ZIndex="1000" Width="30" Height="30" Grid.Row="2" Grid.ColumnSpan="2" Click="btnVider_Click" Margin="296,33,324,184">
+            <Image  Source="/Nutritia;component/UI/Images/viderIcon.png" />
+        </Button>
         <GroupBox x:Name="gbValeurNutri" Header="Valeurs nutritionelles du plateau" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Height="170" Width="290" Grid.Column="1">
             <ContentPresenter Name="presenteurContenu3" VerticalAlignment="Top"/>
         </GroupBox>
