@@ -29,6 +29,7 @@ namespace Nutritia.UI.Views
         private List<Plat> ListePlatPrincipaux { get; set; }
         private List<Plat> ListeBreuvages { get; set; }
         private List<Plat> ListeDesserts { get; set; }
+        private List<Plat> ListePlatsRetires { get; set; }
         private Menu MenuGenere { get; set; }
         private int NbColonnes { get; set; }
         private Random Rand { get; set; }
@@ -62,6 +63,7 @@ namespace Nutritia.UI.Views
             ListePlatPrincipaux = new List<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Plat principal" }));
             ListeBreuvages = new List<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Breuvage" }));
             ListeDesserts = new List<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Déssert" }));
+            ListePlatsRetires = new List<Plat>();
             Mouse.OverrideCursor = null;
 
             // Header de la fenêtre.
@@ -69,6 +71,7 @@ namespace Nutritia.UI.Views
 
             if (!String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
             {
+                btnSuiviPlatsNonAdmissibles.IsEnabled = true;
                 btnOuvrirMenu.IsEnabled = true;
                 RestreindrePossibilites();
             }
@@ -163,7 +166,8 @@ namespace Nutritia.UI.Views
             }
 
             /************************** Diabétique **************************/
-            if (App.MembreCourant.ListeRestrictions.Contains(new RestrictionAlimentaire { Nom = "Diabète" }))
+            if (App.MembreCourant.ListeRestrictions.Contains(new RestrictionAlimentaire { Nom = "Diabète" })
+                || App.MembreCourant.ListeObjectifs.Contains(new Objectif { Nom = "Contrôle glycémique"}))
             {
                 double maxGlucides;
                 Plat platPlusGlucides;
@@ -172,6 +176,7 @@ namespace Nutritia.UI.Views
                 {
                     maxGlucides = ListeDejeuners.Max(plat => plat.CalculerValeursNutritionnelles()["Glucide"]);
                     platPlusGlucides = ListeDejeuners.Find(plat => plat.CalculerValeursNutritionnelles()["Glucide"] == maxGlucides);
+                    ListePlatsRetires.Add(platPlusGlucides);
                     ListeDejeuners.Remove(platPlusGlucides);
                 }
 
@@ -179,6 +184,7 @@ namespace Nutritia.UI.Views
                 {
                     maxGlucides = ListeBreuvages.Max(plat => plat.CalculerValeursNutritionnelles()["Glucide"]);
                     platPlusGlucides = ListeBreuvages.Find(plat => plat.CalculerValeursNutritionnelles()["Glucide"] == maxGlucides);
+                    ListePlatsRetires.Add(platPlusGlucides);
                     ListeBreuvages.Remove(platPlusGlucides);
                 }
 
@@ -186,6 +192,7 @@ namespace Nutritia.UI.Views
                 {
                     maxGlucides = ListeEntrees.Max(plat => plat.CalculerValeursNutritionnelles()["Glucide"]);
                     platPlusGlucides = ListeEntrees.Find(plat => plat.CalculerValeursNutritionnelles()["Glucide"] == maxGlucides);
+                    ListePlatsRetires.Add(platPlusGlucides);
                     ListeEntrees.Remove(platPlusGlucides);
                 }
 
@@ -193,6 +200,7 @@ namespace Nutritia.UI.Views
                 {
                     maxGlucides = ListePlatPrincipaux.Max(plat => plat.CalculerValeursNutritionnelles()["Glucide"]);
                     platPlusGlucides = ListePlatPrincipaux.Find(plat => plat.CalculerValeursNutritionnelles()["Glucide"] == maxGlucides);
+                    ListePlatsRetires.Add(platPlusGlucides);
                     ListePlatPrincipaux.Remove(platPlusGlucides);
                 }
 
@@ -200,12 +208,14 @@ namespace Nutritia.UI.Views
                 {
                     maxGlucides = ListeDesserts.Max(plat => plat.CalculerValeursNutritionnelles()["Glucide"]);
                     platPlusGlucides = ListeDesserts.Find(plat => plat.CalculerValeursNutritionnelles()["Glucide"] == maxGlucides);
+                    ListePlatsRetires.Add(platPlusGlucides);
                     ListeDesserts.Remove(platPlusGlucides);
                 }
             }
 
             /************************** Cholestérol **************************/
-            if (App.MembreCourant.ListeRestrictions.Contains(new RestrictionAlimentaire { Nom = "Cholestérol" }))
+            if (App.MembreCourant.ListeRestrictions.Contains(new RestrictionAlimentaire { Nom = "Cholestérol" })
+                || App.MembreCourant.ListeObjectifs.Contains(new Objectif { Nom = "Contrôle du cholestérol" }))
             {
                 double maxCholesterol;
                 Plat platPlusCholesterol;
@@ -214,6 +224,7 @@ namespace Nutritia.UI.Views
                 {
                     maxCholesterol = ListeDejeuners.Max(plat => plat.CalculerValeursNutritionnelles()["Cholesterol"]);
                     platPlusCholesterol = ListeDejeuners.Find(plat => plat.CalculerValeursNutritionnelles()["Cholesterol"] == maxCholesterol);
+                    ListePlatsRetires.Add(platPlusCholesterol);
                     ListeDejeuners.Remove(platPlusCholesterol);
                 }
 
@@ -221,6 +232,7 @@ namespace Nutritia.UI.Views
                 {
                     maxCholesterol = ListeBreuvages.Max(plat => plat.CalculerValeursNutritionnelles()["Cholesterol"]);
                     platPlusCholesterol = ListeBreuvages.Find(plat => plat.CalculerValeursNutritionnelles()["Cholesterol"] == maxCholesterol);
+                    ListePlatsRetires.Add(platPlusCholesterol);
                     ListeBreuvages.Remove(platPlusCholesterol);
                 }
 
@@ -228,6 +240,7 @@ namespace Nutritia.UI.Views
                 {
                     maxCholesterol = ListeEntrees.Max(plat => plat.CalculerValeursNutritionnelles()["Cholesterol"]);
                     platPlusCholesterol = ListeEntrees.Find(plat => plat.CalculerValeursNutritionnelles()["Cholesterol"] == maxCholesterol);
+                    ListePlatsRetires.Add(platPlusCholesterol);
                     ListeEntrees.Remove(platPlusCholesterol);
                 }
 
@@ -235,6 +248,7 @@ namespace Nutritia.UI.Views
                 {
                     maxCholesterol = ListePlatPrincipaux.Max(plat => plat.CalculerValeursNutritionnelles()["Cholesterol"]);
                     platPlusCholesterol = ListePlatPrincipaux.Find(plat => plat.CalculerValeursNutritionnelles()["Cholesterol"] == maxCholesterol);
+                    ListePlatsRetires.Add(platPlusCholesterol);
                     ListePlatPrincipaux.Remove(platPlusCholesterol);
                 }
 
@@ -242,7 +256,55 @@ namespace Nutritia.UI.Views
                 {
                     maxCholesterol = ListeDesserts.Max(plat => plat.CalculerValeursNutritionnelles()["Cholesterol"]);
                     platPlusCholesterol = ListeDesserts.Find(plat => plat.CalculerValeursNutritionnelles()["Cholesterol"] == maxCholesterol);
+                    ListePlatsRetires.Add(platPlusCholesterol);
                     ListeDesserts.Remove(platPlusCholesterol);
+                }
+            }
+
+            /************************** Haute/basse pression **************************/
+            if (App.MembreCourant.ListeRestrictions.Contains(new RestrictionAlimentaire { Nom = "Haute/Basse pression" }))
+            {
+                double maxSodium;
+                Plat platPlusSodium;
+
+                for (int i = 0; i < ListeDejeuners.Count / 2; i++)
+                {
+                    maxSodium = ListeDejeuners.Max(plat => plat.CalculerValeursNutritionnelles()["Sodium"]);
+                    platPlusSodium = ListeDejeuners.Find(plat => plat.CalculerValeursNutritionnelles()["Sodium"] == maxSodium);
+                    ListePlatsRetires.Add(platPlusSodium);
+                    ListeDejeuners.Remove(platPlusSodium);
+                }
+
+                for (int i = 0; i < ListeBreuvages.Count / 2; i++)
+                {
+                    maxSodium = ListeBreuvages.Max(plat => plat.CalculerValeursNutritionnelles()["Sodium"]);
+                    platPlusSodium = ListeBreuvages.Find(plat => plat.CalculerValeursNutritionnelles()["Sodium"] == maxSodium);
+                    ListePlatsRetires.Add(platPlusSodium);
+                    ListeBreuvages.Remove(platPlusSodium);
+                }
+
+                for (int i = 0; i < ListeEntrees.Count / 2; i++)
+                {
+                    maxSodium = ListeEntrees.Max(plat => plat.CalculerValeursNutritionnelles()["Sodium"]);
+                    platPlusSodium = ListeEntrees.Find(plat => plat.CalculerValeursNutritionnelles()["Sodium"] == maxSodium);
+                    ListePlatsRetires.Add(platPlusSodium);
+                    ListeEntrees.Remove(platPlusSodium);
+                }
+
+                for (int i = 0; i < ListePlatPrincipaux.Count / 2; i++)
+                {
+                    maxSodium = ListePlatPrincipaux.Max(plat => plat.CalculerValeursNutritionnelles()["Sodium"]);
+                    platPlusSodium = ListePlatPrincipaux.Find(plat => plat.CalculerValeursNutritionnelles()["Sodium"] == maxSodium);
+                    ListePlatsRetires.Add(platPlusSodium);
+                    ListePlatPrincipaux.Remove(platPlusSodium);
+                }
+
+                for (int i = 0; i < ListeDesserts.Count / 2; i++)
+                {
+                    maxSodium = ListeDesserts.Max(plat => plat.CalculerValeursNutritionnelles()["Sodium"]);
+                    platPlusSodium = ListeDesserts.Find(plat => plat.CalculerValeursNutritionnelles()["Sodium"] == maxSodium);
+                    ListePlatsRetires.Add(platPlusSodium);
+                    ListeDesserts.Remove(platPlusSodium);
                 }
             }
 
@@ -256,6 +318,7 @@ namespace Nutritia.UI.Views
                 {
                     maxCalories = ListeDejeuners.Max(plat => plat.CalculerValeursNutritionnelles()["Energie"]);
                     platPlusCalorique = ListeDejeuners.Find(plat => plat.CalculerValeursNutritionnelles()["Energie"] == maxCalories);
+                    ListePlatsRetires.Add(platPlusCalorique);
                     ListeDejeuners.Remove(platPlusCalorique);
                 }
 
@@ -263,6 +326,7 @@ namespace Nutritia.UI.Views
                 {
                     maxCalories = ListeBreuvages.Max(plat => plat.CalculerValeursNutritionnelles()["Energie"]);
                     platPlusCalorique = ListeBreuvages.Find(plat => plat.CalculerValeursNutritionnelles()["Energie"] == maxCalories);
+                    ListePlatsRetires.Add(platPlusCalorique);
                     ListeBreuvages.Remove(platPlusCalorique);
                 }
 
@@ -270,6 +334,7 @@ namespace Nutritia.UI.Views
                 {
                     maxCalories = ListeEntrees.Max(plat => plat.CalculerValeursNutritionnelles()["Energie"]);
                     platPlusCalorique = ListeEntrees.Find(plat => plat.CalculerValeursNutritionnelles()["Energie"] == maxCalories);
+                    ListePlatsRetires.Add(platPlusCalorique);
                     ListeEntrees.Remove(platPlusCalorique);
                 }
 
@@ -277,6 +342,7 @@ namespace Nutritia.UI.Views
                 {
                     maxCalories = ListePlatPrincipaux.Max(plat => plat.CalculerValeursNutritionnelles()["Energie"]);
                     platPlusCalorique = ListePlatPrincipaux.Find(plat => plat.CalculerValeursNutritionnelles()["Energie"] == maxCalories);
+                    ListePlatsRetires.Add(platPlusCalorique);
                     ListePlatPrincipaux.Remove(platPlusCalorique);
                 }
 
@@ -284,6 +350,7 @@ namespace Nutritia.UI.Views
                 {
                     maxCalories = ListeDesserts.Max(plat => plat.CalculerValeursNutritionnelles()["Energie"]);
                     platPlusCalorique = ListeDesserts.Find(plat => plat.CalculerValeursNutritionnelles()["Energie"] == maxCalories);
+                    ListePlatsRetires.Add(platPlusCalorique);
                     ListeDesserts.Remove(platPlusCalorique);
                 }
             }
@@ -298,6 +365,7 @@ namespace Nutritia.UI.Views
                 {
                     minCalories = ListeDejeuners.Min(plat => plat.CalculerValeursNutritionnelles()["Energie"]);
                     platMoinsCalorique = ListeDejeuners.Find(plat => plat.CalculerValeursNutritionnelles()["Energie"] == minCalories);
+                    ListePlatsRetires.Add(platMoinsCalorique);
                     ListeDejeuners.Remove(platMoinsCalorique);
                 }
 
@@ -305,6 +373,7 @@ namespace Nutritia.UI.Views
                 {
                     minCalories = ListeBreuvages.Min(plat => plat.CalculerValeursNutritionnelles()["Energie"]);
                     platMoinsCalorique = ListeBreuvages.Find(plat => plat.CalculerValeursNutritionnelles()["Energie"] == minCalories);
+                    ListePlatsRetires.Add(platMoinsCalorique);
                     ListeBreuvages.Remove(platMoinsCalorique);
                 }
 
@@ -312,6 +381,7 @@ namespace Nutritia.UI.Views
                 {
                     minCalories = ListeEntrees.Min(plat => plat.CalculerValeursNutritionnelles()["Energie"]);
                     platMoinsCalorique = ListeEntrees.Find(plat => plat.CalculerValeursNutritionnelles()["Energie"] == minCalories);
+                    ListePlatsRetires.Add(platMoinsCalorique);
                     ListeEntrees.Remove(platMoinsCalorique);
                 }
 
@@ -319,6 +389,7 @@ namespace Nutritia.UI.Views
                 {
                     minCalories = ListePlatPrincipaux.Min(plat => plat.CalculerValeursNutritionnelles()["Energie"]);
                     platMoinsCalorique = ListePlatPrincipaux.Find(plat => plat.CalculerValeursNutritionnelles()["Energie"] == minCalories);
+                    ListePlatsRetires.Add(platMoinsCalorique);
                     ListePlatPrincipaux.Remove(platMoinsCalorique);
                 }
 
@@ -326,6 +397,7 @@ namespace Nutritia.UI.Views
                 {
                     minCalories = ListeDesserts.Min(plat => plat.CalculerValeursNutritionnelles()["Energie"]);
                     platMoinsCalorique = ListeDesserts.Find(plat => plat.CalculerValeursNutritionnelles()["Energie"] == minCalories);
+                    ListePlatsRetires.Add(platMoinsCalorique);
                     ListeDesserts.Remove(platMoinsCalorique);
                 }
             }
@@ -340,6 +412,7 @@ namespace Nutritia.UI.Views
                 {
                     minProteines = ListeDejeuners.Min(plat => plat.CalculerValeursNutritionnelles()["Proteine"]);
                     platMoinsProteines = ListeDejeuners.Find(plat => plat.CalculerValeursNutritionnelles()["Proteine"] == minProteines);
+                    ListePlatsRetires.Add(platMoinsProteines);
                     ListeDejeuners.Remove(platMoinsProteines);
                 }
 
@@ -347,6 +420,7 @@ namespace Nutritia.UI.Views
                 {
                     minProteines = ListeBreuvages.Min(plat => plat.CalculerValeursNutritionnelles()["Proteine"]);
                     platMoinsProteines = ListeBreuvages.Find(plat => plat.CalculerValeursNutritionnelles()["Proteine"] == minProteines);
+                    ListePlatsRetires.Add(platMoinsProteines);
                     ListeBreuvages.Remove(platMoinsProteines);
                 }
 
@@ -354,6 +428,7 @@ namespace Nutritia.UI.Views
                 {
                     minProteines = ListeEntrees.Min(plat => plat.CalculerValeursNutritionnelles()["Proteine"]);
                     platMoinsProteines = ListeEntrees.Find(plat => plat.CalculerValeursNutritionnelles()["Proteine"] == minProteines);
+                    ListePlatsRetires.Add(platMoinsProteines);
                     ListeEntrees.Remove(platMoinsProteines);
                 }
 
@@ -361,6 +436,7 @@ namespace Nutritia.UI.Views
                 {
                     minProteines = ListePlatPrincipaux.Min(plat => plat.CalculerValeursNutritionnelles()["Proteine"]);
                     platMoinsProteines = ListePlatPrincipaux.Find(plat => plat.CalculerValeursNutritionnelles()["Proteine"] == minProteines);
+                    ListePlatsRetires.Add(platMoinsProteines);
                     ListePlatPrincipaux.Remove(platMoinsProteines);
                 }
 
@@ -368,6 +444,7 @@ namespace Nutritia.UI.Views
                 {
                     minProteines = ListeDesserts.Min(plat => plat.CalculerValeursNutritionnelles()["Proteine"]);
                     platMoinsProteines = ListeDesserts.Find(plat => plat.CalculerValeursNutritionnelles()["Proteine"] == minProteines);
+                    ListePlatsRetires.Add(platMoinsProteines);
                     ListeDesserts.Remove(platMoinsProteines);
                 }
             }
@@ -543,6 +620,7 @@ namespace Nutritia.UI.Views
 
                 MenuGenere = popupOuvertureMenu.MenuSelectionne;
                 InitialiserSectionMenu(MenuGenere.ListePlats.Count, (Convert.ToInt32(dgMenus.RowHeight)));
+                gbMenus.Header = MenuGenere.Nom;
                 AjouterSeparateursPlats();
                 dgMenus.ItemsSource = MenuGenere.ListePlats;
                 btnSauvegarder.IsEnabled = true;
@@ -627,6 +705,7 @@ namespace Nutritia.UI.Views
             }
 
             InitialiserSectionMenu(nbPlats, (Convert.ToInt32(dgMenus.RowHeight)));
+            gbMenus.Header = "Menus";
 
             // Il s'agit d'un déjeuner.
             if(nbPlats == NB_PLATS_DEJEUNER)
@@ -1031,6 +1110,43 @@ namespace Nutritia.UI.Views
             App.Current.MainWindow.WindowState = WindowState.Normal;
 
             ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue<FenetreListeEpicerie>(new FenetreListeEpicerie(MenuGenere));
+        }
+
+        /// <summary>
+        /// Événement lancé sur un clique du bouton de suivi des plats non admissibles.
+        /// Permet d'afficher l'ensemble des plats non admissibles à la génération.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSuiviPlatsNonAdmissibles_Click(object sender, RoutedEventArgs e)
+        {
+            FenetreSuiviRestrictions fenetreSuvi = new FenetreSuiviRestrictions(ListePlatsRetires);
+            fenetreSuvi.ShowDialog();
+
+            if(fenetreSuvi.DialogResult == true)
+            {
+                foreach(Plat platCourant in fenetreSuvi.ListePlatsAdmissibles)
+                {
+                    switch (platCourant.TypePlat)
+                    {
+                        case "Déjeuner":
+                            ListeDejeuners.Add(platCourant);
+                            break;
+                        case "Entrée":
+                            ListeEntrees.Add(platCourant);
+                            break;
+                        case "Plat principal":
+                            ListePlatPrincipaux.Add(platCourant);
+                            break;
+                        case "Breuvage":
+                            ListeBreuvages.Add(platCourant);
+                            break;
+                        case "Déssert":
+                            ListeDesserts.Add(platCourant);
+                            break;
+                    }
+                }
+            }
         }
     }
 }

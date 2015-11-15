@@ -57,6 +57,6 @@
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Name="btnOuvrir" Grid.Row="1" Width="150" Height="25" IsEnabled="False" Click="btnOuvrir_Click">Ouvrir</Button>
+        <Button Name="btnOuvrir" Grid.Row="1" IsEnabled="False" Click="btnOuvrir_Click">Ouvrir</Button>
     </Grid>
 </Window>

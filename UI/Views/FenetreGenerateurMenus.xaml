@@ -27,7 +27,7 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="0.75*"></RowDefinition>
             <RowDefinition Height="8*"></RowDefinition>
             <RowDefinition Height="0.25*"></RowDefinition>
@@ -63,14 +63,17 @@
             <Button Name="btnGenerer" Style="{StaticResource btnTexte}" Width="180" Height="25" Margin="0, 0, 12.5, 0" Click="btnGenerer_Click">Générer</Button>
             <Button Name="btnListeEpicerie" Style="{StaticResource btnTexte}" Width="180" Height="25" IsEnabled="False" Click="btnListeEpicerie_Click">Liste d'épicerie</Button>
         </StackPanel>
-        <StackPanel Name="spInfosSup" Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Image Width="225" HorizontalAlignment="Left" Source="pack://application:,,,/UI/Images/infoIcon.png">
+        <StackPanel Name="spInfosSup" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 12.5">
+                <Label Style="{StaticResource fontNutritia}" FontSize="22" VerticalAlignment="Center">Afficher les images des plats ?</Label>
+                <CheckBox Name="chbAfficherImages" IsChecked="True" VerticalAlignment="Center"></CheckBox>
+            </StackPanel>
+            <Image Width="225" Source="pack://application:,,,/UI/Images/infoIcon.png">
                 <Image.ToolTip>
                     <ToolTip Style="{StaticResource toolTipNutritia}" Content="Vous devez remplir la section Informations préalables à la génération &#x0a; et appuyer sur le bouton Générer pour générer un menu. &#x0a; Lors de l'appuie sur le bouton, le menu apparaîtra."></ToolTip>
                 </Image.ToolTip>
             </Image>
-            <Label Style="{StaticResource fontNutritia}" FontSize="22" VerticalAlignment="Center">Afficher les images des plats ?</Label>
-            <CheckBox Name="chbAfficherImages" IsChecked="True" VerticalAlignment="Center"></CheckBox>
+            <Button Name="btnSuiviPlatsNonAdmissibles" Style="{StaticResource btnTexte}" Width="225" Height="25" IsEnabled="False" Click="btnSuiviPlatsNonAdmissibles_Click">Suivi des plats non admissibles</Button>
         </StackPanel>
         <GroupBox Name="gbMenus" Grid.Row="2" Grid.Column="1" Header="Menus" VerticalAlignment="Top" Visibility="Hidden">
             <ScrollViewer Name="svMenus" PreviewMouseWheel="svMenus_PreviewMouseWheel">
