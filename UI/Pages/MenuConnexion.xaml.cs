@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using System.Media;
 
 namespace Nutritia.UI.Pages
 {
@@ -33,7 +34,12 @@ namespace Nutritia.UI.Pages
             obsSessions = new ObservableCollection<Session>(SessionHelper.StringToSessions(stringConnexion));
 
             dgSessions.ItemsSource = obsSessions;
-            SessionActive = SessionHelper.StringToSessions(Properties.Settings.Default.ActiveSession).First();
+            if (!String.IsNullOrWhiteSpace(Properties.Settings.Default.ActiveSession))
+            {
+                SessionActive = SessionHelper.StringToSessions(Properties.Settings.Default.ActiveSession).First();
+            }
+
+            Console.WriteLine();
         }
 
         private void btnLoad_Click(object sender, RoutedEventArgs e)
@@ -41,18 +47,22 @@ namespace Nutritia.UI.Pages
             if (dgSessions.SelectedItem is Session)
             {
                 //Non-nulleable (struct), dont forced cast. Type déjà vérifié juste avant.
-                SessionActive = (Session)dgSessions.SelectedItem;
-                txHostname.Text = SessionActive.HostName_IP;
-                txPort.Text = SessionActive.Port.ToString();
-                txUsername.Text = SessionActive.User;
-                pswPassowrd.Password = SessionActive.Password;
+                Session s = (Session)dgSessions.SelectedItem;
+
+                txHostname.Text = s.HostName_IP;
+                txPort.Text = s.Port.ToString();
+                txUsername.Text = s.User;
+                pswPassowrd.Password = s.Password;
+                txDatabaseName.Text = s.DatabaseName;
             }
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            Session s = new Session("newSession", txHostname.Text, txUsername.Text, pswPassowrd.Password, "toDo", int.Parse(txPort.Text));
+            Session s = new Session("newSession", txHostname.Text, txUsername.Text, pswPassowrd.Password, txDatabaseName.Text, int.Parse(txPort.Text));
             obsSessions.Add(s);
+            Properties.Settings.Default.Sessions = SessionHelper.SessionsToString(obsSessions.ToList());
+            Properties.Settings.Default.Save();
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -60,18 +70,28 @@ namespace Nutritia.UI.Pages
             if (dgSessions.SelectedItem is Session)
             {
                 Session s = (Session)dgSessions.SelectedItem;
+                if (s.Name == SessionActive.Name)
+                {
+                    SystemSounds.Beep.Play();
+                    return;
+                }
                 obsSessions.Remove(s);
+                Properties.Settings.Default.Sessions = SessionHelper.SessionsToString(obsSessions.ToList());
+                Properties.Settings.Default.Save();
             }
         }
 
         private void btnConnect_Click(object sender, RoutedEventArgs e)
         {
             Session newSession = (Session)dgSessions.SelectedItem;
-            //if (SessionActive == newSession)
-            //    return;
+            if (SessionActive == newSession)
+                return;
 
             SwitchActive(obsSessions.IndexOf(SessionActive), obsSessions.IndexOf(newSession));
             SessionActive = newSession;
+
+            Properties.Settings.Default.ActiveSession = "{" + SessionActive.ToString() + "}";
+            Properties.Settings.Default.Save();
         }
 
         private void SwitchActive(int previousIndex, int newIndex)
@@ -97,7 +117,10 @@ namespace Nutritia.UI.Pages
         private void dgSessions_Loaded(object sender, RoutedEventArgs e)
         {
             //Marche parcequ'on enlève le bold avant..mais on le rajoute.
-            SwitchActive(obsSessions.IndexOf(SessionActive), obsSessions.IndexOf(SessionActive));
+            if (SessionActive != new Session())
+            {
+                SwitchActive(obsSessions.IndexOf(SessionActive), obsSessions.IndexOf(SessionActive));
+            }
         }
     }
 }

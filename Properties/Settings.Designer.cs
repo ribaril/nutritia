@@ -50,8 +50,7 @@ namespace Nutritia.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("{name=default;server=localhost;userid=root;password=;database=420-5A5-A15_Nutriti" +
-            "a}{name=new;server=localhost;userid=teste;password=;database=420-5A5-A15_Nutriti" +
-            "a_teste}")]
+            "a}")]
         public string Sessions {
             get {
                 return ((string)(this["Sessions"]));

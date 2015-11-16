@@ -32,7 +32,7 @@
             </StackPanel>
             <StackPanel>
                 <Label>Database Name</Label>
-                <TextBox Width="146" HorizontalAlignment="Left"></TextBox>
+                <TextBox Name="txDatabaseName" Width="146" HorizontalAlignment="Left"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <StackPanel>

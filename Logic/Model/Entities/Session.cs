@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Nutritia.Logic.Model.Entities
 {
+    [Serializable]
     public struct Session : IEquatable<Session>
     {
         public string HostName_IP { get; private set; }
