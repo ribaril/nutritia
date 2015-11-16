@@ -27,52 +27,70 @@ namespace Nutritia
     {
         private const int SLEEP_NOTIFICATION_TIME = 10000;
 
-		
-		public MainWindow()
-        {
-			InitializeComponent();
-			Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.Langue);
 
-			
-			Configurer();
+        public MainWindow()
+        {
+            InitializeComponent();
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.Langue);
+
+            Configurer();
 
             presenteurContenu.Content = new MenuPrincipal();
-			
+
+
+            Thread tNotif = new Thread(VerifierChangement);
+
+            tNotif.Start();
+
         }
 
-		private  void VerifierChangement()
-		{
-			String derniereMaj;
+        private void VerifierChangement()
+        {
             List<Plat> lstPlat;
-			while (true)
-			{
-				if (App.MembreCourant.NomUtilisateur != "")
-				{
-					derniereMaj = "0000-00-00 00:00:00";//ServiceFactory.Instance.GetService<IMembreService>().RetrieveMiseAJOur();
-														//lstPlat = ServiceFactory.Instance.GetService<IPlatService>().RetrieveAll().ToList();
-					for (int i = 0; i < 25; i++)
-					{
-						if (((String)"0000-00-00 00:00:00").CompareTo(derniereMaj) > -1)
-						{
-							CreerNotification();
-						}
-					}	
+            String MajUsager;
+            int i;
+            while (true)
+            {
+                Thread.Sleep(500);
+                if (!String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
+                {
+                    MajUsager = ServiceFactory.Instance.GetService<IMembreService>().RetrieveMiseAJOur();
+                    if (App.MembreCourant.DerniereMaj != "")
+                    {
+                        lstPlat = ServiceFactory.Instance.GetService<IPlatService>().RetrieveAll().ToList();
+                        i = 0;
 
-				}
+                        foreach (var plat in lstPlat)
+                        {
+                            if (plat.DateAjout.CompareTo(App.MembreCourant.DerniereMaj) > -1)
+                            {
+                                i++;
+                            }
+                        }
 
-			}
-		}
+                        if (i > 0)
+                        {
+                            MessageBox.Show(i.ToString() + " nouveau(x) plat(s) !"); //CreerNotification();
+                            App.MembreCourant.DerniereMaj = DateTime.Now.ToString();
+                            ServiceFactory.Instance.GetService<IMembreService>().Update(App.MembreCourant);
+                        }
+                        
+                    }
+                }
 
-		private void CreerNotification()
-		{
-			
-			int i = Convert.ToInt32(nbrNotif.Text == null ? "0" : nbrNotif.Text);
-			// On ajoute 1 pour le nombre de notification
-			i += 1;	
+            }
+        }
+
+        private void CreerNotification()
+        {
+
+            int i = Convert.ToInt32(nbrNotif.Text == null ? "0" : nbrNotif.Text);
+            // On ajoute 1 pour le nombre de notification
+            i += 1;
             nbrNotif.Text = i.ToString();
-		}
+        }
 
-		private void Configurer()
+        private void Configurer()
         {
             // Inscription des différents services de l'application dans le ServiceFactory.
             ServiceFactory.Instance.Register<IRestrictionAlimentaireService, MySqlRestrictionAlimentaireService>(new MySqlRestrictionAlimentaireService());
@@ -97,18 +115,18 @@ namespace Nutritia
             (new FenetreParametres()).ShowDialog();
         }
 
-		private void btnRetour_Click(object sender, RoutedEventArgs e)
-		{
-			if(App.MembreCourant.IdMembre == null)
-				ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipal());
-			else
+        private void btnRetour_Click(object sender, RoutedEventArgs e)
+        {
+            if (App.MembreCourant.IdMembre == null)
+                ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipal());
+            else
             {
-                if(presenteurContenu.Content is Bannissement || presenteurContenu.Content is GestionAdmin || presenteurContenu.Content is GestionRepertoire)
-                        ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuAdministrateur());
+                if (presenteurContenu.Content is Bannissement || presenteurContenu.Content is GestionAdmin || presenteurContenu.Content is GestionRepertoire)
+                    ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuAdministrateur());
                 else
                     ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
             }
-		}
+        }
 
         private void btnInfo_Click(object sender, RoutedEventArgs e)
         {
@@ -147,7 +165,7 @@ namespace Nutritia
             {
                 isOlder = true;
             }
-            
+
 
             Thread.Sleep(SLEEP_NOTIFICATION_TIME);
 
@@ -164,7 +182,7 @@ namespace Nutritia
 
         private void btnNotification_Click(object sender, RoutedEventArgs e)
         {
-			nbrNotif.Text = "";
+            nbrNotif.Text = "";
         }
 
 

@@ -195,12 +195,12 @@ namespace Nutritia
 				DataSet dataSetMembres = connexion.Query(requete);
 				DataTable tableMembres = dataSetMembres.Tables[0];
 
-				derniereMaj = tableMembres.Rows[0]["derniereMaj"].ToString();
+                derniereMaj = tableMembres.Rows[0]["derniereMaj"].ToString();
 
 			}
 			catch (MySqlException)
 			{
-				throw;
+				return "";
 			}
 
 			return derniereMaj;
@@ -259,7 +259,7 @@ namespace Nutritia
 			{
 				connexion = new MySqlConnexion();
 
-				string requete = string.Format("UPDATE Membres SET nom = '{0}' ,prenom = '{1}', taille = {2}, masse = {3}, dateNaissance = '{4}', nomUtilisateur = '{5}', motPasse = '{6}', estAdmin = {7}, estBanni = {8}, derniereMaj = {9} WHERE idMembre = {10}", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance.ToString("yyyy-MM-dd"), membre.NomUtilisateur, membre.MotPasse, membre.EstAdministrateur, membre.EstBanni, membre.DerniereMaj, membre.IdMembre);
+				string requete = string.Format("UPDATE Membres SET nom = '{0}' ,prenom = '{1}', taille = {2}, masse = {3}, dateNaissance = '{4}', nomUtilisateur = '{5}', motPasse = '{6}', estAdmin = {7}, estBanni = {8}, derniereMaj = '{9}' WHERE idMembre = {10}", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance.ToString("yyyy-MM-dd"), membre.NomUtilisateur, membre.MotPasse, membre.EstAdministrateur, membre.EstBanni, membre.DerniereMaj, membre.IdMembre);
 
 				connexion.Query(requete);
 

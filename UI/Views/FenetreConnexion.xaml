@@ -13,7 +13,7 @@
         </Grid.RowDefinitions>
         <Label Grid.Row="0" Content="Connexion" Style="{StaticResource fontNutritia}" FontSize="35"  HorizontalAlignment="Center" Margin="0,20,0,0"></Label>
         <Label Name="lbl_utilisateur" Grid.Row="0" Content="Nom d'utilisateur" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="15"  HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,95,0,0"></Label>
-        <TextBox Name="Nom_utilisateur" Grid.Row="0" SelectedText="" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="15"  HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,120,0,0"></TextBox>
+        <TextBox Name="Nom_utilisateur" Grid.Row="0" SelectedText="" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="15"  HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,120,0,0">admin</TextBox>
         <Label Name="lbl_mdp" Grid.Row="0" Content="Mot de passe" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="15"  HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,155,0,0"></Label>
         <PasswordBox Name="Mot_passe" Grid.Row="0" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="15"  HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,180,0,0"></PasswordBox>
         <Button Grid.Row="0" Content="Connexion" Height="30" Width="150" Style="{StaticResource fontNutritia}" FontSize="15"  HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,28" Click="btn_connexion"></Button>

@@ -703,12 +703,13 @@ namespace Nutritia.UI.Views
             scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - e.Delta);
         }
 
-		private void btnVider_Click(object sender, RoutedEventArgs e)
+        private void txtRecherche_PreviewKeyUp(object sender, KeyEventArgs e)
 		{
 			PlateauAliment.Clear();
 			PlateauPlat.Clear();
 			DessinerPlateau();
 		}
+
 	}
 
 

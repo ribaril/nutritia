@@ -453,7 +453,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="UI\Images\baseDonnee.svg" />
-    <Resource Include="UI\Images\viderIcon.png" />
     <Resource Include="UI\Images\IngredientsIcon.png" />
     <Resource Include="UI\Images\PlatIcon.png" />
     <Resource Include="UI\Images\AdminIcon.png" />
