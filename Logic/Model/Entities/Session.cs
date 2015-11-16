@@ -62,6 +62,11 @@ namespace Nutritia.Logic.Model.Entities
 
         #region IEquatable
 
+        public override int GetHashCode()
+        {
+            return Tuple.Create(HostName_IP, User, Password, Port, DatabaseName).GetHashCode();
+        }
+
         public override bool Equals(object right)
         {
             if (object.ReferenceEquals(right, null))
@@ -80,7 +85,6 @@ namespace Nutritia.Logic.Model.Entities
         {
             return (this.DatabaseName == other.DatabaseName &&
             this.HostName_IP == other.HostName_IP &&
-            this.Name == other.Name &&
             this.Password == other.Password &&
             this.Port == other.Port &&
             this.User == other.User);
