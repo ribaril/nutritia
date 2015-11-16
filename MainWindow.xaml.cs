@@ -31,11 +31,19 @@ namespace Nutritia
         {
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.Langue);
             InitializeComponent();
+            ConfigurerTaille();
             Configurer();
 
             presenteurContenu.Content = new MenuPrincipal();
         }
 
+        private void ConfigurerTaille()
+        {
+            Width = App.APP_WIDTH;
+            Height = App.APP_HEIGHT;
+            MinWidth = App.APP_WIDTH;
+            MinHeight = App.APP_HEIGHT;
+        }
 
         private void Configurer()
         {

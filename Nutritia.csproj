@@ -193,6 +193,9 @@
     <Compile Include="UI\Views\FenetreSauvegarderMenu.xaml.cs">
       <DependentUpon>FenetreSauvegarderMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Views\FenetreSuiviRestrictions.xaml.cs">
+      <DependentUpon>FenetreSuiviRestrictions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\FenetreVote.xaml.cs">
       <DependentUpon>FenetreVote.xaml</DependentUpon>
     </Compile>
@@ -318,6 +321,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Views\FenetreSauvegarderMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\FenetreSuiviRestrictions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
