@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Nutritia.Logic.Model.Entities
 {
-    [Serializable]
-    public struct Session
+    public struct Session : IEquatable<Session>
     {
         public string HostName_IP { get; private set; }
 
@@ -60,5 +59,43 @@ namespace Nutritia.Logic.Model.Entities
             sb.AppendFormat("server={0};userid={1};password={2};database={3}", HostName_IP, User, Password, DatabaseName);
             return sb.ToString();
         }
+
+        #region IEquatable
+
+        public override bool Equals(object right)
+        {
+            if (object.ReferenceEquals(right, null))
+                return false;
+
+            if (object.ReferenceEquals(this, right))
+                return true;
+
+            if (this.GetType() != right.GetType())
+                return false;
+
+            return this.Equals((Session)right);
+        }
+
+        public bool Equals(Session other)
+        {
+            return (this.DatabaseName == other.DatabaseName &&
+            this.HostName_IP == other.HostName_IP &&
+            this.Name == other.Name &&
+            this.Password == other.Password &&
+            this.Port == other.Port &&
+            this.User == other.User);
+        }
+
+        public static bool operator ==(Session left, Session right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(Session left, Session right)
+        {
+            return !(left == right);
+        }
+
+        #endregion
     }
 }

@@ -33,7 +33,7 @@ namespace Nutritia.UI.Pages
             obsSessions = new ObservableCollection<Session>(SessionHelper.StringToSessions(stringConnexion));
 
             dgSessions.ItemsSource = obsSessions;
-
+            SessionActive = SessionHelper.StringToSessions(Properties.Settings.Default.ActiveSession).First();
         }
 
         private void btnLoad_Click(object sender, RoutedEventArgs e)
@@ -51,7 +51,7 @@ namespace Nutritia.UI.Pages
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            Session s = new Session("newSession",txHostname.Text, txUsername.Text, pswPassowrd.Password, "toDo", int.Parse(txPort.Text));
+            Session s = new Session("newSession", txHostname.Text, txUsername.Text, pswPassowrd.Password, "toDo", int.Parse(txPort.Text));
             obsSessions.Add(s);
         }
 
@@ -66,7 +66,38 @@ namespace Nutritia.UI.Pages
 
         private void btnConnect_Click(object sender, RoutedEventArgs e)
         {
+            Session newSession = (Session)dgSessions.SelectedItem;
+            //if (SessionActive == newSession)
+            //    return;
 
+            SwitchActive(obsSessions.IndexOf(SessionActive), obsSessions.IndexOf(newSession));
+            SessionActive = newSession;
+        }
+
+        private void SwitchActive(int previousIndex, int newIndex)
+        {
+            Setter normal = new Setter(TextBlock.FontWeightProperty, FontWeights.Normal, null);
+            Setter bold = new Setter(TextBlock.FontWeightProperty, FontWeights.Bold, null);
+
+            // Enlève le bold de l'ancien
+            DataGridRow row = (DataGridRow)dgSessions.ItemContainerGenerator.ContainerFromIndex(previousIndex);
+            Style newStyle = new Style(row.GetType());
+
+            newStyle.Setters.Add(normal);
+            row.Style = newStyle;
+
+            // Met le bold au nouveau
+            row = (DataGridRow)dgSessions.ItemContainerGenerator.ContainerFromIndex(newIndex);
+            newStyle = new Style(row.GetType());
+
+            newStyle.Setters.Add(bold);
+            row.Style = newStyle;
+        }
+
+        private void dgSessions_Loaded(object sender, RoutedEventArgs e)
+        {
+            //Marche parcequ'on enlève le bold avant..mais on le rajoute.
+            SwitchActive(obsSessions.IndexOf(SessionActive), obsSessions.IndexOf(SessionActive));
         }
     }
 }

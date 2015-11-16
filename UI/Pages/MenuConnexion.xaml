@@ -40,10 +40,11 @@
                     <DataGrid Name="dgSessions" Width="200" Height="100" 
                               CanUserAddRows="False" CanUserDeleteRows="False" 
                               HeadersVisibility="None" GridLinesVisibility="None" AutoGenerateColumns="False"
-                              SelectionMode="Single" Background="White">
+                              SelectionMode="Single" Background="White" Loaded="dgSessions_Loaded">
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="*" Binding="{Binding Path=Name}"></DataGridTextColumn>
                         </DataGrid.Columns>
+
                     </DataGrid>
                 </StackPanel>
                 <StackPanel Margin="5,0,0,0" VerticalAlignment="Center">
