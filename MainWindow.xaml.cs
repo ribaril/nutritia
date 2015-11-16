@@ -116,7 +116,7 @@ namespace Nutritia
             Version versionBD = new Version(latestVersionLogiciel.Version);
             Version versionLocal = new Version(FileVersionInfo.GetVersionInfo(App.ResourceAssembly.Location).FileVersion);
 
-            if (versionBD.Major > versionLocal.Major || versionBD.Minor > versionLocal.Minor || versionBD.Build > versionLocal.Build || versionBD.Revision > versionLocal.Revision)
+            if (versionBD > versionLocal)
             {
                 isOlder = true;
             }
