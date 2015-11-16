@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Nutritia.Toolkit;
 
 namespace Nutritia
 {
@@ -19,7 +20,8 @@ namespace Nutritia
 
         static MySqlConnexion()
         {
-            CONNECTION_STRING = ConfigurationManager.ConnectionStrings["MySqlConnexion"].ConnectionString;
+            CONNECTION_STRING = SessionHelper.StringToSessions(Properties.Settings.Default.ActiveSession).First().ToConnexionString();
+            //CONNECTION_STRING = ConfigurationManager.ConnectionStrings["MySqlConnexion"].ConnectionString;
         }
 
         public MySqlConnexion()
