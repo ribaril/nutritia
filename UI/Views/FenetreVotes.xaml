@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:watermark="clr-namespace:Nutritia.UI.Watermark"
              mc:Ignorable="d" 
              d:DesignHeight="475" d:DesignWidth="650">
     <UserControl.Resources>
@@ -18,25 +19,40 @@
             <RowDefinition Height="7*"></RowDefinition>
         </Grid.RowDefinitions>
         <Label Style="{StaticResource fontSousTitre}">Voter sur des plats</Label>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-            <Button Name="btnSelectionComplete" Margin="0, 0, 90, 0" Click="btnSelectionComplete_Click">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Width="575" VerticalAlignment="Bottom">
+            <Button Name="btnSelectionComplete" Margin="0, 0, 15, 0" Click="btnSelectionComplete_Click">
                 <Image Style="{StaticResource btnFiltre}" Source="pack://application:,,,/UI/Images/platsIcon.png"></Image>
                 <Button.ToolTip>
                     <ToolTip Style="{StaticResource toolTipNutritia}">Tous les plats</ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button Name="btnNouveautes" Margin="0, 0, 90, 0" Click="btnNouveautes_Click">
+            <Button Name="btnNouveautes" Margin="0, 0, 15, 0" Click="btnNouveautes_Click">
                 <Image Style="{StaticResource btnFiltre}" Source="pack://application:,,,/UI/Images/journalIcon.png"></Image>
                 <Button.ToolTip>
                     <ToolTip Style="{StaticResource toolTipNutritia}">Les plus récents</ToolTip>
                 </Button.ToolTip>
             </Button>
-            <Button Name="btnPlusPopulaires" Click="btnPlusPopulaires_Click">
+            <Button Name="btnPlusPopulaires" Margin="0, 0, 15, 0" Click="btnPlusPopulaires_Click">
                 <Image Style="{StaticResource btnFiltre}" Source="pack://application:,,,/UI/Images/etoileIcon.png"></Image>
                 <Button.ToolTip>
                     <ToolTip Style="{StaticResource toolTipNutritia}">Les plus populaires</ToolTip>
                 </Button.ToolTip>
             </Button>
+            <StackPanel VerticalAlignment="Center">
+                <Label Style="{StaticResource fontNutritia}" HorizontalAlignment="Center" FontSize="16">Barre de recherche</Label>
+                <TextBox Name="txtRecherche" Width="210" Height="25" PreviewKeyUp="txtRecherche_PreviewKeyUp">
+                    <TextBox.Resources>
+                        <DiscreteObjectKeyFrame x:Key="proxy"
+                                            Value="Rechercher un plat" />
+                    </TextBox.Resources>
+                    <watermark:WatermarkService.Watermark>
+                        <TextBlock Name="waterMarkText" 
+                        Text="{Binding Value, Source={StaticResource proxy}}"
+                        HorizontalAlignment="Center">
+                        </TextBlock>
+                    </watermark:WatermarkService.Watermark>
+                </TextBox>
+            </StackPanel>
         </StackPanel>
         <GroupBox Name="gbContenu" Grid.Row="2" Header="Tous les plats" Style="{StaticResource groupBoxNutritia}" Width="575" Height="305">
             <ScrollViewer Name="svPlats" PreviewMouseWheel="svPlats_PreviewMouseWheel">
@@ -63,16 +79,28 @@
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center">
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <Label Style="{StaticResource fontNutritia}">Note (Sur 5) : </Label>
+                                            <Label Style="{StaticResource fontNutritia}">Note : </Label>
                                             <Label>
                                                 <Label.Style>
                                                     <Style TargetType="{x:Type Label}" BasedOn="{StaticResource fontNutritia}">
-                                                        <Style.Setters>
-                                                            <Setter Property="Content" Value="{Binding Note}" />
-                                                        </Style.Setters>
                                                         <Style.Triggers>
                                                             <DataTrigger Binding="{Binding Note}" Value="{x:Null}">
                                                                 <Setter Property="Content" Value="Aucune" />
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding Note}" Value="1">
+                                                                <Setter Property="Content" Value="Mauvais" />
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding Note}" Value="2">
+                                                                <Setter Property="Content" Value="Passable" />
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding Note}" Value="3">
+                                                                <Setter Property="Content" Value="Moyen" />
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding Note}" Value="4">
+                                                                <Setter Property="Content" Value="Succulent" />
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding Note}" Value="5">
+                                                                <Setter Property="Content" Value="Divin" />
                                                             </DataTrigger>
                                                         </Style.Triggers>
                                                     </Style>
