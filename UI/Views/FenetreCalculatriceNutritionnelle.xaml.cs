@@ -36,16 +36,17 @@ namespace Nutritia.UI.Views
         public SousEcran BoiteResultat { get; set; }
         private SousEcran2 TabValeurNutritionelle { get; set; }
 
+        public List<int> LstIdPlatADerouler { get; set; }
 
 
-        public FenetreCalculatriceNutritionelle()
+
+        public FenetreCalculatriceNutritionelle(Plat platEnvoye)
         {
             InitializeComponent();
 
-            
-
-            // Header de la fenetre
-            App.Current.MainWindow.Title = "Nutritia - Calculatrice nutritionnelle";
+            if (platEnvoye == null)
+                // Header de la fenetre
+                App.Current.MainWindow.Title = "Nutritia - Calculatrice nutritionnelle";
 
             Plateau = new SousEcran();
             presenteurContenu2.Content = Plateau;
@@ -62,6 +63,8 @@ namespace Nutritia.UI.Views
             PlateauPlat = new List<Plat>();
             PlateauAliment = new List<Aliment>();
             ValeurNutritive = new Dictionary<string, double>();
+
+            LstIdPlatADerouler = new List<int>();
 
             // On génere l'écran des valeurs nutritives
             CalculerValeurNutritionelle();
@@ -80,10 +83,16 @@ namespace Nutritia.UI.Views
             // Puis pour la barre de recherche
             BoiteRechPlat = BoiteRechPlat.OrderBy(plat => plat.Nom).ToList();
             BoiteRechAliment = BoiteRechAliment.OrderBy(aliment => aliment.Nom).ToList();
-            
 
             // On déssine la boite de recherche
             DessinerBoiteResultat();
+
+            // On déssine le plateau s'il a un plat passé en paramètre (apellé ailleur que dans les menus principaux)
+            if (platEnvoye != null)
+            {
+                PlateauPlat.Add(platEnvoye);
+                DessinerPlateau();
+            }
 
             Mouse.OverrideCursor = null;
 
@@ -122,7 +131,7 @@ namespace Nutritia.UI.Views
             stackDejeuner.Background = Brushes.White;
             stackDejeuner.Width = 284;
 
-           
+
 
 
             foreach (var plat in LstPlat)
@@ -155,8 +164,6 @@ namespace Nutritia.UI.Views
 
             itemDessert.Content = stackDessert;
             accPlat.Items.Add(itemDessert);
-
-          
         }
 
 

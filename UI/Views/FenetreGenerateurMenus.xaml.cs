@@ -1022,7 +1022,7 @@ namespace Nutritia.UI.Views
             Plat platSelectionne = (Plat)dgMenus.SelectedItem;
 
             FenetreIngredients fenetreIngredients = new FenetreIngredients(platSelectionne, MenuGenere.NbPersonnes);
-            fenetreIngredients.ShowDialog();
+            fenetreIngredients.Show();
         }
 
         /// <summary>

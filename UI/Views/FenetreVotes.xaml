@@ -40,7 +40,7 @@
             </Button>
             <StackPanel VerticalAlignment="Center">
                 <Label Style="{StaticResource fontNutritia}" HorizontalAlignment="Center" FontSize="16">Barre de recherche</Label>
-                <TextBox Name="txtRecherche" Width="210" Height="25" PreviewKeyUp="txtRecherche_PreviewKeyUp">
+                <TextBox Name="txtRecherche" Style="{StaticResource fontNutritia}" Width="210" Height="25" PreviewKeyUp="txtRecherche_PreviewKeyUp">
                     <TextBox.Resources>
                         <DiscreteObjectKeyFrame x:Key="proxy"
                                             Value="Rechercher un plat" />

@@ -98,7 +98,7 @@ namespace Nutritia.UI.Views
             Plat platSelectionne = (Plat)dgPlats.SelectedItem;
 
             FenetreIngredients fenetreIngredients = new FenetreIngredients(platSelectionne, 1);
-            fenetreIngredients.ShowDialog();
+            fenetreIngredients.Show();
         }
 
         /// <summary>
