@@ -13,22 +13,29 @@ namespace Nutritia
     public class MySqlConnexion
     {
 
-        private static readonly string CONNECTION_STRING;
+        private readonly string CONNECTION_STRING;
         private MySqlConnection connection;
         private MySqlTransaction transaction;
 
 
-        static MySqlConnexion()
+        public MySqlConnexion()
         {
-            CONNECTION_STRING = SessionHelper.StringToSessions(Properties.Settings.Default.ActiveSession).First().ToConnexionString();
             //CONNECTION_STRING = ConfigurationManager.ConnectionStrings["MySqlConnexion"].ConnectionString;
+            CONNECTION_STRING = SessionHelper.StringToSessions(Properties.Settings.Default.ActiveSession).First().ToConnexionString();
+
+            ConfigurationConnection(CONNECTION_STRING);
         }
 
-        public MySqlConnexion()
+        public MySqlConnexion(string connectionString)
+        {
+            ConfigurationConnection(connectionString);
+        }
+
+        private void ConfigurationConnection(string connectionString)
         {
             try
             {
-                connection = new MySqlConnection(CONNECTION_STRING);
+                connection = new MySqlConnection(connectionString);
             }
             catch (MySqlException)
             {
