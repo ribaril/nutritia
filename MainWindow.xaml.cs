@@ -45,7 +45,7 @@ namespace Nutritia
             MinHeight = App.APP_HEIGHT;
         }
 
-        private void Configurer()
+        public void Configurer()
         {
             // Inscription des différents services de l'application dans le ServiceFactory.
             ServiceFactory.Instance.Register<IRestrictionAlimentaireService, MySqlRestrictionAlimentaireService>(new MySqlRestrictionAlimentaireService());
