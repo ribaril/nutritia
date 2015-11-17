@@ -66,20 +66,15 @@ namespace Nutritia.Toolkit
             return listSessions;
         }
 
-        
+
         public static string SessionsToString(List<Session> listS)
         {
             StringBuilder sb = new StringBuilder();
 
-            if (listS.Count == 1)
+            foreach (Session s in listS)
             {
-                sb.Append(listS[0]);
+                sb.Append("{" + s + "}");
             }
-            else
-                foreach (Session s in listS)
-                {
-                    sb.Append("{"+ s +"}");
-                }
             return sb.ToString();
         }
     }

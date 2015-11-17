@@ -63,10 +63,10 @@ namespace Nutritia.UI.Pages
             if (IsAFieldEmpty())
                 return;
             Session s = new Session(txName.Text, txHostname.Text, txUsername.Text, pswPassowrd.Password, txDatabaseName.Text, int.Parse(txPort.Text));
-            ClearFields();
             if (obsSessions.Contains(s))
                 return;
             obsSessions.Add(s);
+            ClearFields();
             Properties.Settings.Default.Sessions = SessionHelper.SessionsToString(obsSessions.ToList());
             Properties.Settings.Default.Save();
         }
@@ -76,7 +76,7 @@ namespace Nutritia.UI.Pages
             if (dgSessions.SelectedItem is Session)
             {
                 Session s = (Session)dgSessions.SelectedItem;
-                if (s.Name == SessionActive.Name && s == SessionActive)
+                if (s == SessionActive)
                 {
                     SystemSounds.Beep.Play();
                     return;
