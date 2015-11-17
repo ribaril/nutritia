@@ -4,6 +4,7 @@
         xmlns:resx="clr-namespace:Nutritia.Properties"
         Title="Nutritia" Icon="/Nutritia;component/UI/Images/logoIconPetit.png" Height="550" Width="650"
 		ResizeMode="CanMinimize"
+		MouseMove="Window_MouseMove"
         Loaded="Window_Loaded">
     
     <Grid>
@@ -53,7 +54,7 @@
                                 </ToolTip>
                             </Image.ToolTip>
                         </Image>
-                        <TextBlock Name="nbrNotif" Text="2" Foreground="DarkGreen"/>                        
+                        <TextBlock Name="nbrNotif" Text="" Foreground="DarkGreen"/>                        
                     </DockPanel>
                 </Button>
             </ToolBar>

@@ -42,6 +42,7 @@ namespace Nutritia.UI.Views
         private void btnDeconnexion_Click(object sender, RoutedEventArgs e)
         {
             App.MembreCourant = new Membre();
+			MainWindow.NouveauxPlats.Clear();
             ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipal());
         }
 
