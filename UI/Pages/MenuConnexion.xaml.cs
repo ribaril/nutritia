@@ -92,33 +92,20 @@ namespace Nutritia.UI.Pages
             Session newSession = (Session)dgSessions.SelectedItem;
             if (SessionActive == newSession)
                 return;
-
+            //Valide si le compte actuel existe sur la nouvelle session spécifié et s'il est admins.
+            //Sinon l'utilisateur ce coupe la branche sous les pieds.
+            IsAdminOnNewConnexion(newSession.ToConnexionString());
             SwitchActive(obsSessions.IndexOf(SessionActive), obsSessions.IndexOf(newSession));
             SessionActive = newSession;
 
             Properties.Settings.Default.ActiveSession = "{" + SessionActive.ToString() + "}";
             Properties.Settings.Default.Save();
+
+            IApplicationService s = ServiceFactory.Instance.GetService<IApplicationService>();
+            s.Configurer();
         }
 
-        private void SwitchActive(int previousIndex, int newIndex)
-        {
-            Setter normal = new Setter(TextBlock.FontWeightProperty, FontWeights.Normal, null);
-            Setter bold = new Setter(TextBlock.FontWeightProperty, FontWeights.Bold, null);
 
-            // Enlève le bold de l'ancien
-            DataGridRow row = (DataGridRow)dgSessions.ItemContainerGenerator.ContainerFromIndex(previousIndex);
-            Style newStyle = new Style(row.GetType());
-
-            newStyle.Setters.Add(normal);
-            row.Style = newStyle;
-
-            // Met le bold au nouveau
-            row = (DataGridRow)dgSessions.ItemContainerGenerator.ContainerFromIndex(newIndex);
-            newStyle = new Style(row.GetType());
-
-            newStyle.Setters.Add(bold);
-            row.Style = newStyle;
-        }
 
         private void dgSessions_Loaded(object sender, RoutedEventArgs e)
         {
@@ -180,6 +167,48 @@ namespace Nutritia.UI.Pages
                 e.CancelCommand();
             }
         }
+        #endregion
+
+        #region ValidationConnexion
+
+
+        private void SwitchActive(int previousIndex, int newIndex)
+        {
+            Setter normal = new Setter(TextBlock.FontWeightProperty, FontWeights.Normal, null);
+            Setter bold = new Setter(TextBlock.FontWeightProperty, FontWeights.Bold, null);
+
+            // Enlève le bold de l'ancien
+            DataGridRow row = (DataGridRow)dgSessions.ItemContainerGenerator.ContainerFromIndex(previousIndex);
+            Style newStyle = new Style(row.GetType());
+
+            newStyle.Setters.Add(normal);
+            row.Style = newStyle;
+
+            // Met le bold au nouveau
+            row = (DataGridRow)dgSessions.ItemContainerGenerator.ContainerFromIndex(newIndex);
+            newStyle = new Style(row.GetType());
+
+            newStyle.Setters.Add(bold);
+            row.Style = newStyle;
+        }
+
+        private bool IsAdminOnNewConnexion(string stringConnexion)
+        {
+            try
+            {
+                IMembreService serviceMembre = new MySqlMembreService(new MySqlConnexion(stringConnexion));
+                IList<Membre> m = serviceMembre.RetrieveAdmins();
+                Console.WriteLine();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            return false;
+        }
+
+
         #endregion
     }
 }
