@@ -17,7 +17,7 @@
                 </StackPanel>
                 <StackPanel Margin="10,0,0,0">
                     <Label>Port</Label>
-                    <TextBox Name="txPort" IsEnabled="False">3306</TextBox>
+                    <TextBox Name="txPort" PreviewTextInput="txPort_PreviewTextInput" DataObject.Pasting="txPort_Pasting">3306</TextBox>
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">

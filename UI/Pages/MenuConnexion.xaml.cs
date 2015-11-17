@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.Media;
+using System.Text.RegularExpressions;
 
 namespace Nutritia.UI.Pages
 {
@@ -30,6 +31,7 @@ namespace Nutritia.UI.Pages
         public MenuConnexion()
         {
             InitializeComponent();
+
             string stringConnexion = Properties.Settings.Default.Sessions;
             obsSessions = new ObservableCollection<Session>(SessionHelper.StringToSessions(stringConnexion));
 
@@ -38,8 +40,6 @@ namespace Nutritia.UI.Pages
             {
                 SessionActive = SessionHelper.StringToSessions(Properties.Settings.Default.ActiveSession).First();
             }
-
-            Console.WriteLine();
         }
 
         private void btnLoad_Click(object sender, RoutedEventArgs e)
@@ -144,12 +144,42 @@ namespace Nutritia.UI.Pages
         {
             return (
                 String.IsNullOrWhiteSpace(txDatabaseName.Text) ||
-                String.IsNullOrWhiteSpace(txHostname.Text)     ||
-                String.IsNullOrWhiteSpace(txName.Text)         ||
-                String.IsNullOrWhiteSpace(txPort.Text)         ||
+                String.IsNullOrWhiteSpace(txHostname.Text) ||
+                String.IsNullOrWhiteSpace(txName.Text) ||
+                String.IsNullOrWhiteSpace(txPort.Text) ||
                 String.IsNullOrWhiteSpace(txUsername.Text)
                 );
         }
 
+        #region ValidationtxPort
+
+        //http://stackoverflow.com/questions/1268552/how-do-i-get-a-textbox-to-only-accept-numeric-input-in-wpf
+        private static bool IsTextAllowed(string text)
+        {
+            Regex regex = new Regex("[^0-9]+"); //regex that matches disallowed text
+            return !regex.IsMatch(text);
+        }
+
+        private void txPort_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextAllowed(e.Text);
+        }
+
+        private void txPort_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(String)))
+            {
+                String text = (String)e.DataObject.GetData(typeof(String));
+                if (!IsTextAllowed(text))
+                {
+                    e.CancelCommand();
+                }
+            }
+            else
+            {
+                e.CancelCommand();
+            }
+        }
+        #endregion
     }
 }
