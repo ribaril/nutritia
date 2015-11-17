@@ -12,7 +12,7 @@
         <StackPanel Margin="20,0,0,0" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal">
                 <StackPanel>
-                    <Label>Host Name (or IP address)</Label>
+                    <Label>Nom d'hôte (ou adresse IP)</Label>
                     <TextBox Name="txHostname"></TextBox>
                 </StackPanel>
                 <StackPanel Margin="10,0,0,0">
@@ -21,22 +21,22 @@
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                <StackPanel Width="100">
-                    <Label>Username</Label>
+                <StackPanel Width="102">
+                    <Label>Nom d'utilisateur</Label>
                     <TextBox Name="txUsername"></TextBox>
                 </StackPanel>
                 <StackPanel Margin="20,0,0,0">
-                    <Label>Password</Label>
+                    <Label>Mot de passe</Label>
                     <PasswordBox ToolTip="Pas réellement sécurisé" Name="pswPassowrd" Width="76"></PasswordBox>
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <StackPanel>
-                    <Label>Name</Label>
+                    <Label>Nom de session</Label>
                     <TextBox Name="txName" Width="90"></TextBox>
                 </StackPanel>
                 <StackPanel Margin="20,0,0,0">
-                    <Label>Database Name</Label>
+                    <Label>Nom de la base de données</Label>
                     <TextBox Name="txDatabaseName" Width="146" HorizontalAlignment="Left"></TextBox>
                 </StackPanel>
             </StackPanel>
@@ -59,10 +59,10 @@
                             <Setter Property="Margin" Value="0, 3, 0, 0"/>
                         </Style>
                     </StackPanel.Resources>
-                    <Button Name="btnConnect" Margin="0,27,0,0" Click="btnConnect_Click">Connect</Button>
-                    <Button Name="btnLoad" Click="btnLoad_Click">Load</Button>
-                    <Button Name="btnSave" Click="btnSave_Click">Save</Button>
-                    <Button Name="btnDelete" Click="btnDelete_Click">Delete</Button>
+                    <Button Name="btnConnect" Margin="0,27,0,0" Click="btnConnect_Click">Connexion</Button>
+                    <Button Name="btnLoad" Click="btnLoad_Click">Chargement</Button>
+                    <Button Name="btnSave" Click="btnSave_Click">Sauvegarde</Button>
+                    <Button Name="btnDelete" Click="btnDelete_Click">Supprimer</Button>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

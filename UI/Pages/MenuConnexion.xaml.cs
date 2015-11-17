@@ -51,10 +51,10 @@ namespace Nutritia.UI.Pages
 
                 txHostname.Text = s.HostName_IP;
                 txPort.Text = s.Port.ToString();
-                txUsername.Text = s.User;
-                pswPassowrd.Password = s.Password;
-                txDatabaseName.Text = s.DatabaseName;
-                txName.Text = s.Name;
+                txUsername.Text = s.NomUtilisateur;
+                pswPassowrd.Password = s.MotDePasse;
+                txDatabaseName.Text = s.NomBD;
+                txName.Text = s.Nom;
             }
         }
 
