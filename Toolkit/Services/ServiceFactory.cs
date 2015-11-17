@@ -17,7 +17,7 @@ namespace Nutritia
             where TInterface : class
             where TClass : class
         {
-            _instancesRegistry.Add(typeof(TInterface), service);
+            _instancesRegistry[typeof(TInterface)] = service;
         }
 
         public static ServiceFactory Instance
