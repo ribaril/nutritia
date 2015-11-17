@@ -13,11 +13,11 @@
             <StackPanel Orientation="Horizontal">
                 <StackPanel>
                     <Label>Nom d'hôte (ou adresse IP)</Label>
-                    <TextBox Name="txHostname"></TextBox>
+                    <TextBox Name="txHostname" Width="155"></TextBox>
                 </StackPanel>
                 <StackPanel Margin="10,0,0,0">
                     <Label>Port</Label>
-                    <TextBox Name="txPort" PreviewTextInput="txPort_PreviewTextInput" DataObject.Pasting="txPort_Pasting">3306</TextBox>
+                    <TextBox Name="txPort" Width="39" PreviewTextInput="txPort_PreviewTextInput" DataObject.Pasting="txPort_Pasting">3306</TextBox>
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
@@ -48,7 +48,7 @@
                               HeadersVisibility="None" GridLinesVisibility="None" AutoGenerateColumns="False"
                               SelectionMode="Single" Background="White" Loaded="dgSessions_Loaded" IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="*" Binding="{Binding Path=Name}"></DataGridTextColumn>
+                            <DataGridTextColumn Width="*" Binding="{Binding Path=Nom}"></DataGridTextColumn>
                         </DataGrid.Columns>
 
                     </DataGrid>
