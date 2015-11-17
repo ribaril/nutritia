@@ -122,7 +122,8 @@ namespace Nutritia
                 Proteine = valeurNut["Protéines"],
                 Lipide = valeurNut["Lipides"],
                 Cholesterol = valeurNut["Cholestérol"],
-                Sodium = valeurNut["Sodium"]
+                Sodium = valeurNut["Sodium"],
+                ImageURL = (string)aliment["imageUrl"]
             };
         }
 
@@ -160,7 +161,7 @@ namespace Nutritia
                     idUnite = (int)rowUnites["idUniteMesure"];
                 }
 
-                string requeteInsert = string.Format("INSERT INTO Aliments (idUniteMesure ,idCategorieAlimentaire, nom, mesure) VALUES ({0}, {1}, '{2}', {3})", idUnite, idCategorie, unAliment.Nom, unAliment.Mesure);
+                string requeteInsert = string.Format("INSERT INTO Aliments (idUniteMesure ,idCategorieAlimentaire, nom, mesure, imageURL) VALUES ({0}, {1}, '{2}', {3}, '{4}')", idUnite, idCategorie, unAliment.Nom, unAliment.Mesure, unAliment.ImageURL);
                 connexion.Query(requeteInsert);
 
                 string requeteAlim = string.Format("SELECT * FROM Aliments WHERE nom = '{0}'", unAliment.Nom);

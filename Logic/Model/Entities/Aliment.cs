@@ -22,6 +22,7 @@ namespace Nutritia
         public double Lipide { get; set; }
         public double Cholesterol { get; set; }
         public double Sodium { get; set; }
+        public string ImageURL { get; set; }
         #endregion
     
         /// <summary>

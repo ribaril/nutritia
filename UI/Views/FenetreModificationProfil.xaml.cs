@@ -22,7 +22,7 @@ namespace Nutritia.UI.Views
     public partial class ModificationProfil : UserControl
     {
         public bool Erreur { get; set; }
-        
+
         public ModificationProfil()
         {
             InitializeComponent();
@@ -33,7 +33,7 @@ namespace Nutritia.UI.Views
             Erreur = false;
 
             /*-----------------------------------Intégration des données du membre connecté-----------------------------------*/
-            
+
             Nom.Text = App.MembreCourant.Nom;
             Prenom.Text = App.MembreCourant.Prenom;
             Nom_utilisateur.Text = App.MembreCourant.NomUtilisateur;
@@ -43,14 +43,14 @@ namespace Nutritia.UI.Views
             Masse.SelectedValue = App.MembreCourant.Masse.ToString();
 
             /*-----------------------------------Intégration des restrictions alimentaires du membre connecté-----------------------------------*/
-            
+
             #region restrictions
 
-            if(App.MembreCourant.ListeRestrictions.Count != 0)
+            if (App.MembreCourant.ListeRestrictions.Count != 0)
             {
-                for(int i = 0; i < App.MembreCourant.ListeRestrictions.Count; i++)
+                for (int i = 0; i < App.MembreCourant.ListeRestrictions.Count; i++)
                 {
-                    if(App.MembreCourant.ListeRestrictions[i].Nom == "Lactose")
+                    if (App.MembreCourant.ListeRestrictions[i].Nom == "Lactose")
                     {
                         Lactose.IsChecked = true;
                     }
@@ -90,9 +90,9 @@ namespace Nutritia.UI.Views
             #endregion
 
             /*-----------------------------------Intégration des objectifs du membre connecté-----------------------------------*/
-            
+
             #region objectifs
-            
+
             if (App.MembreCourant.ListeObjectifs.Count != 0)
             {
                 for (int i = 0; i < App.MembreCourant.ListeObjectifs.Count; i++)
@@ -112,7 +112,7 @@ namespace Nutritia.UI.Views
                         Muscles.IsChecked = true;
                     }
 
-                    if (App.MembreCourant.ListeObjectifs[i].Nom == "Contrôle de glycémie")
+                    if (App.MembreCourant.ListeObjectifs[i].Nom == "Contrôle glycémique")
                     {
                         Glycemie.IsChecked = true;
                     }
@@ -127,9 +127,9 @@ namespace Nutritia.UI.Views
             #endregion
 
             /*-----------------------------------Intégration des préférences du membre connecté-----------------------------------*/
-            
+
             #region preferences
-            
+
             if (App.MembreCourant.ListePreferences.Count != 0)
             {
                 for (int i = 0; i < App.MembreCourant.ListePreferences.Count; i++)
@@ -167,7 +167,7 @@ namespace Nutritia.UI.Views
         private void Valider_Modifier(object sender, RoutedEventArgs e)
         {
             /*-----------------------------------Validation des différents champs de saisie-----------------------------------*/
-            
+
             // Initialement, il n'y a aucune erreur, alors la valeur est à false.
             Erreur = false;
 
@@ -177,11 +177,11 @@ namespace Nutritia.UI.Views
             Valider_Mot_Passe();
 
             //On ne valide la confirmation que si la mot de passe est différent de l'original.
-            if(Mot_passe.Password != App.MembreCourant.MotPasse)
+            if (Mot_passe.Password != App.MembreCourant.MotPasse)
             {
                 Valider_Confirmation_Mot_Passe();
             }
-            
+
             Valider_Si_Taille();
             Valider_Si_Masse();
             Valider_Si_Date();
@@ -515,7 +515,7 @@ namespace Nutritia.UI.Views
             {
                 Prenom.Text = char.ToUpper(Prenom.Text[0]) + Prenom.Text.Substring(1);
             }
-            
+
             App.MembreCourant.Nom = Nom.Text;
             App.MembreCourant.Prenom = Prenom.Text;
             App.MembreCourant.NomUtilisateur = Nom_utilisateur.Text;
