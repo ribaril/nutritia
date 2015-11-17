@@ -54,12 +54,18 @@ namespace Nutritia.UI.Pages
                 txUsername.Text = s.User;
                 pswPassowrd.Password = s.Password;
                 txDatabaseName.Text = s.DatabaseName;
+                txName.Text = s.Name;
             }
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            Session s = new Session("newSession", txHostname.Text, txUsername.Text, pswPassowrd.Password, txDatabaseName.Text, int.Parse(txPort.Text));
+            if (IsAFieldEmpty())
+                return;
+            Session s = new Session(txName.Text, txHostname.Text, txUsername.Text, pswPassowrd.Password, txDatabaseName.Text, int.Parse(txPort.Text));
+            ClearFields();
+            if (obsSessions.Contains(s))
+                return;
             obsSessions.Add(s);
             Properties.Settings.Default.Sessions = SessionHelper.SessionsToString(obsSessions.ToList());
             Properties.Settings.Default.Save();
@@ -70,7 +76,7 @@ namespace Nutritia.UI.Pages
             if (dgSessions.SelectedItem is Session)
             {
                 Session s = (Session)dgSessions.SelectedItem;
-                if (s.Name == SessionActive.Name)
+                if (s.Name == SessionActive.Name && s == SessionActive)
                 {
                     SystemSounds.Beep.Play();
                     return;
@@ -122,5 +128,28 @@ namespace Nutritia.UI.Pages
                 SwitchActive(obsSessions.IndexOf(SessionActive), obsSessions.IndexOf(SessionActive));
             }
         }
+
+        private void ClearFields()
+        {
+            dgSessions.SelectedIndex = -1;
+            txDatabaseName.Text = String.Empty;
+            txHostname.Text = String.Empty;
+            txName.Text = String.Empty;
+            //txPort.Text = String.Empty;
+            txUsername.Text = String.Empty;
+            pswPassowrd.Password = String.Empty;
+        }
+
+        private bool IsAFieldEmpty()
+        {
+            return (
+                String.IsNullOrWhiteSpace(txDatabaseName.Text) ||
+                String.IsNullOrWhiteSpace(txHostname.Text)     ||
+                String.IsNullOrWhiteSpace(txName.Text)         ||
+                String.IsNullOrWhiteSpace(txPort.Text)         ||
+                String.IsNullOrWhiteSpace(txUsername.Text)
+                );
+        }
+
     }
 }

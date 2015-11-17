@@ -27,12 +27,18 @@
                 </StackPanel>
                 <StackPanel Margin="20,0,0,0">
                     <Label>Password</Label>
-                    <PasswordBox Name="pswPassowrd" IsEnabled="False" Width="76"></PasswordBox>
+                    <PasswordBox ToolTip="Pas réellement sécurisé" Name="pswPassowrd" Width="76"></PasswordBox>
                 </StackPanel>
             </StackPanel>
-            <StackPanel>
-                <Label>Database Name</Label>
-                <TextBox Name="txDatabaseName" Width="146" HorizontalAlignment="Left"></TextBox>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel>
+                    <Label>Name</Label>
+                    <TextBox Name="txName" Width="90"></TextBox>
+                </StackPanel>
+                <StackPanel Margin="20,0,0,0">
+                    <Label>Database Name</Label>
+                    <TextBox Name="txDatabaseName" Width="146" HorizontalAlignment="Left"></TextBox>
+                </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <StackPanel>
@@ -40,7 +46,7 @@
                     <DataGrid Name="dgSessions" Width="200" Height="100" 
                               CanUserAddRows="False" CanUserDeleteRows="False" 
                               HeadersVisibility="None" GridLinesVisibility="None" AutoGenerateColumns="False"
-                              SelectionMode="Single" Background="White" Loaded="dgSessions_Loaded">
+                              SelectionMode="Single" Background="White" Loaded="dgSessions_Loaded" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="*" Binding="{Binding Path=Name}"></DataGridTextColumn>
                         </DataGrid.Columns>

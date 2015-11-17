@@ -6,27 +6,11 @@ using System.Threading.Tasks;
 
 namespace Nutritia.Logic.Model.Entities
 {
-    [Serializable]
     public struct Session : IEquatable<Session>
     {
         public string HostName_IP { get; private set; }
 
-        private string nom;
-
-        public string Name
-        {
-            get
-            {
-                return nom;
-            }
-            set
-            {
-                if (!String.IsNullOrWhiteSpace(value))
-                    nom = value;
-                else
-                    return;
-            }
-        }
+        public string Name { get; private set; }
 
         public string User { get; private set; }
 
@@ -65,7 +49,7 @@ namespace Nutritia.Logic.Model.Entities
 
         public override int GetHashCode()
         {
-            return Tuple.Create(HostName_IP, User, Password, Port, DatabaseName).GetHashCode();
+            return Tuple.Create(Name, HostName_IP, User, Password, Port, DatabaseName).GetHashCode();
         }
 
         public override bool Equals(object right)
@@ -85,6 +69,7 @@ namespace Nutritia.Logic.Model.Entities
         public bool Equals(Session other)
         {
             return (this.DatabaseName == other.DatabaseName &&
+            this.Name == other.Name &&
             this.HostName_IP == other.HostName_IP &&
             this.Password == other.Password &&
             this.Port == other.Port &&
