@@ -1,0 +1,29 @@
+﻿<Page x:Class="Nutritia.UI.Pages.MenuGeneral"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Nutritia.UI.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="MenuGeneral">
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Center">
+            <Label HorizontalAlignment="Center" FontWeight="Bold" Margin="0,30,0,20">Langues d'affichage du logiciel</Label>
+            <DataGrid Name="dgLangues" HorizontalAlignment="Center" Width="200" CanUserAddRows="False" AutoGenerateColumns="False" CanUserDeleteRows="False" SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Langue" IsReadOnly="True" Width="6*" Binding="{Binding Nom}"/>
+                    <DataGridTemplateColumn IsReadOnly="False" Header="Active" Width="2*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <RadioButton HorizontalAlignment="Center" GroupName="grpActif" IsChecked="{Binding Actif, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Style="{StaticResource nonTransparent}" IsDefault="True" Margin="0,40,0,0" HorizontalAlignment="Center" Click="Button_Click">Enregistrer</Button>
+        </StackPanel>
+    </Grid>
+</Page>
