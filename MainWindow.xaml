@@ -27,7 +27,7 @@
                         <TextBlock Text="{x:Static resx:Resources.Retour}" FontSize="20" FontFamily="Berlin"/>
                     </DockPanel>
                 </Button>
-                <Button Name="btnInfo" VerticalAlignment="Bottom" Click="btnInfo_Click">
+                <Button Name="btnInfo" VerticalAlignment="Bottom" Click="btnAPropos_Click">
                     <DockPanel>
                         <Image Width="24" Source="/Nutritia;component/UI/Images/aProposIcon.PNG"/>
                         <TextBlock Text="{x:Static resx:Resources.APropos}" FontSize="20" FontFamily="Berlin"/>

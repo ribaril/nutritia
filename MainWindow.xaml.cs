@@ -28,9 +28,12 @@ namespace Nutritia
     {
         private const int SLEEP_NOTIFICATION_TIME = 10000;
 
-        static public List<Plat> NouveauxPlats { get; set; }
+        // Thread asincrone qui regarde les modifications dans la BD
+        private Thread tNotif { get; set; }
+        private Thread ThreadNotif { get; set; }
 
-        public Thread tNotif { get; set; }
+        // Permet d'interargir avec le threas asyncrone pour sauvegardé les nouveau plats dan la BD
+        static public List<Plat> NouveauxPlats { get; set; }
 
         public MainWindow()
         {
@@ -45,18 +48,20 @@ namespace Nutritia
 
             presenteurContenu.Content = new MenuPrincipal();
 
+            // On lance le thread
             tNotif = new Thread(VerifierChangementBD);
-
             tNotif.Start();
         }
 
+        /// <summary>
+        /// Méthode appellé en asyncrone qui boucle toute les demi-secondes pour verifier s'il y a des changements dans la BD
+        /// </summary>
         private void VerifierChangementBD()
         {
             List<Plat> lstPlat;
             List<int> lstIdNouveauPlat = new List<int>();
             while (true)
             {
-
                 if (!String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
                 {
                     App.MembreCourant = ServiceFactory.Instance.GetService<IMembreService>().Retrieve(new RetrieveMembreArgs { IdMembre = App.MembreCourant.IdMembre });
@@ -79,10 +84,12 @@ namespace Nutritia
                         }
 
                     }
+
                     if (App.MembreCourant.EstBanni)
                     {
                         App.MembreCourant.EstBanni = true;
                     }
+
                     if (!App.MembreCourant.EstAdministrateur)
                     {
                         App.MembreCourant.EstAdministrateur = false;
@@ -99,7 +106,9 @@ namespace Nutritia
             }
         }
 
-
+        /// <summary>
+        /// Charge toutes les ressources du service factory
+        /// </summary>
         private void Configurer()
         {
             // Inscription des différents services de l'application dans le ServiceFactory.
@@ -115,16 +124,31 @@ namespace Nutritia
             ServiceFactory.Instance.Register<IApplicationService, MainWindow>(this);
         }
 
+        /// <summary>
+        /// Méthode qui permet de changer de userControl
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="vue"></param>
         public void ChangerVue<T>(T vue)
         {
             presenteurContenu.Content = vue as UserControl;
         }
 
+        /// <summary>
+        /// Ouvre la fenêtre des paramètres en modal
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnParam_Click(object sender, RoutedEventArgs e)
         {
             (new FenetreParametres()).ShowDialog();
         }
 
+        /// <summary>
+        /// Permet, suivant le contexte, de revenir au menu précédent
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRetour_Click(object sender, RoutedEventArgs e)
         {
             if (App.MembreCourant.IdMembre == null)
@@ -138,22 +162,37 @@ namespace Nutritia
             }
         }
 
-        private void btnInfo_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Ouvre la fenêtre des infos sur l'application en modal
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAPropos_Click(object sender, RoutedEventArgs e)
         {
             (new FenetreAPropos()).ShowDialog();
             //ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new FenetreAPropos());
         }
 
+        /// <summary>
+        /// Ouvre la fenêtre d'aide de l'application en modeless
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAide_Click(object sender, RoutedEventArgs e)
         {
             FenetreAide fenetreAide = new FenetreAide(presenteurContenu.Content.GetType().Name);
             fenetreAide.Show();
         }
 
+        /// <summary>
+        /// Quand la fenêtre se charge, 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Thread newThread = new Thread(LastestVersionPopUp);
-            newThread.Start();
+            ThreadNotif = new Thread(LastestVersionPopUp);
+            ThreadNotif.Start();
         }
 
         private void LastestVersionPopUp()
@@ -205,6 +244,9 @@ namespace Nutritia
             }
         }
 
+        /// <summary>
+        /// Formate les nouveaux plats pour les affichers lors du clique sur le bouton de notif
+        /// </summary>
         private void CreerBoiteNotification()
         {
 
@@ -218,6 +260,9 @@ namespace Nutritia
             MessageBox.Show(sbNotifs.ToString());
         }
 
+        /// <summary>
+        /// Génere le nbr de notification pour le dessiner à côté de l'image de notif
+        /// </summary>
         private void DessinerNotification()
         {
             if (!String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
