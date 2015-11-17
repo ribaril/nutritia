@@ -10,7 +10,6 @@ namespace Nutritia
     {
         IList<Membre> RetrieveAll();
         IList<Membre> RetrieveAdmins();
-		String RetrieveMiseAJOur();
         Membre Retrieve(RetrieveMembreArgs args);
         void Insert(Membre membre);
         void Update(Membre membre);

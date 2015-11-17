@@ -177,36 +177,6 @@ namespace Nutritia
 		}
 
 		/// <summary>
-		/// Méthode permettant d'obtenir la date de mise a jour du membre connecté.
-		/// </summary>
-		/// <returns>Une chaine de caractère qui contient la date.</returns>
-		public String RetrieveMiseAJOur()
-		{
-
-			String derniereMaj = "";
-			
-
-			try
-			{
-				connexion = new MySqlConnexion();
-
-				string requete = string.Format("SELECT derniereMaj FROM Membres WHERE idMembre = {0}", App.MembreCourant.IdMembre);
-				
-				DataSet dataSetMembres = connexion.Query(requete);
-				DataTable tableMembres = dataSetMembres.Tables[0];
-
-                derniereMaj = tableMembres.Rows[0]["derniereMaj"].ToString();
-
-			}
-			catch (MySqlException)
-			{
-				return "";
-			}
-
-			return derniereMaj;
-		}
-
-		/// <summary>
 		/// Méthode permettant d'insérer un membre dans la base de données.
 		/// </summary>
 		/// <param name="membre">L'objet Membre a insérer.</param>

@@ -35,7 +35,7 @@
         <GroupBox x:Name="gbValeurNutri" Header="Valeurs nutritionelles du plateau" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Height="170" Width="290" Grid.Column="1">
             <ContentPresenter Name="presenteurContenu3" VerticalAlignment="Top"/>
         </GroupBox>
-        <GroupBox x:Name="gbBoiteRecherche" Header="Barre de recherche" HorizontalAlignment="Center"  Grid.Row="1" Grid.Column="1" Height="200" Width="300" VerticalAlignment="Center" >
+        <GroupBox x:Name="gbBoiteRecherche" Header="Barre de recherche" HorizontalAlignment="Center"  Grid.Row="1" Grid.Column="1" Height="200" Width="305" VerticalAlignment="Center" >
             <StackPanel Background="White">
                 <TextBox Name="txtRecherche" PreviewKeyUp="txtRecherche_PreviewKeyUp">
                     <TextBox.Resources>

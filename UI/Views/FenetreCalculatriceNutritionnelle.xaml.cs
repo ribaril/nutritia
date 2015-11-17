@@ -44,8 +44,9 @@ namespace Nutritia.UI.Views
         {
             InitializeComponent();
 
-            // Header de la fenetre
-            App.Current.MainWindow.Title = "Nutritia - Calculatrice nutritionnelle";
+            if(platEnvoye == null)
+                // Header de la fenetre
+                App.Current.MainWindow.Title = "Nutritia - Calculatrice nutritionnelle";
 
             Plateau = new SousEcran();
             presenteurContenu2.Content = Plateau;
@@ -680,7 +681,7 @@ namespace Nutritia.UI.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void txtRecherche_KeyDown(object sender, KeyEventArgs e)
+        private void txtRecherche_PreviewKeyUp(object sender, KeyEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
             FiltrerChampRecherche(textBox.Text.ToString());
@@ -702,13 +703,6 @@ namespace Nutritia.UI.Views
             ScrollViewer scrollViewer = (ScrollViewer)sender;
             scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - e.Delta);
         }
-
-        private void txtRecherche_PreviewKeyUp(object sender, KeyEventArgs e)
-		{
-			PlateauAliment.Clear();
-			PlateauPlat.Clear();
-			DessinerPlateau();
-		}
 
 	}
 
