@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Nutritia.UI.Views.FenetreIngredients"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Ingrédients" Height="350" Width="400"
+        Title="Nutritia - Ingrédients" Height="350" Width="400"
         Icon="/Nutritia;component/UI/Images/logoIconPetit.png" ResizeMode="NoResize">
     <Window.Resources>
         <Style TargetType="Label" BasedOn="{StaticResource fontNutritia}">
