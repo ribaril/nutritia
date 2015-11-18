@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.Media;
 using System.Text.RegularExpressions;
+using Nutritia.UI.Views;
 
 namespace Nutritia.UI.Pages
 {
@@ -94,15 +95,19 @@ namespace Nutritia.UI.Pages
                 return;
             //Valide si le compte actuel existe sur la nouvelle session spécifié et s'il est admins.
             //Sinon l'utilisateur ce coupe la branche sous les pieds.
-            IsAdminOnNewConnexion(newSession.ToConnexionString());
+            if (!IsAdminOnNewConnexion(newSession.ToConnexionString()))
+            {
+                return;
+            }
             SwitchActive(obsSessions.IndexOf(SessionActive), obsSessions.IndexOf(newSession));
             SessionActive = newSession;
 
             Properties.Settings.Default.ActiveSession = "{" + SessionActive.ToString() + "}";
             Properties.Settings.Default.Save();
 
-            IApplicationService s = ServiceFactory.Instance.GetService<IApplicationService>();
-            s.Configurer();
+            IApplicationService mainWindow = ServiceFactory.Instance.GetService<IApplicationService>();
+            mainWindow.Configurer();
+            mainWindow.ChangerVue(new MenuAdministrateur());
         }
 
 
@@ -197,15 +202,21 @@ namespace Nutritia.UI.Pages
             try
             {
                 IMembreService serviceMembre = new MySqlMembreService(new MySqlConnexion(stringConnexion));
-                IList<Membre> m = serviceMembre.RetrieveAdmins();
-                Console.WriteLine();
+                IList<Membre> adminsDansNouvelleSession = serviceMembre.RetrieveAdmins();
+                //Lance une exception si le Where ne retourne rien, l'exception est géré de toute façon.
+                Membre membreCorrespondant = adminsDansNouvelleSession.Where(membre => membre.NomUtilisateur == App.MembreCourant.NomUtilisateur).First();
+
+                if (membreCorrespondant != null && membreCorrespondant.EstAdministrateur)
+                    return true;
+                else
+                    return false;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
 
-            return false;
         }
 
 
