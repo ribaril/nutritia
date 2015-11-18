@@ -16,6 +16,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.Media;
+using System.Text.RegularExpressions;
+using Nutritia.UI.Views;
 
 namespace Nutritia.UI.Pages
 {
@@ -30,6 +32,7 @@ namespace Nutritia.UI.Pages
         public MenuConnexion()
         {
             InitializeComponent();
+
             string stringConnexion = Properties.Settings.Default.Sessions;
             obsSessions = new ObservableCollection<Session>(SessionHelper.StringToSessions(stringConnexion));
 
@@ -38,8 +41,6 @@ namespace Nutritia.UI.Pages
             {
                 SessionActive = SessionHelper.StringToSessions(Properties.Settings.Default.ActiveSession).First();
             }
-
-            Console.WriteLine();
         }
 
         private void btnLoad_Click(object sender, RoutedEventArgs e)
@@ -51,10 +52,10 @@ namespace Nutritia.UI.Pages
 
                 txHostname.Text = s.HostName_IP;
                 txPort.Text = s.Port.ToString();
-                txUsername.Text = s.User;
-                pswPassowrd.Password = s.Password;
-                txDatabaseName.Text = s.DatabaseName;
-                txName.Text = s.Name;
+                txUsername.Text = s.NomUtilisateur;
+                pswPassowrd.Password = s.MotDePasse;
+                txDatabaseName.Text = s.NomBD;
+                txName.Text = s.Nom;
             }
         }
 
@@ -92,33 +93,24 @@ namespace Nutritia.UI.Pages
             Session newSession = (Session)dgSessions.SelectedItem;
             if (SessionActive == newSession)
                 return;
-
+            //Valide si le compte actuel existe sur la nouvelle session spécifié et s'il est admins.
+            //Sinon l'utilisateur ce coupe la branche sous les pieds.
+            if (!IsAdminOnNewConnexion(newSession.ToConnexionString()))
+            {
+                return;
+            }
             SwitchActive(obsSessions.IndexOf(SessionActive), obsSessions.IndexOf(newSession));
             SessionActive = newSession;
 
             Properties.Settings.Default.ActiveSession = "{" + SessionActive.ToString() + "}";
             Properties.Settings.Default.Save();
+
+            IApplicationService mainWindow = ServiceFactory.Instance.GetService<IApplicationService>();
+            mainWindow.Configurer();
+            mainWindow.ChangerVue(new MenuAdministrateur());
         }
 
-        private void SwitchActive(int previousIndex, int newIndex)
-        {
-            Setter normal = new Setter(TextBlock.FontWeightProperty, FontWeights.Normal, null);
-            Setter bold = new Setter(TextBlock.FontWeightProperty, FontWeights.Bold, null);
 
-            // Enlève le bold de l'ancien
-            DataGridRow row = (DataGridRow)dgSessions.ItemContainerGenerator.ContainerFromIndex(previousIndex);
-            Style newStyle = new Style(row.GetType());
-
-            newStyle.Setters.Add(normal);
-            row.Style = newStyle;
-
-            // Met le bold au nouveau
-            row = (DataGridRow)dgSessions.ItemContainerGenerator.ContainerFromIndex(newIndex);
-            newStyle = new Style(row.GetType());
-
-            newStyle.Setters.Add(bold);
-            row.Style = newStyle;
-        }
 
         private void dgSessions_Loaded(object sender, RoutedEventArgs e)
         {
@@ -144,12 +136,90 @@ namespace Nutritia.UI.Pages
         {
             return (
                 String.IsNullOrWhiteSpace(txDatabaseName.Text) ||
-                String.IsNullOrWhiteSpace(txHostname.Text)     ||
-                String.IsNullOrWhiteSpace(txName.Text)         ||
-                String.IsNullOrWhiteSpace(txPort.Text)         ||
+                String.IsNullOrWhiteSpace(txHostname.Text) ||
+                String.IsNullOrWhiteSpace(txName.Text) ||
+                String.IsNullOrWhiteSpace(txPort.Text) ||
                 String.IsNullOrWhiteSpace(txUsername.Text)
                 );
         }
 
+        #region ValidationtxPort
+
+        //http://stackoverflow.com/questions/1268552/how-do-i-get-a-textbox-to-only-accept-numeric-input-in-wpf
+        private static bool IsTextAllowed(string text)
+        {
+            Regex regex = new Regex("[^0-9]+"); //regex that matches disallowed text
+            return !regex.IsMatch(text);
+        }
+
+        private void txPort_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextAllowed(e.Text);
+        }
+
+        private void txPort_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(String)))
+            {
+                String text = (String)e.DataObject.GetData(typeof(String));
+                if (!IsTextAllowed(text))
+                {
+                    e.CancelCommand();
+                }
+            }
+            else
+            {
+                e.CancelCommand();
+            }
+        }
+        #endregion
+
+        #region ValidationConnexion
+
+
+        private void SwitchActive(int previousIndex, int newIndex)
+        {
+            Setter normal = new Setter(TextBlock.FontWeightProperty, FontWeights.Normal, null);
+            Setter bold = new Setter(TextBlock.FontWeightProperty, FontWeights.Bold, null);
+
+            // Enlève le bold de l'ancien
+            DataGridRow row = (DataGridRow)dgSessions.ItemContainerGenerator.ContainerFromIndex(previousIndex);
+            Style newStyle = new Style(row.GetType());
+
+            newStyle.Setters.Add(normal);
+            row.Style = newStyle;
+
+            // Met le bold au nouveau
+            row = (DataGridRow)dgSessions.ItemContainerGenerator.ContainerFromIndex(newIndex);
+            newStyle = new Style(row.GetType());
+
+            newStyle.Setters.Add(bold);
+            row.Style = newStyle;
+        }
+
+        private bool IsAdminOnNewConnexion(string stringConnexion)
+        {
+            try
+            {
+                IMembreService serviceMembre = new MySqlMembreService(new MySqlConnexion(stringConnexion));
+                IList<Membre> adminsDansNouvelleSession = serviceMembre.RetrieveAdmins();
+                //Lance une exception si le Where ne retourne rien, l'exception est géré de toute façon.
+                Membre membreCorrespondant = adminsDansNouvelleSession.Where(membre => membre.NomUtilisateur == App.MembreCourant.NomUtilisateur).First();
+
+                if (membreCorrespondant != null && membreCorrespondant.EstAdministrateur)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+
+        }
+
+
+        #endregion
     }
 }

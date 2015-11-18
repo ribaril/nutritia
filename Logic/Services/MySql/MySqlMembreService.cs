@@ -14,7 +14,7 @@ namespace Nutritia
     /// </summary>
     public class MySqlMembreService : IMembreService
     {
-        private MySqlConnexion connexion;
+        private readonly MySqlConnexion connexion;
         private readonly IRestrictionAlimentaireService restrictionAlimentaireService;
         private readonly IObjectifService objectifService;
         private readonly IPreferenceService preferenceService;
@@ -24,7 +24,15 @@ namespace Nutritia
         /// Constructeur par défaut de la classe.
         /// </summary>
         public MySqlMembreService()
+            : this(new MySqlConnexion())
         {
+
+        }
+
+        public MySqlMembreService(MySqlConnexion mysqlConnexion)
+        {
+            connexion = mysqlConnexion;
+
             restrictionAlimentaireService = ServiceFactory.Instance.GetService<IRestrictionAlimentaireService>();
             objectifService = ServiceFactory.Instance.GetService<IObjectifService>();
             preferenceService = ServiceFactory.Instance.GetService<IPreferenceService>();
@@ -42,8 +50,6 @@ namespace Nutritia
 
             try
             {
-                connexion = new MySqlConnexion();
-
                 string requete = "SELECT * FROM Membres";
 
                 DataSet dataSetMembres = connexion.Query(requete);
@@ -114,8 +120,6 @@ namespace Nutritia
 
             try
             {
-                connexion = new MySqlConnexion();
-
                 string requete = string.Format("SELECT * FROM Membres WHERE idMembre = {0}", args.IdMembre);
 
                 if (args.NomUtilisateur != null && args.NomUtilisateur != string.Empty)
@@ -184,8 +188,6 @@ namespace Nutritia
         {
             try
             {
-                connexion = new MySqlConnexion();
-
                 string requete = string.Format("INSERT INTO Membres (nom ,prenom, taille, masse, dateNaissance, nomUtilisateur, motPasse, estAdmin, estBanni) VALUES ('{0}', '{1}', {2}, {3}, '{4}', '{5}', '{6}', {7}, {8})", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance.ToString("yyyy-MM-dd"), membre.NomUtilisateur, membre.MotPasse, membre.EstAdministrateur, membre.EstBanni);
                 connexion.Query(requete);
 
@@ -217,8 +219,8 @@ namespace Nutritia
                 throw;
             }
         }
-        
-        
+
+
         /// <summary>
         /// Méthode permettant de mettre à jour un membre dans la base de données.
         /// </summary>
@@ -227,16 +229,14 @@ namespace Nutritia
         {
             try
             {
-                connexion = new MySqlConnexion();
-
                 string requete = string.Format("UPDATE Membres SET nom = '{0}' ,prenom = '{1}', taille = {2}, masse = {3}, dateNaissance = '{4}', nomUtilisateur = '{5}', motPasse = '{6}', estAdmin = {7}, estBanni = {8} WHERE idMembre = {9}", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance.ToString("yyyy-MM-dd"), membre.NomUtilisateur, membre.MotPasse, membre.EstAdministrateur, membre.EstBanni, membre.IdMembre);
 
-				connexion.Query(requete);
+                connexion.Query(requete);
 
                 string requeteEffacerRestrictions = string.Format("DELETE FROM RestrictionsAlimentairesMembres WHERE idMembre = {0}", membre.IdMembre);
                 string requeteEffacerObjectifs = string.Format("DELETE FROM ObjectifsMembres WHERE idMembre = {0}", membre.IdMembre);
                 string requeteEffacerPreferences = string.Format("DELETE FROM PreferencesMembres WHERE idMembre = {0}", membre.IdMembre);
-                
+
                 connexion.Query(requeteEffacerRestrictions);
                 connexion.Query(requeteEffacerObjectifs);
                 connexion.Query(requeteEffacerPreferences);
@@ -300,8 +300,6 @@ namespace Nutritia
 
             try
             {
-                connexion = new MySqlConnexion();
-
                 string requete = "SELECT * FROM Membres WHERE estAdmin = True";
 
                 DataSet dataSetMembres = connexion.Query(requete);

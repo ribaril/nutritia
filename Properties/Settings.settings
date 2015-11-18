@@ -9,10 +9,10 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="Sessions" Type="System.String" Scope="User">
-      <Value Profile="(Default)">{name=default;server=localhost;userid=root;password=;database=420-5A5-A15_Nutritia}</Value>
+      <Value Profile="(Default)">{name=local;server=localhost;userid=root;password=;database=420-5A5-A15_Nutritia}</Value>
     </Setting>
     <Setting Name="ActiveSession" Type="System.String" Scope="User">
-      <Value Profile="(Default)">{name=default;server=localhost;userid=root;password=;database=420-5A5-A15_Nutritia}</Value>
+      <Value Profile="(Default)">{name=local;server=localhost;userid=root;password=;database=420-5A5-A15_Nutritia}</Value>
     </Setting>
   </Settings>
 </SettingsFile>
