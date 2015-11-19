@@ -40,7 +40,7 @@
                     <StackPanel Orientation="Vertical">
                         <Label Name="lblErreurNom" Visibility="Hidden" FontSize="10" Foreground="Red" HorizontalAlignment="Center">* Nom invalide</Label>
                         <AdornerDecorator>
-                            <TextBox Name="txtProprietaire" LostFocus="txtProprietaire_LostFocus" TextChanged="txtProprietaire_TextChanged">
+                            <TextBox Name="txtProprietaire" TextChanged="txtProprietaire_TextChanged">
                                 <watermark:WatermarkService.Watermark>
                                     <TextBlock>Nom du propriétaire</TextBlock>
                                 </watermark:WatermarkService.Watermark>
@@ -50,7 +50,7 @@
                     <StackPanel>
                         <Label Name="lblErreurNoCarte" Visibility="Hidden" FontSize="10" Foreground="Red" HorizontalAlignment="Center">* No Carte invalide</Label>
                         <AdornerDecorator>
-                            <TextBox Name="txtNoCarte" LostFocus="txtNoCarte_LostFocus" TextChanged="txtNoCarte_TextChanged">
+                            <TextBox Name="txtNoCarte" PreviewTextInput="txtNo_PreviewTextInput" DataObject.Pasting="txtNo_Pasting"  TextChanged="txtNoCarte_TextChanged">
                                 <watermark:WatermarkService.Watermark>
                                     <TextBlock>Numéro de carte</TextBlock>
                                 </watermark:WatermarkService.Watermark>
@@ -60,7 +60,7 @@
                     <StackPanel>
                         <Label Name="lblErreurExpiration" Visibility="Hidden"  FontSize="10" Foreground="Red" HorizontalAlignment="Center">* Expiration invalide</Label>
                         <AdornerDecorator>
-                            <TextBox Name="txtDateExpiration" LostFocus="txtDateExpiration_LostFocus" TextChanged="txtDateExpiration_TextChanged">
+                            <TextBox Name="txtDateExpiration" PreviewTextInput="txtDateExpiration_PreviewTextInput" DataObject.Pasting="txtDateExpiration_Pasting" TextChanged="txtDateExpiration_TextChanged">
                                 <watermark:WatermarkService.Watermark>
                                     <TextBlock>Expiration MM/YY</TextBlock>
                                 </watermark:WatermarkService.Watermark>
@@ -70,7 +70,7 @@
                     <StackPanel>
                         <Label Name="lblErreurCSC" Visibility="Hidden" FontSize="10" Foreground="Red" HorizontalAlignment="Center">* CSC invalide</Label>
                         <AdornerDecorator>
-                            <TextBox Name="txtCSC" LostFocus="txtCSC_LostFocus" TextChanged="txtCSC_TextChanged">
+                            <TextBox Name="txtCSC" PreviewTextInput="txtNo_PreviewTextInput" DataObject.Pasting="txtNo_Pasting" TextChanged="txtCSC_TextChanged">
                                 <watermark:WatermarkService.Watermark>
                                     <TextBlock>Code de sécurité</TextBlock>
                                 </watermark:WatermarkService.Watermark>
