@@ -129,5 +129,11 @@ namespace Nutritia.UI.Views
             dgPlats.ItemsSource = ListePlats;
 
         }
+
+        public void Dessiner()
+        {
+            ListePlats = new ObservableCollection<Plat>(PlatService.RetrieveAll());
+            dgPlats.ItemsSource = ListePlats;
+        }
     }
 }

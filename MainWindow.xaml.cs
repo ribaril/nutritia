@@ -35,6 +35,8 @@ namespace Nutritia
         // Permet d'interargir avec le threas asyncrone pour sauvegardé les nouveau plats dan la BD
         static public List<Plat> NouveauxPlats { get; set; }
 
+        public List<Plat> LstPlat { get; set; }
+
 
         public MainWindow()
         {
@@ -46,6 +48,7 @@ namespace Nutritia
             Configurer();
 
             NouveauxPlats = new List<Plat>();
+            LstPlat = ServiceFactory.Instance.GetService<IPlatService>().RetrieveAll().ToList();
 
             presenteurContenu.Content = new MenuPrincipal();
 
@@ -70,6 +73,17 @@ namespace Nutritia
                     bool ancienStatutBanni = App.MembreCourant.EstBanni;
                     
                     App.MembreCourant = ServiceFactory.Instance.GetService<IMembreService>().Retrieve(new RetrieveMembreArgs { IdMembre = App.MembreCourant.IdMembre });
+                    
+
+                    List<Plat> ancienneLstPlat = new List<Plat>(LstPlat);
+                    lstPlat = ServiceFactory.Instance.GetService<IPlatService>().RetrieveAll().ToList();
+
+                    if (ancienneLstPlat != lstPlat)
+                    {
+                        FenetreVotes fv = (FenetreVotes)presenteurContenu.Content;
+                        Dispatcher.Invoke(fv.Dessiner);
+                    }
+                    
 
                     if (App.MembreCourant.EstAdministrateur != ancienStatutAdmin 
                         || App.MembreCourant.EstBanni != ancienStatutBanni)
@@ -79,10 +93,9 @@ namespace Nutritia
 
                     if (App.MembreCourant.DerniereMaj != "")
                     {
-                        lstPlat = ServiceFactory.Instance.GetService<IPlatService>().RetrieveAll().ToList();
                         lstIdNouveauPlat.Clear();
 
-                        foreach (var plat in lstPlat)
+                        foreach (var plat in LstPlat)
                         {
                             if (plat.DateAjout.CompareTo(App.MembreCourant.DerniereMaj) > -1)
                             {
@@ -93,7 +106,7 @@ namespace Nutritia
 
                         if (lstIdNouveauPlat.Count > 0)
                         {
-                            NouveauxPlats = lstPlat.FindAll(plat => lstIdNouveauPlat.Contains((int)plat.IdPlat));
+                            NouveauxPlats = LstPlat.FindAll(plat => lstIdNouveauPlat.Contains((int)plat.IdPlat));
                             Dispatcher.Invoke(DessinerNotification);
                         }
 
