@@ -676,6 +676,54 @@ namespace Nutritia.UI.Views
         }
 
         /// <summary>
+        /// Méthode permettant de calculer des statistiques à propos des plats en BD.
+        /// </summary>
+        /// <returns>Un dictionnaire contenant les statistiques de certaines préférences en BD.</returns>
+        private Dictionary<string, double> CalculerStatistiquesBD()
+        {
+            List<Plat> listePlatsBD = new List<Plat>(PlatService.RetrieveAll());
+            Dictionary<string, double> stats = new Dictionary<string, double>();
+
+            stats["viande"] = 0;
+            stats["pate"] = 0;
+            stats["poisson"] = 0;
+
+            foreach(Plat platCourant in listePlatsBD)
+            {
+                bool contientDejaViande = false;
+                bool contientDejaPate = false;
+                bool contientDejaPoisson = false;
+
+                foreach (Aliment alimentCourant in platCourant.ListeIngredients)
+                {
+                    if (alimentCourant.Categorie == "Viandes et substituts" && !contientDejaViande)
+                    {
+                        stats["viande"]++;
+                        contientDejaViande = true;
+                    }
+
+                    if (alimentCourant.Categorie == "Pâtes" && !contientDejaPate)
+                    {
+                        stats["pate"]++;
+                        contientDejaPate = true;
+                    }
+
+                    if (alimentCourant.Categorie == "Poissons et fruits de mers" && !contientDejaPoisson)
+                    {
+                        stats["poisson"]++;
+                        contientDejaPoisson = true;
+                    }
+                }
+            }
+
+            stats["viande"] /= listePlatsBD.Count;
+            stats["poisson"] /= listePlatsBD.Count;
+            stats["pate"] /= listePlatsBD.Count;
+
+            return stats;
+        }
+
+        /// <summary>
         /// Événement lancé sur un clique du bouton Générer.
         /// Permet de générer un menu en fonction des informations préalables.
         /// </summary>
@@ -883,6 +931,7 @@ namespace Nutritia.UI.Views
                     }
                 }
             }
+            /*
             else if (MenuGenere.ListePlats.Count == NB_PLATS_SEMAINE)
             {
                 int nbPlatsCorrespondant;
@@ -972,6 +1021,17 @@ namespace Nutritia.UI.Views
                     }
                 }
             }
+            */
+            else if (MenuGenere.ListePlats.Count == NB_PLATS_SEMAINE)
+            {
+                Dictionary<string, double> stats = CalculerStatistiquesBD();
+
+                if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Viandes" }))
+                {
+                    double nbPlatsCorrespondants = stats["viande"] * MenuGenere.ListePlats.Count;
+                    MessageBox.Show(nbPlatsCorrespondants.ToString());
+                }
+            }
         }
 
         /// <summary>
@@ -991,6 +1051,8 @@ namespace Nutritia.UI.Views
                 {
                     MenuGenere.Nom = popupSauvegarde.txtNom.Text;
                     MenuService.Insert(MenuGenere);
+                    MenuGenere.IdMenu = MenuService.Retrieve(new RetrieveMenuArgs { IdMembre = App.MembreCourant.IdMembre, Nom = MenuGenere.Nom }).IdMenu;
+                    EstNouveauMenu = false;
                 }
             }
             else
