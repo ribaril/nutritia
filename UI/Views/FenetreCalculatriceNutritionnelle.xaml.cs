@@ -97,73 +97,39 @@ namespace Nutritia.UI.Views
             Mouse.OverrideCursor = null;
 
             // --------- Entrée -------------
-            AccordionItem itemEntree = new AccordionItem();
-            itemEntree.Header = "Entrée";
-            StackPanel stackEntree = new StackPanel();
-            stackEntree.Background = Brushes.White;
-            stackEntree.Width = 284;
+            FormerItemAccordeon("Entrée");
 
             // --------- Breuvage -------------
-            AccordionItem itemBreuvage = new AccordionItem();
-            itemBreuvage.Header = "Breuvage";
-            StackPanel stackBreuvage = new StackPanel();
-            stackBreuvage.Background = Brushes.White;
-            stackBreuvage.Width = 284;
+            FormerItemAccordeon("Breuvage");
 
             // --------- Plat principal -------------
-            AccordionItem itemPlatPrincipal = new AccordionItem();
-            itemPlatPrincipal.Header = "Plat principaux";
-            StackPanel stackPlatPrincipal = new StackPanel();
-            stackPlatPrincipal.Background = Brushes.White;
-            stackPlatPrincipal.Width = 284;
+            FormerItemAccordeon("Plat principal");
 
             // --------- Déssert -------------
-            AccordionItem itemDessert = new AccordionItem();
-            itemDessert.Header = "Déssert";
-            StackPanel stackDessert = new StackPanel();
-            stackDessert.Background = Brushes.White;
-            stackDessert.Width = 284;
+            FormerItemAccordeon("Déssert");
 
             // --------- Déjeuner -------------
-            AccordionItem itemDejeuner = new AccordionItem();
-            itemDejeuner.Header = "Déjeuner";
-            StackPanel stackDejeuner = new StackPanel();
-            stackDejeuner.Background = Brushes.White;
-            stackDejeuner.Width = 284;
+            FormerItemAccordeon("Déjeuner");
 
+        }
 
-
+        public void FormerItemAccordeon(string nomItem)
+        {
+            AccordionItem itemAccordeon = new AccordionItem();
+            itemAccordeon.Header = nomItem;
+            StackPanel stackLigne = new StackPanel();
+            stackLigne.Background = Brushes.White;
+            stackLigne.Width = 284;
 
             foreach (var plat in LstPlat)
             {
                 Button btnPlat = FormerListeLignePlatAliment(true, plat, null);
-
-                if (plat.TypePlat == "Entrée")
-                    stackEntree.Children.Add(btnPlat);
-                else if (plat.TypePlat == "Breuvage")
-                    stackBreuvage.Children.Add(btnPlat);
-                else if (plat.TypePlat == "Plat principal")
-                    stackPlatPrincipal.Children.Add(btnPlat);
-                else if (plat.TypePlat == "Déssert")
-                    stackDessert.Children.Add(btnPlat);
-                else if (plat.TypePlat == "Déjeuner")
-                    stackDejeuner.Children.Add(btnPlat);
+                if(plat.TypePlat == nomItem)
+                    stackLigne.Children.Add(btnPlat);
             }
-
-            itemDejeuner.Content = stackDejeuner;
-            accPlat.Items.Add(itemDejeuner);
-
-            itemBreuvage.Content = stackBreuvage;
-            accPlat.Items.Add(itemBreuvage);
-
-            itemEntree.Content = stackEntree;
-            accPlat.Items.Add(itemEntree);
-
-            itemPlatPrincipal.Content = stackPlatPrincipal;
-            accPlat.Items.Add(itemPlatPrincipal);
-
-            itemDessert.Content = stackDessert;
-            accPlat.Items.Add(itemDessert);
+            
+            itemAccordeon.Content = stackLigne;
+            accPlat.Items.Add(itemAccordeon);
         }
 
 

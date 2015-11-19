@@ -35,6 +35,7 @@ namespace Nutritia
         // Permet d'interargir avec le threas asyncrone pour sauvegardé les nouveau plats dan la BD
         static public List<Plat> NouveauxPlats { get; set; }
 
+
         public MainWindow()
         {
 
@@ -53,6 +54,7 @@ namespace Nutritia
             tNotif.Start();
         }
 
+
         /// <summary>
         /// Méthode appellé en asyncrone qui boucle toute les demi-secondes pour verifier s'il y a des changements dans la BD
         /// </summary>
@@ -64,7 +66,17 @@ namespace Nutritia
             {
                 if (!String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
                 {
+                    bool ancienStatutAdmin = App.MembreCourant.EstAdministrateur;
+                    bool ancienStatutBanni = App.MembreCourant.EstBanni;
+                    
                     App.MembreCourant = ServiceFactory.Instance.GetService<IMembreService>().Retrieve(new RetrieveMembreArgs { IdMembre = App.MembreCourant.IdMembre });
+
+                    if (App.MembreCourant.EstAdministrateur != ancienStatutAdmin 
+                        || App.MembreCourant.EstBanni != ancienStatutBanni)
+                    {
+                        Dispatcher.Invoke(AppliquerNouveauChangementStatut);
+                    }
+
                     if (App.MembreCourant.DerniereMaj != "")
                     {
                         lstPlat = ServiceFactory.Instance.GetService<IPlatService>().RetrieveAll().ToList();
@@ -74,25 +86,17 @@ namespace Nutritia
                         {
                             if (plat.DateAjout.CompareTo(App.MembreCourant.DerniereMaj) > -1)
                             {
-                                lstIdNouveauPlat.Add((int)plat.IdPlat);
+                                if (!lstIdNouveauPlat.Exists(id => id == plat.IdPlat))
+                                    lstIdNouveauPlat.Add((int)plat.IdPlat);
                             }
                         }
 
                         if (lstIdNouveauPlat.Count > 0)
                         {
                             NouveauxPlats = lstPlat.FindAll(plat => lstIdNouveauPlat.Contains((int)plat.IdPlat));
+                            Dispatcher.Invoke(DessinerNotification);
                         }
 
-                    }
-
-                    if (App.MembreCourant.EstBanni)
-                    {
-                        App.MembreCourant.EstBanni = true;
-                    }
-
-                    if (!App.MembreCourant.EstAdministrateur)
-                    {
-                        App.MembreCourant.EstAdministrateur = false;
                     }
 
                 }
@@ -278,9 +282,8 @@ namespace Nutritia
             }
         }
 
-        private void Window_MouseMove(object sender, MouseEventArgs e)
+        public void AppliquerNouveauChangementStatut()
         {
-            DessinerNotification();
             if (!String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
             {
                 if (App.MembreCourant.EstBanni)
@@ -289,18 +292,36 @@ namespace Nutritia
                     MainWindow.NouveauxPlats.Clear();
                     ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipal());
                 }
-                if (!App.MembreCourant.EstAdministrateur)
+                else
                 {
-                    ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
+                    if (presenteurContenu.Content is MenuPrincipalConnecte)
+                        ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
                 }
-            }
 
+                if (App.MembreCourant.EstAdministrateur)
+                {
+                    if (presenteurContenu.Content is MenuPrincipalConnecte)
+                        ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
+                }
+                else
+                {
+                    if (presenteurContenu.Content is Bannissement
+                    || presenteurContenu.Content is GestionAdmin
+                    || presenteurContenu.Content is GestionRepertoire
+                    || presenteurContenu.Content is MenuAdministrateur)
+                        ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
+                }
+                    
+            }
+            
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             tNotif.Abort();
+            ThreadNotif.Abort();
         }
+
 
 
     }
