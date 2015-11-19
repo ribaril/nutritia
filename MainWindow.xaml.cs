@@ -74,15 +74,13 @@ namespace Nutritia
                     
                     App.MembreCourant = ServiceFactory.Instance.GetService<IMembreService>().Retrieve(new RetrieveMembreArgs { IdMembre = App.MembreCourant.IdMembre });
                     
-
                     List<Plat> ancienneLstPlat = new List<Plat>(LstPlat);
                     lstPlat = ServiceFactory.Instance.GetService<IPlatService>().RetrieveAll().ToList();
-
-                    if (ancienneLstPlat != lstPlat)
-                    {
-                        FenetreVotes fv = (FenetreVotes)presenteurContenu.Content;
-                        Dispatcher.Invoke(fv.Dessiner);
-                    }
+                    
+                        if (ancienneLstPlat != lstPlat)
+                        {
+                            Dispatcher.Invoke(AppliquerNouveauChangementStatut);
+                        }
                     
 
                     if (App.MembreCourant.EstAdministrateur != ancienStatutAdmin 
@@ -122,6 +120,7 @@ namespace Nutritia
 
             }
         }
+
 
         /// <summary>
         /// Charge toutes les ressources du service factory
@@ -299,6 +298,9 @@ namespace Nutritia
         {
             if (!String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
             {
+                if (presenteurContenu.Content is FenetreVotes)
+                    ((FenetreVotes)presenteurContenu.Content).Dessiner();
+
                 if (App.MembreCourant.EstBanni)
                 {
                     App.MembreCourant = new Membre();
