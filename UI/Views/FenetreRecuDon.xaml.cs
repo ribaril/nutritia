@@ -24,11 +24,12 @@ namespace Nutritia.UI.Views
         public FenetreRecuDon(Transaction transaction)
         {
             InitializeComponent();
-            lblDate.Content += transaction.DateHeureTransaction.ToString();
-            lblModePaiement.Content += transaction.ModePaiementTransaction.ToString();
-            lblMontant.Content += transaction.Montant.ToString() + "$";
-            lblNom.Content += transaction.NomAuteur;
-            lblNoTransaction.Content += transaction.NoTransaction.ToString();
+            lblDate.Content = transaction.DateHeureTransaction.ToString("dd/mm/yy");
+            lblHeure.Content = transaction.DateHeureTransaction.ToString("HH:mm");
+            lblModePaiement.Content = transaction.ModePaiementTransaction.ToString();
+            lblMontant.Content = transaction.Montant.ToString() + "$";
+            lblNom.Content = transaction.NomAuteur;
+            lblNoTransaction.Content += " " + transaction.NoTransaction.ToString();
             imgQrCode.Source = QrCodeHelper.getQrBitmap(transaction.ToString());
         }
     }
