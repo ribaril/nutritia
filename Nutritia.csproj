@@ -41,6 +41,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Toolkit\QrCode.Net\Gma.QrCodeNet.Encoding.Net45.dll</HintPath>
     </Reference>
+    <Reference Include="Infralution.Localization.Wpf">
+      <HintPath>Toolkit\Infralution\Infralution.Localization.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data, Version=6.9.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>packages\MySql.Data.6.9.7\lib\net45\MySql.Data.dll</HintPath>
@@ -479,6 +482,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="LogoIcon.ico" />
+    <Content Include="Toolkit\Infralution\Infralution.Localization.Wpf.dll" />
+    <Content Include="Toolkit\Infralution\Infralution.Localization.Wpf.pdb" />
+    <Resource Include="Toolkit\Infralution\Infralution.Localization.Wpf.XML" />
     <Content Include="UI\Images\baseDonnee.svg" />
     <Resource Include="UI\Images\IngredientsIcon.png" />
     <Resource Include="UI\Images\PlatIcon.png" />
