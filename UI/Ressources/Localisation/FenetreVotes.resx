@@ -117,16 +117,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Aide" xml:space="preserve">
-    <value>Help</value>
+  <data name="AjoutePar" xml:space="preserve">
+    <value>Ajouté par</value>
   </data>
-  <data name="APropos" xml:space="preserve">
-    <value>About</value>
+  <data name="Aucune" xml:space="preserve">
+    <value>Aucune</value>
   </data>
-  <data name="Parametres" xml:space="preserve">
-    <value>Settings</value>
+  <data name="BarreRecherche" xml:space="preserve">
+    <value>Barre de recherche</value>
   </data>
-  <data name="Retour" xml:space="preserve">
-    <value>Back</value>
+  <data name="Divin" xml:space="preserve">
+    <value>Divin</value>
+  </data>
+  <data name="LesPlusPopulaires" xml:space="preserve">
+    <value>Les plus populaires</value>
+  </data>
+  <data name="LesPlusRecents" xml:space="preserve">
+    <value>Les plus récents</value>
+  </data>
+  <data name="Mauvais" xml:space="preserve">
+    <value>Mauvais</value>
+  </data>
+  <data name="Moyen" xml:space="preserve">
+    <value>Moyen</value>
+  </data>
+  <data name="NbrVotes" xml:space="preserve">
+    <value>Nombre de votes :</value>
+  </data>
+  <data name="Passable" xml:space="preserve">
+    <value>Passable</value>
+  </data>
+  <data name="RechercherUnPlat" xml:space="preserve">
+    <value>Rechercher un plat</value>
+  </data>
+  <data name="Succulent" xml:space="preserve">
+    <value>Succulent</value>
+  </data>
+  <data name="Titre" xml:space="preserve">
+    <value>Voter sur des plats</value>
+  </data>
+  <data name="TousLesPlats" xml:space="preserve">
+    <value>Tous les plats</value>
   </data>
 </root>

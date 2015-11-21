@@ -117,16 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Aide" xml:space="preserve">
-    <value>Help</value>
+  <data name="Cholesterol" xml:space="preserve">
+    <value>Cholesterol</value>
   </data>
-  <data name="APropos" xml:space="preserve">
-    <value>About</value>
+  <data name="Energie" xml:space="preserve">
+    <value>Energy</value>
   </data>
-  <data name="Parametres" xml:space="preserve">
-    <value>Settings</value>
+  <data name="Fibre" xml:space="preserve">
+    <value>Fiber</value>
   </data>
-  <data name="Retour" xml:space="preserve">
-    <value>Back</value>
+  <data name="Glucide" xml:space="preserve">
+    <value>Carbohydrate</value>
+  </data>
+  <data name="Lipide" xml:space="preserve">
+    <value>Lipid</value>
+  </data>
+  <data name="Proteine" xml:space="preserve">
+    <value>Protein</value>
+  </data>
+  <data name="Sodium" xml:space="preserve">
+    <value>Sodium</value>
   </data>
 </root>

@@ -117,16 +117,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Aide" xml:space="preserve">
-    <value>Help</value>
+  <data name="AjoutePar" xml:space="preserve">
+    <value>Added by</value>
   </data>
-  <data name="APropos" xml:space="preserve">
-    <value>About</value>
+  <data name="Aucune" xml:space="preserve">
+    <value>None</value>
   </data>
-  <data name="Parametres" xml:space="preserve">
-    <value>Settings</value>
+  <data name="BarreRecherche" xml:space="preserve">
+    <value>Search box</value>
   </data>
-  <data name="Retour" xml:space="preserve">
-    <value>Back</value>
+  <data name="Divin" xml:space="preserve">
+    <value>Heavenly</value>
+  </data>
+  <data name="LesPlusPopulaires" xml:space="preserve">
+    <value>The most popular</value>
+  </data>
+  <data name="LesPlusRecents" xml:space="preserve">
+    <value>The newest</value>
+  </data>
+  <data name="Mauvais" xml:space="preserve">
+    <value>Bad</value>
+  </data>
+  <data name="Moyen" xml:space="preserve">
+    <value>Average</value>
+  </data>
+  <data name="NbrVotes" xml:space="preserve">
+    <value>Number of votes :</value>
+  </data>
+  <data name="Passable" xml:space="preserve">
+    <value>Acceptable</value>
+  </data>
+  <data name="RechercherUnPlat" xml:space="preserve">
+    <value>Search for a meal</value>
+  </data>
+  <data name="Succulent" xml:space="preserve">
+    <value>Delicious</value>
+  </data>
+  <data name="Titre" xml:space="preserve">
+    <value>Vote on meals</value>
+  </data>
+  <data name="TousLesPlats" xml:space="preserve">
+    <value>All the meals</value>
   </data>
 </root>

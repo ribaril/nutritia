@@ -144,15 +144,35 @@
     <Compile Include="UI\Pages\MenuGeneral.xaml.cs">
       <DependentUpon>MenuGeneral.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Ressources\Localisation\MainWindow.en.Designer.cs">
-      <DependentUpon>MainWindow.en.resx</DependentUpon>
+    <Compile Include="UI\Ressources\Localisation\FenetreVotes.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>FenetreVotes.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Ressources\Localisation\FenetreVotes.en.Designer.cs">
+      <DependentUpon>FenetreVotes.en.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="UI\Ressources\Localisation\MainWindow.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MainWindow.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Ressources\Localisation\MainWindow.en.Designer.cs">
+      <DependentUpon>MainWindow.en.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="UI\Ressources\Localisation\TabValeurNutri.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TabValeurNutri.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Ressources\Localisation\TabValeurNutri.en.Designer.cs">
+      <DependentUpon>TabValeurNutri.en.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="UI\Views\FenetreAjoutPlatAdmin.xaml.cs">
       <DependentUpon>FenetreAjoutPlatAdmin.xaml</DependentUpon>
@@ -402,13 +422,32 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\FenetreVotes.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FenetreVotes.en.Designer.cs</LastGenOutput>
+      <DependentUpon>FenetreVotes.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\FenetreVotes.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FenetreVotes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Ressources\Localisation\MainWindow.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MainWindow.en.Designer.cs</LastGenOutput>
+      <DependentUpon>MainWindow.resx</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Ressources\Localisation\MainWindow.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MainWindow.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\TabValeurNutri.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TabValeurNutri.en.Designer.cs</LastGenOutput>
+      <DependentUpon>TabValeurNutri.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\TabValeurNutri.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TabValeurNutri.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

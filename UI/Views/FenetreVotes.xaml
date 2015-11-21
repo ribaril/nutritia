@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:watermark="clr-namespace:Nutritia.UI.Watermark"
              mc:Ignorable="d" 
-             d:DesignHeight="475" d:DesignWidth="650">
+             d:DesignHeight="475" d:DesignWidth="650"
+             ResxExtension.DefaultResxName="Nutritia.UI.Ressources.Localisation.FenetreVotes" Language="{UICulture}">
     <UserControl.Resources>
         <Style TargetType="Image" x:Key="btnFiltre">
             <Setter Property="Width" Value="100"></Setter>
@@ -18,32 +19,32 @@
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="7*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Style="{StaticResource fontSousTitre}">Voter sur des plats</Label>
+        <Label Style="{StaticResource fontSousTitre}" Content="{Resx Titre}"/>
         <StackPanel Grid.Row="1" Orientation="Horizontal" Width="575" VerticalAlignment="Bottom">
             <Button Name="btnSelectionComplete" Margin="0, 0, 15, 0" Click="btnSelectionComplete_Click">
                 <Image Style="{StaticResource btnFiltre}" Source="pack://application:,,,/UI/Images/platsIcon.png"></Image>
                 <Button.ToolTip>
-                    <ToolTip Style="{StaticResource toolTipNutritia}">Tous les plats</ToolTip>
+                    <ToolTip Style="{StaticResource toolTipNutritia}" Content="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreVotes, Key=TousLesPlats}"/>
                 </Button.ToolTip>
             </Button>
             <Button Name="btnNouveautes" Margin="0, 0, 15, 0" Click="btnNouveautes_Click">
                 <Image Style="{StaticResource btnFiltre}" Source="pack://application:,,,/UI/Images/journalIcon.png"></Image>
                 <Button.ToolTip>
-                    <ToolTip Style="{StaticResource toolTipNutritia}">Les plus récents</ToolTip>
+                    <ToolTip Style="{StaticResource toolTipNutritia}" Content="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreVotes, Key=LesPlusRecents}"/>
                 </Button.ToolTip>
             </Button>
             <Button Name="btnPlusPopulaires" Margin="0, 0, 15, 0" Click="btnPlusPopulaires_Click">
                 <Image Style="{StaticResource btnFiltre}" Source="pack://application:,,,/UI/Images/etoileIcon.png"></Image>
                 <Button.ToolTip>
-                    <ToolTip Style="{StaticResource toolTipNutritia}">Les plus populaires</ToolTip>
+                    <ToolTip Style="{StaticResource toolTipNutritia}" Content="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreVotes, Key=LesPlusPopulaires}"/>
                 </Button.ToolTip>
             </Button>
             <StackPanel VerticalAlignment="Center">
-                <Label Style="{StaticResource fontNutritia}" HorizontalAlignment="Center" FontSize="16">Barre de recherche</Label>
+                <Label Style="{StaticResource fontNutritia}" HorizontalAlignment="Center" FontSize="16" Content="{Resx BarreRecherche}"/>
                 <TextBox Name="txtRecherche" Style="{StaticResource fontNutritia}" Width="210" Height="25" PreviewKeyUp="txtRecherche_PreviewKeyUp">
                     <TextBox.Resources>
                         <DiscreteObjectKeyFrame x:Key="proxy"
-                                            Value="Rechercher un plat" />
+                                            Value="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreVotes, Key=RechercherUnPlat}" />
                     </TextBox.Resources>
                     <watermark:WatermarkService.Watermark>
                         <TextBlock Name="waterMarkText" 
@@ -85,22 +86,22 @@
                                                     <Style TargetType="{x:Type Label}" BasedOn="{StaticResource fontNutritia}">
                                                         <Style.Triggers>
                                                             <DataTrigger Binding="{Binding Note}" Value="{x:Null}">
-                                                                <Setter Property="Content" Value="Aucune" />
+                                                                <Setter Property="Content" Value="Aucune"/>
                                                             </DataTrigger>
                                                             <DataTrigger Binding="{Binding Note}" Value="1">
-                                                                <Setter Property="Content" Value="Mauvais" />
+                                                                <Setter Property="Content" Value="Mauvais"/>
                                                             </DataTrigger>
                                                             <DataTrigger Binding="{Binding Note}" Value="2">
-                                                                <Setter Property="Content" Value="Passable" />
+                                                                <Setter Property="Content" Value="Passable"/>
                                                             </DataTrigger>
                                                             <DataTrigger Binding="{Binding Note}" Value="3">
-                                                                <Setter Property="Content" Value="Moyen" />
+                                                                <Setter Property="Content" Value="Moyen"/>
                                                             </DataTrigger>
                                                             <DataTrigger Binding="{Binding Note}" Value="4">
-                                                                <Setter Property="Content" Value="Succulent" />
+                                                                <Setter Property="Content" Value="Succulent"/>
                                                             </DataTrigger>
                                                             <DataTrigger Binding="{Binding Note}" Value="5">
-                                                                <Setter Property="Content" Value="Divin" />
+                                                                <Setter Property="Content" Value="Divin"/>
                                                             </DataTrigger>
                                                         </Style.Triggers>
                                                     </Style>
@@ -108,10 +109,10 @@
                                             </Label>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <Label Style="{StaticResource fontNutritia}">Nombre de votes :</Label>
-                                            <Label Style="{StaticResource fontNutritia}" Content="{Binding NbVotes}"></Label>
+                                            <Label Style="{StaticResource fontNutritia}" Content="{Resx NbrVotes}" />
+                                                <Label Style="{StaticResource fontNutritia}" Content="{Binding NbVotes}"></Label>
                                         </StackPanel>
-                                        <Label Style="{StaticResource fontNutritia}" HorizontalAlignment="Center">Ajouté par</Label>
+                                        <Label Style="{StaticResource fontNutritia}" HorizontalAlignment="Center" Content="{Resx AjoutePar}" />
                                         <Label Style="{StaticResource fontNutritia}" Content="{Binding Createur}" HorizontalAlignment="Center"></Label>
                                     </StackPanel>
                                 </DataTemplate>
