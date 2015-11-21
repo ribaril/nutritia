@@ -229,7 +229,7 @@ namespace Nutritia
         {
             try
             {
-                string requete = string.Format("UPDATE Membres SET nom = '{0}' ,prenom = '{1}', taille = {2}, masse = {3}, dateNaissance = '{4}', nomUtilisateur = '{5}', motPasse = '{6}', estAdmin = {7}, estBanni = {8} WHERE idMembre = {9}", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance.ToString("yyyy-MM-dd"), membre.NomUtilisateur, membre.MotPasse, membre.EstAdministrateur, membre.EstBanni, membre.IdMembre);
+                string requete = string.Format("UPDATE Membres SET nom = '{0}' ,prenom = '{1}', taille = {2}, masse = {3}, dateNaissance = '{4}', nomUtilisateur = '{5}', motPasse = '{6}', estAdmin = {7}, estBanni = {8}, derniereMaj = '{9}' WHERE idMembre = {10}", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance.ToString("yyyy-MM-dd"), membre.NomUtilisateur, membre.MotPasse, membre.EstAdministrateur, membre.EstBanni, membre.DerniereMaj, membre.IdMembre);
 
                 connexion.Query(requete);
 
@@ -275,22 +275,23 @@ namespace Nutritia
         /// <returns>Un objet Membre.</returns>
         private Membre ConstruireMembre(DataRow membre)
         {
-            return new Membre()
-            {
-                IdMembre = (int)membre["idMembre"],
-                Nom = (string)membre["nom"],
-                Prenom = (string)membre["prenom"],
-                Taille = (double)membre["taille"],
-                Masse = (double)membre["masse"],
-                DateNaissance = (DateTime)membre["dateNaissance"],
-                NomUtilisateur = (string)membre["nomUtilisateur"],
-                MotPasse = (string)membre["motPasse"],
-                ListeRestrictions = new List<RestrictionAlimentaire>(),
-                ListeObjectifs = new List<Objectif>(),
-                ListePreferences = new List<Preference>(),
-                ListeMenus = new List<Menu>(),
-                EstAdministrateur = (bool)membre["estAdmin"],
-                EstBanni = (bool)membre["estBanni"]
+			return new Membre()
+			{
+				IdMembre = (int)membre["idMembre"],
+				Nom = (string)membre["nom"],
+				Prenom = (string)membre["prenom"],
+				Taille = (double)membre["taille"],
+				Masse = (double)membre["masse"],
+				DateNaissance = (DateTime)membre["dateNaissance"],
+				NomUtilisateur = (string)membre["nomUtilisateur"],
+				MotPasse = (string)membre["motPasse"],
+				ListeRestrictions = new List<RestrictionAlimentaire>(),
+				ListeObjectifs = new List<Objectif>(),
+				ListePreferences = new List<Preference>(),
+				ListeMenus = new List<Menu>(),
+				EstAdministrateur = (bool)membre["estAdmin"],
+				EstBanni = (bool)membre["estBanni"],
+				DerniereMaj = membre["derniereMaj"].ToString()
             };
         }
 

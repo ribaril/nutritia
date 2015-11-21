@@ -156,5 +156,11 @@ namespace Nutritia.UI.Views
             ListePlats = new ObservableCollection<Plat>(listePlatsTemp.FindAll(plat => plat.Nom.ToLower().Contains(recherche.ToLower())).ToList());
             dgPlats.ItemsSource = ListePlats;
         }
+
+		public void Dessiner()
+		{
+			ListePlats = new ObservableCollection<Plat>(PlatService.RetrieveAll());
+			dgPlats.ItemsSource = ListePlats;
+		}
     }
 }

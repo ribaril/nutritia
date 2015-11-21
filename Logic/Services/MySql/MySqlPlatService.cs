@@ -236,15 +236,16 @@ namespace Nutritia
                 note = (double?)plat["note"];
             }
 
-            return new Plat()
-            {
-                IdPlat = (int)plat["idPlat"],
-                Createur = (string)plat["nomUtilisateur"],
-                Nom = (string)plat["nom"],
-                TypePlat = (string)plat["typePlat"],
-                Note = note,
-                NbVotes = (int)plat["nbVotes"],
-                ImageUrl = (string)plat["imageUrl"],
+			return new Plat()
+			{
+				IdPlat = (int)plat["idPlat"],
+				Createur = (string)plat["nomUtilisateur"],
+				Nom = (string)plat["nom"],
+				TypePlat = (string)plat["typePlat"],
+				Note = note,
+				NbVotes = (int)plat["nbVotes"],
+				ImageUrl = (string)plat["imageUrl"],
+				DateAjout = plat["dateAjout"].ToString()
             };
         }
     }
