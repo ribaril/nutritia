@@ -1,0 +1,53 @@
+﻿<Window x:Class="Nutritia.UI.Views.FenetreSuiviRestrictions"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Nutritia - Suivi des restrictions" Height="450" Width="500"
+        Icon="pack://application:,,,/UI/Images/logoIconPetit.png">
+    <Window.Resources>
+        <Style TargetType="DataGrid" BasedOn="{StaticResource dataGridPlats}">
+            <Setter Property="GridLinesVisibility" Value="None" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="7.75*"></RowDefinition>
+            <RowDefinition Height="1.25*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+            <ColumnDefinition Width="9.5*"></ColumnDefinition>
+            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.Background>
+            <ImageBrush Opacity="0.3" ImageSource="pack://application:,,,/UI/Images/background.jpg"/>
+        </Grid.Background>
+        <Label Name="lblEntete" Grid.Column="1" Style="{StaticResource fontNutritia}" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center">Cochez les plats que vous désirez rendre admissible à la génération.</Label>
+        <Label Name="lblAucunPlat" Grid.Column="1" Style="{StaticResource fontNutritia}" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden">Vous n'avez aucune restriction alimentaire et/ou objectif.</Label>
+        <GroupBox Grid.Row="1" Grid.Column="1" Style="{StaticResource groupBoxNutritia}" MaxWidth="700" Header="Plats non admis à la génération">
+            <ScrollViewer Name="svPlats" PreviewMouseWheel="svPlats_PreviewMouseWheel">
+                <DataGrid Name="dgPlatsNonAdmissibles" Margin="0, 5, 0, 5">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"></CheckBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Binding="{Binding Nom}" Foreground="DarkGreen" IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                    <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </ScrollViewer>
+        </GroupBox>
+        <Button Name="btnEnregistrer" Grid.Row="2" Grid.Column="1" Style="{StaticResource fontNutritia}" Width="125" Height="25" FontSize="16" Click="btnEnregistrer_Click">Enregistrer</Button>
+    </Grid>
+</Window>

@@ -98,7 +98,7 @@ namespace Nutritia.UI.Views
             Plat platSelectionne = (Plat)dgPlats.SelectedItem;
 
             FenetreIngredients fenetreIngredients = new FenetreIngredients(platSelectionne, 1);
-            fenetreIngredients.ShowDialog();
+            fenetreIngredients.Show();
         }
 
         /// <summary>
@@ -130,9 +130,30 @@ namespace Nutritia.UI.Views
 
         }
 
-        public void Dessiner()
+        /// <summary>
+        /// Événement lancé lorsque l'utilisateur tape quelque chose dans le champ de recherche.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtRecherche_PreviewKeyUp(object sender, KeyEventArgs e)
         {
-            ListePlats = new ObservableCollection<Plat>(PlatService.RetrieveAll());
+            List<Plat> listePlatsTemp = new List<Plat>();
+
+            switch (gbContenu.Header.ToString())
+            {
+                case "Tous les plats":
+                    listePlatsTemp = new List<Plat>(PlatService.RetrieveAll());
+                    break;
+                case "Nouveautés":
+                    listePlatsTemp = new List<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { NbResultats = 10, Depart = "Fin" }));
+                    break;
+                case "Les plus populaires":
+                    listePlatsTemp = new List<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { NbResultats = 10, PlusPopulaires = true }));
+                    break;
+            }
+
+            string recherche = ((TextBox)sender).Text;
+            ListePlats = new ObservableCollection<Plat>(listePlatsTemp.FindAll(plat => plat.Nom.ToLower().Contains(recherche.ToLower())).ToList());
             dgPlats.ItemsSource = ListePlats;
         }
     }

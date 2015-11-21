@@ -13,9 +13,9 @@
             <ImageBrush Opacity="0.3" ImageSource="pack://application:,,,/UI/Images/background.jpg"/>
         </Grid.Background>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label Name="lblNom" Style="{StaticResource fontNutritia}" HorizontalAlignment="Center">Nom du menu</Label>
-            <TextBox Name="txtNom" Width="200" Height="25"></TextBox>
+            <Label Name="lblNom" Style="{StaticResource fontNutritia}" HorizontalAlignment="Center" FontSize="16">Nom du menu</Label>
+            <TextBox Name="txtNom" Style="{StaticResource fontNutritia}" Width="200" Height="25"></TextBox>
         </StackPanel>
-        <Button Name="btnSauvegarder" Grid.Row="1" Style="{StaticResource fontNutritia}" Width="150" Height="25" Click="btnSauvegarder_Click">Sauvegarder</Button>
+        <Button Name="btnSauvegarder" Grid.Row="1" Style="{StaticResource fontNutritia}" Width="150" Height="25" FontSize="16" Click="btnSauvegarder_Click">Sauvegarder</Button>
     </Grid>
 </Window>

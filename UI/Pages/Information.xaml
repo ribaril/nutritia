@@ -9,24 +9,26 @@
       Title="Information">
 
     <Grid>
-        <StackPanel VerticalAlignment="Center" Orientation="Vertical">
-            <StackPanel.Resources>
-                <Style TargetType="{x:Type StackPanel}">
-                    <Setter Property="Margin" Value="0, 20, 0, 5"/>
-                </Style>
-            </StackPanel.Resources>
-            <StackPanel HorizontalAlignment="Center">
-                <Label>Version:</Label>
-                <Label Name="lblVersion"></Label>
+        <Viewbox Stretch="Uniform">
+            <StackPanel Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type StackPanel}">
+                        <Setter Property="Margin" Value="0, 20, 0, 5"/>
+                    </Style>
+                </StackPanel.Resources>
+                <StackPanel HorizontalAlignment="Center">
+                    <Label>Version:</Label>
+                    <Label Name="lblVersion"></Label>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Center">
+                    <Label HorizontalAlignment="Center">Auteurs:</Label>
+                    <Label Name="lblAuteurs">Corantin N., Guillaume L. S., Richard B., Tristan S.</Label>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Center">
+                    <Label HorizontalAlignment="Center">License:</Label>
+                    <Label Name="lblLicense">Mozilla Public License, version 2.0</Label>
+                </StackPanel>
             </StackPanel>
-            <StackPanel HorizontalAlignment="Center">
-                <Label HorizontalAlignment="Center">Auteurs:</Label>
-                <Label Name="lblAuteurs">Corantin N., Guillaume L. S., Richard B., Tristan S.</Label>
-            </StackPanel>
-            <StackPanel HorizontalAlignment="Center">
-                <Label HorizontalAlignment="Center">License:</Label>
-                <Label Name="lblLicense">Mozilla Public License, version 2.0</Label>
-            </StackPanel>
-        </StackPanel>
+        </Viewbox>
     </Grid>
 </Page>

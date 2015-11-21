@@ -27,7 +27,7 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="0.75*"></RowDefinition>
             <RowDefinition Height="8*"></RowDefinition>
             <RowDefinition Height="0.25*"></RowDefinition>
@@ -59,34 +59,51 @@
             <Button Name="btnSauvegarder" Width="25" Height="25" Margin="0, 0, 12.5, 0" IsEnabled="False" Click="btnSauvegarder_Click">
                 <Image Source="pack://application:,,,/UI/Images/disquetteIcon.png"></Image>
             </Button>
-            <Button Name="btnOuvrirMenu" Style="{StaticResource btnTexte}" Width="180" Height="25" Margin="0, 0, 12.5, 0" Click="btnOuvrirMenu_Click">Ouvrir un menu existant</Button>
+            <Button Name="btnOuvrirMenu" Style="{StaticResource btnTexte}" Width="180" Height="25" Margin="0, 0, 12.5, 0" IsEnabled="False" Click="btnOuvrirMenu_Click">Ouvrir un menu existant</Button>
             <Button Name="btnGenerer" Style="{StaticResource btnTexte}" Width="180" Height="25" Margin="0, 0, 12.5, 0" Click="btnGenerer_Click">Générer</Button>
             <Button Name="btnListeEpicerie" Style="{StaticResource btnTexte}" Width="180" Height="25" IsEnabled="False" Click="btnListeEpicerie_Click">Liste d'épicerie</Button>
         </StackPanel>
-        <StackPanel Name="spInfosSup" Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Image Width="225" HorizontalAlignment="Left" Source="pack://application:,,,/UI/Images/infoIcon.png">
+        <StackPanel Name="spInfosSup" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 12.5">
+                <Label Style="{StaticResource fontNutritia}" FontSize="22" VerticalAlignment="Center">Afficher les images des plats ?</Label>
+                <CheckBox Name="chbAfficherImages" IsChecked="True" VerticalAlignment="Center"></CheckBox>
+            </StackPanel>
+            <Image Width="225" Source="pack://application:,,,/UI/Images/infoIcon.png">
                 <Image.ToolTip>
                     <ToolTip Style="{StaticResource toolTipNutritia}" Content="Vous devez remplir la section Informations préalables à la génération &#x0a; et appuyer sur le bouton Générer pour générer un menu. &#x0a; Lors de l'appuie sur le bouton, le menu apparaîtra."></ToolTip>
                 </Image.ToolTip>
             </Image>
-            <Label Style="{StaticResource fontNutritia}" FontSize="22" VerticalAlignment="Center">Afficher les images des plats ?</Label>
-            <CheckBox Name="chbAfficherImages" IsChecked="True" VerticalAlignment="Center"></CheckBox>
+            <Button Name="btnSuiviPlatsNonAdmissibles" Style="{StaticResource btnTexte}" Width="225" Height="25" IsEnabled="False" Click="btnSuiviPlatsNonAdmissibles_Click">Suivi des plats non admissibles</Button>
         </StackPanel>
         <GroupBox Name="gbMenus" Grid.Row="2" Grid.Column="1" Header="Menus" VerticalAlignment="Top" Visibility="Hidden">
             <ScrollViewer Name="svMenus" PreviewMouseWheel="svMenus_PreviewMouseWheel">
                 <Grid Name="grdMenus" ScrollViewer.CanContentScroll="False">
                     <DataGrid Name="dgMenus" Style="{StaticResource dataGridPlats}" RowHeight="80" VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn x:Name="dgtcNom" Width="3*" Binding="{Binding Nom}" Foreground="DarkGreen" IsReadOnly="True">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style>
-                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-                                        <Setter Property="TextBlock.TextAlignment" Value="Center" />
-                                        <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
-                                        <Setter Property="TextBlock.Margin" Value="0, 20, 0, 0" />
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
+                            <DataGridTemplateColumn x:Name="dgtcNom" Width="3*" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Foreground="DarkGreen">
+                                            <TextBlock.Style>
+                                                <Style TargetType="{x:Type TextBlock}">
+                                                    <Style.Setters>
+                                                        <Setter Property="Text" Value="{Binding Nom}" />
+                                                        <Setter Property="TextWrapping" Value="Wrap" />
+                                                        <Setter Property="TextAlignment" Value="Center" />
+                                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                                        <Setter Property="Margin" Value="0, 20, 0, 0" />
+                                                    </Style.Setters>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Nom}" Value="{x:Null}">
+                                                            <Setter Property="Text" Value="Aucune correspondance" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                             <DataGridTemplateColumn x:Name="dgtcImage" Width="3*" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -99,6 +116,15 @@
                                     <DataTemplate>
                                         <Button Name="btnRegenerer" Width="45" Height="45" Click="btnRegenerer_Click">
                                             <Image Source="pack://application:,,,/UI/Images/regenererIcon.png"></Image>
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Nom}" Value="{x:Null}">
+                                                            <Setter Property="Visibility" Value="Hidden" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
                                         </Button>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -106,7 +132,17 @@
                             <DataGridTemplateColumn x:Name="dgtcIngredient" Width="2*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Name="btnIngredients" Style="{StaticResource btnTexte}" Width="100" Height="45" Click="btnIngredients_Click">Ingrédients</Button>
+                                        <Button Name="btnIngredients" Width="100" Height="45" Content="Ingrédients" Click="btnIngredients_Click">
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource btnTexte}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Nom}" Value="{x:Null}">
+                                                            <Setter Property="Visibility" Value="Hidden" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

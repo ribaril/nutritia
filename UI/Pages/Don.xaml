@@ -10,89 +10,91 @@
       Title="Don">
 
     <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
-            <Label HorizontalAlignment="Center">Méthode de payment disponible:</Label>
-            <WrapPanel HorizontalAlignment="Center" Name="WpTypeCarte">
-                <WrapPanel.Resources>
-                    <Style TargetType="{x:Type Image}">
-                        <Setter Property="Width" Value="51" />
-                        <Setter Property="Height" Value="32" />
-                        <Setter Property="Margin" Value="20,10,20,10" />
-                        <Style.Triggers>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Opacity" Value="0.5"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </WrapPanel.Resources>
-                <Image Name="imgVisa" Source="/Nutritia;component/UI/Images/Cartes_Credit/visa.png"></Image>
-                <Image Name="imgMasterCard" Source="/Nutritia;component/UI/Images/Cartes_Credit/mastercard.png"></Image>
-                <Image Name="imgAmex" Source="/Nutritia;component/UI/Images/Cartes_Credit/amex.png"></Image>
-            </WrapPanel>
-            <UniformGrid HorizontalAlignment="Center" Columns="2">
-                <UniformGrid.Resources>
-                    <Style TargetType="{x:Type StackPanel}">
-                        <Setter Property="Width" Value="120"/>
-                        <Setter Property="Margin" Value="10,0,10,10"/>
-                    </Style>
-                </UniformGrid.Resources>
-                <StackPanel Orientation="Vertical">
-                    <Label Name="lblErreurNom" Visibility="Hidden" FontSize="10" Foreground="Red" HorizontalAlignment="Center">* Nom invalide</Label>
-                    <AdornerDecorator>
-                        <TextBox Name="txtProprietaire" LostFocus="txtProprietaire_LostFocus" TextChanged="txtProprietaire_TextChanged">
-                            <watermark:WatermarkService.Watermark>
-                                <TextBlock>Nom du propriétaire</TextBlock>
-                            </watermark:WatermarkService.Watermark>
-                        </TextBox>
-                    </AdornerDecorator>
-                </StackPanel>
-                <StackPanel>
-                    <Label Name="lblErreurNoCarte" Visibility="Hidden" FontSize="10" Foreground="Red" HorizontalAlignment="Center">* No Carte invalide</Label>
-                    <AdornerDecorator>
-                        <TextBox Name="txtNoCarte" LostFocus="txtNoCarte_LostFocus" TextChanged="txtNoCarte_TextChanged">
-                            <watermark:WatermarkService.Watermark>
-                                <TextBlock>Numéro de carte</TextBlock>
-                            </watermark:WatermarkService.Watermark>
-                        </TextBox>
-                    </AdornerDecorator>
-                </StackPanel>
-                <StackPanel>
-                    <Label Name="lblErreurExpiration" Visibility="Hidden"  FontSize="10" Foreground="Red" HorizontalAlignment="Center">* Expiration invalide</Label>
-                    <AdornerDecorator>
-                        <TextBox Name="txtDateExpiration" LostFocus="txtDateExpiration_LostFocus" TextChanged="txtDateExpiration_TextChanged">
-                            <watermark:WatermarkService.Watermark>
-                                <TextBlock>Expiration MM/YY</TextBlock>
-                            </watermark:WatermarkService.Watermark>
-                        </TextBox>
-                    </AdornerDecorator>
-                </StackPanel>
-                <StackPanel>
-                    <Label Name="lblErreurCSC" Visibility="Hidden" FontSize="10" Foreground="Red" HorizontalAlignment="Center">* CSC invalide</Label>
-                    <AdornerDecorator>
-                        <TextBox Name="txtCSC" LostFocus="txtCSC_LostFocus" TextChanged="txtCSC_TextChanged">
-                            <watermark:WatermarkService.Watermark>
-                                <TextBlock>Code de sécurité</TextBlock>
-                            </watermark:WatermarkService.Watermark>
-                        </TextBox>
-                    </AdornerDecorator>
-                </StackPanel>
-            </UniformGrid>
-            <GroupBox HorizontalAlignment="Center" Header="Montant">
-                <WrapPanel Name="wrapMontant" Orientation="Horizontal">
+        <Viewbox Stretch="Uniform">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+                <Label HorizontalAlignment="Center">Méthode de payment disponible:</Label>
+                <WrapPanel HorizontalAlignment="Center" Name="WpTypeCarte">
                     <WrapPanel.Resources>
-                        <Style TargetType="{x:Type RadioButton}">
-                            <Setter Property="Margin" Value="10,10,10,10"/>
-                            <Setter Property="GroupName" Value="grpMontant"/>
+                        <Style TargetType="{x:Type Image}">
+                            <Setter Property="Width" Value="51" />
+                            <Setter Property="Height" Value="32" />
+                            <Setter Property="Margin" Value="20,10,20,10" />
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" Value="0.5"/>
+                                </Trigger>
+                            </Style.Triggers>
                         </Style>
                     </WrapPanel.Resources>
-                    <RadioButton IsChecked="True" >1$</RadioButton>
-                    <RadioButton>10$</RadioButton>
-                    <RadioButton>25$</RadioButton>
-                    <RadioButton>50$</RadioButton>
-                    <RadioButton>100$</RadioButton>
+                    <Image Name="imgVisa" Source="/Nutritia;component/UI/Images/Cartes_Credit/visa.png"></Image>
+                    <Image Name="imgMasterCard" Source="/Nutritia;component/UI/Images/Cartes_Credit/mastercard.png"></Image>
+                    <Image Name="imgAmex" Source="/Nutritia;component/UI/Images/Cartes_Credit/amex.png"></Image>
                 </WrapPanel>
-            </GroupBox>
-            <Button Style="{StaticResource nonTransparent}" IsEnabled="False" Name="btnConfirmer" Click="btnConfirmer_Click" Margin="0,10,0,10" HorizontalAlignment="Center">Confirmer</Button>
-        </StackPanel>
+                <UniformGrid HorizontalAlignment="Center" Columns="2">
+                    <UniformGrid.Resources>
+                        <Style TargetType="{x:Type StackPanel}">
+                            <Setter Property="Width" Value="120"/>
+                            <Setter Property="Margin" Value="10,0,10,10"/>
+                        </Style>
+                    </UniformGrid.Resources>
+                    <StackPanel Orientation="Vertical">
+                        <Label Name="lblErreurNom" Visibility="Hidden" FontSize="10" Foreground="Red" HorizontalAlignment="Center">* Nom invalide</Label>
+                        <AdornerDecorator>
+                            <TextBox Name="txtProprietaire" TextChanged="txtProprietaire_TextChanged">
+                                <watermark:WatermarkService.Watermark>
+                                    <TextBlock>Nom du propriétaire</TextBlock>
+                                </watermark:WatermarkService.Watermark>
+                            </TextBox>
+                        </AdornerDecorator>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Name="lblErreurNoCarte" Visibility="Hidden" FontSize="10" Foreground="Red" HorizontalAlignment="Center">* No Carte invalide</Label>
+                        <AdornerDecorator>
+                            <TextBox Name="txtNoCarte" PreviewTextInput="txtNo_PreviewTextInput" DataObject.Pasting="txtNo_Pasting"  TextChanged="txtNoCarte_TextChanged">
+                                <watermark:WatermarkService.Watermark>
+                                    <TextBlock>Numéro de carte</TextBlock>
+                                </watermark:WatermarkService.Watermark>
+                            </TextBox>
+                        </AdornerDecorator>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Name="lblErreurExpiration" Visibility="Hidden"  FontSize="10" Foreground="Red" HorizontalAlignment="Center">* Expiration invalide</Label>
+                        <AdornerDecorator>
+                            <TextBox Name="txtDateExpiration" PreviewTextInput="txtDateExpiration_PreviewTextInput" DataObject.Pasting="txtDateExpiration_Pasting" TextChanged="txtDateExpiration_TextChanged">
+                                <watermark:WatermarkService.Watermark>
+                                    <TextBlock>Expiration MM/YY</TextBlock>
+                                </watermark:WatermarkService.Watermark>
+                            </TextBox>
+                        </AdornerDecorator>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Name="lblErreurCSC" Visibility="Hidden" FontSize="10" Foreground="Red" HorizontalAlignment="Center">* CSC invalide</Label>
+                        <AdornerDecorator>
+                            <TextBox Name="txtCSC" PreviewTextInput="txtNo_PreviewTextInput" DataObject.Pasting="txtNo_Pasting" TextChanged="txtCSC_TextChanged">
+                                <watermark:WatermarkService.Watermark>
+                                    <TextBlock>Code de sécurité</TextBlock>
+                                </watermark:WatermarkService.Watermark>
+                            </TextBox>
+                        </AdornerDecorator>
+                    </StackPanel>
+                </UniformGrid>
+                <GroupBox HorizontalAlignment="Center" Header="Montant">
+                    <WrapPanel Name="wrapMontant" Orientation="Horizontal">
+                        <WrapPanel.Resources>
+                            <Style TargetType="{x:Type RadioButton}">
+                                <Setter Property="Margin" Value="10,10,10,10"/>
+                                <Setter Property="GroupName" Value="grpMontant"/>
+                            </Style>
+                        </WrapPanel.Resources>
+                        <RadioButton IsChecked="True" >1$</RadioButton>
+                        <RadioButton>10$</RadioButton>
+                        <RadioButton>25$</RadioButton>
+                        <RadioButton>50$</RadioButton>
+                        <RadioButton>100$</RadioButton>
+                    </WrapPanel>
+                </GroupBox>
+                <Button Style="{StaticResource nonTransparent}" IsEnabled="False" Name="btnConfirmer" Click="btnConfirmer_Click" Margin="0,10,0,10" HorizontalAlignment="Center">Confirmer</Button>
+            </StackPanel>
+        </Viewbox>
     </Grid>
 </Page>

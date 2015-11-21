@@ -35,7 +35,22 @@ namespace Nutritia.UI.Views
             
             ListeMenus = new ObservableCollection<Menu>(MenuService.RetrieveSome(new RetrieveMenuArgs { IdMembre = (int)App.MembreCourant.IdMembre }));
 
+            if(ListeMenus.Count == 0)
+            {
+                lblAucunMenu.Visibility = Visibility.Visible;
+            }
+
             dgMenus.ItemsSource = ListeMenus;
+        }
+
+        /// <summary>
+        /// Événement lancé lors de la sélection d'un menu.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void rbSelection_Checked(object sender, RoutedEventArgs e)
+        {
+            btnOuvrir.IsEnabled = true;
         }
 
         /// <summary>

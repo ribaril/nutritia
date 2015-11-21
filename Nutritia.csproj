@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>LogoIcon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Gma.QrCodeNet.Encoding.Net45, Version=0.4.0.0, Culture=neutral, PublicKeyToken=e8a75d24b142be49, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -88,6 +91,7 @@
     <Compile Include="Logic\Model\Entities\Plat.cs" />
     <Compile Include="Logic\Model\Entities\Preference.cs" />
     <Compile Include="Logic\Model\Entities\RestrictionAlimentaire.cs" />
+    <Compile Include="Logic\Model\Entities\Session.cs" />
     <Compile Include="Logic\Model\Entities\Transaction.cs" />
     <Compile Include="Logic\Model\Entities\UniteMesure.cs" />
     <Compile Include="Logic\Model\Entities\VersionLogiciel.cs" />
@@ -120,6 +124,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.en.resx</DependentUpon>
     </Compile>
+    <Compile Include="Toolkit\SessionHelper.cs" />
     <Compile Include="Toolkit\Services\Definitions\IApplicationService.cs" />
     <Compile Include="Toolkit\Services\ServiceFactory.cs" />
     <Compile Include="Toolkit\QrCodeHelper.cs" />
@@ -129,6 +134,12 @@
     </Compile>
     <Compile Include="UI\Pages\Information.xaml.cs">
       <DependentUpon>Information.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\MenuConnexion.xaml.cs">
+      <DependentUpon>MenuConnexion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Pages\MenuGeneral.xaml.cs">
+      <DependentUpon>MenuGeneral.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\FenetreAjoutPlatAdmin.xaml.cs">
       <DependentUpon>FenetreAjoutPlatAdmin.xaml</DependentUpon>
@@ -193,6 +204,9 @@
     <Compile Include="UI\Views\FenetreSauvegarderMenu.xaml.cs">
       <DependentUpon>FenetreSauvegarderMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Views\FenetreSuiviRestrictions.xaml.cs">
+      <DependentUpon>FenetreSuiviRestrictions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\FenetreVote.xaml.cs">
       <DependentUpon>FenetreVote.xaml</DependentUpon>
     </Compile>
@@ -226,6 +240,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UI\Pages\Don.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\MenuConnexion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Pages\MenuGeneral.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -318,6 +340,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Views\FenetreSauvegarderMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\FenetreSuiviRestrictions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -452,6 +478,7 @@
     <Resource Include="UI\Images\nonDisponible.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="LogoIcon.ico" />
     <Content Include="UI\Images\baseDonnee.svg" />
     <Resource Include="UI\Images\IngredientsIcon.png" />
     <Resource Include="UI\Images\PlatIcon.png" />

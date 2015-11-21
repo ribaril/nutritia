@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -84,7 +85,7 @@ namespace Nutritia
             {
                 connexion = new MySqlConnexion();
 
-                string requete = string.Format("SELECT * FROM Menus WHERE Nom = '{0}'", args.Nom);
+                string requete = string.Format("SELECT * FROM Menus WHERE idMembre = {0} && Nom = '{1}'", args.IdMembre, args.Nom);
 
                 DataSet dataSetMenus = connexion.Query(requete);
                 DataTable tableMenus = dataSetMenus.Tables[0];
@@ -129,11 +130,41 @@ namespace Nutritia
 
                 foreach(Plat platCourant in menu.ListePlats)
                 {
-                    requete = string.Format("INSERT INTO MenusPlats (idMenu, idPlat) VALUES ({0}, {1})", Retrieve(new RetrieveMenuArgs { Nom = menu.Nom }).IdMenu,  platCourant.IdPlat);
+                    requete = string.Format("INSERT INTO MenusPlats (idMenu, idPlat) VALUES ({0}, {1})", Retrieve(new RetrieveMenuArgs { IdMembre = App.MembreCourant.IdMembre, Nom = menu.Nom }).IdMenu, platCourant.IdPlat);
                     connexion.Query(requete);
                 }
             }
             catch(MySqlException)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Méthode permettant de mettre à jour un menu dans la base de données.
+        /// </summary>
+        /// <param name="menu">Le menu à mettre à jour.</param>
+        public void Update(Menu menu)
+        {
+            try
+            {
+                connexion = new MySqlConnexion();
+
+                string requete = string.Format("UPDATE Menus SET idMembre = {0}, nom = '{1}', nbPersonnes = {2}, dateMenu = '{3}' WHERE idMenu = {3}", App.MembreCourant.IdMembre, menu.Nom, menu.NbPersonnes, menu.DateCreation.ToString("yyyy-MM-dd"), menu.IdMenu);
+
+                connexion.Query(requete);
+
+                string requeteEffacerPlats = string.Format("DELETE FROM MenusPlats WHERE idMenu = {0}", menu.IdMenu);
+
+                connexion.Query(requeteEffacerPlats);
+
+                foreach (Plat platCourant in menu.ListePlats)
+                {
+                    requete = string.Format("INSERT INTO MenusPlats (idMenu, idPlat) VALUES ({0}, {1})", Retrieve(new RetrieveMenuArgs { IdMembre = App.MembreCourant.IdMembre, Nom = menu.Nom }).IdMenu, platCourant.IdPlat);
+                    connexion.Query(requete);
+                }
+            }
+            catch (MySqlException)
             {
                 throw;
             }
@@ -152,7 +183,7 @@ namespace Nutritia
                 Nom = (string)menu["nom"],
                 NbPersonnes = (int)menu["nbPersonnes"],
                 DateCreation = (DateTime)menu["dateMenu"],
-                ListePlats = new List<Plat>()
+                ListePlats = new ObservableCollection<Plat>()
             };
         }
     }

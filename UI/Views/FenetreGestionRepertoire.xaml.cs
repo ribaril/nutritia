@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -179,6 +180,16 @@ namespace Nutritia.UI.Views
         }
 
         /// <summary>
+        /// Méthode qui appelle la validation du nom de l'aliment à chaque modification du champ de saisie.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Nom_alim_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Valider_Nom();
+        }
+
+        /// <summary>
         /// Méthode de validation du champ "Nom de l'aliment".
         /// De plus, la longueur du nom doit être comprise entre 1 et 50 caractères.
         /// </summary>
@@ -217,10 +228,10 @@ namespace Nutritia.UI.Views
                         Regex RgxApostropheDebut = new Regex("^['| ]");
                         bool ContientApostropheDebut = RgxApostropheDebut.IsMatch(Nom_alim.Text);
 
-                        if (char.IsLower(Nom_alim.Text[0]) || ContientApostropheDebut)
+                        if (ContientApostropheDebut)
                         {
                             lbl_nom.Foreground = Brushes.Red;
-                            lbl_nom.Content = "Nom (Doit débuter avec une majuscule)";
+                            lbl_nom.Content = "Nom (Doit débuter avec une lettre)";
                             Erreur = true;
                         }
                         else
@@ -366,6 +377,14 @@ namespace Nutritia.UI.Views
         {
             Aliment nouvelAliment = new Aliment();
 
+            //----------------------------------------Enregistrement des valeurs nutritionnelles----------------------------------------
+
+            // Conversion automatisée de la première lettre du nom de l'aliment.
+            if (char.IsLower(Nom_alim.Text[0]))
+            {
+                Nom_alim.Text = char.ToUpper(Nom_alim.Text[0]) + Nom_alim.Text.Substring(1);
+            }
+            
             nouvelAliment.Nom = Nom_alim.Text;
             nouvelAliment.Categorie = cbo_grp_alim.SelectionBoxItem.ToString();
             nouvelAliment.Mesure = int.Parse(Mesure.Text);
@@ -378,9 +397,41 @@ namespace Nutritia.UI.Views
             nouvelAliment.Cholesterol = double.Parse(Cholesterol.Text);
             nouvelAliment.Sodium = double.Parse(Sodium.Text);
 
+            //----------------------------------------Enregistrement du chemin de l'image----------------------------------------
+            string chemin = img_alim.Source.ToString();
+            int position = chemin.LastIndexOf('/');
+            string image = chemin.Substring(position + 1);
+            string actuel;
+
+            int positionPack = chemin.IndexOf("pack");
+
+            if (positionPack == -1)
+            {
+                chemin = chemin.Substring(8);
+                actuel = Directory.GetCurrentDirectory();
+                int positionDest = actuel.LastIndexOf('\\');
+                actuel = actuel.Substring(0, actuel.Length - (actuel.Length - positionDest));
+                positionDest = actuel.LastIndexOf('\\');
+                actuel = actuel.Substring(0, actuel.Length - (actuel.Length - positionDest));
+                actuel += "\\UI\\Images\\" + image;
+
+                if(!File.Exists(actuel))
+                {
+                    System.IO.File.Copy(chemin, actuel);
+                }
+                
+                nouvelAliment.ImageURL = "pack://application:,,,/UI/Images/" + image;
+            }
+            else
+            {
+                nouvelAliment.ImageURL = chemin;
+            }
+
+            //----------------------------------------Insertion en BD----------------------------------------
             ServiceFactory.Instance.GetService<IAlimentService>().Insert(nouvelAliment);
             listeAliments = ServiceFactory.Instance.GetService<IAlimentService>().RetrieveAll();
 
+            //----------------------------------------Remise à neuf des champs de saisie----------------------------------------
             Nom_alim.Text = "";
             cbo_grp_alim.SelectedIndex = -1;
             cbo_unite_mesure.SelectedIndex = -1;
@@ -392,9 +443,28 @@ namespace Nutritia.UI.Views
             Lipides.Text = "";
             Cholesterol.Text = "";
             Sodium.Text = "";
+            img_alim.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/nonDisponible.png"));
         }
 
         #endregion
 
+        /// <summary>
+        /// Méthode qui permet de charger à l'écran une image pour l'aliment.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Ajouter_Image(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+
+            Nullable<bool> result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                string chemin = dlg.FileName;
+
+                img_alim.Source = new BitmapImage(new Uri(chemin));
+            }
+        }
     }
 }

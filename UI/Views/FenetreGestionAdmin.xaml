@@ -12,38 +12,49 @@
         <converter:BoolToOppositeBoolConverter x:Key="oppositeConverter" />
     </UserControl.Resources>
     <Grid>
-        <Label Margin="61,41,432,407" Content="{x:Static resx:Resources.RechercheMembre}"/>
-        <local:SearchBox x:Name="filterDataGrid" Margin="20,73,406,252" WatermarkContent="{x:Static resx:Resources.NomUtilisateur}" FilterMode="StartWith" SelectionMode="Single">
-            <local:SearchBox.Columns>
-                <DataGridTemplateColumn Header="{x:Static resx:Resources.Admin}" IsReadOnly="False" Width="50">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <CheckBox HorizontalAlignment="Center" IsChecked="{Binding EstAdministrateur}" IsEnabled="{Binding EstBanni, Converter={StaticResource oppositeConverter}}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"></CheckBox>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn IsReadOnly="True" Header="{x:Static resx:Resources.Compte}" Binding="{Binding NomUtilisateur}"/>
-            </local:SearchBox.Columns>
-        </local:SearchBox>
-        <local:FenetreInfoMembre Margin="399,68,27,252" MembreContent="{Binding ElementName=filterDataGrid, Path=SelectedItem}">
-        </local:FenetreInfoMembre>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel Margin="30">
+                <Label Content="{x:Static resx:Resources.RechercheMembre}"/>
+                <local:SearchBox x:Name="filterDataGrid" Width="300" WatermarkContent="{x:Static resx:Resources.NomUtilisateur}" FilterMode="StartWith" SelectionMode="Single">
+                    <local:SearchBox.Columns>
+                        <DataGridTemplateColumn Header="{x:Static resx:Resources.Admin}" IsReadOnly="False" Width="50">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox HorizontalAlignment="Center" IsChecked="{Binding EstAdministrateur}" IsEnabled="{Binding EstBanni, Converter={StaticResource oppositeConverter}}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"></CheckBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn IsReadOnly="True" Header="{x:Static resx:Resources.Compte}" Binding="{Binding NomUtilisateur}"/>
+                    </local:SearchBox.Columns>
+                </local:SearchBox>
+            </StackPanel>
+            <StackPanel Margin="0,30,0,0">
+                <Label Content="Information du membre sélectionné"/>
+                <Border BorderBrush="Black" BorderThickness="1">
+                    <local:FenetreInfoMembre MembreContent="{Binding ElementName=filterDataGrid, Path=SelectedItem}"/>
+                </Border>
+            </StackPanel>
+        </StackPanel>
 
-
-        <Label Margin="274,236,265,212" Content="{x:Static resx:Resources.Administrateurs}"/>
-
-
-        <DataGrid Name="dgAdmin" Margin="206,263,222,109" CanUserAddRows="False" AutoGenerateColumns="False" EnableRowVirtualization="False">
-            <DataGrid.Columns>
-                <DataGridTemplateColumn Header="{x:Static resx:Resources.Admin}" IsReadOnly="False" Width="50">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <CheckBox HorizontalAlignment="Center" IsChecked="{Binding EstAdministrateur}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"></CheckBox>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Width="*" IsReadOnly="True" Header="{x:Static resx:Resources.Compte}" Binding="{Binding NomUtilisateur}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button Margin="274,384,280,58" Click="Button_Click" Content="{x:Static resx:Resources.Accepter}"/>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Label Content="{x:Static resx:Resources.Administrateurs}"/>
+            <DataGrid Name="dgAdmin" Width="300" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" EnableRowVirtualization="False">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="{x:Static resx:Resources.Admin}" IsReadOnly="False" Width="50">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox HorizontalAlignment="Center" IsChecked="{Binding EstAdministrateur}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"></CheckBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Width="*" IsReadOnly="True" Header="{x:Static resx:Resources.Compte}" Binding="{Binding NomUtilisateur}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Margin="10" Style="{StaticResource nonTransparent}" Click="Button_Click" Content="{x:Static resx:Resources.Accepter}"/>
+        </StackPanel>
     </Grid>
 </UserControl>

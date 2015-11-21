@@ -6,33 +6,42 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Nutritia.Toolkit;
 
 namespace Nutritia
 {
 	public class MySqlConnexion
 	{
 
-		private static readonly string CONNECTION_STRING;
-		private MySqlConnection connection;
-		private MySqlTransaction transaction;
+        private readonly string CONNECTION_STRING;
+        private MySqlConnection connection;
+        private MySqlTransaction transaction;
 
 
-		static MySqlConnexion()
-		{
-			CONNECTION_STRING = ConfigurationManager.ConnectionStrings["MySqlConnexion"].ConnectionString;
-		}
+        public MySqlConnexion()
+        {
+            //CONNECTION_STRING = ConfigurationManager.ConnectionStrings["MySqlConnexion"].ConnectionString;
+            CONNECTION_STRING = SessionHelper.StringToSessions(Properties.Settings.Default.ActiveSession).First().ToConnexionString();
 
-		public MySqlConnexion()
-		{
-			try
-			{
-				connection = new MySqlConnection(CONNECTION_STRING);
-			}
-			catch (MySqlException)
-			{
-				throw;
-			}
-		}
+            ConfigurationConnection(CONNECTION_STRING);
+        }
+
+        public MySqlConnexion(string connectionString)
+        {
+            ConfigurationConnection(connectionString);
+        }
+
+        private void ConfigurationConnection(string connectionString)
+        {
+            try
+            {
+                connection = new MySqlConnection(connectionString);
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+        }
 
 
 		private bool Open()
