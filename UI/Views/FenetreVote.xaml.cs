@@ -68,7 +68,7 @@ namespace Nutritia.UI.Views
             }
             
             // Mise à jour dans la base de données.
-            PlatSelectionne.Note = Math.Round((Double)PlatSelectionne.Note, 0);
+            PlatSelectionne.Note = Math.Round((Double)PlatSelectionne.Note, 2);
             PlatService.Update(PlatSelectionne);
 
             Close();
