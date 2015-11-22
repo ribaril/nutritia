@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Nutritia.UI.Views"
         mc:Ignorable="d"
-        Title="Merci pour votre don" Height="310" Width="300" ResizeMode="NoResize">
+        Title="{Resx Titre}" Height="310" Width="300" ResizeMode="NoResize"
+        ResxExtension.DefaultResxName="Nutritia.UI.Ressources.Localisation.FenetreRecuDon" Language="{UICulture}">
     <Grid>
         <StackPanel>
             <Grid>
@@ -13,15 +14,15 @@
                 <Label HorizontalAlignment="Center" FontWeight="Bold">Nutritia</Label>
             </Grid>
             <StackPanel Orientation="Horizontal">
-                <Label Margin="0,0,10,0">Client:</Label>
+                <Label Margin="0,0,10,0" Content="{Resx Client}"/>
                 <Label Name="lblNom">Nom</Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Label>Montant:</Label>
+                <Label Content="{Resx Montant}"/>
                 <Label Name="lblMontant">0$</Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Label>Carte:</Label>
+                <Label Content="{Resx Carte}" />
                 <Label Name="lblModePaiement">Mode</Label>
             </StackPanel>
             <StackPanel Margin="0,15,0,0" HorizontalAlignment="Center">
