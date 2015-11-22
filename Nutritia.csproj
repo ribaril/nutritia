@@ -214,6 +214,16 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="UI\Ressources\Localisation\Pages\Don.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Don.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Ressources\Localisation\Pages\Don.en.Designer.cs">
+      <DependentUpon>Don.en.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Include="UI\Ressources\Localisation\TabValeurNutri.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -534,6 +544,15 @@
     <EmbeddedResource Include="UI\Ressources\Localisation\MainWindow.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MainWindow.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\Pages\Don.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Don.en.Designer.cs</LastGenOutput>
+      <DependentUpon>Don.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\Pages\Don.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Don.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Ressources\Localisation\TabValeurNutri.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
