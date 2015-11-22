@@ -5,18 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Nutritia.UI.Views"
         mc:Ignorable="d"
-        Title="Merci pour votre don" Height="300" Width="300" ResizeMode="NoResize">
+        Title="Merci pour votre don" Height="310" Width="300" ResizeMode="NoResize">
     <Grid>
         <StackPanel>
-            <Label HorizontalAlignment="Center">Relevé de transaction Nutritia</Label>
-            <Label FontWeight="Bold">Nutritia Inc.</Label>
-            <Label>Client:</Label>
-            <Label Name="lblNom"></Label>
-            <Label Name="lblMontant" FontWeight="Bold" HorizontalAlignment="Center"></Label>
-            <Image Name="imgQrCode" Width="100" Height="100"></Image>
-            <Label Name="lblModePaiement">Mode de paiement: </Label>
-            <Label Name="lblDate">Date/heure: </Label>
-            <Label Name="lblNoTransaction">No. de transaction: </Label>
+            <Grid>
+                <Label FontWeight="Light" HorizontalAlignment="Left" Name="lblNoTransaction">No.</Label>
+                <Label HorizontalAlignment="Center" FontWeight="Bold">Nutritia</Label>
+            </Grid>
+            <StackPanel Orientation="Horizontal">
+                <Label Margin="0,0,10,0">Client:</Label>
+                <Label Name="lblNom">Nom</Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label>Montant:</Label>
+                <Label Name="lblMontant">0$</Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label>Carte:</Label>
+                <Label Name="lblModePaiement">Mode</Label>
+            </StackPanel>
+            <StackPanel Margin="0,15,0,0" HorizontalAlignment="Center">
+                <Border BorderThickness="1" BorderBrush="Black" Width="100" Height="100">
+                    <Image Name="imgQrCode"></Image>
+                </Border>
+                <Label HorizontalAlignment="Center" Name="lblHeure">HH:MM</Label>
+                <Label HorizontalAlignment="Center" Name="lblDate">dd/mm/yy</Label>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

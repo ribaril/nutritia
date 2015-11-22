@@ -95,10 +95,10 @@ namespace Nutritia.UI.Pages
                 return;
             //Valide si le compte actuel existe sur la nouvelle session spécifié et s'il est admins.
             //Sinon l'utilisateur ce coupe la branche sous les pieds.
-            if (!IsAdminOnNewConnexion(newSession.ToConnexionString()))
-            {
-                return;
-            }
+            //if (!IsAdminOnNewConnexion(newSession.ToConnexionString()))
+            //{
+            //    return;
+            //}
             SwitchActive(obsSessions.IndexOf(SessionActive), obsSessions.IndexOf(newSession));
             SessionActive = newSession;
 

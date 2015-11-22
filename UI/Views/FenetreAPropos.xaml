@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Nutritia.UI.Views"
         mc:Ignorable="d"
-        Title="Nutritia - À Propos" Height="350" Width="520" MinHeight="300" MinWidth="500" ResizeMode="NoResize">
+        Title="Nutritia - À Propos" Height="350" Width="520" MinHeight="300" MinWidth="500">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -31,8 +31,8 @@
             <Button Name="btnDon" Click="btnDon_Click">Faire un don</Button>
         </StackPanel>
         <Rectangle Grid.Row="1" Grid.ColumnSpan="2" Stroke="Black" Fill="Transparent"/>
-        <DockPanel Name="dockContent"  Grid.Column="1" Grid.Row="0">
+        <Grid Name="dockContent"  Grid.Column="1" Grid.Row="0">
             <Frame x:Name="FrmNavigation" NavigationUIVisibility="Hidden" />
-        </DockPanel>
+        </Grid>
     </Grid>
 </Window>
