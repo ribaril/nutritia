@@ -144,6 +144,16 @@
     <Compile Include="UI\Pages\MenuGeneral.xaml.cs">
       <DependentUpon>MenuGeneral.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Ressources\Localisation\FenetreVote.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FenetreVote.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Ressources\Localisation\FenetreVote.en.Designer.cs">
+      <DependentUpon>FenetreVote.en.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Include="UI\Ressources\Localisation\FenetreVotes.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -421,6 +431,15 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\FenetreVote.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FenetreVote.en.Designer.cs</LastGenOutput>
+      <DependentUpon>FenetreVote.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\FenetreVote.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FenetreVote.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Ressources\Localisation\FenetreVotes.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
