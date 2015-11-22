@@ -48,8 +48,8 @@ namespace Nutritia.UI.Pages
         public MenuGeneral()
         {
             mapLangue = new ObservableCollection<Langue>();
-            Langue francais = new Langue("Français", "fr");
-            Langue anglais = new Langue("Anglais", "en");
+            Langue francais = new Langue(Nutritia.UI.Ressources.Localisation.Pages.MenuGeneral.LangueFrancais, "fr");
+            Langue anglais = new Langue(Nutritia.UI.Ressources.Localisation.Pages.MenuGeneral.LangueAnglais, "en");
             string codeLangueActif = Properties.Settings.Default.Langue;
 
             mapLangue.Add(francais);

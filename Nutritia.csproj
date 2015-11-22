@@ -254,6 +254,16 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="UI\Ressources\Localisation\Pages\MenuGeneral.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MenuGeneral.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Ressources\Localisation\Pages\MenuGeneral.en.Designer.cs">
+      <DependentUpon>MenuGeneral.en.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Include="UI\Ressources\Localisation\TabValeurNutri.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -610,6 +620,15 @@
     <EmbeddedResource Include="UI\Ressources\Localisation\Pages\MenuConnexion.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MenuConnexion.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\Pages\MenuGeneral.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MenuGeneral.en.Designer.cs</LastGenOutput>
+      <DependentUpon>MenuGeneral.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\Pages\MenuGeneral.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MenuGeneral.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Ressources\Localisation\TabValeurNutri.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
