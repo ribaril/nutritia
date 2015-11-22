@@ -43,7 +43,7 @@ namespace Nutritia.UI.Views
                 if(nom.Length < 2 || nom.Length > 10)
                 {
                     Erreur = true;
-                    lblNom.Content = "Nom (Min 2 carac. Max 10 carac.)";
+                    lblNom.Content = Nutritia.UI.Ressources.Localisation.FenetreSauvegarderMenu.ErreurLongueurNom;
                     lblNom.Foreground = Brushes.Red;
                 }
                 else
@@ -51,7 +51,7 @@ namespace Nutritia.UI.Views
                     if (!string.IsNullOrEmpty(ServiceFactory.Instance.GetService<IMenuService>().Retrieve(new RetrieveMenuArgs { IdMembre = App.MembreCourant.IdMembre, Nom = nom }).Nom))
                     {
                         Erreur = true;
-                        lblNom.Content = "Nom (Nom déjà utilisé)";
+                        lblNom.Content = Nutritia.UI.Ressources.Localisation.FenetreSauvegarderMenu.ErreurDuplication;
                         lblNom.Foreground = Brushes.Red;
                     }
                 }
@@ -59,7 +59,7 @@ namespace Nutritia.UI.Views
             else
             {
                 Erreur = true;
-                lblNom.Content = "Nom (Champ vide)";
+                lblNom.Content = Nutritia.UI.Ressources.Localisation.FenetreSauvegarderMenu.ErreurVide;
                 lblNom.Foreground = Brushes.Red;
             }
         }
