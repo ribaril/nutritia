@@ -144,6 +144,16 @@
     <Compile Include="UI\Pages\MenuGeneral.xaml.cs">
       <DependentUpon>MenuGeneral.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Ressources\Localisation\FenetreSuiviRestrictions.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FenetreSuiviRestrictions.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Ressources\Localisation\FenetreSuiviRestrictions.en.Designer.cs">
+      <DependentUpon>FenetreSuiviRestrictions.en.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Include="UI\Ressources\Localisation\FenetreVote.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -431,6 +441,15 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\FenetreSuiviRestrictions.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FenetreSuiviRestrictions.en.Designer.cs</LastGenOutput>
+      <DependentUpon>FenetreSuiviRestrictions.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\FenetreSuiviRestrictions.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FenetreSuiviRestrictions.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Ressources\Localisation\FenetreVote.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
