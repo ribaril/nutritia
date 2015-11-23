@@ -13,7 +13,7 @@
             <Label HorizontalAlignment="Center" FontWeight="Bold" Margin="0,30,0,20" Content="{Resx LangueTitre}"/>
             <DataGrid Name="dgLangues" HorizontalAlignment="Center" Width="200" CanUserAddRows="False" AutoGenerateColumns="False" CanUserDeleteRows="False" SelectionMode="Single">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="{Resx ResxName=Nutritia.UI.Ressources.Localisation.Pages.MenuGeneral, Key=LangueHeaderNom}" IsReadOnly="True" Width="6*" Binding="{Binding Nom}"/>
+                    <DataGridTextColumn Header="{Resx ResxName=Nutritia.UI.Ressources.Localisation.Pages.MenuGeneral, Key=LangueHeaderNom}" IsReadOnly="True" Width="6*" Binding="{Binding Nom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <DataGridTemplateColumn IsReadOnly="False" Header="{Resx ResxName=Nutritia.UI.Ressources.Localisation.Pages.MenuGeneral, Key=LangueHeaderStatut}" Width="2*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
