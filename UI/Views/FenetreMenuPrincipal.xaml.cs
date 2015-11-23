@@ -25,7 +25,7 @@ namespace Nutritia.UI.Views
             InitializeComponent();
 
             // Header de la fenetre
-            App.Current.MainWindow.Title = "Nutritia - Menu Principal";
+            App.Current.MainWindow.Title = Nutritia.UI.Ressources.Localisation.FenetreMenuPrincipal.Titre;
         }
 
         private void btnInscription_Click(object sender, RoutedEventArgs e)

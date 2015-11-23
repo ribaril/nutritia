@@ -154,6 +154,16 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="UI\Ressources\Localisation\FenetreMenuPrincipal.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FenetreMenuPrincipal.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Ressources\Localisation\FenetreMenuPrincipal.en.Designer.cs">
+      <DependentUpon>FenetreMenuPrincipal.en.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Include="UI\Ressources\Localisation\FenetreMenuPrincipalConnecte.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -560,6 +570,15 @@
     <EmbeddedResource Include="UI\Ressources\Localisation\FenetreAPropos.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FenetreAPropos.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\FenetreMenuPrincipal.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FenetreMenuPrincipal.en.Designer.cs</LastGenOutput>
+      <DependentUpon>FenetreMenuPrincipal.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\FenetreMenuPrincipal.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FenetreMenuPrincipal.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Ressources\Localisation\FenetreMenuPrincipalConnecte.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
