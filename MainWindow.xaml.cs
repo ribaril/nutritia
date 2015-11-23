@@ -21,335 +21,356 @@ using System.ComponentModel;
 
 namespace Nutritia
 {
-	/// <summary>
-	/// Logique d'interaction pour MainWindow.xaml
-	/// </summary>
-	public partial class MainWindow : Window, IApplicationService
-	{
-		private const int SLEEP_NOTIFICATION_TIME = 10000;
+    /// <summary>
+    /// Logique d'interaction pour MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window, IApplicationService
+    {
+        private const int SLEEP_NOTIFICATION_TIME = 500;
 
-		// Thread asincrone qui regarde les modifications dans la BD
-		private Thread tNotif { get; set; }
-		private Thread ThreadNotif { get; set; }
+        // Thread asincrone qui regarde les modifications dans la BD
+        private Thread tNotif { get; set; }
+        private Thread ThreadNotif { get; set; }
 
-		// Permet d'interargir avec le threas asyncrone pour sauvegardé les nouveau plats dan la BD
-		static public List<Plat> NouveauxPlats { get; set; }
+        // Permet d'interargir avec le threas asyncrone pour sauvegardé les nouveau plats dan la BD
+        static public List<Plat> NouveauxPlats { get; set; }
+        public string MessageNouvelleVersion { get; set; }
 
-		public List<Plat> LstPlat { get; set; }
-
-
-		public MainWindow()
-		{
-
-			Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.Langue);
-			InitializeComponent();
-			ConfigurerTaille();
-			Configurer();
+        private IPlatService platAsync;
+        public List<Plat> LstPlat { get; set; }
 
 
-			NouveauxPlats = new List<Plat>();
-			LstPlat = ServiceFactory.Instance.GetService<IPlatService>().RetrieveAll().ToList();
+        public MainWindow()
+        {
 
-			presenteurContenu.Content = new MenuPrincipal();
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.Langue);
+            InitializeComponent();
+            ConfigurerTaille();
+            Configurer();
+            platAsync = new MySqlPlatService();
+            MessageNouvelleVersion = "";
+            NouveauxPlats = new List<Plat>();
+            LstPlat = ServiceFactory.Instance.GetService<IPlatService>().RetrieveAll().ToList();
 
-			// On lance le thread
-			tNotif = new Thread(VerifierChangementBD);
-			tNotif.Start();
-		}
+            presenteurContenu.Content = new MenuPrincipal();
+
+            // On lance le thread
+            tNotif = new Thread(VerifierChangementBD);
+            tNotif.Start();
+        }
 
 
-		/// <summary>
-		/// Méthode appellé en asyncrone qui boucle toute les demi-secondes pour verifier s'il y a des changements dans la BD
-		/// </summary>
-		private void VerifierChangementBD()
-		{
-			List<Plat> lstPlat;
-			List<int> lstIdNouveauPlat = new List<int>();
-			List<Plat> ancienneLstPlat;
+        /// <summary>
+        /// Méthode appellé en asyncrone qui boucle toute les demi-secondes pour verifier s'il y a des changements dans la BD
+        /// </summary>
+        private void VerifierChangementBD()
+        {
+            List<Plat> lstPlat = platAsync.RetrieveAll().ToList();
+            List<int> lstIdNouveauPlat = new List<int>();
+            List<Plat> ancienneLstPlat = platAsync.RetrieveAll().ToList();
+            // Roule tant que l'utilisateur est connécté 
             while (true)
-			{
-				if (!String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
-				{
-					bool ancienStatutAdmin = App.MembreCourant.EstAdministrateur;
-					bool ancienStatutBanni = App.MembreCourant.EstBanni;
+            {
+                if (!String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
+                {
+                    bool ancienStatutAdmin = App.MembreCourant.EstAdministrateur;
+                    bool ancienStatutBanni = App.MembreCourant.EstBanni;
+
+                    App.MembreCourant = ServiceFactory.Instance.GetService<IMembreService>().Retrieve(new RetrieveMembreArgs { IdMembre = App.MembreCourant.IdMembre });
+
+                    lstPlat = platAsync.RetrieveAll().ToList();
+
+                    foreach (var plat in lstPlat)
+                    {
+                        if (plat.NbVotes != ancienneLstPlat.Find(p => p.IdPlat == plat.IdPlat).NbVotes)
+                        {
+                            Dispatcher.Invoke(AppliquerNouveauChangementStatut);
+                            ancienneLstPlat = platAsync.RetrieveAll().ToList();
+                            
+                        }
+                    }
+
+                    if (App.MembreCourant.EstAdministrateur != ancienStatutAdmin
+                        || App.MembreCourant.EstBanni != ancienStatutBanni)
+                    {
+                        Dispatcher.Invoke(AppliquerNouveauChangementStatut);
+                    }
+
+                    if (App.MembreCourant.DerniereMaj != "")
+                    {
+                        lstIdNouveauPlat.Clear();
+
+                        foreach (var plat in LstPlat)
+                        {
+                            if (plat.DateAjout.CompareTo(App.MembreCourant.DerniereMaj) > -1)
+                            {
+                                if (!lstIdNouveauPlat.Exists(id => id == plat.IdPlat))
+                                    lstIdNouveauPlat.Add((int)plat.IdPlat);
+                            }
+                        }
+
+                        if (lstIdNouveauPlat.Count > 0)
+                        {
+                            NouveauxPlats = LstPlat.FindAll(plat => lstIdNouveauPlat.Contains((int)plat.IdPlat));
+                            Dispatcher.Invoke(DessinerNotification);
+                        }
+
+                    }
+                }
+                else
+                {
+                    NouveauxPlats.Clear();
+                    Dispatcher.Invoke(DessinerNotification);
+
+                }
+
+                Thread.Sleep(SLEEP_NOTIFICATION_TIME); // On fait une pause pour ne pas surcharger le CPU
+
+            }
+        }
 
 
-					App.MembreCourant = ServiceFactory.Instance.GetService<IMembreService>().Retrieve(new RetrieveMembreArgs { IdMembre = App.MembreCourant.IdMembre });
+        private void ConfigurerTaille()
+        {
+            Width = App.APP_WIDTH;
+            Height = App.APP_HEIGHT;
+            MinWidth = App.APP_WIDTH;
+            MinHeight = App.APP_HEIGHT;
+        }
 
-					ancienneLstPlat = new List<Plat>(LstPlat);
-					lstPlat = ServiceFactory.Instance.GetService<IPlatService>().RetrieveAll().ToList();
+        /// <summary>
+        /// Charge toutes les ressources du service factory
+        /// </summary>
+        public void Configurer()
+        {
+            // Inscription des différents services de l'application dans le ServiceFactory.
+            ServiceFactory.Instance.Register<IRestrictionAlimentaireService, MySqlRestrictionAlimentaireService>(new MySqlRestrictionAlimentaireService());
+            ServiceFactory.Instance.Register<IObjectifService, MySqlObjectifService>(new MySqlObjectifService());
+            ServiceFactory.Instance.Register<IUniteMesureService, MySqlUniteMesureService>(new MySqlUniteMesureService());
+            ServiceFactory.Instance.Register<IPreferenceService, MySqlPreferenceService>(new MySqlPreferenceService());
+            ServiceFactory.Instance.Register<IAlimentService, MySqlAlimentService>(new MySqlAlimentService());
+            ServiceFactory.Instance.Register<IPlatService, MySqlPlatService>(new MySqlPlatService());
+            ServiceFactory.Instance.Register<IMenuService, MySqlMenuService>(new MySqlMenuService());
+            ServiceFactory.Instance.Register<IMembreService, MySqlMembreService>(new MySqlMembreService());
+            ServiceFactory.Instance.Register<IVersionLogicielService, MySqlVersionLogicielService>(new MySqlVersionLogicielService());
+            ServiceFactory.Instance.Register<IApplicationService, MainWindow>(this);
+        }
 
-					foreach (var plat in lstPlat)
-					{
-						if (plat.NbVotes != ancienneLstPlat.Find(p => p.IdPlat == plat.IdPlat).NbVotes)
-						{
-							Dispatcher.Invoke(AppliquerNouveauChangementStatut);
-						}
-					}
-					
+        /// <summary>
+        /// Méthode qui permet de changer de userControl
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="vue"></param>
+        public void ChangerVue<T>(T vue)
+        {
+            presenteurContenu.Content = vue as UserControl;
+        }
 
+        /// <summary>
+        /// Ouvre la fenêtre des paramètres en modal
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnParam_Click(object sender, RoutedEventArgs e)
+        {
+            (new FenetreParametres()).ShowDialog();
+        }
 
-					if (App.MembreCourant.EstAdministrateur != ancienStatutAdmin
-						|| App.MembreCourant.EstBanni != ancienStatutBanni)
-					{
-						Dispatcher.Invoke(AppliquerNouveauChangementStatut);
-					}
+        /// <summary>
+        /// Permet, suivant le contexte, de revenir au menu précédent
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnRetour_Click(object sender, RoutedEventArgs e)
+        {
+            if (App.MembreCourant.IdMembre == null)
+                ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipal());
+            else
+            {
+                if (presenteurContenu.Content is Bannissement || presenteurContenu.Content is GestionAdmin || presenteurContenu.Content is GestionRepertoire)
+                    ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuAdministrateur());
+                else
+                    ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
+            }
+        }
 
-					if (App.MembreCourant.DerniereMaj != "")
-					{
-						lstIdNouveauPlat.Clear();
+        /// <summary>
+        /// Ouvre la fenêtre des infos sur l'application en modal
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAPropos_Click(object sender, RoutedEventArgs e)
+        {
+            (new FenetreAPropos()).ShowDialog();
+            //ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new FenetreAPropos());
+        }
 
-						foreach (var plat in LstPlat)
-						{
-							if (plat.DateAjout.CompareTo(App.MembreCourant.DerniereMaj) > -1)
-							{
-								if (!lstIdNouveauPlat.Exists(id => id == plat.IdPlat))
-									lstIdNouveauPlat.Add((int)plat.IdPlat);
-							}
-						}
+        /// <summary>
+        /// Ouvre la fenêtre d'aide de l'application en modeless
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAide_Click(object sender, RoutedEventArgs e)
+        {
+            FenetreAide fenetreAide = new FenetreAide(presenteurContenu.Content.GetType().Name);
+            fenetreAide.Show();
+        }
 
-						if (lstIdNouveauPlat.Count > 0)
-						{
-							NouveauxPlats = LstPlat.FindAll(plat => lstIdNouveauPlat.Contains((int)plat.IdPlat));
-							Dispatcher.Invoke(DessinerNotification);
-						}
+        /// <summary>
+        /// Quand la fenêtre se charge, 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            ThreadNotif = new Thread(LastestVersionPopUp);
+            ThreadNotif.Start();
+        }
 
-					}
+        private void LastestVersionPopUp()
+        {
+            bool isOlder = false;
+            IVersionLogicielService serviceMembre = ServiceFactory.Instance.GetService<IVersionLogicielService>();
 
-				}
-				else
-				{
-					NouveauxPlats.Clear(); // On vide la liste si l'utilisateur n'est pas connécté
-				}
+            VersionLogiciel latestVersionLogiciel = serviceMembre.RetrieveLatest();
 
-				Thread.Sleep(500); // On fait une pause pour ne pas surcharger le CPU
+            if (String.IsNullOrEmpty(latestVersionLogiciel.Version))
+            {
+                return;
+            }
 
-			}
-		}
+            Version versionBD = new Version(latestVersionLogiciel.Version);
+            Version versionLocal = new Version(FileVersionInfo.GetVersionInfo(App.ResourceAssembly.Location).FileVersion);
 
-
-		private void ConfigurerTaille()
-		{
-			Width = App.APP_WIDTH;
-			Height = App.APP_HEIGHT;
-			MinWidth = App.APP_WIDTH;
-			MinHeight = App.APP_HEIGHT;
-		}
-
-		/// <summary>
-		/// Charge toutes les ressources du service factory
-		/// </summary>
-		public void Configurer()
-		{
-			// Inscription des différents services de l'application dans le ServiceFactory.
-			ServiceFactory.Instance.Register<IRestrictionAlimentaireService, MySqlRestrictionAlimentaireService>(new MySqlRestrictionAlimentaireService());
-			ServiceFactory.Instance.Register<IObjectifService, MySqlObjectifService>(new MySqlObjectifService());
-			ServiceFactory.Instance.Register<IUniteMesureService, MySqlUniteMesureService>(new MySqlUniteMesureService());
-			ServiceFactory.Instance.Register<IPreferenceService, MySqlPreferenceService>(new MySqlPreferenceService());
-			ServiceFactory.Instance.Register<IAlimentService, MySqlAlimentService>(new MySqlAlimentService());
-			ServiceFactory.Instance.Register<IPlatService, MySqlPlatService>(new MySqlPlatService());
-			ServiceFactory.Instance.Register<IMenuService, MySqlMenuService>(new MySqlMenuService());
-			ServiceFactory.Instance.Register<IMembreService, MySqlMembreService>(new MySqlMembreService());
-			ServiceFactory.Instance.Register<IVersionLogicielService, MySqlVersionLogicielService>(new MySqlVersionLogicielService());
-			ServiceFactory.Instance.Register<IApplicationService, MainWindow>(this);
-		}
-
-		/// <summary>
-		/// Méthode qui permet de changer de userControl
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="vue"></param>
-		public void ChangerVue<T>(T vue)
-		{
-			presenteurContenu.Content = vue as UserControl;
-		}
-
-		/// <summary>
-		/// Ouvre la fenêtre des paramètres en modal
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void btnParam_Click(object sender, RoutedEventArgs e)
-		{
-			(new FenetreParametres()).ShowDialog();
-		}
-
-		/// <summary>
-		/// Permet, suivant le contexte, de revenir au menu précédent
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void btnRetour_Click(object sender, RoutedEventArgs e)
-		{
-			if (App.MembreCourant.IdMembre == null)
-				ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipal());
-			else
-			{
-				if (presenteurContenu.Content is Bannissement || presenteurContenu.Content is GestionAdmin || presenteurContenu.Content is GestionRepertoire)
-					ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuAdministrateur());
-				else
-					ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
-			}
-		}
-
-		/// <summary>
-		/// Ouvre la fenêtre des infos sur l'application en modal
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void btnAPropos_Click(object sender, RoutedEventArgs e)
-		{
-			(new FenetreAPropos()).ShowDialog();
-			//ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new FenetreAPropos());
-		}
-
-		/// <summary>
-		/// Ouvre la fenêtre d'aide de l'application en modeless
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void btnAide_Click(object sender, RoutedEventArgs e)
-		{
-			FenetreAide fenetreAide = new FenetreAide(presenteurContenu.Content.GetType().Name);
-			fenetreAide.Show();
-		}
-
-		/// <summary>
-		/// Quand la fenêtre se charge, 
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void Window_Loaded(object sender, RoutedEventArgs e)
-		{
-			ThreadNotif = new Thread(LastestVersionPopUp);
-			ThreadNotif.Start();
-		}
-
-		private void LastestVersionPopUp()
-		{
-			bool isOlder = false;
-			IVersionLogicielService serviceMembre = ServiceFactory.Instance.GetService<IVersionLogicielService>();
-
-			VersionLogiciel latestVersionLogiciel = serviceMembre.RetrieveLatest();
-
-			if (String.IsNullOrEmpty(latestVersionLogiciel.Version))
-			{
-				return;
-			}
-
-			Version versionBD = new Version(latestVersionLogiciel.Version);
-			Version versionLocal = new Version(FileVersionInfo.GetVersionInfo(App.ResourceAssembly.Location).FileVersion);
-
-			if (versionBD.Major > versionLocal.Major || versionBD.Minor > versionLocal.Minor || versionBD.Build > versionLocal.Build || versionBD.Revision > versionLocal.Revision)
-			{
-				isOlder = true;
-			}
+            if (versionBD.Major > versionLocal.Major || versionBD.Minor > versionLocal.Minor || versionBD.Build > versionLocal.Build || versionBD.Revision > versionLocal.Revision)
+            {
+                isOlder = true;
+            }
 
 
-			//Thread.Sleep(SLEEP_NOTIFICATION_TIME);
+            Thread.Sleep(SLEEP_NOTIFICATION_TIME);
 
-			if (isOlder)
-			{
-				string message = "Version: " + latestVersionLogiciel.Version + " disponible.\nLien de téléchargement: " + latestVersionLogiciel.DownloadLink;
-				MessageBox.Show(
-					message,
-					"Nouvelle version disponible",
-					MessageBoxButton.OK,
-					MessageBoxImage.Information);
-			}
-		}
+            if (isOlder)
+            {
+                MessageNouvelleVersion = "Version: " + latestVersionLogiciel.Version + " disponible.\nLien de téléchargement: " + latestVersionLogiciel.DownloadLink;
+                Dispatcher.Invoke(DessinerNotification);
 
-		private void btnNotification_Click(object sender, RoutedEventArgs e)
-		{
-			if (!String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
-			{
-				if (NouveauxPlats.Count > 0)
-				{
-					NouveauxPlats.Clear();
-					nbrNotif.Text = "";
-					App.MembreCourant.DerniereMaj = DateTime.Now.ToString();
-					ServiceFactory.Instance.GetService<IMembreService>().Update(App.MembreCourant);
-					CreerBoiteNotification();
-				}
-			}
-		}
+            }
+        }
 
-		/// <summary>
-		/// Formate les nouveaux plats pour les affichers lors du clique sur le bouton de notif
-		/// </summary>
-		private void CreerBoiteNotification()
-		{
+        private void btnNotification_Click(object sender, RoutedEventArgs e)
+        {
+            if (nbrNotif.Text != "")
+            {
+                if (!String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
+                {
+                    if (NouveauxPlats.Count > 0)
+                    {
+                        App.MembreCourant.DerniereMaj = DateTime.Now.ToString();
+                        ServiceFactory.Instance.GetService<IMembreService>().Update(App.MembreCourant);
+                        CreerBoiteNotification();
+                        nbrNotif.Text = "";
+                        NouveauxPlats.Clear();
+                    }
+                }
 
-			StringBuilder sbNotifs = new StringBuilder();
-			sbNotifs.AppendLine("Nouveaux plats : ");
-			foreach (var plat in NouveauxPlats)
-			{
-				sbNotifs.AppendLine(plat.Nom);
-			}
+                if (MessageNouvelleVersion != "")
+                {
+                    MessageBox.Show(
+                        MessageNouvelleVersion,
+                        "Nouvelle version disponible",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information);
+                    nbrNotif.Text = "";
+                    MessageNouvelleVersion = "";
+                }
+            }
+        }
 
-			MessageBox.Show(sbNotifs.ToString());
-		}
+        /// <summary>
+        /// Formate les nouveaux plats pour les affichers lors du clique sur le bouton de notif
+        /// </summary>
+        private void CreerBoiteNotification()
+        {
+            StringBuilder sbNotifs = new StringBuilder();
+            sbNotifs.AppendLine("Nouveaux plats : ");
+            foreach (var plat in NouveauxPlats)
+            {
+                sbNotifs.AppendLine(plat.Nom);
+            }
 
-		/// <summary>
-		/// Génere le nbr de notification pour le dessiner à côté de l'image de notif
-		/// </summary>
-		private void DessinerNotification()
-		{
-			if (!String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
-			{
-				if (NouveauxPlats.Count > 0)
-				{
-					nbrNotif.Text = NouveauxPlats.Count.ToString();
-				}
-			}
-			else
-			{
-				nbrNotif.Text = "";
-			}
-		}
+            MessageBox.Show(sbNotifs.ToString());
+        }
 
-		public void AppliquerNouveauChangementStatut()
-		{
-			if (!String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
-			{
-				if (presenteurContenu.Content is FenetreVotes)
-					((FenetreVotes)presenteurContenu.Content).Dessiner();
+        /// <summary>
+        /// Génere le nbr de notification pour le dessiner à côté de l'image de notif
+        /// </summary>
+        private void DessinerNotification()
+        {
+            if (!String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
+            {
+                if (NouveauxPlats.Count > 0)
+                    nbrNotif.Text = NouveauxPlats.Count.ToString();
+            }
+            else
+            {
+                nbrNotif.Text = "";
+            }
 
-				if (App.MembreCourant.EstBanni)
-				{
-					App.MembreCourant = new Membre();
-					MainWindow.NouveauxPlats.Clear();
-					ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipal());
-				}
-				else
-				{
-					if (presenteurContenu.Content is MenuPrincipalConnecte)
-						ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
-				}
+            if (MessageNouvelleVersion != "")
+            {
+                if (nbrNotif.Text == "")
+                    nbrNotif.Text = "1";
+                else
+                    nbrNotif.Text = (Convert.ToInt32(nbrNotif.Text) + 1).ToString();
+            }
 
-				if (App.MembreCourant.EstAdministrateur)
-				{
-					if (presenteurContenu.Content is MenuPrincipalConnecte)
-						ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
-				}
-				else
-				{
-					if (presenteurContenu.Content is Bannissement
-					|| presenteurContenu.Content is GestionAdmin
-					|| presenteurContenu.Content is GestionRepertoire
-					|| presenteurContenu.Content is MenuAdministrateur)
-						ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
-				}
+        }
 
-			}
+        public void AppliquerNouveauChangementStatut()
+        {
+            if (!String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
+            {
+                if (presenteurContenu.Content is FenetreVotes)
+                    ((FenetreVotes)presenteurContenu.Content).Rafraichir();
 
-		}
+                if (App.MembreCourant.EstBanni)
+                {
+                    App.MembreCourant = new Membre();
+                    MainWindow.NouveauxPlats.Clear();
+                    ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipal());
+                }
+                else
+                {
+                    if (presenteurContenu.Content is MenuPrincipalConnecte)
+                        ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
+                }
 
-		private void Window_Closing(object sender, CancelEventArgs e)
-		{
-			tNotif.Abort();
-			ThreadNotif.Abort();
-		}
+                if (App.MembreCourant.EstAdministrateur)
+                {
+                    if (presenteurContenu.Content is MenuPrincipalConnecte)
+                        ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
+                }
+                else
+                {
+                    if (presenteurContenu.Content is Bannissement
+                    || presenteurContenu.Content is GestionAdmin
+                    || presenteurContenu.Content is GestionRepertoire
+                    || presenteurContenu.Content is MenuAdministrateur)
+                        ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
+                }
 
-	}
+            }
+
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            tNotif.Abort();
+            ThreadNotif.Abort();
+        }
+
+
+
+    }
 }

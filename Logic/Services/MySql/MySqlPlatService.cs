@@ -21,7 +21,7 @@ namespace Nutritia
         /// </summary>
         public MySqlPlatService ()
 	    {
-            alimentService = ServiceFactory.Instance.GetService<IAlimentService>();
+            alimentService = new MySqlAlimentService();
 	    }
 
         /// <summary>
