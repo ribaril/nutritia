@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Infralution.Localization.Wpf;
 using Nutritia.UI.Views;
 
 namespace Nutritia.UI.Views
@@ -23,6 +24,8 @@ namespace Nutritia.UI.Views
     {
         public MenuPrincipalConnecte()
         {
+            CultureManager.UICultureChanged += CultureManager_UICultureChanged;
+
             InitializeComponent();
 
             // Header de la fenetre
@@ -73,6 +76,11 @@ namespace Nutritia.UI.Views
         private void btnGestAdmin_Click(object sender, RoutedEventArgs e)
         {
             ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuAdministrateur());
+        }
+
+        private void CultureManager_UICultureChanged(object sender, EventArgs e)
+        {
+            App.Current.MainWindow.Title = Nutritia.UI.Ressources.Localisation.FenetreMenuPrincipalConnecte.Titre;
         }
 	}
 }
