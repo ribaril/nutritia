@@ -4,39 +4,40 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="515" d:DesignWidth="650">
+             d:DesignHeight="515" d:DesignWidth="650"
+             ResxExtension.DefaultResxName="Nutritia.UI.Ressources.Localisation.FenetreMenuPrincipalConnecte" Language="{UICulture}">
     <Canvas >
-        <Label Name="lbl_nom_membre" Content="Bienvenue nomMembre" Style="{StaticResource fontNutritia}" FontStyle="Italic" FontSize="30"  Canvas.Top="20" Canvas.Left="313" Width="319"/>
+        <Label Name="lbl_nom_membre" Content="{Resx BienvenueNonMembre}" Style="{StaticResource fontNutritia}" FontStyle="Italic" FontSize="30"  Canvas.Top="20" Canvas.Left="313" Width="319"/>
         <Label Content="Nutritia" Style="{StaticResource fontNutritia}" FontSize="45"  Canvas.Left="14" Canvas.Top="7"/>
         <Image Source="/Nutritia;component/UI/Images/LogoIcon.PNG" Panel.ZIndex="-100" Width="100" Height="100" Canvas.Left="147" Canvas.Top="-5"/>
         <Button Name="btnDeconnexion" Canvas.Left="451" Canvas.Top="91" Height="75" Width="75" Click="btnDeconnexion_Click">
             <Image Source="/Nutritia;component/UI/Images/logInIcon.png" />
         </Button>
-        <Label Content="Déconnexion" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="161" Canvas.Left="401" Width="178"/>
+        <Label Content="{Resx Deconnexion}" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="161" Canvas.Left="401" Width="178"/>
         <Button Name="btnCalculatrice" Canvas.Left="112" Canvas.Top="223" Width="75" Height="75" Click="btnCalculatrice_Click">
             <Image Source="/Nutritia;component/UI/Images/calcIcon.png" />
         </Button>
-        <Label Content="Calculatrice Nutritionnelle" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="293" Canvas.Left="-3"/>
+        <Label Content="{Resx CalculatriceNutritionnelle}" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="293" Canvas.Left="-3"/>
         <Button Name="btnMenuListe" Canvas.Left="454" Canvas.Top="222" Width="75" Height="75" Click="btnMenuListe_Click">
             <Image Source="/Nutritia;component/UI/Images/menuListIcon.png"/>
         </Button>
-        <Label Content="Menu &amp; liste d'épicerie" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="293" Canvas.Left="344"/>
+        <Label Content="{Resx MenuListeEpicerie}" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="293" Canvas.Left="344"/>
         <Button Name="btnAjoutPlat" Canvas.Left="112" Canvas.Top="359" Width="75" Height="75" Click="btnAjoutPlat_Click">
             <Image Source="/Nutritia;component/UI/Images/AjoutIcon.png" />
         </Button>
-        <Label Content="Ajouter un plat" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="429" Canvas.Left="46"/>
+        <Label Content="{Resx AjoutPlat}" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="429" Canvas.Left="46"/>
         <Button Name="btnVoterPlat" Canvas.Left="454" Canvas.Top="358" Width="75" Height="75" Click="btnVoterPlat_Click">
             <Image Source="/Nutritia;component/UI/Images/voterPlatIcon.png"/>
         </Button>
-        <Label Content="Voter un plat" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="429" Canvas.Left="403"/>
+        <Label Content="{Resx VoterPlat}" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="429" Canvas.Left="403"/>
         <Button Name="btnProfil" Canvas.Left="112" Canvas.Top="91" Height="75" Width="75" Click="btnProfil_Click">
             <Image Source="/Nutritia;component/UI/Images/ProfilIcon.png" />
         </Button>
-        <Label Content="Mon profil" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="161" Canvas.Left="81" Width="134"/>
+        <Label Content="{Resx MonProfil}" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="161" Canvas.Left="81" Width="134"/>
         <Button x:Name="btnGestAdmin" Visibility="Hidden" Canvas.Left="370" Canvas.Top="19" Click="btnGestAdmin_Click">
             <StackPanel Orientation="Horizontal">
                 <Image  Height="40" Source="/Nutritia;component/UI/Images/adminIcon.png" />
-                <Label Content="Gestion admin" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="20" Canvas.Left="395" Width="188"/>
+                <Label Content="{Resx GestionAdmin}" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="20" Canvas.Left="395" Width="188"/>
             </StackPanel>
         </Button>
 
