@@ -12,12 +12,12 @@ namespace Nutritia
         public int? IdPlat { get; set; }
         public string Createur { get; set; }
         public string Nom { get; set; }
+        public string Description { get; set; }
         public string TypePlat { get; set; }
         public double? Note { get; set; }
         public int NbVotes { get; set; }
         public string ImageUrl { get; set; }
         public IList<Aliment> ListeIngredients { get; set; }
-        public bool EstActif { get; set; }
         #endregion
 
         /// <summary>
