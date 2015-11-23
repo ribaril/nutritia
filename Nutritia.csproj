@@ -154,6 +154,16 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="UI\Ressources\Localisation\FenetreListeEpicerie.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FenetreListeEpicerie.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Ressources\Localisation\FenetreListeEpicerie.en.Designer.cs">
+      <DependentUpon>FenetreListeEpicerie.en.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Include="UI\Ressources\Localisation\FenetreMenuAdministrateur.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -580,6 +590,15 @@
     <EmbeddedResource Include="UI\Ressources\Localisation\FenetreAPropos.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FenetreAPropos.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\FenetreListeEpicerie.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FenetreListeEpicerie.en.Designer.cs</LastGenOutput>
+      <DependentUpon>FenetreListeEpicerie.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\FenetreListeEpicerie.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FenetreListeEpicerie.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Ressources\Localisation\FenetreMenuAdministrateur.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
