@@ -10,204 +10,204 @@ using Nutritia.Toolkit;
 
 namespace Nutritia
 {
-	public class MySqlConnexion
-	{
+    public class MySqlConnexion
+    {
 
-		private readonly string CONNECTION_STRING;
-		private readonly string CONNECTION_STRING2;
-		private MySqlConnection connection;
-		private MySqlTransaction transaction;
-
-
-		public MySqlConnexion()
-		{
-			CONNECTION_STRING = SessionHelper.StringToSessions(Properties.Settings.Default.ActiveSession).First().ToConnexionString();
-			CONNECTION_STRING2 = ConfigurationManager.ConnectionStrings["MySqlConnexion"].ConnectionString;
-
-			ConfigurationConnection();
-
-		}
-
-		public MySqlConnexion(string connectionString)
-		{
-			ConfigurationConnection();
-		}
-
-		private void ConfigurationConnection()
-		{
-			try
-			{
-				connection = new MySqlConnection(CONNECTION_STRING);
-			}
-			catch (MySqlException e)
-			{
-				connection = new MySqlConnection(CONNECTION_STRING2);
-			}
-		}
+        private readonly string CONNECTION_STRING;
+        private MySqlConnection connection;
+        private MySqlTransaction transaction;
 
 
-		private bool Open()
-		{
-			try
-			{
-				if (connection.State == ConnectionState.Open)
-					return true;
+        public MySqlConnexion()
+        {
+            //CONNECTION_STRING = ConfigurationManager.ConnectionStrings["MySqlConnexion"].ConnectionString;
+            CONNECTION_STRING = SessionHelper.StringToSessions(Properties.Settings.Default.ActiveSession).First().ToConnexionString();
 
-				connection.Open();
-				return true;
-			}
-			catch (MySqlException)
-			{
-				throw;
-			}
+            ConfigurationConnection(CONNECTION_STRING);
+        }
 
-		}
+        public MySqlConnexion(string connectionString)
+        {
+            ConfigurationConnection(connectionString);
+        }
 
-		public void OpenWithTransaction()
-		{
-			try
-			{
-				if (Open())
-				{
-					transaction = connection.BeginTransaction();
-				}
-			}
-			catch (MySqlException)
-			{
-				throw;
-			}
-		}
+        private void ConfigurationConnection(string connectionString)
+        {
+            try
+            {
+                connection = new MySqlConnection(connectionString);
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+        }
 
-		private bool Close()
-		{
-			try
-			{
-				connection.Close();
-				return true;
-			}
-			catch (MySqlException)
-			{
-				throw;
-			}
-		}
+
+        private bool Open()
+        {
+            try
+            {
+                if (connection.State == ConnectionState.Open)
+                    return true;
+
+                connection.Open();
+                return true;
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+
+        }
+
+        public void OpenWithTransaction()
+        {
+            try
+            {
+                if (Open())
+                {
+                    transaction = connection.BeginTransaction();
+                }
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+        }
+
+        private bool Close()
+        {
+            try
+            {
+                connection.Close();
+                return true;
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+        }
 
 
 
-		public void Commit()
-		{
-			try
-			{
-				transaction.Commit();
-				transaction = null;
-				connection.Close();
-			}
-			catch (MySqlException)
-			{
-				throw;
-			}
-		}
+        public void Commit()
+        {
+            try
+            {
+                transaction.Commit();
+                transaction = null;
+                connection.Close();
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+        }
 
-		public void Rollback()
-		{
-			try
-			{
-				transaction.Rollback();
-				transaction = null;
-				connection.Close();
-			}
-			catch (MySqlException)
-			{
-				throw;
-			}
-		}
+        public void Rollback()
+        {
+            try
+            {
+                transaction.Rollback();
+                transaction = null;
+                connection.Close();
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+        }
 
-		public int NonQuery(string query)
-		{
-			int nbResultat = 0;
-			try
-			{
-				if (Open() || connection.State == ConnectionState.Open)
-				{
-					MySqlCommand command = new MySqlCommand(query, connection);
-					nbResultat = command.ExecuteNonQuery();
-				}
+        public int NonQuery(string query)
+        {
+            int nbResultat = 0;
+            try
+            {
+                if (Open() || connection.State == ConnectionState.Open)
+                {
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    nbResultat = command.ExecuteNonQuery();
+                }
 
-				return nbResultat;
-			}
-			catch (MySqlException)
-			{
-				throw;
-			}
-			finally
-			{
-				if (transaction == null)
-					Close();
-			}
-		}
-
-
-		public DataSet Query(string query)
-		{
-
-			DataSet dataset = new DataSet();
-
-			try
-			{
-				if (Open() || transaction != null)
-				{
-					MySqlDataAdapter adapter = new MySqlDataAdapter();
-					adapter.SelectCommand = new MySqlCommand(query, connection);
-					adapter.Fill(dataset);
-				}
-				return dataset;
-
-			}
-			catch (MySqlException)
-			{
-				throw;
-			}
-			finally
-			{
-				Close();
-			}
-
-		}
+                return nbResultat;
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+            finally
+            {
+                if (transaction == null)
+                    Close();
+            }
+        }
 
 
-		public DataSet StoredProcedure(string query, IList<MySqlParameter> parameters = null)
-		{
-			DataSet dataset = new DataSet();
+        public DataSet Query(string query)
+        {
 
-			try
-			{
-				if (Open() || transaction != null)
-				{
+            DataSet dataset = new DataSet();
 
-					MySqlCommand commande = new MySqlCommand(query, connection);
-					commande.CommandType = CommandType.StoredProcedure;
-
-					if (parameters != null)
-					{
-						commande.Parameters.AddRange(parameters.ToArray());
-					}
-					MySqlDataAdapter adapter = new MySqlDataAdapter();
-					adapter.SelectCommand = commande;
-					adapter.Fill(dataset);
+            try
+            {
+                if (Open() || transaction != null)
+                {
+                    MySqlDataAdapter adapter = new MySqlDataAdapter();
+                    adapter.SelectCommand = new MySqlCommand(query, connection);
+                    adapter.Fill(dataset);
 
 
-				}
-				return dataset;
+                }
+                return dataset;
 
-			}
-			catch (MySqlException)
-			{
-				throw;
-			}
-			finally
-			{
-				if (transaction == null)
-					Close();
-			}
-		}
-	}
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+            finally
+            {
+                Close();
+            }
+
+        }
+
+
+        public DataSet StoredProcedure(string query, IList<MySqlParameter> parameters = null)
+        {
+            DataSet dataset = new DataSet();
+
+            try
+            {
+                if (Open() || transaction != null)
+                {
+
+                    MySqlCommand commande = new MySqlCommand(query, connection);
+                    commande.CommandType = CommandType.StoredProcedure;
+
+                    if (parameters != null)
+                    {
+                        commande.Parameters.AddRange(parameters.ToArray());
+                    }
+                    MySqlDataAdapter adapter = new MySqlDataAdapter();
+                    adapter.SelectCommand = commande;
+                    adapter.Fill(dataset);
+
+
+                }
+                return dataset;
+
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+            finally
+            {
+                if (transaction == null)
+                    Close();
+            }
+        }
+    }
 }
