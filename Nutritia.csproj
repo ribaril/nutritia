@@ -154,6 +154,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="UI\Ressources\Localisation\FenetreProfil.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FenetreProfil.resx</DependentUpon>
+    </Compile>
     <Compile Include="UI\Ressources\Localisation\FenetreOuvrirMenu.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -171,6 +176,11 @@
     </Compile>
     <Compile Include="UI\Ressources\Localisation\FenetreParametres.en.Designer.cs">
       <DependentUpon>FenetreParametres.en.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="UI\Ressources\Localisation\FenetreProfil.en.Designer.cs">
+      <DependentUpon>FenetreProfil.en.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
@@ -540,6 +550,15 @@
     <EmbeddedResource Include="UI\Ressources\Localisation\FenetreAPropos.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FenetreAPropos.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\FenetreProfil.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FenetreProfil.en.Designer.cs</LastGenOutput>
+      <DependentUpon>FenetreProfil.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\FenetreProfil.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FenetreProfil.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Ressources\Localisation\FenetreOuvrirMenu.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
