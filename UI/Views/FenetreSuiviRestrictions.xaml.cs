@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace Nutritia.UI.Views
     /// </summary>
     public partial class FenetreSuiviRestrictions : Window
     {
-        public List<Plat> ListePlatsAdmissibles { get; set; }
+        public List<Plat> ListePlatsNonAdmissibles { get; set; }
 
         /// <summary>
         /// Constructeur par défaut de la classe.
@@ -36,8 +37,8 @@ namespace Nutritia.UI.Views
                 btnEnregistrer.IsEnabled = false;
             }
 
-            dgPlatsNonAdmissibles.ItemsSource = listePlatsNonAdmissibles;
-            ListePlatsAdmissibles = new List<Plat>();
+            ListePlatsNonAdmissibles = listePlatsNonAdmissibles;
+            dgPlatsNonAdmissibles.ItemsSource = ListePlatsNonAdmissibles;
         }
 
         /// <summary>
@@ -60,7 +61,10 @@ namespace Nutritia.UI.Views
         /// <param name="e"></param>
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            ListePlatsAdmissibles.Add((Plat)dgPlatsNonAdmissibles.SelectedItem);
+            if(dgPlatsNonAdmissibles.SelectedItem != null)
+            {
+                ListePlatsNonAdmissibles.Find(plat => plat.IdPlat == ((Plat)dgPlatsNonAdmissibles.SelectedItem).IdPlat).EstTricherie = true;
+            }
         }
 
         /// <summary>
@@ -71,7 +75,7 @@ namespace Nutritia.UI.Views
         /// <param name="e"></param>
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            ListePlatsAdmissibles.Remove((Plat)dgPlatsNonAdmissibles.SelectedItem);
+            ListePlatsNonAdmissibles.Find(plat => plat.IdPlat == ((Plat)dgPlatsNonAdmissibles.SelectedItem).IdPlat).EstTricherie = false;
         }
 
         /// <summary>
