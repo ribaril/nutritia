@@ -18,6 +18,7 @@ namespace Nutritia
         public string NoteConviviale { get; set; }
         public int NbVotes { get; set; }
         public string ImageUrl { get; set; }
+        public bool EstTricherie { get; set; }
         public IList<Aliment> ListeIngredients { get; set; }
         #endregion
 

@@ -23,6 +23,7 @@ namespace Nutritia.UI.Views
     {
         private IAlimentService AlimentService { get; set; }
         private IPlatService PlatService { get; set; }
+        private ISuiviPlatService SuiviPlatService { get; set; }
         private IMenuService MenuService { get; set; }
         private List<Plat> ListeDejeuners { get; set; }
         private List<Plat> ListeEntrees { get; set; }
@@ -55,6 +56,7 @@ namespace Nutritia.UI.Views
 
             AlimentService = ServiceFactory.Instance.GetService<IAlimentService>();
             PlatService = ServiceFactory.Instance.GetService<IPlatService>();
+            SuiviPlatService = ServiceFactory.Instance.GetService<ISuiviPlatService>();
             MenuService = ServiceFactory.Instance.GetService<IMenuService>();
 
             // Chargement des plats.
@@ -75,6 +77,48 @@ namespace Nutritia.UI.Views
                 btnSuiviPlatsNonAdmissibles.IsEnabled = true;
                 btnOuvrirMenu.IsEnabled = true;
                 RestreindrePossibilites();
+                List<Plat> ListePlatsSuivis = new List<Plat>(SuiviPlatService.RetrieveSome(new RetrieveSuiviPlatArgs { IdMembre = (int)App.MembreCourant.IdMembre }));
+                
+                if (ListePlatsSuivis.Count == 0)
+                {
+                    SuiviPlatService.Insert(ListePlatsRetires, App.MembreCourant);
+                }
+                else
+                {
+                    foreach (Plat platCourant in ListePlatsRetires)
+                    {
+                        if (ListePlatsSuivis.Find(plat => plat.IdPlat == platCourant.IdPlat) != null)
+                        {
+                            platCourant.EstTricherie = ListePlatsSuivis.Find(plat => plat.IdPlat == platCourant.IdPlat).EstTricherie;
+
+                            if (platCourant.EstTricherie)
+                            {
+                                switch (platCourant.TypePlat)
+                                {
+                                    case "Déjeuner":
+                                        ListeDejeuners.Add(platCourant);
+                                        break;
+                                    case "Entrée":
+                                        ListeEntrees.Add(platCourant);
+                                        break;
+                                    case "Plat principal":
+                                        ListePlatPrincipaux.Add(platCourant);
+                                        break;
+                                    case "Breuvage":
+                                        ListeBreuvages.Add(platCourant);
+                                        break;
+                                    case "Déssert":
+                                        ListeDesserts.Add(platCourant);
+                                        break;
+                                }
+                            }
+                        }
+
+                    }
+
+                    SuiviPlatService.Update(ListePlatsRetires, App.MembreCourant);
+
+                }
             }
 
             EstNouveauMenu = true;
@@ -1149,32 +1193,38 @@ namespace Nutritia.UI.Views
         /// <param name="e"></param>
         private void btnSuiviPlatsNonAdmissibles_Click(object sender, RoutedEventArgs e)
         {
-            FenetreSuiviRestrictions fenetreSuvi = new FenetreSuiviRestrictions(ListePlatsRetires);
+            FenetreSuiviRestrictions fenetreSuvi = new FenetreSuiviRestrictions(new List<Plat>(SuiviPlatService.RetrieveSome(new RetrieveSuiviPlatArgs { IdMembre = (int)App.MembreCourant.IdMembre })));
             fenetreSuvi.ShowDialog();
 
             if(fenetreSuvi.DialogResult == true)
             {
-                foreach(Plat platCourant in fenetreSuvi.ListePlatsAdmissibles)
+                foreach(Plat platCourant in fenetreSuvi.ListePlatsNonAdmissibles)
                 {
-                    switch (platCourant.TypePlat)
+                    if(platCourant.EstTricherie)
                     {
-                        case "Déjeuner":
-                            ListeDejeuners.Add(platCourant);
-                            break;
-                        case "Entrée":
-                            ListeEntrees.Add(platCourant);
-                            break;
-                        case "Plat principal":
-                            ListePlatPrincipaux.Add(platCourant);
-                            break;
-                        case "Breuvage":
-                            ListeBreuvages.Add(platCourant);
-                            break;
-                        case "Déssert":
-                            ListeDesserts.Add(platCourant);
-                            break;
+                        switch (platCourant.TypePlat)
+                        {
+                            case "Déjeuner":
+                                ListeDejeuners.Add(platCourant);
+                                break;
+                            case "Entrée":
+                                ListeEntrees.Add(platCourant);
+                                break;
+                            case "Plat principal":
+                                ListePlatPrincipaux.Add(platCourant);
+                                break;
+                            case "Breuvage":
+                                ListeBreuvages.Add(platCourant);
+                                break;
+                            case "Déssert":
+                                ListeDesserts.Add(platCourant);
+                                break;
+                        }
                     }
                 }
+
+                SuiviPlatService.Update(fenetreSuvi.ListePlatsNonAdmissibles, App.MembreCourant);
+
             }
         }
     }

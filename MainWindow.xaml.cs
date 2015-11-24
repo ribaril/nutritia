@@ -54,6 +54,7 @@ namespace Nutritia
             ServiceFactory.Instance.Register<IPreferenceService, MySqlPreferenceService>(new MySqlPreferenceService());
             ServiceFactory.Instance.Register<IAlimentService, MySqlAlimentService>(new MySqlAlimentService());
             ServiceFactory.Instance.Register<IPlatService, MySqlPlatService>(new MySqlPlatService());
+            ServiceFactory.Instance.Register<ISuiviPlatService, MySqlSuiviPlatService>(new MySqlSuiviPlatService());
             ServiceFactory.Instance.Register<IMenuService, MySqlMenuService>(new MySqlMenuService());
             ServiceFactory.Instance.Register<IMembreService, MySqlMembreService>(new MySqlMembreService());
             ServiceFactory.Instance.Register<IVersionLogicielService, MySqlVersionLogicielService>(new MySqlVersionLogicielService());

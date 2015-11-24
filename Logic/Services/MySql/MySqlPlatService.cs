@@ -245,7 +245,7 @@ namespace Nutritia
                 TypePlat = (string)plat["typePlat"],
                 Note = note,
                 NbVotes = (int)plat["nbVotes"],
-                ImageUrl = (string)plat["imageUrl"],
+                ImageUrl = (string)plat["imageUrl"]
             };
         }
     }
