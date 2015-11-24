@@ -22,14 +22,14 @@ namespace Nutritia.UI.Ressources.Localisation {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class FenetreInfoMembre {
+    public class FenetreGestionAdmin {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal FenetreInfoMembre() {
+        internal FenetreGestionAdmin() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Nutritia.UI.Ressources.Localisation {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Nutritia.UI.Ressources.Localisation.FenetreInfoMembre", typeof(FenetreInfoMembre).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Nutritia.UI.Ressources.Localisation.FenetreGestionAdmin", typeof(FenetreGestionAdmin).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,74 @@ namespace Nutritia.UI.Ressources.Localisation {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à an.
+        ///   Recherche une chaîne localisée semblable à Accepter.
         /// </summary>
-        public static string Age {
+        public static string Accepter {
             get {
-                return ResourceManager.GetString("Age", resourceCulture);
+                return ResourceManager.GetString("Accepter", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à ans.
+        ///   Recherche une chaîne localisée semblable à Admin.
         /// </summary>
-        public static string Ages {
+        public static string Admin {
             get {
-                return ResourceManager.GetString("Ages", resourceCulture);
+                return ResourceManager.GetString("Admin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Administrateurs.
+        /// </summary>
+        public static string Administrateurs {
+            get {
+                return ResourceManager.GetString("Administrateurs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Compte.
+        /// </summary>
+        public static string Compte {
+            get {
+                return ResourceManager.GetString("Compte", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Information du membre sélectionné.
+        /// </summary>
+        public static string InfoMembre {
+            get {
+                return ResourceManager.GetString("InfoMembre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Rechercher un membre.
+        /// </summary>
+        public static string RechercheMembre {
+            get {
+                return ResourceManager.GetString("RechercheMembre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Nom d&apos;utilisateur.
+        /// </summary>
+        public static string SearchBoxWatermark {
+            get {
+                return ResourceManager.GetString("SearchBoxWatermark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Nutritia - Gestion administrateurs.
+        /// </summary>
+        public static string Titre {
+            get {
+                return ResourceManager.GetString("Titre", resourceCulture);
             }
         }
     }
