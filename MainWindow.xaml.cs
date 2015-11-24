@@ -247,23 +247,23 @@ namespace Nutritia
 
         private void btnNotification_Click(object sender, RoutedEventArgs e)
         {
-            if (!String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
-            {
-                if (NouveauxPlats.Count > 0)
-                {
-                    NouveauxPlats.Clear();
-                    nbrNotif.Text = "";
-                    App.MembreCourant.DerniereMaj = DateTime.Now.ToString();
-                    ServiceFactory.Instance.GetService<IMembreService>().Update(App.MembreCourant);
-                    CreerBoiteNotification();
-                }
-            }
-        }
+			/*if (!String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
+			{
+				if (NouveauxPlats.Count > 0)
+				{
+					NouveauxPlats.Clear();
+					nbrNotif.Text = "";
+					App.MembreCourant.DerniereMaj = DateTime.Now.ToString();
+					ServiceFactory.Instance.GetService<IMembreService>().Update(App.MembreCourant);
+					CreerBoiteNotification();
+				}
+			}*/
+		}
 
-        /// <summary>
-        /// Formate les nouveaux plats pour les affichers lors du clique sur le bouton de notif
-        /// </summary>
-        private void CreerBoiteNotification()
+		/// <summary>
+		/// Formate les nouveaux plats pour les affichers lors du clique sur le bouton de notif
+		/// </summary>
+		private void CreerBoiteNotification()
         {
 
             StringBuilder sbNotifs = new StringBuilder();
@@ -337,7 +337,15 @@ namespace Nutritia
             ThreadNotif.Abort();
         }
 
+		private void btnNouvelleVersion_Click(object sender, RoutedEventArgs e)
+		{
+			LastestVersionPopUp();
+		}
 
+		private void btnNouveauxPlats_Click(object sender, RoutedEventArgs e)
+		{
+			DessinerNotification();
+		}
 
-    }
+	}
 }

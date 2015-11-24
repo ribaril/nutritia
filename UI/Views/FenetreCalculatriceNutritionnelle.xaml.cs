@@ -673,6 +673,4 @@ namespace Nutritia.UI.Views
 	}
 
 
-
-
 }
