@@ -9,5 +9,6 @@ namespace Nutritia
     public interface IApplicationService
     {
         void ChangerVue<T>(T vue);
+        void Configurer();
     }
 }

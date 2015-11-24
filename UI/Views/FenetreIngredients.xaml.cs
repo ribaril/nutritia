@@ -20,18 +20,22 @@ namespace Nutritia.UI.Views
     /// </summary>
     public partial class FenetreIngredients : Window
     {
+        private Plat PlatCourant { get; set; }
+        
         /// <summary>
         /// Constructeur par défaut de la classe.
         /// </summary>
         /// <param name="plat">Un plat.</param>
+        /// <param name="nbPersonnes">Le nombre de personnes.</param>
         public FenetreIngredients(Plat plat, int nbPersonnes)
         {
             InitializeComponent();
 
-            // Header de la fenetre
-            App.Current.MainWindow.Title = "Nutritia - Ingrédients";
+            PlatCourant = plat;
 
-            GenererRangees(plat.ListeIngredients.Count + 1);
+            int nbRangees = plat.ListeIngredients.Count + 1;
+
+            GenererRangees(nbRangees);
 
             Label entete = new Label();
             entete.FontSize = 18;
@@ -39,7 +43,20 @@ namespace Nutritia.UI.Views
             entete.Content = plat.Nom;
             grdIngredients.Children.Add(entete);
 
-            AfficherIngredients(new List<Aliment>(plat.ListeIngredients), nbPersonnes);
+            AfficherIngredients(new List<Aliment>(PlatCourant.ListeIngredients), nbPersonnes);
+
+            Button btnCalculatrice = new Button();
+            btnCalculatrice.Content = "Calculatrice";
+            btnCalculatrice.Width = 150;
+            btnCalculatrice.Height = 25;
+            btnCalculatrice.FontSize = 16;
+            Thickness margin = new Thickness();
+            margin.Top = 10;
+            btnCalculatrice.Margin = margin;
+            btnCalculatrice.Style = FindResource("fontNutritia") as Style;
+            btnCalculatrice.Click += new RoutedEventHandler(btnCalculatrice_Click);
+            Grid.SetRow(btnCalculatrice, nbRangees);
+            grdIngredients.Children.Add(btnCalculatrice);
         }
 
         /// <summary>
@@ -50,7 +67,7 @@ namespace Nutritia.UI.Views
         {
             RowDefinition rowDefinition;
 
-            for (int i = 0; i < nbRangees; i++)
+            for (int i = 0; i < nbRangees + 1; i++)
             {
                 rowDefinition = new RowDefinition();
                 rowDefinition.Height = GridLength.Auto;
@@ -124,6 +141,30 @@ namespace Nutritia.UI.Views
             spValeurNut.Children.Add(lblValeurNut);
             ttValeurNut.Content = spValeurNut;
             return ttValeurNut;
+        }
+
+        /// <summary>
+        /// Événement lancé sur un clique du bouton Calculatrice.
+        /// La calculatrice nutritionnelle s'ouvrira ayant comme contenu ce plat.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCalculatrice_Click(object sender, RoutedEventArgs e)
+        {
+            Window windowCalculatrice = new Window();
+            windowCalculatrice.Width = App.APP_WIDTH;
+            windowCalculatrice.Height = App.APP_HEIGHT;
+            windowCalculatrice.ResizeMode = ResizeMode.CanMinimize;
+            windowCalculatrice.Title = "Nutritia - Calculatrice nutritionnelle";
+            windowCalculatrice.Icon = new BitmapImage(new Uri("pack://application:,,,/UI/Images/logoIconPetit.png"));
+            Grid grdContenu = new Grid();
+            ImageBrush brush = new ImageBrush();
+            brush.Opacity = 0.3;
+            brush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/UI/Images/background.jpg"));
+            grdContenu.Background = brush;
+            grdContenu.Children.Add(new FenetreCalculatriceNutritionelle(PlatCourant));
+            windowCalculatrice.Content = grdContenu;
+            windowCalculatrice.Show();
         }
     }
 }

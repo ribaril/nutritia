@@ -1,0 +1,70 @@
+﻿<Page x:Class="Nutritia.UI.Pages.MenuConnexion"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Nutritia.UI.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="MenuConnexion">
+
+    <Grid>
+        <StackPanel Margin="20,0,0,0" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel>
+                    <Label>Nom d'hôte (ou adresse IP)</Label>
+                    <TextBox Name="txHostname" Width="155"></TextBox>
+                </StackPanel>
+                <StackPanel Margin="10,0,0,0">
+                    <Label>Port</Label>
+                    <TextBox Name="txPort" Width="39" PreviewTextInput="txPort_PreviewTextInput" DataObject.Pasting="txPort_Pasting">3306</TextBox>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <StackPanel Width="102">
+                    <Label>Nom d'utilisateur</Label>
+                    <TextBox Name="txUsername"></TextBox>
+                </StackPanel>
+                <StackPanel Margin="20,0,0,0">
+                    <Label>Mot de passe</Label>
+                    <PasswordBox ToolTip="Pas réellement sécurisé" Name="pswPassowrd" Width="76"></PasswordBox>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel>
+                    <Label>Nom de session</Label>
+                    <TextBox Name="txName" Width="90"></TextBox>
+                </StackPanel>
+                <StackPanel Margin="20,0,0,0">
+                    <Label>Nom de la base de données</Label>
+                    <TextBox Name="txDatabaseName" Width="146" HorizontalAlignment="Left"></TextBox>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel>
+                    <Label HorizontalAlignment="Center">Sessions</Label>
+                    <DataGrid Name="dgSessions" Width="200" Height="100" 
+                              CanUserAddRows="False" CanUserDeleteRows="False" 
+                              HeadersVisibility="None" GridLinesVisibility="None" AutoGenerateColumns="False"
+                              SelectionMode="Single" Background="White" Loaded="dgSessions_Loaded" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="*" Binding="{Binding Path=Nom}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+                </StackPanel>
+                <StackPanel Margin="5,0,0,0" VerticalAlignment="Center">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Margin" Value="0, 3, 0, 0"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Button Name="btnConnect" Margin="0,27,0,0" Click="btnConnect_Click">Connexion</Button>
+                    <Button Name="btnLoad" Click="btnLoad_Click">Chargement</Button>
+                    <Button Name="btnSave" Click="btnSave_Click">Sauvegarde</Button>
+                    <Button Name="btnDelete" Click="btnDelete_Click">Supprimer</Button>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

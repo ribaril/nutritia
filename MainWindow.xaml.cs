@@ -26,7 +26,7 @@ namespace Nutritia
     /// </summary>
     public partial class MainWindow : Window, IApplicationService
     {
-        private const int SLEEP_NOTIFICATION_TIME = 10000;
+        private const int SLEEP_NOTIFICATION_TIME = 500;
 
         // Thread asincrone qui regarde les modifications dans la BD
         private Thread tNotif { get; set; }
@@ -34,19 +34,21 @@ namespace Nutritia
 
         // Permet d'interargir avec le threas asyncrone pour sauvegardé les nouveau plats dan la BD
         static public List<Plat> NouveauxPlats { get; set; }
+        public string MessageNouvelleVersion { get; set; }
 
+        private IPlatService platAsync;
         public List<Plat> LstPlat { get; set; }
 
 
         public MainWindow()
         {
 
-            InitializeComponent();
-
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.Langue);
-
+            InitializeComponent();
+            ConfigurerTaille();
             Configurer();
-
+            platAsync = new MySqlPlatService();
+            MessageNouvelleVersion = "";
             NouveauxPlats = new List<Plat>();
             LstPlat = ServiceFactory.Instance.GetService<IPlatService>().RetrieveAll().ToList();
 
@@ -63,27 +65,32 @@ namespace Nutritia
         /// </summary>
         private void VerifierChangementBD()
         {
-            List<Plat> lstPlat;
+            List<Plat> lstPlat = platAsync.RetrieveAll().ToList();
             List<int> lstIdNouveauPlat = new List<int>();
+            List<Plat> ancienneLstPlat = platAsync.RetrieveAll().ToList();
+            // Roule tant que l'utilisateur est connécté 
             while (true)
             {
                 if (!String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
                 {
                     bool ancienStatutAdmin = App.MembreCourant.EstAdministrateur;
                     bool ancienStatutBanni = App.MembreCourant.EstBanni;
-                    
+
                     App.MembreCourant = ServiceFactory.Instance.GetService<IMembreService>().Retrieve(new RetrieveMembreArgs { IdMembre = App.MembreCourant.IdMembre });
-                    
-                    List<Plat> ancienneLstPlat = new List<Plat>(LstPlat);
-                    lstPlat = ServiceFactory.Instance.GetService<IPlatService>().RetrieveAll().ToList();
-                    
-                        if (ancienneLstPlat != lstPlat)
+
+                    lstPlat = platAsync.RetrieveAll().ToList();
+
+                    foreach (var plat in lstPlat)
+                    {
+                        if (plat.NbVotes != ancienneLstPlat.Find(p => p.IdPlat == plat.IdPlat).NbVotes)
                         {
                             Dispatcher.Invoke(AppliquerNouveauChangementStatut);
+                            ancienneLstPlat = platAsync.RetrieveAll().ToList();
+                            
                         }
-                    
+                    }
 
-                    if (App.MembreCourant.EstAdministrateur != ancienStatutAdmin 
+                    if (App.MembreCourant.EstAdministrateur != ancienStatutAdmin
                         || App.MembreCourant.EstBanni != ancienStatutBanni)
                     {
                         Dispatcher.Invoke(AppliquerNouveauChangementStatut);
@@ -109,23 +116,32 @@ namespace Nutritia
                         }
 
                     }
-
                 }
                 else
                 {
-                    NouveauxPlats.Clear(); // On vide la liste si l'utilisateur n'est pas connécté
+                    NouveauxPlats.Clear();
+                    Dispatcher.Invoke(DessinerNotification);
+
                 }
 
-                Thread.Sleep(500); // On fait une pause pour ne pas surcharger le CPU
+                Thread.Sleep(SLEEP_NOTIFICATION_TIME); // On fait une pause pour ne pas surcharger le CPU
 
             }
         }
 
 
+        private void ConfigurerTaille()
+        {
+            Width = App.APP_WIDTH;
+            Height = App.APP_HEIGHT;
+            MinWidth = App.APP_WIDTH;
+            MinHeight = App.APP_HEIGHT;
+        }
+
         /// <summary>
         /// Charge toutes les ressources du service factory
         /// </summary>
-        private void Configurer()
+        public void Configurer()
         {
             // Inscription des différents services de l'application dans le ServiceFactory.
             ServiceFactory.Instance.Register<IRestrictionAlimentaireService, MySqlRestrictionAlimentaireService>(new MySqlRestrictionAlimentaireService());
@@ -232,16 +248,13 @@ namespace Nutritia
             }
 
 
-            //Thread.Sleep(SLEEP_NOTIFICATION_TIME);
+            Thread.Sleep(SLEEP_NOTIFICATION_TIME);
 
             if (isOlder)
             {
-                string message = "Version: " + latestVersionLogiciel.Version + " disponible.\nLien de téléchargement: " + latestVersionLogiciel.DownloadLink;
-                MessageBox.Show(
-                    message,
-                    "Nouvelle version disponible",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Information);
+                MessageNouvelleVersion = "Version: " + latestVersionLogiciel.Version + " disponible.\nLien de téléchargement: " + latestVersionLogiciel.DownloadLink;
+                Dispatcher.Invoke(DessinerNotification);
+
             }
         }
 
@@ -265,7 +278,6 @@ namespace Nutritia
 		/// </summary>
 		private void CreerBoiteNotification()
         {
-
             StringBuilder sbNotifs = new StringBuilder();
             sbNotifs.AppendLine("Nouveaux plats : ");
             foreach (var plat in NouveauxPlats)
@@ -284,14 +296,21 @@ namespace Nutritia
             if (!String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
             {
                 if (NouveauxPlats.Count > 0)
-                {
                     nbrNotif.Text = NouveauxPlats.Count.ToString();
-                }
             }
             else
             {
                 nbrNotif.Text = "";
             }
+
+            if (MessageNouvelleVersion != "")
+            {
+                if (nbrNotif.Text == "")
+                    nbrNotif.Text = "1";
+                else
+                    nbrNotif.Text = (Convert.ToInt32(nbrNotif.Text) + 1).ToString();
+            }
+
         }
 
         public void AppliquerNouveauChangementStatut()
@@ -299,7 +318,7 @@ namespace Nutritia
             if (!String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
             {
                 if (presenteurContenu.Content is FenetreVotes)
-                    ((FenetreVotes)presenteurContenu.Content).Dessiner();
+                    ((FenetreVotes)presenteurContenu.Content).Rafraichir();
 
                 if (App.MembreCourant.EstBanni)
                 {
@@ -326,9 +345,9 @@ namespace Nutritia
                     || presenteurContenu.Content is MenuAdministrateur)
                         ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
                 }
-                    
+
             }
-            
+
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)

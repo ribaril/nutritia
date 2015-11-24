@@ -275,10 +275,10 @@
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Label Name="lbl_nom" Grid.Row="0" Content="Nom de l'aliment" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,55,0,0"></Label>
-                    <TextBox Name="Nom_alim" Grid.Row="0" SelectedText="" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,75,0,0"></TextBox>
-                    <Label Name="lbl_grp_alim" Grid.Row="0" Content="Catégorie alimentaire" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,105,0,0"></Label>
-                    <ComboBox Grid.Row="0" Name="cbo_grp_alim" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,125,0,0">
+                    <Label Name="lbl_nom" Grid.Row="0" Content="Nom de l'aliment" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,30,0,0"></Label>
+                    <TextBox Name="Nom_alim" Grid.Row="0" SelectedText="" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,50,0,0" TextChanged="Nom_alim_TextChanged"></TextBox>
+                    <Label Name="lbl_grp_alim" Grid.Row="0" Content="Catégorie alimentaire" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,80,0,0"></Label>
+                    <ComboBox Grid.Row="0" Name="cbo_grp_alim" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,100,0,0">
                         <ComboBoxItem></ComboBoxItem>
                         <ComboBoxItem>Boissons</ComboBoxItem>
                         <ComboBoxItem>Arachides et noix</ComboBoxItem>
@@ -293,14 +293,17 @@
                         <ComboBoxItem>Produits sucrés</ComboBoxItem>
                         <ComboBoxItem>Autres</ComboBoxItem>
                     </ComboBox>
-                    <Label Name="lbl_unite_mesure" Grid.Row="0" Content="Unité de mesure" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,155,0,0"></Label>
-                    <ComboBox Grid.Row="0" Name="cbo_unite_mesure" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,175,0,0">
+                    <Label Name="lbl_unite_mesure" Grid.Row="0" Content="Unité de mesure" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,130,0,0"></Label>
+                    <ComboBox Grid.Row="0" Name="cbo_unite_mesure" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,150,0,0">
                         <ComboBoxItem>Millilitre</ComboBoxItem>
                         <ComboBoxItem>Gramme</ComboBoxItem>
                         <ComboBoxItem>Unite</ComboBoxItem>
                     </ComboBox>
-                    <Label Name="lbl_mesure" Grid.Row="0" Content="Mesure de la portion" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,205,0,0"></Label>
-                    <TextBox Name="Mesure" Grid.Row="0" MaxLength="3" SelectedText="" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="82.5,225,0,0"></TextBox>
+                    <Label Name="lbl_mesure" Grid.Row="0" Content="Mesure de la portion" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,180,0,0"></Label>
+                    <TextBox Name="Mesure" Grid.Row="0" MaxLength="3" SelectedText="" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="82.5,200,0,0"></TextBox>
+
+                    <Image Name="img_alim" Width="75" Height="75" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,240,0,0" Source="pack://application:,,,/UI/Images/nonDisponible.png"></Image>
+                    <Button Name="btn_ajout_img" Grid.Row="0" Content="Ajouter une image" Height="30" Width="150" Foreground="DarkGreen" FontSize="15" Style="{StaticResource nonTransparent}" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,260,0,0" Click="Ajouter_Image"></Button>
 
                     <Label Grid.Row="0" Content="Valeurs nutritionnelles" Width="265" Height="30" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,20,0"></Label>
                     <Label Name="lbl_calories" Grid.Row="0" Content="Énergie (calories)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,160,0"></Label>
@@ -319,7 +322,7 @@
                     <TextBox Name="Sodium" Grid.Row="0"  MaxLength="6" SelectedText="" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,200,160,0"></TextBox>
                 </Grid>
             </GroupBox>
-            <Button Name="btn_creer" Grid.Row="0" Content="Ajouter l'aliment" Height="30" Width="150" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,30" Click="Valider_Inserer_Aliment"></Button>
+            <Button Name="btn_creer" Grid.Row="0" Content="Ajouter l'aliment" Height="30" Width="150" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource nonTransparent}" Margin="315,0,0,30" Click="Valider_Inserer_Aliment"></Button>
         </Grid>
 
         <Grid Grid.Row="1" Name="grid_modif_aliment" Visibility="Hidden">

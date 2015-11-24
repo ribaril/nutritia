@@ -18,8 +18,64 @@ namespace Nutritia
         public string ImageUrl { get; set; }
         public IList<Aliment> ListeIngredients { get; set; }
         public bool EstActif { get; set; }
-		public String DateAjout { get; set; }
-		#endregion
-	}
+		public string DateAjout { get; set; }
+        #endregion
+
+        /// <summary>
+        /// Constructeur par défaut de la classe.
+        /// </summary>
+        public Plat()
+        {
+            ListeIngredients = new List<Aliment>();
+        }
+
+        /// <summary>
+        /// Méthode permettant de calculer les valeurs nutritionnelles d'un plat.
+        /// </summary>
+        /// <param name="plat">Le plat à analyser.</param>
+        /// <returns>Un dictionnaire contenant les valeurs nutritionnelles du plat.</returns>
+        public Dictionary<string, double> CalculerValeursNutritionnelles()
+        {
+            // Initialisation du dictionnaire.
+            Dictionary<string, double> dictionnaireValeursNut = new Dictionary<string, double>();
+
+            dictionnaireValeursNut.Add("Energie", 0);
+            dictionnaireValeursNut.Add("Glucide", 0);
+            dictionnaireValeursNut.Add("Fibre", 0);
+            dictionnaireValeursNut.Add("Proteine", 0);
+            dictionnaireValeursNut.Add("Lipide", 0);
+            dictionnaireValeursNut.Add("Cholesterol", 0);
+            dictionnaireValeursNut.Add("Sodium", 0);
+
+            foreach (Aliment alimentCourant in ListeIngredients)
+            {
+                dictionnaireValeursNut["Energie"] += alimentCourant.Energie * (alimentCourant.Quantite/alimentCourant.Mesure);
+                dictionnaireValeursNut["Glucide"] += alimentCourant.Glucide * (alimentCourant.Quantite / alimentCourant.Mesure);
+                dictionnaireValeursNut["Fibre"] += alimentCourant.Fibre * (alimentCourant.Quantite / alimentCourant.Mesure);
+                dictionnaireValeursNut["Proteine"] += alimentCourant.Proteine * (alimentCourant.Quantite / alimentCourant.Mesure);
+                dictionnaireValeursNut["Lipide"] += alimentCourant.Lipide * (alimentCourant.Quantite / alimentCourant.Mesure);
+                dictionnaireValeursNut["Cholesterol"] += alimentCourant.Cholesterol * (alimentCourant.Quantite / alimentCourant.Mesure);
+                dictionnaireValeursNut["Sodium"] += alimentCourant.Sodium * (alimentCourant.Quantite / alimentCourant.Mesure);
+            }
+
+            return dictionnaireValeursNut;
+        }
+
+        /// <summary>
+        /// Méthode permettant d'obtenir une liste contenant les catégories de ses ingrédients.
+        /// </summary>
+        /// <returns>Une liste contenant les catégories.</returns>
+        public List<string> ObtenirCategoriesIngredients()
+        {
+            List<string> categories = new List<string>();
+
+            foreach (Aliment alimentCourant in ListeIngredients)
+            {
+                categories.Add(alimentCourant.Categorie);
+            }
+
+            return categories.Distinct().ToList<string>();
+        }
+    }
 }
     

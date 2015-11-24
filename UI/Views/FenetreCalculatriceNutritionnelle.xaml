@@ -7,7 +7,8 @@
              xmlns:local="clr-namespace:Nutritia.UI.Views"
              xmlns:watermark="clr-namespace:Nutritia.UI.Watermark"
              mc:Ignorable="d" 
-             d:DesignHeight="550" d:DesignWidth="650">
+             d:DesignHeight="550" d:DesignWidth="650"
+			 Keyboard.KeyDown="UserControl_KeyDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="55"></RowDefinition>
@@ -26,13 +27,25 @@
         <ScrollViewer Name="svAccordeon" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Height="200" Width="300" PreviewMouseWheel="ScrollFocus">
             <layoutToolkit:Accordion Name="accPlat" Width="290" />
         </ScrollViewer>
-        <GroupBox x:Name="gbPlateau" Header="Plateau" HorizontalAlignment="Center"  Grid.Row="2" VerticalAlignment="Center" Height="170" Width="300">
-            <ContentPresenter Name="presenteurContenu2" />
+        <GroupBox x:Name="gbPlateau" Header="Plateau" HorizontalAlignment="Center"  Grid.Row="2" VerticalAlignment="Center" Height="190" Width="300">
+            <DockPanel>
+                <Button Name="btnVider" Height="20" Click="btnVider_Click" DockPanel.Dock="Top">
+                    <DockPanel Width="287" ToolTip="Ctrl + Delete">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Image Width="15" Source="/Nutritia;component/UI/Images/poubelleIcon.png"/>
+                            <TextBlock>Vider</TextBlock>
+                        </StackPanel>
+                    </DockPanel>
+                </Button>
+                <ContentPresenter Name="presenteurContenu2"/>
+            </DockPanel>
         </GroupBox>
-        <Button Name="btnVider" Width="30" Height="30" Grid.Row="2" Margin="275,9,20,208">
+        <!--<Button Name="btnVider" Width="20" Height="20" Grid.Row="2" Grid.Column="0" Click="btnVider_Click" Margin="316,16,314,212" Grid.ColumnSpan="2">
             <Image  Source="/Nutritia;component/UI/Images/poubelleIcon.png" />
-        </Button>
-        <GroupBox x:Name="gbValeurNutri" Header="Valeurs nutritionelles du plateau" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Height="170" Width="290" Grid.Column="1">
+            X
+        </Button>-->
+
+        <GroupBox x:Name="gbValeurNutri" Header="Valeurs nutritionelles du plateau" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Height="190" Width="290" Grid.Column="1">
             <ContentPresenter Name="presenteurContenu3" VerticalAlignment="Top"/>
         </GroupBox>
         <GroupBox x:Name="gbBoiteRecherche" Header="Barre de recherche" HorizontalAlignment="Center"  Grid.Row="1" Grid.Column="1" Height="210" Width="305" VerticalAlignment="Center" >

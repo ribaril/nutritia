@@ -5,23 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Nutritia.UI.Views"
         mc:Ignorable="d"
-        Title="Nutritia - Paramètres" Height="250" Width="400" ResizeMode="NoResize">
+        Title="Nutritia - Paramètres" Height="350" Width="520" MinHeight="300" MinWidth="500" ResizeMode="NoResize">
     <Grid>
-        <StackPanel HorizontalAlignment="Center">
-            <Label HorizontalAlignment="Center" FontWeight="Bold" Margin="0,30,0,20">Langues d'affichage du logiciel</Label>
-            <DataGrid Name="dgLangues" HorizontalAlignment="Center" Width="200" CanUserAddRows="False" AutoGenerateColumns="False" CanUserDeleteRows="False" SelectionMode="Single">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Langue" IsReadOnly="True" Width="6*" Binding="{Binding Nom}"/>
-                    <DataGridTemplateColumn IsReadOnly="False" Header="Active" Width="2*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <RadioButton HorizontalAlignment="Center" GroupName="grpActif" IsChecked="{Binding Actif, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-            <Button Style="{StaticResource nonTransparent}" IsDefault="True" Margin="0,40,0,0" HorizontalAlignment="Center" Click="Button_Click">Enregistrer</Button>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Rectangle Grid.Column="0" Grid.Row="0" Stroke="Black" Fill="Transparent"/>
+        <StackPanel Grid.Column="0" Grid.Row="0">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Padding" Value="0, 5, 0, 5"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Focusable" Value="False"/>
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                    <EventSetter Event="Button.Click" Handler="ChangeColor"/>
+                </Style>
+            </StackPanel.Resources>
+            <Button Name="btnGeneral" Click="btnGeneral_Click" Background="Gray">Général</Button>
+            <Button Name="btnConnexion" Click="btnConnexion_Click">Connexion</Button>
         </StackPanel>
+        <Rectangle Grid.Row="1" Grid.ColumnSpan="2" Stroke="Black" Fill="Transparent"/>
+        <DockPanel Name="dockContent"  Grid.Column="1" Grid.Row="0">
+            <Frame x:Name="FrmNavigation" NavigationUIVisibility="Hidden" />
+        </DockPanel>
     </Grid>
 </Window>

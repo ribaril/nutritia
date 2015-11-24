@@ -19,14 +19,13 @@
             <RowDefinition Height="4*"></RowDefinition>
             <RowDefinition Height="4*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Style="{StaticResource fontNutritia}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14">Quelle note donneriez-vous à ce plat (0-5) ?</Label>
-        <ComboBox Name="cboNote" Grid.Row="1" Style="{StaticResource fontNutritia}" SelectedIndex="0" Width="50" Height="25">
-            <ComboBoxItem>0</ComboBoxItem>
-            <ComboBoxItem>1</ComboBoxItem>
-            <ComboBoxItem>2</ComboBoxItem>
-            <ComboBoxItem>3</ComboBoxItem>
-            <ComboBoxItem>4</ComboBoxItem>
-            <ComboBoxItem>5</ComboBoxItem>
+        <Label Style="{StaticResource fontNutritia}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14">Quelle note donneriez-vous à ce plat ?</Label>
+        <ComboBox Name="cboNote" Grid.Row="1" Style="{StaticResource fontNutritia}" SelectedIndex="0" Width="100" Height="25" HorizontalContentAlignment="Center">
+            <ComboBoxItem Uid="1">Mauvais</ComboBoxItem>
+            <ComboBoxItem Uid="2">Passable</ComboBoxItem>
+            <ComboBoxItem Uid="3">Moyen</ComboBoxItem>
+            <ComboBoxItem Uid="4">Succulent</ComboBoxItem>
+            <ComboBoxItem Uid="5">Divin</ComboBoxItem>
         </ComboBox>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Name="btnAnnuler" Margin="0, 0, 25, 0" Click="btnAnnuler_Click">Annuler</Button>

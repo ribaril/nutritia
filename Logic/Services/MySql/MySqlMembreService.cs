@@ -9,272 +9,272 @@ using System.Windows;
 
 namespace Nutritia
 {
-	/// <summary>
-	/// Service MySql lié aux Membres.
-	/// </summary>
-	public class MySqlMembreService : IMembreService
-	{
-		private MySqlConnexion connexion;
-		private readonly IRestrictionAlimentaireService restrictionAlimentaireService;
-		private readonly IObjectifService objectifService;
-		private readonly IPreferenceService preferenceService;
-		private readonly IMenuService menuService;
+    /// <summary>
+    /// Service MySql lié aux Membres.
+    /// </summary>
+    public class MySqlMembreService : IMembreService
+    {
+        private readonly MySqlConnexion connexion;
+        private readonly IRestrictionAlimentaireService restrictionAlimentaireService;
+        private readonly IObjectifService objectifService;
+        private readonly IPreferenceService preferenceService;
+        private readonly IMenuService menuService;
 
-		/// <summary>
-		/// Constructeur par défaut de la classe.
-		/// </summary>
-		public MySqlMembreService()
-		{
-			restrictionAlimentaireService = ServiceFactory.Instance.GetService<IRestrictionAlimentaireService>();
-			objectifService = ServiceFactory.Instance.GetService<IObjectifService>();
-			preferenceService = ServiceFactory.Instance.GetService<IPreferenceService>();
-			menuService = ServiceFactory.Instance.GetService<IMenuService>();
-		}
+        /// <summary>
+        /// Constructeur par défaut de la classe.
+        /// </summary>
+        public MySqlMembreService()
+            : this(new MySqlConnexion())
+        {
 
-		/// <summary>
-		/// Méthode permettant d'obtenir l'ensemble des membres sauvegardés dans la base de données.
-		/// </summary>
-		/// <returns>Une liste contenant les membres.</returns>
-		public IList<Membre> RetrieveAll()
-		{
+        }
 
-			IList<Membre> resultat = new List<Membre>();
+        public MySqlMembreService(MySqlConnexion mysqlConnexion)
+        {
+            connexion = mysqlConnexion;
 
-			try
-			{
-				connexion = new MySqlConnexion();
+            restrictionAlimentaireService = ServiceFactory.Instance.GetService<IRestrictionAlimentaireService>();
+            objectifService = ServiceFactory.Instance.GetService<IObjectifService>();
+            preferenceService = ServiceFactory.Instance.GetService<IPreferenceService>();
+            menuService = ServiceFactory.Instance.GetService<IMenuService>();
+        }
 
-				string requete = "SELECT * FROM Membres";
+        /// <summary>
+        /// Méthode permettant d'obtenir l'ensemble des membres sauvegardés dans la base de données.
+        /// </summary>
+        /// <returns>Une liste contenant les membres.</returns>
+        public IList<Membre> RetrieveAll()
+        {
 
-				DataSet dataSetMembres = connexion.Query(requete);
-				DataTable tableMembres = dataSetMembres.Tables[0];
+            IList<Membre> resultat = new List<Membre>();
 
-				// Construction de chaque objet Membre.
-				foreach (DataRow rowMembre in tableMembres.Rows)
-				{
-					Membre membre = ConstruireMembre(rowMembre);
+            try
+            {
+                string requete = "SELECT * FROM Membres";
 
-					// Ajout des restrictions alimentaires du membre.
-					requete = string.Format("SELECT idRestrictionAlimentaire FROM RestrictionsAlimentairesMembres WHERE idMembre = {0}", membre.IdMembre);
+                DataSet dataSetMembres = connexion.Query(requete);
+                DataTable tableMembres = dataSetMembres.Tables[0];
 
-					DataSet dataSetRestrictions = connexion.Query(requete);
-					DataTable tableRestrictions = dataSetRestrictions.Tables[0];
+                // Construction de chaque objet Membre.
+                foreach (DataRow rowMembre in tableMembres.Rows)
+                {
+                    Membre membre = ConstruireMembre(rowMembre);
 
-					foreach (DataRow rowRestriction in tableRestrictions.Rows)
-					{
-						membre.ListeRestrictions.Add(restrictionAlimentaireService.Retrieve(new RetrieveRestrictionAlimentaireArgs { IdRestrictionAlimentaire = (int)rowRestriction["idRestrictionAlimentaire"] }));
-					}
+                    // Ajout des restrictions alimentaires du membre.
+                    requete = string.Format("SELECT idRestrictionAlimentaire FROM RestrictionsAlimentairesMembres WHERE idMembre = {0}", membre.IdMembre);
 
-					// Ajout des objectifs du membre.
-					requete = string.Format("SELECT idObjectif FROM ObjectifsMembres WHERE idMembre = {0}", membre.IdMembre);
+                    DataSet dataSetRestrictions = connexion.Query(requete);
+                    DataTable tableRestrictions = dataSetRestrictions.Tables[0];
 
-					DataSet dataSetObjectifs = connexion.Query(requete);
-					DataTable tableObjectifs = dataSetObjectifs.Tables[0];
+                    foreach (DataRow rowRestriction in tableRestrictions.Rows)
+                    {
+                        membre.ListeRestrictions.Add(restrictionAlimentaireService.Retrieve(new RetrieveRestrictionAlimentaireArgs { IdRestrictionAlimentaire = (int)rowRestriction["idRestrictionAlimentaire"] }));
+                    }
 
-					foreach (DataRow rowObjectif in tableObjectifs.Rows)
-					{
-						membre.ListeObjectifs.Add(objectifService.Retrieve(new RetrieveObjectifArgs { IdObjectif = (int)rowObjectif["idObjectif"] }));
-					}
+                    // Ajout des objectifs du membre.
+                    requete = string.Format("SELECT idObjectif FROM ObjectifsMembres WHERE idMembre = {0}", membre.IdMembre);
 
-					// Ajout des préférences du membre.
-					requete = string.Format("SELECT idPreference FROM PreferencesMembres WHERE idMembre = {0}", membre.IdMembre);
+                    DataSet dataSetObjectifs = connexion.Query(requete);
+                    DataTable tableObjectifs = dataSetObjectifs.Tables[0];
 
-					DataSet dataSetPreferences = connexion.Query(requete);
-					DataTable tablePreferences = dataSetPreferences.Tables[0];
+                    foreach (DataRow rowObjectif in tableObjectifs.Rows)
+                    {
+                        membre.ListeObjectifs.Add(objectifService.Retrieve(new RetrieveObjectifArgs { IdObjectif = (int)rowObjectif["idObjectif"] }));
+                    }
 
-					foreach (DataRow rowPreference in tablePreferences.Rows)
-					{
-						membre.ListePreferences.Add(preferenceService.Retrieve(new RetrievePreferenceArgs { IdPreference = (int)rowPreference["idPreference"] }));
-					}
+                    // Ajout des préférences du membre.
+                    requete = string.Format("SELECT idPreference FROM PreferencesMembres WHERE idMembre = {0}", membre.IdMembre);
 
-					membre.ListeMenus = menuService.RetrieveSome(new RetrieveMenuArgs { IdMembre = (int)membre.IdMembre });
+                    DataSet dataSetPreferences = connexion.Query(requete);
+                    DataTable tablePreferences = dataSetPreferences.Tables[0];
 
-					resultat.Add(membre);
+                    foreach (DataRow rowPreference in tablePreferences.Rows)
+                    {
+                        membre.ListePreferences.Add(preferenceService.Retrieve(new RetrievePreferenceArgs { IdPreference = (int)rowPreference["idPreference"] }));
+                    }
 
-				}
+                    membre.ListeMenus = menuService.RetrieveSome(new RetrieveMenuArgs { IdMembre = (int)membre.IdMembre });
 
-			}
-			catch (MySqlException)
-			{
-				throw;
-			}
+                    resultat.Add(membre);
 
-			return resultat;
-		}
+                }
 
-		/// <summary>
-		/// Méthode permettant d'obtenir un membre sauvegardé dans la base de données.
-		/// </summary>
-		/// <param name="args">Les arguments permettant de retrouver le membre.</param>
-		/// <returns>Un objet Membre.</returns>
-		public Membre Retrieve(RetrieveMembreArgs args)
-		{
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
 
-			Membre membre = new Membre();
+            return resultat;
+        }
 
-			try
-			{
-				connexion = new MySqlConnexion();
+        /// <summary>
+        /// Méthode permettant d'obtenir un membre sauvegardé dans la base de données.
+        /// </summary>
+        /// <param name="args">Les arguments permettant de retrouver le membre.</param>
+        /// <returns>Un objet Membre.</returns>
+        public Membre Retrieve(RetrieveMembreArgs args)
+        {
 
-				string requete = string.Format("SELECT * FROM Membres WHERE idMembre = {0}", args.IdMembre);
+            Membre membre = new Membre();
 
-				if (args.NomUtilisateur != null && args.NomUtilisateur != string.Empty)
-				{
-					requete = string.Format("SELECT * FROM Membres WHERE nomUtilisateur = '{0}'", args.NomUtilisateur);
-				}
+            try
+            {
+                string requete = string.Format("SELECT * FROM Membres WHERE idMembre = {0}", args.IdMembre);
 
-				DataSet dataSetMembres = connexion.Query(requete);
-				DataTable tableMembres = dataSetMembres.Tables[0];
+                if (args.NomUtilisateur != null && args.NomUtilisateur != string.Empty)
+                {
+                    requete = string.Format("SELECT * FROM Membres WHERE nomUtilisateur = '{0}'", args.NomUtilisateur);
+                }
 
-				// Construction de l'objet Membre.
-				if (tableMembres.Rows.Count != 0)
-				{
-					membre = ConstruireMembre(tableMembres.Rows[0]);
+                DataSet dataSetMembres = connexion.Query(requete);
+                DataTable tableMembres = dataSetMembres.Tables[0];
 
-					// Ajout des restrictions alimentaires du membre.
-					requete = string.Format("SELECT idRestrictionAlimentaire FROM RestrictionsAlimentairesMembres WHERE idMembre = {0}", membre.IdMembre);
+                // Construction de l'objet Membre.
+                if (tableMembres.Rows.Count != 0)
+                {
+                    membre = ConstruireMembre(tableMembres.Rows[0]);
 
-					DataSet dataSetRestrictions = connexion.Query(requete);
-					DataTable tableRestrictions = dataSetRestrictions.Tables[0];
+                    // Ajout des restrictions alimentaires du membre.
+                    requete = string.Format("SELECT idRestrictionAlimentaire FROM RestrictionsAlimentairesMembres WHERE idMembre = {0}", membre.IdMembre);
 
-					foreach (DataRow rowRestriction in tableRestrictions.Rows)
-					{
-						membre.ListeRestrictions.Add(restrictionAlimentaireService.Retrieve(new RetrieveRestrictionAlimentaireArgs { IdRestrictionAlimentaire = (int)rowRestriction["idRestrictionAlimentaire"] }));
-					}
+                    DataSet dataSetRestrictions = connexion.Query(requete);
+                    DataTable tableRestrictions = dataSetRestrictions.Tables[0];
 
-					// Ajout des objectifs du membre.
-					requete = string.Format("SELECT idObjectif FROM ObjectifsMembres WHERE idMembre = {0}", membre.IdMembre);
+                    foreach (DataRow rowRestriction in tableRestrictions.Rows)
+                    {
+                        membre.ListeRestrictions.Add(restrictionAlimentaireService.Retrieve(new RetrieveRestrictionAlimentaireArgs { IdRestrictionAlimentaire = (int)rowRestriction["idRestrictionAlimentaire"] }));
+                    }
 
-					DataSet dataSetObjectifs = connexion.Query(requete);
-					DataTable tableObjectifs = dataSetObjectifs.Tables[0];
+                    // Ajout des objectifs du membre.
+                    requete = string.Format("SELECT idObjectif FROM ObjectifsMembres WHERE idMembre = {0}", membre.IdMembre);
 
-					foreach (DataRow rowObjectif in tableObjectifs.Rows)
-					{
-						membre.ListeObjectifs.Add(objectifService.Retrieve(new RetrieveObjectifArgs { IdObjectif = (int)rowObjectif["idObjectif"] }));
-					}
+                    DataSet dataSetObjectifs = connexion.Query(requete);
+                    DataTable tableObjectifs = dataSetObjectifs.Tables[0];
 
-					// Ajout des préférences du membre.
-					requete = string.Format("SELECT idPreference FROM PreferencesMembres WHERE idMembre = {0}", membre.IdMembre);
+                    foreach (DataRow rowObjectif in tableObjectifs.Rows)
+                    {
+                        membre.ListeObjectifs.Add(objectifService.Retrieve(new RetrieveObjectifArgs { IdObjectif = (int)rowObjectif["idObjectif"] }));
+                    }
 
-					DataSet dataSetPreferences = connexion.Query(requete);
-					DataTable tablePreferences = dataSetPreferences.Tables[0];
+                    // Ajout des préférences du membre.
+                    requete = string.Format("SELECT idPreference FROM PreferencesMembres WHERE idMembre = {0}", membre.IdMembre);
 
-					foreach (DataRow rowPreference in tablePreferences.Rows)
-					{
-						membre.ListePreferences.Add(preferenceService.Retrieve(new RetrievePreferenceArgs { IdPreference = (int)rowPreference["idPreference"] }));
-					}
+                    DataSet dataSetPreferences = connexion.Query(requete);
+                    DataTable tablePreferences = dataSetPreferences.Tables[0];
 
-					membre.ListeMenus = menuService.RetrieveSome(new RetrieveMenuArgs { IdMembre = (int)membre.IdMembre });
-				}
+                    foreach (DataRow rowPreference in tablePreferences.Rows)
+                    {
+                        membre.ListePreferences.Add(preferenceService.Retrieve(new RetrievePreferenceArgs { IdPreference = (int)rowPreference["idPreference"] }));
+                    }
 
-			}
-			catch (MySqlException)
-			{
-				throw;
-			}
+                    membre.ListeMenus = menuService.RetrieveSome(new RetrieveMenuArgs { IdMembre = (int)membre.IdMembre });
+                }
 
-			return membre;
-		}
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
 
-		/// <summary>
-		/// Méthode permettant d'insérer un membre dans la base de données.
-		/// </summary>
-		/// <param name="membre">L'objet Membre a insérer.</param>
-		public void Insert(Membre membre)
-		{
-			try
-			{
-				connexion = new MySqlConnexion();
+            return membre;
+        }
 
-				string requete = string.Format("INSERT INTO Membres (nom ,prenom, taille, masse, dateNaissance, nomUtilisateur, motPasse, estAdmin, estBanni) VALUES ('{0}', '{1}', {2}, {3}, '{4}', '{5}', '{6}', {7}, {8})", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance.ToString("yyyy-MM-dd"), membre.NomUtilisateur, membre.MotPasse, membre.EstAdministrateur, membre.EstBanni);
-				connexion.Query(requete);
+        /// <summary>
+        /// Méthode permettant d'insérer un membre dans la base de données.
+        /// </summary>
+        /// <param name="membre">L'objet Membre a insérer.</param>
+        public void Insert(Membre membre)
+        {
+            try
+            {
+                string requete = string.Format("INSERT INTO Membres (nom ,prenom, taille, masse, dateNaissance, nomUtilisateur, motPasse, estAdmin, estBanni) VALUES ('{0}', '{1}', {2}, {3}, '{4}', '{5}', '{6}', {7}, {8})", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance.ToString("yyyy-MM-dd"), membre.NomUtilisateur, membre.MotPasse, membre.EstAdministrateur, membre.EstBanni);
+                connexion.Query(requete);
 
-				int idMembre = (int)Retrieve(new RetrieveMembreArgs { NomUtilisateur = membre.NomUtilisateur }).IdMembre;
+                int idMembre = (int)Retrieve(new RetrieveMembreArgs { NomUtilisateur = membre.NomUtilisateur }).IdMembre;
 
-				// Ajout des restrictions alimentaires du membre.
-				foreach (RestrictionAlimentaire restriction in membre.ListeRestrictions)
-				{
-					requete = string.Format("INSERT INTO RestrictionsAlimentairesMembres (idRestrictionAlimentaire, idMembre) VALUES ({0}, {1})", restriction.IdRestrictionAlimentaire, idMembre);
-					connexion.Query(requete);
-				}
+                // Ajout des restrictions alimentaires du membre.
+                foreach (RestrictionAlimentaire restriction in membre.ListeRestrictions)
+                {
+                    requete = string.Format("INSERT INTO RestrictionsAlimentairesMembres (idRestrictionAlimentaire, idMembre) VALUES ({0}, {1})", restriction.IdRestrictionAlimentaire, idMembre);
+                    connexion.Query(requete);
+                }
 
-				// Ajout des objectifs du membre.
-				foreach (Objectif objectif in membre.ListeObjectifs)
-				{
-					requete = string.Format("INSERT INTO ObjectifsMembres (idObjectif, idMembre) VALUES ({0}, {1})", objectif.IdObjectif, idMembre);
-					connexion.Query(requete);
-				}
+                // Ajout des objectifs du membre.
+                foreach (Objectif objectif in membre.ListeObjectifs)
+                {
+                    requete = string.Format("INSERT INTO ObjectifsMembres (idObjectif, idMembre) VALUES ({0}, {1})", objectif.IdObjectif, idMembre);
+                    connexion.Query(requete);
+                }
 
-				// Ajout des préférences du membre.
-				foreach (Preference preference in membre.ListePreferences)
-				{
-					requete = string.Format("INSERT INTO PreferencesMembres (idPreference, idMembre) VALUES ({0}, {1})", preference.IdPreference, idMembre);
-					connexion.Query(requete);
-				}
-			}
-			catch (MySqlException)
-			{
-				throw;
-			}
-		}
+                // Ajout des préférences du membre.
+                foreach (Preference preference in membre.ListePreferences)
+                {
+                    requete = string.Format("INSERT INTO PreferencesMembres (idPreference, idMembre) VALUES ({0}, {1})", preference.IdPreference, idMembre);
+                    connexion.Query(requete);
+                }
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+        }
 
 
-		/// <summary>
-		/// Méthode permettant de mettre à jour un membre dans la base de données.
-		/// </summary>
-		/// <param name="membre">L'objet Membre à mettre à jour.</param>
-		public void Update(Membre membre)
-		{
-			try
-			{
-				connexion = new MySqlConnexion();
+        /// <summary>
+        /// Méthode permettant de mettre à jour un membre dans la base de données.
+        /// </summary>
+        /// <param name="membre">L'objet Membre à mettre à jour.</param>
+        public void Update(Membre membre)
+        {
+            try
+            {
+                string requete = string.Format("UPDATE Membres SET nom = '{0}' ,prenom = '{1}', taille = {2}, masse = {3}, dateNaissance = '{4}', nomUtilisateur = '{5}', motPasse = '{6}', estAdmin = {7}, estBanni = {8}, derniereMaj = '{9}' WHERE idMembre = {10}", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance.ToString("yyyy-MM-dd"), membre.NomUtilisateur, membre.MotPasse, membre.EstAdministrateur, membre.EstBanni, membre.DerniereMaj, membre.IdMembre);
 
-				string requete = string.Format("UPDATE Membres SET nom = '{0}' ,prenom = '{1}', taille = {2}, masse = {3}, dateNaissance = '{4}', nomUtilisateur = '{5}', motPasse = '{6}', estAdmin = {7}, estBanni = {8}, derniereMaj = '{9}' WHERE idMembre = {10}", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance.ToString("yyyy-MM-dd"), membre.NomUtilisateur, membre.MotPasse, membre.EstAdministrateur, membre.EstBanni, membre.DerniereMaj, membre.IdMembre);
+                connexion.Query(requete);
 
-				connexion.Query(requete);
+                string requeteEffacerRestrictions = string.Format("DELETE FROM RestrictionsAlimentairesMembres WHERE idMembre = {0}", membre.IdMembre);
+                string requeteEffacerObjectifs = string.Format("DELETE FROM ObjectifsMembres WHERE idMembre = {0}", membre.IdMembre);
+                string requeteEffacerPreferences = string.Format("DELETE FROM PreferencesMembres WHERE idMembre = {0}", membre.IdMembre);
 
-				string requeteEffacerRestrictions = string.Format("DELETE FROM RestrictionsAlimentairesMembres WHERE idMembre = {0}", membre.IdMembre);
-				string requeteEffacerObjectifs = string.Format("DELETE FROM ObjectifsMembres WHERE idMembre = {0}", membre.IdMembre);
-				string requeteEffacerPreferences = string.Format("DELETE FROM PreferencesMembres WHERE idMembre = {0}", membre.IdMembre);
+                connexion.Query(requeteEffacerRestrictions);
+                connexion.Query(requeteEffacerObjectifs);
+                connexion.Query(requeteEffacerPreferences);
 
-				connexion.Query(requeteEffacerRestrictions);
-				connexion.Query(requeteEffacerObjectifs);
-				connexion.Query(requeteEffacerPreferences);
+                // Ajout des restrictions alimentaires du membre.
+                foreach (RestrictionAlimentaire restriction in membre.ListeRestrictions)
+                {
+                    requete = string.Format("INSERT INTO RestrictionsAlimentairesMembres (idRestrictionAlimentaire, idMembre) VALUES ({0}, {1})", restriction.IdRestrictionAlimentaire, membre.IdMembre);
+                    connexion.Query(requete);
+                }
 
-				// Ajout des restrictions alimentaires du membre.
-				foreach (RestrictionAlimentaire restriction in membre.ListeRestrictions)
-				{
-					requete = string.Format("INSERT INTO RestrictionsAlimentairesMembres (idRestrictionAlimentaire, idMembre) VALUES ({0}, {1})", restriction.IdRestrictionAlimentaire, membre.IdMembre);
-					connexion.Query(requete);
-				}
+                // Ajout des objectifs du membre.
+                foreach (Objectif objectif in membre.ListeObjectifs)
+                {
+                    requete = string.Format("INSERT INTO ObjectifsMembres (idObjectif, idMembre) VALUES ({0}, {1})", objectif.IdObjectif, membre.IdMembre);
+                    connexion.Query(requete);
+                }
 
-				// Ajout des objectifs du membre.
-				foreach (Objectif objectif in membre.ListeObjectifs)
-				{
-					requete = string.Format("INSERT INTO ObjectifsMembres (idObjectif, idMembre) VALUES ({0}, {1})", objectif.IdObjectif, membre.IdMembre);
-					connexion.Query(requete);
-				}
+                // Ajout des préférences du membre.
+                foreach (Preference preference in membre.ListePreferences)
+                {
+                    requete = string.Format("INSERT INTO PreferencesMembres (idPreference, idMembre) VALUES ({0}, {1})", preference.IdPreference, membre.IdMembre);
+                    connexion.Query(requete);
+                }
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+        }
 
-				// Ajout des préférences du membre.
-				foreach (Preference preference in membre.ListePreferences)
-				{
-					requete = string.Format("INSERT INTO PreferencesMembres (idPreference, idMembre) VALUES ({0}, {1})", preference.IdPreference, membre.IdMembre);
-					connexion.Query(requete);
-				}
-			}
-			catch (MySqlException)
-			{
-				throw;
-			}
-		}
-
-		/// <summary>
-		/// Méthode permettant de construire un objet Membre.
-		/// </summary>
-		/// <param name="membre">Un enregistrement de la table Membres.</param>
-		/// <returns>Un objet Membre.</returns>
-		private Membre ConstruireMembre(DataRow membre)
-		{
+        /// <summary>
+        /// Méthode permettant de construire un objet Membre.
+        /// </summary>
+        /// <param name="membre">Un enregistrement de la table Membres.</param>
+        /// <returns>Un objet Membre.</returns>
+        private Membre ConstruireMembre(DataRow membre)
+        {
 			return new Membre()
 			{
 				IdMembre = (int)membre["idMembre"],
@@ -292,73 +292,71 @@ namespace Nutritia
 				EstAdministrateur = (bool)membre["estAdmin"],
 				EstBanni = (bool)membre["estBanni"],
 				DerniereMaj = membre["derniereMaj"].ToString()
-			};
-		}
+            };
+        }
 
-		public IList<Membre> RetrieveAdmins()
-		{
-			IList<Membre> resultat = new List<Membre>();
+        public IList<Membre> RetrieveAdmins()
+        {
+            IList<Membre> resultat = new List<Membre>();
 
-			try
-			{
-				connexion = new MySqlConnexion();
+            try
+            {
+                string requete = "SELECT * FROM Membres WHERE estAdmin = True";
 
-				string requete = "SELECT * FROM Membres WHERE estAdmin = True";
+                DataSet dataSetMembres = connexion.Query(requete);
+                DataTable tableMembres = dataSetMembres.Tables[0];
 
-				DataSet dataSetMembres = connexion.Query(requete);
-				DataTable tableMembres = dataSetMembres.Tables[0];
+                // Construction de chaque objet Membre.
+                foreach (DataRow rowMembre in tableMembres.Rows)
+                {
+                    Membre membre = ConstruireMembre(rowMembre);
 
-				// Construction de chaque objet Membre.
-				foreach (DataRow rowMembre in tableMembres.Rows)
-				{
-					Membre membre = ConstruireMembre(rowMembre);
+                    // Ajout des restrictions alimentaires du membre.
+                    requete = string.Format("SELECT idRestrictionAlimentaire FROM RestrictionsAlimentairesMembres WHERE idMembre = {0}", membre.IdMembre);
 
-					// Ajout des restrictions alimentaires du membre.
-					requete = string.Format("SELECT idRestrictionAlimentaire FROM RestrictionsAlimentairesMembres WHERE idMembre = {0}", membre.IdMembre);
+                    DataSet dataSetRestrictions = connexion.Query(requete);
+                    DataTable tableRestrictions = dataSetRestrictions.Tables[0];
 
-					DataSet dataSetRestrictions = connexion.Query(requete);
-					DataTable tableRestrictions = dataSetRestrictions.Tables[0];
+                    foreach (DataRow rowRestriction in tableRestrictions.Rows)
+                    {
+                        membre.ListeRestrictions.Add(restrictionAlimentaireService.Retrieve(new RetrieveRestrictionAlimentaireArgs { IdRestrictionAlimentaire = (int)rowRestriction["idRestrictionAlimentaire"] }));
+                    }
 
-					foreach (DataRow rowRestriction in tableRestrictions.Rows)
-					{
-						membre.ListeRestrictions.Add(restrictionAlimentaireService.Retrieve(new RetrieveRestrictionAlimentaireArgs { IdRestrictionAlimentaire = (int)rowRestriction["idRestrictionAlimentaire"] }));
-					}
+                    // Ajout des objectifs du membre.
+                    requete = string.Format("SELECT idObjectif FROM ObjectifsMembres WHERE idMembre = {0}", membre.IdMembre);
 
-					// Ajout des objectifs du membre.
-					requete = string.Format("SELECT idObjectif FROM ObjectifsMembres WHERE idMembre = {0}", membre.IdMembre);
+                    DataSet dataSetObjectifs = connexion.Query(requete);
+                    DataTable tableObjectifs = dataSetObjectifs.Tables[0];
 
-					DataSet dataSetObjectifs = connexion.Query(requete);
-					DataTable tableObjectifs = dataSetObjectifs.Tables[0];
+                    foreach (DataRow rowObjectif in tableObjectifs.Rows)
+                    {
+                        membre.ListeObjectifs.Add(objectifService.Retrieve(new RetrieveObjectifArgs { IdObjectif = (int)rowObjectif["idObjectif"] }));
+                    }
 
-					foreach (DataRow rowObjectif in tableObjectifs.Rows)
-					{
-						membre.ListeObjectifs.Add(objectifService.Retrieve(new RetrieveObjectifArgs { IdObjectif = (int)rowObjectif["idObjectif"] }));
-					}
+                    // Ajout des préférences du membre.
+                    requete = string.Format("SELECT idPreference FROM PreferencesMembres WHERE idMembre = {0}", membre.IdMembre);
 
-					// Ajout des préférences du membre.
-					requete = string.Format("SELECT idPreference FROM PreferencesMembres WHERE idMembre = {0}", membre.IdMembre);
+                    DataSet dataSetPreferences = connexion.Query(requete);
+                    DataTable tablePreferences = dataSetPreferences.Tables[0];
 
-					DataSet dataSetPreferences = connexion.Query(requete);
-					DataTable tablePreferences = dataSetPreferences.Tables[0];
+                    foreach (DataRow rowPreference in tablePreferences.Rows)
+                    {
+                        membre.ListePreferences.Add(preferenceService.Retrieve(new RetrievePreferenceArgs { IdPreference = (int)rowPreference["idPreference"] }));
+                    }
 
-					foreach (DataRow rowPreference in tablePreferences.Rows)
-					{
-						membre.ListePreferences.Add(preferenceService.Retrieve(new RetrievePreferenceArgs { IdPreference = (int)rowPreference["idPreference"] }));
-					}
+                    membre.ListeMenus = menuService.RetrieveSome(new RetrieveMenuArgs { IdMembre = (int)membre.IdMembre });
 
-					membre.ListeMenus = menuService.RetrieveSome(new RetrieveMenuArgs { IdMembre = (int)membre.IdMembre });
+                    resultat.Add(membre);
 
-					resultat.Add(membre);
+                }
 
-				}
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
 
-			}
-			catch (MySqlException)
-			{
-				throw;
-			}
-
-			return resultat;
-		}
-	}
+            return resultat;
+        }
+    }
 }

@@ -3,6 +3,7 @@ using Nutritia.UI.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -35,26 +36,56 @@ namespace Nutritia.UI.Pages
             InitializeComponent();
         }
 
+
+
         private void btnConfirmer_Click(object sender, RoutedEventArgs e)
         {
             RadioButton btnChecked = wrapMontant.Children.OfType<RadioButton>().FirstOrDefault(r => r.IsChecked == true);
-
             int valeurRadio;
             string stringContent = btnChecked.Content.ToString();
             bool IsInt = int.TryParse(stringContent.Remove(stringContent.Length - 1), out valeurRadio);
             if (IsInt)
             {
                 valeurDon = valeurRadio;
-                Transaction transaction = new Transaction(txtProprietaire.Text,valeurDon, modePaiement);
-                (new FenetreRecuDon(transaction)).ShowDialog();
+                MontreLabelErreur();
+                if (isNomGood && isNoCarteGood && isExpirationGood && isCSCGood)
+                {
+                    Transaction transaction = new Transaction(txtProprietaire.Text, valeurDon, modePaiement);
+
+                    VideChamps();
+
+                    (new FenetreRecuDon(transaction)).ShowDialog();
+                }
+                else
+                    SystemSounds.Beep.Play();
             }
         }
 
+        [Obsolete]
         private void ValidationChamps()
         {
-            btnConfirmer.IsEnabled = isNomGood && isNoCarteGood && isExpirationGood && isCSCGood;
+            //btnConfirmer.IsEnabled = isNomGood && isNoCarteGood && isExpirationGood && isCSCGood;
         }
 
+        private void EnablingBouton()
+        {
+            bool areFieldsEmpty = (String.IsNullOrWhiteSpace(txtCSC.Text) || String.IsNullOrWhiteSpace(txtDateExpiration.Text) || 
+                String.IsNullOrWhiteSpace(txtNoCarte.Text) || String.IsNullOrWhiteSpace(txtProprietaire.Text));
+
+            btnConfirmer.IsEnabled = !areFieldsEmpty;
+        }
+
+        private void MontreLabelErreur()
+        {
+            if (!isNoCarteGood)
+                lblErreurNoCarte.Visibility = Visibility.Visible;
+            if (!isNomGood)
+                lblErreurNom.Visibility = Visibility.Visible;
+            if (!isExpirationGood)
+                lblErreurExpiration.Visibility = Visibility.Visible;
+            if (!isCSCGood)
+                lblErreurCSC.Visibility = Visibility.Visible;
+        }
 
         private void ValidationNom()
         {
@@ -62,12 +93,10 @@ namespace Nutritia.UI.Pages
             Regex regexNom = new Regex("^[a-z ,.'-]+$", RegexOptions.IgnoreCase);
             isNomGood = regexNom.IsMatch(txtProprietaire.Text);
 
-            if (!isNomGood)
+            if (isNomGood)
             {
-                lblErreurNom.Visibility = Visibility.Visible;
+                lblErreurNom.Visibility = Visibility.Hidden; ;
             }
-            else
-                lblErreurNom.Visibility = Visibility.Hidden;
         }
 
         private void ValidationNoCarte()
@@ -106,7 +135,6 @@ namespace Nutritia.UI.Pages
             else
             {
                 isNoCarteGood = false;
-                lblErreurNoCarte.Visibility = Visibility.Visible;
             }
         }
 
@@ -121,9 +149,9 @@ namespace Nutritia.UI.Pages
             else
             {
                 isCSCGood = false;
-                lblErreurCSC.Visibility = Visibility.Visible;
             }
         }
+
 
         private void ValidationDateExpiration()
         {
@@ -147,61 +175,108 @@ namespace Nutritia.UI.Pages
                 else
                 {
                     isExpirationGood = false;
-                    lblErreurExpiration.Visibility = Visibility.Visible;
                 }
             }
             catch (System.FormatException e)
             {
                 isExpirationGood = false;
-                lblErreurExpiration.Visibility = Visibility.Visible;
             }
 
 
         }
 
-        private void txtProprietaire_LostFocus(object sender, RoutedEventArgs e)
-        {
-            //ValidationNom();
-        }
-
-        private void txtNoCarte_LostFocus(object sender, RoutedEventArgs e)
-        {
-            //ValidationNoCarte();
-        }
-
-        private void txtDateExpiration_LostFocus(object sender, RoutedEventArgs e)
-        {
-            // ValidationDateExpiration();
-        }
-
-        private void txtCSC_LostFocus(object sender, RoutedEventArgs e)
-        {
-            //ValidationCSC();
-        }
 
         private void txtCSC_TextChanged(object sender, TextChangedEventArgs e)
         {
             ValidationCSC();
             ValidationChamps();
+            EnablingBouton();
         }
 
         private void txtDateExpiration_TextChanged(object sender, TextChangedEventArgs e)
         {
             ValidationDateExpiration();
             ValidationChamps();
+            EnablingBouton();
         }
 
         private void txtNoCarte_TextChanged(object sender, TextChangedEventArgs e)
         {
             ValidationNoCarte();
             ValidationChamps();
+            EnablingBouton();
         }
 
         private void txtProprietaire_TextChanged(object sender, TextChangedEventArgs e)
         {
             ValidationNom();
             ValidationChamps();
+            EnablingBouton();
         }
 
+        private void VideChamps()
+        {
+            txtCSC.Text = String.Empty;
+            txtDateExpiration.Text = String.Empty;
+            txtNoCarte.Text = String.Empty;
+            txtProprietaire.Text = String.Empty;
+        }
+
+        private void txtNo_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextAllowed(e.Text);
+        }
+
+        private void txtNo_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(String)))
+            {
+                String text = (String)e.DataObject.GetData(typeof(String));
+                if (!IsTextAllowed(text))
+                {
+                    e.CancelCommand();
+                }
+            }
+            else
+            {
+                e.CancelCommand();
+            }
+        }
+
+
+        //http://stackoverflow.com/questions/1268552/how-do-i-get-a-textbox-to-only-accept-numeric-input-in-wpf
+        private static bool IsTextAllowed(string text)
+        {
+            Regex regex = new Regex("[^0-9]+"); //regex that matches disallowed text
+            return !regex.IsMatch(text);
+        }
+
+        //http://stackoverflow.com/questions/1268552/how-do-i-get-a-textbox-to-only-accept-numeric-input-in-wpf
+        private static bool IsTextAllowedDate(string text)
+        {
+            Regex regex = new Regex("[^0-9/]+"); //regex that matches disallowed text
+            return !regex.IsMatch(text);
+        }
+
+        private void txtDateExpiration_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextAllowedDate(e.Text);
+        }
+
+        private void txtDateExpiration_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(String)))
+            {
+                String text = (String)e.DataObject.GetData(typeof(String));
+                if (!IsTextAllowedDate(text))
+                {
+                    e.CancelCommand();
+                }
+            }
+            else
+            {
+                e.CancelCommand();
+            }
+        }
     }
 }

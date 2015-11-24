@@ -670,6 +670,27 @@ namespace Nutritia.UI.Views
             scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - e.Delta);
         }
 
+		private void UserControl_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Delete)
+				if (Keyboard.Modifiers == ModifierKeys.Control)
+				{
+					PlateauAliment.Clear();
+					PlateauPlat.Clear();
+					LstIdPlatADerouler.Clear();
+					DessinerPlateau();
+				}
+		}
+
+		private void btnVider_Click(object sender, RoutedEventArgs e)
+		{
+			PlateauAliment.Clear();
+			PlateauPlat.Clear();
+			LstIdPlatADerouler.Clear();
+			DessinerPlateau();
+
+		}
+
 	}
 
 

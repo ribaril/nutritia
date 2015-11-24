@@ -32,6 +32,8 @@ namespace Nutritia
                 int age = DateTime.Now.Year - DateNaissance.Year;
                 if (DateTime.Now.Month < DateNaissance.Month || (DateTime.Now.Month == DateNaissance.Month && DateTime.Now.Day < DateNaissance.Day))
                     age--;
+                if (age < 0)
+                    age = 0;
                 return age;
             }
         }

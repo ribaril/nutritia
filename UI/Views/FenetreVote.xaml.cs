@@ -51,7 +51,7 @@ namespace Nutritia.UI.Views
         /// <param name="e"></param>
         private void btnConfirmer_Click(object sender, RoutedEventArgs e)
         {
-            double note = Convert.ToDouble(((ComboBoxItem)cboNote.SelectedItem).Content);
+            double note = Convert.ToDouble(((ComboBoxItem)cboNote.SelectedItem).Uid);
             int nbVotesActuel = PlatSelectionne.NbVotes;
 
             PlatSelectionne.NbVotes++;
@@ -68,7 +68,7 @@ namespace Nutritia.UI.Views
             }
             
             // Mise à jour dans la base de données.
-            PlatSelectionne.Note = Math.Round((Double)PlatSelectionne.Note, 2);
+            PlatSelectionne.Note = Math.Round((Double)PlatSelectionne.Note, 0);
             PlatService.Update(PlatSelectionne);
 
             Close();
