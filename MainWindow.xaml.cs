@@ -72,6 +72,11 @@ namespace Nutritia
 
 		private void btnRetour_Click(object sender, RoutedEventArgs e)
 		{
+            App.Current.MainWindow.ResizeMode = ResizeMode.CanMinimize;
+            App.Current.MainWindow.Width = App.APP_WIDTH;
+            App.Current.MainWindow.Height = App.APP_HEIGHT;
+            App.Current.MainWindow.WindowState = WindowState.Normal;
+
 			if(App.MembreCourant.IdMembre == null)
 				ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipal());
 			else
