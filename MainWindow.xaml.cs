@@ -294,13 +294,33 @@ namespace Nutritia
 				sbNotifs.Append("+ ").AppendLine(plat.Nom).AppendLine();
 			}
 
-			sbNotifs.AppendLine("-----------------------------------------");
+			sbNotifs.AppendLine("-----------------------------------------").AppendLine("Voulez-vous ouvrir ces ").AppendLine("plats avec la calculatrice ?");
 
-			MessageBox.Show(
+			if(MessageBox.Show(
 					 sbNotifs.ToString(),
 					 "Nouveaux plats disponibles",
-					 MessageBoxButton.OK,
-					 MessageBoxImage.Information);
+					 MessageBoxButton.YesNo,
+					 MessageBoxImage.Information) == MessageBoxResult.Yes)
+			{
+				// Si l'utilisateur à répondu oui pour afficher les plats dans la calculatrice ...<
+				Window windowCalculatrice = new Window();
+				windowCalculatrice.Width = App.APP_WIDTH;
+				windowCalculatrice.Height = App.APP_HEIGHT;
+				windowCalculatrice.ResizeMode = ResizeMode.CanMinimize;
+				windowCalculatrice.Title = "Nutritia - Calculatrice nutritionnelle";
+				windowCalculatrice.Icon = new BitmapImage(new Uri("pack://application:,,,/UI/Images/logoIconPetit.png"));
+				Grid grdContenu = new Grid();
+				ImageBrush brush = new ImageBrush();
+				brush.Opacity = 0.3;
+				brush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/UI/Images/background.jpg"));
+				grdContenu.Background = brush;
+				grdContenu.Children.Add(new FenetreCalculatriceNutritionelle(NouveauxPlats));
+				windowCalculatrice.Content = grdContenu;
+				windowCalculatrice.Show();
+			} 
+			
+
+			
 		}
 
 		/// <summary>
