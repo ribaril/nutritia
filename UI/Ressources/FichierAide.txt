@@ -23,12 +23,14 @@ Vous pouvez aussi apercevoir un compteur à gauche qui indique le nombre d'élé
 Cette section visuelle affiche chaque valeur nutritive (calories, fibres, cholestérol, ... ) du total de tous les ingrédients de tous les plats et aliment présents dans le plateau.
 
 Conseil (raccourcis et autres) : 
-Ctrl + clique gauche sur l'accordéon où la boite de recherche -> ajoute un plat ou aliment au plateau à coup de 10.
-Ctrl + clique gauche sur le plateau -> supprime 10 plats ou aliment du plateau en même temps.
-Maj + clic gauche sur le plateau-> supprime tous les plats ou aliment du même nom.
+Ctrl + clique gauche sur l'accordéon où la boite de recherche -> Ajoute 10 plat ou aliment du même nom au plateau.
+Ctrl + clique gauche sur le plateau -> Supprime 10 plats ou aliment du plateau qui ont le même nom.
+Maj + clic gauche sur le plateau-> Supprime tous les plats ou aliment du même nom du plateau.
+Ctrl + Delete -> Supprimer tous les plats ou aliments du plateau.
 
 Survoler les plats et aliments pour voir la valeur nutritive atomique de l'élément, de son poids total et de ses mensurations nutritives.
 Vous pouvez apercevoir une icône à droite dans une ligne de plat ou d'aliment, elle indique si l'élément est un plat (couteau fourchette) ou un aliment (panier d'épicerie).
+
 #EnvoyerDon
 EnvoyerDonEnvoyerDonEnvoyerDon
 #GenerationMenu

@@ -44,9 +44,9 @@
                         <TextBlock Text="{x:Static resx:Resources.Aide}" FontSize="20" FontFamily="Berlin"/>
                     </DockPanel>
                 </Button>
-                <ToolBar Name="tbNotif" Width="55" Height="30">
-                    <Button Name="btnNotification" VerticalAlignment="Top">
-                        <DockPanel>
+                <ToolBar Name="toolBarNotif" Width="65" Height="30">
+                    <!--<Button Name="btnNotification" VerticalAlignment="Top">-->
+                    <DockPanel Margin="2">
                             <Image ToolTipService.ShowDuration="12000" Width="25" Source="UI/Images/notifIcon.png" >
                                 <Image.ToolTip>
                                     <ToolTip StaysOpen="True" HorizontalOffset="10"
@@ -57,13 +57,7 @@
                             </Image>
                             <TextBlock Name="nbrNotif" Text="" Foreground="DarkGreen"/>
                         </DockPanel>
-                    </Button>
-                    <Button Name="btnNouvelleVersion" Click="btnNouvelleVersion_Click">
-                        <Label Style="{StaticResource fontNutritia}">Nouvelle version disponible !</Label>
-                    </Button>
-                    <Button Name="btnNouveauxPlats" Click="btnNouveauxPlats_Click">
-                        <Label Style="{StaticResource fontNutritia}">Nouveaux plats !</Label>
-                    </Button>
+                    <!--</Button>-->
                 </ToolBar>
             </ToolBar>
         </DockPanel>
