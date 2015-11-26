@@ -113,7 +113,6 @@ namespace Nutritia.UI.Views
                                 }
                             }
                         }
-
                     }
 
                     SuiviPlatService.Update(ListePlatsRetires, App.MembreCourant);
@@ -123,6 +122,103 @@ namespace Nutritia.UI.Views
 
             EstNouveauMenu = true;
             NbColonnes = NB_COLONNES_AVEC_IMAGES;
+        }
+
+        /* A voir faut je corrige ce bug la */
+        public FenetreGenerateurMenus(Menu menu, int nbColonnes)
+        {
+            InitializeComponent();
+
+            Rand = new Random();
+
+            App.Current.MainWindow.ResizeMode = ResizeMode.CanResize;
+
+            AlimentService = ServiceFactory.Instance.GetService<IAlimentService>();
+            PlatService = ServiceFactory.Instance.GetService<IPlatService>();
+            SuiviPlatService = ServiceFactory.Instance.GetService<ISuiviPlatService>();
+            MenuService = ServiceFactory.Instance.GetService<IMenuService>();
+
+            // Chargement des plats.
+            Mouse.OverrideCursor = Cursors.Wait;
+            ListeDejeuners = new List<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Déjeuner" }));
+            ListeEntrees = new List<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Entrée" }));
+            ListePlatPrincipaux = new List<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Plat principal" }));
+            ListeBreuvages = new List<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Breuvage" }));
+            ListeDesserts = new List<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Déssert" }));
+            ListePlatsRetires = new List<Plat>();
+            Mouse.OverrideCursor = null;
+
+            // Header de la fenêtre.
+            App.Current.MainWindow.Title = "Nutritia - Génération de menus";
+
+            if (!String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
+            {
+                btnSuiviPlatsNonAdmissibles.IsEnabled = true;
+                btnOuvrirMenu.IsEnabled = true;
+                btnSauvegarder.IsEnabled = true;
+                RestreindrePossibilites();
+                List<Plat> ListePlatsSuivis = new List<Plat>(SuiviPlatService.RetrieveSome(new RetrieveSuiviPlatArgs { IdMembre = (int)App.MembreCourant.IdMembre }));
+
+                if (ListePlatsSuivis.Count == 0)
+                {
+                    SuiviPlatService.Insert(ListePlatsRetires, App.MembreCourant);
+                }
+                else
+                {
+                    foreach (Plat platCourant in ListePlatsRetires)
+                    {
+                        if (ListePlatsSuivis.Find(plat => plat.IdPlat == platCourant.IdPlat) != null)
+                        {
+                            platCourant.EstTricherie = ListePlatsSuivis.Find(plat => plat.IdPlat == platCourant.IdPlat).EstTricherie;
+
+                            if (platCourant.EstTricherie)
+                            {
+                                switch (platCourant.TypePlat)
+                                {
+                                    case "Déjeuner":
+                                        ListeDejeuners.Add(platCourant);
+                                        break;
+                                    case "Entrée":
+                                        ListeEntrees.Add(platCourant);
+                                        break;
+                                    case "Plat principal":
+                                        ListePlatPrincipaux.Add(platCourant);
+                                        break;
+                                    case "Breuvage":
+                                        ListeBreuvages.Add(platCourant);
+                                        break;
+                                    case "Déssert":
+                                        ListeDesserts.Add(platCourant);
+                                        break;
+                                }
+                            }
+                        }
+                    }
+
+                    SuiviPlatService.Update(ListePlatsRetires, App.MembreCourant);
+
+                }
+            }
+
+            NbColonnes = nbColonnes;
+
+            if (nbColonnes == 3)
+            {
+                dgMenus.RowHeight = 60;
+                dgtcNom.Width = new DataGridLength(2, DataGridLengthUnitType.Star);
+                dgtcImage.Visibility = Visibility.Hidden;
+                dgtcRegenerer.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+                dgtcIngredient.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            }
+
+            MenuGenere = menu;
+            InitialiserSectionMenu(MenuGenere.ListePlats.Count, (Convert.ToInt32(dgMenus.RowHeight)));
+            AjouterSeparateursPlats();
+            dgMenus.ItemsSource = MenuGenere.ListePlats;
+            spInfosSup.Visibility = Visibility.Hidden;
+            gbMenus.Visibility = Visibility.Visible;
+            btnListeEpicerie.IsEnabled = true;
+            EstNouveauMenu = false;
         }
 
         /// <summary>
@@ -179,15 +275,20 @@ namespace Nutritia.UI.Views
             if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Végétarien" }))
             {
                 ListeDejeuners.RemoveAll(plat => plat.ObtenirCategoriesIngredients().Contains("Viandes et substituts")
-                                             || plat.ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers"));
+                                             || plat.ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers")
+                                             && !plat.ListeIngredients.Contains(new Aliment { Nom = "Oeuf" }));
                 ListeEntrees.RemoveAll(plat => plat.ObtenirCategoriesIngredients().Contains("Viandes et substituts")
-                                             || plat.ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers"));
+                                             || plat.ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers")
+                                             && !plat.ListeIngredients.Contains(new Aliment { Nom = "Oeuf" }));
                 ListePlatPrincipaux.RemoveAll(plat => plat.ObtenirCategoriesIngredients().Contains("Viandes et substituts")
-                                             || plat.ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers"));
+                                             || plat.ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers")
+                                             && !plat.ListeIngredients.Contains(new Aliment { Nom = "Oeuf" }));
                 ListeBreuvages.RemoveAll(plat => plat.ObtenirCategoriesIngredients().Contains("Viandes et substituts")
-                                             || plat.ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers"));
+                                             || plat.ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers")
+                                             && !plat.ListeIngredients.Contains(new Aliment { Nom = "Oeuf" }));
                 ListeDesserts.RemoveAll(plat => plat.ObtenirCategoriesIngredients().Contains("Viandes et substituts")
-                                             || plat.ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers"));
+                                             || plat.ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers")
+                                             && !plat.ListeIngredients.Contains(new Aliment { Nom = "Oeuf" }));
             }
 
             /************************** Végétalien **************************/
@@ -700,7 +801,7 @@ namespace Nutritia.UI.Views
 
                     foreach (Aliment alimentCourant in platCourant.ListeIngredients)
                     {
-                        if (alimentCourant.Categorie == "Viandes et substituts" && !contientDejaViande)
+                        if (alimentCourant.Categorie == "Viandes et substituts" && alimentCourant.Nom != "Oeuf" && !contientDejaViande)
                         {
                             stats["viande"]++;
                             contientDejaViande = true;
@@ -754,7 +855,7 @@ namespace Nutritia.UI.Views
 
                     foreach (Aliment alimentCourant in platCourant.ListeIngredients)
                     {
-                        if (alimentCourant.Categorie == "Viandes et substituts" && !contientDejaViande)
+                        if (alimentCourant.Categorie == "Viandes et substituts" && alimentCourant.Nom != "Oeuf" && !contientDejaViande)
                         {
                             stats["viande"]++;
                             contientDejaViande = true;
@@ -888,6 +989,11 @@ namespace Nutritia.UI.Views
                             {
                                 positionsPlatsSansViande.Add(i);
                             }
+                            else if (MenuGenere.ListePlats[i].ListeIngredients.Count(p => p.Categorie == "Viandes et substituts") == 1 
+                                     && MenuGenere.ListePlats[i].ListeIngredients.Contains(new Aliment { Nom = "Oeuf" }))
+                            {
+                                positionsPlatsSansViande.Add(i);
+                            }
                         }
                     }
 
@@ -906,19 +1012,25 @@ namespace Nutritia.UI.Views
                         switch (MenuGenere.ListePlats[positionRandomCourante].TypePlat)
                         {
                             case "Déjeuner":
-                                while (!MenuGenere.ListePlats[positionRandomCourante].ObtenirCategoriesIngredients().Contains("Viandes et substituts"))
+                                while (!MenuGenere.ListePlats[positionRandomCourante].ObtenirCategoriesIngredients().Contains("Viandes et substituts")
+                                       || (MenuGenere.ListePlats[positionRandomCourante].ListeIngredients.Count(p => p.Categorie == "Viandes et substituts") == 1
+                                       && MenuGenere.ListePlats[positionRandomCourante].ListeIngredients.Contains(new Aliment { Nom = "Oeuf" })))
                                 {
                                     MenuGenere.ListePlats[positionRandomCourante] = ListeDejeuners[Rand.Next(0, ListeDejeuners.Count)];
                                 }
                                 break;
                             case "Entrée":
-                                while (!MenuGenere.ListePlats[positionRandomCourante].ObtenirCategoriesIngredients().Contains("Viandes et substituts"))
+                                while (!MenuGenere.ListePlats[positionRandomCourante].ObtenirCategoriesIngredients().Contains("Viandes et substituts")
+                                       || (MenuGenere.ListePlats[positionRandomCourante].ListeIngredients.Count(p => p.Categorie == "Viandes et substituts") == 1
+                                       && MenuGenere.ListePlats[positionRandomCourante].ListeIngredients.Contains(new Aliment { Nom = "Oeuf" })))
                                 {
                                     MenuGenere.ListePlats[positionRandomCourante] = ListeEntrees[Rand.Next(0, ListeDejeuners.Count)];
                                 }
                                 break;
                             case "Plat principal":
-                                while (!MenuGenere.ListePlats[positionRandomCourante].ObtenirCategoriesIngredients().Contains("Viandes et substituts"))
+                                while (!MenuGenere.ListePlats[positionRandomCourante].ObtenirCategoriesIngredients().Contains("Viandes et substituts")
+                                       || (MenuGenere.ListePlats[positionRandomCourante].ListeIngredients.Count(p => p.Categorie == "Viandes et substituts") == 1
+                                       && MenuGenere.ListePlats[positionRandomCourante].ListeIngredients.Contains(new Aliment { Nom = "Oeuf" })))
                                 {
                                     MenuGenere.ListePlats[positionRandomCourante] = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
                                 }
@@ -1182,7 +1294,7 @@ namespace Nutritia.UI.Views
             App.Current.MainWindow.Height = App.APP_HEIGHT;
             App.Current.MainWindow.WindowState = WindowState.Normal;
 
-            ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue<FenetreListeEpicerie>(new FenetreListeEpicerie(MenuGenere));
+            ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue<FenetreListeEpicerie>(new FenetreListeEpicerie(MenuGenere, NbColonnes));
         }
 
         /// <summary>
