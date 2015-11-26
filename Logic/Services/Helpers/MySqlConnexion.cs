@@ -20,8 +20,8 @@ namespace Nutritia
 
         public MySqlConnexion()
         {
-            //CONNECTION_STRING = ConfigurationManager.ConnectionStrings["MySqlConnexion"].ConnectionString;
-            CONNECTION_STRING = SessionHelper.StringToSessions(Properties.Settings.Default.ActiveSession).First().ToConnexionString();
+            CONNECTION_STRING = ConfigurationManager.ConnectionStrings["MySqlConnexion"].ConnectionString;
+            //CONNECTION_STRING = SessionHelper.StringToSessions(Properties.Settings.Default.ActiveSession).First().ToConnexionString();
 
             ConfigurationConnection(CONNECTION_STRING);
         }
@@ -156,8 +156,6 @@ namespace Nutritia
                     MySqlDataAdapter adapter = new MySqlDataAdapter();
                     adapter.SelectCommand = new MySqlCommand(query, connection);
                     adapter.Fill(dataset);
-
-
                 }
                 return dataset;
 
