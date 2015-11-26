@@ -163,6 +163,7 @@ namespace Nutritia
                     requete = string.Format("INSERT INTO MenusPlats (idMenu, idPlat) VALUES ({0}, {1})", Retrieve(new RetrieveMenuArgs { IdMembre = App.MembreCourant.IdMembre, Nom = menu.Nom }).IdMenu, platCourant.IdPlat);
                     connexion.Query(requete);
                 }
+
             }
             catch (MySqlException)
             {

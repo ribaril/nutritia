@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,7 +23,8 @@ namespace Nutritia.UI.Views
     public partial class FenetreVotes : UserControl
     {
         private IPlatService PlatService { get; set; }
-        private ObservableCollection<Plat> ListePlats;
+        private ObservableCollection<Plat> ListePlats { get; set; }
+        private int NbResultatsAffiches { get; set; }
 
         /// <summary>
         /// Constructeur par défaut de la classe.
@@ -36,8 +38,21 @@ namespace Nutritia.UI.Views
 
             PlatService = ServiceFactory.Instance.GetService<IPlatService>();
 
-            ListePlats = new ObservableCollection<Plat>(PlatService.RetrieveAll());
-            dgPlats.ItemsSource = ListePlats;
+            NbResultatsAffiches = 10;
+
+            // Par défaut, tous les plats sont affichés.
+            btnSelectionComplete_Click(null, null);
+        }
+
+        /// <summary>
+        /// Méthode permettant de déterminer la note conviviale de chacun des plats de la liste.
+        /// </summary>
+        private void DeterminerNoteConviviale()
+        {
+            foreach(Plat platCourant in ListePlats)
+            {
+                platCourant.DeterminerNoteConviviale();
+            }
         }
 
         /// <summary>
@@ -48,7 +63,8 @@ namespace Nutritia.UI.Views
         private void btnSelectionComplete_Click(object sender, RoutedEventArgs e)
         {
             gbContenu.Header = "Tous les plats";
-            ListePlats = new ObservableCollection<Plat>(PlatService.RetrieveAll());
+            ListePlats = new ObservableCollection<Plat>(PlatService.RetrieveAll().OrderBy(plat => plat.Nom));
+            DeterminerNoteConviviale();
             dgPlats.ItemsSource = ListePlats;
         }
 
@@ -60,7 +76,10 @@ namespace Nutritia.UI.Views
         private void btnNouveautes_Click(object sender, RoutedEventArgs e)
         {
             gbContenu.Header = "Nouveautés";
-            ListePlats = new ObservableCollection<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { NbResultats = 10, Depart = "Fin" }));
+            NbResultatsAffiches = 10;
+            if (Regex.IsMatch(txtNbResultats.Text, @"^\d+$")) { NbResultatsAffiches = Convert.ToInt32(txtNbResultats.Text); }
+            ListePlats = new ObservableCollection<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { NbResultats = NbResultatsAffiches, Depart = "Fin" }));
+            DeterminerNoteConviviale();
             dgPlats.ItemsSource = ListePlats;
         }
 
@@ -72,7 +91,10 @@ namespace Nutritia.UI.Views
         private void btnPlusPopulaires_Click(object sender, RoutedEventArgs e)
         {
             gbContenu.Header = "Les plus populaires";
-            ListePlats = new ObservableCollection<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { NbResultats = 10, PlusPopulaires = true }));
+            NbResultatsAffiches = 10;
+            if (Regex.IsMatch(txtNbResultats.Text, @"^\d+$")) { NbResultatsAffiches = Convert.ToInt32(txtNbResultats.Text); }
+            ListePlats = new ObservableCollection<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { NbResultats = NbResultatsAffiches, PlusPopulaires = true }));
+            DeterminerNoteConviviale();
             dgPlats.ItemsSource = ListePlats;
         }
 
@@ -115,18 +137,16 @@ namespace Nutritia.UI.Views
 
             switch(gbContenu.Header.ToString())
             {
-                case "Tous les plats" : 
-                    ListePlats = new ObservableCollection<Plat>(PlatService.RetrieveAll());
+                case "Tous les plats" :
+                    btnSelectionComplete_Click(null, null);
                 break;
-                case "Nouveautés" : 
-                    ListePlats = new ObservableCollection<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { NbResultats = 10, Depart = "Fin" }));
+                case "Nouveautés" :
+                    btnNouveautes_Click(null, null);
                 break;
                 case "Les plus populaires" :
-                    ListePlats = new ObservableCollection<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { NbResultats = 10, PlusPopulaires = true }));
+                    btnPlusPopulaires_Click(null, null);
                 break;
             }
-
-            dgPlats.ItemsSource = ListePlats;
 
         }
 
@@ -145,15 +165,16 @@ namespace Nutritia.UI.Views
                     listePlatsTemp = new List<Plat>(PlatService.RetrieveAll());
                     break;
                 case "Nouveautés":
-                    listePlatsTemp = new List<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { NbResultats = 10, Depart = "Fin" }));
+                    listePlatsTemp = new List<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { NbResultats = NbResultatsAffiches, Depart = "Fin" }));
                     break;
                 case "Les plus populaires":
-                    listePlatsTemp = new List<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { NbResultats = 10, PlusPopulaires = true }));
+                    listePlatsTemp = new List<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { NbResultats = NbResultatsAffiches, PlusPopulaires = true }));
                     break;
             }
 
             string recherche = ((TextBox)sender).Text;
             ListePlats = new ObservableCollection<Plat>(listePlatsTemp.FindAll(plat => plat.Nom.ToLower().Contains(recherche.ToLower())).ToList());
+            DeterminerNoteConviviale();
             dgPlats.ItemsSource = ListePlats;
         }
 

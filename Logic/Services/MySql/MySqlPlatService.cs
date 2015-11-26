@@ -241,6 +241,7 @@ namespace Nutritia
 				IdPlat = (int)plat["idPlat"],
 				Createur = (string)plat["nomUtilisateur"],
 				Nom = (string)plat["nom"],
+				Description = (string)plat["description"],
 				TypePlat = (string)plat["typePlat"],
 				Note = note,
 				NbVotes = (int)plat["nbVotes"],

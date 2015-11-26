@@ -39,6 +39,21 @@ namespace Nutritia
 		private IPlatService platAsync;
 		public List<Plat> LstPlat { get; set; }
 
+        public void Configurer()
+        {
+            // Inscription des différents services de l'application dans le ServiceFactory.
+            ServiceFactory.Instance.Register<IRestrictionAlimentaireService, MySqlRestrictionAlimentaireService>(new MySqlRestrictionAlimentaireService());
+            ServiceFactory.Instance.Register<IObjectifService, MySqlObjectifService>(new MySqlObjectifService());
+            ServiceFactory.Instance.Register<IUniteMesureService, MySqlUniteMesureService>(new MySqlUniteMesureService());
+            ServiceFactory.Instance.Register<IPreferenceService, MySqlPreferenceService>(new MySqlPreferenceService());
+            ServiceFactory.Instance.Register<IAlimentService, MySqlAlimentService>(new MySqlAlimentService());
+            ServiceFactory.Instance.Register<IPlatService, MySqlPlatService>(new MySqlPlatService());
+            ServiceFactory.Instance.Register<ISuiviPlatService, MySqlSuiviPlatService>(new MySqlSuiviPlatService());
+            ServiceFactory.Instance.Register<IMenuService, MySqlMenuService>(new MySqlMenuService());
+            ServiceFactory.Instance.Register<IMembreService, MySqlMembreService>(new MySqlMembreService());
+            ServiceFactory.Instance.Register<IVersionLogicielService, MySqlVersionLogicielService>(new MySqlVersionLogicielService());
+            ServiceFactory.Instance.Register<IApplicationService, MainWindow>(this);
+        }
 
 		public MainWindow()
 		{
@@ -193,7 +208,12 @@ namespace Nutritia
 		/// <param name="e"></param>
 		private void btnRetour_Click(object sender, RoutedEventArgs e)
 		{
-			if (App.MembreCourant.IdMembre == null)
+            App.Current.MainWindow.ResizeMode = ResizeMode.CanMinimize;
+            App.Current.MainWindow.Width = App.APP_WIDTH;
+            App.Current.MainWindow.Height = App.APP_HEIGHT;
+            App.Current.MainWindow.WindowState = WindowState.Normal;
+
+			if(App.MembreCourant.IdMembre == null)
 				ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipal());
 			else
 			{

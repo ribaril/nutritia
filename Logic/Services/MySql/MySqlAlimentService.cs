@@ -115,7 +115,7 @@ namespace Nutritia
                 Nom = (string)aliment["nom"],
                 Categorie = (string)aliment["categorieAlimentaire"],
                 Mesure = (int)aliment["mesure"],
-                UniteMesure = (string)aliment["symbole"],
+                UniteMesure = (string)aliment["uniteMesure"],
                 Energie = valeurNut["Calories"],
                 Glucide = valeurNut["Glucides"],
                 Fibre = valeurNut["Fibres"],
@@ -251,6 +251,71 @@ namespace Nutritia
 
                 string requeteInsert = string.Format("INSERT INTO AlimentsValeursNutritionnelles (idAliment ,idValeurNutritionnelle, quantite) VALUES ({0}, {1}, {2})", idAliment, idValeur, uneValeur);
                 connexion.Query(requeteInsert);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Méthode de mise à jour d'un aliment dans la base de données.
+        /// </summary>
+        /// <param name="unAliment"></param>
+        public void Update(Aliment unAliment)
+        {
+            try
+            {
+                connexion = new MySqlConnexion();
+
+                string requeteCategoriesAlim = string.Format("SELECT * FROM CategoriesAlimentaires WHERE categorieAlimentaire = '{0}'", unAliment.Categorie);
+
+                DataSet dataSetCategories = connexion.Query(requeteCategoriesAlim);
+                DataTable tableCategories = dataSetCategories.Tables[0];
+
+                int idCategorie = 0;
+
+                foreach (DataRow rowCategories in tableCategories.Rows)
+                {
+                    idCategorie = (int)rowCategories["idCategorieAlimentaire"];
+                }
+
+                string requeteUnitesMesure = string.Format("SELECT * FROM UnitesMesure WHERE uniteMesure = '{0}'", unAliment.UniteMesure);
+
+                DataSet dataSetUnites = connexion.Query(requeteUnitesMesure);
+                DataTable tableUnites = dataSetUnites.Tables[0];
+
+                int idUnite = 0;
+
+                foreach (DataRow rowUnites in tableUnites.Rows)
+                {
+                    idUnite = (int)rowUnites["idUniteMesure"];
+                }
+                
+                string requeteUpdate = string.Format("UPDATE Aliments SET idUniteMesure = {0}, idCategorieAlimentaire = {1}, nom = '{2}', mesure = {3}, imageURL = '{4}' WHERE idAliment = {5}", idUnite, idCategorie, unAliment.Nom, unAliment.Mesure, unAliment.ImageURL, unAliment.IdAliment);
+                connexion.Query(requeteUpdate);
+
+                int idAliment = (int)unAliment.IdAliment;
+
+                int idEnergie = Associer_Valeur_Nutritionnelle("Calories");
+                int idProteine = Associer_Valeur_Nutritionnelle("Protéines");
+                int idGlucide = Associer_Valeur_Nutritionnelle("Glucides");
+                int idFibre = Associer_Valeur_Nutritionnelle("Fibres");
+                int idLipide = Associer_Valeur_Nutritionnelle("Lipides");
+                int idSodium = Associer_Valeur_Nutritionnelle("Sodium");
+                int idCholesterol = Associer_Valeur_Nutritionnelle("Cholestérol");
+
+                string requeteDelete = string.Format("DELETE FROM AlimentsValeursNutritionnelles WHERE idAliment = {0}", idAliment);
+                connexion.Query(requeteDelete);
+
+                Inserer_Valeur_Nutritionnelle(idEnergie, idAliment, unAliment.Energie);
+                Inserer_Valeur_Nutritionnelle(idProteine, idAliment, unAliment.Proteine);
+                Inserer_Valeur_Nutritionnelle(idGlucide, idAliment, unAliment.Glucide);
+                Inserer_Valeur_Nutritionnelle(idFibre, idAliment, unAliment.Fibre);
+                Inserer_Valeur_Nutritionnelle(idLipide, idAliment, unAliment.Lipide);
+                Inserer_Valeur_Nutritionnelle(idSodium, idAliment, unAliment.Sodium);
+                Inserer_Valeur_Nutritionnelle(idCholesterol, idAliment, unAliment.Cholesterol);
+
             }
             catch (Exception)
             {
