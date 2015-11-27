@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" d:DesignHeight="475" d:DesignWidth="650">
+             mc:Ignorable="d" d:DesignHeight="475" d:DesignWidth="650"
+             ResxExtension.DefaultResxName="Nutritia.UI.Ressources.Localisation.FenetreGenerateurMenus" Language="{UICulture}">
     <UserControl.Resources>
         <Style TargetType="Button" x:Key="btnTexte" BasedOn="{StaticResource fontNutritia}">
             <Setter Property="FontSize" Value="16" />
@@ -37,15 +38,15 @@
             <ColumnDefinition Width="9.5*"></ColumnDefinition>
             <ColumnDefinition Width="0.25*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <GroupBox Grid.Column="1" Header="Informations préalables à la génération">
+        <GroupBox Grid.Column="1" Header="{Resx InfoGeneration}">
             <Grid>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Label Style="{StaticResource fontNutritia}" FontSize="14" VerticalAlignment="Center">Période :</Label>
-                    <RadioButton Name="rbDejeuner">Un déjeuner</RadioButton>
-                    <RadioButton Name="rbDinerSouper" IsChecked="True">Un diner/souper</RadioButton>
-                    <RadioButton Name="rbMenuJournalier">Un jour</RadioButton>
-                    <RadioButton Name="rbMenuHebdomadaire">Une semaine</RadioButton>
-                    <Label Style="{StaticResource fontNutritia}" FontSize="14" Margin="25, 0, 0, 0" VerticalAlignment="Center">Personnes :</Label>
+                    <Label Style="{StaticResource fontNutritia}" FontSize="14" VerticalAlignment="Center" Content="{Resx Periode}"/>
+                    <RadioButton Name="rbDejeuner" Content="{Resx Dejeuner}" />
+                    <RadioButton Name="rbDinerSouper" IsChecked="True" Content="{Resx DinerSouper}" />
+                    <RadioButton Name="rbMenuJournalier" Content="{Resx Jour}" />
+                    <RadioButton Name="rbMenuHebdomadaire" Content="{Resx Semaine}"/>
+                        <Label Style="{StaticResource fontNutritia}" FontSize="14" Margin="25, 0, 0, 0" VerticalAlignment="Center" Content="{Resx Personnes}"/>
                     <ComboBox Name="cboNbPersonnes">
                         <ComboBoxItem>1</ComboBoxItem>
                         <ComboBoxItem>2</ComboBoxItem>
@@ -59,21 +60,21 @@
             <Button Name="btnSauvegarder" Width="25" Height="25" Margin="0, 0, 12.5, 0" IsEnabled="False" Click="btnSauvegarder_Click">
                 <Image Source="pack://application:,,,/UI/Images/disquetteIcon.png"></Image>
             </Button>
-            <Button Name="btnOuvrirMenu" Style="{StaticResource btnTexte}" Width="180" Height="25" Margin="0, 0, 12.5, 0" IsEnabled="False" Click="btnOuvrirMenu_Click">Ouvrir un menu existant</Button>
-            <Button Name="btnGenerer" Style="{StaticResource btnTexte}" Width="180" Height="25" Margin="0, 0, 12.5, 0" Click="btnGenerer_Click">Générer</Button>
-            <Button Name="btnListeEpicerie" Style="{StaticResource btnTexte}" Width="180" Height="25" IsEnabled="False" Click="btnListeEpicerie_Click">Liste d'épicerie</Button>
+            <Button Name="btnOuvrirMenu" Style="{StaticResource btnTexte}" Width="180" Height="25" Margin="0, 0, 12.5, 0" IsEnabled="False" Click="btnOuvrirMenu_Click" Content="{Resx OuvrirMenu}" />
+            <Button Name="btnGenerer" Style="{StaticResource btnTexte}" Width="180" Height="25" Margin="0, 0, 12.5, 0" Click="btnGenerer_Click" Content="{Resx Generer}" />
+            <Button Name="btnListeEpicerie" Style="{StaticResource btnTexte}" Width="180" Height="25" IsEnabled="False" Click="btnListeEpicerie_Click" Content="{Resx ListeEpicerie}" />
         </StackPanel>
         <StackPanel Name="spInfosSup" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 12.5">
-                <Label Style="{StaticResource fontNutritia}" FontSize="22" VerticalAlignment="Center">Afficher les images des plats ?</Label>
+                <Label Style="{StaticResource fontNutritia}" FontSize="22" VerticalAlignment="Center" Content="{Resx AfficherImage}" />
                 <CheckBox Name="chbAfficherImages" IsChecked="True" VerticalAlignment="Center"></CheckBox>
             </StackPanel>
             <Image Width="225" Source="pack://application:,,,/UI/Images/infoIcon.png">
                 <Image.ToolTip>
-                    <ToolTip Style="{StaticResource toolTipNutritia}" Content="Vous devez remplir la section Informations préalables à la génération &#x0a; et appuyer sur le bouton Générer pour générer un menu. &#x0a; Lors de l'appuie sur le bouton, le menu apparaîtra."></ToolTip>
+                    <ToolTip Style="{StaticResource toolTipNutritia}" Content="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreGenerateurMenus, Key=TooltipNonAdmissible}"></ToolTip>
                 </Image.ToolTip>
             </Image>
-            <Button Name="btnSuiviPlatsNonAdmissibles" Style="{StaticResource btnTexte}" Width="225" Height="25" IsEnabled="False" Click="btnSuiviPlatsNonAdmissibles_Click">Suivi des plats non admissibles</Button>
+            <Button Name="btnSuiviPlatsNonAdmissibles" Style="{StaticResource btnTexte}" Width="225" Height="25" IsEnabled="False" Click="btnSuiviPlatsNonAdmissibles_Click" Content="{Resx SuiviNonAdmissible}" />
         </StackPanel>
         <GroupBox Name="gbMenus" Grid.Row="2" Grid.Column="1" Header="Menus" VerticalAlignment="Top" Visibility="Hidden">
             <ScrollViewer Name="svMenus" PreviewMouseWheel="svMenus_PreviewMouseWheel">
@@ -132,7 +133,7 @@
                             <DataGridTemplateColumn x:Name="dgtcIngredient" Width="2*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Name="btnIngredients" Width="100" Height="45" Content="Ingrédients" Click="btnIngredients_Click">
+                                        <Button Name="btnIngredients" Width="100" Height="45" Content="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreGenerateurMenus, Key=Ingredients}" Click="btnIngredients_Click">
                                             <Button.Style>
                                                 <Style TargetType="{x:Type Button}" BasedOn="{StaticResource btnTexte}">
                                                     <Style.Triggers>
