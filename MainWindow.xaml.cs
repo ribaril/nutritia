@@ -78,12 +78,15 @@ namespace Nutritia
             App.Current.MainWindow.Height = App.APP_HEIGHT;
             App.Current.MainWindow.WindowState = WindowState.Normal;
 
-			if(App.MembreCourant.IdMembre == null)
-				ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipal());
+            if (presenteurContenu.Content is FenetreListeEpicerie)
+                ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new FenetreGenerateurMenus(FenetreListeEpicerie.MenuGenere, FenetreListeEpicerie.NbColonnesMenu));
+            else if (App.MembreCourant.IdMembre == null)
+				ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipal()); 
 			else
             {
                 if(presenteurContenu.Content is Bannissement || presenteurContenu.Content is GestionAdmin || presenteurContenu.Content is GestionRepertoire)
-                        ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuAdministrateur());
+                    ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuAdministrateur());
+               
                 else
                     ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
             }
