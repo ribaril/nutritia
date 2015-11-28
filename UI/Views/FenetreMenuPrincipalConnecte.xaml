@@ -33,7 +33,7 @@
         <Button Name="btnProfil" Canvas.Left="112" Canvas.Top="91" Height="75" Width="75" Click="btnProfil_Click">
             <Image Source="/Nutritia;component/UI/Images/ProfilIcon.png" />
         </Button>
-        <Label Content="{Resx MonProfil}" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="161" Canvas.Left="81" Width="134"/>
+        <Label Content="{Resx MonProfil}" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="161" Canvas.Left="81" Width="141"/>
         <Button x:Name="btnGestAdmin" Visibility="Hidden" Canvas.Left="370" Canvas.Top="19" Click="btnGestAdmin_Click">
             <StackPanel Orientation="Horizontal">
                 <Image  Height="40" Source="/Nutritia;component/UI/Images/adminIcon.png" />
