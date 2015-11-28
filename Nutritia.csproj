@@ -144,6 +144,16 @@
     <Compile Include="UI\Pages\MenuGeneral.xaml.cs">
       <DependentUpon>MenuGeneral.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Ressources\Localisation\FenetreConnexion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FenetreConnexion.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Ressources\Localisation\FenetreConnexion.en.Designer.cs">
+      <DependentUpon>FenetreConnexion.en.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Include="UI\Ressources\Localisation\FenetreGenerateurMenus.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -631,6 +641,15 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\FenetreConnexion.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FenetreConnexion.en.Designer.cs</LastGenOutput>
+      <DependentUpon>FenetreConnexion.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\FenetreConnexion.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FenetreConnexion.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Ressources\Localisation\FenetreGenerateurMenus.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
