@@ -154,6 +154,16 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="UI\Ressources\Localisation\FenetreBannissement.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FenetreBannissement.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Ressources\Localisation\FenetreBannissement.en.Designer.cs">
+      <DependentUpon>FenetreBannissement.en.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Include="UI\Ressources\Localisation\FenetreConnexion.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -660,6 +670,15 @@
     <EmbeddedResource Include="UI\Ressources\Localisation\FenetreAide.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FenetreAide.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\FenetreBannissement.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FenetreBannissement.en.Designer.cs</LastGenOutput>
+      <DependentUpon>FenetreBannissement.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\FenetreBannissement.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FenetreBannissement.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Ressources\Localisation\FenetreConnexion.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
