@@ -285,4 +285,16 @@
   <data name="Viandes" xml:space="preserve">
     <value>Viandes</value>
   </data>
+  <data name="BtnCreerLeProfil" xml:space="preserve">
+    <value>Créer le profil</value>
+  </data>
+  <data name="MessageCreationSucces" xml:space="preserve">
+    <value>Votre compte Nutritia a été créé avec succès!</value>
+  </data>
+  <data name="MessageCreationTitre" xml:space="preserve">
+    <value>Félicitations</value>
+  </data>
+  <data name="TitreCreation" xml:space="preserve">
+    <value>Nutritia - Création de profil</value>
+  </data>
 </root>

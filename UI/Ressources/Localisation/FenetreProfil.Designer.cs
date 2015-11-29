@@ -88,6 +88,15 @@ namespace Nutritia.UI.Ressources.Localisation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Créer le profil.
+        /// </summary>
+        public static string BtnCreerLeProfil {
+            get {
+                return ResourceManager.GetString("BtnCreerLeProfil", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Modifier le profil.
         /// </summary>
         public static string BtnModifierLeProfil {
@@ -210,6 +219,24 @@ namespace Nutritia.UI.Ressources.Localisation {
         public static string MasseVide {
             get {
                 return ResourceManager.GetString("MasseVide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Votre compte Nutritia a été créé avec succès!.
+        /// </summary>
+        public static string MessageCreationSucces {
+            get {
+                return ResourceManager.GetString("MessageCreationSucces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Félicitations.
+        /// </summary>
+        public static string MessageCreationTitre {
+            get {
+                return ResourceManager.GetString("MessageCreationTitre", resourceCulture);
             }
         }
         
@@ -489,6 +516,15 @@ namespace Nutritia.UI.Ressources.Localisation {
         public static string Titre {
             get {
                 return ResourceManager.GetString("Titre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nutritia - Création de profil.
+        /// </summary>
+        public static string TitreCreation {
+            get {
+                return ResourceManager.GetString("TitreCreation", resourceCulture);
             }
         }
         
