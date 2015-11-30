@@ -26,6 +26,7 @@ namespace Nutritia.UI.Views
         public FenetreParametres()
         {
             InitializeComponent();
+            btnConnexion.IsEnabled = App.MembreCourant.EstAdministrateur;
             FrmNavigation.Navigate(new MenuGeneral());
         }
 
