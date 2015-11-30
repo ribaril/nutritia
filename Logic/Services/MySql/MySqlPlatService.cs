@@ -246,7 +246,7 @@ namespace Nutritia
 				Note = note,
 				NbVotes = (int)plat["nbVotes"],
 				ImageUrl = (string)plat["imageUrl"],
-				DateAjout = plat["dateAjout"].ToString()
+				DateAjout = DateTime.Parse(plat["dateAjout"].ToString())
             };
         }
     }

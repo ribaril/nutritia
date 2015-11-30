@@ -24,7 +24,7 @@ namespace Nutritia
         public bool EstConnecte { get; set; }
         public bool EstAdministrateur { get; set; }
         public bool EstBanni { get; set; }
-		public String DerniereMaj { get; set; }
+		public DateTime DerniereMaj { get; set; }
 		public int Age
         {
             get

@@ -46,8 +46,8 @@
                 </Button>
                 <ToolBar Name="toolBarNotif" Width="65" Height="30">
                     <!--<Button Name="btnNotification" VerticalAlignment="Top">-->
-                    <DockPanel Margin="2">
-                            <Image ToolTipService.ShowDuration="12000" Width="25" Source="UI/Images/notifIcon.png" >
+                   
+                            <Image ToolTipService.ShowDuration="12000" Width="25" Margin="2" Source="UI/Images/notifIcon.png" >
                                 <Image.ToolTip>
                                     <ToolTip StaysOpen="True" HorizontalOffset="10"
                                     ToolTipService.InitialShowDelay="0" ToolTipService.BetweenShowDelay="0">
@@ -56,7 +56,7 @@
                                 </Image.ToolTip>
                             </Image>
                             <TextBlock Name="nbrNotif" Text="" Foreground="DarkGreen"/>
-                        </DockPanel>
+                        
                     <!--</Button>-->
                 </ToolBar>
             </ToolBar>

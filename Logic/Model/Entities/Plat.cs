@@ -20,7 +20,7 @@ namespace Nutritia
         public string ImageUrl { get; set; }
         public bool EstTricherie { get; set; }
         public IList<Aliment> ListeIngredients { get; set; }
-		public String DateAjout { get; set; }
+		public DateTime DateAjout { get; set; }
         #endregion
 
         /// <summary>
