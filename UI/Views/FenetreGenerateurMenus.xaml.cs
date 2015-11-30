@@ -123,83 +123,9 @@ namespace Nutritia.UI.Views
             EstNouveauMenu = true;
             NbColonnes = NB_COLONNES_AVEC_IMAGES;
         }
-
-        /* A voir faut je corrige ce bug la */
-        public FenetreGenerateurMenus(Menu menu, int nbColonnes)
+        
+        public FenetreGenerateurMenus(Menu menu, int nbColonnes) : this()
         {
-            InitializeComponent();
-
-            Rand = new Random();
-
-            App.Current.MainWindow.ResizeMode = ResizeMode.CanResize;
-
-            AlimentService = ServiceFactory.Instance.GetService<IAlimentService>();
-            PlatService = ServiceFactory.Instance.GetService<IPlatService>();
-            SuiviPlatService = ServiceFactory.Instance.GetService<ISuiviPlatService>();
-            MenuService = ServiceFactory.Instance.GetService<IMenuService>();
-
-            // Chargement des plats.
-            Mouse.OverrideCursor = Cursors.Wait;
-            ListeDejeuners = new List<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Déjeuner" }));
-            ListeEntrees = new List<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Entrée" }));
-            ListePlatPrincipaux = new List<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Plat principal" }));
-            ListeBreuvages = new List<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Breuvage" }));
-            ListeDesserts = new List<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Déssert" }));
-            ListePlatsRetires = new List<Plat>();
-            Mouse.OverrideCursor = null;
-
-            // Header de la fenêtre.
-            App.Current.MainWindow.Title = "Nutritia - Génération de menus";
-
-            if (!String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
-            {
-                btnSuiviPlatsNonAdmissibles.IsEnabled = true;
-                btnOuvrirMenu.IsEnabled = true;
-                btnSauvegarder.IsEnabled = true;
-                RestreindrePossibilites();
-                List<Plat> ListePlatsSuivis = new List<Plat>(SuiviPlatService.RetrieveSome(new RetrieveSuiviPlatArgs { IdMembre = (int)App.MembreCourant.IdMembre }));
-
-                if (ListePlatsSuivis.Count == 0)
-                {
-                    SuiviPlatService.Insert(ListePlatsRetires, App.MembreCourant);
-                }
-                else
-                {
-                    foreach (Plat platCourant in ListePlatsRetires)
-                    {
-                        if (ListePlatsSuivis.Find(plat => plat.IdPlat == platCourant.IdPlat) != null)
-                        {
-                            platCourant.EstTricherie = ListePlatsSuivis.Find(plat => plat.IdPlat == platCourant.IdPlat).EstTricherie;
-
-                            if (platCourant.EstTricherie)
-                            {
-                                switch (platCourant.TypePlat)
-                                {
-                                    case "Déjeuner":
-                                        ListeDejeuners.Add(platCourant);
-                                        break;
-                                    case "Entrée":
-                                        ListeEntrees.Add(platCourant);
-                                        break;
-                                    case "Plat principal":
-                                        ListePlatPrincipaux.Add(platCourant);
-                                        break;
-                                    case "Breuvage":
-                                        ListeBreuvages.Add(platCourant);
-                                        break;
-                                    case "Déssert":
-                                        ListeDesserts.Add(platCourant);
-                                        break;
-                                }
-                            }
-                        }
-                    }
-
-                    SuiviPlatService.Update(ListePlatsRetires, App.MembreCourant);
-
-                }
-            }
-
             NbColonnes = nbColonnes;
 
             if (nbColonnes == 3)
