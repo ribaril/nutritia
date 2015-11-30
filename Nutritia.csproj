@@ -189,6 +189,16 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="UI\Ressources\Localisation\FenetreDons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FenetreDons.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Ressources\Localisation\FenetreDons.en.Designer.cs">
+      <DependentUpon>FenetreDons.en.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Include="UI\Ressources\Localisation\FenetreGenerateurMenus.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -453,6 +463,9 @@
     <Compile Include="UI\Views\FenetreConnexion.xaml.cs">
       <DependentUpon>FenetreConnexion.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Views\FenetreDons.xaml.cs">
+      <DependentUpon>FenetreDons.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\FenetreInfoMembre.xaml.cs">
       <DependentUpon>FenetreInfoMembre.xaml</DependentUpon>
     </Compile>
@@ -576,6 +589,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Views\FenetreConnexion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\FenetreDons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -712,6 +729,15 @@
     <EmbeddedResource Include="UI\Ressources\Localisation\FenetreConnexion.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FenetreConnexion.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\FenetreDons.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FenetreDons.en.Designer.cs</LastGenOutput>
+      <DependentUpon>FenetreDons.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\FenetreDons.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FenetreDons.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Ressources\Localisation\FenetreGenerateurMenus.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -1018,6 +1044,7 @@
     <Resource Include="UI\Images\nonDisponible.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="UI\Images\moneyBag.png" />
     <Resource Include="LogoIcon.ico" />
     <Content Include="Toolkit\Infralution\Infralution.Localization.Wpf.dll" />
     <Content Include="Toolkit\Infralution\Infralution.Localization.Wpf.pdb" />

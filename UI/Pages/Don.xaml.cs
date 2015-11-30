@@ -24,7 +24,7 @@ namespace Nutritia.UI.Pages
     /// </summary>
     public partial class Don : Page
     {
-        IDonService donService;
+        private IDonService donService;
         private int valeurDon;
         public bool isNomGood = false;
         public bool isNoCarteGood = false;

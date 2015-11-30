@@ -54,7 +54,7 @@ namespace Nutritia
         private Transaction ConstruireDon(DataRow don)
         {
             DateTime DateHeureTransaction = (DateTime)don["dateDon"];
-            float Montant = (int)don["montant"];
+            float Montant = (float)don["montant"];
             string NomAuteur = (string)don["Auteur"];
             ModePaiement mode = ModePaiement.StringToValue((string)don["ModePaiement"]);
 
