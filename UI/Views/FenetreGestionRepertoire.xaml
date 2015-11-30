@@ -25,7 +25,7 @@
             <RadioButton Name="rdb_plat" Checked="rdb_plat_Checked" IsChecked="True" Content="Plat / Breuvage" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="0,5,0,0"></RadioButton>
         </StackPanel>
 
-        <Grid Grid.Row="1" Name="grid_ajout_plat" Visibility="Hidden">
+        <Grid Grid.Row="1" Name="grid_ajout_plat" Visibility="Visible">
             <GroupBox Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="10,10,10,10" BorderBrush="DarkGreen">
                 <GroupBox.Header>Ajout d'un plat / breuvage</GroupBox.Header>
                 <Grid>
@@ -33,9 +33,9 @@
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" Content="Nom du plat" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,5,0,0"></Label>
-                    <TextBox Name="Nom_plat" Grid.Row="0" SelectedText="" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,25,0,0"></TextBox>
-                    <Label Grid.Row="0" Content="Type de plat" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,55,0,0"></Label>
+                    <Label Name="lbl_nom_plat" Grid.Row="0" Content="Nom du plat" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,5,0,0"></Label>
+                    <TextBox Name="Nom_plat" Grid.Row="0" SelectedText="" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,25,0,0" TextChanged="Nom_plat_TextChanged"></TextBox>
+                    <Label Name="lbl_type" Grid.Row="0" Content="Type de plat" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,55,0,0"></Label>
                     <ComboBox Grid.Row="0" Name="cbo_type" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,75,0,0">
                         <ComboBoxItem>Entrée</ComboBoxItem>
                         <ComboBoxItem>Plat principal</ComboBoxItem>
@@ -46,21 +46,21 @@
                     <Image Name="img_plat" Width="60" Height="60" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,115,0,0" Source="pack://application:,,,/UI/Images/nonDisponible.png"></Image>
                     <Button Name="btn_ajout_img_plat" Grid.Row="0" Content="Ajouter une image" Height="25" Width="120" Foreground="DarkGreen" FontSize="13" Style="{StaticResource nonTransparent}" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,130,0,0" Click="Ajouter_Image"></Button>
 
-                    <Label Grid.Row="0" Content="Description" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,20,0"></Label>
-                    <TextBox Name="Description" Grid.Row="0" Width="250" Height="100" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" TextWrapping="WrapWithOverflow" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,25,20,0"></TextBox>
+                    <Label Grid.Row="0" Content="Description" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,180,0,0"></Label>
+                    <TextBox Name="Description" Grid.Row="0" Width="250" Height="80" MaxLength="200" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,205,0,0"></TextBox>
 
-                    <Label Grid.Row="0" Content="Composition du plat" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,155,20,0"></Label>
-                    <DataGrid Name="composition_plat" HeadersVisibility="None" Width="250" Height="120" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,175,20,0">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Width="50"></DataGridTextColumn>
-                            <DataGridTextColumn Width="200"></DataGridTextColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <GroupBox x:Name="compo_plat" Header="Composition du plat" FontSize="13" HorizontalAlignment="Right"  Grid.Row="2" VerticalAlignment="Top" Height="160" Width="250" Margin="0,170,20,0">
+                        <ScrollViewer>
+                            <StackPanel Name="composition_plat">
+                            </StackPanel>
+                        </ScrollViewer>
 
-                    <!--<Button Name="Btn_confirmer_ajout_plat" Grid.Row="1" Content="Confirmer l'ajout" Height="30" Width="150" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"></Button>-->
+                    </GroupBox>
 
-                    <Label Grid.Row="0" Content="Aliments disponibles par groupe" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,180,0,0"></Label>
-                    <ScrollViewer Name="aliments_ajout" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Height="120" Width="250" FontSize="14" FontFamily="Berlin Sans FB Demi" Margin="20,190,0,0">
+                    <Button Name="Btn_confirmer_ajout_plat" Grid.Row="1" Content="Confirmer l'ajout" Height="30" Style="{StaticResource nonTransparent}" Width="150" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="67,0,0,10" Click="Valider_Inserer_Plat"></Button>
+
+                    <Label Grid.Row="0" Content="Aliments disponibles par groupe" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,20,0"></Label>
+                    <ScrollViewer Name="aliments_ajout" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Height="130" Width="250" FontSize="14" FontFamily="Berlin Sans FB Demi" Margin="0,30,20,0">
                         <layoutToolkit:Accordion Width="288" Name="accordeon_aliments">
                         </layoutToolkit:Accordion>
                     </ScrollViewer>
@@ -167,7 +167,7 @@
             <Button Name="btn_creer" Grid.Row="0" Content="Ajouter l'aliment" Height="30" Width="150" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource nonTransparent}" Margin="315,0,0,30" Click="Valider_Inserer_Aliment"></Button>
         </Grid>
 
-        <Grid Grid.Row="1" Name="grid_modif_aliment" Visibility="Visible">
+        <Grid Grid.Row="1" Name="grid_modif_aliment" Visibility="Hidden">
             <GroupBox Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="10,10,10,10" BorderBrush="DarkGreen">
                 <GroupBox.Header>Modification d'un aliment</GroupBox.Header>
                 <Grid>
