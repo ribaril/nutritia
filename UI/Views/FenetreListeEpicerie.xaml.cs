@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Infralution.Localization.Wpf;
 
 namespace Nutritia.UI.Views
 {
@@ -21,20 +22,24 @@ namespace Nutritia.UI.Views
     /// </summary>
     public partial class FenetreListeEpicerie : UserControl
     {
-        public Menu MenuGenere { get; set; }
+        public static Menu MenuGenere { get; set; }
+        public static int NbColonnesMenu { get; set; }
         public ObservableCollection<Aliment> ListeAliments { get; set; }
 
         /// <summary>
         /// Constructeur par défaut de la classe.
         /// </summary>
-        public FenetreListeEpicerie(Menu menu)
+        public FenetreListeEpicerie(Menu menu, int nbColonnes)
         {
+            CultureManager.UICultureChanged += CultureManager_UICultureChanged;
+
             InitializeComponent();
 
             // Header de la fenetre
-            App.Current.MainWindow.Title = "Nutritia - Liste épicerie";
+            App.Current.MainWindow.Title = Nutritia.UI.Ressources.Localisation.FenetreListeEpicerie.Titre;
 
             MenuGenere = menu;
+            NbColonnesMenu = nbColonnes;
 
             ListeAliments = new ObservableCollection<Aliment>();
 
@@ -137,6 +142,11 @@ namespace Nutritia.UI.Views
 
             ListeAliments.Remove(alimentSelectionne);
             GenererListeConviviale();
+        }
+
+        private void CultureManager_UICultureChanged(object sender, EventArgs e)
+        {
+            App.Current.MainWindow.Title = Nutritia.UI.Ressources.Localisation.FenetreListeEpicerie.Titre;
         }
     }
 }

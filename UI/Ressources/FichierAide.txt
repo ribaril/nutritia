@@ -34,7 +34,7 @@ Vous pouvez apercevoir une icône à droite dans une ligne de plat ou d'aliment,
 #EnvoyerDon
 EnvoyerDonEnvoyerDonEnvoyerDon
 #GenerationMenu
-GenerationMenuGenerationMenuGenerationMenu
+
 #ListeEpicerie
 ListeEpicerieListeEpicerieListeEpicerie
 #MenuConnecte

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Infralution.Localization.Wpf;
 
 namespace Nutritia.UI.Views
 {
@@ -22,10 +23,12 @@ namespace Nutritia.UI.Views
     {
         public MenuPrincipal()
         {
+            CultureManager.UICultureChanged += CultureManager_UICultureChanged;
+            
             InitializeComponent();
 
             // Header de la fenetre
-            App.Current.MainWindow.Title = "Nutritia - Menu Principal";
+            App.Current.MainWindow.Title = Nutritia.UI.Ressources.Localisation.FenetreMenuPrincipal.Titre;
         }
 
         private void btnInscription_Click(object sender, RoutedEventArgs e)
@@ -46,6 +49,11 @@ namespace Nutritia.UI.Views
         private void btnMenuListe_Click(object sender, RoutedEventArgs e)
         {
             ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new FenetreGenerateurMenus());
+        }
+
+        private void CultureManager_UICultureChanged(object sender, EventArgs e)
+        {
+            App.Current.MainWindow.Title = Nutritia.UI.Ressources.Localisation.FenetreMenuPrincipal.Titre;
         }
     }
 }

@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Nutritia.UI.Ressources.Localisation;
+using Infralution.Localization.Wpf;
 
 namespace Nutritia.UI.Views
 {
@@ -51,6 +53,7 @@ namespace Nutritia.UI.Views
 
 		public FenetreCalculatriceNutritionelle(Plat platEnvoye)
 		{
+            CultureManager.UICultureChanged += CultureManager_UICultureChanged;
 			InitializeComponent();
 			Initialiser();
 
@@ -712,6 +715,11 @@ namespace Nutritia.UI.Views
 			DessinerPlateau();
 
 		}
+
+        private void CultureManager_UICultureChanged(object sender, EventArgs e)
+        {
+            App.Current.MainWindow.Title = FenetreCalculatriceNutritionnelle.Titre;
+        }
 
 	}
 

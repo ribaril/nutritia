@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="475" d:DesignWidth="650">
+             d:DesignHeight="475" d:DesignWidth="650"
+             ResxExtension.DefaultResxName="Nutritia.UI.Ressources.Localisation.FenetreListeEpicerie" Language="{UICulture}">
     <UserControl.Resources>
         <Style TargetType="DataGrid">
             <Setter Property="CanUserAddRows" Value="False" />
@@ -48,7 +49,7 @@
             <ColumnDefinition Width="5.75*"></ColumnDefinition>
             <ColumnDefinition Width="4.25*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label Style="{StaticResource fontSousTitre}" Grid.ColumnSpan="2">Liste d'épicerie</Label>
+        <Label Style="{StaticResource fontSousTitre}" Grid.ColumnSpan="2" Content="{Resx ListeEpicerie}"/>
         <DataGrid Name="dgListeEpicerie" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Width="*">
@@ -60,7 +61,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Width="3.25*" Header="Article" Binding="{Binding Nom}" Foreground="DarkGreen" IsReadOnly="True">
+                <DataGridTextColumn Width="3.25*" Header="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreListeEpicerie, Key=Article}" Binding="{Binding Nom}" Foreground="DarkGreen" IsReadOnly="True">
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
@@ -69,7 +70,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Width="2.25*" Header="Quantité" Binding="{Binding Quantite}" Foreground="DarkGreen" IsReadOnly="True">
+                <DataGridTextColumn Width="2.25*" Header="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreListeEpicerie, Key=Quantite}" Binding="{Binding Quantite}" Foreground="DarkGreen" IsReadOnly="True">
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
@@ -78,7 +79,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Width="3.75*" Header="Unité de mesure" Binding="{Binding UniteMesure}" Foreground="DarkGreen" IsReadOnly="True">
+                <DataGridTextColumn Width="3.75*" Header="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreListeEpicerie, Key=UniteMesure}" Binding="{Binding UniteMesure}" Foreground="DarkGreen" IsReadOnly="True">
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
@@ -89,7 +90,7 @@
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <GroupBox Grid.Row="1" Grid.Column="1" Header="Liste d'épicerie" Style="{StaticResource groupBoxNutritia}" Width="260" Height="355">
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreListeEpicerie, Key=ListeEpicerie}" Style="{StaticResource groupBoxNutritia}" Width="260" Height="355">
             <ScrollViewer>
                 <Grid Name="grdListeConviviale">
                 </Grid>
@@ -97,7 +98,7 @@
         </GroupBox>
         <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource nonTransparent}" Width="150" Height="50" FontSize="16" VerticalAlignment="Top">
             <StackPanel Orientation="Horizontal">
-                <Label Style="{StaticResource fontNutritia}" VerticalAlignment="Center">Imprimer</Label>
+                <Label Style="{StaticResource fontNutritia}" VerticalAlignment="Center" Content="{Resx Imprimer}"/>
                 <Image Source="pack://application:,,,/UI/Images/imprimanteIcon.png" />
             </StackPanel>
         </Button>

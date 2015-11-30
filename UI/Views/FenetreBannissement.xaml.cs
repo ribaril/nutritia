@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Infralution.Localization.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -26,12 +27,14 @@ namespace Nutritia.UI.Views
 		public List<Membre> TousLesMembres { get; set; }
 		public Bannissement()
 		{
-			InitializeComponent();
+            CultureManager.UICultureChanged += CultureManager_UICultureChanged;
+
+            InitializeComponent();
 
             // Header de la fenetre
-            App.Current.MainWindow.Title = "Nutritia - Banissement";
+            App.Current.MainWindow.Title = Nutritia.UI.Ressources.Localisation.FenetreBannissement.Titre;
 
-			LstMembre = new ObservableCollection<Membre>();
+            LstMembre = new ObservableCollection<Membre>();
 			LstBanni = new ObservableCollection<Membre>();
 			TousLesMembres = new List<Membre>(ServiceFactory.Instance.GetService<IMembreService>().RetrieveAll());
 			
@@ -98,5 +101,10 @@ namespace Nutritia.UI.Views
 			dgBanni.ItemsSource = LstBanni;
 			//dgMembre.ItemsSource = LstMembre;
 		}
+
+        private void CultureManager_UICultureChanged(object sender, EventArgs e)
+        {
+            App.Current.MainWindow.Title = Nutritia.UI.Ressources.Localisation.FenetreBannissement.Titre;
+        }
     }
 }

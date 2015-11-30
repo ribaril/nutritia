@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Infralution.Localization.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,9 +26,11 @@ namespace Nutritia.UI.Views
         
         public FenetreConnexion()
         {
+            CultureManager.UICultureChanged += CultureManager_UICultureChanged;
+
             InitializeComponent();
             // Header de la fenetre
-            App.Current.MainWindow.Title = "Nutritia - Connexion";
+            App.Current.MainWindow.Title = Nutritia.UI.Ressources.Localisation.FenetreConnexion.Titre;
             Erreur = false;
         }
 
@@ -44,8 +47,8 @@ namespace Nutritia.UI.Views
                 if(membreValidation.EstBanni)
                 {
                     MessageBoxResult resultat;
-                    resultat = MessageBox.Show("Vous avez été banni(e), veuillez contacter un administrateur."
-                                                , "Connexion impossible"
+                    resultat = MessageBox.Show(Nutritia.UI.Ressources.Localisation.FenetreConnexion.Bannissement
+                                                , Nutritia.UI.Ressources.Localisation.FenetreConnexion.ConnexionImpossible
                                                 , MessageBoxButton.OK
                                                 , MessageBoxImage.Warning
                                                 , MessageBoxResult.OK);
@@ -79,7 +82,7 @@ namespace Nutritia.UI.Views
             if (string.IsNullOrEmpty(Nom_utilisateur.Text))
             {
                 lbl_utilisateur.Foreground = Brushes.Red;
-                lbl_utilisateur.Content = "Nom d'utilisateur (Champ vide)";
+                lbl_utilisateur.Content = Nutritia.UI.Ressources.Localisation.FenetreConnexion.NomUtilisateurVide;
 
                 Erreur = true;
             }
@@ -90,13 +93,13 @@ namespace Nutritia.UI.Views
                 if (membreValidation.NomUtilisateur == null)
                 {
                     lbl_utilisateur.Foreground = Brushes.Red;
-                    lbl_utilisateur.Content = "Utilisateur non-existant";
+                    lbl_utilisateur.Content = Nutritia.UI.Ressources.Localisation.FenetreConnexion.UtilisateurNonExistant;
                     Erreur = true;
                 }
                 else
                 {
                     lbl_utilisateur.Foreground = Brushes.DarkGreen;
-                    lbl_utilisateur.Content = "Nom d'utilisateur";
+                    lbl_utilisateur.Content = Nutritia.UI.Ressources.Localisation.FenetreConnexion.NomUtilisateur;
                 }
             }
         }
@@ -110,7 +113,7 @@ namespace Nutritia.UI.Views
             if (string.IsNullOrEmpty(Mot_passe.Password))
             {
                 lbl_mdp.Foreground = Brushes.Red;
-                lbl_mdp.Content = "Mot de passe (Champ vide)";
+                lbl_mdp.Content = Nutritia.UI.Ressources.Localisation.FenetreConnexion.MotPasseVide;
                 Erreur = true;
             }
             else
@@ -119,7 +122,7 @@ namespace Nutritia.UI.Views
                 if(membreValidation.NomUtilisateur == null)
                 {
                     lbl_mdp.Foreground = Brushes.Red;
-                    lbl_mdp.Content = "Mot de passe éronné";
+                    lbl_mdp.Content = Nutritia.UI.Ressources.Localisation.FenetreConnexion.MotPasseErreur;
                     Erreur = true;
                 }
                 else
@@ -128,16 +131,21 @@ namespace Nutritia.UI.Views
                     if (membreValidation.MotPasse != Mot_passe.Password)
                     {
                         lbl_mdp.Foreground = Brushes.Red;
-                        lbl_mdp.Content = "Mot de passe éronné";
+                        lbl_mdp.Content = Nutritia.UI.Ressources.Localisation.FenetreConnexion.MotPasseErreur;
                         Erreur = true;
                     }
                     else
                     {
                         lbl_mdp.Foreground = Brushes.DarkGreen;
-                        lbl_mdp.Content = "Mot de passe";
+                        lbl_mdp.Content = Nutritia.UI.Ressources.Localisation.FenetreConnexion.MotPasse;
                     }
                 }
             }
+        }
+
+        private void CultureManager_UICultureChanged(object sender, EventArgs e)
+        {
+            App.Current.MainWindow.Title = Nutritia.UI.Ressources.Localisation.FenetreConnexion.Titre;
         }
     }
 }

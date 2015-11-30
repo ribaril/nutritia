@@ -249,5 +249,66 @@ namespace Nutritia
 				DateAjout = DateTime.Parse(plat["dateAjout"].ToString())
             };
         }
+
+        /// <summary>
+        /// Méthode d'insertion d'un nouveau plat dans la base de données.
+        /// </summary>
+        /// <param name="unAliment"></param>
+        public void Insert(Plat unPlat)
+        {
+            try
+            {
+                connexion = new MySqlConnexion();
+
+                string requeteTypePlat = string.Format("SELECT * FROM TypesPlats WHERE typePlat = '{0}'", unPlat.TypePlat);
+
+                DataSet dataSetTypes = connexion.Query(requeteTypePlat);
+                DataTable tableTypes = dataSetTypes.Tables[0];
+
+                int idType = 0;
+
+                foreach (DataRow rowType in tableTypes.Rows)
+                {
+                    idType = (int)rowType["idTypePlat"];
+                }
+
+                string requeteCreateur = string.Format("SELECT * FROM Membres WHERE nomUtilisateur = '{0}'", unPlat.Createur);
+
+                DataSet dataSetCreateur = connexion.Query(requeteCreateur);
+                DataTable tableCreateur = dataSetCreateur.Tables[0];
+
+                int idMembre = 0;
+
+                foreach (DataRow rowCreateur in tableCreateur.Rows)
+                {
+                    idMembre = (int)rowCreateur["idMembre"];
+                }
+
+                string requeteInsert = string.Format("INSERT INTO Plats (idMembre, idTypePlat, nom, description, imageUrl, dateAjout) VALUES ({0}, {1}, '{2}', '{3}', '{4}', '{5}')", idMembre, idType, unPlat.Nom, unPlat.Description, unPlat.ImageUrl, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                connexion.Query(requeteInsert);
+
+                string requetePlat = string.Format("SELECT * FROM Plats WHERE nom = '{0}'", unPlat.Nom);
+
+                DataSet dataSetPlat = connexion.Query(requetePlat);
+                DataTable tablePlat = dataSetPlat.Tables[0];
+
+                int idPlat = 0;
+
+                foreach (DataRow rowPlat in tablePlat.Rows)
+                {
+                    idPlat = (int)rowPlat["idPlat"];
+                }
+
+                for (int i = 0; i < unPlat.ListeIngredients.Count; i++)
+                {
+                    string requeteInsertAlimentPlat = string.Format("INSERT INTO PlatsAliments (idPlat, idAliment, quantite) VALUES ({0}, {1}, {2})", idPlat, unPlat.ListeIngredients[i].IdAliment, unPlat.ListeIngredients[i].Quantite);
+                    connexion.Query(requeteInsertAlimentPlat);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

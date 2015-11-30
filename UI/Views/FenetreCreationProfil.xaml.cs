@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Infralution.Localization.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Nutritia.UI.Ressources.Localisation;
 
 namespace Nutritia.UI.Views
 {
@@ -25,9 +27,11 @@ namespace Nutritia.UI.Views
 
         public CreationProfil()
         {
+            CultureManager.UICultureChanged += CultureManager_UICultureChanged;
+
             InitializeComponent();
             // Header de la fenetre
-            App.Current.MainWindow.Title = "Nutritia - Création de profil";
+            App.Current.MainWindow.Title = FenetreProfil.TitreCreation;
 
             Erreur = false;
         }
@@ -60,8 +64,8 @@ namespace Nutritia.UI.Views
                 Inserer_Donnees();
 
                 MessageBoxResult resultat;
-                resultat = MessageBox.Show("Votre compte Nutritia a été créé avec succès!"
-                                            , "Félicitations"
+                resultat = MessageBox.Show(FenetreProfil.MessageCreationSucces
+                                            , FenetreProfil.MessageCreationTitre
                                             , MessageBoxButton.OK);
 
                 ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
@@ -74,8 +78,8 @@ namespace Nutritia.UI.Views
         private void Erreur_Champ()
         {
             MessageBoxResult resultat;
-            resultat = MessageBox.Show("Il y a un ou plusieurs champs invalides."
-                                        , "Erreur"
+            resultat = MessageBox.Show(FenetreProfil.MessageModificationErreur
+                                        , FenetreProfil.MessageModificationErreurTitre
                                         , MessageBoxButton.OK
                                         , MessageBoxImage.Warning
                                         , MessageBoxResult.OK);
@@ -91,7 +95,7 @@ namespace Nutritia.UI.Views
             if (string.IsNullOrEmpty(Nom.Text))
             {
                 lbl_nom.Foreground = Brushes.Red;
-                lbl_nom.Content = "Nom (Champ vide)";
+                lbl_nom.Content = FenetreProfil.NomVide;
                 Erreur = true;
             }
             else
@@ -100,7 +104,7 @@ namespace Nutritia.UI.Views
                 if (Nom.Text.Length > 25)
                 {
                     lbl_nom.Foreground = Brushes.Red;
-                    lbl_nom.Content = "Nom (Entre 1 et 25 caractères)";
+                    lbl_nom.Content = FenetreProfil.NomLongueur;
                     Erreur = true;
                 }
                 else
@@ -112,7 +116,7 @@ namespace Nutritia.UI.Views
                     if (ContientSeulement)
                     {
                         lbl_nom.Foreground = Brushes.Red;
-                        lbl_nom.Content = "Nom (- ' et lettres seulement)";
+                        lbl_nom.Content = FenetreProfil.NomCaractereInvalide;
                         Erreur = true;
                     }
                     else
@@ -123,13 +127,13 @@ namespace Nutritia.UI.Views
                         if (ContientApostropheDebut)
                         {
                             lbl_nom.Foreground = Brushes.Red;
-                            lbl_nom.Content = "Nom (Doit débuter avec une lettre)";
+                            lbl_nom.Content = FenetreProfil.NomDebutInvalide;
                             Erreur = true;
                         }
                         else
                         {
                             lbl_nom.Foreground = Brushes.DarkGreen;
-                            lbl_nom.Content = "Nom";
+                            lbl_nom.Content = FenetreProfil.NomGeneral;
                         }
                     }
                 }
@@ -146,7 +150,7 @@ namespace Nutritia.UI.Views
             if (string.IsNullOrEmpty(Prenom.Text))
             {
                 lbl_prenom.Foreground = Brushes.Red;
-                lbl_prenom.Content = "Prénom (Champ vide)";
+                lbl_prenom.Content = FenetreProfil.PrenomVide;
                 Erreur = true;
             }
             else
@@ -155,7 +159,7 @@ namespace Nutritia.UI.Views
                 if (Prenom.Text.Length > 25)
                 {
                     lbl_prenom.Foreground = Brushes.Red;
-                    lbl_prenom.Content = "Prénom (Entre 1 et 25 caractères)";
+                    lbl_prenom.Content = FenetreProfil.PrenomLongueur;
                     Erreur = true;
                 }
                 else
@@ -167,7 +171,7 @@ namespace Nutritia.UI.Views
                     if (ContientSeulement)
                     {
                         lbl_prenom.Foreground = Brushes.Red;
-                        lbl_prenom.Content = "Prénom (- ' et lettres seulement)";
+                        lbl_prenom.Content = FenetreProfil.PrenomCaractereInvalide;
                         Erreur = true;
                     }
                     else
@@ -178,13 +182,13 @@ namespace Nutritia.UI.Views
                         if (ContientApostropheDebut)
                         {
                             lbl_prenom.Foreground = Brushes.Red;
-                            lbl_prenom.Content = "Prénom (Doit débuter avec une lettre)";
+                            lbl_prenom.Content = FenetreProfil.PrenomDebutInvalide;
                             Erreur = true;
                         }
                         else
                         {
                             lbl_prenom.Foreground = Brushes.DarkGreen;
-                            lbl_prenom.Content = "Prénom";
+                            lbl_prenom.Content = FenetreProfil.PrenomGeneral;
                         }
                     }
                 }
@@ -202,7 +206,7 @@ namespace Nutritia.UI.Views
             if (string.IsNullOrEmpty(Nom_utilisateur.Text))
             {
                 lbl_utilisateur.Foreground = Brushes.Red;
-                lbl_utilisateur.Content = "Nom d'utilisateur (Champ vide)";
+                lbl_utilisateur.Content = FenetreProfil.UsernameVide;
                 Erreur = true;
             }
             else
@@ -211,7 +215,7 @@ namespace Nutritia.UI.Views
                 if (Nom_utilisateur.Text.Length < 2 || Nom_utilisateur.Text.Length > 15)
                 {
                     lbl_utilisateur.Foreground = Brushes.Red;
-                    lbl_utilisateur.Content = "Nom d'utilisateur (Entre 2 et 15 caractères)";
+                    lbl_utilisateur.Content = FenetreProfil.UsernameLongueur;
                     Erreur = true;
                 }
                 else
@@ -223,7 +227,7 @@ namespace Nutritia.UI.Views
                     if (ContientSeulement)
                     {
                         lbl_utilisateur.Foreground = Brushes.Red;
-                        lbl_utilisateur.Content = "Nom d'utilisateur (lettres et chiffres)";
+                        lbl_utilisateur.Content = FenetreProfil.UsernameCaractereInvalide;
                         Erreur = true;
                     }
                     else
@@ -234,13 +238,13 @@ namespace Nutritia.UI.Views
                         if(membreValidation.NomUtilisateur != null)
                         {
                             lbl_utilisateur.Foreground = Brushes.Red;
-                            lbl_utilisateur.Content = "Nom d'utilisateur (nom déjà utilisé)";
+                            lbl_utilisateur.Content = FenetreProfil.UsernameUnique;
                             Erreur = true;
                         }
                         else
                         {
                             lbl_utilisateur.Foreground = Brushes.DarkGreen;
-                            lbl_utilisateur.Content = "Nom d'utilisateur";
+                            lbl_utilisateur.Content = FenetreProfil.UsernameGeneral;
                         }
                     }
                 }
@@ -257,7 +261,7 @@ namespace Nutritia.UI.Views
             if (string.IsNullOrEmpty(Mot_passe.Password))
             {
                 lbl_mdp.Foreground = Brushes.Red;
-                lbl_mdp.Content = "Mot de passe (Champ vide)";
+                lbl_mdp.Content = FenetreProfil.MotPasseVide;
                 Erreur = true;
             }
             else
@@ -266,7 +270,7 @@ namespace Nutritia.UI.Views
                 if (Mot_passe.Password.Length < 2 || Mot_passe.Password.Length > 10)
                 {
                     lbl_mdp.Foreground = Brushes.Red;
-                    lbl_mdp.Content = "Mot de passe (Entre 2 et 10 caractères)";
+                    lbl_mdp.Content = FenetreProfil.MotpasseLongueur;
                     Erreur = true;
                 }
                 else
@@ -278,13 +282,13 @@ namespace Nutritia.UI.Views
                     if (ContientSeulement)
                     {
                         lbl_mdp.Foreground = Brushes.Red;
-                        lbl_mdp.Content = "Mot de passe (lettres et chiffres)";
+                        lbl_mdp.Content = FenetreProfil.MotPasseCaractereInvalide;
                         Erreur = true;
                     }
                     else
                     {
                         lbl_mdp.Foreground = Brushes.DarkGreen;
-                        lbl_mdp.Content = "Mot de passe";
+                        lbl_mdp.Content = FenetreProfil.MotPasseGeneral;
                     }
                 }
             }
@@ -298,13 +302,13 @@ namespace Nutritia.UI.Views
             if(Validation_mdp.Password != Mot_passe.Password)
             {
                 lbl_conf_mdp.Foreground = Brushes.Red;
-                lbl_conf_mdp.Content = "Confirmation (différent du mot de passe)";
+                lbl_conf_mdp.Content = FenetreProfil.MotPasseConfirmationDifferent;
                 Erreur = true;
             }
             else
             {
                 lbl_conf_mdp.Foreground = Brushes.DarkGreen;
-                lbl_conf_mdp.Content = "Confirmation du mot de passe";
+                lbl_conf_mdp.Content = FenetreProfil.MotPasseConfirmationGeneral;
             }
         }
 
@@ -316,13 +320,13 @@ namespace Nutritia.UI.Views
             if(Taille.SelectedIndex == -1)
             {
                 lbl_taille.Foreground = Brushes.Red;
-                lbl_taille.Content = "Taille (cm) (Aucune taille sélectionnée)";
+                lbl_taille.Content = FenetreProfil.TailleVide;
                 Erreur = true;
             }
             else
             {
                 lbl_taille.Foreground = Brushes.DarkGreen;
-                lbl_taille.Content = "Taille (cm)";
+                lbl_taille.Content = FenetreProfil.TailleGeneral;
             }
         }
 
@@ -334,13 +338,13 @@ namespace Nutritia.UI.Views
             if (Masse.SelectedIndex == -1)
             {
                 lbl_masse.Foreground = Brushes.Red;
-                lbl_masse.Content = "Masse (kg) (Aucune masse sélectionnée)";
+                lbl_masse.Content = FenetreProfil.MasseVide;
                 Erreur = true;
             }
             else
             {
                 lbl_masse.Foreground = Brushes.DarkGreen;
-                lbl_masse.Content = "Masse (kg)";
+                lbl_masse.Content = FenetreProfil.MasseGeneral;
             }
         }
 
@@ -352,13 +356,13 @@ namespace Nutritia.UI.Views
             if(Date_naissance.SelectedDate == null)
             {
                 lbl_date.Foreground = Brushes.Red;
-                lbl_date.Content = "Date de naissance (Aucune date sélectionnée)";
+                lbl_date.Content = FenetreProfil.DateNaissanceVide;
                 Erreur = true;
             }
             else
             {
                 lbl_date.Foreground = Brushes.DarkGreen;
-                lbl_date.Content = "Date de naissance";
+                lbl_date.Content = FenetreProfil.DateNaissanceGeneral;
             }
         }
         
@@ -385,6 +389,7 @@ namespace Nutritia.UI.Views
             App.MembreCourant.Masse = double.Parse(Masse.SelectionBoxItem.ToString());
             App.MembreCourant.MotPasse = Mot_passe.Password;
             App.MembreCourant.DateNaissance = (DateTime)Date_naissance.SelectedDate;
+            App.MembreCourant.DerniereMaj = DateTime.Now;
 
             /*-----------------------------------Restrictions alimentaires-----------------------------------*/
             
@@ -736,5 +741,10 @@ namespace Nutritia.UI.Views
         }
 
         #endregion
+
+        private void CultureManager_UICultureChanged(object sender, EventArgs e)
+        {
+            App.Current.MainWindow.Title = FenetreProfil.TitreCreation;
+        }
     }
 }

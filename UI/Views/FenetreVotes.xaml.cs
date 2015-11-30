@@ -62,7 +62,7 @@ namespace Nutritia.UI.Views
         /// <param name="e"></param>
         private void btnSelectionComplete_Click(object sender, RoutedEventArgs e)
         {
-            gbContenu.Header = "Tous les plats";
+            gbContenu.Header = Nutritia.UI.Ressources.Localisation.FenetreVotes.TousLesPlats;
             ListePlats = new ObservableCollection<Plat>(PlatService.RetrieveAll().OrderBy(plat => plat.Nom));
             DeterminerNoteConviviale();
             dgPlats.ItemsSource = ListePlats;
@@ -75,7 +75,7 @@ namespace Nutritia.UI.Views
         /// <param name="e"></param>
         private void btnNouveautes_Click(object sender, RoutedEventArgs e)
         {
-            gbContenu.Header = "Nouveautés";
+            gbContenu.Header = Nutritia.UI.Ressources.Localisation.FenetreVotes.Nouveaute;
             NbResultatsAffiches = 10;
             if (Regex.IsMatch(txtNbResultats.Text, @"^\d+$")) { NbResultatsAffiches = Convert.ToInt32(txtNbResultats.Text); }
             ListePlats = new ObservableCollection<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { NbResultats = NbResultatsAffiches, Depart = "Fin" }));
@@ -90,7 +90,7 @@ namespace Nutritia.UI.Views
         /// <param name="e"></param>
         private void btnPlusPopulaires_Click(object sender, RoutedEventArgs e)
         {
-            gbContenu.Header = "Les plus populaires";
+            gbContenu.Header = Nutritia.UI.Ressources.Localisation.FenetreVotes.LesPlusPopulaires;
             NbResultatsAffiches = 10;
             if (Regex.IsMatch(txtNbResultats.Text, @"^\d+$")) { NbResultatsAffiches = Convert.ToInt32(txtNbResultats.Text); }
             ListePlats = new ObservableCollection<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { NbResultats = NbResultatsAffiches, PlusPopulaires = true }));
@@ -181,7 +181,20 @@ namespace Nutritia.UI.Views
 		public void Rafraichir()
 		{
 			ListePlats = new ObservableCollection<Plat>(PlatService.RetrieveAll());
-			dgPlats.ItemsSource = ListePlats;
+            DeterminerNoteConviviale();
+
+            switch (gbContenu.Header.ToString())
+            {
+                case "Tous les plats":
+                    btnSelectionComplete_Click(null, null);
+                    break;
+                case "Nouveautés":
+                    btnNouveautes_Click(null, null);
+                    break;
+                case "Les plus populaires":
+                    btnPlusPopulaires_Click(null, null);
+                    break;
+            }
 		}
     }
 }

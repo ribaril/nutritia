@@ -1,9 +1,10 @@
 ﻿<Window x:Class="Nutritia.UI.Views.FenetreOuvrirMenu"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Nutritia - Ouvrir un menu" Height="275" Width="300"
+        Title="{Resx Titre}" Height="275" Width="300"
         Icon="pack://application:,,,/UI/Images/logoIconPetit.png"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        ResxExtension.DefaultResxName="Nutritia.UI.Ressources.Localisation.FenetreOuvrirMenu" Language="{UICulture}">
     <Window.Resources>
         <Style TargetType="DataGrid" BasedOn="{StaticResource dataGridPlats}">
             <Setter Property="GridLinesVisibility" Value="None" />
@@ -27,7 +28,7 @@
         <Grid.Background>
             <ImageBrush Opacity="0.3" ImageSource="pack://application:,,,/UI/Images/background.jpg"/>
         </Grid.Background>
-        <Label Name="lblAucunMenu" Style="{StaticResource fontNutritia}" FontSize="16" HorizontalAlignment="Center" Visibility="Hidden">Vous n'avez sauvegardé aucun menu.</Label>
+        <Label Name="lblAucunMenu" Style="{StaticResource fontNutritia}" FontSize="16" HorizontalAlignment="Center" Visibility="Hidden" Content="{Resx MessageAucunMenu}" />
         <DataGrid Name="dgMenus">
             <DataGrid.Columns>
                 <DataGridTemplateColumn>
@@ -57,6 +58,6 @@
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Name="btnOuvrir" Grid.Row="1" IsEnabled="False" Click="btnOuvrir_Click">Ouvrir</Button>
+        <Button Name="btnOuvrir" Grid.Row="1" IsEnabled="False" Click="btnOuvrir_Click" Content="{Resx Ouvrir}" />
     </Grid>
 </Window>
