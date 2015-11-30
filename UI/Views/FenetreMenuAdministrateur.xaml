@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Nutritia.UI.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="550" d:DesignWidth="650">
+             d:DesignHeight="550" d:DesignWidth="650"
+             ResxExtension.DefaultResxName="Nutritia.UI.Ressources.Localisation.FenetreMenuAdministrateur" Language="{UICulture}">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel.Resources>
@@ -13,18 +14,18 @@
                     <Setter Property="Margin" Value="0, 10, 0, 0"/>
                 </Style>
             </StackPanel.Resources>
-            <Label HorizontalAlignment="Center" Foreground="DarkGreen" Margin="0,-10,0,10" FontSize="30" FontFamily="Berlin Sans FB Demi">Administration</Label>
+            <Label HorizontalAlignment="Center" Foreground="DarkGreen" Margin="0,-10,0,10" FontSize="30" FontFamily="Berlin Sans FB Demi" Content="{Resx Administration}"/>
 
-            <Label HorizontalAlignment="Center" Foreground="DarkGreen" FontSize="22" FontFamily="Berlin Sans FB Demi">Gestion des aliments et plats</Label>
+            <Label HorizontalAlignment="Center" Foreground="DarkGreen" FontSize="22" FontFamily="Berlin Sans FB Demi" Content="{Resx GestionAlimentsPlats}"/>
             <Button Name="btnRepertoire" Width="80" Height="80" Click="btnRepertoire_Click">
                 <Image Width="64" Height="75" Source="/Nutritia;component/UI/Images/baseDonnee.PNG"/>
             </Button>
 
-            <Label HorizontalAlignment="Center" Foreground="DarkGreen" FontSize="22" FontFamily="Berlin Sans FB Demi">Gestion des administrateurs</Label>
+            <Label HorizontalAlignment="Center" Foreground="DarkGreen" FontSize="22" FontFamily="Berlin Sans FB Demi" Content="{Resx GestionAdmins}"/>
             <Button Name="btngestionAdmin" Width="80" Height="80" Click="btngestionAdmin_Click">
                 <Image Width="64" Height="75" Source="/Nutritia;component/UI/Images/cadenas.PNG"/>
             </Button>
-            <Label HorizontalAlignment="Center" Foreground="DarkGreen" FontSize="22" FontFamily="Berlin Sans FB Demi">Bannissement de membres</Label>
+            <Label HorizontalAlignment="Center" Foreground="DarkGreen" FontSize="22" FontFamily="Berlin Sans FB Demi" Content="{Resx Bannissement}"/>
             <Button Name="btnBanUtilisateur" Width="80" Height="80" Click="btnBanUtilisateur_Click">
                 <Image Width="75" Height="75" Source="/Nutritia;component/UI/Images/ban.PNG"/>
             </Button>

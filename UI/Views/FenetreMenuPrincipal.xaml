@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="550" d:DesignWidth="650">
+             d:DesignHeight="550" d:DesignWidth="650"
+             ResxExtension.DefaultResxName="Nutritia.UI.Ressources.Localisation.FenetreMenuPrincipal" Language="{UICulture}">
     <Canvas >
-        <Label Content="S'inscrire" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="76" Canvas.Left="513"/>
+        <Label Content="{Resx Inscrire}" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="76" Canvas.Left="513"/>
         <Button Name="btnInscription" Width="75" Height="75" Canvas.Top="9" Canvas.Left="530" Click="btnInscription_Click">
             <Image Source="/Nutritia;component/UI/Images/SignInIcon.PNG"></Image>
         </Button>
@@ -15,14 +16,14 @@
         <Button Name="btnConnexion" Canvas.Left="280" Canvas.Top="104" Height="75" Width="75" Click="btnConnexion_Click">
             <Image Source="/Nutritia;component/UI/Images/logInIcon.png" />
         </Button>
-        <Label Content="Se connecter" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="174" Canvas.Left="230"/>
+        <Label Content="{Resx Connecter}" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="174" Canvas.Left="230"/>
         <Button Name="btnCalculatrice" Canvas.Left="280" Canvas.Top="229" Width="75" Height="75" Click="btnCalculatrice_Click">
             <Image Source="/Nutritia;component/UI/Images/calcIcon.png" />
         </Button>
-        <Label Content="Calculatrice Nutritionnelle" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="299" Canvas.Left="152"/>
+        <Label Content="{Resx CalculatriceNutritionnelle}" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="299" Canvas.Left="152"/>
         <Button Name="btnMenuListe" Canvas.Left="280" Canvas.Top="354" Width="75" Height="75" Click="btnMenuListe_Click">
             <Image Source="/Nutritia;component/UI/Images/menuListIcon.png"/>
         </Button>
-        <Label Content="Menu &amp; liste d'épicerie" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="425" Canvas.Left="170"/>
+        <Label Content="{Resx MenuListeEpicerie}" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="425" Canvas.Left="170"/>
     </Canvas>
 </UserControl>

@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Allergies" xml:space="preserve">
+    <value>-- Allergies --</value>
+  </data>
+  <data name="ArachidesNoix" xml:space="preserve">
+    <value>Arachides et noix</value>
+  </data>
+  <data name="Autre" xml:space="preserve">
+    <value>-- Autres --</value>
+  </data>
+  <data name="BtnModifierLeProfil" xml:space="preserve">
+    <value>Modifier le profil</value>
+  </data>
+  <data name="Cholesterol" xml:space="preserve">
+    <value>Cholestérol</value>
+  </data>
+  <data name="ControleCholesterol" xml:space="preserve">
+    <value>Contrôle du cholestérol</value>
+  </data>
+  <data name="ControleGlycemique" xml:space="preserve">
+    <value>Contrôle glycémique</value>
+  </data>
+  <data name="DateNaissanceGeneral" xml:space="preserve">
+    <value>Date de naissance</value>
+  </data>
+  <data name="DateNaissanceVide" xml:space="preserve">
+    <value>Date de naissance (Aucune date sélectionnée)</value>
+  </data>
+  <data name="Diabete" xml:space="preserve">
+    <value>Diabète</value>
+  </data>
+  <data name="DonneesPersonnelles" xml:space="preserve">
+    <value>Données personnelles</value>
+  </data>
+  <data name="GainMusculaire" xml:space="preserve">
+    <value>Gain musculaire</value>
+  </data>
+  <data name="GainPoids" xml:space="preserve">
+    <value>Gain de poids</value>
+  </data>
+  <data name="Gluten" xml:space="preserve">
+    <value>Gluten</value>
+  </data>
+  <data name="Lactose" xml:space="preserve">
+    <value>Lactose</value>
+  </data>
+  <data name="MasseGeneral" xml:space="preserve">
+    <value>Masse (kg)</value>
+  </data>
+  <data name="MasseVide" xml:space="preserve">
+    <value>Masse (kg) (Aucune masse sélectionnée)</value>
+  </data>
+  <data name="MessageModificationErreur" xml:space="preserve">
+    <value>Il y a un ou plusieurs champs invalides.</value>
+  </data>
+  <data name="MessageModificationErreurTitre" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
+  <data name="MessageModificationSucces" xml:space="preserve">
+    <value>Votre compte Nutritia a été modifié avec succès!</value>
+  </data>
+  <data name="MessageModificationSuccesTitre" xml:space="preserve">
+    <value>Réussite!</value>
+  </data>
+  <data name="MotPasseCaractereInvalide" xml:space="preserve">
+    <value>Mot de passe (lettres et chiffres)</value>
+  </data>
+  <data name="MotPasseConfirmationDifferent" xml:space="preserve">
+    <value>Confirmation (différent du mot de passe)</value>
+  </data>
+  <data name="MotPasseConfirmationGeneral" xml:space="preserve">
+    <value>Confirmation du mot de passe</value>
+  </data>
+  <data name="MotPasseGeneral" xml:space="preserve">
+    <value>Mot de passe</value>
+  </data>
+  <data name="MotpasseLongueur" xml:space="preserve">
+    <value>Mot de passe (Entre 2 et 10 caractères)</value>
+  </data>
+  <data name="MotPasseVide" xml:space="preserve">
+    <value>Mot de passe (Champ vide)</value>
+  </data>
+  <data name="NomCaractereInvalide" xml:space="preserve">
+    <value>Nom (- ' et lettres seulement)</value>
+  </data>
+  <data name="NomDebutInvalide" xml:space="preserve">
+    <value>Nom (Doit débuter avec une lettre)</value>
+  </data>
+  <data name="NomGeneral" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="NomLongueur" xml:space="preserve">
+    <value>Nom (Entre 1 et 25 caractères)</value>
+  </data>
+  <data name="NomVide" xml:space="preserve">
+    <value>Nom (Champ vide)</value>
+  </data>
+  <data name="Objectifs" xml:space="preserve">
+    <value>-- Objectifs --</value>
+  </data>
+  <data name="ObjectifsPreferences" xml:space="preserve">
+    <value>Objectifs et Préférences</value>
+  </data>
+  <data name="Pates" xml:space="preserve">
+    <value>Pâtes</value>
+  </data>
+  <data name="PertePoids" xml:space="preserve">
+    <value>Perte de poids</value>
+  </data>
+  <data name="PoissonFruitMer" xml:space="preserve">
+    <value>Poissons et fruits de mer</value>
+  </data>
+  <data name="Preferences" xml:space="preserve">
+    <value>-- Préférences --</value>
+  </data>
+  <data name="PrenomCaractereInvalide" xml:space="preserve">
+    <value>Prénom (- ' et lettres seulement)</value>
+  </data>
+  <data name="PrenomDebutInvalide" xml:space="preserve">
+    <value>Prénom (Dois débuter avec une lettre)</value>
+  </data>
+  <data name="PrenomGeneral" xml:space="preserve">
+    <value>Prénom</value>
+  </data>
+  <data name="PrenomLongueur" xml:space="preserve">
+    <value>Prénom (Entre 1 et 25 caractères)</value>
+  </data>
+  <data name="PrenomVide" xml:space="preserve">
+    <value>Prénom (Champ vide)</value>
+  </data>
+  <data name="Pression" xml:space="preserve">
+    <value>Haute/basse pression</value>
+  </data>
+  <data name="RestrictionsAlimentaires" xml:space="preserve">
+    <value>Restrictions alimentaires</value>
+  </data>
+  <data name="TailleGeneral" xml:space="preserve">
+    <value>Taille (cm)</value>
+  </data>
+  <data name="TailleVide" xml:space="preserve">
+    <value>Taille (cm) (Aucune taille sélectionnée)</value>
+  </data>
+  <data name="Titre" xml:space="preserve">
+    <value>Nutritia - Modification Profil</value>
+  </data>
+  <data name="UsernameCaractereInvalide" xml:space="preserve">
+    <value>Nom d'utilisateur (lettre et chiffres)</value>
+  </data>
+  <data name="UsernameGeneral" xml:space="preserve">
+    <value>Nom d'utilisateur</value>
+  </data>
+  <data name="UsernameLongueur" xml:space="preserve">
+    <value>Nom d'utilisateur (Entre 2 et 15 caractères)</value>
+  </data>
+  <data name="UsernameUnique" xml:space="preserve">
+    <value>Nom d'utilisateur (nom déjà utilisé)</value>
+  </data>
+  <data name="UsernameVide" xml:space="preserve">
+    <value>Nom d'utilisateur (Champ vide)</value>
+  </data>
+  <data name="Vegetalien" xml:space="preserve">
+    <value>Végétalien</value>
+  </data>
+  <data name="Vegetarien" xml:space="preserve">
+    <value>Végétarien</value>
+  </data>
+  <data name="Viandes" xml:space="preserve">
+    <value>Viandes</value>
+  </data>
+  <data name="BtnCreerLeProfil" xml:space="preserve">
+    <value>Créer le profil</value>
+  </data>
+  <data name="MessageCreationSucces" xml:space="preserve">
+    <value>Votre compte Nutritia a été créé avec succès!</value>
+  </data>
+  <data name="MessageCreationTitre" xml:space="preserve">
+    <value>Félicitations</value>
+  </data>
+  <data name="TitreCreation" xml:space="preserve">
+    <value>Nutritia - Création de profil</value>
+  </data>
+</root>

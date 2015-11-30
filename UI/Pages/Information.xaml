@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Nutritia.UI.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="Information">
+      ResxExtension.DefaultResxName="Nutritia.UI.Ressources.Localisation.Pages.Information" Language="{UICulture}">
 
     <Grid>
         <Viewbox Stretch="Uniform">
@@ -17,15 +17,15 @@
                     </Style>
                 </StackPanel.Resources>
                 <StackPanel HorizontalAlignment="Center">
-                    <Label>Version:</Label>
+                    <Label Content="{Resx Version}"/>
                     <Label Name="lblVersion"></Label>
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Center">
-                    <Label HorizontalAlignment="Center">Auteurs:</Label>
+                    <Label HorizontalAlignment="Center" Content="{Resx Auteurs}"/>
                     <Label Name="lblAuteurs">Corantin N., Guillaume L. S., Richard B., Tristan S.</Label>
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Center">
-                    <Label HorizontalAlignment="Center">License:</Label>
+                    <Label HorizontalAlignment="Center" Content="{Resx License}"/>
                     <Label Name="lblLicense">Mozilla Public License, version 2.0</Label>
                 </StackPanel>
             </StackPanel>

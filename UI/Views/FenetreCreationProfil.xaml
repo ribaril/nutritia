@@ -4,28 +4,29 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             d:DesignHeight="475" d:DesignWidth="650">
+             d:DesignHeight="475" d:DesignWidth="650"
+             ResxExtension.DefaultResxName="Nutritia.UI.Ressources.Localisation.FenetreProfil" Language="{UICulture}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1.15*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Content="Données personnelles" Style="{StaticResource fontNutritia}" FontSize="35"  HorizontalAlignment="Center"></Label>
-        <Label Name="lbl_nom" Grid.Row="0" Content="Nom" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,40,0,0"></Label>
+        <Label Grid.Row="0" Content="{Resx DonneesPersonnelles}" Style="{StaticResource fontNutritia}" FontSize="35"  HorizontalAlignment="Center"></Label>
+        <Label Name="lbl_nom" Grid.Row="0" Content="{Resx NomGeneral}" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,40,0,0"></Label>
         <TextBox Name="Nom" Grid.Row="0" SelectedText="" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,60,0,0"></TextBox>
-        <Label Name="lbl_prenom" Grid.Row="0" Content="Prenom" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,90,0,0"></Label>
+        <Label Name="lbl_prenom" Grid.Row="0" Content="{Resx PrenomGeneral}" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,90,0,0"></Label>
         <TextBox Name="Prenom" Grid.Row="0" SelectedText="" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,110,0,0"></TextBox>
-        <Label Name="lbl_utilisateur" Grid.Row="0" Content="Nom d'utilisateur" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,140,0,0"></Label>
+        <Label Name="lbl_utilisateur" Grid.Row="0" Content="{Resx UsernameGeneral}" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,140,0,0"></Label>
         <TextBox Name="Nom_utilisateur" Grid.Row="0" SelectedText="" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,160,0,0"></TextBox>
-        <Label Name="lbl_mdp" Grid.Row="0" Content="Mot de passe" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,190,0,0"></Label>
+        <Label Name="lbl_mdp" Grid.Row="0" Content="{Resx MotPasseGeneral}" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,190,0,0"></Label>
         <PasswordBox Name="Mot_passe" Grid.Row="0" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,210,0,0"></PasswordBox>
 
-        <Label Name="lbl_conf_mdp" Grid.Row="0" Content="Confirmation du mot de passe" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,190,50,0"></Label>
+        <Label Name="lbl_conf_mdp" Grid.Row="0" Content="{Resx MotPasseConfirmationGeneral}" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,190,50,0"></Label>
         <PasswordBox Name="Validation_mdp" Grid.Row="0" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,210,50,0"></PasswordBox>
 
-        <Label Name="lbl_date" Grid.Row="0" Content="Date de naissance" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,42,50,0"></Label>
+        <Label Name="lbl_date" Grid.Row="0" Content="{Resx DateNaissanceGeneral}" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,42,50,0"></Label>
         <DatePicker Name="Date_naissance" Grid.Row="0" BorderBrush="Transparent" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,62,50,0"></DatePicker>
-        <Label Name="lbl_taille" Grid.Row="0" Content="Taille (cm)" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,90,50,0"></Label>
+        <Label Name="lbl_taille" Grid.Row="0" Content="{Resx TailleGeneral}" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,90,50,0"></Label>
         <ComboBox Name="Taille" Grid.Row="0" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,110,50,0">
             <ComboBoxItem>120</ComboBoxItem>
             <ComboBoxItem>130</ComboBoxItem>
@@ -38,7 +39,7 @@
             <ComboBoxItem>200</ComboBoxItem>
             <ComboBoxItem>210</ComboBoxItem>
         </ComboBox>        
-        <Label Name="lbl_masse" Grid.Row="0" Content="Masse (kg)" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,140,50,0"></Label>
+        <Label Name="lbl_masse" Grid.Row="0" Content="{Resx MasseGeneral}" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,140,50,0"></Label>
         <ComboBox Name="Masse" Grid.Row="0" Width="250" Height="30" Style="{StaticResource fontNutritia}" FontSize="13" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,160,50,0">
             <ComboBoxItem>40</ComboBoxItem>
             <ComboBoxItem>50</ComboBoxItem>
@@ -56,45 +57,45 @@
         </ComboBox>
 
         <TabControl Grid.Row="1" Height="175" Width="625" VerticalAlignment="Top">
-            <TabItem Header="Restrictions alimentaires" Style="{StaticResource fontNutritia}" FontSize="15" >
+            <TabItem Header="{Resx RestrictionsAlimentaires}" Style="{StaticResource fontNutritia}" FontSize="15" >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Label Content="-- Allergies --" Height="30" Width="100" Style="{StaticResource fontNutritia}" FontSize="15"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,0,0,0"></Label>
-                    <CheckBox Name="Lactose" Content="Lactose" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,35,0,0"></CheckBox>
-                    <CheckBox Name="Noix" Content="Arachides et noix" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,60,0,0"></CheckBox>
-                    <CheckBox Name="Gluten" Content="Gluten" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,85,0,0"></CheckBox>
-                    <CheckBox Name="Rest_poissons_mer" Content="Poissons et fruits de mer" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,110,0,0"></CheckBox>
+                    <Label Content="{Resx Allergies}" Height="30" Width="100" Style="{StaticResource fontNutritia}" FontSize="15"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,0,0,0"></Label>
+                    <CheckBox Name="Lactose" Content="{Resx Lactose}" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,35,0,0"></CheckBox>
+                    <CheckBox Name="Noix" Content="{Resx ArachidesNoix}" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,60,0,0"></CheckBox>
+                    <CheckBox Name="Gluten" Content="{Resx Gluten}" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,85,0,0"></CheckBox>
+                    <CheckBox Name="Rest_poissons_mer" Content="{Resx PoissonFruitMer}" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,110,0,0"></CheckBox>
 
-                    <Label Content="-- Autres --" Height="30" Width="100" Style="{StaticResource fontNutritia}" FontSize="15"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,0,0,0"></Label>
-                    <CheckBox Name="Diabete" Content="Diabète" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,35,0,0"></CheckBox>
-                    <CheckBox Name="Cholesterol" Content="Cholestérol" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,60,0,0"></CheckBox>
-                    <CheckBox Name="Pression" Content="Haute/basse pression" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,85,0,0"></CheckBox>
+                    <Label Content="{Resx Autre}" Height="30" Width="100" Style="{StaticResource fontNutritia}" FontSize="15"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,0,0,0"></Label>
+                    <CheckBox Name="Diabete" Content="{Resx Diabete}" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,35,0,0"></CheckBox>
+                    <CheckBox Name="Cholesterol" Content="{Resx Cholesterol}" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,60,0,0"></CheckBox>
+                    <CheckBox Name="Pression" Content="{Resx Pression}" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,85,0,0"></CheckBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Objectifs et Préférences" Style="{StaticResource fontNutritia}" FontSize="15" >
+            <TabItem Header="{Resx ObjectifsPreferences}" Style="{StaticResource fontNutritia}" FontSize="15" >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Label Content="-- Objectifs --" Height="30" Width="100" Style="{StaticResource fontNutritia}" FontSize="15"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,10,0,0"></Label>
-                    <CheckBox Name="Perte_poids" Content="Perte de poids" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,50,0,0" Checked="Perte_poids_Checked"></CheckBox>
-                    <CheckBox Name="Gain_poids" Content="Gain de poids" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,75,0,0" Checked="Gain_poids_Checked"></CheckBox>
-                    <CheckBox Name="Muscles" Content="Gain musculaire" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,50,0,0"></CheckBox>
-                    <CheckBox Name="Glycemie" Content="Contrôle glycémique" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,75,0,0"></CheckBox>
-                    <CheckBox Name="Ctrl_cholesterol" Content="Contrôle du cholestérol" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,100,0,0"></CheckBox>
+                    <Label Content="{Resx Objectifs}" Height="30" Width="100" Style="{StaticResource fontNutritia}" FontSize="15"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,10,0,0"></Label>
+                    <CheckBox Name="Perte_poids" Content="{Resx PertePoids}" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,50,0,0" Checked="Perte_poids_Checked"></CheckBox>
+                    <CheckBox Name="Gain_poids" Content="{Resx GainPoids}" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,75,0,0" Checked="Gain_poids_Checked"></CheckBox>
+                    <CheckBox Name="Muscles" Content="{Resx GainMusculaire}" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,50,0,0"></CheckBox>
+                    <CheckBox Name="Glycemie" Content="{Resx ControleGlycemique}" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,75,0,0"></CheckBox>
+                    <CheckBox Name="Ctrl_cholesterol" Content="{Resx ControleCholesterol}" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,100,0,0"></CheckBox>
 
-                    <Label Content="-- Préférences --" Height="30" Width="115" Style="{StaticResource fontNutritia}" FontSize="15"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="400,10,0,0"></Label>
-                    <CheckBox Name="Vegetarien" Content="Végétarien" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,50,0,0" Checked="Vegetarien_Checked" Unchecked="Vegetarien_Vegetalien_Dechoche"></CheckBox>
-                    <CheckBox Name="Vegetalien" Content="Végétalien" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,75,0,0" Checked="Vegetalien_Checked" Unchecked="Vegetarien_Vegetalien_Dechoche"></CheckBox>
-                    <CheckBox Name="Viandes" Content="Viandes" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="450,50,0,0" Checked="Viandes_Checked"></CheckBox>
-                    <CheckBox Name="Pates" Content="Pâtes" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="450,75,0,0" Checked="Pates_Checked"></CheckBox>
-                    <CheckBox Name="Pref_poissons_mer" Content="Poissons et fruits de mer" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="450,100,0,0" Checked="Pref_poissons_mer_Checked"></CheckBox>
+                    <Label Content="{Resx Preferences}" Height="30" Width="115" Style="{StaticResource fontNutritia}" FontSize="15"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="400,10,0,0"></Label>
+                    <CheckBox Name="Vegetarien" Content="{Resx Vegetarien}" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,50,0,0" Checked="Vegetarien_Checked" Unchecked="Vegetarien_Vegetalien_Dechoche"></CheckBox>
+                    <CheckBox Name="Vegetalien" Content="{Resx Vegetalien}" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,75,0,0" Checked="Vegetalien_Checked" Unchecked="Vegetarien_Vegetalien_Dechoche"></CheckBox>
+                    <CheckBox Name="Viandes" Content="{Resx Viandes}" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="450,50,0,0" Checked="Viandes_Checked"></CheckBox>
+                    <CheckBox Name="Pates" Content="{Resx Pates}" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="450,75,0,0" Checked="Pates_Checked"></CheckBox>
+                    <CheckBox Name="Pref_poissons_mer" Content="{Resx PoissonFruitMer}" Style="{StaticResource fontNutritia}" FontSize="13"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="450,100,0,0" Checked="Pref_poissons_mer_Checked"></CheckBox>
                 </Grid>
             </TabItem>
         </TabControl>
 
-        <Button Name="Btn_creer" Grid.Row="1" Content="Créer le profil" Height="30" Width="150" Style="{StaticResource fontNutritia}" FontSize="15"  HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10" Click="Valider_Inserer"></Button>
+        <Button Name="Btn_creer" Grid.Row="1" Content="{Resx BtnCreerLeProfil}" Height="30" Width="150" Style="{StaticResource fontNutritia}" FontSize="15"  HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10" Click="Valider_Inserer"></Button>
     </Grid>
 </UserControl>

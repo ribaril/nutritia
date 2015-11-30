@@ -7,36 +7,37 @@
              mc:Ignorable="d" 
              Height="400" Width="600"
              ResizeMode="NoResize"
-             Title="Nutritia - Aide">
+             Title="{Resx Titre}"
+             ResxExtension.DefaultResxName="Nutritia.UI.Ressources.Localisation.FenetreAide" Language="{UICulture}">
     <Grid>
         <Grid.Background>
             <ImageBrush Opacity="0.3" ImageSource="/Nutritia;component/UI/Images/background.jpg"/>
         </Grid.Background>
         <TabControl Name="tcAide" TabStripPlacement="Left" Background="Transparent">
-            <TabItem Style="{StaticResource tabItem}" Name="tiAjoutPlat" Header="Ajout de plat">
+            <TabItem Style="{StaticResource tabItem}" Name="tiAjoutPlat" Header="{Resx AjoutPlat}">
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
-                        <Label Style="{StaticResource fontSousTitre}" Content="Ajout de plat" />
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx AjoutPlat}" />
                         <TextBlock>
                             Mon texte
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Style="{StaticResource tabItem}" Name="tiSuspenssion" Header="Suspenssion">
+            <TabItem Style="{StaticResource tabItem}" Name="tiSuspenssion" Header="{Resx Suspension}">
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
-                        <Label Style="{StaticResource fontSousTitre}" Content="Information sur la suspenssion" />
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx Suspension}" />
                         <TextBlock>
                             Mon texte
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Style="{StaticResource tabItem}" Name="tiCalculatrice" Header="Calculatrice">
+            <TabItem Style="{StaticResource tabItem}" Name="tiCalculatrice" Header="{Resx Calculatrice}">
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
-                        <Label Style="{StaticResource fontSousTitre}" Content="Calculatrice nutritionelle" />
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx CalculatriceNutritionnelle}" />
                         <TextBlock TextWrapping="Wrap">
                             Bienvenue dans la calculatrice nutritionnelle. Elle vous confère l'aperçu d'un menu que vous avez créer vous même.<LineBreak></LineBreak>
                             
@@ -66,90 +67,90 @@
                 </ScrollViewer>
             </TabItem>
 
-            <TabItem Style="{StaticResource tabItem}" Name="tiConnexion" Header="Connexion">
+            <TabItem Style="{StaticResource tabItem}" Name="tiConnexion" Header="{Resx Connexion}">
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
-                        <Label Style="{StaticResource fontSousTitre}" Content="Se connecter" />
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx SeConnecter}" />
                         <TextBlock>
                             Mon texte
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Style="{StaticResource tabItem}" Name="tiDon" Header="Don">
+            <TabItem Style="{StaticResource tabItem}" Name="tiDon" Header="{Resx Don}">
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
-                        <Label Style="{StaticResource fontSousTitre}" Content="Envoyer un don" />
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx EnvoyerUnDon}" />
                         <TextBlock>
                             Mon texte
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Style="{StaticResource tabItem}" Name="tiGenerationMenu" Header="Generation de menu">
+            <TabItem Style="{StaticResource tabItem}" Name="tiGenerationMenu" Header="{Resx GenerationMenu}">
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
-                        <Label Style="{StaticResource fontSousTitre}" Content="Génération de menu" />
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx GenerationMenu}" />
                         <TextBlock>
                             Mon texte
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Style="{StaticResource tabItem}" Name="tiListeEpicerie" Header="Liste d'épicerie">
+            <TabItem Style="{StaticResource tabItem}" Name="tiListeEpicerie" Header="{Resx ListeEpicerie}">
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
-                        <Label Style="{StaticResource fontSousTitre}" Content="Votre liste d'épicerie" />
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx VotreListeEpicerie}" />
                         <TextBlock>
                             Mon texte
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Style="{StaticResource tabItem}" Name="tiMenuConnecte" Header="Menu connecté">
+            <TabItem Style="{StaticResource tabItem}" Name="tiMenuConnecte" Header="{Resx MenuConnecte}">
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
-                        <Label Style="{StaticResource fontSousTitre}" Content="Menu connécté" />
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx MenuConnecte}" />
                         <TextBlock>
                             Mon texte
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Style="{StaticResource tabItem}" Name="tiMenuPrincipal" Header="Menu pricipale">
+            <TabItem Style="{StaticResource tabItem}" Name="tiMenuPrincipal" Header="{Resx MenuPrincipal}">
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
-                        <Label Style="{StaticResource fontSousTitre}" Content="Menu pricipale" />
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx MenuPrincipal}" />
                         <TextBlock>
                             Mon texte
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Style="{StaticResource tabItem}" Name="tiParametre" Header="Paramètre">
+            <TabItem Style="{StaticResource tabItem}" Name="tiParametre" Header="{Resx Parametre}">
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
-                        <Label Style="{StaticResource fontSousTitre}" Content="Vos paramètres" />
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx VosParametres}" />
                         <TextBlock>
                             Mon texte
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Style="{StaticResource tabItem}" Name="tiProfil" Header="Profil">
+            <TabItem Style="{StaticResource tabItem}" Name="tiProfil" Header="{Resx Profil}">
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
-                        <Label Style="{StaticResource fontSousTitre}" Content="Mon profil" />
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx MonProfil}" />
                         <TextBlock>
                             Mon texte
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Style="{StaticResource tabItem}" Name="tiLangue" Header="Langage">
+            <TabItem Style="{StaticResource tabItem}" Name="tiLangue" Header="{Resx Langage}">
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
-                        <Label Style="{StaticResource fontSousTitre}" Content="Mon profil" />
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx Langage}" />
                         <TextBlock>
                             Mon texte
                         </TextBlock>

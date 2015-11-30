@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Nutritia.UI.Views"
         mc:Ignorable="d"
-        Title="Nutritia - À Propos" Height="350" Width="520" MinHeight="300" MinWidth="500">
+        Title="{Resx Titre}" Height="350" Width="520" MinHeight="300" MinWidth="500"
+        ResxExtension.DefaultResxName="Nutritia.UI.Ressources.Localisation.FenetreAPropos" Language="{UICulture}">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -27,8 +28,8 @@
                     <EventSetter Event="Button.Click" Handler="ChangeColor"/>
                 </Style>
             </StackPanel.Resources>
-            <Button Name="btnInformation" Click="btnInformation_Click" Background="Gray">Informations</Button>
-            <Button Name="btnDon" Click="btnDon_Click">Faire un don</Button>
+            <Button Name="btnInformation" Click="btnInformation_Click" Background="Gray" Content="{Resx Informations}"/>
+            <Button Name="btnDon" Click="btnDon_Click" Content="{Resx FaireDon}"/>
         </StackPanel>
         <Rectangle Grid.Row="1" Grid.ColumnSpan="2" Stroke="Black" Fill="Transparent"/>
         <Grid Name="dockContent"  Grid.Column="1" Grid.Row="0">

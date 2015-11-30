@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Infralution.Localization.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -48,6 +49,8 @@ namespace Nutritia.UI.Views
         /// </summary>
         public FenetreGenerateurMenus()
         {
+            CultureManager.UICultureChanged += CultureManager_UICultureChanged;
+
             InitializeComponent();
 
             Rand = new Random();
@@ -70,7 +73,7 @@ namespace Nutritia.UI.Views
             Mouse.OverrideCursor = null;
 
             // Header de la fenêtre.
-            App.Current.MainWindow.Title = "Nutritia - Génération de menus";
+            App.Current.MainWindow.Title = Nutritia.UI.Ressources.Localisation.FenetreGenerateurMenus.Titre;
 
             if (!String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
             {
@@ -913,7 +916,7 @@ namespace Nutritia.UI.Views
             }
 
             InitialiserSectionMenu(nbPlats, (Convert.ToInt32(dgMenus.RowHeight)));
-            gbMenus.Header = "Menus";
+            gbMenus.Header = Nutritia.UI.Ressources.Localisation.FenetreGenerateurMenus.Menus;
 
             // Il s'agit d'un déjeuner.
             if(nbPlats == NB_PLATS_DEJEUNER)
@@ -1338,6 +1341,11 @@ namespace Nutritia.UI.Views
                 SuiviPlatService.Update(fenetreSuvi.ListePlatsNonAdmissibles, App.MembreCourant);
 
             }
+        }
+
+        private void CultureManager_UICultureChanged(object sender, EventArgs e)
+        {
+            App.Current.MainWindow.Title = Nutritia.UI.Ressources.Localisation.FenetreGenerateurMenus.Titre;
         }
     }
 }
