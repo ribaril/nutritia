@@ -11,5 +11,6 @@ namespace Nutritia
     {
         IList<Transaction> RetrieveAll();
         void Insert(Transaction don);
+        void Insert(Membre membre, Transaction don);
     }
 }

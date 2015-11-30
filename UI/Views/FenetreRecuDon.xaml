@@ -10,7 +10,7 @@
     <Grid>
         <StackPanel>
             <Grid>
-                <Label FontWeight="Light" HorizontalAlignment="Left" Name="lblNoTransaction">No.</Label>
+                <!--<Label FontWeight="Light" HorizontalAlignment="Left" Name="lblNoTransaction">No.</Label>-->
                 <Label HorizontalAlignment="Center" FontWeight="Bold">Nutritia</Label>
             </Grid>
             <StackPanel Orientation="Horizontal">

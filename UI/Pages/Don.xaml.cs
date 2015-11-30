@@ -53,7 +53,10 @@ namespace Nutritia.UI.Pages
                 if (isNomGood && isNoCarteGood && isExpirationGood && isCSCGood)
                 {
                     Transaction transaction = new Transaction(txtProprietaire.Text, valeurDon, modePaiement);
-                    donService.Insert(transaction);
+                    if (String.IsNullOrWhiteSpace(App.MembreCourant.NomUtilisateur))
+                        donService.Insert(transaction);
+                    else
+                        donService.Insert(App.MembreCourant, transaction);
                     VideChamps();
 
                     (new FenetreRecuDon(transaction)).ShowDialog();

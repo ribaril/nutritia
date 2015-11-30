@@ -29,7 +29,7 @@ namespace Nutritia.UI.Views
             lblModePaiement.Content = transaction.ModePaiementTransaction.ToString();
             lblMontant.Content = transaction.Montant.ToString() + "$";
             lblNom.Content = transaction.NomAuteur;
-            lblNoTransaction.Content += " " + transaction.NoTransaction.ToString();
+            //lblNoTransaction.Content += " " + transaction.NoTransaction.ToString();
             imgQrCode.Source = QrCodeHelper.getQrBitmap(transaction.ToString());
         }
     }

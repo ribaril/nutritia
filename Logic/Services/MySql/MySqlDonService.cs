@@ -42,7 +42,7 @@ namespace Nutritia
             try
             {
                 connexion = new MySqlConnexion();
-                string requete = string.Format("INSERT INTO Dons (idModePaiement, nom, montant) VALUES ( (SELECT idModePaiement FROM ModesPaiement WHERE nom = '{0}'), '{1}', {2})", don.ModePaiementTransaction, don.NomAuteur, don.Montant);
+                string requete = string.Format("INSERT INTO Dons (idModePaiement, nom, montant, noTransaction) VALUES ( (SELECT idModePaiement FROM ModesPaiement WHERE nom = '{0}'), '{1}', {2}, '{3}')", don.ModePaiementTransaction, don.NomAuteur, don.Montant, don.NoTransaction);
                 connexion.Query(requete);
             }
             catch (MySqlException)
@@ -59,6 +59,23 @@ namespace Nutritia
             ModePaiement mode = ModePaiement.StringToValue((string)don["ModePaiement"]);
 
             return new Transaction(NomAuteur, Montant, mode);
+        }
+
+
+        public void Insert(Membre membre, Transaction transaction)
+        {
+            Insert(transaction);
+
+            try
+            {
+                connexion = new MySqlConnexion();
+                string requete = string.Format("INSERT INTO DonsMembres (idMembre, idDon) VALUES ( (SELECT idMembre FROM Membres WHERE nomUtilisateur = '{0}'), (SELECT idDon FROM Dons WHERE noTransaction = '{1}')) ", membre.NomUtilisateur, transaction.NoTransaction);
+                connexion.Query(requete);
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
         }
 
     }
