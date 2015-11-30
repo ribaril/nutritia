@@ -90,9 +90,9 @@ namespace Nutritia.UI.Views
                 {
                     foreach (Plat platCourant in ListePlatsRetires)
                     {
-                        if (ListePlatsSuivis.Find(plat => plat.IdPlat == platCourant.IdPlat) != null)
+                        if (ListePlatsSuivis.Find(plat => plat.Nom == platCourant.Nom) != null)
                         {
-                            platCourant.EstTricherie = ListePlatsSuivis.Find(plat => plat.IdPlat == platCourant.IdPlat).EstTricherie;
+                            platCourant.EstTricherie = ListePlatsSuivis.Find(plat => plat.Nom == platCourant.Nom).EstTricherie;
 
                             if (platCourant.EstTricherie)
                             {
@@ -1241,26 +1241,23 @@ namespace Nutritia.UI.Views
             {
                 foreach(Plat platCourant in fenetreSuvi.ListePlatsNonAdmissibles)
                 {
-                    if(platCourant.EstTricherie)
+                    switch (platCourant.TypePlat)
                     {
-                        switch (platCourant.TypePlat)
-                        {
-                            case "Déjeuner":
-                                ListeDejeuners.Add(platCourant);
-                                break;
-                            case "Entrée":
-                                ListeEntrees.Add(platCourant);
-                                break;
-                            case "Plat principal":
-                                ListePlatPrincipaux.Add(platCourant);
-                                break;
-                            case "Breuvage":
-                                ListeBreuvages.Add(platCourant);
-                                break;
-                            case "Déssert":
-                                ListeDesserts.Add(platCourant);
-                                break;
-                        }
+                        case "Déjeuner":
+                            if(platCourant.EstTricherie) { ListeDejeuners.Add(platCourant); } else { ListeDejeuners.RemoveAll(plat => plat.Nom == platCourant.Nom); }
+                            break;
+                        case "Entrée":
+                            if(platCourant.EstTricherie) { ListeEntrees.Add(platCourant); } else { ListeEntrees.RemoveAll(plat => plat.Nom == platCourant.Nom); }
+                            break;
+                        case "Plat principal":
+                            if(platCourant.EstTricherie) { ListePlatPrincipaux.Add(platCourant); } else { ListePlatPrincipaux.RemoveAll(plat => plat.Nom == platCourant.Nom); }
+                            break;
+                        case "Breuvage":
+                            if(platCourant.EstTricherie) { ListeBreuvages.Add(platCourant); } else { ListeBreuvages.RemoveAll(plat => plat.Nom == platCourant.Nom); }
+                            break;
+                        case "Déssert":
+                            if(platCourant.EstTricherie) { ListeDesserts.Add(platCourant); } else { ListeDesserts.RemoveAll(plat => plat.Nom == platCourant.Nom); }
+                            break;
                     }
                 }
 

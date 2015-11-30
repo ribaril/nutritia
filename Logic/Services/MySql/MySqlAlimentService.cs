@@ -115,7 +115,7 @@ namespace Nutritia
                 Nom = (string)aliment["nom"],
                 Categorie = (string)aliment["categorieAlimentaire"],
                 Mesure = (int)aliment["mesure"],
-                UniteMesure = (string)aliment["uniteMesure"],
+                UniteMesure = (string)aliment["symbole"],
                 Energie = valeurNut["Calories"],
                 Glucide = valeurNut["Glucides"],
                 Fibre = valeurNut["Fibres"],
