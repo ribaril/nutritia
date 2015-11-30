@@ -97,6 +97,15 @@ namespace Nutritia.UI.Ressources.Localisation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ingrédients.
+        /// </summary>
+        public static string Ingredients {
+            get {
+                return ResourceManager.GetString("Ingredients", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Les plus populaires.
         /// </summary>
         public static string LesPlusPopulaires {
@@ -133,11 +142,29 @@ namespace Nutritia.UI.Ressources.Localisation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nombre de résultats.
+        /// </summary>
+        public static string NbrResultat {
+            get {
+                return ResourceManager.GetString("NbrResultat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nombre de votes :.
         /// </summary>
         public static string NbrVotes {
             get {
                 return ResourceManager.GetString("NbrVotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nouveautés.
+        /// </summary>
+        public static string Nouveaute {
+            get {
+                return ResourceManager.GetString("Nouveaute", resourceCulture);
             }
         }
         
@@ -183,6 +210,15 @@ namespace Nutritia.UI.Ressources.Localisation {
         public static string TousLesPlats {
             get {
                 return ResourceManager.GetString("TousLesPlats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Voter sur le plat.
+        /// </summary>
+        public static string VoterPlat {
+            get {
+                return ResourceManager.GetString("VoterPlat", resourceCulture);
             }
         }
     }

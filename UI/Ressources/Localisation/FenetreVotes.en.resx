@@ -129,6 +129,9 @@
   <data name="Divin" xml:space="preserve">
     <value>Heavenly</value>
   </data>
+  <data name="Ingredients" xml:space="preserve">
+    <value>Ingredients</value>
+  </data>
   <data name="LesPlusPopulaires" xml:space="preserve">
     <value>The most popular</value>
   </data>
@@ -141,8 +144,14 @@
   <data name="Moyen" xml:space="preserve">
     <value>Average</value>
   </data>
+  <data name="NbrResultat" xml:space="preserve">
+    <value>Number of results</value>
+  </data>
   <data name="NbrVotes" xml:space="preserve">
     <value>Number of votes :</value>
+  </data>
+  <data name="Nouveaute" xml:space="preserve">
+    <value>New</value>
   </data>
   <data name="Passable" xml:space="preserve">
     <value>Acceptable</value>
@@ -158,5 +167,8 @@
   </data>
   <data name="TousLesPlats" xml:space="preserve">
     <value>All the meals</value>
+  </data>
+  <data name="VoterPlat" xml:space="preserve">
+    <value>Vote on the meal</value>
   </data>
 </root>

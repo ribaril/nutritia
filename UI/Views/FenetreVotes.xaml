@@ -55,7 +55,7 @@
                 <TextBox Name="txtNbResultats" Style="{StaticResource fontNutritia}" Width="125" Height="25">
                     <TextBox.Resources>
                         <DiscreteObjectKeyFrame x:Key="proxy"
-                                            Value="Nombre de résultats" />
+                                            Value="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreVotes, Key=NbrResultat}" />
                     </TextBox.Resources>
                     <watermark:WatermarkService.Watermark>
                         <TextBlock Name="waterMarkTextResultats" 
@@ -66,7 +66,7 @@
                 </TextBox>
             </StackPanel>
         </StackPanel>
-        <GroupBox Name="gbContenu" Grid.Row="2" Header="Tous les plats" Style="{StaticResource groupBoxNutritia}" Width="600" Height="305">
+        <GroupBox Name="gbContenu" Grid.Row="2" Header="{Resx TousLesPlats}" Style="{StaticResource groupBoxNutritia}" Width="600" Height="305">
             <ScrollViewer Name="svPlats" PreviewMouseWheel="svPlats_PreviewMouseWheel">
                 <DataGrid Name="dgPlats" Style="{StaticResource dataGridPlats}">
                     <DataGrid.Columns>
@@ -107,7 +107,7 @@
                         <DataGridTemplateColumn Width="2.25*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Name="btnInformations" Style="{StaticResource fontNutritia}" Width="100" Height="50" Click="btnInformations_Click">Ingrédients</Button>
+                                    <Button Name="btnInformations" Style="{StaticResource fontNutritia}" Width="100" Height="50" Click="btnInformations_Click" Content="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreVotes, Key=Ingredients}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -117,7 +117,7 @@
                                     <Button Name="btnVoter" Width="50" Height="50" Click="btnVoter_Click">
                                         <Image Source="pack://application:,,,/UI/Images/voterPlatIcon.png"></Image>
                                         <Button.ToolTip>
-                                            <ToolTip Style="{StaticResource toolTipNutritia}">Voter sur le plat</ToolTip>
+                                            <ToolTip Style="{StaticResource toolTipNutritia}" Content="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreVotes, Key=VoterPlat}" />
                                         </Button.ToolTip>
                                     </Button>
                                 </DataTemplate>
