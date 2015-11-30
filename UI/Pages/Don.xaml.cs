@@ -24,6 +24,7 @@ namespace Nutritia.UI.Pages
     /// </summary>
     public partial class Don : Page
     {
+        private IDonService donService;
         private int valeurDon;
         public bool isNomGood = false;
         public bool isNoCarteGood = false;
@@ -33,6 +34,7 @@ namespace Nutritia.UI.Pages
 
         public Don()
         {
+            donService = ServiceFactory.Instance.GetService<IDonService>();
             InitializeComponent();
         }
 
@@ -51,7 +53,10 @@ namespace Nutritia.UI.Pages
                 if (isNomGood && isNoCarteGood && isExpirationGood && isCSCGood)
                 {
                     Transaction transaction = new Transaction(txtProprietaire.Text, valeurDon, modePaiement);
-
+                    if (String.IsNullOrWhiteSpace(App.MembreCourant.NomUtilisateur))
+                        donService.Insert(transaction);
+                    else
+                        donService.Insert(App.MembreCourant, transaction);
                     VideChamps();
 
                     (new FenetreRecuDon(transaction)).ShowDialog();
@@ -69,7 +74,7 @@ namespace Nutritia.UI.Pages
 
         private void EnablingBouton()
         {
-            bool areFieldsEmpty = (String.IsNullOrWhiteSpace(txtCSC.Text) || String.IsNullOrWhiteSpace(txtDateExpiration.Text) || 
+            bool areFieldsEmpty = (String.IsNullOrWhiteSpace(txtCSC.Text) || String.IsNullOrWhiteSpace(txtDateExpiration.Text) ||
                 String.IsNullOrWhiteSpace(txtNoCarte.Text) || String.IsNullOrWhiteSpace(txtProprietaire.Text));
 
             btnConfirmer.IsEnabled = !areFieldsEmpty;

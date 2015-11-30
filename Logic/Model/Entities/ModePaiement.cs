@@ -10,6 +10,7 @@ namespace Nutritia.Logic.Model.Entities
     {
         private ModePaiement() { }
 
+        public static readonly ModePaiement Inconnue = new ModePaiement();
         public static readonly ModePaiement MasterCard = new ModePaiement();
         public static readonly ModePaiement Visa = new ModePaiement();
         public static readonly ModePaiement Amex = new ModePaiement();
@@ -23,6 +24,20 @@ namespace Nutritia.Logic.Model.Entities
             if (this == ModePaiement.Visa)
                 return "Visa";
             return "Mode de Paiement Inconnue";
+        }
+
+        public static ModePaiement StringToValue(string s)
+        {
+            if (s == MasterCard.ToString())
+                return MasterCard;
+
+            if (s == Visa.ToString())
+                return Visa;
+
+            if (s == Amex.ToString())
+                return Amex;
+
+            return Inconnue;
         }
     }
 }

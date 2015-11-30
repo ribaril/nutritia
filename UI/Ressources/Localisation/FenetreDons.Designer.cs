@@ -22,14 +22,14 @@ namespace Nutritia.UI.Ressources.Localisation {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class FenetreMenuAdministrateur {
+    public class FenetreDons {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal FenetreMenuAdministrateur() {
+        internal FenetreDons() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Nutritia.UI.Ressources.Localisation {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Nutritia.UI.Ressources.Localisation.FenetreMenuAdministrateur", typeof(FenetreMenuAdministrateur).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Nutritia.UI.Ressources.Localisation.FenetreDons", typeof(FenetreDons).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,11 @@ namespace Nutritia.UI.Ressources.Localisation {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Administration.
+        ///   Recherche une chaîne localisée semblable à Date.
         /// </summary>
-        public static string Administration {
+        public static string Date {
             get {
-                return ResourceManager.GetString("Administration", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Bannissement de membres.
-        /// </summary>
-        public static string Bannissement {
-            get {
-                return ResourceManager.GetString("Bannissement", resourceCulture);
+                return ResourceManager.GetString("Date", resourceCulture);
             }
         }
         
@@ -88,25 +79,34 @@ namespace Nutritia.UI.Ressources.Localisation {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Gestion des administrateurs.
+        ///   Recherche une chaîne localisée semblable à ModePaiement.
         /// </summary>
-        public static string GestionAdmins {
+        public static string ModePaiement {
             get {
-                return ResourceManager.GetString("GestionAdmins", resourceCulture);
+                return ResourceManager.GetString("ModePaiement", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Gestion des aliments et plats.
+        ///   Recherche une chaîne localisée semblable à Montant.
         /// </summary>
-        public static string GestionAlimentsPlats {
+        public static string Montant {
             get {
-                return ResourceManager.GetString("GestionAlimentsPlats", resourceCulture);
+                return ResourceManager.GetString("Montant", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Nutritia - Menu Administrateur.
+        ///   Recherche une chaîne localisée semblable à Nom.
+        /// </summary>
+        public static string Nom {
+            get {
+                return ResourceManager.GetString("Nom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Nutritia - Dons.
         /// </summary>
         public static string Titre {
             get {

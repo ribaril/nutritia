@@ -67,5 +67,15 @@ namespace Nutritia.UI.Views
         {
             App.Current.MainWindow.Title = Nutritia.UI.Ressources.Localisation.FenetreMenuAdministrateur.Titre;
         }
+
+        private void btnDons_Click(object sender, RoutedEventArgs e)
+        {
+            IApplicationService mainWindow = ServiceFactory.Instance.GetService<IApplicationService>();
+
+            if (mainWindow is MainWindow)
+            {
+                (mainWindow as MainWindow).ChangerVue(new FenetreDons());
+            }
+        }
     }
 }

@@ -123,6 +123,9 @@
   <data name="Bannissement" xml:space="preserve">
     <value>Ban a member</value>
   </data>
+  <data name="Dons" xml:space="preserve">
+    <value>Donations</value>
+  </data>
   <data name="GestionAdmins" xml:space="preserve">
     <value>Manage Administrator</value>
   </data>
