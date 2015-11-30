@@ -94,7 +94,8 @@ namespace Nutritia.UI.Views
 
                 StringBuilder sbIngredients = new StringBuilder();
                 sbIngredients.Append(alimentCourant.Quantite * nbPersonnes).ToString();
-                sbIngredients.Append(alimentCourant.UniteMesure);
+                sbIngredients.Append(" ");
+                sbIngredients.Append(alimentCourant.UniteMesure.ToLower());
                 alimentCourant.Nom = alimentCourant.Nom.ToLower();
                 if (alimentCourant.Nom[0] == 'a' || alimentCourant.Nom[0] == 'e' || alimentCourant.Nom[0] == 'h' || 
                     alimentCourant.Nom[0] == 'i' || alimentCourant.Nom[0] == 'o' || alimentCourant.Nom[0] == 'u')

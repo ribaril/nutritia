@@ -22,13 +22,14 @@ namespace Nutritia.UI.Views
     /// </summary>
     public partial class FenetreListeEpicerie : UserControl
     {
-        public Menu MenuGenere { get; set; }
+        public static Menu MenuGenere { get; set; }
+        public static int NbColonnesMenu { get; set; }
         public ObservableCollection<Aliment> ListeAliments { get; set; }
 
         /// <summary>
         /// Constructeur par défaut de la classe.
         /// </summary>
-        public FenetreListeEpicerie(Menu menu)
+        public FenetreListeEpicerie(Menu menu, int nbColonnes)
         {
             CultureManager.UICultureChanged += CultureManager_UICultureChanged;
 
@@ -38,6 +39,7 @@ namespace Nutritia.UI.Views
             App.Current.MainWindow.Title = Nutritia.UI.Ressources.Localisation.FenetreListeEpicerie.Titre;
 
             MenuGenere = menu;
+            NbColonnesMenu = nbColonnes;
 
             ListeAliments = new ObservableCollection<Aliment>();
 

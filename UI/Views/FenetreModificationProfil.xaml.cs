@@ -875,7 +875,6 @@ namespace Nutritia.UI.Views
         }
 
         #endregion
-
         private void CultureManager_UICultureChanged(object sender, EventArgs e)
         {
             App.Current.MainWindow.Title = FenetreProfil.Titre;

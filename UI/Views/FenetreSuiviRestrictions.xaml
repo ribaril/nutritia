@@ -33,7 +33,7 @@
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <CheckBox Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"></CheckBox>
+                                    <CheckBox IsChecked="{Binding EstTricherie}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"></CheckBox>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

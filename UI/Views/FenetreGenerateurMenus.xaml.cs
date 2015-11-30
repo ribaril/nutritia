@@ -24,6 +24,7 @@ namespace Nutritia.UI.Views
     {
         private IAlimentService AlimentService { get; set; }
         private IPlatService PlatService { get; set; }
+        private ISuiviPlatService SuiviPlatService { get; set; }
         private IMenuService MenuService { get; set; }
         private List<Plat> ListeDejeuners { get; set; }
         private List<Plat> ListeEntrees { get; set; }
@@ -41,6 +42,7 @@ namespace Nutritia.UI.Views
         private const int NB_PLATS_SEMAINE = 70;
         private const int NB_COLONNES_AVEC_IMAGES = 4;
         private const int NB_COLONNES_SANS_IMAGES = 3;
+        private const double POURCENTAGE_AUGMENTATION_PREFERENCES = 0.5;
 
         /// <summary>
         /// Constructeur par défaut de la classe.
@@ -57,6 +59,7 @@ namespace Nutritia.UI.Views
 
             AlimentService = ServiceFactory.Instance.GetService<IAlimentService>();
             PlatService = ServiceFactory.Instance.GetService<IPlatService>();
+            SuiviPlatService = ServiceFactory.Instance.GetService<ISuiviPlatService>();
             MenuService = ServiceFactory.Instance.GetService<IMenuService>();
 
             // Chargement des plats.
@@ -77,10 +80,148 @@ namespace Nutritia.UI.Views
                 btnSuiviPlatsNonAdmissibles.IsEnabled = true;
                 btnOuvrirMenu.IsEnabled = true;
                 RestreindrePossibilites();
+                List<Plat> ListePlatsSuivis = new List<Plat>(SuiviPlatService.RetrieveSome(new RetrieveSuiviPlatArgs { IdMembre = (int)App.MembreCourant.IdMembre }));
+                
+                if (ListePlatsSuivis.Count == 0)
+                {
+                    SuiviPlatService.Insert(ListePlatsRetires, App.MembreCourant);
+                }
+                else
+                {
+                    foreach (Plat platCourant in ListePlatsRetires)
+                    {
+                        if (ListePlatsSuivis.Find(plat => plat.IdPlat == platCourant.IdPlat) != null)
+                        {
+                            platCourant.EstTricherie = ListePlatsSuivis.Find(plat => plat.IdPlat == platCourant.IdPlat).EstTricherie;
+
+                            if (platCourant.EstTricherie)
+                            {
+                                switch (platCourant.TypePlat)
+                                {
+                                    case "Déjeuner":
+                                        ListeDejeuners.Add(platCourant);
+                                        break;
+                                    case "Entrée":
+                                        ListeEntrees.Add(platCourant);
+                                        break;
+                                    case "Plat principal":
+                                        ListePlatPrincipaux.Add(platCourant);
+                                        break;
+                                    case "Breuvage":
+                                        ListeBreuvages.Add(platCourant);
+                                        break;
+                                    case "Déssert":
+                                        ListeDesserts.Add(platCourant);
+                                        break;
+                                }
+                            }
+                        }
+                    }
+
+                    SuiviPlatService.Update(ListePlatsRetires, App.MembreCourant);
+
+                }
             }
 
             EstNouveauMenu = true;
             NbColonnes = NB_COLONNES_AVEC_IMAGES;
+        }
+
+        /* A voir faut je corrige ce bug la */
+        public FenetreGenerateurMenus(Menu menu, int nbColonnes)
+        {
+            InitializeComponent();
+
+            Rand = new Random();
+
+            App.Current.MainWindow.ResizeMode = ResizeMode.CanResize;
+
+            AlimentService = ServiceFactory.Instance.GetService<IAlimentService>();
+            PlatService = ServiceFactory.Instance.GetService<IPlatService>();
+            SuiviPlatService = ServiceFactory.Instance.GetService<ISuiviPlatService>();
+            MenuService = ServiceFactory.Instance.GetService<IMenuService>();
+
+            // Chargement des plats.
+            Mouse.OverrideCursor = Cursors.Wait;
+            ListeDejeuners = new List<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Déjeuner" }));
+            ListeEntrees = new List<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Entrée" }));
+            ListePlatPrincipaux = new List<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Plat principal" }));
+            ListeBreuvages = new List<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Breuvage" }));
+            ListeDesserts = new List<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { Categorie = "Déssert" }));
+            ListePlatsRetires = new List<Plat>();
+            Mouse.OverrideCursor = null;
+
+            // Header de la fenêtre.
+            App.Current.MainWindow.Title = "Nutritia - Génération de menus";
+
+            if (!String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
+            {
+                btnSuiviPlatsNonAdmissibles.IsEnabled = true;
+                btnOuvrirMenu.IsEnabled = true;
+                btnSauvegarder.IsEnabled = true;
+                RestreindrePossibilites();
+                List<Plat> ListePlatsSuivis = new List<Plat>(SuiviPlatService.RetrieveSome(new RetrieveSuiviPlatArgs { IdMembre = (int)App.MembreCourant.IdMembre }));
+
+                if (ListePlatsSuivis.Count == 0)
+                {
+                    SuiviPlatService.Insert(ListePlatsRetires, App.MembreCourant);
+                }
+                else
+                {
+                    foreach (Plat platCourant in ListePlatsRetires)
+                    {
+                        if (ListePlatsSuivis.Find(plat => plat.IdPlat == platCourant.IdPlat) != null)
+                        {
+                            platCourant.EstTricherie = ListePlatsSuivis.Find(plat => plat.IdPlat == platCourant.IdPlat).EstTricherie;
+
+                            if (platCourant.EstTricherie)
+                            {
+                                switch (platCourant.TypePlat)
+                                {
+                                    case "Déjeuner":
+                                        ListeDejeuners.Add(platCourant);
+                                        break;
+                                    case "Entrée":
+                                        ListeEntrees.Add(platCourant);
+                                        break;
+                                    case "Plat principal":
+                                        ListePlatPrincipaux.Add(platCourant);
+                                        break;
+                                    case "Breuvage":
+                                        ListeBreuvages.Add(platCourant);
+                                        break;
+                                    case "Déssert":
+                                        ListeDesserts.Add(platCourant);
+                                        break;
+                                }
+                            }
+                        }
+                    }
+
+                    SuiviPlatService.Update(ListePlatsRetires, App.MembreCourant);
+
+                }
+            }
+
+            NbColonnes = nbColonnes;
+
+            if (nbColonnes == 3)
+            {
+                dgMenus.RowHeight = 60;
+                dgtcNom.Width = new DataGridLength(2, DataGridLengthUnitType.Star);
+                dgtcImage.Visibility = Visibility.Hidden;
+                dgtcRegenerer.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+                dgtcIngredient.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            }
+
+            MenuGenere = menu;
+            InitialiserSectionMenu(MenuGenere.ListePlats.Count, (Convert.ToInt32(dgMenus.RowHeight)));
+            AjouterSeparateursPlats();
+            dgMenus.ItemsSource = MenuGenere.ListePlats;
+            spInfosSup.Visibility = Visibility.Hidden;
+            gbMenus.Visibility = Visibility.Visible;
+            btnListeEpicerie.IsEnabled = true;
+            EstNouveauMenu = false;
         }
 
         /// <summary>
@@ -137,15 +278,20 @@ namespace Nutritia.UI.Views
             if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Végétarien" }))
             {
                 ListeDejeuners.RemoveAll(plat => plat.ObtenirCategoriesIngredients().Contains("Viandes et substituts")
-                                             || plat.ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers"));
+                                             || plat.ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers")
+                                             && !plat.ListeIngredients.Contains(new Aliment { Nom = "Oeuf" }));
                 ListeEntrees.RemoveAll(plat => plat.ObtenirCategoriesIngredients().Contains("Viandes et substituts")
-                                             || plat.ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers"));
+                                             || plat.ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers")
+                                             && !plat.ListeIngredients.Contains(new Aliment { Nom = "Oeuf" }));
                 ListePlatPrincipaux.RemoveAll(plat => plat.ObtenirCategoriesIngredients().Contains("Viandes et substituts")
-                                             || plat.ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers"));
+                                             || plat.ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers")
+                                             && !plat.ListeIngredients.Contains(new Aliment { Nom = "Oeuf" }));
                 ListeBreuvages.RemoveAll(plat => plat.ObtenirCategoriesIngredients().Contains("Viandes et substituts")
-                                             || plat.ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers"));
+                                             || plat.ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers")
+                                             && !plat.ListeIngredients.Contains(new Aliment { Nom = "Oeuf" }));
                 ListeDesserts.RemoveAll(plat => plat.ObtenirCategoriesIngredients().Contains("Viandes et substituts")
-                                             || plat.ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers"));
+                                             || plat.ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers")
+                                             && !plat.ListeIngredients.Contains(new Aliment { Nom = "Oeuf" }));
             }
 
             /************************** Végétalien **************************/
@@ -638,9 +784,9 @@ namespace Nutritia.UI.Views
         /// Méthode permettant de calculer des statistiques à propos du menu généré.
         /// </summary>
         /// <returns>Un dictionnaire contenant les statistiques de certaines préférences.</returns>
-        private Dictionary<string, int> CalculerStatistiques()
+        private Dictionary<string, double> CalculerStatistiques()
         {
-            Dictionary<string, int> stats = new Dictionary<string, int>();
+            Dictionary<string, double> stats = new Dictionary<string, double>();
 
             stats["viande"] = 0;
             stats["pate"] = 0;
@@ -648,32 +794,94 @@ namespace Nutritia.UI.Views
 
             foreach(Plat platCourant in MenuGenere.ListePlats)
             {
-                bool contientDejaViande = false;
-                bool contientDejaPate = false;
-                bool contientDejaPoisson = false;
-
-                foreach(Aliment alimentCourant in platCourant.ListeIngredients)
+                if (platCourant.TypePlat == "Déjeuner"
+                   || platCourant.TypePlat == "Entrée"
+                   || platCourant.TypePlat == "Plat principal")
                 {
-                    if(alimentCourant.Categorie == "Viandes et substituts" && !contientDejaViande)
-                    {
-                        stats["viande"]++;
-                        contientDejaViande = true;
-                    }
+                    bool contientDejaViande = false;
+                    bool contientDejaPate = false;
+                    bool contientDejaPoisson = false;
 
-                    if(alimentCourant.Categorie == "Pâtes" && !contientDejaPate)
+                    foreach (Aliment alimentCourant in platCourant.ListeIngredients)
                     {
-                        stats["pate"]++;
-                        contientDejaPate = true;
-                    }
+                        if (alimentCourant.Categorie == "Viandes et substituts" && alimentCourant.Nom != "Oeuf" && !contientDejaViande)
+                        {
+                            stats["viande"]++;
+                            contientDejaViande = true;
+                        }
 
-                    if (alimentCourant.Categorie == "Poissons et fruits de mers" && !contientDejaPoisson)
-                    {
-                        stats["poisson"]++;
-                        contientDejaPoisson = true;
+                        if (alimentCourant.Categorie == "Pâtes" && !contientDejaPate)
+                        {
+                            stats["pate"]++;
+                            contientDejaPate = true;
+                        }
 
+                        if (alimentCourant.Categorie == "Poissons et fruits de mers" && !contientDejaPoisson)
+                        {
+                            stats["poisson"]++;
+                            contientDejaPoisson = true;
+
+                        }
                     }
                 }
             }
+
+            stats["viande"] /= MenuGenere.ListePlats.Count;
+            stats["poisson"] /= MenuGenere.ListePlats.Count;
+            stats["pate"] /= MenuGenere.ListePlats.Count;
+
+            return stats;
+        }
+
+        /// <summary>
+        /// Méthode permettant de calculer des statistiques à propos des plats en BD.
+        /// </summary>
+        /// <returns>Un dictionnaire contenant les statistiques de certaines préférences en BD.</returns>
+        private Dictionary<string, double> CalculerStatistiquesBD()
+        {
+            List<Plat> listePlatsBD = new List<Plat>(PlatService.RetrieveAll());
+            Dictionary<string, double> stats = new Dictionary<string, double>();
+
+            stats["viande"] = 0;
+            stats["pate"] = 0;
+            stats["poisson"] = 0;
+
+            foreach(Plat platCourant in listePlatsBD)
+            {
+                if(platCourant.TypePlat == "Déjeuner"
+                   || platCourant.TypePlat == "Entrée"
+                   || platCourant.TypePlat == "Plat principal")
+                {
+                    bool contientDejaViande = false;
+                    bool contientDejaPate = false;
+                    bool contientDejaPoisson = false;
+
+                    foreach (Aliment alimentCourant in platCourant.ListeIngredients)
+                    {
+                        if (alimentCourant.Categorie == "Viandes et substituts" && alimentCourant.Nom != "Oeuf" && !contientDejaViande)
+                        {
+                            stats["viande"]++;
+                            contientDejaViande = true;
+                        }
+
+                        if (alimentCourant.Categorie == "Pâtes" && !contientDejaPate)
+                        {
+                            stats["pate"]++;
+                            contientDejaPate = true;
+                        }
+
+                        if (alimentCourant.Categorie == "Poissons et fruits de mers" && !contientDejaPoisson)
+                        {
+                            stats["poisson"]++;
+                            contientDejaPoisson = true;
+                        }
+                    }
+                }
+            }
+
+            stats["viande"] /= listePlatsBD.Count;
+            stats["poisson"] /= listePlatsBD.Count;
+            stats["pate"] /= listePlatsBD.Count;
 
             return stats;
         }
@@ -747,7 +955,6 @@ namespace Nutritia.UI.Views
             if(!string.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
             {
                 btnSauvegarder.IsEnabled = true;
-                AffecterPreferences();
             }
 
             dgMenus.ItemsSource = MenuGenere.ListePlats;
@@ -759,219 +966,195 @@ namespace Nutritia.UI.Views
         }
 
         /// <summary>
-        /// Méthode permettant d'affecter les préférences d'un membre a un menu généré.
+        /// Méthode permettant d'ajuster les préférences d'un menu généré.
         /// </summary>
-        private void AffecterPreferences()
+        private void AjusterPreferences(string preference)
         {
-            if(MenuGenere.ListePlats.Count == NB_PLATS_DEJEUNER)
+            if (MenuGenere.ListePlats.Count == NB_PLATS_SEMAINE)
             {
                 if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Viandes" }))
                 {
-                    while(!MenuGenere.ListePlats[0].ObtenirCategoriesIngredients().Contains("Viandes et substituts"))
+                    Dictionary<string, double> stats = CalculerStatistiquesBD();
+
+                    double nouvelleProportionViandes = stats["viande"] + (stats["viande"] * POURCENTAGE_AUGMENTATION_PREFERENCES);
+                    double proportionActuelle = CalculerStatistiques()["viande"];
+                    double difference = nouvelleProportionViandes - proportionActuelle;
+                    int nbPlatsAAjouter = Convert.ToInt32(Math.Round((difference * 35), 0));
+                    List<int> positionsPlatsSansViande = new List<int>();
+
+                    for (int i = 0; i < MenuGenere.ListePlats.Count; i++)
                     {
-                        MenuGenere.ListePlats[0] = ListeDejeuners[Rand.Next(0, ListeDejeuners.Count)];
+                        if (MenuGenere.ListePlats[i].TypePlat == "Déjeuner"
+                            || MenuGenere.ListePlats[i].TypePlat == "Entrée"
+                            || MenuGenere.ListePlats[i].TypePlat == "Plat principal")
+                        {
+                            if (!MenuGenere.ListePlats[i].ObtenirCategoriesIngredients().Contains("Viandes et substituts"))
+                            {
+                                positionsPlatsSansViande.Add(i);
+                            }
+                            else if (MenuGenere.ListePlats[i].ListeIngredients.Count(p => p.Categorie == "Viandes et substituts") == 1 
+                                     && MenuGenere.ListePlats[i].ListeIngredients.Contains(new Aliment { Nom = "Oeuf" }))
+                            {
+                                positionsPlatsSansViande.Add(i);
+                            }
+                        }
+                    }
+
+                    List<int> positionsRandom = new List<int>();
+
+                    for (int i = 0; i < positionsPlatsSansViande.Count; i++)
+                    {
+                        int index = Rand.Next(0, positionsPlatsSansViande.Count);
+                        int position = positionsPlatsSansViande[index];
+                        positionsRandom.Add(position);
+                        positionsPlatsSansViande.Remove(position);
+                    }
+
+                    foreach (int positionRandomCourante in positionsRandom)
+                    {
+                        switch (MenuGenere.ListePlats[positionRandomCourante].TypePlat)
+                        {
+                            case "Déjeuner":
+                                while (!MenuGenere.ListePlats[positionRandomCourante].ObtenirCategoriesIngredients().Contains("Viandes et substituts")
+                                       || (MenuGenere.ListePlats[positionRandomCourante].ListeIngredients.Count(p => p.Categorie == "Viandes et substituts") == 1
+                                       && MenuGenere.ListePlats[positionRandomCourante].ListeIngredients.Contains(new Aliment { Nom = "Oeuf" })))
+                                {
+                                    MenuGenere.ListePlats[positionRandomCourante] = ListeDejeuners[Rand.Next(0, ListeDejeuners.Count)];
+                                }
+                                break;
+                            case "Entrée":
+                                while (!MenuGenere.ListePlats[positionRandomCourante].ObtenirCategoriesIngredients().Contains("Viandes et substituts")
+                                       || (MenuGenere.ListePlats[positionRandomCourante].ListeIngredients.Count(p => p.Categorie == "Viandes et substituts") == 1
+                                       && MenuGenere.ListePlats[positionRandomCourante].ListeIngredients.Contains(new Aliment { Nom = "Oeuf" })))
+                                {
+                                    MenuGenere.ListePlats[positionRandomCourante] = ListeEntrees[Rand.Next(0, ListeDejeuners.Count)];
+                                }
+                                break;
+                            case "Plat principal":
+                                while (!MenuGenere.ListePlats[positionRandomCourante].ObtenirCategoriesIngredients().Contains("Viandes et substituts")
+                                       || (MenuGenere.ListePlats[positionRandomCourante].ListeIngredients.Count(p => p.Categorie == "Viandes et substituts") == 1
+                                       && MenuGenere.ListePlats[positionRandomCourante].ListeIngredients.Contains(new Aliment { Nom = "Oeuf" })))
+                                {
+                                    MenuGenere.ListePlats[positionRandomCourante] = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
+                                }
+                                break;
+                        }
                     }
                 }
-            }
-            else if (MenuGenere.ListePlats.Count == NB_PLATS_DINER_SOUPER)
-            {
-                if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Viandes" }))
+                else if(App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Poissons et fruits de mers" }))
                 {
-                    while (!MenuGenere.ListePlats[1].ObtenirCategoriesIngredients().Contains("Viandes et substituts"))
+                    Dictionary<string, double> stats = CalculerStatistiquesBD();
+
+                    double nouvelleProportionViandes = stats["poisson"] + (stats["poisson"] * POURCENTAGE_AUGMENTATION_PREFERENCES);
+                    double proportionActuelle = CalculerStatistiques()["poisson"];
+                    double difference = nouvelleProportionViandes - proportionActuelle;
+                    int nbPlatsAAjouter = Convert.ToInt32(Math.Round((difference * 35), 0));
+                    List<int> positionsPlatsSansPoisson = new List<int>();
+
+                    for (int i = 0; i < MenuGenere.ListePlats.Count; i++)
                     {
-                        MenuGenere.ListePlats[1] = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
+                        if (MenuGenere.ListePlats[i].TypePlat == "Déjeuner"
+                            || MenuGenere.ListePlats[i].TypePlat == "Entrée"
+                            || MenuGenere.ListePlats[i].TypePlat == "Plat principal")
+                        {
+                            if (!MenuGenere.ListePlats[i].ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers"))
+                            {
+                                positionsPlatsSansPoisson.Add(i);
+                            }
+                        }
+                    }
+
+                    List<int> positionsRandom = new List<int>();
+
+                    for (int i = 0; i < positionsPlatsSansPoisson.Count; i++)
+                    {
+                        int index = Rand.Next(0, positionsPlatsSansPoisson.Count);
+                        int position = positionsPlatsSansPoisson[index];
+                        positionsRandom.Add(position);
+                        positionsPlatsSansPoisson.Remove(position);
+                    }
+
+                    foreach (int positionRandomCourante in positionsRandom)
+                    {
+                        switch (MenuGenere.ListePlats[positionRandomCourante].TypePlat)
+                        {
+                            case "Déjeuner":
+                                while (!MenuGenere.ListePlats[positionRandomCourante].ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers"))
+                                {
+                                    MenuGenere.ListePlats[positionRandomCourante] = ListeDejeuners[Rand.Next(0, ListeDejeuners.Count)];
+                                }
+                                break;
+                            case "Entrée":
+                                while (!MenuGenere.ListePlats[positionRandomCourante].ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers"))
+                                {
+                                    MenuGenere.ListePlats[positionRandomCourante] = ListeEntrees[Rand.Next(0, ListeDejeuners.Count)];
+                                }
+                                break;
+                            case "Plat principal":
+                                while (!MenuGenere.ListePlats[positionRandomCourante].ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers"))
+                                {
+                                    MenuGenere.ListePlats[positionRandomCourante] = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
+                                }
+                                break;
+                        }
                     }
                 }
                 else if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Pâtes" }))
                 {
-                    while (!MenuGenere.ListePlats[1].ObtenirCategoriesIngredients().Contains("Pâtes"))
-                    {
-                        MenuGenere.ListePlats[1] = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
-                    }
-                }
-                else if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Poissons et fruits de mers" }))
-                {
-                    while (!MenuGenere.ListePlats[1].ObtenirCategoriesIngredients().Contains("Poissons et fruits de mers"))
-                    {
-                        MenuGenere.ListePlats[1] = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
-                    }
-                }
-            }
-            else if (MenuGenere.ListePlats.Count == NB_PLATS_JOURNEE)
-            {
-                int nbPlatsCorrespondant;
+                    Dictionary<string, double> stats = CalculerStatistiquesBD();
 
-                if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Viandes" }))
-                {
-                    nbPlatsCorrespondant = CalculerStatistiques()["viande"];
+                    double nouvelleProportionViandes = stats["pate"] + (stats["pate"] * POURCENTAGE_AUGMENTATION_PREFERENCES);
+                    double proportionActuelle = CalculerStatistiques()["pate"];
+                    double difference = nouvelleProportionViandes - proportionActuelle;
+                    int nbPlatsAAjouter = Convert.ToInt32(Math.Round((difference * 35), 0));
+                    List<int> positionsPlatsSansPate = new List<int>();
 
-                    while (nbPlatsCorrespondant < 1)
+                    for (int i = 0; i < MenuGenere.ListePlats.Count; i++)
                     {
-                        int positionAleatoire = Rand.Next(0, MenuGenere.ListePlats.Count);
-
-                        switch (MenuGenere.ListePlats[positionAleatoire].TypePlat)
+                        if (MenuGenere.ListePlats[i].TypePlat == "Déjeuner"
+                            || MenuGenere.ListePlats[i].TypePlat == "Entrée"
+                            || MenuGenere.ListePlats[i].TypePlat == "Plat principal")
                         {
-                            case "Entrée":
-                                if (ListeEntrees.Count > 1)
+                            if (!MenuGenere.ListePlats[i].ObtenirCategoriesIngredients().Contains("Pâtes"))
+                            {
+                                positionsPlatsSansPate.Add(i);
+                            }
+                        }
+                    }
+
+                    List<int> positionsRandom = new List<int>();
+
+                    for (int i = 0; i < positionsPlatsSansPate.Count; i++)
+                    {
+                        int index = Rand.Next(0, positionsPlatsSansPate.Count);
+                        int position = positionsPlatsSansPate[index];
+                        positionsRandom.Add(position);
+                        positionsPlatsSansPate.Remove(position);
+                    }
+
+                    foreach (int positionRandomCourante in positionsRandom)
+                    {
+                        switch (MenuGenere.ListePlats[positionRandomCourante].TypePlat)
+                        {
+                            case "Déjeuner":
+                                while (!MenuGenere.ListePlats[positionRandomCourante].ObtenirCategoriesIngredients().Contains("Pâtes"))
                                 {
-                                    MenuGenere.ListePlats[positionAleatoire] = ListeEntrees[Rand.Next(0, ListeEntrees.Count)];
+                                    MenuGenere.ListePlats[positionRandomCourante] = ListeDejeuners[Rand.Next(0, ListeDejeuners.Count)];
+                                }
+                                break;
+                            case "Entrée":
+                                while (!MenuGenere.ListePlats[positionRandomCourante].ObtenirCategoriesIngredients().Contains("Pâtes"))
+                                {
+                                    MenuGenere.ListePlats[positionRandomCourante] = ListeEntrees[Rand.Next(0, ListeDejeuners.Count)];
                                 }
                                 break;
                             case "Plat principal":
-                                if (ListeEntrees.Count > 1)
+                                while (!MenuGenere.ListePlats[positionRandomCourante].ObtenirCategoriesIngredients().Contains("Pâtes"))
                                 {
-                                    MenuGenere.ListePlats[positionAleatoire] = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
+                                    MenuGenere.ListePlats[positionRandomCourante] = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
                                 }
                                 break;
                         }
-
-                        nbPlatsCorrespondant = CalculerStatistiques()["viande"];
-
-                    }
-                }
-                else if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Pâtes" }))
-                {
-                    nbPlatsCorrespondant = CalculerStatistiques()["pate"];
-
-                    while (nbPlatsCorrespondant < 1)
-                    {
-                        int positionAleatoire = Rand.Next(0, MenuGenere.ListePlats.Count);
-
-                        switch (MenuGenere.ListePlats[positionAleatoire].TypePlat)
-                        {
-                            case "Entrée":
-                                if (ListeEntrees.Count > 1)
-                                {
-                                    MenuGenere.ListePlats[positionAleatoire] = ListeEntrees[Rand.Next(0, ListeEntrees.Count)];
-                                }
-                                break;
-                            case "Plat principal":
-                                if (ListeEntrees.Count > 1)
-                                {
-                                    MenuGenere.ListePlats[positionAleatoire] = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
-                                }
-                                break;
-                        }
-
-                        nbPlatsCorrespondant = CalculerStatistiques()["pate"];
-
-                    }
-                }
-                else if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Poissons et fruits de mers" }))
-                {
-                    nbPlatsCorrespondant = CalculerStatistiques()["poisson"];
-
-                    while (nbPlatsCorrespondant < 1)
-                    {
-                        int positionAleatoire = Rand.Next(0, MenuGenere.ListePlats.Count);
-
-                        switch (MenuGenere.ListePlats[positionAleatoire].TypePlat)
-                        {
-                            case "Entrée":
-                                if (ListeEntrees.Count > 1)
-                                {
-                                    MenuGenere.ListePlats[positionAleatoire] = ListeEntrees[Rand.Next(0, ListeEntrees.Count)];
-                                }
-                                break;
-                            case "Plat principal":
-                                if (ListeEntrees.Count > 1)
-                                {
-                                    MenuGenere.ListePlats[positionAleatoire] = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
-                                }
-                                break;
-                        }
-
-                        nbPlatsCorrespondant = CalculerStatistiques()["poisson"];
-
-                    }
-                }
-            }
-            else if (MenuGenere.ListePlats.Count == NB_PLATS_SEMAINE)
-            {
-                int nbPlatsCorrespondant;
-
-                if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Viandes" }))
-                {
-                    nbPlatsCorrespondant = CalculerStatistiques()["viande"];
-
-                    while (nbPlatsCorrespondant < 7)
-                    {
-                        int positionAleatoire = Rand.Next(0, MenuGenere.ListePlats.Count);
-
-                        switch (MenuGenere.ListePlats[positionAleatoire].TypePlat)
-                        {
-                            case "Entrée":
-                                if (ListeEntrees.Count > 1)
-                                {
-                                    MenuGenere.ListePlats[positionAleatoire] = ListeEntrees[Rand.Next(0, ListeEntrees.Count)];
-                                }
-                                break;
-                            case "Plat principal":
-                                if (ListeEntrees.Count > 1)
-                                {
-                                    MenuGenere.ListePlats[positionAleatoire] = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
-                                }
-                                break;
-                        }
-
-                        nbPlatsCorrespondant = CalculerStatistiques()["viande"];
-
-                    }
-                }
-                else if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Pâtes" }))
-                {
-                    nbPlatsCorrespondant = CalculerStatistiques()["pate"];
-
-                    while (nbPlatsCorrespondant < 7)
-                    {
-                        int positionAleatoire = Rand.Next(0, MenuGenere.ListePlats.Count);
-
-                        switch (MenuGenere.ListePlats[positionAleatoire].TypePlat)
-                        {
-                            case "Entrée":
-                                if (ListeEntrees.Count > 1)
-                                {
-                                    MenuGenere.ListePlats[positionAleatoire] = ListeEntrees[Rand.Next(0, ListeEntrees.Count)];
-                                }
-                                break;
-                            case "Plat principal":
-                                if (ListeEntrees.Count > 1)
-                                {
-                                    MenuGenere.ListePlats[positionAleatoire] = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
-                                }
-                                break;
-                        }
-
-                        nbPlatsCorrespondant = CalculerStatistiques()["pate"];
-
-                    }
-                }
-                else if (App.MembreCourant.ListePreferences.Contains(new Preference { Nom = "Poissons et fruits de mers" }))
-                {
-                    nbPlatsCorrespondant = CalculerStatistiques()["poisson"];
-
-                    while (nbPlatsCorrespondant < 7)
-                    {
-                        int positionAleatoire = Rand.Next(0, MenuGenere.ListePlats.Count);
-
-                        switch (MenuGenere.ListePlats[positionAleatoire].TypePlat)
-                        {
-                            case "Entrée":
-                                if (ListeEntrees.Count > 1)
-                                {
-                                    MenuGenere.ListePlats[positionAleatoire] = ListeEntrees[Rand.Next(0, ListeEntrees.Count)];
-                                }
-                                break;
-                            case "Plat principal":
-                                if (ListeEntrees.Count > 1)
-                                {
-                                    MenuGenere.ListePlats[positionAleatoire] = ListePlatPrincipaux[Rand.Next(0, ListePlatPrincipaux.Count)];
-                                }
-                                break;
-                        }
-
-                        nbPlatsCorrespondant = CalculerStatistiques()["poisson"];
-
                     }
                 }
             }
@@ -994,6 +1177,8 @@ namespace Nutritia.UI.Views
                 {
                     MenuGenere.Nom = popupSauvegarde.txtNom.Text;
                     MenuService.Insert(MenuGenere);
+                    MenuGenere.IdMenu = MenuService.Retrieve(new RetrieveMenuArgs { IdMembre = App.MembreCourant.IdMembre, Nom = MenuGenere.Nom }).IdMenu;
+                    EstNouveauMenu = false;
                 }
             }
             else
@@ -1112,7 +1297,7 @@ namespace Nutritia.UI.Views
             App.Current.MainWindow.Height = App.APP_HEIGHT;
             App.Current.MainWindow.WindowState = WindowState.Normal;
 
-            ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue<FenetreListeEpicerie>(new FenetreListeEpicerie(MenuGenere));
+            ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue<FenetreListeEpicerie>(new FenetreListeEpicerie(MenuGenere, NbColonnes));
         }
 
         /// <summary>
@@ -1123,32 +1308,38 @@ namespace Nutritia.UI.Views
         /// <param name="e"></param>
         private void btnSuiviPlatsNonAdmissibles_Click(object sender, RoutedEventArgs e)
         {
-            FenetreSuiviRestrictions fenetreSuvi = new FenetreSuiviRestrictions(ListePlatsRetires);
+            FenetreSuiviRestrictions fenetreSuvi = new FenetreSuiviRestrictions(new List<Plat>(SuiviPlatService.RetrieveSome(new RetrieveSuiviPlatArgs { IdMembre = (int)App.MembreCourant.IdMembre })));
             fenetreSuvi.ShowDialog();
 
             if(fenetreSuvi.DialogResult == true)
             {
-                foreach(Plat platCourant in fenetreSuvi.ListePlatsAdmissibles)
+                foreach(Plat platCourant in fenetreSuvi.ListePlatsNonAdmissibles)
                 {
-                    switch (platCourant.TypePlat)
+                    if(platCourant.EstTricherie)
                     {
-                        case "Déjeuner":
-                            ListeDejeuners.Add(platCourant);
-                            break;
-                        case "Entrée":
-                            ListeEntrees.Add(platCourant);
-                            break;
-                        case "Plat principal":
-                            ListePlatPrincipaux.Add(platCourant);
-                            break;
-                        case "Breuvage":
-                            ListeBreuvages.Add(platCourant);
-                            break;
-                        case "Déssert":
-                            ListeDesserts.Add(platCourant);
-                            break;
+                        switch (platCourant.TypePlat)
+                        {
+                            case "Déjeuner":
+                                ListeDejeuners.Add(platCourant);
+                                break;
+                            case "Entrée":
+                                ListeEntrees.Add(platCourant);
+                                break;
+                            case "Plat principal":
+                                ListePlatPrincipaux.Add(platCourant);
+                                break;
+                            case "Breuvage":
+                                ListeBreuvages.Add(platCourant);
+                                break;
+                            case "Déssert":
+                                ListeDesserts.Add(platCourant);
+                                break;
+                        }
                     }
                 }
+
+                SuiviPlatService.Update(fenetreSuvi.ListePlatsNonAdmissibles, App.MembreCourant);
+
             }
         }
 

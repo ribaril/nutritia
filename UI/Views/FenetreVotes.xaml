@@ -20,34 +20,45 @@
             <RowDefinition Height="7*"></RowDefinition>
         </Grid.RowDefinitions>
         <Label Style="{StaticResource fontSousTitre}" Content="{Resx Titre}"/>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Width="575" VerticalAlignment="Bottom">
-            <Button Name="btnSelectionComplete" Margin="0, 0, 15, 0" Click="btnSelectionComplete_Click">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Width="600" VerticalAlignment="Bottom">
+            <Button Name="btnSelectionComplete" Margin="0, 0, 25, 0" Click="btnSelectionComplete_Click">
                 <Image Style="{StaticResource btnFiltre}" Source="pack://application:,,,/UI/Images/platsIcon.png"></Image>
                 <Button.ToolTip>
                     <ToolTip Style="{StaticResource toolTipNutritia}" Content="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreVotes, Key=TousLesPlats}"/>
                 </Button.ToolTip>
             </Button>
-            <Button Name="btnNouveautes" Margin="0, 0, 15, 0" Click="btnNouveautes_Click">
+            <Button Name="btnNouveautes" Margin="0, 0, 25, 0" Click="btnNouveautes_Click">
                 <Image Style="{StaticResource btnFiltre}" Source="pack://application:,,,/UI/Images/journalIcon.png"></Image>
                 <Button.ToolTip>
                     <ToolTip Style="{StaticResource toolTipNutritia}" Content="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreVotes, Key=LesPlusRecents}"/>
                 </Button.ToolTip>
             </Button>
-            <Button Name="btnPlusPopulaires" Margin="0, 0, 15, 0" Click="btnPlusPopulaires_Click">
+            <Button Name="btnPlusPopulaires" Margin="0, 0, 25, 0" Click="btnPlusPopulaires_Click">
                 <Image Style="{StaticResource btnFiltre}" Source="pack://application:,,,/UI/Images/etoileIcon.png"></Image>
                 <Button.ToolTip>
                     <ToolTip Style="{StaticResource toolTipNutritia}" Content="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreVotes, Key=LesPlusPopulaires}"/>
                 </Button.ToolTip>
             </Button>
             <StackPanel VerticalAlignment="Center">
-                <Label Style="{StaticResource fontNutritia}" HorizontalAlignment="Center" FontSize="16" Content="{Resx BarreRecherche}"/>
-                <TextBox Name="txtRecherche" Style="{StaticResource fontNutritia}" Width="210" Height="25" PreviewKeyUp="txtRecherche_PreviewKeyUp">
+                <TextBox Name="txtRecherche" Style="{StaticResource fontNutritia}" Width="210" Height="25" Margin="0, 0, 0, 10" PreviewKeyUp="txtRecherche_PreviewKeyUp">
                     <TextBox.Resources>
                         <DiscreteObjectKeyFrame x:Key="proxy"
                                             Value="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreVotes, Key=RechercherUnPlat}" />
                     </TextBox.Resources>
                     <watermark:WatermarkService.Watermark>
-                        <TextBlock Name="waterMarkText" 
+                        <TextBlock Name="waterMarkTextRecherche" 
+                        Text="{Binding Value, Source={StaticResource proxy}}"
+                        HorizontalAlignment="Center">
+                        </TextBlock>
+                    </watermark:WatermarkService.Watermark>
+                </TextBox>
+                <TextBox Name="txtNbResultats" Style="{StaticResource fontNutritia}" Width="125" Height="25">
+                    <TextBox.Resources>
+                        <DiscreteObjectKeyFrame x:Key="proxy"
+                                            Value="Nombre de résultats" />
+                    </TextBox.Resources>
+                    <watermark:WatermarkService.Watermark>
+                        <TextBlock Name="waterMarkTextResultats" 
                         Text="{Binding Value, Source={StaticResource proxy}}"
                         HorizontalAlignment="Center">
                         </TextBlock>
@@ -55,7 +66,7 @@
                 </TextBox>
             </StackPanel>
         </StackPanel>
-        <GroupBox Name="gbContenu" Grid.Row="2" Header="Tous les plats" Style="{StaticResource groupBoxNutritia}" Width="575" Height="305">
+        <GroupBox Name="gbContenu" Grid.Row="2" Header="Tous les plats" Style="{StaticResource groupBoxNutritia}" Width="600" Height="305">
             <ScrollViewer Name="svPlats" PreviewMouseWheel="svPlats_PreviewMouseWheel">
                 <DataGrid Name="dgPlats" Style="{StaticResource dataGridPlats}">
                     <DataGrid.Columns>
@@ -68,45 +79,20 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTemplateColumn Width="2.25*">
+                        <DataGridTemplateColumn Width="2*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Image Width="100" Height="75" Source="{Binding ImageUrl}"></Image>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Width="3.5*">
+                        <DataGridTemplateColumn Width="3.25*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center">
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <Label Style="{StaticResource fontNutritia}">Note : </Label>
-                                            <Label>
-                                                <Label.Style>
-                                                    <Style TargetType="{x:Type Label}" BasedOn="{StaticResource fontNutritia}">
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding Note}" Value="{x:Null}">
-                                                                <Setter Property="Content" Value="Aucune"/>
-                                                            </DataTrigger>
-                                                            <DataTrigger Binding="{Binding Note}" Value="1">
-                                                                <Setter Property="Content" Value="Mauvais"/>
-                                                            </DataTrigger>
-                                                            <DataTrigger Binding="{Binding Note}" Value="2">
-                                                                <Setter Property="Content" Value="Passable"/>
-                                                            </DataTrigger>
-                                                            <DataTrigger Binding="{Binding Note}" Value="3">
-                                                                <Setter Property="Content" Value="Moyen"/>
-                                                            </DataTrigger>
-                                                            <DataTrigger Binding="{Binding Note}" Value="4">
-                                                                <Setter Property="Content" Value="Succulent"/>
-                                                            </DataTrigger>
-                                                            <DataTrigger Binding="{Binding Note}" Value="5">
-                                                                <Setter Property="Content" Value="Divin"/>
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </Label.Style>
-                                            </Label>
+                                            <Label Style="{StaticResource fontNutritia}" Content="{Binding NoteConviviale}" />
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <Label Style="{StaticResource fontNutritia}" Content="{Resx NbrVotes}" />
@@ -118,20 +104,21 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Width="1.5*">
+                        <DataGridTemplateColumn Width="2.25*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Name="btnInformations" Width="50" Height="50" Click="btnInformations_Click">
-                                        <Image Source="pack://application:,,,/UI/Images/infoIcon.png"></Image>
-                                    </Button>
+                                    <Button Name="btnInformations" Style="{StaticResource fontNutritia}" Width="100" Height="50" Click="btnInformations_Click">Ingrédients</Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Width="1.5*">
+                        <DataGridTemplateColumn Width="1.25*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Name="btnVoter" Width="50" Height="50" Click="btnVoter_Click">
                                         <Image Source="pack://application:,,,/UI/Images/voterPlatIcon.png"></Image>
+                                        <Button.ToolTip>
+                                            <ToolTip Style="{StaticResource toolTipNutritia}">Voter sur le plat</ToolTip>
+                                        </Button.ToolTip>
                                     </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

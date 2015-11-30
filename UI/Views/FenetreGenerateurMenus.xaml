@@ -108,7 +108,22 @@
                             <DataGridTemplateColumn x:Name="dgtcImage" Width="3*" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Image Width="100" Height="70" Source="{Binding ImageUrl}"></Image>
+                                        <Image Width="100" Height="70" Source="{Binding ImageUrl}">
+                                            <Image.ToolTip>
+                                                <ToolTip Style="{StaticResource toolTipNutritia}">
+                                                    <TextBlock Foreground="DarkGreen" MinWidth="130" MaxWidth="200">
+                                                        <TextBlock.Style>
+                                                            <Style TargetType="{x:Type TextBlock}">
+                                                                <Style.Setters>
+                                                                    <Setter Property="Text" Value="{Binding Description}" />
+                                                                    <Setter Property="TextWrapping" Value="Wrap" />
+                                                                </Style.Setters>
+                                                            </Style>
+                                                        </TextBlock.Style>
+                                                    </TextBlock>
+                                                </ToolTip>
+                                            </Image.ToolTip>
+                                        </Image>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

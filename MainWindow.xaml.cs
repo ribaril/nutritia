@@ -55,6 +55,7 @@ namespace Nutritia
             ServiceFactory.Instance.Register<IPreferenceService, MySqlPreferenceService>(new MySqlPreferenceService());
             ServiceFactory.Instance.Register<IAlimentService, MySqlAlimentService>(new MySqlAlimentService());
             ServiceFactory.Instance.Register<IPlatService, MySqlPlatService>(new MySqlPlatService());
+            ServiceFactory.Instance.Register<ISuiviPlatService, MySqlSuiviPlatService>(new MySqlSuiviPlatService());
             ServiceFactory.Instance.Register<IMenuService, MySqlMenuService>(new MySqlMenuService());
             ServiceFactory.Instance.Register<IMembreService, MySqlMembreService>(new MySqlMembreService());
             ServiceFactory.Instance.Register<IVersionLogicielService, MySqlVersionLogicielService>(new MySqlVersionLogicielService());
@@ -73,12 +74,20 @@ namespace Nutritia
 
 		private void btnRetour_Click(object sender, RoutedEventArgs e)
 		{
-			if(App.MembreCourant.IdMembre == null)
-				ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipal());
+            App.Current.MainWindow.ResizeMode = ResizeMode.CanMinimize;
+            App.Current.MainWindow.Width = App.APP_WIDTH;
+            App.Current.MainWindow.Height = App.APP_HEIGHT;
+            App.Current.MainWindow.WindowState = WindowState.Normal;
+
+            if (presenteurContenu.Content is FenetreListeEpicerie)
+                ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new FenetreGenerateurMenus(FenetreListeEpicerie.MenuGenere, FenetreListeEpicerie.NbColonnesMenu));
+            else if (App.MembreCourant.IdMembre == null)
+				ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipal()); 
 			else
             {
                 if(presenteurContenu.Content is Bannissement || presenteurContenu.Content is GestionAdmin || presenteurContenu.Content is GestionRepertoire)
-                        ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuAdministrateur());
+                    ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuAdministrateur());
+               
                 else
                     ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
             }

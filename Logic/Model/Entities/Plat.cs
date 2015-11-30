@@ -12,12 +12,14 @@ namespace Nutritia
         public int? IdPlat { get; set; }
         public string Createur { get; set; }
         public string Nom { get; set; }
+        public string Description { get; set; }
         public string TypePlat { get; set; }
         public double? Note { get; set; }
+        public string NoteConviviale { get; set; }
         public int NbVotes { get; set; }
         public string ImageUrl { get; set; }
+        public bool EstTricherie { get; set; }
         public IList<Aliment> ListeIngredients { get; set; }
-        public bool EstActif { get; set; }
         #endregion
 
         /// <summary>
@@ -26,6 +28,28 @@ namespace Nutritia
         public Plat()
         {
             ListeIngredients = new List<Aliment>();
+        }
+
+        /// <summary>
+        /// Méthode permettant de déterminer la note du plat de façon plus conviviale.
+        /// Elle se base sur la note en chiffre du plat.
+        /// </summary>
+        public void DeterminerNoteConviviale()
+        {
+            if (Note == null) { NoteConviviale = "Aucune"; }
+            else if (Note == 1) { NoteConviviale = "Mauvais"; }
+            else if (Note > 1 && Note < 1.5) { NoteConviviale = "Mauvais +"; }
+            else if (Note >= 1.5 && Note < 2) { NoteConviviale = "Passable -"; }
+            else if (Note == 2) { NoteConviviale = "Passable"; }
+            else if (Note > 2 && Note < 2.5) { NoteConviviale = "Passable +"; }
+            else if (Note >= 2.5 && Note < 3) { NoteConviviale = "Moyen -"; }
+            else if (Note == 3) { NoteConviviale = "Moyen"; }
+            else if (Note > 3 && Note < 3.5) { NoteConviviale = "Moyen +"; }
+            else if (Note >= 3.5 && Note < 4) { NoteConviviale = "Succulent -"; }
+            else if (Note == 4) { NoteConviviale = "Succulent"; }
+            else if (Note > 4 && Note < 4.5) { NoteConviviale = "Succulent +"; }
+            else if (Note >= 4.5 && Note < 5) { NoteConviviale = "Divin -"; }
+            else if (Note == 5) { NoteConviviale = "Divin"; }
         }
 
         /// <summary>
