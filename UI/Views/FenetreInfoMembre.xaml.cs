@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Infralution.Localization.Wpf;
 
 namespace Nutritia.UI.Views
 {
@@ -25,14 +26,16 @@ namespace Nutritia.UI.Views
         public static readonly DependencyProperty MembreProperty = DependencyProperty.Register("MembreContent", typeof(Membre), typeof(FenetreInfoMembre), new FrameworkPropertyMetadata(null, PropertyChangedCallback));
 
 
-        public Membre membre { get; set; }
+        //public Membre membre { get; set; }
 
         public FenetreInfoMembre()
         {
+            CultureManager.UICultureChanged += CultureManager_UICultureChanged;
+
             InitializeComponent();
 
             // Header de la fenetre
-            App.Current.MainWindow.Title = "Nutritia - Info Membre";
+            //App.Current.MainWindow.Title = "Nutritia - Info Membre";
 
         }
 
@@ -95,7 +98,12 @@ namespace Nutritia.UI.Views
             ic.Add(new LineBreak());
             ic.Add(new Run(Indent(1)));
             ic.Add(new Run(m.Age.ToString()));
-            ic.Add(new Run(" " + Properties.Resources.An));
+            if (m.Age > 1)
+            {
+                ic.Add(new Run(" " + Nutritia.UI.Ressources.Localisation.FenetreInfoMembre.Ages));
+            }
+            else
+                ic.Add(new Run(" " + Nutritia.UI.Ressources.Localisation.FenetreInfoMembre.Age));
 
             //ic.Add(new Bold(new Run(" my")));
             //ic.Add(new Run(" faithful"));
@@ -104,6 +112,21 @@ namespace Nutritia.UI.Views
             //ic.Add(new Italic(new Run("You rock!")));
 
             return ic;
+        }
+
+
+        private void CultureManager_UICultureChanged(object sender, EventArgs e)
+        {
+            if (MembreContent is Membre)
+            {
+                Membre m = MembreContent as Membre;
+                this.txtBlock.Inlines.Clear();
+
+                foreach (Inline item in MemberToDisplay(m))
+                {
+                    this.txtBlock.Inlines.Add(item);
+                }
+            }
         }
     }
 }

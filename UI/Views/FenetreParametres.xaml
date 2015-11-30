@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Nutritia.UI.Views"
         mc:Ignorable="d"
-        Title="Nutritia - Paramètres" Height="350" Width="520" MinHeight="300" MinWidth="500" ResizeMode="NoResize">
+        Title="{Resx Titre}" Height="350" Width="520" MinHeight="300" MinWidth="500" ResizeMode="NoResize"
+        ResxExtension.DefaultResxName="Nutritia.UI.Ressources.Localisation.FenetreParametres" Language="{UICulture}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -26,8 +27,8 @@
                     <EventSetter Event="Button.Click" Handler="ChangeColor"/>
                 </Style>
             </StackPanel.Resources>
-            <Button Name="btnGeneral" Click="btnGeneral_Click" Background="Gray">Général</Button>
-            <Button Name="btnConnexion" Click="btnConnexion_Click">Connexion</Button>
+            <Button Name="btnGeneral" Click="btnGeneral_Click" Background="Gray" Content="{Resx General}"/>
+            <Button Name="btnConnexion" Click="btnConnexion_Click" Content="{Resx Connexion}"/>
         </StackPanel>
         <Rectangle Grid.Row="1" Grid.ColumnSpan="2" Stroke="Black" Fill="Transparent"/>
         <DockPanel Name="dockContent"  Grid.Column="1" Grid.Row="0">

@@ -4,7 +4,8 @@
         xmlns:resx="clr-namespace:Nutritia.Properties"
         Title="Nutritia"
 		ResizeMode="CanMinimize"
-        Loaded="Window_Loaded">
+        Loaded="Window_Loaded"
+        ResxExtension.DefaultResxName="Nutritia.UI.Ressources.Localisation.MainWindow" Language="{UICulture}">
     
     <Grid>
     
@@ -22,25 +23,25 @@
                 <Button Name="btnRetour" VerticalAlignment="Bottom" Click="btnRetour_Click">
                     <DockPanel>
                         <Image Source="/Nutritia;component/UI/Images/retour.PNG"/>
-                        <TextBlock Text="{x:Static resx:Resources.Retour}" FontSize="20" FontFamily="Berlin"/>
+                        <TextBlock Text="{Resx Retour}" FontSize="20" FontFamily="Berlin"/>
                     </DockPanel>
                 </Button>
                 <Button Name="btnInfo" VerticalAlignment="Bottom" Click="btnInfo_Click">
                     <DockPanel>
                         <Image Width="24" Source="/Nutritia;component/UI/Images/aProposIcon.PNG"/>
-                        <TextBlock Text="{x:Static resx:Resources.APropos}" FontSize="20" FontFamily="Berlin"/>
+                        <TextBlock Text="{Resx APropos}" FontSize="20" FontFamily="Berlin"/>
                     </DockPanel>
                 </Button>
                 <Button Name="btnParam" Click="btnParam_Click">
                     <DockPanel>
                         <Image Source="/Nutritia;component/UI/Images/paramIcon.PNG"/>
-                        <TextBlock Text="{x:Static resx:Resources.Parametres}" FontSize="20" FontFamily="Berlin"/>
+                        <TextBlock Text="{Resx Parametres}" FontSize="20" FontFamily="Berlin"/>
                     </DockPanel>
                 </Button>
                 <Button Name="btnAide" Click="btnAide_Click">
                     <DockPanel>
                         <Image Source="/Nutritia;component/UI/Images/HelpIcon.PNG"/>
-                        <TextBlock Text="{x:Static resx:Resources.Aide}" FontSize="20" FontFamily="Berlin"/>
+                        <TextBlock Text="{Resx Aide}" FontSize="20" FontFamily="Berlin"/>
                     </DockPanel>
                 </Button>
             </ToolBar>

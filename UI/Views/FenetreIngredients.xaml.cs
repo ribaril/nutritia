@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Infralution.Localization.Wpf;
 
 namespace Nutritia.UI.Views
 {
@@ -21,6 +22,8 @@ namespace Nutritia.UI.Views
     public partial class FenetreIngredients : Window
     {
         private Plat PlatCourant { get; set; }
+        private int NbrPersonnes { get; set; }
+        private Button btnCalculatrice;
         
         /// <summary>
         /// Constructeur par défaut de la classe.
@@ -29,9 +32,12 @@ namespace Nutritia.UI.Views
         /// <param name="nbPersonnes">Le nombre de personnes.</param>
         public FenetreIngredients(Plat plat, int nbPersonnes)
         {
+            CultureManager.UICultureChanged += CultureManager_UICultureChanged;
+
             InitializeComponent();
 
             PlatCourant = plat;
+            NbrPersonnes = nbPersonnes;
 
             int nbRangees = plat.ListeIngredients.Count + 1;
 
@@ -45,8 +51,8 @@ namespace Nutritia.UI.Views
 
             AfficherIngredients(new List<Aliment>(PlatCourant.ListeIngredients), nbPersonnes);
 
-            Button btnCalculatrice = new Button();
-            btnCalculatrice.Content = "Calculatrice";
+            btnCalculatrice = new Button();
+            btnCalculatrice.Content = Nutritia.UI.Ressources.Localisation.FenetreIngredient.Calculatrice;
             btnCalculatrice.Width = 150;
             btnCalculatrice.Height = 25;
             btnCalculatrice.FontSize = 16;
@@ -123,19 +129,19 @@ namespace Nutritia.UI.Views
             StackPanel spValeurNut = new StackPanel();
 
             Label lblEntete = new Label();
-            lblEntete.Content = "Valeurs nutritionnelles";
+            lblEntete.Content = Nutritia.UI.Ressources.Localisation.FenetreIngredient.ValeurNutritionnelle;
             spValeurNut.Children.Add(lblEntete);
 
             double multiplicateurValeur = (aliment.Quantite * nbPersonnes)/aliment.Mesure;
 
             StringBuilder sbValeurNut = new StringBuilder();
-            sbValeurNut.Append("Énergie : ").Append(aliment.Energie * multiplicateurValeur).AppendLine(" cal");
-            sbValeurNut.Append("Glucides : ").Append(aliment.Glucide * multiplicateurValeur).AppendLine(" g");
-            sbValeurNut.Append("Fibres : ").Append(aliment.Fibre * multiplicateurValeur).AppendLine(" g");
-            sbValeurNut.Append("Protéines : ").Append(aliment.Proteine * multiplicateurValeur).AppendLine(" g");
-            sbValeurNut.Append("Lipides : ").Append(aliment.Lipide * multiplicateurValeur).AppendLine(" g");
-            sbValeurNut.Append("Cholestérol : ").Append(aliment.Cholesterol * multiplicateurValeur).AppendLine(" mg");
-            sbValeurNut.Append("Sodium : ").Append(aliment.Sodium * multiplicateurValeur).Append(" mg");
+            sbValeurNut.Append(Nutritia.UI.Ressources.Localisation.ValeurNutritionnelle.Energie + " : ").Append(aliment.Energie * multiplicateurValeur).AppendLine(" cal");
+            sbValeurNut.Append(Nutritia.UI.Ressources.Localisation.ValeurNutritionnelle.Glucides + " : ").Append(aliment.Glucide * multiplicateurValeur).AppendLine(" g");
+            sbValeurNut.Append(Nutritia.UI.Ressources.Localisation.ValeurNutritionnelle.Fibres + " : ").Append(aliment.Fibre * multiplicateurValeur).AppendLine(" g");
+            sbValeurNut.Append(Nutritia.UI.Ressources.Localisation.ValeurNutritionnelle.Proteines + " : ").Append(aliment.Proteine * multiplicateurValeur).AppendLine(" g");
+            sbValeurNut.Append(Nutritia.UI.Ressources.Localisation.ValeurNutritionnelle.Lipides + " : ").Append(aliment.Lipide * multiplicateurValeur).AppendLine(" g");
+            sbValeurNut.Append(Nutritia.UI.Ressources.Localisation.ValeurNutritionnelle.Cholesterol + " : ").Append(aliment.Cholesterol * multiplicateurValeur).AppendLine(" mg");
+            sbValeurNut.Append(Nutritia.UI.Ressources.Localisation.ValeurNutritionnelle.Sodium + " : ").Append(aliment.Sodium * multiplicateurValeur).Append(" mg");
             Label lblValeurNut = new Label();
             lblValeurNut.Content = sbValeurNut.ToString();
 
@@ -156,7 +162,7 @@ namespace Nutritia.UI.Views
             windowCalculatrice.Width = App.APP_WIDTH;
             windowCalculatrice.Height = App.APP_HEIGHT;
             windowCalculatrice.ResizeMode = ResizeMode.CanMinimize;
-            windowCalculatrice.Title = "Nutritia - Calculatrice nutritionnelle";
+            windowCalculatrice.Title = Nutritia.UI.Ressources.Localisation.FenetreIngredient.TitreCalculatriceNutritionnelle;
             windowCalculatrice.Icon = new BitmapImage(new Uri("pack://application:,,,/UI/Images/logoIconPetit.png"));
             Grid grdContenu = new Grid();
             ImageBrush brush = new ImageBrush();
@@ -166,6 +172,12 @@ namespace Nutritia.UI.Views
             grdContenu.Children.Add(new FenetreCalculatriceNutritionelle(PlatCourant));
             windowCalculatrice.Content = grdContenu;
             windowCalculatrice.Show();
+        }
+
+        private void CultureManager_UICultureChanged(object sender, EventArgs e)
+        {
+            AfficherIngredients(new List<Aliment>(PlatCourant.ListeIngredients), NbrPersonnes);
+            btnCalculatrice.Content = Nutritia.UI.Ressources.Localisation.FenetreIngredient.Calculatrice;
         }
     }
 }

@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Infralution.Localization.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,14 +24,45 @@ namespace Nutritia.UI.Pages
     /// </summary>
     public partial class MenuGeneral : Page
     {
-        private ObservableCollection<Langue> mapLangue;
-
-
-        public class Langue
+        #region NestedClassLangue
+        //Nested class Langue
+        public class Langue : INotifyPropertyChanged
         {
-            public string Nom { get; set; }
-            public string CodeISO { get; set; }
-            public bool Actif { get; set; }
+            public event PropertyChangedEventHandler PropertyChanged;
+
+            private string nom;
+            private string codeISO;
+            private bool actif;
+
+            public string Nom
+            {
+                get
+                { return nom; }
+                set
+                {
+                    nom = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("Nom"));
+                }
+            }
+
+            public string CodeISO
+            {
+                get { return codeISO; }
+                set
+                {
+                    codeISO = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("CodeISO"));
+                }
+            }
+            public bool Actif
+            {
+                get { return actif; }
+                set
+                {
+                    actif = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("Actif"));
+                }
+            }
 
             public Langue(string nom, string code, bool actif = false)
             {
@@ -37,17 +71,32 @@ namespace Nutritia.UI.Pages
                 this.Actif = actif;
             }
 
+
+            public void OnPropertyChanged(PropertyChangedEventArgs e)
+            {
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, e);
+                }
+            }
+
             public override string ToString()
             {
                 return Nom.ToString();
             }
         }
+        #endregion
+
+        private ObservableCollection<Langue> mapLangue;
+
+        Langue francais = new Langue(Nutritia.UI.Ressources.Localisation.Pages.MenuGeneral.LangueFrancais, "fr");
+        Langue anglais = new Langue(Nutritia.UI.Ressources.Localisation.Pages.MenuGeneral.LangueAnglais, "en");
 
         public MenuGeneral()
         {
+            CultureManager.UICultureChanged += CultureManager_UICultureChanged;
+
             mapLangue = new ObservableCollection<Langue>();
-            Langue francais = new Langue("Français", "fr");
-            Langue anglais = new Langue("Anglais", "en");
             string codeLangueActif = Properties.Settings.Default.Langue;
 
             mapLangue.Add(francais);
@@ -64,7 +113,14 @@ namespace Nutritia.UI.Pages
             Langue langue = mapLangue.FirstOrDefault(l => l.Actif == true);
             Properties.Settings.Default.Langue = langue.CodeISO;
             Properties.Settings.Default.Save();
-            MessageBox.Show("Veuillez redémarrer l'application\n pour que le changement s'applique.");
+
+            CultureManager.UICulture = new CultureInfo(Properties.Settings.Default.Langue);
+        }
+
+        private void CultureManager_UICultureChanged(object sender, EventArgs e)
+        {
+            francais.Nom = Nutritia.UI.Ressources.Localisation.Pages.MenuGeneral.LangueFrancais;
+            anglais.Nom = Nutritia.UI.Ressources.Localisation.Pages.MenuGeneral.LangueAnglais;
         }
     }
 }

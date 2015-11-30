@@ -17,6 +17,7 @@ using Nutritia.UI.Views;
 using System.Globalization;
 using System.Threading;
 using System.Diagnostics;
+using Infralution.Localization.Wpf;
 
 namespace Nutritia
 {
@@ -29,7 +30,7 @@ namespace Nutritia
 
         public MainWindow()
         {
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.Langue);
+            CultureManager.UICulture = new CultureInfo(Properties.Settings.Default.Langue);
             InitializeComponent();
             ConfigurerTaille();
             Configurer();

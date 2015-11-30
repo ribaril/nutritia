@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Nutritia.UI.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="475" d:DesignWidth="650">
+             d:DesignHeight="475" d:DesignWidth="650"
+             ResxExtension.DefaultResxName="Nutritia.UI.Ressources.Localisation.FenetreBannissement" Language="{UICulture}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"></RowDefinition>
@@ -17,43 +18,43 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Label Content="Gestion de banissement" Style="{StaticResource fontTitre}" VerticalAlignment="Center" Grid.ColumnSpan="2"></Label>
+        <Label Content="{Resx GestionBanissement}" Style="{StaticResource fontTitre}" VerticalAlignment="Center" Grid.ColumnSpan="2"></Label>
         <Rectangle Grid.Row="1" Grid.ColumnSpan="2" Stroke="DarkGreen" Width="625"/>
 
-        <GroupBox x:Name="groupBox_Copy" Header="Membres bannis" Grid.Row="1" HorizontalAlignment="Center" Width="285" Margin="0,0,0,10" >
+        <GroupBox x:Name="groupBox_Copy" Header="{Resx MembresBannis}" Grid.Row="1" HorizontalAlignment="Center" Width="285" Margin="0,0,0,10" >
             <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" Name="dgBanni" >
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="Banni">
+                    <DataGridTemplateColumn Header="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreBannissement, Key=Banni}">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <CheckBox VerticalAlignment="Center" IsChecked="{Binding Path=EstBanni, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn FontSize="10"  Binding="{Binding NomUtilisateur}" Header="Nom Utilisateur"/>
-                    <DataGridTextColumn FontSize="10" Binding="{Binding Prenom}" Header="Prénom"/>
-                    <DataGridTextColumn FontSize="10" Binding="{Binding Nom}" Header="Nom"  />
+                    <DataGridTextColumn FontSize="10"  Binding="{Binding NomUtilisateur}" Header="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreBannissement, Key=NomCompte}"/>
+                    <DataGridTextColumn FontSize="10" Binding="{Binding Prenom}" Header="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreBannissement, Key=Prenom}"/>
+                    <DataGridTextColumn FontSize="10" Binding="{Binding Nom}" Header="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreBannissement, Key=Nom}"  />
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
-        <GroupBox Grid.Row="1" Grid.Column="1" Header="Membre" HorizontalAlignment="Center" Width="285" Margin="0,0,0,10">
-            <local:SearchBox x:Name="dgRecherche" Margin="0,0,-2,-12" WatermarkContent="Nom de compte" FilterMode="StartWith" SelectionMode="Single">
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="{Resx Membres}" HorizontalAlignment="Center" Width="285" Margin="0,0,0,10">
+            <local:SearchBox x:Name="dgRecherche" Margin="0,0,-2,-12" WatermarkContent="{Resx NomCompte}" FilterMode="StartWith" SelectionMode="Single">
                 <local:SearchBox.Columns>
-                    <DataGridTemplateColumn Header="Banni" IsReadOnly="True" Width="50">
+                    <DataGridTemplateColumn Header="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreBannissement, Key=Banni}" IsReadOnly="True" Width="50">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <CheckBox HorizontalAlignment="Center" IsChecked="{Binding Path=EstBanni, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn IsReadOnly="True" Header="Utilisateur" Binding="{Binding NomUtilisateur}"/>
-                    <DataGridTextColumn IsReadOnly="True" Header="Prénom" Binding="{Binding Prenom}"/>
-                    <DataGridTextColumn IsReadOnly="True" Header="Nom" Binding="{Binding Nom}"/>
+                    <DataGridTextColumn IsReadOnly="True" Header="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreBannissement, Key=Utilisateur}" Binding="{Binding NomUtilisateur}"/>
+                    <DataGridTextColumn IsReadOnly="True" Header="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreBannissement, Key=Prenom}" Binding="{Binding Prenom}"/>
+                    <DataGridTextColumn IsReadOnly="True" Header="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreBannissement, Key=Nom}" Binding="{Binding Nom}"/>
                     
 
                 </local:SearchBox.Columns>
             </local:SearchBox>
         </GroupBox>
-        <Button Name="btnAppliquer" Style="{StaticResource nonTransparent}" Grid.Row="3" Grid.ColumnSpan="2" Width="200" Height="25" Click="btnAppliquer_Click">Appliquer</Button>
+        <Button Name="btnAppliquer" Style="{StaticResource nonTransparent}" Grid.Row="3" Grid.ColumnSpan="2" Width="200" Height="25" Click="btnAppliquer_Click" Content="{Resx Appliquer}" />
     </Grid>
 </UserControl>

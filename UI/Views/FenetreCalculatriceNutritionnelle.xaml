@@ -6,7 +6,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Nutritia.UI.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="550" d:DesignWidth="650">
+             d:DesignHeight="550" d:DesignWidth="650"
+             ResxExtension.DefaultResxName="Nutritia.UI.Ressources.Localisation.FenetreCalculatriceNutritionnelle" Language="{UICulture}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="55"></RowDefinition>
@@ -18,7 +19,7 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Label Content="Calculatrice nutritionnelle" Style="{StaticResource fontNutritia}" FontSize="50"  HorizontalAlignment="Center" Grid.ColumnSpan="2"></Label>
+        <Label Content="{Resx CalculatriceNutritionnelle}" Style="{StaticResource fontNutritia}" FontSize="50"  HorizontalAlignment="Center" Grid.ColumnSpan="2"></Label>
         <!--<local:SearchBox x:Name="dgRecherche" Grid.Row="1" Grid.Column="1" WatermarkContent="Aliment à rechercher" FilterMode="Contains"  SelectionMode="Single" Margin="33,24,34,24">
             <local:SearchBox.Columns>
                 <DataGridTemplateColumn Header="Rajouter" IsReadOnly="False" Width="60">
@@ -42,10 +43,10 @@
         <GroupBox x:Name="gbPlateau" Header="Plateau" HorizontalAlignment="Center"  Grid.Row="2" VerticalAlignment="Center" Height="170" Width="300">
             <ContentPresenter Name="presenteurContenu2" />
         </GroupBox>
-        <GroupBox x:Name="gbValeurNutri" Header="Valeurs nutritionelles du plateau" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Height="170" Width="290" Grid.Column="1">
+        <GroupBox x:Name="gbValeurNutri" Header="{Resx ValeurPlateau}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Height="170" Width="290" Grid.Column="1">
             <ContentPresenter Name="presenteurContenu3" VerticalAlignment="Top"/>
         </GroupBox>
-        <GroupBox x:Name="gbBoiteRecherche" Header="Barre de recherche" HorizontalAlignment="Center"  Grid.Row="1" Grid.Column="1" Height="200" Width="300" VerticalAlignment="Center" >
+        <GroupBox x:Name="gbBoiteRecherche" Header="{Resx BarreRecherche}" HorizontalAlignment="Center"  Grid.Row="1" Grid.Column="1" Height="200" Width="300" VerticalAlignment="Center" >
             <StackPanel Background="White">
                 <TextBox Name="txtRecherche" PreviewKeyUp="txtRecherche_KeyDown" ></TextBox>
                 <ContentPresenter Name="presenteurContenu4" Height="160" Width="290"/>
