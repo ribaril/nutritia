@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Nutritia.UI.Ressources.Localisation;
+using Infralution.Localization.Wpf;
 
 namespace Nutritia.UI.Views
 {
@@ -42,11 +44,13 @@ namespace Nutritia.UI.Views
 
         public FenetreCalculatriceNutritionelle(Plat platEnvoye)
         {
+            CultureManager.UICultureChanged += CultureManager_UICultureChanged;
+
             InitializeComponent();
 
             if (platEnvoye == null)
                 // Header de la fenetre
-                App.Current.MainWindow.Title = "Nutritia - Calculatrice nutritionnelle";
+                App.Current.MainWindow.Title = FenetreCalculatriceNutritionnelle.Titre;
 
             Plateau = new SousEcran();
             presenteurContenu2.Content = Plateau;
@@ -98,35 +102,35 @@ namespace Nutritia.UI.Views
 
             // --------- Entrée -------------
             AccordionItem itemEntree = new AccordionItem();
-            itemEntree.Header = "Entrée";
+            itemEntree.Header = FenetreCalculatriceNutritionnelle.Entree;
             StackPanel stackEntree = new StackPanel();
             stackEntree.Background = Brushes.White;
             stackEntree.Width = 284;
 
             // --------- Breuvage -------------
             AccordionItem itemBreuvage = new AccordionItem();
-            itemBreuvage.Header = "Breuvage";
+            itemBreuvage.Header = FenetreCalculatriceNutritionnelle.Breuvage;
             StackPanel stackBreuvage = new StackPanel();
             stackBreuvage.Background = Brushes.White;
             stackBreuvage.Width = 284;
 
             // --------- Plat principal -------------
             AccordionItem itemPlatPrincipal = new AccordionItem();
-            itemPlatPrincipal.Header = "Plat principaux";
+            itemPlatPrincipal.Header = FenetreCalculatriceNutritionnelle.PlatPrincipaux;
             StackPanel stackPlatPrincipal = new StackPanel();
             stackPlatPrincipal.Background = Brushes.White;
             stackPlatPrincipal.Width = 284;
 
             // --------- Déssert -------------
             AccordionItem itemDessert = new AccordionItem();
-            itemDessert.Header = "Déssert";
+            itemDessert.Header = FenetreCalculatriceNutritionnelle.Dessert;
             StackPanel stackDessert = new StackPanel();
             stackDessert.Background = Brushes.White;
             stackDessert.Width = 284;
 
             // --------- Déjeuner -------------
             AccordionItem itemDejeuner = new AccordionItem();
-            itemDejeuner.Header = "Déjeuner";
+            itemDejeuner.Header = FenetreCalculatriceNutritionnelle.Dejeuner;
             StackPanel stackDejeuner = new StackPanel();
             stackDejeuner.Background = Brushes.White;
             stackDejeuner.Width = 284;
@@ -484,7 +488,7 @@ namespace Nutritia.UI.Views
             StackPanel spValeurNut = new StackPanel();
 
             Label lblEntete = new Label();
-            lblEntete.Content = "Valeurs nutritive";
+            lblEntete.Content = FenetreCalculatriceNutritionnelle.ValeurNutritive;
             spValeurNut.Children.Add(lblEntete);
 
             ValeurNutritive = new Dictionary<string, double>();
@@ -503,14 +507,14 @@ namespace Nutritia.UI.Views
 			
 
             StringBuilder sbValeurNut = new StringBuilder();
-            sbValeurNut.Append("1 ").Append(EstPlat ? plat.Nom : plat.ListeIngredients[0].Nom).AppendLine(" de " + poidPlat + " g").AppendLine(); // Affichage du nom du plat ou de l'aliment
-            sbValeurNut.Append("Énergie : ").Append(ValeurNutritive["Calorie"].ToString("N")).AppendLine(" cal");
-            sbValeurNut.Append("Glucides : ").Append(ValeurNutritive["Glucides"].ToString("N")).AppendLine(" g");
-            sbValeurNut.Append("Fibres : ").Append(ValeurNutritive["Fibres"].ToString("N")).AppendLine(" g");
-            sbValeurNut.Append("Protéines : ").Append(ValeurNutritive["Proteines"].ToString("N")).AppendLine(" g");
-            sbValeurNut.Append("Lipides : ").Append(ValeurNutritive["Lipides"].ToString("N")).AppendLine(" g");
-            sbValeurNut.Append("Cholestérol : ").Append(ValeurNutritive["Cholesterol"].ToString("N")).AppendLine(" mg");
-            sbValeurNut.Append("Sodium : ").Append(ValeurNutritive["Sodium"].ToString("N")).Append(" mg");
+            sbValeurNut.Append("1 ").Append(EstPlat ? plat.Nom : plat.ListeIngredients[0].Nom).AppendLine(" " + FenetreCalculatriceNutritionnelle.De + " " + poidPlat + " g").AppendLine(); // Affichage du nom du plat ou de l'aliment
+            sbValeurNut.Append(ValeurNutritionnelle.Energie + " : ").Append(ValeurNutritive["Calorie"].ToString("N")).AppendLine(" cal");
+            sbValeurNut.Append(ValeurNutritionnelle.Glucides + " : ").Append(ValeurNutritive["Glucides"].ToString("N")).AppendLine(" g");
+            sbValeurNut.Append(ValeurNutritionnelle.Fibres + " : ").Append(ValeurNutritive["Fibres"].ToString("N")).AppendLine(" g");
+            sbValeurNut.Append(ValeurNutritionnelle.Proteines + " : ").Append(ValeurNutritive["Proteines"].ToString("N")).AppendLine(" g");
+            sbValeurNut.Append(ValeurNutritionnelle.Lipides + " : ").Append(ValeurNutritive["Lipides"].ToString("N")).AppendLine(" g");
+            sbValeurNut.Append(ValeurNutritionnelle.Cholesterol + " : ").Append(ValeurNutritive["Cholesterol"].ToString("N")).AppendLine(" mg");
+            sbValeurNut.Append(ValeurNutritionnelle.Sodium + " : ").Append(ValeurNutritive["Sodium"].ToString("N")).Append(" mg");
             Label lblValeurNut = new Label();
             lblValeurNut.Content = sbValeurNut.ToString();
 
@@ -624,10 +628,13 @@ namespace Nutritia.UI.Views
             DessinerBoiteResultat();
         }
 
+        private void CultureManager_UICultureChanged(object sender, EventArgs e)
+        {
+            App.Current.MainWindow.Title = FenetreCalculatriceNutritionnelle.Titre;
+        }
 
 
 
-        
     }
 
 
