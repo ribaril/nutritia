@@ -97,17 +97,27 @@ namespace Nutritia
                     // Checker si l'utilisateur est rendu banni
                     if (membreAJour.EstBanni != App.MembreCourant.EstBanni)
                     {
-                        // Si oui, on applique le changement
-                        App.MembreCourant = membreAJour.Cloner();
-                        Dispatcher.Invoke(AppliquerNouveauChangementStatut);
+                        if (membreAJour.NomUtilisateur == App.MembreCourant.NomUtilisateur)
+                        {
+                            App.MembreCourant = membreAJour.Cloner();
+                            // Si oui, on applique le changement
+                            Dispatcher.Invoke(AppliquerNouveauChangementStatut);
+                            // Et on met à jour le membre courrant
+                        }
+
                     }
 
                     // Checker si un utilisateur est devenu admin ou ne l'est plus
                     if (membreAJour.EstAdministrateur != App.MembreCourant.EstAdministrateur)
                     {
-                        // Si oui, on applique le changement
-                        App.MembreCourant = membreAJour.Cloner();
-                        Dispatcher.Invoke(AppliquerNouveauChangementStatut);
+                        if (membreAJour.NomUtilisateur == App.MembreCourant.NomUtilisateur)
+                        {
+                            App.MembreCourant = membreAJour.Cloner();
+                            // Si oui, on applique le changement
+                            Dispatcher.Invoke(AppliquerNouveauChangementStatut);
+                            // Et on met à jour le membre courrant
+                        }
+
                     }
 
                     // Check si de nouveaux plats sont diponible pour un utilisateur (qui n'a pas encore vu la notif)

@@ -14,25 +14,26 @@ namespace Nutritia
     /// </summary>
     public class MySqlMembreService : IMembreService
     {
-        private readonly MySqlConnexion connexion;
+        private readonly string stringConnexion;
         private readonly IRestrictionAlimentaireService restrictionAlimentaireService;
         private readonly IObjectifService objectifService;
         private readonly IPreferenceService preferenceService;
         private readonly IMenuService menuService;
 
+        private MySqlConnexion connexion;
+
         /// <summary>
         /// Constructeur par défaut de la classe.
         /// </summary>
         public MySqlMembreService()
-            : this(new MySqlConnexion())
+            : this(String.Empty)
         {
 
         }
 
-        public MySqlMembreService(MySqlConnexion mysqlConnexion)
+        public MySqlMembreService(String connexion)
         {
-            connexion = mysqlConnexion;
-
+            stringConnexion = connexion;
             restrictionAlimentaireService = ServiceFactory.Instance.GetService<IRestrictionAlimentaireService>();
             objectifService = ServiceFactory.Instance.GetService<IObjectifService>();
             preferenceService = ServiceFactory.Instance.GetService<IPreferenceService>();
@@ -50,6 +51,7 @@ namespace Nutritia
 
             try
             {
+                connexion = new MySqlConnexion();
                 string requete = "SELECT * FROM Membres";
 
                 DataSet dataSetMembres = connexion.Query(requete);
@@ -120,6 +122,7 @@ namespace Nutritia
 
             try
             {
+                connexion = new MySqlConnexion();
                 string requete = string.Format("SELECT * FROM Membres WHERE idMembre = {0}", args.IdMembre);
 
                 if (args.NomUtilisateur != null && args.NomUtilisateur != string.Empty)
@@ -188,7 +191,8 @@ namespace Nutritia
         {
             try
             {
-                string requete = string.Format("INSERT INTO Membres (nom ,prenom, taille, masse, dateNaissance, nomUtilisateur, motPasse, estAdmin, estBanni, derniereMaj) VALUES ('{0}', '{1}', {2}, {3}, '{4}', '{5}', '{6}', {7}, {8}, '{9}')", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance.ToString("yyyy-MM-dd"), membre.NomUtilisateur, membre.MotPasse, membre.EstAdministrateur, membre.EstBanni, membre.DerniereMaj.ToString("yyyy-MM-dd HH:mm:ss"));
+                connexion = new MySqlConnexion();
+                string requete = string.Format("INSERT INTO Membres (nom ,prenom, taille, masse, dateNaissance, nomUtilisateur, motPasse, derniereMaj) VALUES ('{0}', '{1}', {2}, {3}, '{4}', '{5}', '{6}', '{7}')", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance.ToString("yyyy-MM-dd"), membre.NomUtilisateur, membre.MotPasse, membre.DerniereMaj.ToString("yyyy-MM-dd HH:mm:ss"));
                 connexion.Query(requete);
 
                 int idMembre = (int)Retrieve(new RetrieveMembreArgs { NomUtilisateur = membre.NomUtilisateur }).IdMembre;
@@ -229,6 +233,7 @@ namespace Nutritia
         {
             try
             {
+                connexion = new MySqlConnexion();
                 string requete = string.Format("UPDATE Membres SET nom = '{0}' ,prenom = '{1}', taille = {2}, masse = {3}, dateNaissance = '{4}', nomUtilisateur = '{5}', motPasse = '{6}', estAdmin = {7}, estBanni = {8}, derniereMaj = '{9}' WHERE idMembre = {10}", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance.ToString("yyyy-MM-dd"), membre.NomUtilisateur, membre.MotPasse, membre.EstAdministrateur, membre.EstBanni, membre.DerniereMaj.ToString("yyyy-MM-dd HH:mm:ss"), membre.IdMembre);
 
                 connexion.Query(requete);
@@ -275,24 +280,25 @@ namespace Nutritia
         /// <returns>Un objet Membre.</returns>
         private Membre ConstruireMembre(DataRow membre)
         {
-			return new Membre()
-			{
-				IdMembre = (int)membre["idMembre"],
-				Nom = (string)membre["nom"],
-				Prenom = (string)membre["prenom"],
-				Taille = (double)membre["taille"],
-				Masse = (double)membre["masse"],
-				DateNaissance = (DateTime)membre["dateNaissance"],
-				NomUtilisateur = (string)membre["nomUtilisateur"],
-				MotPasse = (string)membre["motPasse"],
-				ListeRestrictions = new List<RestrictionAlimentaire>(),
-				ListeObjectifs = new List<Objectif>(),
-				ListePreferences = new List<Preference>(),
-				ListeMenus = new List<Menu>(),
-				EstAdministrateur = (bool)membre["estAdmin"],
-				EstBanni = (bool)membre["estBanni"],
+            return new Membre()
+            {
+                IdMembre = (int)membre["idMembre"],
+                Nom = (string)membre["nom"],
+                Prenom = (string)membre["prenom"],
+                Taille = (double)membre["taille"],
+                Masse = (double)membre["masse"],
+                DateNaissance = (DateTime)membre["dateNaissance"],
+                NomUtilisateur = (string)membre["nomUtilisateur"],
+                MotPasse = (string)membre["motPasse"],
+                ListeRestrictions = new List<RestrictionAlimentaire>(),
+                ListeObjectifs = new List<Objectif>(),
+                ListePreferences = new List<Preference>(),
+                ListeMenus = new List<Menu>(),
+                EstAdministrateur = (bool)membre["estAdmin"],
+                EstBanni = (bool)membre["estBanni"],
                 DerniereMaj = (DateTime)membre["derniereMaj"]
 		    };
+
         }
 
         public IList<Membre> RetrieveAdmins()
@@ -301,6 +307,7 @@ namespace Nutritia
 
             try
             {
+                connexion = new MySqlConnexion();
                 string requete = "SELECT * FROM Membres WHERE estAdmin = True";
 
                 DataSet dataSetMembres = connexion.Query(requete);

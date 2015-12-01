@@ -38,6 +38,8 @@ namespace Nutritia.UI.Views
             }
             else
             {
+                btnGestAdmin.Visibility = Visibility.Hidden;
+                lbl_nom_membre.Visibility = Visibility.Visible;
                 lbl_nom_membre.Content = Nutritia.UI.Ressources.Localisation.FenetreMenuPrincipalConnecte.Bienvenue + " " + App.MembreCourant.NomUtilisateur;
             }
         }
