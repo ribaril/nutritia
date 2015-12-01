@@ -10,11 +10,11 @@ namespace Nutritia.Logic.Model.Entities
     public class Transaction
     {
 
-        private uint noTransaction;
+        private Guid noTransaction;
 
         public static uint ProchainNoTransaction { get; private set; }
 
-        public uint NoTransaction { get { return noTransaction; } }
+        public Guid NoTransaction { get { return noTransaction; } }
 
         public DateTime DateHeureTransaction { get; private set; }
         public string NomAuteur { get; private set; }
@@ -23,7 +23,7 @@ namespace Nutritia.Logic.Model.Entities
 
         public Transaction()
         {
-            noTransaction = ++ProchainNoTransaction;
+            noTransaction = Guid.NewGuid();
             DateHeureTransaction = DateTime.Now;
         }
 

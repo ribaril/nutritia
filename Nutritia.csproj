@@ -100,6 +100,7 @@
     <Compile Include="Logic\Model\Entities\UniteMesure.cs" />
     <Compile Include="Logic\Model\Entities\VersionLogiciel.cs" />
     <Compile Include="Logic\Services\Definitions\IAlimentService.cs" />
+    <Compile Include="Logic\Services\Definitions\IDonService.cs" />
     <Compile Include="Logic\Services\Definitions\IMembreService.cs" />
     <Compile Include="Logic\Services\Definitions\IMenuService.cs" />
     <Compile Include="Logic\Services\Definitions\IObjectifService.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="Logic\Services\Definitions\IVersionLogicielService.cs" />
     <Compile Include="Logic\Services\Helpers\MySqlConnexion.cs" />
     <Compile Include="Logic\Services\MySql\MySqlAlimentService.cs" />
+    <Compile Include="Logic\Services\MySql\MySqlDonService.cs" />
     <Compile Include="Logic\Services\MySql\MySqlMembreService.cs" />
     <Compile Include="Logic\Services\MySql\MySqlMenuService.cs" />
     <Compile Include="Logic\Services\MySql\MySqlObjectifService.cs" />
@@ -184,6 +186,16 @@
     </Compile>
     <Compile Include="UI\Ressources\Localisation\FenetreConnexion.en.Designer.cs">
       <DependentUpon>FenetreConnexion.en.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="UI\Ressources\Localisation\FenetreDons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FenetreDons.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Ressources\Localisation\FenetreDons.en.Designer.cs">
+      <DependentUpon>FenetreDons.en.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
@@ -451,6 +463,9 @@
     <Compile Include="UI\Views\FenetreConnexion.xaml.cs">
       <DependentUpon>FenetreConnexion.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Views\FenetreDons.xaml.cs">
+      <DependentUpon>FenetreDons.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\FenetreInfoMembre.xaml.cs">
       <DependentUpon>FenetreInfoMembre.xaml</DependentUpon>
     </Compile>
@@ -574,6 +589,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Views\FenetreConnexion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\FenetreDons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -710,6 +729,15 @@
     <EmbeddedResource Include="UI\Ressources\Localisation\FenetreConnexion.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FenetreConnexion.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\FenetreDons.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FenetreDons.en.Designer.cs</LastGenOutput>
+      <DependentUpon>FenetreDons.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\FenetreDons.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FenetreDons.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Ressources\Localisation\FenetreGenerateurMenus.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -1016,7 +1044,8 @@
     <Resource Include="UI\Images\nonDisponible.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\Ressources\FichierAide.txt" />
+    <Resource Include="UI\Images\moneyBag.png" />
+	<Resource Include="UI\Ressources\FichierAide.txt" />
     <Resource Include="LogoIcon.ico" />
     <Content Include="Toolkit\Infralution\Infralution.Localization.Wpf.dll" />
     <Content Include="Toolkit\Infralution\Infralution.Localization.Wpf.pdb" />

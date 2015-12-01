@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="Nutritia.UI.Views.FenetreDons"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             ResxExtension.DefaultResxName="Nutritia.UI.Ressources.Localisation.FenetreDons" Language="{UICulture}">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center">
+            <Label Content="{Resx Dons}" HorizontalAlignment="Center"/>
+            <DataGrid Name="dgDons" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="2*" Header="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreDons, Key=Date}" Binding="{Binding DateHeureTransaction}"/>
+                    <DataGridTextColumn Width="3*" Header="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreDons, Key=Nom}" Binding="{Binding NomAuteur}"/>
+                    <DataGridTextColumn Width="*" Header="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreDons, Key=ModePaiement}" Binding="{Binding ModePaiementTransaction}"/>
+                    <DataGridTextColumn Width="*" Header="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreDons, Key=Montant}" Binding="{Binding Montant}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</UserControl>
