@@ -60,6 +60,7 @@ namespace Nutritia
             ServiceFactory.Instance.Register<IMembreService, MySqlMembreService>(new MySqlMembreService());
             ServiceFactory.Instance.Register<IVersionLogicielService, MySqlVersionLogicielService>(new MySqlVersionLogicielService());
             ServiceFactory.Instance.Register<IApplicationService, MainWindow>(this);
+            ServiceFactory.Instance.Register<IDonService, MySqlDonService>(new MySqlDonService());
         }
 
         public void ChangerVue<T>(T vue)
