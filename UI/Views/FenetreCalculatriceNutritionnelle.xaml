@@ -29,7 +29,7 @@
                 <layoutToolkit:Accordion Name="accPlat" Width="290" />
             </ScrollViewer>
         </GroupBox>
-        <GroupBox x:Name="gbBoiteRecherche" Header="Barre de recherche" HorizontalAlignment="Center"  Grid.Row="1" Grid.Column="1" Height="205" Width="305" VerticalAlignment="Center" >
+        <GroupBox x:Name="gbBoiteRecherche" Header="{Resx BarreRecherche}" HorizontalAlignment="Center"  Grid.Row="1" Grid.Column="1" Height="205" Width="305" VerticalAlignment="Center" >
             <StackPanel Background="White">
                 <TextBox Name="txtRecherche" PreviewKeyUp="txtRecherche_PreviewKeyUp">
                     <TextBox.Resources>

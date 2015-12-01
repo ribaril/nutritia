@@ -46,13 +46,15 @@ namespace Nutritia.UI.Views
 			Initialiser();
 			
 			// Header de la fenetre
-			App.Current.MainWindow.Title = "Nutritia - Calculatrice nutritionnelle";
-
+            App.Current.MainWindow.Title = FenetreCalculatriceNutritionnelle.Titre;
+            CultureManager.UICultureChanged += CultureManager_UICultureChanged;
 			ConfigurerCalculatrice();
 		}
 
 		public FenetreCalculatriceNutritionelle(Plat platEnvoye)
 		{
+            App.Current.MainWindow.Title = FenetreCalculatriceNutritionnelle.Titre;
+
             CultureManager.UICultureChanged += CultureManager_UICultureChanged;
 			InitializeComponent();
 			Initialiser();
@@ -65,6 +67,8 @@ namespace Nutritia.UI.Views
 
 		public FenetreCalculatriceNutritionelle(List<Plat> lstPlatEnvoye)
 		{
+            App.Current.MainWindow.Title = FenetreCalculatriceNutritionnelle.Titre;
+            CultureManager.UICultureChanged += CultureManager_UICultureChanged;
 			InitializeComponent();
 			Initialiser();
 

@@ -45,7 +45,7 @@ namespace Nutritia
 		public MainWindow()
 		{
 			CultureManager.UICulture = new CultureInfo(Properties.Settings.Default.Langue);
-			Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.Langue);
+
 			InitializeComponent();
 			ConfigurerTaille();
 			Configurer();
