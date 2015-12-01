@@ -63,7 +63,7 @@ namespace Nutritia.UI.Views
         {
             if(dgPlatsNonAdmissibles.SelectedItem != null)
             {
-                ListePlatsNonAdmissibles.Find(plat => plat.IdPlat == ((Plat)dgPlatsNonAdmissibles.SelectedItem).IdPlat).EstTricherie = true;
+                ListePlatsNonAdmissibles.Find(plat => plat.Nom == ((Plat)dgPlatsNonAdmissibles.SelectedItem).Nom).EstTricherie = true;
             }
         }
 
@@ -75,7 +75,7 @@ namespace Nutritia.UI.Views
         /// <param name="e"></param>
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            ListePlatsNonAdmissibles.Find(plat => plat.IdPlat == ((Plat)dgPlatsNonAdmissibles.SelectedItem).IdPlat).EstTricherie = false;
+            ListePlatsNonAdmissibles.Find(plat => plat.Nom == ((Plat)dgPlatsNonAdmissibles.SelectedItem).Nom).EstTricherie = false;
         }
 
         /// <summary>
