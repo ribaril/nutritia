@@ -13,13 +13,23 @@
         <Grid.Background>
             <ImageBrush Opacity="0.3" ImageSource="/Nutritia;component/UI/Images/background.jpg"/>
         </Grid.Background>
-        <TabControl Name="tcAide" TabStripPlacement="Left" Background="Transparent">
+        <TabControl Name="tcAide" TabStripPlacement="Left" Background="Transparent" Style="{StaticResource tabControl}">
+            <TabItem Style="{StaticResource tabItem}" Name="tiNutritia" Header="Nutritia">
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="Nutritia" />
+                        <TextBlock Name="Nutritia" TextWrapping="Wrap">
+
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
             <TabItem Style="{StaticResource tabItem}" Name="tiAjoutPlat" Header="{Resx AjoutPlat}">
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="{Resx AjoutPlat}" />
                         <TextBlock Name="AjoutPlat" TextWrapping="Wrap">
-                            
+
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
@@ -29,7 +39,7 @@
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="{Resx Suspension}" />
                         <TextBlock Name="InfoSuspenssion" TextWrapping="Wrap">
-                            
+
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
@@ -37,9 +47,9 @@
             <TabItem Style="{StaticResource tabItem}" Name="tiCalculatrice" Header="{Resx Calculatrice}">
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
-                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx CalculatriceNutritionnelle}" />
+                        <Label Style="{StaticResource fontSousTitre}" Content="Calculatrice nutritionnelle" />
                         <TextBlock Name="CalculatriceNutrionnelle" TextWrapping="Wrap">
-                            
+
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
@@ -50,7 +60,7 @@
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="{Resx SeConnecter}" />
                         <TextBlock Name="SeConnecter" TextWrapping="Wrap">
-                            
+
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
@@ -70,7 +80,7 @@
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="{Resx GenerationMenu}" />
                         <TextBlock Name="GenerationMenu" TextWrapping="Wrap">
-                            
+
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
@@ -80,7 +90,7 @@
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="{Resx VotreListeEpicerie}" />
                         <TextBlock Name="ListeEpicerie" TextWrapping="Wrap">
-                            
+
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
@@ -90,7 +100,7 @@
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="{Resx MenuConnecte}" />
                         <TextBlock Name="MenuConnecte" TextWrapping="Wrap">
-                            
+
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
@@ -100,7 +110,7 @@
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="{Resx MenuPrincipal}" />
                         <TextBlock Name="MenuPrincipal" TextWrapping="Wrap">
-                            
+
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
@@ -110,7 +120,7 @@
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="{Resx VosParametres}" />
                         <TextBlock Name="VosParametres" TextWrapping="Wrap">
-                            
+
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
@@ -120,7 +130,7 @@
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="{Resx MonProfil}" />
                         <TextBlock Name="MonProfil" TextWrapping="Wrap">
-                            
+
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
@@ -130,7 +140,7 @@
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="Langage" />
                         <TextBlock Name="Langage" TextWrapping="Wrap">
-                            
+
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
