@@ -291,7 +291,7 @@ namespace Nutritia
 				ListeMenus = new List<Menu>(),
 				EstAdministrateur = (bool)membre["estAdmin"],
 				EstBanni = (bool)membre["estBanni"],
-                DerniereMaj = DateTime.Parse(membre["derniereMaj"].ToString())
+                DerniereMaj = (DateTime)membre["derniereMaj"]
 		};
         }
 
