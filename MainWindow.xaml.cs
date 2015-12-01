@@ -91,7 +91,6 @@ namespace Nutritia
                                 Dispatcher.Invoke(AppliquerNouveauChangementStatut);
                                 LstPlat = platAsync.RetrieveAll().ToList();
                             }
-
                         }
                     }
 
@@ -99,18 +98,16 @@ namespace Nutritia
                     if (membreAJour.EstBanni != App.MembreCourant.EstBanni)
                     {
                         // Si oui, on applique le changement
-                        Dispatcher.Invoke(AppliquerNouveauChangementStatut);
-                        // Et on met à jour le membre courrant
                         App.MembreCourant = membreAJour.Cloner();
+                        Dispatcher.Invoke(AppliquerNouveauChangementStatut);
                     }
 
                     // Checker si un utilisateur est devenu admin ou ne l'est plus
                     if (membreAJour.EstAdministrateur != App.MembreCourant.EstAdministrateur)
                     {
                         // Si oui, on applique le changement
-                        Dispatcher.Invoke(AppliquerNouveauChangementStatut);
-                        // Et on met à jour le membre courrant
                         App.MembreCourant = membreAJour.Cloner();
+                        Dispatcher.Invoke(AppliquerNouveauChangementStatut);
                     }
 
                     // Check si de nouveaux plats sont diponible pour un utilisateur (qui n'a pas encore vu la notif)
@@ -124,7 +121,6 @@ namespace Nutritia
                         NvPlatAffichable = new List<Plat>(NouveauxPlats);
                         NouveauxPlats.Clear();
                         Dispatcher.Invoke(DessinerNotificationNvPlat);
-
                     }
 
                 }
