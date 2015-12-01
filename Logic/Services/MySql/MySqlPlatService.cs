@@ -73,14 +73,14 @@ namespace Nutritia
 
                 string requete = "SELECT * FROM Plats p INNER JOIN TypesPlats tp ON tp.idTypePlat = p.idTypePlat INNER JOIN Membres m ON m.idMembre = p.idMembre";
 
-                if(args.Categorie != null && args.Categorie != string.Empty)
+                if (args.Categorie != null && args.Categorie != string.Empty)
                 {
                     requete += string.Format(" WHERE typePlat = '{0}'", args.Categorie);
                 }
 
-                if(args.NbResultats != null)
+                if (args.NbResultats != null)
                 {
-                    if(args.PlusPopulaires == true)
+                    if (args.PlusPopulaires == true)
                     {
                         requete += " ORDER BY note DESC ";
                     }
@@ -88,7 +88,7 @@ namespace Nutritia
                     {
                         requete += " ORDER BY note ASC ";
                     }
-                    else if(args.PlusPopulaires == null)
+                    else if (args.PlusPopulaires == null)
                     {
                         if (args.Depart != null && args.Depart != string.Empty)
                         {
@@ -115,8 +115,8 @@ namespace Nutritia
                 foreach (DataRow rowPlat in tablePlats.Rows)
                 {
                     Plat plat = ConstruirePlat(rowPlat);
-                    
-                    plat.ListeIngredients = RetrieveAlimentsPlat(new RetrievePlatArgs{IdPlat = plat.IdPlat});
+
+                    plat.ListeIngredients = RetrieveAlimentsPlat(new RetrievePlatArgs { IdPlat = plat.IdPlat });
 
                     resultat.Add(plat);
                 }
@@ -145,7 +145,7 @@ namespace Nutritia
 
                 DataSet dataSetPlats = connexion.Query(requete);
                 DataTable tablePlats = dataSetPlats.Tables[0];
-                
+
                 plat = ConstruirePlat(tablePlats.Rows[0]);
 
                 plat.ListeIngredients = RetrieveAlimentsPlat(new RetrievePlatArgs { IdPlat = plat.IdPlat });
@@ -184,37 +184,48 @@ namespace Nutritia
         }
 
         /// <summary>
-        /// Méthode permettant de mettre à jour un plat dans la base de données.
+        /// Méthode de mise à jour d'un plat dans la base de données.
         /// </summary>
-        /// <param name="plat">Le plat à mettre à jour.</param>
-        public void Update(Plat plat)
+        /// <param name="unAliment"></param>
+        public void Update(Plat unPlat)
         {
             try
             {
                 connexion = new MySqlConnexion();
 
-                // Obtenir le idTypePlat.
-                string requete = string.Format("SELECT idTypePlat FROM TypesPlats WHERE typePlat = '{0}'", plat.TypePlat);
+                string requeteTypePlat = string.Format("SELECT * FROM TypesPlats WHERE typePlat = '{0}'", unPlat.TypePlat);
 
-                DataSet dataSetType = connexion.Query(requete);
-                DataTable tableType = dataSetType.Tables[0];
-                int idTypePlat = (int)(tableType.Rows[0]["idTypePlat"]);
+                DataSet dataSetTypes = connexion.Query(requeteTypePlat);
+                DataTable tableTypes = dataSetTypes.Tables[0];
 
-                string note = plat.Note.ToString();
-                
-                if(note.Contains(","))
+                int idType = 0;
+
+                foreach (DataRow rowType in tableTypes.Rows)
+                {
+                    idType = (int)rowType["idTypePlat"];
+                }
+
+                string note = unPlat.Note.ToString();
+
+                if (note.Contains(","))
                 {
                     note = note.Replace(",", ".");
                 }
 
-                requete = string.Format("UPDATE Plats SET idTypePlat = {0}, nom = '{1}', imageUrl = '{2}', note = {3}, nbVotes = {4} WHERE idPlat = {5}", idTypePlat, plat.Nom.Replace("'", "''"), plat.ImageUrl, note, plat.NbVotes, plat.IdPlat);
-                connexion.Query(requete);
+                string requeteUpdate = string.Format("UPDATE Plats SET idTypePlat = {0}, nom = '{1}', imageUrl = '{2}', note = '{3}', nbVotes = {4}, description = '{5}' WHERE idPlat = {6}", idType, unPlat.Nom.Replace("'", "''"), unPlat.ImageUrl, note, unPlat.NbVotes, unPlat.Description, unPlat.IdPlat);
+                connexion.Query(requeteUpdate);
 
-                // Mise à jour des aliments du plat.
-                foreach (Aliment aliment in plat.ListeIngredients)
+                int idPlat = (int)unPlat.IdPlat;
+
+                string requeteDelete = string.Format("DELETE FROM PlatsAliments WHERE idPlat = {0}", idPlat);
+                connexion.Query(requeteDelete);
+
+                for (int i = 0; i < unPlat.ListeIngredients.Count; i++)
                 {
-                    
+                    string requeteInsertAlimentPlat = string.Format("INSERT INTO PlatsAliments (idPlat, idAliment, quantite) VALUES ({0}, {1}, {2})", idPlat, unPlat.ListeIngredients[i].IdAliment, unPlat.ListeIngredients[i].Quantite);
+                    connexion.Query(requeteInsertAlimentPlat);
                 }
+
             }
             catch (Exception)
             {
@@ -284,10 +295,10 @@ namespace Nutritia
                     idMembre = (int)rowCreateur["idMembre"];
                 }
 
-                string requeteInsert = string.Format("INSERT INTO Plats (idMembre, idTypePlat, nom, description, imageUrl, dateAjout) VALUES ({0}, {1}, '{2}', '{3}', '{4}', '{5}')", idMembre, idType, unPlat.Nom, unPlat.Description, unPlat.ImageUrl, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                string requeteInsert = string.Format("INSERT INTO Plats (idMembre, idTypePlat, nom, description, imageUrl, dateAjout) VALUES ({0}, {1}, '{2}', '{3}', '{4}', '{5}')", idMembre, idType, unPlat.Nom.Replace("'", "''"), unPlat.Description, unPlat.ImageUrl, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 connexion.Query(requeteInsert);
 
-                string requetePlat = string.Format("SELECT * FROM Plats WHERE nom = '{0}'", unPlat.Nom);
+                string requetePlat = string.Format("SELECT * FROM Plats WHERE nom = '{0}'", unPlat.Nom.Replace("'", "''"));
 
                 DataSet dataSetPlat = connexion.Query(requetePlat);
                 DataTable tablePlat = dataSetPlat.Tables[0];
