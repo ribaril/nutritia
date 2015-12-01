@@ -201,7 +201,7 @@ namespace Nutritia.UI.Pages
         {
             try
             {
-                IMembreService serviceMembre = new MySqlMembreService(new MySqlConnexion(stringConnexion));
+                IMembreService serviceMembre = new MySqlMembreService(stringConnexion);
                 IList<Membre> adminsDansNouvelleSession = serviceMembre.RetrieveAdmins();
                 //Lance une exception si le Where ne retourne rien, l'exception est géré de toute façon.
                 Membre membreCorrespondant = adminsDansNouvelleSession.Where(membre => membre.NomUtilisateur == App.MembreCourant.NomUtilisateur).First();
