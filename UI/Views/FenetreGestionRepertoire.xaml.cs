@@ -1032,7 +1032,7 @@ namespace Nutritia.UI.Views
                         }
                         else
                         {
-                            img_plat_modif.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/nonDisponible.png"));
+                            img_alim_modif.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/nonDisponible.png"));
                         }
                     }
                     else
@@ -2205,7 +2205,7 @@ namespace Nutritia.UI.Views
 
                         if (File.Exists(actuel))
                         {
-                            img_alim_modif.Source = new BitmapImage(new Uri(actuel));
+                            img_plat_modif.Source = new BitmapImage(new Uri(actuel));
                         }
                         else
                         {
