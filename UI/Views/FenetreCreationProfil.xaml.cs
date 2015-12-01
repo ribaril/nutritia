@@ -390,6 +390,7 @@ namespace Nutritia.UI.Views
             App.MembreCourant.MotPasse = Mot_passe.Password;
             App.MembreCourant.DateNaissance = (DateTime)Date_naissance.SelectedDate;
             App.MembreCourant.DerniereMaj = DateTime.Now;
+            App.MembreCourant.EstAdministrateur = false;
 
             /*-----------------------------------Restrictions alimentaires-----------------------------------*/
             
