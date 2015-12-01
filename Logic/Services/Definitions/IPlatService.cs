@@ -13,6 +13,7 @@ namespace Nutritia
         Plat Retrieve(RetrievePlatArgs args);
         IList<Aliment> RetrieveAlimentsPlat(RetrievePlatArgs args);
         void Update(Plat plat);
+        void UpdateVote(Plat plat);
         void Insert(Plat unPlat);
     }
 }

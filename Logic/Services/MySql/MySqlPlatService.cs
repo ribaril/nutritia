@@ -184,6 +184,39 @@ namespace Nutritia
         }
 
         /// <summary>
+        /// Méthode permettant de mettre à jour un plat dans la base de données.
+        /// </summary>
+        /// <param name="plat">Le plat à mettre à jour.</param>
+        public void UpdateVote(Plat plat)
+        {
+            try
+            {
+                connexion = new MySqlConnexion();
+
+                // Obtenir le idTypePlat.
+                string requete = string.Format("SELECT idTypePlat FROM TypesPlats WHERE typePlat = '{0}'", plat.TypePlat);
+
+                DataSet dataSetType = connexion.Query(requete);
+                DataTable tableType = dataSetType.Tables[0];
+                int idTypePlat = (int)(tableType.Rows[0]["idTypePlat"]);
+
+                string note = plat.Note.ToString();
+
+                if (note.Contains(","))
+                {
+                    note = note.Replace(",", ".");
+                }
+
+                requete = string.Format("UPDATE Plats SET idTypePlat = {0}, nom = '{1}', imageUrl = '{2}', note = {3}, nbVotes = {4} WHERE idPlat = {5}", idTypePlat, plat.Nom.Replace("'", "''"), plat.ImageUrl, note, plat.NbVotes, plat.IdPlat);
+                connexion.Query(requete);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Méthode de mise à jour d'un plat dans la base de données.
         /// </summary>
         /// <param name="unAliment"></param>
