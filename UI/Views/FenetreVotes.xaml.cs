@@ -177,5 +177,24 @@ namespace Nutritia.UI.Views
             DeterminerNoteConviviale();
             dgPlats.ItemsSource = ListePlats;
         }
+
+		public void Rafraichir()
+		{
+			ListePlats = new ObservableCollection<Plat>(PlatService.RetrieveAll());
+            DeterminerNoteConviviale();
+
+            switch (gbContenu.Header.ToString())
+            {
+                case "Tous les plats":
+                    btnSelectionComplete_Click(null, null);
+                    break;
+                case "Nouveautés":
+                    btnNouveautes_Click(null, null);
+                    break;
+                case "Les plus populaires":
+                    btnPlusPopulaires_Click(null, null);
+                    break;
+            }
+		}
     }
 }

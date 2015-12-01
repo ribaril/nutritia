@@ -188,7 +188,7 @@ namespace Nutritia
         {
             try
             {
-                string requete = string.Format("INSERT INTO Membres (nom ,prenom, taille, masse, dateNaissance, nomUtilisateur, motPasse, estAdmin, estBanni) VALUES ('{0}', '{1}', {2}, {3}, '{4}', '{5}', '{6}', {7}, {8})", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance.ToString("yyyy-MM-dd"), membre.NomUtilisateur, membre.MotPasse, membre.EstAdministrateur, membre.EstBanni);
+                string requete = string.Format("INSERT INTO Membres (nom ,prenom, taille, masse, dateNaissance, nomUtilisateur, motPasse, estAdmin, estBanni, derniereMaj) VALUES ('{0}', '{1}', {2}, {3}, '{4}', '{5}', '{6}', {7}, {8}, '{9}')", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance.ToString("yyyy-MM-dd"), membre.NomUtilisateur, membre.MotPasse, membre.EstAdministrateur, membre.EstBanni, membre.DerniereMaj.ToString("yyyy-MM-dd HH:mm:ss"));
                 connexion.Query(requete);
 
                 int idMembre = (int)Retrieve(new RetrieveMembreArgs { NomUtilisateur = membre.NomUtilisateur }).IdMembre;
@@ -229,7 +229,7 @@ namespace Nutritia
         {
             try
             {
-                string requete = string.Format("UPDATE Membres SET nom = '{0}' ,prenom = '{1}', taille = {2}, masse = {3}, dateNaissance = '{4}', nomUtilisateur = '{5}', motPasse = '{6}', estAdmin = {7}, estBanni = {8} WHERE idMembre = {9}", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance.ToString("yyyy-MM-dd"), membre.NomUtilisateur, membre.MotPasse, membre.EstAdministrateur, membre.EstBanni, membre.IdMembre);
+                string requete = string.Format("UPDATE Membres SET nom = '{0}' ,prenom = '{1}', taille = {2}, masse = {3}, dateNaissance = '{4}', nomUtilisateur = '{5}', motPasse = '{6}', estAdmin = {7}, estBanni = {8}, derniereMaj = '{9}' WHERE idMembre = {10}", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance.ToString("yyyy-MM-dd"), membre.NomUtilisateur, membre.MotPasse, membre.EstAdministrateur, membre.EstBanni, membre.DerniereMaj.ToString("yyyy-MM-dd HH:mm:ss"), membre.IdMembre);
 
                 connexion.Query(requete);
 
@@ -275,23 +275,24 @@ namespace Nutritia
         /// <returns>Un objet Membre.</returns>
         private Membre ConstruireMembre(DataRow membre)
         {
-            return new Membre()
-            {
-                IdMembre = (int)membre["idMembre"],
-                Nom = (string)membre["nom"],
-                Prenom = (string)membre["prenom"],
-                Taille = (double)membre["taille"],
-                Masse = (double)membre["masse"],
-                DateNaissance = (DateTime)membre["dateNaissance"],
-                NomUtilisateur = (string)membre["nomUtilisateur"],
-                MotPasse = (string)membre["motPasse"],
-                ListeRestrictions = new List<RestrictionAlimentaire>(),
-                ListeObjectifs = new List<Objectif>(),
-                ListePreferences = new List<Preference>(),
-                ListeMenus = new List<Menu>(),
-                EstAdministrateur = (bool)membre["estAdmin"],
-                EstBanni = (bool)membre["estBanni"]
-            };
+			return new Membre()
+			{
+				IdMembre = (int)membre["idMembre"],
+				Nom = (string)membre["nom"],
+				Prenom = (string)membre["prenom"],
+				Taille = (double)membre["taille"],
+				Masse = (double)membre["masse"],
+				DateNaissance = (DateTime)membre["dateNaissance"],
+				NomUtilisateur = (string)membre["nomUtilisateur"],
+				MotPasse = (string)membre["motPasse"],
+				ListeRestrictions = new List<RestrictionAlimentaire>(),
+				ListeObjectifs = new List<Objectif>(),
+				ListePreferences = new List<Preference>(),
+				ListeMenus = new List<Menu>(),
+				EstAdministrateur = (bool)membre["estAdmin"],
+				EstBanni = (bool)membre["estBanni"],
+                DerniereMaj = DateTime.Parse(membre["derniereMaj"].ToString())
+		};
         }
 
         public IList<Membre> RetrieveAdmins()

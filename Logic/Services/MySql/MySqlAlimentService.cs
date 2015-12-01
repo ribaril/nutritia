@@ -31,7 +31,7 @@ namespace Nutritia
                 DataSet dataSetAliments = connexion.Query(requete);
                 DataTable tableAliments = dataSetAliments.Tables[0];
 
-                foreach(DataRow rowAliment in tableAliments.Rows)
+                foreach (DataRow rowAliment in tableAliments.Rows)
                 {
                     requete = string.Format("SELECT quantite, valeurNutritionnelle FROM AlimentsValeursNutritionnelles avn INNER JOIN ValeursNutritionnelles vn ON avn.idValeurNutritionnelle = vn.idValeurNutritionnelle WHERE idAliment = {0}", (int)rowAliment["idAliment"]);
 
@@ -107,7 +107,7 @@ namespace Nutritia
         /// <param name="valeurNut">Un dictionnaire des valeurs nutritionnelles de l'aliment.
         /// (Clé = Nom de la valeur nut. et valeur = Quantité de celle-ci).</param>
         /// <returns>Un objet Aliment.</returns>
-        private Aliment ConstruireAliment(DataRow aliment, Dictionary<string,double> valeurNut)
+        private Aliment ConstruireAliment(DataRow aliment, Dictionary<string, double> valeurNut)
         {
             return new Aliment()
             {
@@ -183,7 +183,7 @@ namespace Nutritia
                 int idLipide = Associer_Valeur_Nutritionnelle("Lipides");
                 int idSodium = Associer_Valeur_Nutritionnelle("Sodium");
                 int idCholesterol = Associer_Valeur_Nutritionnelle("Cholestérol");
-                
+
                 Inserer_Valeur_Nutritionnelle(idEnergie, idAliment, unAliment.Energie);
                 Inserer_Valeur_Nutritionnelle(idProteine, idAliment, unAliment.Proteine);
                 Inserer_Valeur_Nutritionnelle(idGlucide, idAliment, unAliment.Glucide);
@@ -224,7 +224,7 @@ namespace Nutritia
 
                 return idValeur;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 throw;
             }
@@ -252,7 +252,7 @@ namespace Nutritia
                 string requeteInsert = string.Format("INSERT INTO AlimentsValeursNutritionnelles (idAliment ,idValeurNutritionnelle, quantite) VALUES ({0}, {1}, {2})", idAliment, idValeur, uneValeur);
                 connexion.Query(requeteInsert);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 throw;
             }

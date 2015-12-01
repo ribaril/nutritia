@@ -18,8 +18,8 @@
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="{Resx AjoutPlat}" />
-                        <TextBlock>
-                            Mon texte
+                        <TextBlock Name="AjoutPlat" TextWrapping="Wrap">
+                            
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
@@ -28,8 +28,8 @@
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="{Resx Suspension}" />
-                        <TextBlock>
-                            Mon texte
+                        <TextBlock Name="InfoSuspenssion" TextWrapping="Wrap">
+                            
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
@@ -38,30 +38,8 @@
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="{Resx CalculatriceNutritionnelle}" />
-                        <TextBlock TextWrapping="Wrap">
-                            Bienvenue dans la calculatrice nutritionnelle. Elle vous confère l'aperçu d'un menu que vous avez créer vous même.<LineBreak></LineBreak>
+                        <TextBlock Name="CalculatriceNutrionnelle" TextWrapping="Wrap">
                             
-                                Cette écran est divisé entre quatre sections. Chacune a son utilité.<LineBreak></LineBreak> 
-							<LineBreak></LineBreak> 
-							1- L'accordéon : <LineBreak></LineBreak> 
-							Cette section vous permet d'ajouter un plat dans votre plateau (Section 3). L'accordéon se divise en plusieurs catégories de plats, à savoir, des déjeuners, des breuvages, des entrées, des plats principaux et des desserts  Il suffit de cliquer sur une catégorie pour la dérouler puis de cliquer sur un plat (Voir raccourcis) et il se placera automatiquement dans la section du plateau.<LineBreak></LineBreak> 
-							<LineBreak></LineBreak> 
-							2- La barre de recherche intélligente :<LineBreak></LineBreak>
-							Cette outil vous permet de rechercher un aliment en entrant des mots clés dans la barre de recherche.<LineBreak></LineBreak>
-							Il vous suffira de cliquer(Raccourcis disponible) sur l'icone d'ajout pour envoyer l'aliment dans le plateau au dessous des plats. <LineBreak></LineBreak>
-							<LineBreak></LineBreak>
-							3-Le plateau :<LineBreak></LineBreak>        
-							Cette boite contient tous les plats et aliments que vous avez ajouter avec les sections 1 et 2. Il sont groupés par plat et aliment et ordonnés dans l'ordre d'ajout. Il vous est aussi possible de retirer un plat ou aliment du plateau en cliquant dessus (Raccourcis disponible). Vous pouvez aussi aperçevoir un compteur à gauche qui indique le nombre d'élément présent dans le plateau.<LineBreak></LineBreak>
-							<LineBreak></LineBreak>
-							4-Le tableau de valeur nutritive : <LineBreak></LineBreak>
-							Cette section visuel affiche chaques valeurs nutritives (calories, fibres, cholestérol, ... ) du total de tous les ingrédients de tous les plats et aliment présents dans le plateau.
-							<LineBreak></LineBreak><LineBreak></LineBreak>
-							Conseil (raccourcis et autres) : <LineBreak></LineBreak>
-							Ctrl + clique gauche sur l'accordéon ou la boite de recherche -> Ajoute un plat ou aliment au plateau à coup de 10.<LineBreak></LineBreak>
-							Ctrl + clique gauche sur le plateau -> Supprime 10 plat ou aliment du plateau en même temps.<LineBreak></LineBreak>
-							Maj + clique gauche sur le plateau-> Supprime tous les plat ou aliment du même nom.<LineBreak></LineBreak>
-							Survoler les plats et aliments pour voir la valeur nutritive atomique de l'élément, de son poid totale et de ses mensuration nutritives.
-							Vous pouvez aperçevoire un icone à droite dans une ligne de plat ou d'aliment, elle indique si l'élément est un plat (couteau fourchette) ou un aliment (panier d'épicerie)
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
@@ -71,8 +49,8 @@
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="{Resx SeConnecter}" />
-                        <TextBlock>
-                            Mon texte
+                        <TextBlock Name="SeConnecter" TextWrapping="Wrap">
+                            
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
@@ -81,8 +59,8 @@
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="{Resx EnvoyerUnDon}" />
-                        <TextBlock>
-                            Mon texte
+                        <TextBlock Name="EnvoyerDon" TextWrapping="Wrap">
+
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
@@ -91,8 +69,8 @@
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="{Resx GenerationMenu}" />
-                        <TextBlock>
-                            Mon texte
+                        <TextBlock Name="GenerationMenu" TextWrapping="Wrap">
+                            
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
@@ -101,8 +79,8 @@
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="{Resx VotreListeEpicerie}" />
-                        <TextBlock>
-                            Mon texte
+                        <TextBlock Name="ListeEpicerie" TextWrapping="Wrap">
+                            
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
@@ -111,8 +89,8 @@
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="{Resx MenuConnecte}" />
-                        <TextBlock>
-                            Mon texte
+                        <TextBlock Name="MenuConnecte" TextWrapping="Wrap">
+                            
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
@@ -121,8 +99,8 @@
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="{Resx MenuPrincipal}" />
-                        <TextBlock>
-                            Mon texte
+                        <TextBlock Name="MenuPrincipal" TextWrapping="Wrap">
+                            
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
@@ -131,8 +109,8 @@
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="{Resx VosParametres}" />
-                        <TextBlock>
-                            Mon texte
+                        <TextBlock Name="VosParametres" TextWrapping="Wrap">
+                            
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
@@ -141,8 +119,8 @@
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="{Resx MonProfil}" />
-                        <TextBlock>
-                            Mon texte
+                        <TextBlock Name="MonProfil" TextWrapping="Wrap">
+                            
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
@@ -150,9 +128,9 @@
             <TabItem Style="{StaticResource tabItem}" Name="tiLangue" Header="{Resx Langage}">
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
-                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx Langage}" />
-                        <TextBlock>
-                            Mon texte
+                        <Label Style="{StaticResource fontSousTitre}" Content="Langage" />
+                        <TextBlock Name="Langage" TextWrapping="Wrap">
+                            
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>

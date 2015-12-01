@@ -43,7 +43,7 @@ namespace Nutritia.UI.Views
 
         private void btnCalculatrice_Click(object sender, RoutedEventArgs e)
         {
-            ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new FenetreCalculatriceNutritionelle(null));
+            ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new FenetreCalculatriceNutritionelle());
         }
 
         private void btnMenuListe_Click(object sender, RoutedEventArgs e)

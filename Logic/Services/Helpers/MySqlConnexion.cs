@@ -156,8 +156,6 @@ namespace Nutritia
                     MySqlDataAdapter adapter = new MySqlDataAdapter();
                     adapter.SelectCommand = new MySqlCommand(query, connection);
                     adapter.Fill(dataset);
-
-
                 }
                 return dataset;
 

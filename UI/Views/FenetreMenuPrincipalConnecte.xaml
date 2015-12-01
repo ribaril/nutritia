@@ -40,6 +40,7 @@
                 <Label Content="{Resx GestionAdmin}" Style="{StaticResource fontNutritia}" FontSize="30"  Canvas.Top="20" Canvas.Left="395" Width="188"/>
             </StackPanel>
         </Button>
+        
 
     </Canvas>
 </UserControl>

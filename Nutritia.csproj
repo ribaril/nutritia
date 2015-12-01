@@ -1045,6 +1045,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="UI\Images\moneyBag.png" />
+	<Resource Include="UI\Ressources\FichierAide.txt" />
     <Resource Include="LogoIcon.ico" />
     <Content Include="Toolkit\Infralution\Infralution.Localization.Wpf.dll" />
     <Content Include="Toolkit\Infralution\Infralution.Localization.Wpf.pdb" />

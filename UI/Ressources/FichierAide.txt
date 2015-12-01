@@ -1,0 +1,64 @@
+#AjoutPlat
+AjoutPlatAjoutPlatAjoutPlat
+#InfoSuspenssion
+InfoSuspenssionInfoSuspenssionInfoSuspenssion
+#CalculatriceNutrionnelle
+Bienvenue dans la calculatrice nutritionnelle. Elle vous confère l'aperçu d'un menu que vous avez créé vous-même.
+                            
+Cet écran est divisé entre quatre sections. Chacune a son utilité.
+
+1- L'accordéon : 
+Cette section vous permet d'ajouter un plat dans votre plateau (Section 3). L'accordéon se divise en plusieurs catégories de plats, à savoir, des déjeuners, des breuvages, des entrées, des plats principaux et des desserts.
+Il suffit de cliquer sur une catégorie pour la dérouler puis de cliquer sur un plat (voir raccourcit) et il se placera automatiquement dans la section du plateau.
+
+2- La barre de recherche intelligente :
+Cet outil vous permet de rechercher un aliment en entrant des mots clés dans la barre de recherche.
+Il vous suffira de cliquer (Raccourcis disponibles) sur l'icône d'ajout pour envoyer l'aliment dans le plateau au-dessous des plats. 
+
+3-Le plateau :       
+Cette boite contient tous les plats et aliments que vous avez ajoutés avec la section 1 et 2. Il est groupé par plat et aliment et ordonné dans l'ordre d'ajout. Il vous est aussi possible de retirer un plat ou aliment du plateau en cliquant dessus (Raccourcis disponibles). 
+Vous pouvez aussi apercevoir un compteur à gauche qui indique le nombre d'éléments présents dans le plateau. Puis pour finir, il est possible de voir tous les ingrédients d'un plat (voir raccourcis).
+
+4-Le tableau de valeur nutritive : 
+Cette section visuelle affiche chaque valeur nutritive (calories, fibres, cholestérol, ... ) du total de tous les ingrédients de tous les plats et aliment présents dans le plateau.
+
+Conseil (raccourcis et autres) : 
+Ctrl + clique gauche sur l'accordéon où la boite de recherche -> Ajoute 10 plat ou aliment du même nom au plateau.
+Ctrl + clique gauche sur le plateau -> Supprime 10 plats ou aliment du plateau qui ont le même nom.
+Maj + clic gauche sur le plateau-> Supprime tous les plats ou aliment du même nom du plateau.
+Ctrl + Delete -> Supprimer tous les plats ou aliments du plateau.
+
+Survoler les plats et aliments pour voir la valeur nutritive atomique de l'élément, de son poids total et de ses mensurations nutritives.
+Vous pouvez apercevoir une icône à droite dans une ligne de plat ou d'aliment, elle indique si l'élément est un plat (couteau fourchette) ou un aliment (panier d'épicerie).
+
+#EnvoyerDon
+EnvoyerDonEnvoyerDonEnvoyerDon
+#GenerationMenu
+
+#ListeEpicerie
+ListeEpicerieListeEpicerieListeEpicerie
+#MenuConnecte
+MenuConnecteMenuConnecteMenuConnecte
+#MenuPrincipal
+Vous voici dans le menu principal de l'application.
+
+D'ici, vous pouvez déja faire de nombreuses actions :
+
+1 - Vous inscrire pour profiter de nos services premium :
+	+Avoir un compte premium vous donne accès à une génération
+	de menu.
+	+qui tient compte de toutes vos préférences alimentaires.
+	+Vous pourrez aussi ajouter vos propres recettes maisons afin 
+	qu'elles aient une chance d'apparaitre dans votre menu.
+	+Vous pourrez aussi voter des plats et accéder au best of des
+	utilisateurs.
+		
+2 - Vous connecter pour accéder à votre compte premium.
+		
+3 - 
+#VosParametres
+VosParametresVosParametresVosParametres
+#MonProfil
+MonProfilMonProfilMonProfil
+#Langage
+LangageLangageLangage

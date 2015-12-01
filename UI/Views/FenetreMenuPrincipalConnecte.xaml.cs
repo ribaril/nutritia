@@ -46,6 +46,7 @@ namespace Nutritia.UI.Views
         {
             App.MembreCourant = new Membre();
             ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipal());
+       
         }
 
         private void btnProfil_Click(object sender, RoutedEventArgs e)
@@ -55,7 +56,7 @@ namespace Nutritia.UI.Views
 
 		private void btnCalculatrice_Click(object sender, RoutedEventArgs e)
 		{
-			ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new FenetreCalculatriceNutritionelle(null));
+			ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new FenetreCalculatriceNutritionelle());
 		}
 
 		private void btnMenuListe_Click(object sender, RoutedEventArgs e)

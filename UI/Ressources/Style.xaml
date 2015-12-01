@@ -7,6 +7,8 @@
     </Style>
     <Style x:Key="nonTransparent" BasedOn="{x:Null}" />
 
+
+
     <Style x:Key="fontNutritia" TargetType="Control">
         <Setter Property="Foreground" Value="DarkGreen"/>
         <Setter Property="FontFamily" Value="Berlin Sans FB Demi"/>
@@ -87,5 +89,6 @@
         <Setter Property="FontFamily" Value="Berlin Sans FB Demi" />
         <Setter Property="Foreground" Value="DarkGreen" />
     </Style>
+
 
 </ResourceDictionary>

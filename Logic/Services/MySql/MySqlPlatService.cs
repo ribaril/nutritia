@@ -19,10 +19,10 @@ namespace Nutritia
         /// <summary>
         /// Constructeur par défaut de la classe.
         /// </summary>
-        public MySqlPlatService()
-        {
-            alimentService = ServiceFactory.Instance.GetService<IAlimentService>();
-        }
+        public MySqlPlatService ()
+	    {
+            alimentService = new MySqlAlimentService();
+	    }
 
         /// <summary>
         /// Méthode permettant d'obtenir l'ensemble des plats sauvegardé dans la base de données.
@@ -247,16 +247,17 @@ namespace Nutritia
                 note = (double?)plat["note"];
             }
 
-            return new Plat()
-            {
-                IdPlat = (int)plat["idPlat"],
-                Createur = (string)plat["nomUtilisateur"],
-                Nom = (string)plat["nom"],
-                Description = (string)plat["description"],
-                TypePlat = (string)plat["typePlat"],
-                Note = note,
-                NbVotes = (int)plat["nbVotes"],
-                ImageUrl = (string)plat["imageUrl"]
+			return new Plat()
+			{
+				IdPlat = (int)plat["idPlat"],
+				Createur = (string)plat["nomUtilisateur"],
+				Nom = (string)plat["nom"],
+				Description = (string)plat["description"],
+				TypePlat = (string)plat["typePlat"],
+				Note = note,
+				NbVotes = (int)plat["nbVotes"],
+				ImageUrl = (string)plat["imageUrl"],
+				DateAjout = DateTime.Parse(plat["dateAjout"].ToString())
             };
         }
 

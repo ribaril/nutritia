@@ -5,10 +5,12 @@
         Title="Nutritia"
 		ResizeMode="CanMinimize"
         Loaded="Window_Loaded"
+		Closing="Window_Closing"
+        KeyDown="Window_KeyDown"
         ResxExtension.DefaultResxName="Nutritia.UI.Ressources.Localisation.MainWindow" Language="{UICulture}">
     
     <Grid>
-    
+
         <Grid.Background>
             <ImageBrush Opacity="0.3" ImageSource="/Nutritia;component/UI/Images/background.jpg"/>
         </Grid.Background>
@@ -19,14 +21,14 @@
         </Grid.RowDefinitions>
 
         <DockPanel>
-            <ToolBar>
+            <ToolBar Width="655" HorizontalAlignment="Center">
                 <Button Name="btnRetour" VerticalAlignment="Bottom" Click="btnRetour_Click">
                     <DockPanel>
                         <Image Source="/Nutritia;component/UI/Images/retour.PNG"/>
                         <TextBlock Text="{Resx Retour}" FontSize="20" FontFamily="Berlin"/>
                     </DockPanel>
                 </Button>
-                <Button Name="btnInfo" VerticalAlignment="Bottom" Click="btnInfo_Click">
+                <Button Name="btnInfo" VerticalAlignment="Bottom" Click="btnAPropos_Click">
                     <DockPanel>
                         <Image Width="24" Source="/Nutritia;component/UI/Images/aProposIcon.PNG"/>
                         <TextBlock Text="{Resx APropos}" FontSize="20" FontFamily="Berlin"/>
@@ -44,9 +46,24 @@
                         <TextBlock Text="{Resx Aide}" FontSize="20" FontFamily="Berlin"/>
                     </DockPanel>
                 </Button>
+                <ToolBar Name="toolBarNotif" Width="65" Height="30">
+                    <!--<Button Name="btnNotification" VerticalAlignment="Top">-->
+                   
+                            <Image ToolTipService.ShowDuration="12000" Width="25" Margin="2" Source="UI/Images/notifIcon.png" >
+                                <Image.ToolTip>
+                                    <ToolTip StaysOpen="True" HorizontalOffset="10"
+                                    ToolTipService.InitialShowDelay="0" ToolTipService.BetweenShowDelay="0">
+                                        <TextBlock>Nouvelle Notification</TextBlock>
+                                    </ToolTip>
+                                </Image.ToolTip>
+                            </Image>
+                            <TextBlock Name="nbrNotif" Text="" Foreground="DarkGreen"/>
+                        
+                    <!--</Button>-->
+                </ToolBar>
             </ToolBar>
         </DockPanel>
-	
+
         <ContentPresenter Grid.Row="1" Name="presenteurContenu" />
 
     </Grid>
