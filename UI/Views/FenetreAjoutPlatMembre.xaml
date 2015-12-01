@@ -29,7 +29,7 @@
                 <Button Name="btn_ajout_img_plat" Grid.Row="0" Content="Ajouter une image" Height="25" Width="120" Foreground="DarkGreen" FontSize="13" Style="{StaticResource nonTransparent}" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,130,0,0" Click="Ajouter_Image"></Button>
 
                 <Label Grid.Row="0" Content="Description" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,180,0,0"></Label>
-                <TextBox Name="Description" Grid.Row="0" Width="250" Height="80" MaxLength="200" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,205,0,0"></TextBox>
+                <TextBox Name="Description" Grid.Row="0" Width="250" Height="80" MaxLength="200" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,205,0,0"></TextBox>
 
                 <GroupBox x:Name="compo_plat" Header="Composition du plat" FontSize="13" HorizontalAlignment="Right"  Grid.Row="2" VerticalAlignment="Top" Height="160" Width="250" Margin="0,170,20,0">
                     <ScrollViewer>
