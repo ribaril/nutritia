@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,12 +23,15 @@ namespace Nutritia.UI.Views
     /// </summary>
     public partial class GestionAdmin : UserControl
     {
-        private IMembreService serviceMembre = ServiceFactory.Instance.GetService<IMembreService>();
+        private IMembreService serviceMembre = new MySqlMembreService();
         private ObservableCollection<Membre> listMembres;
         private ObservableCollection<Membre> listAdmins;
         private List<Membre> adminDepart;
         private List<Membre> adminFin;
         private List<Membre> membreModifie;
+        private Thread dbPoolingThread;
+        private DateTime previousTime;
+        private DateTime currentTime;
 
         public GestionAdmin()
         {
@@ -46,9 +50,36 @@ namespace Nutritia.UI.Views
             //adminsSysteme = new ObservableCollection<Membre>(serviceMembre.RetrieveAdmins());
             dgAdmin.ItemsSource = listAdmins;
             adminDepart = listAdmins.ToList();
+
+            currentTime = previousTime = listMembres.Max(m => m.DerniereMaj);
+
+            dbPoolingThread = new Thread(PoolDB);
+            dbPoolingThread.Start();
         }
 
+        private void PoolDB()
+        {
+            while (true)
+            {
+                currentTime = serviceMembre.LastUpdatedTime();
+                if (currentTime > previousTime)
+                {
+                    //Dois mettre à jour
+                    Dispatcher.Invoke(RefreshDataGrid);
+                    previousTime = currentTime;
+                }
+                Thread.Sleep(App.POOL_TIME);
+            }
+        }
 
+        private void RefreshDataGrid()
+        {
+            dgAdmin.SelectedIndex = -1;
+            listMembres = new ObservableCollection<Membre>(serviceMembre.RetrieveAll());
+            listAdmins = new ObservableCollection<Membre>(listMembres.Where(m => m.EstAdministrateur).ToList());
+            filterDataGrid.DataGridCollection = CollectionViewSource.GetDefaultView(listMembres);
+            dgAdmin.ItemsSource = listAdmins;
+        }
 
         public bool Filter(object obj)
         {
