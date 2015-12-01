@@ -115,6 +115,7 @@ namespace Nutritia.UI.Views
                 if (unAliment.Categorie == categorie)
                 {
                     Button btnAliment = Creer_Bouton_Aliment(true, unAliment);
+                    btnAliment.ToolTip = Produire_Aide_Contextuelle(unAliment);
                     stackCategorie.Children.Add(btnAliment);
                 }
             }
@@ -140,6 +141,7 @@ namespace Nutritia.UI.Views
             btnControl.Margin = margin;
             btnControl.Height = 32;
             btnControl.Name = "btn" + ((int)unAliment.IdAliment).ToString();
+            btnControl.ToolTip = Produire_Aide_Contextuelle(unAliment);
 
             if (plus)
             {
@@ -189,6 +191,7 @@ namespace Nutritia.UI.Views
             btnControl.Height = 32;
             btnControl.Name = unBouton.Name;
             btnControl.Click += Retirer_Aliment_Plateau;
+            btnControl.ToolTip = Produire_Aide_Contextuelle(unAliment);
 
             StackPanel stackLigne = new StackPanel();
             stackLigne.Orientation = Orientation.Horizontal;
@@ -625,6 +628,29 @@ namespace Nutritia.UI.Views
             img_plat.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/nonDisponible.png"));
             listeAlimentsPlateau = new List<Aliment>();
             composition_plat.Children.Clear();
+        }
+
+        /// <summary>
+        /// Méthode servant à générer l'aide contextuelle pour chaque aliment.
+        /// </summary>
+        /// <param name="unAliment"></param>
+        /// <returns></returns>
+        private ToolTip Produire_Aide_Contextuelle(Aliment unAliment)
+        {
+            ToolTip aideContextuelle = new ToolTip();
+            StackPanel unStackPanel = new StackPanel();
+
+            Label lblEntete = new Label();
+            lblEntete.Content = unAliment.Nom;
+            unStackPanel.Children.Add(lblEntete);
+
+            Label lblMesure = new Label();
+            lblMesure.Content = unAliment.Mesure + " " + unAliment.UniteMesure + " pour 1";
+            unStackPanel.Children.Add(lblMesure);
+
+            aideContextuelle.Content = unStackPanel;
+
+            return aideContextuelle;
         }
     }
 }
