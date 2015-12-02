@@ -25,6 +25,7 @@ namespace Nutritia
         public bool EstAdministrateur { get; set; }
         public bool EstBanni { get; set; }
 		public DateTime DerniereMaj { get; set; }
+        public Langue LangueMembre { get; set; }
 		public int Age
         {
             get

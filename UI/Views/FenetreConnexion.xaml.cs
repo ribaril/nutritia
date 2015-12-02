@@ -1,6 +1,7 @@
 ﻿using Infralution.Localization.Wpf;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,7 +57,7 @@ namespace Nutritia.UI.Views
                 else
                 {
                     App.MembreCourant = membreValidation;
-					
+                    CultureManager.UICulture = new CultureInfo(App.MembreCourant.LangueMembre.IETF);
                     ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
 
                 }   

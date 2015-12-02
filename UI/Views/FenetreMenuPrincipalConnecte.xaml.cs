@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Infralution.Localization.Wpf;
 using Nutritia.UI.Views;
+using System.Globalization;
 
 namespace Nutritia.UI.Views
 {
@@ -47,6 +48,7 @@ namespace Nutritia.UI.Views
         private void btnDeconnexion_Click(object sender, RoutedEventArgs e)
         {
             App.MembreCourant = new Membre();
+            CultureManager.UICulture = new CultureInfo(App.LangueInstance.IETF);
             ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipal());
        
         }

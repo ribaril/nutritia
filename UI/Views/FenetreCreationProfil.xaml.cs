@@ -389,7 +389,7 @@ namespace Nutritia.UI.Views
             App.MembreCourant.Masse = double.Parse(Masse.SelectionBoxItem.ToString());
             App.MembreCourant.MotPasse = Mot_passe.Password;
             App.MembreCourant.DateNaissance = (DateTime)Date_naissance.SelectedDate;
-            App.MembreCourant.DerniereMaj = DateTime.Now;
+            App.MembreCourant.LangueMembre = App.LangueInstance;
 
             /*-----------------------------------Restrictions alimentaires-----------------------------------*/
             
