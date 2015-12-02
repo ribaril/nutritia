@@ -78,5 +78,24 @@ namespace Nutritia
             }
         }
 
+        public DateTime LastTimeDon()
+        {
+            DateTime last = DateTime.MinValue;
+            try
+            {
+                connexion = new MySqlConnexion();
+                string requete = " SELECT * FROM LastTimeDon";
+
+                DataSet dataSetDon = connexion.Query(requete);
+                DataTable tableDon = dataSetDon.Tables[0];
+                if (tableDon.Rows.Count != 0)
+                    last = (DateTime)tableDon.Rows[0]["dateDon"];
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+            return last;
+        }
     }
 }

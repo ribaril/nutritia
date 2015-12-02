@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Infralution.Localization.Wpf;
 using Nutritia.Logic.Model.Entities;
+using System.Threading;
 
 namespace Nutritia.UI.Views
 {
@@ -23,17 +24,47 @@ namespace Nutritia.UI.Views
     public partial class FenetreDons : UserControl
     {
         private IDonService donService;
+        private DateTime previousTime;
+        private DateTime currentTime;
+        private Thread dbPoolingThread;
+        List<Transaction> transactions;
 
         public FenetreDons()
         {
             CultureManager.UICultureChanged += CultureManager_UICultureChanged;
-            donService = ServiceFactory.Instance.GetService<IDonService>();
+            donService = new MySqlDonService();
 
             InitializeComponent();
 
             App.Current.MainWindow.Title = Nutritia.UI.Ressources.Localisation.FenetreDons.Titre;
 
-            List<Transaction> transactions = donService.RetrieveAll().ToList();
+            previousTime = DateTime.MinValue;
+
+            dbPoolingThread = new Thread(PoolDB);
+            dbPoolingThread.IsBackground = true;
+            dbPoolingThread.Start();
+
+        }
+
+
+        private void PoolDB()
+        {
+            while (true)
+            {
+                currentTime = donService.LastTimeDon();
+                if (currentTime > previousTime)
+                {
+                    //Dois mettre à jour
+                    Dispatcher.Invoke(RefreshDataGrid);
+                    previousTime = currentTime;
+                }
+                Thread.Sleep(App.POOL_TIME);
+            }
+        }
+
+        private void RefreshDataGrid()
+        {
+            transactions = donService.RetrieveAll().ToList();
             dgDons.ItemsSource = transactions;
         }
 
