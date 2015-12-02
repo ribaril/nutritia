@@ -54,6 +54,7 @@ namespace Nutritia.UI.Views
             currentTime = previousTime = listMembres.Max(m => m.DerniereMaj);
 
             dbPoolingThread = new Thread(PoolDB);
+            dbPoolingThread.IsBackground = true;
             dbPoolingThread.Start();
         }
 
@@ -78,6 +79,7 @@ namespace Nutritia.UI.Views
             listMembres = new ObservableCollection<Membre>(serviceMembre.RetrieveAll());
             listAdmins = new ObservableCollection<Membre>(listMembres.Where(m => m.EstAdministrateur).ToList());
             filterDataGrid.DataGridCollection = CollectionViewSource.GetDefaultView(listMembres);
+            adminDepart = listAdmins.ToList();
             dgAdmin.ItemsSource = listAdmins;
         }
 
