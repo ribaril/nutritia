@@ -47,7 +47,7 @@
             <TabItem Style="{StaticResource tabItem}" Name="tiCalculatrice" Header="{Resx Calculatrice}">
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
-                        <Label Style="{StaticResource fontSousTitre}" Content="Calculatrice nutritionnelle" />
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx CalculatriceNutritionnelle}" />
                         <TextBlock Name="CalculatriceNutrionnelle" TextWrapping="Wrap">
 
                         </TextBlock>
