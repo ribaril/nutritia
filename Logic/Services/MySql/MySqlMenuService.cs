@@ -22,7 +22,7 @@ namespace Nutritia
         /// </summary>
         public MySqlMenuService()
         {
-            platService = ServiceFactory.Instance.GetService<IPlatService>();
+            platService = new MySqlPlatService();
         }
 
         /// <summary>

@@ -18,8 +18,7 @@ namespace Nutritia
         /// </summary>
         public MySqlSuiviPlatService ()
 	    {
-            connexion = new MySqlConnexion();
-            platService = ServiceFactory.Instance.GetService<IPlatService>();
+            platService = new MySqlPlatService();
 	    }
 
         /// <summary>
@@ -33,6 +32,8 @@ namespace Nutritia
 
             try
             {
+                connexion = new MySqlConnexion();
+
                 string requete = string.Format("SELECT * FROM SuiviPlats WHERE idMembre = {0}", args.IdMembre);
 
                 DataSet dataSetPlats = connexion.Query(requete);
@@ -64,7 +65,9 @@ namespace Nutritia
         {
             try
             {
-                foreach(Plat plat in listePlats)
+                connexion = new MySqlConnexion();
+
+                foreach (Plat plat in listePlats)
                 {
                     string requete = string.Format("INSERT INTO SuiviPlats (idMembre, idPlat, estTricherie) VALUES ({0}, {1}, {2})", membre.IdMembre, plat.IdPlat, plat.EstTricherie);
                     connexion.Query(requete);
@@ -85,6 +88,8 @@ namespace Nutritia
         {
             try
             {
+                connexion = new MySqlConnexion();
+
                 string requeteEffacerSuivi = string.Format("DELETE FROM SuiviPlats WHERE idMembre = {0}", membre.IdMembre);
                 connexion.Query(requeteEffacerSuivi);
 
