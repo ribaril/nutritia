@@ -88,6 +88,7 @@
     <Compile Include="Logic\Model\Args\RetrieveUniteMesureArgs.cs" />
     <Compile Include="Logic\Model\Entities\Aliment.cs" />
     <Compile Include="Logic\Model\Entities\Calculatrice.cs" />
+    <Compile Include="Logic\Model\Entities\Langue.cs" />
     <Compile Include="Logic\Model\Entities\Membre.cs" />
     <Compile Include="Logic\Model\Entities\Menu.cs" />
     <Compile Include="Logic\Model\Entities\ModePaiement.cs" />
@@ -1045,7 +1046,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="UI\Images\moneyBag.png" />
-	<Resource Include="UI\Ressources\FichierAide.txt" />
+    <Resource Include="UI\Ressources\FichierAide.txt" />
     <Resource Include="LogoIcon.ico" />
     <Content Include="Toolkit\Infralution\Infralution.Localization.Wpf.dll" />
     <Content Include="Toolkit\Infralution\Infralution.Localization.Wpf.pdb" />

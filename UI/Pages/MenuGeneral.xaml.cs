@@ -89,15 +89,25 @@ namespace Nutritia.UI.Pages
 
         private ObservableCollection<Langue> mapLangue;
 
-        Langue francais = new Langue(Nutritia.UI.Ressources.Localisation.Pages.MenuGeneral.LangueFrancais, "fr");
-        Langue anglais = new Langue(Nutritia.UI.Ressources.Localisation.Pages.MenuGeneral.LangueAnglais, "en");
+        Langue francais = new Langue(Nutritia.UI.Ressources.Localisation.Pages.MenuGeneral.LangueFrancais, "fr-CA");
+        Langue anglais = new Langue(Nutritia.UI.Ressources.Localisation.Pages.MenuGeneral.LangueAnglais, "en-US");
 
         public MenuGeneral()
         {
             CultureManager.UICultureChanged += CultureManager_UICultureChanged;
 
             mapLangue = new ObservableCollection<Langue>();
-            string codeLangueActif = Properties.Settings.Default.Langue;
+            string codeLangueActif;
+
+            if (App.MembreCourant.IdMembre != null)
+            {
+                codeLangueActif = App.MembreCourant.LangueMembre.IETF;
+            }
+            else
+            {
+                codeLangueActif = App.LangueInstance.IETF;
+            }
+
 
             mapLangue.Add(francais);
             mapLangue.Add(anglais);
@@ -111,10 +121,18 @@ namespace Nutritia.UI.Pages
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Langue langue = mapLangue.FirstOrDefault(l => l.Actif == true);
-            Properties.Settings.Default.Langue = langue.CodeISO;
-            Properties.Settings.Default.Save();
-
-            CultureManager.UICulture = new CultureInfo(Properties.Settings.Default.Langue);
+            //Properties.Settings.Default.Langue = langue.CodeISO;
+            //Properties.Settings.Default.Save();
+            if (App.MembreCourant.IdMembre != null)
+            {
+                App.MembreCourant.LangueMembre = Nutritia.Langue.LangueFromIETF(langue.CodeISO);
+                new MySqlMembreService().Update(App.MembreCourant);
+            }
+            else
+            {
+                App.LangueInstance = Nutritia.Langue.LangueFromIETF(langue.CodeISO);
+            }
+            CultureManager.UICulture = new CultureInfo(langue.CodeISO);
         }
 
         private void CultureManager_UICultureChanged(object sender, EventArgs e)

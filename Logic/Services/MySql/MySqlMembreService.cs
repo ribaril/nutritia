@@ -62,6 +62,8 @@ namespace Nutritia
                 {
                     Membre membre = ConstruireMembre(rowMembre);
 
+                    membre.LangueMembre = LangueFromId((int)rowMembre["idLangue"]);
+
                     // Ajout des restrictions alimentaires du membre.
                     requete = string.Format("SELECT idRestrictionAlimentaire FROM RestrictionsAlimentairesMembres WHERE idMembre = {0}", membre.IdMembre);
 
@@ -139,6 +141,8 @@ namespace Nutritia
                         {
                             membre = ConstruireMembre(tableMembres.Rows[0]);
 
+                            membre.LangueMembre = LangueFromId((int)tableMembres.Rows[0]["idLangue"]);
+
                             // Ajout des restrictions alimentaires du membre.
                             requete = string.Format("SELECT idRestrictionAlimentaire FROM RestrictionsAlimentairesMembres WHERE idMembre = {0}", membre.IdMembre);
 
@@ -207,7 +211,7 @@ namespace Nutritia
             try
             {
                 connexion = new MySqlConnexion();
-                string requete = string.Format("INSERT INTO Membres (nom ,prenom, taille, masse, dateNaissance, nomUtilisateur, motPasse) VALUES ('{0}', '{1}', {2}, {3}, '{4}', '{5}', '{6}')", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance.ToString("yyyy-MM-dd"), membre.NomUtilisateur, membre.MotPasse);
+                string requete = string.Format("INSERT INTO Membres (nom ,prenom, taille, masse, dateNaissance, nomUtilisateur, motPasse, idLangue) VALUES ('{0}', '{1}', {2}, {3}, '{4}', '{5}', '{6}', (SELECT idLangue FROM Langues WHERE IETF = '{7}'))", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance.ToString("yyyy-MM-dd"), membre.NomUtilisateur, membre.MotPasse, membre.LangueMembre.IETF);
                 connexion.Query(requete);
 
                 int idMembre = (int)Retrieve(new RetrieveMembreArgs { NomUtilisateur = membre.NomUtilisateur }).IdMembre;
@@ -249,7 +253,7 @@ namespace Nutritia
             try
             {
                 connexion = new MySqlConnexion();
-                string requete = string.Format("UPDATE Membres SET nom = '{0}' ,prenom = '{1}', taille = {2}, masse = {3}, dateNaissance = '{4}', nomUtilisateur = '{5}', motPasse = '{6}', estAdmin = {7}, estBanni = {8} WHERE idMembre = {9}", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance.ToString("yyyy-MM-dd"), membre.NomUtilisateur, membre.MotPasse, membre.EstAdministrateur, membre.EstBanni, membre.IdMembre);
+                string requete = string.Format("UPDATE Membres SET nom = '{0}' ,prenom = '{1}', taille = {2}, masse = {3}, dateNaissance = '{4}', nomUtilisateur = '{5}', motPasse = '{6}', estAdmin = {7}, estBanni = {8}, idLangue = (SELECT idLangue FROM Langues WHERE IETF = '{9}') WHERE idMembre = {10}", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance.ToString("yyyy-MM-dd"), membre.NomUtilisateur, membre.MotPasse, membre.EstAdministrateur, membre.EstBanni, membre.LangueMembre.IETF, membre.IdMembre);
 
                 connexion.Query(requete);
 
@@ -312,6 +316,7 @@ namespace Nutritia
                 EstAdministrateur = (bool)membre["estAdmin"],
                 EstBanni = (bool)membre["estBanni"],
                 DerniereMaj = (DateTime)membre["derniereMaj"]
+                
 		    };
 
         }
@@ -332,6 +337,8 @@ namespace Nutritia
                 foreach (DataRow rowMembre in tableMembres.Rows)
                 {
                     Membre membre = ConstruireMembre(rowMembre);
+
+                    membre.LangueMembre = LangueFromId((int)rowMembre["idLangue"]);
 
                     // Ajout des restrictions alimentaires du membre.
                     requete = string.Format("SELECT idRestrictionAlimentaire FROM RestrictionsAlimentairesMembres WHERE idMembre = {0}", membre.IdMembre);
@@ -381,7 +388,27 @@ namespace Nutritia
             return resultat;
         }
 
-
+        private Langue LangueFromId(int id)
+        {
+            Langue langue;
+            try
+            {
+                connexion = new MySqlConnexion();
+                string requete = string.Format("SELECT IETF FROM Langues WHERE idLangue = {0}", id);
+                using (DataSet dataSetLangue = connexion.Query(requete))
+                {
+                    using (DataTable tableLangue = dataSetLangue.Tables[0])
+                    {
+                        langue = Langue.LangueFromIETF(tableLangue.Rows[0]["IETF"].ToString());
+                    }
+                }
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+            return langue;
+        }
 
         public DateTime LastUpdatedTime()
         {

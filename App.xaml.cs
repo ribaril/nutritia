@@ -22,6 +22,7 @@ namespace Nutritia
         static public int APP_WIDTH = 650;
         static public int APP_HEIGHT = 550;
         public const int POOL_TIME = 300;
+        static public Langue LangueInstance = Langue.FrancaisCanada;
     }
 
 }
