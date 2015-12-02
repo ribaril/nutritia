@@ -40,6 +40,7 @@ namespace Nutritia
         public string MessageNouvelleVersion { get; set; }
 
         private IPlatService platAsync;
+        private IMembreService membreAsync;
         public List<Plat> LstPlat { get; set; }
 
         public MainWindow()
@@ -50,6 +51,7 @@ namespace Nutritia
             ConfigurerTaille();
             Configurer();
             platAsync = new MySqlPlatService();
+            membreAsync = new MySqlMembreService();
             MessageNouvelleVersion = "";
             NouveauxPlats = new List<Plat>();
             NvPlatAffichable = new List<Plat>();
@@ -78,7 +80,7 @@ namespace Nutritia
                 if (!String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
                 {
                     // Mise a jour des variables
-                    membreAJour = ServiceFactory.Instance.GetService<IMembreService>().Retrieve(new RetrieveMembreArgs { NomUtilisateur = App.MembreCourant.NomUtilisateur });
+                    membreAJour = membreAsync.Retrieve(new RetrieveMembreArgs { NomUtilisateur = App.MembreCourant.NomUtilisateur });
                     lstPlatAJour = platAsync.RetrieveAll().ToList();
 
                     //Raffraichi la liste dans la page des votes lorsqu'un autre utilisateur vote

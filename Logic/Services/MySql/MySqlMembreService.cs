@@ -34,10 +34,10 @@ namespace Nutritia
         public MySqlMembreService(String connexion)
         {
             stringConnexion = connexion;
-            restrictionAlimentaireService = ServiceFactory.Instance.GetService<IRestrictionAlimentaireService>();
-            objectifService = ServiceFactory.Instance.GetService<IObjectifService>();
-            preferenceService = ServiceFactory.Instance.GetService<IPreferenceService>();
-            menuService = ServiceFactory.Instance.GetService<IMenuService>();
+            restrictionAlimentaireService = new MySqlRestrictionAlimentaireService();
+            objectifService = new MySqlObjectifService();
+            preferenceService = new MySqlPreferenceService();
+            menuService = new MySqlMenuService();
         }
 
         /// <summary>
