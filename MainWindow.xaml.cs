@@ -91,7 +91,6 @@ namespace Nutritia
                                 Dispatcher.Invoke(AppliquerNouveauChangementStatut);
                                 LstPlat = platAsync.RetrieveAll().ToList();
                             }
-
                         }
                     }
 
@@ -132,7 +131,6 @@ namespace Nutritia
                         NvPlatAffichable = new List<Plat>(NouveauxPlats);
                         NouveauxPlats.Clear();
                         Dispatcher.Invoke(DessinerNotificationNvPlat);
-
                     }
 
                 }

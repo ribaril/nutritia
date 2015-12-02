@@ -162,7 +162,7 @@ namespace Nutritia.UI.Views
             switch (gbContenu.Header.ToString())
             {
                 case "Tous les plats":
-                    listePlatsTemp = new List<Plat>(PlatService.RetrieveAll());
+                    listePlatsTemp = new List<Plat>(PlatService.RetrieveAll().OrderBy(plat => plat.Nom));
                     break;
                 case "Nouveautés":
                     listePlatsTemp = new List<Plat>(PlatService.RetrieveSome(new RetrievePlatArgs { NbResultats = NbResultatsAffiches, Depart = "Fin" }));
@@ -180,9 +180,6 @@ namespace Nutritia.UI.Views
 
 		public void Rafraichir()
 		{
-			ListePlats = new ObservableCollection<Plat>(PlatService.RetrieveAll());
-            DeterminerNoteConviviale();
-
             switch (gbContenu.Header.ToString())
             {
                 case "Tous les plats":

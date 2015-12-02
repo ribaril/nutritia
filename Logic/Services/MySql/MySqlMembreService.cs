@@ -297,7 +297,8 @@ namespace Nutritia
                 EstAdministrateur = (bool)membre["estAdmin"],
                 EstBanni = (bool)membre["estBanni"],
                 DerniereMaj = (DateTime)membre["derniereMaj"]
-            };
+		    };
+
         }
 
         public IList<Membre> RetrieveAdmins()

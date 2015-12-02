@@ -15,6 +15,7 @@ namespace Nutritia
         public int Mesure { get; set; }
         public double Quantite { get; set; }
         public string UniteMesure { get; set; }
+        public string Symbole { get; set; }
         public double Energie { get; set; }
         public double Glucide { get; set; }
         public double Fibre { get; set; }
