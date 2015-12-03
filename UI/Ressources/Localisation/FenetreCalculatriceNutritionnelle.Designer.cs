@@ -61,6 +61,15 @@ namespace Nutritia.UI.Ressources.Localisation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accordéon.
+        /// </summary>
+        public static string Accordeon {
+            get {
+                return ResourceManager.GetString("Accordeon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Barre de recherche.
         /// </summary>
         public static string BarreRecherche {
@@ -124,11 +133,29 @@ namespace Nutritia.UI.Ressources.Localisation {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Plat principaux.
+        ///   Looks up a localized string similar to Plateau.
         /// </summary>
-        public static string PlatPrincipaux {
+        public static string Plateau {
             get {
-                return ResourceManager.GetString("PlatPrincipaux", resourceCulture);
+                return ResourceManager.GetString("Plateau", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plat principal.
+        /// </summary>
+        public static string PlatPrincipal {
+            get {
+                return ResourceManager.GetString("PlatPrincipal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rechercher un plat ou aliment.
+        /// </summary>
+        public static string RecherchePlatAliment {
+            get {
+                return ResourceManager.GetString("RecherchePlatAliment", resourceCulture);
             }
         }
         
@@ -156,6 +183,15 @@ namespace Nutritia.UI.Ressources.Localisation {
         public static string ValeurPlateau {
             get {
                 return ResourceManager.GetString("ValeurPlateau", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vider.
+        /// </summary>
+        public static string Vider {
+            get {
+                return ResourceManager.GetString("Vider", resourceCulture);
             }
         }
     }
