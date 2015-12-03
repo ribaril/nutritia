@@ -95,10 +95,13 @@ namespace Nutritia.UI.Pages
                 return;
             //Valide si le compte actuel existe sur la nouvelle session spécifié et s'il est admins.
             //Sinon l'utilisateur ce coupe la branche sous les pieds.
-            //if (!IsAdminOnNewConnexion(newSession.ToConnexionString()))
-            //{
-            //    return;
-            //}
+            if (!IsAdminOnNewConnexion(newSession.ToConnexionString()))
+            {
+                MessageBox.Show("Impossible de se connecter. Est-ce que votre compte existe sur la base de données et êtes vous administrateur?",
+                    "Erreur de connexion", 
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             SwitchActive(obsSessions.IndexOf(SessionActive), obsSessions.IndexOf(newSession));
             SessionActive = newSession;
 
@@ -107,7 +110,7 @@ namespace Nutritia.UI.Pages
 
             IApplicationService mainWindow = ServiceFactory.Instance.GetService<IApplicationService>();
             mainWindow.Configurer();
-            mainWindow.ChangerVue(new MenuAdministrateur());
+            mainWindow.ChangerVue(new MenuPrincipalConnecte());
         }
 
 
@@ -204,10 +207,14 @@ namespace Nutritia.UI.Pages
                 IMembreService serviceMembre = new MySqlMembreService(stringConnexion);
                 IList<Membre> adminsDansNouvelleSession = serviceMembre.RetrieveAdmins();
                 //Lance une exception si le Where ne retourne rien, l'exception est géré de toute façon.
-                Membre membreCorrespondant = adminsDansNouvelleSession.Where(membre => membre.NomUtilisateur == App.MembreCourant.NomUtilisateur).First();
-
+                Membre membreCorrespondant = adminsDansNouvelleSession.Where(membre => membre.NomUtilisateur == App.MembreCourant.NomUtilisateur && membre.MotPasse == App.MembreCourant.MotPasse).First();
+                //Redondant, car on retrieves les admins et si membreCorrespondant est null, la lambda lance une exception.
                 if (membreCorrespondant != null && membreCorrespondant.EstAdministrateur)
+                {
+                    //Mauvaise place pour le faire, mais au cas le compte à des info différentes:
+                    App.MembreCourant = membreCorrespondant;
                     return true;
+                }
                 else
                     return false;
             }
