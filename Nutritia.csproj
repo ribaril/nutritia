@@ -1084,7 +1084,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="UI\Images\moneyBag.png" />
-    <Resource Include="UI\Ressources\FichierAide.txt" />
+    <EmbeddedResource Include="Aide\FichierAide.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Resource Include="LogoIcon.ico" />
     <Content Include="Toolkit\Infralution\Infralution.Localization.Wpf.dll" />
     <Content Include="Toolkit\Infralution\Infralution.Localization.Wpf.pdb" />
