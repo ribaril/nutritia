@@ -127,19 +127,19 @@ namespace Nutritia.UI.Views
 			Mouse.OverrideCursor = null;
 
 			// --------- Entrée -------------
-			FormerItemAccordeon("Entrée");
+			FormerItemAccordeon(FenetreCalculatriceNutritionnelle.Entree);
 
 			// --------- Breuvage -------------
-			FormerItemAccordeon("Breuvage");
+			FormerItemAccordeon(FenetreCalculatriceNutritionnelle.Breuvage);
 
 			// --------- Plat principal -------------
-			FormerItemAccordeon("Plat principal");
+			FormerItemAccordeon(FenetreCalculatriceNutritionnelle.PlatPrincipal);
 
 			// --------- Déssert -------------
-			FormerItemAccordeon("Déssert");
+			FormerItemAccordeon(FenetreCalculatriceNutritionnelle.Dessert);
 
 			// --------- Déjeuner -------------
-			FormerItemAccordeon("Déjeuner");
+			FormerItemAccordeon(FenetreCalculatriceNutritionnelle.Dejeuner);
 		}
 
 		public void FormerItemAccordeon(string nomItem)
@@ -153,6 +153,7 @@ namespace Nutritia.UI.Views
 			foreach (var plat in LstPlat)
 			{
 				Button btnPlat = FormerListeLignePlatAliment(true, plat, null);
+                //Ne marchera pas avec la traduction nomItem == Header et TypePlat pas traduit
 				if (plat.TypePlat == nomItem)
 					stackLigne.Children.Add(btnPlat);
 			}
@@ -556,7 +557,7 @@ namespace Nutritia.UI.Views
 			StackPanel spValeurNut = new StackPanel();
 
 			Label lblEntete = new Label();
-			lblEntete.Content = "Valeurs nutritive";
+			lblEntete.Content = FenetreCalculatriceNutritionnelle.ValeurNutritive;
 			spValeurNut.Children.Add(lblEntete);
 
 			ValeurNutritive = new Dictionary<string, double>();
@@ -573,13 +574,13 @@ namespace Nutritia.UI.Views
 
 			StringBuilder sbValeurNut = new StringBuilder();
 			sbValeurNut.Append("1 ").Append(item is Plat ? plat.Nom : plat.ListeIngredients[0].Nom).AppendLine(" de " + poidPlat + " g").AppendLine(); // Affichage du nom du plat ou de l'aliment
-			sbValeurNut.Append("Énergie : ").Append(ValeurNutritive["Calorie"].ToString("N")).AppendLine(" cal");
-			sbValeurNut.Append("Glucides : ").Append(ValeurNutritive["Glucides"].ToString("N")).AppendLine(" g");
-			sbValeurNut.Append("Fibres : ").Append(ValeurNutritive["Fibres"].ToString("N")).AppendLine(" g");
-			sbValeurNut.Append("Protéines : ").Append(ValeurNutritive["Proteines"].ToString("N")).AppendLine(" g");
-			sbValeurNut.Append("Lipides : ").Append(ValeurNutritive["Lipides"].ToString("N")).AppendLine(" g");
-			sbValeurNut.Append("Cholestérol : ").Append(ValeurNutritive["Cholesterol"].ToString("N")).AppendLine(" mg");
-			sbValeurNut.Append("Sodium : ").Append(ValeurNutritive["Sodium"].ToString("N")).Append(" mg");
+			sbValeurNut.Append(ValeurNutritionnelle.Energie + " : ").Append(ValeurNutritive["Calorie"].ToString("N")).AppendLine(" cal");
+			sbValeurNut.Append(ValeurNutritionnelle.Glucides + " : ").Append(ValeurNutritive["Glucides"].ToString("N")).AppendLine(" g");
+			sbValeurNut.Append(ValeurNutritionnelle.Fibres + " : ").Append(ValeurNutritive["Fibres"].ToString("N")).AppendLine(" g");
+			sbValeurNut.Append(ValeurNutritionnelle.Proteines + " : ").Append(ValeurNutritive["Proteines"].ToString("N")).AppendLine(" g");
+			sbValeurNut.Append(ValeurNutritionnelle.Lipides + " : ").Append(ValeurNutritive["Lipides"].ToString("N")).AppendLine(" g");
+			sbValeurNut.Append(ValeurNutritionnelle.Cholesterol + " : ").Append(ValeurNutritive["Cholesterol"].ToString("N")).AppendLine(" mg");
+			sbValeurNut.Append(ValeurNutritionnelle.Sodium + " : ").Append(ValeurNutritive["Sodium"].ToString("N")).Append(" mg");
 			Label lblValeurNut = new Label();
 			lblValeurNut.Content = sbValeurNut.ToString();
 

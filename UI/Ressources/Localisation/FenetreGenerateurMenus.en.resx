@@ -156,6 +156,24 @@
   <data name="Semaine" xml:space="preserve">
     <value>One week</value>
   </data>
+  <data name="SeparateurBreuvage" xml:space="preserve">
+    <value>Beverage</value>
+  </data>
+  <data name="SeparateurDejeuner" xml:space="preserve">
+    <value>Breakfast</value>
+  </data>
+  <data name="SeparateurDessert" xml:space="preserve">
+    <value>Dessert</value>
+  </data>
+  <data name="SeparateurEntree" xml:space="preserve">
+    <value>Appetizer</value>
+  </data>
+  <data name="SeparateurJour" xml:space="preserve">
+    <value>Day</value>
+  </data>
+  <data name="SeparateurPlatPrincipal" xml:space="preserve">
+    <value>Main course</value>
+  </data>
   <data name="SuiviNonAdmissible" xml:space="preserve">
     <value>Follow ineligible meals</value>
   </data>

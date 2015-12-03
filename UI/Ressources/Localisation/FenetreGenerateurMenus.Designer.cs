@@ -178,6 +178,60 @@ namespace Nutritia.UI.Ressources.Localisation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Breuvage.
+        /// </summary>
+        public static string SeparateurBreuvage {
+            get {
+                return ResourceManager.GetString("SeparateurBreuvage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Déjeuner.
+        /// </summary>
+        public static string SeparateurDejeuner {
+            get {
+                return ResourceManager.GetString("SeparateurDejeuner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Déssert.
+        /// </summary>
+        public static string SeparateurDessert {
+            get {
+                return ResourceManager.GetString("SeparateurDessert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entrée.
+        /// </summary>
+        public static string SeparateurEntree {
+            get {
+                return ResourceManager.GetString("SeparateurEntree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jour.
+        /// </summary>
+        public static string SeparateurJour {
+            get {
+                return ResourceManager.GetString("SeparateurJour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plat principal.
+        /// </summary>
+        public static string SeparateurPlatPrincipal {
+            get {
+                return ResourceManager.GetString("SeparateurPlatPrincipal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Suivi des plats non admissibles.
         /// </summary>
         public static string SuiviNonAdmissible {

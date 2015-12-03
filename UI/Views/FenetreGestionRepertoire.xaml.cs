@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Nutritia.UI.Ressources.Localisation;
+using Infralution.Localization.Wpf;
 
 namespace Nutritia.UI.Views
 {
@@ -44,7 +46,11 @@ namespace Nutritia.UI.Views
 
         public GestionRepertoire()
         {
+            CultureManager.UICultureChanged += CultureManager_UICultureChanged;
+
             InitializeComponent();
+
+            App.Current.MainWindow.Title = FenetreGestionRepertoire.Titre;
 
             Erreur = false;
 
@@ -102,8 +108,8 @@ namespace Nutritia.UI.Views
         private void Erreur_Champ()
         {
             MessageBoxResult resultat;
-            resultat = MessageBox.Show("Il y a un ou plusieurs champs invalides."
-                                        , "Erreur"
+            resultat = MessageBox.Show(FenetreGestionRepertoire.ErreurMessage
+                                        , FenetreGestionRepertoire.ErreurTitre
                                         , MessageBoxButton.OK
                                         , MessageBoxImage.Warning
                                         , MessageBoxResult.OK);
@@ -238,8 +244,8 @@ namespace Nutritia.UI.Views
                 Inserer_Aliment();
 
                 MessageBoxResult resultat;
-                resultat = MessageBox.Show("Le nouvel aliment a été correctement ajouté à la base de données."
-                                            , "Ajout d'aliment réussie"
+                resultat = MessageBox.Show(FenetreGestionRepertoire.SuccessAjoutAlimentMessage
+                                            , FenetreGestionRepertoire.SuccessAjoutAlimentTitre
                                             , MessageBoxButton.OK);
             }
         }
@@ -281,8 +287,8 @@ namespace Nutritia.UI.Views
                 Modifier_Aliment();
 
                 MessageBoxResult resultat;
-                resultat = MessageBox.Show("L'aliment a été correctement modifié dans la base de données."
-                                            , "Modification d'aliment réussie"
+                resultat = MessageBox.Show(FenetreGestionRepertoire.SuccessModifAlimentMessage
+                                            , FenetreGestionRepertoire.SuccessModifAlimentTitre
                                             , MessageBoxButton.OK);
             }
         }
@@ -307,7 +313,7 @@ namespace Nutritia.UI.Views
             if (string.IsNullOrEmpty(unTextBox.Text))
             {
                 unLabel.Foreground = Brushes.Red;
-                unLabel.Content = "Nom de l'aliment (Champ vide)";
+                unLabel.Content = FenetreGestionRepertoire.NomAlimentVide;
                 Erreur = true;
             }
             else
@@ -316,7 +322,7 @@ namespace Nutritia.UI.Views
                 if (unTextBox.Text.Length > 50)
                 {
                     unLabel.Foreground = Brushes.Red;
-                    unLabel.Content = "Nom de l'aliment (Entre 1 et 50 caractères)";
+                    unLabel.Content = FenetreGestionRepertoire.NomAlimentTaille;
                     Erreur = true;
                 }
                 else
@@ -328,7 +334,7 @@ namespace Nutritia.UI.Views
                     if (ContientSeulement)
                     {
                         unLabel.Foreground = Brushes.Red;
-                        unLabel.Content = "Nom de l'aliment (charctères invalides)";
+                        unLabel.Content = FenetreGestionRepertoire.NomAlimentInvalide;
                         Erreur = true;
                     }
                     else
@@ -339,7 +345,7 @@ namespace Nutritia.UI.Views
                         if (ContientApostropheDebut)
                         {
                             unLabel.Foreground = Brushes.Red;
-                            unLabel.Content = "Nom (Doit débuter avec une lettre)";
+                            unLabel.Content = FenetreGestionRepertoire.NomAlimentDebut;
                             Erreur = true;
                         }
                         else
@@ -380,7 +386,7 @@ namespace Nutritia.UI.Views
                                 if (alimentBD == alimentText)
                                 {
                                     unLabel.Foreground = Brushes.Red;
-                                    unLabel.Content = "Nom de l'aliment (aliment déjà existant)";
+                                    unLabel.Content = FenetreGestionRepertoire.NomAlimentUnique;
                                     Erreur = true;
                                     unique = false;
                                 }
@@ -390,7 +396,7 @@ namespace Nutritia.UI.Views
                             if (unique)
                             {
                                 unLabel.Foreground = Brushes.DarkGreen;
-                                unLabel.Content = "Nom de l'aliment";
+                                unLabel.Content = FenetreGestionRepertoire.NomAliment;
                             }
                         }
                     }
@@ -408,7 +414,7 @@ namespace Nutritia.UI.Views
             if (string.IsNullOrEmpty(unTextBox.Text))
             {
                 unLabel.Foreground = Brushes.Red;
-                unLabel.Content = "Nom de l'aliment (Champ vide)";
+                unLabel.Content = FenetreGestionRepertoire.NomAlimentVide;
                 Erreur = true;
             }
             else
@@ -417,7 +423,7 @@ namespace Nutritia.UI.Views
                 if (unTextBox.Text.Length > 50)
                 {
                     unLabel.Foreground = Brushes.Red;
-                    unLabel.Content = "Nom de l'aliment (Entre 1 et 50 caractères)";
+                    unLabel.Content = FenetreGestionRepertoire.NomAlimentTaille;
                     Erreur = true;
                 }
                 else
@@ -429,7 +435,7 @@ namespace Nutritia.UI.Views
                     if (ContientSeulement)
                     {
                         unLabel.Foreground = Brushes.Red;
-                        unLabel.Content = "Nom de l'aliment (caractères invalides)";
+                        unLabel.Content = FenetreGestionRepertoire.NomAlimentInvalide;
                         Erreur = true;
                     }
                     else
@@ -440,7 +446,7 @@ namespace Nutritia.UI.Views
                         if (ContientApostropheDebut)
                         {
                             unLabel.Foreground = Brushes.Red;
-                            unLabel.Content = "Nom (Doit débuter avec une lettre)";
+                            unLabel.Content = FenetreGestionRepertoire.NomAlimentDebut;
                             Erreur = true;
                         }
                         else
@@ -497,7 +503,7 @@ namespace Nutritia.UI.Views
                                     if (alimentBD == alimentText && alimentText != alimentRecherche)
                                     {
                                         unLabel.Foreground = Brushes.Red;
-                                        unLabel.Content = "Nom de l'aliment (aliment déjà existant)";
+                                        unLabel.Content = FenetreGestionRepertoire.NomAlimentUnique;
                                         Erreur = true;
                                         unique = false;
                                     }
@@ -507,7 +513,7 @@ namespace Nutritia.UI.Views
                                     if (alimentBD == alimentText)
                                     {
                                         unLabel.Foreground = Brushes.Red;
-                                        unLabel.Content = "Nom de l'aliment (aliment déjà existant)";
+                                        unLabel.Content = FenetreGestionRepertoire.NomAlimentUnique;
                                         Erreur = true;
                                         unique = false;
                                     }
@@ -518,7 +524,7 @@ namespace Nutritia.UI.Views
                             if (unique)
                             {
                                 unLabel.Foreground = Brushes.DarkGreen;
-                                unLabel.Content = "Nom de l'aliment";
+                                unLabel.Content = FenetreGestionRepertoire.NomAliment;
                             }
                         }
                     }
@@ -534,13 +540,13 @@ namespace Nutritia.UI.Views
             if (unComboBox.SelectedIndex == -1)
             {
                 unLabel.Foreground = Brushes.Red;
-                unLabel.Content = "Catégorie alimentaire (Aucun de sélectionné)";
+                unLabel.Content = FenetreGestionRepertoire.CategorieVide;
                 Erreur = true;
             }
             else
             {
                 unLabel.Foreground = Brushes.DarkGreen;
-                unLabel.Content = "Catégorie alimentaire";
+                unLabel.Content = FenetreGestionRepertoire.CategorieAlimentaire;
             }
         }
 
@@ -552,13 +558,13 @@ namespace Nutritia.UI.Views
             if (unComboBox.SelectedIndex == -1)
             {
                 unLabel.Foreground = Brushes.Red;
-                unLabel.Content = "Unité de mesure (Aucune de sélectionnée)";
+                unLabel.Content = FenetreGestionRepertoire.UniteMesureVide;
                 Erreur = true;
             }
             else
             {
                 unLabel.Foreground = Brushes.DarkGreen;
-                unLabel.Content = "Unité de mesure";
+                unLabel.Content = FenetreGestionRepertoire.UniteMesure;
             }
         }
 
@@ -571,7 +577,7 @@ namespace Nutritia.UI.Views
             if (String.IsNullOrEmpty(unTextBox.Text))
             {
                 unLabel.Foreground = Brushes.Red;
-                unLabel.Content = "Mesure de la portion (champ vide)";
+                unLabel.Content = FenetreGestionRepertoire.MesureVide;
                 Erreur = true;
             }
             else
@@ -583,7 +589,7 @@ namespace Nutritia.UI.Views
                 if (ContientSeulement)
                 {
                     unLabel.Foreground = Brushes.Red;
-                    unLabel.Content = "Mesure de la portion (entier numérique)";
+                    unLabel.Content = FenetreGestionRepertoire.MesureInvalide;
                     Erreur = true;
                 }
                 else
@@ -592,13 +598,13 @@ namespace Nutritia.UI.Views
                     if (int.Parse(unTextBox.Text) < 1 || int.Parse(unTextBox.Text) > 500)
                     {
                         unLabel.Foreground = Brushes.Red;
-                        unLabel.Content = "Mesure de la portion (1 à 500)";
+                        unLabel.Content = FenetreGestionRepertoire.MesureBorne;
                         Erreur = true;
                     }
                     else
                     {
                         unLabel.Foreground = Brushes.DarkGreen;
-                        unLabel.Content = "Mesure de la portion";
+                        unLabel.Content = FenetreGestionRepertoire.MesurePortion;
                     }
                 }
             }
@@ -729,13 +735,13 @@ namespace Nutritia.UI.Views
                     if (somme > iMesure)
                     {
                         valeur.Foreground = Brushes.Red;
-                        valeur.Content = "Valeurs nutritionnelles (total irréel)";
+                        valeur.Content = FenetreGestionRepertoire.ValeurNutritionnelleIrreel;
                         Erreur = true;
                     }
                     else
                     {
                         valeur.Foreground = Brushes.DarkGreen;
-                        valeur.Content = "Valeurs nutritionnelles";
+                        valeur.Content = FenetreGestionRepertoire.ValeurNutritionnelles;
                     }
                 }
             }
@@ -1046,7 +1052,7 @@ namespace Nutritia.UI.Views
             if (!recherche)
             {
                 Recherche_aliment.Foreground = Brushes.Red;
-                Recherche_aliment.Content = "Rechercher un aliment (Auncun trouvé)";
+                Recherche_aliment.Content = FenetreGestionRepertoire.RechercherAlimentAucun;
 
                 Nom_alim_modif.Text = "";
                 cbo_grp_alim_modif.SelectedIndex = -1;
@@ -1064,7 +1070,7 @@ namespace Nutritia.UI.Views
             else
             {
                 Recherche_aliment.Foreground = Brushes.DarkGreen;
-                Recherche_aliment.Content = "Rechercher un aliment";
+                Recherche_aliment.Content = FenetreGestionRepertoire.RechercherAliment;
             }
         }
 
@@ -1646,8 +1652,8 @@ namespace Nutritia.UI.Views
                 Inserer_Plat();
 
                 MessageBoxResult resultat;
-                resultat = MessageBox.Show("Le nouveau plat a été correctement ajouté à la base de données."
-                                            , "Ajout de plat réussie"
+                resultat = MessageBox.Show(FenetreGestionRepertoire.SuccessAjoutPlatMessage
+                                            , FenetreGestionRepertoire.SuccessAjoutPlatTitre
                                             , MessageBoxButton.OK);
             }
         }
@@ -1680,8 +1686,8 @@ namespace Nutritia.UI.Views
                 Modifier_Plat();
 
                 MessageBoxResult resultat;
-                resultat = MessageBox.Show("Le plat a été correctement modifié dans la base de données."
-                                            , "Modification de plat réussie"
+                resultat = MessageBox.Show(FenetreGestionRepertoire.SuccessModifPlatMessage
+                                            , FenetreGestionRepertoire.SuccessModifPlatTitre
                                             , MessageBoxButton.OK);
             }
         }
@@ -1696,7 +1702,7 @@ namespace Nutritia.UI.Views
             if (string.IsNullOrEmpty(unTextBox.Text))
             {
                 unLabel.Foreground = Brushes.Red;
-                unLabel.Content = "Nom du plat (Champ vide)";
+                unLabel.Content = FenetreGestionRepertoire.NomPlatVide;
                 Erreur = true;
             }
             else
@@ -1705,7 +1711,7 @@ namespace Nutritia.UI.Views
                 if (unTextBox.Text.Length > 50 || unTextBox.Text.Length < 2)
                 {
                     unLabel.Foreground = Brushes.Red;
-                    unLabel.Content = "Nom du plat (Entre 2 et 50 caractères)";
+                    unLabel.Content = FenetreGestionRepertoire.NomPlatTaille;
                     Erreur = true;
                 }
                 else
@@ -1717,7 +1723,7 @@ namespace Nutritia.UI.Views
                     if (ContientSeulement)
                     {
                         unLabel.Foreground = Brushes.Red;
-                        unLabel.Content = "Nom du plat (charctères invalides)";
+                        unLabel.Content = FenetreGestionRepertoire.NomPlatInvalide;
                         Erreur = true;
                     }
                     else
@@ -1728,7 +1734,7 @@ namespace Nutritia.UI.Views
                         if (ContientApostropheDebut)
                         {
                             unLabel.Foreground = Brushes.Red;
-                            unLabel.Content = "Nom (Doit débuter avec une lettre)";
+                            unLabel.Content = FenetreGestionRepertoire.NomPlatDebut;
                             Erreur = true;
                         }
                         else
@@ -1769,7 +1775,7 @@ namespace Nutritia.UI.Views
                                 if (platBD == platText)
                                 {
                                     unLabel.Foreground = Brushes.Red;
-                                    unLabel.Content = "Nom du plat (plat déjà existant)";
+                                    unLabel.Content = FenetreGestionRepertoire.NomPlatUnique;
                                     Erreur = true;
                                     unique = false;
                                 }
@@ -1779,7 +1785,7 @@ namespace Nutritia.UI.Views
                             if (unique)
                             {
                                 unLabel.Foreground = Brushes.DarkGreen;
-                                unLabel.Content = "Nom du plat";
+                                unLabel.Content = FenetreGestionRepertoire.NomPlat;
                             }
                         }
                     }
@@ -1797,7 +1803,7 @@ namespace Nutritia.UI.Views
             if (string.IsNullOrEmpty(unTextBox.Text))
             {
                 unLabel.Foreground = Brushes.Red;
-                unLabel.Content = "Nom du plat (Champ vide)";
+                unLabel.Content = FenetreGestionRepertoire.NomPlatVide;
                 Erreur = true;
             }
             else
@@ -1806,7 +1812,7 @@ namespace Nutritia.UI.Views
                 if (unTextBox.Text.Length > 50)
                 {
                     unLabel.Foreground = Brushes.Red;
-                    unLabel.Content = "Nom du plat (Entre 2 et 50 caractères)";
+                    unLabel.Content = FenetreGestionRepertoire.NomPlatTaille;
                     Erreur = true;
                 }
                 else
@@ -1818,7 +1824,7 @@ namespace Nutritia.UI.Views
                     if (ContientSeulement)
                     {
                         unLabel.Foreground = Brushes.Red;
-                        unLabel.Content = "Nom du plat (caractères invalides)";
+                        unLabel.Content = FenetreGestionRepertoire.NomPlatInvalide;
                         Erreur = true;
                     }
                     else
@@ -1829,7 +1835,7 @@ namespace Nutritia.UI.Views
                         if (ContientApostropheDebut)
                         {
                             unLabel.Foreground = Brushes.Red;
-                            unLabel.Content = "Nom (Doit débuter avec une lettre)";
+                            unLabel.Content = FenetreGestionRepertoire.NomPlatDebut;
                             Erreur = true;
                         }
                         else
@@ -1886,7 +1892,7 @@ namespace Nutritia.UI.Views
                                     if (platBD == platText && platText != platRecherche)
                                     {
                                         unLabel.Foreground = Brushes.Red;
-                                        unLabel.Content = "Nom du plat (plat déjà existant)";
+                                        unLabel.Content = FenetreGestionRepertoire.NomPlatUnique;
                                         Erreur = true;
                                         unique = false;
                                     }
@@ -1896,7 +1902,7 @@ namespace Nutritia.UI.Views
                                     if (platBD == platText)
                                     {
                                         unLabel.Foreground = Brushes.Red;
-                                        unLabel.Content = "Nom du plat (plat déjà existant)";
+                                        unLabel.Content = FenetreGestionRepertoire.NomPlatUnique;
                                         Erreur = true;
                                         unique = false;
                                     }
@@ -1907,7 +1913,7 @@ namespace Nutritia.UI.Views
                             if (unique)
                             {
                                 unLabel.Foreground = Brushes.DarkGreen;
-                                unLabel.Content = "Nom du plat";
+                                unLabel.Content = FenetreGestionRepertoire.NomPlat;
                             }
                         }
                     }
@@ -1923,13 +1929,13 @@ namespace Nutritia.UI.Views
             if (unComboBox.SelectedIndex == -1)
             {
                 unLabel.Foreground = Brushes.Red;
-                unLabel.Content = "Type de plat (Aucun de sélectionné)";
+                unLabel.Content = FenetreGestionRepertoire.TypeVide;
                 Erreur = true;
             }
             else
             {
                 unLabel.Foreground = Brushes.DarkGreen;
-                unLabel.Content = "Type de plat";
+                unLabel.Content = FenetreGestionRepertoire.TypePlat;
             }
         }
 
@@ -1945,13 +1951,13 @@ namespace Nutritia.UI.Views
             if (uneListeAliments.Count == 0)
             {
                 unGroupBox.Foreground = Brushes.Red;
-                unGroupBox.Header = "Composition du plat (Auncun aliment)";
+                unGroupBox.Header = FenetreGestionRepertoire.CompositionVide;
                 Erreur = true;
             }
             else
             {
                 unGroupBox.Foreground = Brushes.DarkGreen;
-                unGroupBox.Header = "Composition du plat";
+                unGroupBox.Header = FenetreGestionRepertoire.CompositionPlat;
             }
         }
 
@@ -2279,7 +2285,7 @@ namespace Nutritia.UI.Views
             if (!recherche)
             {
                 Recherche_plat.Foreground = Brushes.Red;
-                Recherche_plat.Content = "Rechercher un plat (Auncun trouvé)";
+                Recherche_plat.Content = FenetreGestionRepertoire.RechercherPlatAucun;
 
                 //----------------------------------------Remise à neuf des champs de saisie----------------------------------------
                 Nom_plat_modif.Text = "";
@@ -2292,7 +2298,7 @@ namespace Nutritia.UI.Views
             else
             {
                 Recherche_plat.Foreground = Brushes.DarkGreen;
-                Recherche_plat.Content = "Rechercher un plat";
+                Recherche_plat.Content = FenetreGestionRepertoire.RechercherPlat;
             }
         }
 
@@ -2320,5 +2326,10 @@ namespace Nutritia.UI.Views
         }
 
         #endregion
+
+        private void CultureManager_UICultureChanged(object sender, EventArgs e)
+        {
+            App.Current.MainWindow.Title = FenetreGestionRepertoire.Titre;
+        }
     }
 }

@@ -160,6 +160,16 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="UI\Ressources\Localisation\FenetreAjoutPlatMembre.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FenetreAjoutPlatMembre.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Ressources\Localisation\FenetreAjoutPlatMembre.en.Designer.cs">
+      <DependentUpon>FenetreAjoutPlatMembre.en.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Include="UI\Ressources\Localisation\FenetreBannissement.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -217,6 +227,16 @@
     </Compile>
     <Compile Include="UI\Ressources\Localisation\FenetreGestionAdmin.en.Designer.cs">
       <DependentUpon>FenetreGestionAdmin.en.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="UI\Ressources\Localisation\FenetreGestionRepertoire.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FenetreGestionRepertoire.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Ressources\Localisation\FenetreGestionRepertoire.en.Designer.cs">
+      <DependentUpon>FenetreGestionRepertoire.en.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
@@ -704,6 +724,15 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FenetreAide.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\FenetreAjoutPlatMembre.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FenetreAjoutPlatMembre.en.Designer.cs</LastGenOutput>
+      <DependentUpon>FenetreAjoutPlatMembre.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\FenetreAjoutPlatMembre.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FenetreAjoutPlatMembre.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Ressources\Localisation\FenetreBannissement.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FenetreBannissement.en.Designer.cs</LastGenOutput>
@@ -757,6 +786,15 @@
     <EmbeddedResource Include="UI\Ressources\Localisation\FenetreGestionAdmin.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FenetreGestionAdmin.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\FenetreGestionRepertoire.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FenetreGestionRepertoire.en.Designer.cs</LastGenOutput>
+      <DependentUpon>FenetreGestionRepertoire.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Ressources\Localisation\FenetreGestionRepertoire.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FenetreGestionRepertoire.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Ressources\Localisation\FenetreInfoMembre.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

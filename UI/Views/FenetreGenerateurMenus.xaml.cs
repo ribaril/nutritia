@@ -638,17 +638,17 @@ namespace Nutritia.UI.Views
             // Il s'agit d'un déjeuner.
             if (nbPlats == NB_PLATS_DEJEUNER)
             {
-                GenererSeparateurPlat("Déjeuner", 0);
-                GenererSeparateurPlat("Breuvage", 1);
+                GenererSeparateurPlat(Nutritia.UI.Ressources.Localisation.FenetreGenerateurMenus.SeparateurDejeuner, 0);
+                GenererSeparateurPlat(Nutritia.UI.Ressources.Localisation.FenetreGenerateurMenus.SeparateurBreuvage, 1);
             }
 
             // Il s'agit d'un diner/souper.
             if (nbPlats == NB_PLATS_DINER_SOUPER)
             {
-                GenererSeparateurPlat("Entrée", 0);
-                GenererSeparateurPlat("Plat principal", 1);
-                GenererSeparateurPlat("Breuvage", 2);
-                GenererSeparateurPlat("Déssert", 3);
+                GenererSeparateurPlat(Nutritia.UI.Ressources.Localisation.FenetreGenerateurMenus.SeparateurEntree, 0);
+                GenererSeparateurPlat(Nutritia.UI.Ressources.Localisation.FenetreGenerateurMenus.SeparateurPlatPrincipal, 1);
+                GenererSeparateurPlat(Nutritia.UI.Ressources.Localisation.FenetreGenerateurMenus.SeparateurBreuvage, 2);
+                GenererSeparateurPlat(Nutritia.UI.Ressources.Localisation.FenetreGenerateurMenus.SeparateurDessert, 3);
             }
 
             // Il s'agit d'une journée ou encore d'une semaine.
@@ -656,15 +656,26 @@ namespace Nutritia.UI.Views
             {
                 for (int i = 0; i < nbJours; i++)
                 {
-                    GenererSeparateurPlat("Jour " + (i + 1) + " (Déjeuner)", i * (nbPlats / nbJours));
-                    GenererSeparateurPlat("Jour " + (i + 1) + " (Breuvage)", i * (nbPlats / nbJours) + 1);
+                    GenererSeparateurPlat(Nutritia.UI.Ressources.Localisation.FenetreGenerateurMenus.SeparateurJour + " " 
+                        + (i + 1) + " (" + Nutritia.UI.Ressources.Localisation.FenetreGenerateurMenus.SeparateurDejeuner + ")", i * (nbPlats / nbJours));
+
+                    GenererSeparateurPlat(Nutritia.UI.Ressources.Localisation.FenetreGenerateurMenus .SeparateurJour 
+                        + " " + (i + 1) + " (" + Nutritia.UI.Ressources.Localisation.FenetreGenerateurMenus.SeparateurBreuvage + ")", i * (nbPlats / nbJours) + 1);
 
                     for (int j = 0; j < 2; j++)
                     {
-                        GenererSeparateurPlat("Jour " + (i + 1) + " (Entrée)", (i * (nbPlats / nbJours) + 2 + (j * 4)));
-                        GenererSeparateurPlat("Jour " + (i + 1) + " (Plat principal)", (i * (nbPlats / nbJours) + 3 + (j * 4)));
-                        GenererSeparateurPlat("Jour " + (i + 1) + " (Breuvage)", (i * (nbPlats / nbJours) + 4 + (j * 4)));
-                        GenererSeparateurPlat("Jour " + (i + 1) + " (Déssert)", (i * (nbPlats / nbJours) + 5 + (j * 4)));
+                        GenererSeparateurPlat(Nutritia.UI.Ressources.Localisation.FenetreGenerateurMenus .SeparateurJour 
+                            + " " + (i + 1) + " (" + Nutritia.UI.Ressources.Localisation.FenetreGenerateurMenus.SeparateurEntree + ")", (i * (nbPlats / nbJours) + 2 + (j * 4)));
+
+                        GenererSeparateurPlat(Nutritia.UI.Ressources.Localisation.FenetreGenerateurMenus.SeparateurJour
+                            + " " + (i + 1) + " (" + Nutritia.UI.Ressources.Localisation.FenetreGenerateurMenus.SeparateurPlatPrincipal + ")", (i * (nbPlats / nbJours) + 3 + (j * 4)));
+
+                        GenererSeparateurPlat(Nutritia.UI.Ressources.Localisation.FenetreGenerateurMenus.SeparateurJour
+                            + " " + (i + 1) + " (" + Nutritia.UI.Ressources.Localisation.FenetreGenerateurMenus.SeparateurBreuvage + ")", (i * (nbPlats / nbJours) + 4 + (j * 4)));
+
+                        GenererSeparateurPlat(Nutritia.UI.Ressources.Localisation.FenetreGenerateurMenus.SeparateurJour
+                            + " " + (i + 1) + " (" + Nutritia.UI.Ressources.Localisation.FenetreGenerateurMenus.SeparateurDessert + ")", (i * (nbPlats / nbJours) + 5 + (j * 4)));
+
                     }
                 }
             }

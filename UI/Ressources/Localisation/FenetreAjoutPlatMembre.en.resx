@@ -117,49 +117,64 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Accordeon" xml:space="preserve">
-    <value>Accordion</value>
+  <data name="AjoutImage" xml:space="preserve">
+    <value>Add a picture</value>
   </data>
-  <data name="BarreRecherche" xml:space="preserve">
-    <value>SearchBox</value>
+  <data name="AjoutPlat" xml:space="preserve">
+    <value>Add meals</value>
   </data>
-  <data name="Breuvage" xml:space="preserve">
-    <value>Beverage</value>
+  <data name="AlimentDispoGroupe" xml:space="preserve">
+    <value>Food available by group</value>
   </data>
-  <data name="CalculatriceNutritionnelle" xml:space="preserve">
-    <value>Nutrition calculator</value>
+  <data name="CompositionPlat" xml:space="preserve">
+    <value>Composition of the meal</value>
   </data>
-  <data name="De" xml:space="preserve">
-    <value>of</value>
+  <data name="CompositionVide" xml:space="preserve">
+    <value>Composition of the meal (No food)</value>
   </data>
-  <data name="Dejeuner" xml:space="preserve">
-    <value>Breakfast</value>
+  <data name="ConfirmerAjout" xml:space="preserve">
+    <value>Confirm the addition</value>
   </data>
-  <data name="Dessert" xml:space="preserve">
-    <value>Dessert</value>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
   </data>
-  <data name="Entree" xml:space="preserve">
-    <value>Appetizer</value>
+  <data name="ErreurMessage" xml:space="preserve">
+    <value>There are one or more invalid fields</value>
   </data>
-  <data name="Plateau" xml:space="preserve">
-    <value>Dish</value>
+  <data name="ErreurTitre" xml:space="preserve">
+    <value>Error</value>
   </data>
-  <data name="PlatPrincipal" xml:space="preserve">
-    <value>Main dish</value>
+  <data name="NomDebut" xml:space="preserve">
+    <value>Name of the meal (Must begin with a letter)</value>
   </data>
-  <data name="RecherchePlatAliment" xml:space="preserve">
-    <value>Search for a meal or food</value>
+  <data name="NomInvalide" xml:space="preserve">
+    <value>Name of the meal (Invalid caracters)</value>
+  </data>
+  <data name="NomPlat" xml:space="preserve">
+    <value>Name of the meal</value>
+  </data>
+  <data name="NomTaille" xml:space="preserve">
+    <value>Name of the meal (Between 2 and 50 caracaters)</value>
+  </data>
+  <data name="NomUnique" xml:space="preserve">
+    <value>Name of the meal (Meal already exist)</value>
+  </data>
+  <data name="NomVide" xml:space="preserve">
+    <value>Name of the meal (Empty field)</value>
+  </data>
+  <data name="SuccessMessage" xml:space="preserve">
+    <value>The new meal has been successfully added to the database.</value>
+  </data>
+  <data name="SuccessTitre" xml:space="preserve">
+    <value>Success</value>
   </data>
   <data name="Titre" xml:space="preserve">
-    <value>Nutritia - Nutrition calculator</value>
+    <value>Nutritia - Add a meal</value>
   </data>
-  <data name="ValeurNutritive" xml:space="preserve">
-    <value>Nutritional value</value>
+  <data name="TypePlat" xml:space="preserve">
+    <value>Type of meal</value>
   </data>
-  <data name="ValeurPlateau" xml:space="preserve">
-    <value>Nutritional value of the dish</value>
-  </data>
-  <data name="Vider" xml:space="preserve">
-    <value>Empty</value>
+  <data name="TypeVide" xml:space="preserve">
+    <value>Type of meal (None selected)</value>
   </data>
 </root>
