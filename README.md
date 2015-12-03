@@ -1,7 +1,7 @@
 ﻿# Nutritia
 ﻿
 [![Build status](https://ci.appveyor.com/api/projects/status/axic4ds0j9mcl3dc/branch/develop?svg=true)](https://ci.appveyor.com/project/Tri125/nutritia)
-[![Version number](https://img.shields.io/badge/Version-1.5.0.0-blue.svg)](https://github.com/Nutritia/nutritia/releases)
+[![Version number](https://img.shields.io/badge/Version-1.5.1.0-blue.svg)](https://github.com/Nutritia/nutritia/releases)
 
 [![Join the chat at https://gitter.im/Nutritia/nutritia](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Nutritia/nutritia?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
