@@ -225,6 +225,9 @@ namespace Nutritia.UI.Pages
             txtDateExpiration.Text = String.Empty;
             txtNoCarte.Text = String.Empty;
             txtProprietaire.Text = String.Empty;
+            imgAmex.IsEnabled = true;
+            imgMasterCard.IsEnabled = true;
+            imgVisa.IsEnabled = true;
         }
 
         private void txtNo_PreviewTextInput(object sender, TextCompositionEventArgs e)
