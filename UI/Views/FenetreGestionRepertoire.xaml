@@ -6,36 +6,36 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Nutritia.UI.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="475" d:DesignWidth="650">
+             d:DesignHeight="475" d:DesignWidth="650"
+             ResxExtension.DefaultResxName="Nutritia.UI.Ressources.Localisation.FenetreGestionRepertoire" Language="{UICulture}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.25*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Content="Gestion des aliments et plats" Foreground="DarkGreen" FontSize="30" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Center"></Label>
+        <Label Grid.Row="0" Content="{Resx GestionAlimentPlat}" Foreground="DarkGreen" FontSize="30" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Center"></Label>
 
         <StackPanel Grid.Row="0" Width="150" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,50,0,0">
-            <RadioButton Name="rdb_ajout" Checked="rdb_ajout_Checked" IsChecked="True" Content="Ajout" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="0,0,0,0"></RadioButton>
-            <RadioButton Name="rdb_modif" Checked="rdb_modif_Checked" Content="Modification" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="0,5,0,0"></RadioButton>
+            <RadioButton Name="rdb_ajout" Checked="rdb_ajout_Checked" IsChecked="True" Content="{Resx Ajout}" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="0,0,0,0"></RadioButton>
+            <RadioButton Name="rdb_modif" Checked="rdb_modif_Checked" Content="{Resx Modification}" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="0,5,0,0"></RadioButton>
         </StackPanel>
 
         <StackPanel Grid.Row="0" Width="150" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,50,150,0">
-            <RadioButton Name="rdb_aliment" Checked="rdb_aliment_Checked" Content="Aliment" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="0,0,0,0"></RadioButton>
-            <RadioButton Name="rdb_plat" Checked="rdb_plat_Checked" IsChecked="True" Content="Plat / Breuvage" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="0,5,0,0"></RadioButton>
+            <RadioButton Name="rdb_aliment" Checked="rdb_aliment_Checked" Content="{Resx Aliment}" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="0,0,0,0"></RadioButton>
+            <RadioButton Name="rdb_plat" Checked="rdb_plat_Checked" IsChecked="True" Content="{Resx PlatBreuvage}" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="0,5,0,0"></RadioButton>
         </StackPanel>
 
         <Grid Grid.Row="1" Name="grid_ajout_plat" Visibility="Hidden">
-            <GroupBox Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="10,10,10,10" BorderBrush="DarkGreen">
-                <GroupBox.Header>Ajout d'un plat / breuvage</GroupBox.Header>
+            <GroupBox Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="10,10,10,10" BorderBrush="DarkGreen" Header="{Resx AjoutPlatBreuvage}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <Label Name="lbl_nom_plat" Grid.Row="0" Content="Nom du plat" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,5,0,0"></Label>
+                    <Label Name="lbl_nom_plat" Grid.Row="0" Content="{Resx NomPlat}" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,5,0,0"></Label>
                     <TextBox Name="Nom_plat" Grid.Row="0" SelectedText="" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,25,0,0" TextChanged="Nom_plat_TextChanged"></TextBox>
-                    <Label Name="lbl_type" Grid.Row="0" Content="Type de plat" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,55,0,0"></Label>
+                    <Label Name="lbl_type" Grid.Row="0" Content="{Resx TypePlat}" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,55,0,0"></Label>
                     <ComboBox Grid.Row="0" Name="cbo_type" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,75,0,0">
                         <ComboBoxItem>Entrée</ComboBoxItem>
                         <ComboBoxItem>Plat principal</ComboBoxItem>
@@ -44,12 +44,12 @@
                         <ComboBoxItem>Déjeuner</ComboBoxItem>
                     </ComboBox>
                     <Image Name="img_plat" Width="60" Height="60" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,115,0,0" Source="pack://application:,,,/UI/Images/nonDisponible.png"></Image>
-                    <Button Name="btn_ajout_img_plat" Grid.Row="0" Content="Ajouter une image" Height="25" Width="120" Foreground="DarkGreen" FontSize="13" Style="{StaticResource nonTransparent}" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,130,0,0" Click="Ajouter_Image"></Button>
+                    <Button Name="btn_ajout_img_plat" Grid.Row="0" Content="{Resx AjouterImage}" Height="25" Width="120" Foreground="DarkGreen" FontSize="13" Style="{StaticResource nonTransparent}" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,130,0,0" Click="Ajouter_Image"></Button>
 
-                    <Label Grid.Row="0" Content="Description" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,180,0,0"></Label>
+                    <Label Grid.Row="0" Content="{Resx Description}" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,180,0,0"></Label>
                     <TextBox Name="Description" Grid.Row="0" Width="250" Height="80" MaxLength="200" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,205,0,0"></TextBox>
 
-                    <GroupBox x:Name="compo_plat" Header="Composition du plat" FontSize="13" HorizontalAlignment="Right"  Grid.Row="2" VerticalAlignment="Top" Height="160" Width="250" Margin="0,170,20,0">
+                    <GroupBox x:Name="compo_plat" Header="{Resx CompositionPlat}" FontSize="13" HorizontalAlignment="Right"  Grid.Row="2" VerticalAlignment="Top" Height="160" Width="250" Margin="0,170,20,0">
                         <ScrollViewer>
                             <StackPanel Name="composition_plat">
                             </StackPanel>
@@ -57,9 +57,9 @@
 
                     </GroupBox>
 
-                    <Button Name="Btn_confirmer_ajout_plat" Grid.Row="1" Content="Confirmer l'ajout" Height="30" Style="{StaticResource nonTransparent}" Width="150" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="67,0,0,10" Click="Valider_Inserer_Plat"></Button>
+                    <Button Name="Btn_confirmer_ajout_plat" Grid.Row="1" Content="{Resx ConfirmerAjout}" Height="30" Style="{StaticResource nonTransparent}" Width="150" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="67,0,0,10" Click="Valider_Inserer_Plat"></Button>
 
-                    <Label Grid.Row="0" Content="Aliments disponibles par groupe" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,20,0"></Label>
+                    <Label Grid.Row="0" Content="{Resx AlimentDispoGroupe}" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,20,0"></Label>
                     <ScrollViewer Name="aliments_ajout" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Height="130" Width="250" FontSize="14" FontFamily="Berlin Sans FB Demi" Margin="0,30,20,0">
                         <layoutToolkit:Accordion Width="288" Name="accordeon_aliments">
                         </layoutToolkit:Accordion>
@@ -69,19 +69,18 @@
         </Grid>
 
         <Grid Grid.Row="1" Name="grid_modification_plat" Visibility="Visible">
-            <GroupBox Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="10,10,10,10" BorderBrush="DarkGreen">
-                <GroupBox.Header>Ajout d'un plat / breuvage</GroupBox.Header>
+            <GroupBox Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="10,10,10,10" BorderBrush="DarkGreen" Header="{Resx ModificationPlatBreuvage}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <Label Name="Recherche_plat" Grid.Row="0" Content="Rechercher un plat" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,0,0,0"></Label>
+                    <Label Name="Recherche_plat" Grid.Row="0" Content="{Resx RechercherPlat}" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,0,0,0"></Label>
                     <TextBox Name="Search_plat" Grid.Row="0" SelectedText="" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0" TextChanged="Recherche_Plat"></TextBox>
 
-                    <Label Name="lbl_nom_plat_modif" Grid.Row="0" Content="Nom du plat" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,50,0,0"></Label>
+                    <Label Name="lbl_nom_plat_modif" Grid.Row="0" Content="{Resx NomPlat}" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,50,0,0"></Label>
                     <TextBox Name="Nom_plat_modif" Grid.Row="0" SelectedText="" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,70,0,0" TextChanged="Nom_plat_TextChanged"></TextBox>
-                    <Label Name="lbl_type_modif" Grid.Row="0" Content="Type de plat" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,100,0,0"></Label>
+                    <Label Name="lbl_type_modif" Grid.Row="0" Content="{Resx TypePlat}" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,100,0,0"></Label>
                     <ComboBox Grid.Row="0" Name="cbo_type_modif" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,120,0,0">
                         <ComboBoxItem>Entrée</ComboBoxItem>
                         <ComboBoxItem>Plat principal</ComboBoxItem>
@@ -90,12 +89,12 @@
                         <ComboBoxItem>Déjeuner</ComboBoxItem>
                     </ComboBox>
                     <Image Name="img_plat_modif" Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,160,0,0" Source="pack://application:,,,/UI/Images/nonDisponible.png"></Image>
-                    <Button Name="btn_ajout_img_plat_modif" Grid.Row="0" Content="Ajouter une image" Height="25" Width="120" Foreground="DarkGreen" FontSize="13" Style="{StaticResource nonTransparent}" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,175,0,0" Click="Ajouter_Image"></Button>
+                    <Button Name="btn_ajout_img_plat_modif" Grid.Row="0" Content="{Resx AjouterImage}" Height="25" Width="120" Foreground="DarkGreen" FontSize="13" Style="{StaticResource nonTransparent}" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,175,0,0" Click="Ajouter_Image"></Button>
 
-                    <Label Grid.Row="0" Content="Description" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,210,0,0"></Label>
+                    <Label Grid.Row="0" Content="{Resx Description}" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,210,0,0"></Label>
                     <TextBox Name="Description_modif" Grid.Row="0" Width="250" Height="60" MaxLength="200" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,235,0,0"></TextBox>
 
-                    <GroupBox x:Name="compo_plat_modif" Header="Composition du plat" FontSize="13" HorizontalAlignment="Right"  Grid.Row="2" VerticalAlignment="Top" Height="160" Width="250" Margin="0,170,20,0">
+                    <GroupBox x:Name="compo_plat_modif" Header="{Resx CompositionPlat}" FontSize="13" HorizontalAlignment="Right"  Grid.Row="2" VerticalAlignment="Top" Height="160" Width="250" Margin="0,170,20,0">
                         <ScrollViewer>
                             <StackPanel Name="composition_plat_modif">
                             </StackPanel>
@@ -103,9 +102,9 @@
 
                     </GroupBox>
 
-                    <Button Name="Btn_confirmer_modif_plat" Grid.Row="1" Content="Confirmer la modification" Height="25" Style="{StaticResource nonTransparent}" Width="170" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="57,0,0,10" Click="Valider_Modifier_Plat"></Button>
+                    <Button Name="Btn_confirmer_modif_plat" Grid.Row="1" Content="{Resx ConfirmerModification}" Height="25" Style="{StaticResource nonTransparent}" Width="170" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="57,0,0,10" Click="Valider_Modifier_Plat"></Button>
 
-                    <Label Grid.Row="0" Content="Aliments disponibles par groupe" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,20,0"></Label>
+                    <Label Grid.Row="0" Content="{Resx AlimentDispoGroupe}" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,20,0"></Label>
                     <ScrollViewer Name="aliments_modif" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Height="130" Width="250" FontSize="14" FontFamily="Berlin Sans FB Demi" Margin="0,30,20,0">
                         <layoutToolkit:Accordion Width="288" Name="accordeon_aliments_modif">
                         </layoutToolkit:Accordion>
@@ -115,15 +114,14 @@
         </Grid>
 
         <Grid Grid.Row="1" Name="grid_ajout_aliment" Visibility="Hidden">
-            <GroupBox Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="10,10,10,10" BorderBrush="DarkGreen">
-                <GroupBox.Header>Ajout d'un aliment</GroupBox.Header>
+            <GroupBox Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="10,10,10,10" BorderBrush="DarkGreen" Header="{Resx AjoutAliment}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Label Name="lbl_nom" Grid.Row="0" Content="Nom de l'aliment" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,30,0,0"></Label>
+                    <Label Name="lbl_nom" Grid.Row="0" Content="{Resx NomAliment}" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,30,0,0"></Label>
                     <TextBox Name="Nom_alim" Grid.Row="0" SelectedText="" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,50,0,0" TextChanged="Nom_alim_TextChanged"></TextBox>
-                    <Label Name="lbl_grp_alim" Grid.Row="0" Content="Catégorie alimentaire" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,80,0,0"></Label>
+                    <Label Name="lbl_grp_alim" Grid.Row="0" Content="{Resx CategorieAlimentaire}" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,80,0,0"></Label>
                     <ComboBox Grid.Row="0" Name="cbo_grp_alim" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,100,0,0">
                         <ComboBoxItem></ComboBoxItem>
                         <ComboBoxItem>Boissons</ComboBoxItem>
@@ -139,50 +137,49 @@
                         <ComboBoxItem>Produits sucrés</ComboBoxItem>
                         <ComboBoxItem>Autres</ComboBoxItem>
                     </ComboBox>
-                    <Label Name="lbl_unite_mesure" Grid.Row="0" Content="Unité de mesure" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,130,0,0"></Label>
+                    <Label Name="lbl_unite_mesure" Grid.Row="0" Content="{Resx UniteMesure}" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,130,0,0"></Label>
                     <ComboBox Grid.Row="0" Name="cbo_unite_mesure" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,150,0,0">
                         <ComboBoxItem>Millilitre</ComboBoxItem>
                         <ComboBoxItem>Gramme</ComboBoxItem>
                         <ComboBoxItem>Unité</ComboBoxItem>
                     </ComboBox>
-                    <Label Name="lbl_mesure" Grid.Row="0" Content="Mesure de la portion" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,180,0,0"></Label>
+                    <Label Name="lbl_mesure" Grid.Row="0" Content="{Resx MesurePortion}" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,180,0,0"></Label>
                     <TextBox Name="Mesure" Grid.Row="0" MaxLength="3" SelectedText="" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="82.5,200,0,0"></TextBox>
 
                     <Image Name="img_alim" Width="75" Height="75" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,240,0,0" Source="pack://application:,,,/UI/Images/nonDisponible.png"></Image>
-                    <Button Name="btn_ajout_img_alim" Grid.Row="0" Content="Ajouter une image" Height="30" Width="150" Foreground="DarkGreen" FontSize="15" Style="{StaticResource nonTransparent}" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,260,0,0" Click="Ajouter_Image"></Button>
+                    <Button Name="btn_ajout_img_alim" Grid.Row="0" Content="{Resx AjouterImage}" Height="30" Width="150" Foreground="DarkGreen" FontSize="15" Style="{StaticResource nonTransparent}" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,260,0,0" Click="Ajouter_Image"></Button>
 
-                    <Label Name="lbl_valeurs" Grid.Row="0" Content="Valeurs nutritionnelles" Width="265" Height="30" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,20,0"></Label>
-                    <Label Name="lbl_calories" Grid.Row="0" Content="Énergie (calories)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,160,0"></Label>
+                    <Label Name="lbl_valeurs" Grid.Row="0" Content="{Resx ValeurNutritionnelles}" Width="265" Height="30" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,20,0"></Label>
+                    <Label Name="lbl_calories" Grid.Row="0" Content="{Resx Energie}" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,160,0"></Label>
                     <TextBox Name="Calories" Grid.Row="0"  MaxLength="6" SelectedText="" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,50,160,0"></TextBox>
-                    <Label Name="lbl_proteines" Grid.Row="0" Content="Protéines (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,80,160,0"></Label>
+                    <Label Name="lbl_proteines" Grid.Row="0" Content="{Resx Proteine}" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,80,160,0"></Label>
                     <TextBox Name="Proteines" Grid.Row="0"  MaxLength="6" SelectedText="" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,100,160,0"></TextBox>
-                    <Label Name="lbl_glucides" Grid.Row="0" Content="Glucides (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,130,160,0"></Label>
+                    <Label Name="lbl_glucides" Grid.Row="0" Content="{Resx Glucide}" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,130,160,0"></Label>
                     <TextBox Name="Glucides" Grid.Row="0"  MaxLength="6" SelectedText="" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,150,160,0"></TextBox>
-                    <Label Name="lbl_fibres" Grid.Row="0" Content="Fibres (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,20,0"></Label>
+                    <Label Name="lbl_fibres" Grid.Row="0" Content="{Resx Fibre}" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,20,0"></Label>
                     <TextBox Name="Fibres" Grid.Row="0"  MaxLength="6" SelectedText="" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,50,20,0"></TextBox>
-                    <Label Name="lbl_lipides" Grid.Row="0" Content="Lipides (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,80,20,0"></Label>
+                    <Label Name="lbl_lipides" Grid.Row="0" Content="{Resx Lipide}" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,80,20,0"></Label>
                     <TextBox Name="Lipides" Grid.Row="0"  MaxLength="6" SelectedText="" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,100,20,0"></TextBox>
-                    <Label Name="lbl_cholesterol" Grid.Row="0" Content="Cholestérol (mg)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,130,20,0"></Label>
+                    <Label Name="lbl_cholesterol" Grid.Row="0" Content="{Resx Cholesterol}" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,130,20,0"></Label>
                     <TextBox Name="Cholesterol" Grid.Row="0"  MaxLength="6" SelectedText="" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,150,20,0"></TextBox>
-                    <Label Name="lbl_sodium" Grid.Row="0" Content="Sodium (mg)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,180,160,0"></Label>
+                    <Label Name="lbl_sodium" Grid.Row="0" Content="{Resx Sodium}" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,180,160,0"></Label>
                     <TextBox Name="Sodium" Grid.Row="0"  MaxLength="6" SelectedText="" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,200,160,0"></TextBox>
                 </Grid>
             </GroupBox>
-            <Button Name="btn_creer" Grid.Row="0" Content="Ajouter l'aliment" Height="30" Width="150" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Style="{StaticResource nonTransparent}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="315,0,0,48" Click="Valider_Inserer_Aliment"></Button>
+            <Button Name="btn_creer" Grid.Row="0" Content="{Resx AjouterAliment}" Height="30" Width="150" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Style="{StaticResource nonTransparent}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="315,0,0,48" Click="Valider_Inserer_Aliment"></Button>
         </Grid>
 
         <Grid Grid.Row="1" Name="grid_modif_aliment" Visibility="Hidden">
-            <GroupBox Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="10,10,10,10" BorderBrush="DarkGreen">
-                <GroupBox.Header>Modification d'un aliment</GroupBox.Header>
+            <GroupBox Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" Margin="10,10,10,10" BorderBrush="DarkGreen" Header="{Resx ModificationAliment}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Label Name="Recherche_aliment" Grid.Row="0" Content="Rechercher un aliment" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,0,0,0"></Label>
+                    <Label Name="Recherche_aliment" Grid.Row="0" Content="{Resx RechercherAliment}" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,0,0,0"></Label>
                     <TextBox Name="Search_alim" Grid.Row="0" SelectedText="" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0" TextChanged="Recherche_Aliment"></TextBox>
-                    <Label Name="lbl_nom_modif" Grid.Row="0" Content="Nom de l'aliment" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,50,0,0"></Label>
+                    <Label Name="lbl_nom_modif" Grid.Row="0" Content="{Resx NomAliment}" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,50,0,0"></Label>
                     <TextBox Name="Nom_alim_modif" Grid.Row="0" SelectedText="" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,70,0,0"></TextBox>
-                    <Label Name="lbl_grp_alim_modif" Grid.Row="0" Content="Catégorie alimentaire" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,100,0,0"></Label>
+                    <Label Name="lbl_grp_alim_modif" Grid.Row="0" Content="{Resx CategorieAlimentaire}" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,100,0,0"></Label>
                     <ComboBox Grid.Row="0" Name="cbo_grp_alim_modif" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,120,0,0">
                         <ComboBoxItem></ComboBoxItem>
                         <ComboBoxItem>Boissons</ComboBoxItem>
@@ -199,37 +196,37 @@
                         <ComboBoxItem>Autres</ComboBoxItem>
                     </ComboBox>
 
-                    <Label Name="lbl_unite_mesure_modif" Grid.Row="0" Content="Unité de mesure" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,150,0,0"></Label>
+                    <Label Name="lbl_unite_mesure_modif" Grid.Row="0" Content="{Resx UniteMesure}" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,150,0,0"></Label>
                     <ComboBox Grid.Row="0" Name="cbo_unite_mesure_modif" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,170,0,0">
                         <ComboBoxItem>Millilitre</ComboBoxItem>
                         <ComboBoxItem>Gramme</ComboBoxItem>
                         <ComboBoxItem>Unité</ComboBoxItem>
                     </ComboBox>
 
-                    <Label Name="lbl_mesure_modif" Grid.Row="0" Content="Mesure de la portion" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,200,0,0"></Label>
+                    <Label Name="lbl_mesure_modif" Grid.Row="0" Content="{Resx MesurePortion}" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,200,0,0"></Label>
                     <TextBox Name="Mesure_modif" Grid.Row="0" MaxLength="3" SelectedText="" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="82.5,220,0,0"></TextBox>
 
                     <Image Name="img_alim_modif" Width="75" Height="75" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,255,0,0" Source="pack://application:,,,/UI/Images/nonDisponible.png"></Image>
-                    <Button Name="btn_modif_img_alim" Grid.Row="0" Content="Ajouter une image" Height="30" Width="150" Foreground="DarkGreen" FontSize="15" Style="{StaticResource nonTransparent}" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,275,0,0" Click="Ajouter_Image"></Button>
+                    <Button Name="btn_modif_img_alim" Grid.Row="0" Content="{Resx AjouterImage}" Height="30" Width="150" Foreground="DarkGreen" FontSize="15" Style="{StaticResource nonTransparent}" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,275,0,0" Click="Ajouter_Image"></Button>
 
-                    <Label Name="lbl_valeurs_modif" Grid.Row="0" Content="Valeurs nutritionnelles" Width="265" Height="30" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,20,0"></Label>
-                    <Label Name="lbl_calories_modif" Grid.Row="0" Content="Énergie (calories)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,160,0"></Label>
+                    <Label Name="lbl_valeurs_modif" Grid.Row="0" Content="{Resx ValeurNutritionnelles}" Width="265" Height="30" Foreground="DarkGreen" FontSize="15" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,20,0"></Label>
+                    <Label Name="lbl_calories_modif" Grid.Row="0" Content="{Resx Energie}" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,160,0"></Label>
                     <TextBox Name="Calories_modif" Grid.Row="0"  MaxLength="6" SelectedText="" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,50,160,0"></TextBox>
-                    <Label Name="lbl_proteines_modif" Grid.Row="0" Content="Protéines (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,80,160,0"></Label>
+                    <Label Name="lbl_proteines_modif" Grid.Row="0" Content="{Resx Proteine}" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,80,160,0"></Label>
                     <TextBox Name="Proteines_modif" Grid.Row="0"  MaxLength="6" SelectedText="" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,100,160,0"></TextBox>
-                    <Label Name="lbl_glucides_modif" Grid.Row="0" Content="Glucides (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,130,160,0"></Label>
+                    <Label Name="lbl_glucides_modif" Grid.Row="0" Content="{Resx Glucide}" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,130,160,0"></Label>
                     <TextBox Name="Glucides_modif" Grid.Row="0"  MaxLength="6" SelectedText="" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,150,160,0"></TextBox>
-                    <Label Name="lbl_fibres_modif" Grid.Row="0" Content="Fibres (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,20,0"></Label>
+                    <Label Name="lbl_fibres_modif" Grid.Row="0" Content="{Resx Fibre}" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,20,0"></Label>
                     <TextBox Name="Fibres_modif" Grid.Row="0"  MaxLength="6" SelectedText="" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,50,20,0"></TextBox>
-                    <Label Name="lbl_lipides_modif" Grid.Row="0" Content="Lipides (g)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,80,20,0"></Label>
+                    <Label Name="lbl_lipides_modif" Grid.Row="0" Content="{Resx Lipide}" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,80,20,0"></Label>
                     <TextBox Name="Lipides_modif" Grid.Row="0"  MaxLength="6" SelectedText="" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,100,20,0"></TextBox>
-                    <Label Name="lbl_cholesterol_modif" Grid.Row="0" Content="Cholestérol (mg)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,130,20,0"></Label>
+                    <Label Name="lbl_cholesterol_modif" Grid.Row="0" Content="{Resx Cholesterol}" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,130,20,0"></Label>
                     <TextBox Name="Cholesterol_modif" Grid.Row="0"  MaxLength="6" SelectedText="" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,150,20,0"></TextBox>
-                    <Label Name="lbl_sodium_modif" Grid.Row="0" Content="Sodium (mg)" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,180,160,0"></Label>
+                    <Label Name="lbl_sodium_modif" Grid.Row="0" Content="{Resx Sodium}" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,180,160,0"></Label>
                     <TextBox Name="Sodium_modif" Grid.Row="0"  MaxLength="6" SelectedText="" Width="125" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,200,160,0"></TextBox>
                 </Grid>
             </GroupBox>
-            <Button Name="btn_modif" Grid.Row="0" Content="Modifier l'aliment" Height="30" Width="150" Foreground="DarkGreen" FontSize="15" Style="{StaticResource nonTransparent}" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="315,0,0,48" Click="Valider_Modifier_Aliment"></Button>
+            <Button Name="btn_modif" Grid.Row="0" Content="{Resx ModifierAliment}" Height="30" Width="150" Foreground="DarkGreen" FontSize="15" Style="{StaticResource nonTransparent}" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="315,0,0,48" Click="Valider_Modifier_Aliment"></Button>
         </Grid>
     </Grid>
 </UserControl>
