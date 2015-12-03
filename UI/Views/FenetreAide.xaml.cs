@@ -72,7 +72,7 @@ namespace Nutritia.UI.Views
         void AppliquerText()
         {
             // Placer tous le contenu du fichier en mémoire dans une liste de ligne
-            List<String> lstLigne = System.IO.File.ReadAllLines("../../UI/Ressources/FichierAide.txt").ToList();
+            List<String> lstLigne = System.IO.File.ReadAllLines("../../Aide/FichierAide.txt").ToList();
             Dictionary<String, String> dicAide = new Dictionary<String, String>();
             String section = "";
             List<String> lstSting = new List<string>();

@@ -21,7 +21,7 @@ namespace Nutritia
         static public CultureInfo culture = new CultureInfo(String.Empty);
         static public int APP_WIDTH = 650;
         static public int APP_HEIGHT = 550;
-        public const int POOL_TIME = 300;
+        public const int POOL_TIME = 500;
         static public Langue LangueInstance = Langue.FrancaisCanada;
     }
 

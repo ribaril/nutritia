@@ -61,6 +61,7 @@ namespace Nutritia
 
             // On lance le thread
             tNotif = new Thread(VerifierChangementBD);
+            tNotif.IsBackground = true;
             tNotif.Start();
         }
 
@@ -147,6 +148,7 @@ namespace Nutritia
                         Dispatcher.Invoke(DessinerNotificationNvPlat);
                     }
                 }
+                Thread.Sleep(App.POOL_TIME);
             }
         }
 
@@ -254,6 +256,7 @@ namespace Nutritia
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             ThreadNotif = new Thread(LastestVersionPopUp);
+            ThreadNotif.IsBackground = true;
             ThreadNotif.Start();
         }
 
@@ -280,7 +283,7 @@ namespace Nutritia
                     Dispatcher.Invoke(DessinerNotificationNvnvVersion);
                 }
 
-                Thread.Sleep(SLEEP_NOTIFICATION_TIME);
+                Thread.Sleep(App.POOL_TIME);
 
             }
         }
