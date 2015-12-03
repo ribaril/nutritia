@@ -51,7 +51,12 @@ namespace Nutritia
 
             try
             {
-                connexion = new MySqlConnexion();
+                if (!String.IsNullOrWhiteSpace(stringConnexion))
+                {
+                    connexion = new MySqlConnexion(stringConnexion);
+                }
+                else
+                    connexion = new MySqlConnexion();
                 string requete = "SELECT * FROM Membres";
 
                 DataSet dataSetMembres = connexion.Query(requete);
@@ -124,7 +129,13 @@ namespace Nutritia
 
             try
             {
-                connexion = new MySqlConnexion();
+                if (!String.IsNullOrWhiteSpace(stringConnexion))
+                {
+                    connexion = new MySqlConnexion(stringConnexion);
+                }
+                else
+                    connexion = new MySqlConnexion();
+
                 string requete = string.Format("SELECT * FROM Membres WHERE idMembre = {0}", args.IdMembre);
 
                 if (args.NomUtilisateur != null && args.NomUtilisateur != string.Empty)
@@ -210,7 +221,13 @@ namespace Nutritia
         {
             try
             {
-                connexion = new MySqlConnexion();
+                if (!String.IsNullOrWhiteSpace(stringConnexion))
+                {
+                    connexion = new MySqlConnexion(stringConnexion);
+                }
+                else
+                    connexion = new MySqlConnexion();
+
                 string requete = string.Format("INSERT INTO Membres (nom ,prenom, taille, masse, dateNaissance, nomUtilisateur, motPasse, idLangue) VALUES ('{0}', '{1}', {2}, {3}, '{4}', '{5}', '{6}', (SELECT idLangue FROM Langues WHERE IETF = '{7}'))", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance.ToString("yyyy-MM-dd"), membre.NomUtilisateur, membre.MotPasse, membre.LangueMembre.IETF);
                 connexion.Query(requete);
 
@@ -252,7 +269,13 @@ namespace Nutritia
         {
             try
             {
-                connexion = new MySqlConnexion();
+                if (!String.IsNullOrWhiteSpace(stringConnexion))
+                {
+                    connexion = new MySqlConnexion(stringConnexion);
+                }
+                else
+                    connexion = new MySqlConnexion();
+
                 string requete = string.Format("UPDATE Membres SET nom = '{0}' ,prenom = '{1}', taille = {2}, masse = {3}, dateNaissance = '{4}', nomUtilisateur = '{5}', motPasse = '{6}', estAdmin = {7}, estBanni = {8}, idLangue = (SELECT idLangue FROM Langues WHERE IETF = '{9}') WHERE idMembre = {10}", membre.Nom, membre.Prenom, membre.Taille, membre.Masse, membre.DateNaissance.ToString("yyyy-MM-dd"), membre.NomUtilisateur, membre.MotPasse, membre.EstAdministrateur, membre.EstBanni, membre.LangueMembre.IETF, membre.IdMembre);
 
                 connexion.Query(requete);
@@ -316,8 +339,8 @@ namespace Nutritia
                 EstAdministrateur = (bool)membre["estAdmin"],
                 EstBanni = (bool)membre["estBanni"],
                 DerniereMaj = (DateTime)membre["derniereMaj"]
-                
-		    };
+
+            };
 
         }
 
@@ -327,7 +350,13 @@ namespace Nutritia
 
             try
             {
-                connexion = new MySqlConnexion();
+                if (!String.IsNullOrWhiteSpace(stringConnexion))
+                {
+                    connexion = new MySqlConnexion(stringConnexion);
+                }
+                else
+                    connexion = new MySqlConnexion();
+
                 string requete = "SELECT * FROM Membres WHERE estAdmin = True";
 
                 DataSet dataSetMembres = connexion.Query(requete);
@@ -393,7 +422,13 @@ namespace Nutritia
             Langue langue;
             try
             {
-                connexion = new MySqlConnexion();
+                if (!String.IsNullOrWhiteSpace(stringConnexion))
+                {
+                    connexion = new MySqlConnexion(stringConnexion);
+                }
+                else
+                    connexion = new MySqlConnexion();
+
                 string requete = string.Format("SELECT IETF FROM Langues WHERE idLangue = {0}", id);
                 using (DataSet dataSetLangue = connexion.Query(requete))
                 {
@@ -415,7 +450,13 @@ namespace Nutritia
             DateTime time;
             try
             {
-                connexion = new MySqlConnexion();
+                if (!String.IsNullOrWhiteSpace(stringConnexion))
+                {
+                    connexion = new MySqlConnexion(stringConnexion);
+                }
+                else
+                    connexion = new MySqlConnexion();
+
                 string requete = "SELECT * FROM LastModifiedMember";
                 using (DataSet dataSetLastUpdatedTime = connexion.Query(requete))
                 {
