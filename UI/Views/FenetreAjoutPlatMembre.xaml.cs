@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Infralution.Localization.Wpf;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Nutritia.UI.Ressources.Localisation;
+
 namespace Nutritia.UI.Views
 {
     /// <summary>
@@ -31,9 +34,11 @@ namespace Nutritia.UI.Views
 
         public AjoutPlat()
         {
+            CultureManager.UICultureChanged += CultureManager_UICultureChanged;
+
             InitializeComponent();
             // Header de la fenetre
-            App.Current.MainWindow.Title = "Nutritia - Ajout de membre";
+            App.Current.MainWindow.Title = FenetreAjoutPlatMembre.Titre;
 
             Erreur = false;
 
@@ -50,8 +55,8 @@ namespace Nutritia.UI.Views
         private void Erreur_Champ()
         {
             MessageBoxResult resultat;
-            resultat = MessageBox.Show("Il y a un ou plusieurs champs invalides."
-                                        , "Erreur"
+            resultat = MessageBox.Show(FenetreAjoutPlatMembre.ErreurMessage
+                                        , FenetreAjoutPlatMembre.ErreurTitre
                                         , MessageBoxButton.OK
                                         , MessageBoxImage.Warning
                                         , MessageBoxResult.OK);
@@ -400,8 +405,8 @@ namespace Nutritia.UI.Views
                 Inserer_Plat();
 
                 MessageBoxResult resultat;
-                resultat = MessageBox.Show("Le nouveau plat a été correctement ajouté à la base de données."
-                                            , "Ajout de plat réussie"
+                resultat = MessageBox.Show(FenetreAjoutPlatMembre.SuccessMessage
+                                            , FenetreAjoutPlatMembre.SuccessTitre
                                             , MessageBoxButton.OK);
             }
         }
@@ -416,7 +421,7 @@ namespace Nutritia.UI.Views
             if (string.IsNullOrEmpty(unTextBox.Text))
             {
                 unLabel.Foreground = Brushes.Red;
-                unLabel.Content = "Nom du plat (Champ vide)";
+                unLabel.Content = FenetreAjoutPlatMembre.NomVide;
                 Erreur = true;
             }
             else
@@ -425,7 +430,7 @@ namespace Nutritia.UI.Views
                 if (unTextBox.Text.Length > 50 || unTextBox.Text.Length < 2)
                 {
                     unLabel.Foreground = Brushes.Red;
-                    unLabel.Content = "Nom du plat (Entre 2 et 50 caractères)";
+                    unLabel.Content = FenetreAjoutPlatMembre.NomTaille;
                     Erreur = true;
                 }
                 else
@@ -437,7 +442,7 @@ namespace Nutritia.UI.Views
                     if (ContientSeulement)
                     {
                         unLabel.Foreground = Brushes.Red;
-                        unLabel.Content = "Nom du plat (charctères invalides)";
+                        unLabel.Content = FenetreAjoutPlatMembre.NomInvalide;
                         Erreur = true;
                     }
                     else
@@ -448,7 +453,7 @@ namespace Nutritia.UI.Views
                         if (ContientApostropheDebut)
                         {
                             unLabel.Foreground = Brushes.Red;
-                            unLabel.Content = "Nom (Doit débuter avec une lettre)";
+                            unLabel.Content = FenetreAjoutPlatMembre.NomDebut;
                             Erreur = true;
                         }
                         else
@@ -489,7 +494,7 @@ namespace Nutritia.UI.Views
                                 if (platBD == platText)
                                 {
                                     unLabel.Foreground = Brushes.Red;
-                                    unLabel.Content = "Nom du plat (plat déjà existant)";
+                                    unLabel.Content = FenetreAjoutPlatMembre.NomUnique;
                                     Erreur = true;
                                     unique = false;
                                 }
@@ -499,7 +504,7 @@ namespace Nutritia.UI.Views
                             if (unique)
                             {
                                 unLabel.Foreground = Brushes.DarkGreen;
-                                unLabel.Content = "Nom du plat";
+                                unLabel.Content = FenetreAjoutPlatMembre.NomPlat;
                             }
                         }
                     }
@@ -515,13 +520,13 @@ namespace Nutritia.UI.Views
             if (unComboBox.SelectedIndex == -1)
             {
                 unLabel.Foreground = Brushes.Red;
-                unLabel.Content = "Type de plat (Aucun de sélectionné)";
+                unLabel.Content = FenetreAjoutPlatMembre.TypeVide;
                 Erreur = true;
             }
             else
             {
                 unLabel.Foreground = Brushes.DarkGreen;
-                unLabel.Content = "Type de plat";
+                unLabel.Content = FenetreAjoutPlatMembre.TypePlat;
             }
         }
 
@@ -537,13 +542,13 @@ namespace Nutritia.UI.Views
             if (uneListeAliments.Count == 0)
             {
                 unGroupBox.Foreground = Brushes.Red;
-                unGroupBox.Header = "Composition du plat (Auncun aliment)";
+                unGroupBox.Header = FenetreAjoutPlatMembre.CompositionVide;
                 Erreur = true;
             }
             else
             {
                 unGroupBox.Foreground = Brushes.DarkGreen;
-                unGroupBox.Header = "Composition du plat";
+                unGroupBox.Header = FenetreAjoutPlatMembre.CompositionPlat;
             }
         }
 
@@ -651,6 +656,11 @@ namespace Nutritia.UI.Views
             aideContextuelle.Content = unStackPanel;
 
             return aideContextuelle;
+        }
+
+        private void CultureManager_UICultureChanged(object sender, EventArgs e)
+        {
+            App.Current.MainWindow.Title = FenetreAjoutPlatMembre.Titre;
         }
     }
 }
