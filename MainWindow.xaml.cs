@@ -43,9 +43,13 @@ namespace Nutritia
         private IMembreService membreAsync;
         public List<Plat> LstPlat { get; set; }
 
+        private DateTime previousTime;
+        private DateTime currentTime;
+
         public MainWindow()
         {
             CultureManager.UICulture = new CultureInfo(App.LangueInstance.IETF);
+            previousTime = DateTime.MinValue;
 
             InitializeComponent();
             ConfigurerTaille();
@@ -81,19 +85,32 @@ namespace Nutritia
                 if (!String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
                 {
                     // Mise a jour des variables
+                    //Faudrait juste qui vérifie le temps de mise à jour du membre.
                     membreAJour = membreAsync.Retrieve(new RetrieveMembreArgs { NomUtilisateur = App.MembreCourant.NomUtilisateur });
-                    lstPlatAJour = platAsync.RetrieveAll().ToList();
 
-                    //Raffraichi la liste dans la page des votes lorsqu'un autre utilisateur vote
-                    foreach (var plat in lstPlatAJour)
+                    currentTime = platAsync.LastUpdatedTime();
+                    if (currentTime > previousTime)
                     {
-                        if (LstPlat.Count == lstPlatAJour.Count)
-                        {
-                            if (plat.NbVotes != LstPlat.Find(p => p.IdPlat == plat.IdPlat).NbVotes)
+                        previousTime = currentTime;
+
+                        lstPlatAJour = platAsync.RetrieveAll().ToList();
+
+                        //Raffraichi la liste dans la page des votes lorsqu'un autre utilisateur vote
+                        LstPlat = lstPlatAJour;
+                        Dispatcher.Invoke(AppliquerNouveauChangementStatut);
+
+                        // Check si de nouveaux plats sont diponible pour un utilisateur (qui n'a pas encore vu la notif)
+                        foreach (var plat in lstPlatAJour)// On check donc la date de mise a jour du membre
+                            if (plat.DerniereMaj > App.MembreCourant.DerniereMaj)
                             {
-                                Dispatcher.Invoke(AppliquerNouveauChangementStatut);
-                                LstPlat = platAsync.RetrieveAll().ToList();
+                                NouveauxPlats.Add(plat);
                             }
+
+                        if (NouveauxPlats.Count > 0)
+                        {
+                            NvPlatAffichable = new List<Plat>(NouveauxPlats);
+                            NouveauxPlats.Clear();
+                            Dispatcher.Invoke(DessinerNotificationNvPlat);
                         }
                     }
 
@@ -121,19 +138,6 @@ namespace Nutritia
                             // Et on met à jour le membre courrant
                         }
 
-                    }
-
-                    // Check si de nouveaux plats sont diponible pour un utilisateur (qui n'a pas encore vu la notif)
-                    foreach (var plat in lstPlatAJour)// On check donc la date de mise a jour du membre
-                        if (plat.DateAjout > App.MembreCourant.DerniereMaj)
-                            NouveauxPlats.Add(plat);
-
-                    if (NouveauxPlats.Count > 0)
-                    {
-                        LstPlat = platAsync.RetrieveAll().ToList();
-                        NvPlatAffichable = new List<Plat>(NouveauxPlats);
-                        NouveauxPlats.Clear();
-                        Dispatcher.Invoke(DessinerNotificationNvPlat);
                     }
 
                 }
