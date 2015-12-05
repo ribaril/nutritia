@@ -2199,15 +2199,32 @@ namespace Nutritia.UI.Views
                             break;
                     }
 
-                    // Chargement et affichage de l'image d'un plat si celle-ci existe.
-                    Uri imgUri = new Uri(listePlats[i].ImageUrl);
-                    try
+                    string chemin = listePlats[i].ImageUrl;
+                    int position = chemin.LastIndexOf('/');
+                    string image = chemin.Substring(position + 1);
+                    string actuel;
+
+                    chemin = chemin.Substring(8);
+                    actuel = Directory.GetCurrentDirectory();
+                    actuel += "\\UI\\Images\\" + image;
+
+                    if (File.Exists(actuel))
                     {
-                        img_plat_modif.Source = new BitmapImage(imgUri);
+                        img_plat_modif.Source = new BitmapImage(new Uri(actuel));
                     }
-                    catch (IOException)
+                    else
                     {
-                        img_plat_modif.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/nonDisponible.png"));
+
+                        // Chargement et affichage de l'image d'un plat si celle-ci existe.
+                        Uri imgUri = new Uri(listePlats[i].ImageUrl);
+                        try
+                        {
+                            img_plat_modif.Source = new BitmapImage(imgUri);
+                        }
+                        catch (IOException)
+                        {
+                            img_plat_modif.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/nonDisponible.png"));
+                        }
                     }
 
                     listeAlimentsPlateauModification = listePlats[i].ListeIngredients;
