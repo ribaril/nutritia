@@ -15,5 +15,6 @@ namespace Nutritia
         void Update(Plat plat);
         void UpdateVote(Plat plat);
         void Insert(Plat unPlat);
+        DateTime LastUpdatedTime();
     }
 }

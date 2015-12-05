@@ -10,7 +10,7 @@ using Nutritia.Toolkit;
 
 namespace Nutritia
 {
-    public class MySqlConnexion
+    public class MySqlConnexion : IDisposable
     {
 
         private readonly string CONNECTION_STRING;
@@ -205,6 +205,23 @@ namespace Nutritia
             {
                 if (transaction == null)
                     Close();
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (connection != null)
+                    connection.Dispose();
+                if (transaction != null)
+                    transaction.Dispose();
             }
         }
     }

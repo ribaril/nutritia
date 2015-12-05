@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -290,7 +291,7 @@ namespace Nutritia
 				Note = note,
 				NbVotes = (int)plat["nbVotes"],
 				ImageUrl = (string)plat["imageUrl"],
-				DateAjout = DateTime.Parse(plat["dateAjout"].ToString())
+                DerniereMaj = DateTime.Parse(plat["derniereMaj"].ToString())
             };
         }
 
@@ -328,7 +329,7 @@ namespace Nutritia
                     idMembre = (int)rowCreateur["idMembre"];
                 }
 
-                string requeteInsert = string.Format("INSERT INTO Plats (idMembre, idTypePlat, nom, description, imageUrl, dateAjout) VALUES ({0}, {1}, '{2}', '{3}', '{4}', '{5}')", idMembre, idType, unPlat.Nom.Replace("'", "''"), unPlat.Description, unPlat.ImageUrl, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                string requeteInsert = string.Format("INSERT INTO Plats (idMembre, idTypePlat, nom, description, imageUrl) VALUES ({0}, {1}, '{2}', '{3}', '{4}')", idMembre, idType, unPlat.Nom.Replace("'", "''"), unPlat.Description, unPlat.ImageUrl);
                 connexion.Query(requeteInsert);
 
                 string requetePlat = string.Format("SELECT * FROM Plats WHERE nom = '{0}'", unPlat.Nom.Replace("'", "''"));
@@ -353,6 +354,30 @@ namespace Nutritia
             {
                 throw;
             }
+        }
+
+        public DateTime LastUpdatedTime()
+        {
+            DateTime time;
+            try
+            {
+                using (MySqlConnexion connexion = new MySqlConnexion())
+                {
+
+                    string requete = "SELECT * FROM LastModifiedPlat";
+                    using (DataSet dataSetLastUpdatedTime = connexion.Query(requete))
+                    using (DataTable tableLastUpdatedTime = dataSetLastUpdatedTime.Tables[0])
+                    {
+                        time = (DateTime)tableLastUpdatedTime.Rows[0]["derniereMaj"];
+                    }
+                }
+            }
+
+            catch (MySqlException)
+            {
+                throw;
+            }
+            return time;
         }
     }
 }

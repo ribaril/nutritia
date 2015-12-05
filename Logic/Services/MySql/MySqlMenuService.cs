@@ -150,7 +150,7 @@ namespace Nutritia
             {
                 connexion = new MySqlConnexion();
 
-                string requete = string.Format("UPDATE Menus SET idMembre = {0}, nom = '{1}', nbPersonnes = {2}, dateMenu = '{3}' WHERE idMenu = {3}", App.MembreCourant.IdMembre, menu.Nom, menu.NbPersonnes, menu.DateCreation.ToString("yyyy-MM-dd"), menu.IdMenu);
+                string requete = string.Format("UPDATE Menus SET idMembre = {0}, nom = '{1}', nbPersonnes = {2}, dateMenu = '{3}' WHERE idMenu = {4}", App.MembreCourant.IdMembre, menu.Nom, menu.NbPersonnes, menu.DateCreation.ToString("yyyy-MM-dd"), menu.IdMenu);
 
                 connexion.Query(requete);
 
