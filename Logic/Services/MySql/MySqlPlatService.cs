@@ -20,10 +20,10 @@ namespace Nutritia
         /// <summary>
         /// Constructeur par défaut de la classe.
         /// </summary>
-        public MySqlPlatService ()
-	    {
+        public MySqlPlatService()
+        {
             alimentService = new MySqlAlimentService();
-	    }
+        }
 
         /// <summary>
         /// Méthode permettant d'obtenir l'ensemble des plats sauvegardé dans la base de données.
@@ -240,13 +240,20 @@ namespace Nutritia
                 }
 
                 string note = unPlat.Note.ToString();
-
-                if (note.Contains(","))
+                string requeteUpdate;
+                if (!String.IsNullOrWhiteSpace(note))
                 {
-                    note = note.Replace(",", ".");
+                    if (note.Contains(","))
+                    {
+                        note = note.Replace(",", ".");
+                    }
+                    requeteUpdate = string.Format("UPDATE Plats SET idTypePlat = {0}, nom = '{1}', imageUrl = '{2}', note = '{3}', nbVotes = {4}, description = '{5}' WHERE idPlat = {6}", idType, unPlat.Nom.Replace("'", "''"), unPlat.ImageUrl, note, unPlat.NbVotes, unPlat.Description, unPlat.IdPlat);
                 }
+                else
+                    //string.Format remplace un NULL, par un espace vide, ce qui est invalide dans MySql et lance une exception puisqu'il essait de convertir un string vide à un Double (le type de donnée en bd pour note)
+                    //Dois vérifier manuellement et écrire NULL.
+                    requeteUpdate = string.Format("UPDATE Plats SET idTypePlat = {0}, nom = '{1}', imageUrl = '{2}', note = NULL, nbVotes = {3}, description = '{4}' WHERE idPlat = {5}", idType, unPlat.Nom.Replace("'", "''"), unPlat.ImageUrl, unPlat.NbVotes, unPlat.Description, unPlat.IdPlat);
 
-                string requeteUpdate = string.Format("UPDATE Plats SET idTypePlat = {0}, nom = '{1}', imageUrl = '{2}', note = '{3}', nbVotes = {4}, description = '{5}' WHERE idPlat = {6}", idType, unPlat.Nom.Replace("'", "''"), unPlat.ImageUrl, note, unPlat.NbVotes, unPlat.Description, unPlat.IdPlat);
                 connexion.Query(requeteUpdate);
 
                 int idPlat = (int)unPlat.IdPlat;
@@ -281,16 +288,16 @@ namespace Nutritia
                 note = (double?)plat["note"];
             }
 
-			return new Plat()
-			{
-				IdPlat = (int)plat["idPlat"],
-				Createur = (string)plat["nomUtilisateur"],
-				Nom = (string)plat["nom"],
-				Description = (string)plat["description"],
-				TypePlat = (string)plat["typePlat"],
-				Note = note,
-				NbVotes = (int)plat["nbVotes"],
-				ImageUrl = (string)plat["imageUrl"],
+            return new Plat()
+            {
+                IdPlat = (int)plat["idPlat"],
+                Createur = (string)plat["nomUtilisateur"],
+                Nom = (string)plat["nom"],
+                Description = (string)plat["description"],
+                TypePlat = (string)plat["typePlat"],
+                Note = note,
+                NbVotes = (int)plat["nbVotes"],
+                ImageUrl = (string)plat["imageUrl"],
                 DerniereMaj = DateTime.Parse(plat["derniereMaj"].ToString())
             };
         }

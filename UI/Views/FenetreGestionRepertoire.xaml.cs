@@ -2011,11 +2011,13 @@ namespace Nutritia.UI.Views
             {
                 chemin = chemin.Substring(8);
                 actuel = Directory.GetCurrentDirectory();
-                int positionDest = actuel.LastIndexOf('\\');
-                actuel = actuel.Substring(0, actuel.Length - (actuel.Length - positionDest));
-                positionDest = actuel.LastIndexOf('\\');
-                actuel = actuel.Substring(0, actuel.Length - (actuel.Length - positionDest));
-                actuel += "\\UI\\Images\\" + image;
+                actuel += "\\UI\\Images\\";
+
+                bool dossierExiste = System.IO.Directory.Exists(actuel);
+                if (!dossierExiste)
+                    System.IO.Directory.CreateDirectory(actuel);
+
+                actuel +=  image;
 
                 if (!File.Exists(actuel))
                 {
@@ -2082,11 +2084,17 @@ namespace Nutritia.UI.Views
             {
                 chemin = chemin.Substring(8);
                 actuel = Directory.GetCurrentDirectory();
-                int positionDest = actuel.LastIndexOf('\\');
-                actuel = actuel.Substring(0, actuel.Length - (actuel.Length - positionDest));
-                positionDest = actuel.LastIndexOf('\\');
-                actuel = actuel.Substring(0, actuel.Length - (actuel.Length - positionDest));
-                actuel += "\\UI\\Images\\" + image;
+                //int positionDest = actuel.LastIndexOf('\\');
+                //actuel = actuel.Substring(0, actuel.Length - (actuel.Length - positionDest));
+                //positionDest = actuel.LastIndexOf('\\');
+                //actuel = actuel.Substring(0, actuel.Length - (actuel.Length - positionDest));
+                actuel += "\\UI\\Images\\";
+
+                bool dossierExiste = System.IO.Directory.Exists(actuel);
+                if (!dossierExiste)
+                    System.IO.Directory.CreateDirectory(actuel);
+
+                actuel += image;
 
                 if (!File.Exists(actuel))
                 {
@@ -2124,7 +2132,7 @@ namespace Nutritia.UI.Views
         {
             bool recherche = false;
 
-            
+
 
             for (int i = 0; i < listePlats.Count; i++)
             {
@@ -2191,36 +2199,32 @@ namespace Nutritia.UI.Views
                             break;
                     }
 
-                    // Chargement et affichage de l'image d'un plat si celle-ci existe.
-                    if (listePlats[i].ImageUrl != "pack://application:,,,/UI/Images/nonDisponible.png")
+                    string chemin = listePlats[i].ImageUrl;
+                    int position = chemin.LastIndexOf('/');
+                    string image = chemin.Substring(position + 1);
+                    string actuel;
+
+                    chemin = chemin.Substring(8);
+                    actuel = Directory.GetCurrentDirectory();
+                    actuel += "\\UI\\Images\\" + image;
+
+                    if (File.Exists(actuel))
                     {
-                        string chemin = listePlats[i].ImageUrl;
-                        int position = chemin.LastIndexOf('/');
-                        string image = chemin.Substring(position + 1);
-                        string actuel;
-
-                        chemin = chemin.Substring(8);
-                        actuel = Directory.GetCurrentDirectory();
-                        int positionDest = actuel.LastIndexOf('\\');
-                        actuel = actuel.Substring(0, actuel.Length - (actuel.Length - positionDest));
-                        positionDest = actuel.LastIndexOf('\\');
-                        actuel = actuel.Substring(0, actuel.Length - (actuel.Length - positionDest));
-                        actuel += "\\UI\\Images\\" + image;
-
-                        
-
-                        if (File.Exists(actuel))
-                        {
-                            img_plat_modif.Source = new BitmapImage(new Uri(actuel));
-                        }
-                        else
-                        {
-                            img_plat_modif.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/nonDisponible.png"));
-                        }
+                        img_plat_modif.Source = new BitmapImage(new Uri(actuel));
                     }
                     else
                     {
-                        img_plat_modif.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/nonDisponible.png"));
+
+                        // Chargement et affichage de l'image d'un plat si celle-ci existe.
+                        Uri imgUri = new Uri(listePlats[i].ImageUrl);
+                        try
+                        {
+                            img_plat_modif.Source = new BitmapImage(imgUri);
+                        }
+                        catch (IOException)
+                        {
+                            img_plat_modif.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/nonDisponible.png"));
+                        }
                     }
 
                     listeAlimentsPlateauModification = listePlats[i].ListeIngredients;
