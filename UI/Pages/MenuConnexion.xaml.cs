@@ -90,27 +90,32 @@ namespace Nutritia.UI.Pages
 
         private void btnConnect_Click(object sender, RoutedEventArgs e)
         {
-            Session newSession = (Session)dgSessions.SelectedItem;
-            if (SessionActive == newSession)
-                return;
-            //Valide si le compte actuel existe sur la nouvelle session spécifié et s'il est admins.
-            //Sinon l'utilisateur ce coupe la branche sous les pieds.
-            if (!IsAdminOnNewConnexion(newSession.ToConnexionString()))
+            if (dgSessions.SelectedIndex != -1)
             {
-                MessageBox.Show("Impossible de se connecter. Est-ce que votre compte existe sur la base de données et êtes vous administrateur?",
-                    "Erreur de connexion", 
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                Session newSession = (Session)dgSessions.SelectedItem;
+                if (SessionActive == newSession)
+                    return;
+                //Valide si le compte actuel existe sur la nouvelle session spécifié et s'il est admins.
+                //Sinon l'utilisateur ce coupe la branche sous les pieds.
+                if (!IsAdminOnNewConnexion(newSession.ToConnexionString()))
+                {
+                    MessageBox.Show("Impossible de se connecter. Est-ce que votre compte existe sur la base de données et êtes vous administrateur?",
+                        "Erreur de connexion",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                SwitchActive(obsSessions.IndexOf(SessionActive), obsSessions.IndexOf(newSession));
+                SessionActive = newSession;
+
+                Properties.Settings.Default.ActiveSession = "{" + SessionActive.ToString() + "}";
+                Properties.Settings.Default.Save();
+
+                IApplicationService mainWindow = ServiceFactory.Instance.GetService<IApplicationService>();
+                mainWindow.Configurer();
+                mainWindow.ChangerVue(new MenuPrincipalConnecte());
             }
-            SwitchActive(obsSessions.IndexOf(SessionActive), obsSessions.IndexOf(newSession));
-            SessionActive = newSession;
-
-            Properties.Settings.Default.ActiveSession = "{" + SessionActive.ToString() + "}";
-            Properties.Settings.Default.Save();
-
-            IApplicationService mainWindow = ServiceFactory.Instance.GetService<IApplicationService>();
-            mainWindow.Configurer();
-            mainWindow.ChangerVue(new MenuPrincipalConnecte());
+            else
+                SystemSounds.Beep.Play();
         }
 
 
