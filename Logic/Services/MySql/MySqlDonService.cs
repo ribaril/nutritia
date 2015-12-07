@@ -88,8 +88,8 @@ namespace Nutritia
 
                 DataSet dataSetDon = connexion.Query(requete);
                 DataTable tableDon = dataSetDon.Tables[0];
-                if (tableDon.Rows.Count != 0)
-                    last = (DateTime)tableDon.Rows[0]["dateDon"];
+                if (!tableDon.Rows[0].IsNull("derniereMaj"))
+                    last = (DateTime)tableDon.Rows[0]["derniereMaj"];
             }
             catch (MySqlException)
             {
