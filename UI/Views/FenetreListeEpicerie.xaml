@@ -79,7 +79,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Width="3.75*" Header="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreListeEpicerie, Key=UniteMesure}" Binding="{Binding UniteMesure}" Foreground="DarkGreen" IsReadOnly="True">
+                <DataGridTextColumn Width="3.75*" Header="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreListeEpicerie, Key=UniteMesure}" Binding="{Binding Symbole}" Foreground="DarkGreen" IsReadOnly="True">
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextWrapping" Value="Wrap" />

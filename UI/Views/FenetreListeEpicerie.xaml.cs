@@ -109,7 +109,7 @@ namespace Nutritia.UI.Views
             {
                 StringBuilder sbArticle = new StringBuilder();
                 sbArticle.Append(ListeAliments[i].Quantite);
-                sbArticle.Append(ListeAliments[i].UniteMesure);
+                sbArticle.Append(ListeAliments[i].Symbole);
                 ListeAliments[i].Nom = ListeAliments[i].Nom.ToLower();
                 if (ListeAliments[i].Nom[0] == 'a' || ListeAliments[i].Nom[0] == 'e' || ListeAliments[i].Nom[0] == 'h' ||
                     ListeAliments[i].Nom[0] == 'i' || ListeAliments[i].Nom[0] == 'o' || ListeAliments[i].Nom[0] == 'u')
