@@ -75,8 +75,9 @@ namespace Nutritia.UI.Views
             // Placer tous le contenu du fichier en mémoire dans une liste de ligne
             StreamResourceInfo streamResourceInfo = Application.GetResourceStream(new Uri("pack://application:,,,/Aide/FichierAide.txt"));
             StreamReader sr = new StreamReader(streamResourceInfo.Stream);
-            List<String> lstLigne = sr.ReadToEnd().Split('\n').ToList();
+            List<String> lstLigne = sr.ReadToEnd().Split(Environment.NewLine.ToCharArray()).ToList();
             sr.Dispose();
+
             Dictionary<String, String> dicAide = new Dictionary<String, String>();
             String section = "";
             List<String> lstSting = new List<string>();
