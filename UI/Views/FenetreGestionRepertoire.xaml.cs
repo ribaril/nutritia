@@ -46,7 +46,7 @@ namespace Nutritia.UI.Views
         int idAlimentModif;
         int idPlatModif;
         int nbrVotes;
-        double note;
+        double? note;
 
         public GestionRepertoire()
         {
@@ -2187,7 +2187,7 @@ namespace Nutritia.UI.Views
                     idPlatModif = (int)listePlats[i].IdPlat;
 
                     nbrVotes = listePlats[i].NbVotes;
-                    note = (double)listePlats[i].Note;
+                    note = listePlats[i].Note;
                     Nom_plat_modif.Text = listePlats[i].Nom;
                     Description_modif.Text = listePlats[i].Description;
 
