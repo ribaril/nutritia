@@ -24,6 +24,8 @@ namespace Nutritia.UI.Views
     /// </summary>
     public partial class AjoutPlat : UserControl
     {
+
+        private const string cheminSauvegarde = "\\Images\\";
         public bool Plat { get; set; }
 
         public bool Erreur { get; set; }
@@ -604,11 +606,14 @@ namespace Nutritia.UI.Views
             {
                 chemin = chemin.Substring(8);
                 actuel = Directory.GetCurrentDirectory();
-                int positionDest = actuel.LastIndexOf('\\');
-                actuel = actuel.Substring(0, actuel.Length - (actuel.Length - positionDest));
-                positionDest = actuel.LastIndexOf('\\');
-                actuel = actuel.Substring(0, actuel.Length - (actuel.Length - positionDest));
-                actuel += "\\UI\\Images\\" + image;
+
+                actuel += cheminSauvegarde;
+
+                bool dossierExiste = System.IO.Directory.Exists(actuel);
+                if (!dossierExiste)
+                    System.IO.Directory.CreateDirectory(actuel);
+
+                actuel += image;
 
                 if (!File.Exists(actuel))
                 {
