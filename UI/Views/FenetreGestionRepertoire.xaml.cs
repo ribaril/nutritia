@@ -24,6 +24,8 @@ namespace Nutritia.UI.Views
     /// </summary>
     public partial class GestionRepertoire : UserControl
     {
+        private const string cheminSauvegarde = "\\Images\\";
+
         public bool Ajout { get; set; }
         public bool Modification { get; set; }
         public bool Aliment { get; set; }
@@ -787,11 +789,14 @@ namespace Nutritia.UI.Views
             {
                 chemin = chemin.Substring(8);
                 actuel = Directory.GetCurrentDirectory();
-                int positionDest = actuel.LastIndexOf('\\');
-                actuel = actuel.Substring(0, actuel.Length - (actuel.Length - positionDest));
-                positionDest = actuel.LastIndexOf('\\');
-                actuel = actuel.Substring(0, actuel.Length - (actuel.Length - positionDest));
-                actuel += "\\UI\\Images\\" + image;
+
+                actuel += cheminSauvegarde;
+
+                bool dossierExiste = System.IO.Directory.Exists(actuel);
+                if (!dossierExiste)
+                    System.IO.Directory.CreateDirectory(actuel);
+
+                actuel += image;
 
                 if (!File.Exists(actuel))
                 {
@@ -864,11 +869,14 @@ namespace Nutritia.UI.Views
             {
                 chemin = chemin.Substring(8);
                 actuel = Directory.GetCurrentDirectory();
-                int positionDest = actuel.LastIndexOf('\\');
-                actuel = actuel.Substring(0, actuel.Length - (actuel.Length - positionDest));
-                positionDest = actuel.LastIndexOf('\\');
-                actuel = actuel.Substring(0, actuel.Length - (actuel.Length - positionDest));
-                actuel += "\\UI\\Images\\" + image;
+
+                actuel += cheminSauvegarde;
+
+                bool dossierExiste = System.IO.Directory.Exists(actuel);
+                if (!dossierExiste)
+                    System.IO.Directory.CreateDirectory(actuel);
+
+                actuel += image;
 
                 if (!File.Exists(actuel))
                 {
@@ -1016,34 +1024,32 @@ namespace Nutritia.UI.Views
                     Cholesterol_modif.Text = listeAliments[i].Cholesterol.ToString();
                     Sodium_modif.Text = listeAliments[i].Sodium.ToString();
 
-                    // Chargement et affichage de l'image d'un aliment si cell-ci existe.
-                    if (listeAliments[i].ImageURL != "pack://application:,,,/UI/Images/nonDisponible.png")
+                    string chemin = listeAliments[i].ImageURL;
+                    int position = chemin.LastIndexOf('/');
+                    string image = chemin.Substring(position + 1);
+                    string actuel;
+
+                    chemin = chemin.Substring(8);
+                    actuel = Directory.GetCurrentDirectory();
+
+                    actuel += cheminSauvegarde + image;
+
+                    if (File.Exists(actuel))
                     {
-                        string chemin = listeAliments[i].ImageURL;
-                        int position = chemin.LastIndexOf('/');
-                        string image = chemin.Substring(position + 1);
-                        string actuel;
-
-                        chemin = chemin.Substring(8);
-                        actuel = Directory.GetCurrentDirectory();
-                        int positionDest = actuel.LastIndexOf('\\');
-                        actuel = actuel.Substring(0, actuel.Length - (actuel.Length - positionDest));
-                        positionDest = actuel.LastIndexOf('\\');
-                        actuel = actuel.Substring(0, actuel.Length - (actuel.Length - positionDest));
-                        actuel += "\\UI\\Images\\" + image;
-
-                        if (File.Exists(actuel))
-                        {
-                            img_alim_modif.Source = new BitmapImage(new Uri(actuel));
-                        }
-                        else
-                        {
-                            img_alim_modif.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/nonDisponible.png"));
-                        }
+                        img_alim_modif.Source = new BitmapImage(new Uri(actuel));
                     }
                     else
                     {
-                        img_alim_modif.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/nonDisponible.png"));
+                        // Chargement et affichage de l'image d'un plat si celle-ci existe.
+                        Uri imgUri = new Uri(listeAliments[i].ImageURL);
+                        try
+                        {
+                            img_alim_modif.Source = new BitmapImage(imgUri);
+                        }
+                        catch (IOException)
+                        {
+                            img_alim_modif.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/nonDisponible.png"));
+                        }
                     }
                 }
             }
@@ -2011,13 +2017,13 @@ namespace Nutritia.UI.Views
             {
                 chemin = chemin.Substring(8);
                 actuel = Directory.GetCurrentDirectory();
-                actuel += "\\UI\\Images\\";
+                actuel += cheminSauvegarde;
 
                 bool dossierExiste = System.IO.Directory.Exists(actuel);
                 if (!dossierExiste)
                     System.IO.Directory.CreateDirectory(actuel);
 
-                actuel +=  image;
+                actuel += image;
 
                 if (!File.Exists(actuel))
                 {
@@ -2088,7 +2094,7 @@ namespace Nutritia.UI.Views
                 //actuel = actuel.Substring(0, actuel.Length - (actuel.Length - positionDest));
                 //positionDest = actuel.LastIndexOf('\\');
                 //actuel = actuel.Substring(0, actuel.Length - (actuel.Length - positionDest));
-                actuel += "\\UI\\Images\\";
+                actuel += cheminSauvegarde;
 
                 bool dossierExiste = System.IO.Directory.Exists(actuel);
                 if (!dossierExiste)
@@ -2206,7 +2212,7 @@ namespace Nutritia.UI.Views
 
                     chemin = chemin.Substring(8);
                     actuel = Directory.GetCurrentDirectory();
-                    actuel += "\\UI\\Images\\" + image;
+                    actuel += cheminSauvegarde + image;
 
                     if (File.Exists(actuel))
                     {
