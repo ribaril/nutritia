@@ -45,6 +45,8 @@ namespace Nutritia.UI.Views
 
         int idAlimentModif;
         int idPlatModif;
+        int nbrVotes;
+        double note;
 
         public GestionRepertoire()
         {
@@ -89,7 +91,7 @@ namespace Nutritia.UI.Views
 
                 if (sender == btn_ajout_img_plat_modif)
                 {
-                    img_plat.Source = new BitmapImage(new Uri(chemin));
+                    img_plat_modif.Source = new BitmapImage(new Uri(chemin));
                 }
 
                 if (sender == btn_ajout_img_alim)
@@ -2066,6 +2068,8 @@ namespace Nutritia.UI.Views
             modifPlat.IdPlat = idPlatModif;
             modifPlat.Nom = Nom_plat_modif.Text;
             modifPlat.TypePlat = cbo_type_modif.SelectionBoxItem.ToString();
+            modifPlat.NbVotes = nbrVotes;
+            modifPlat.Note = note;
 
             if (Description_modif.Text.Length == 0 || Description_modif.Text == null)
             {
@@ -2182,6 +2186,8 @@ namespace Nutritia.UI.Views
 
                     idPlatModif = (int)listePlats[i].IdPlat;
 
+                    nbrVotes = listePlats[i].NbVotes;
+                    note = (double)listePlats[i].Note;
                     Nom_plat_modif.Text = listePlats[i].Nom;
                     Description_modif.Text = listePlats[i].Description;
 
