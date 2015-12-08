@@ -57,8 +57,7 @@ namespace Nutritia
             float Montant = (float)don["montant"];
             string NomAuteur = (string)don["Auteur"];
             ModePaiement mode = ModePaiement.StringToValue((string)don["ModePaiement"]);
-
-            return new Transaction(NomAuteur, Montant, mode);
+            return new Transaction(NomAuteur, Montant, mode, DateHeureTransaction);
         }
 
 

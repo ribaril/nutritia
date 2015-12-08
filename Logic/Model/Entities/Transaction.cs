@@ -24,7 +24,6 @@ namespace Nutritia.Logic.Model.Entities
         public Transaction()
         {
             noTransaction = Guid.NewGuid();
-            DateHeureTransaction = DateTime.Now;
         }
 
         public Transaction(string nom, double montant, ModePaiement modePaiement)
@@ -33,6 +32,12 @@ namespace Nutritia.Logic.Model.Entities
             NomAuteur = nom;
             Montant = montant;
             ModePaiementTransaction = modePaiement;
+        }
+
+        public Transaction(string nom, double montant, ModePaiement modePaiement, DateTime dateHeure)
+            : this(nom, montant, modePaiement)
+        {
+            DateHeureTransaction = dateHeure;
         }
 
         public override string ToString()
