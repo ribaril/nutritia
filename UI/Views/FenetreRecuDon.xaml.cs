@@ -24,7 +24,7 @@ namespace Nutritia.UI.Views
         public FenetreRecuDon(Transaction transaction)
         {
             InitializeComponent();
-            lblDate.Content = transaction.DateHeureTransaction.ToString("dd/mm/yy");
+            lblDate.Content = transaction.DateHeureTransaction.ToString("dd/MM/yy");
             lblHeure.Content = transaction.DateHeureTransaction.ToString("HH:mm");
             lblModePaiement.Content = transaction.ModePaiementTransaction.ToString();
             lblMontant.Content = transaction.Montant.ToString() + "$";
