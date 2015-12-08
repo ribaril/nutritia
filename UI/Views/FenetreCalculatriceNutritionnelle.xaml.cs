@@ -564,12 +564,12 @@ namespace Nutritia.UI.Views
 
 			ValeurNutritive = ConstruireDicValeurNutritive(null, ValeurNutritive);
 
-			int poidPlat = 0;
+			double poidPlat = 0;
 
 			foreach (var aliment in plat.ListeIngredients)
 			{
 				ValeurNutritive = ConstruireDicValeurNutritive(aliment, ValeurNutritive);
-				poidPlat += aliment.Mesure;
+				poidPlat += aliment.Quantite;
 			}
 
 			StringBuilder sbValeurNut = new StringBuilder();
@@ -652,19 +652,15 @@ namespace Nutritia.UI.Views
 			{
 				double mesure = aliment.Mesure;
 				double quantite = aliment.Quantite;
-				if (quantite / mesure <= 1) // Cas ou c'Est un simple aliment atomique qui est calculé et pas un plat
-				{
-					mesure = 1;
-					quantite = 1;
-				}
+				
 
-				dValeurNutritive["Calorie"] += aliment.Energie * quantite / mesure;
-				dValeurNutritive["Glucides"] += aliment.Glucide * quantite / mesure;
-				dValeurNutritive["Fibres"] += aliment.Fibre * quantite / mesure;
-				dValeurNutritive["Proteines"] += aliment.Proteine * quantite / mesure;
-				dValeurNutritive["Lipides"] += aliment.Lipide * quantite / mesure;
-				dValeurNutritive["Cholesterol"] += aliment.Cholesterol * quantite / mesure;
-				dValeurNutritive["Sodium"] += aliment.Sodium * quantite / mesure;
+				dValeurNutritive["Calorie"] += aliment.Energie * (quantite / mesure);
+				dValeurNutritive["Glucides"] += aliment.Glucide * (quantite / mesure);
+				dValeurNutritive["Fibres"] += aliment.Fibre * (quantite / mesure);
+				dValeurNutritive["Proteines"] += aliment.Proteine * (quantite / mesure);
+				dValeurNutritive["Lipides"] += aliment.Lipide * (quantite / mesure);
+				dValeurNutritive["Cholesterol"] += aliment.Cholesterol * (quantite / mesure);
+				dValeurNutritive["Sodium"] += aliment.Sodium * (quantite / mesure);
 			}
 
 			return dValeurNutritive;
