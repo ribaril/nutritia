@@ -37,6 +37,8 @@ namespace Nutritia.UI.Views
             LstMembre = new ObservableCollection<Membre>();
 			LstBanni = new ObservableCollection<Membre>();
 			TousLesMembres = new List<Membre>(ServiceFactory.Instance.GetService<IMembreService>().RetrieveAll());
+
+            TousLesMembres.Remove(TousLesMembres.First(membre => membre.IdMembre == App.MembreCourant.IdMembre));
 			
 			RemplirListe();
 
