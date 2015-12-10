@@ -149,6 +149,7 @@ namespace Nutritia
                     if (NvPlatAffichable.Count > 0)
                     {
                         NvPlatAffichable.Clear();
+                        
                         Dispatcher.Invoke(DessinerNotificationNvPlat);
                     }
                 }
@@ -342,12 +343,11 @@ namespace Nutritia
         /// </summary>
         private void DessinerNotificationNvPlat()
         {
+            Button btnNouveauxPlats = new Button();
             if (!String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
             {
                 if (NvPlatAffichable.Count > 0)
                 {
-                    Button btnNouveauxPlats = new Button();
-
                     foreach (var contenu in toolBarNotif.Items)
                         if (contenu is Button)
                             if (((Button)contenu).Name == "notifNvPlat")
@@ -370,9 +370,18 @@ namespace Nutritia
                     }
                     MettreAJourNbrNotif();
                 }
+                
             }
+            else if(NvPlatAffichable.Count == 0)
+            {
+                foreach (Button item in toolBarNotif.Items)
+                    if(item.Name == "notifNvPlat")
+                        btnNouveauxPlats = item;
 
+                toolBarNotif.Items.Remove(btnNouveauxPlats);
+                MettreAJourNbrNotif();
 
+            }
 
         }
 

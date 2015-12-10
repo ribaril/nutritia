@@ -113,3 +113,41 @@ Pour l’instant, dans la version 1.0 du logiciel, le bouton n’a aucun effet. 
 L’utilisateur a le choix entre français et anglais. Une fois la langue sélectionné, il ne faut pas oublier de cliquer sur le bouton Enregistrer pour que le changement prenne effet. Une fois enregistré, l’affichage de l’interface changera immédiatement à la langue choisie.
 Le logiciel Nutritia est par défaut en français. Le paramètre de langue n’est pas enregistré sauf si vous êtes connecté à votre compte, la langue sera remis à français si l’utilisateur lance une nouvelle instance de Nutritia.
 Votre compte de membre enregistre votre paramètre de langue d’affichage. Si vous vous connecter à votre compte, l’interface sera changé automatiquement à votre langue de préférence. Si vous changé le paramètre de langue d’affichage une fois connecté, le changement sera enregistré à votre compte.
+
+#SeConnecter
+Cet écran permet à l’utilisateur de saisir un nom d’utilisateur, mais aussi un mot de passe afin de se connecter à un profil. 
+Tout comme pour l’écran de démarrage de l’application, un bouton d’inscription est encore une fois disponible afin de créer un profil de membre, et de pouvoir utiliser les différentes fonctionnalités du logiciel Nutritia.
+1.	Identification
+Afin de s’identifier à un profil d’utilisateur, il faut saisir à l’écran deux informations, soit le nom d’utilisateur associé à un profil ainsi que le mot de passe correspondant. Il est important de noter qu’un utilisateur préalablement banni ne pourra se connecter. Ce dernier recevra alors le message suivant suite à la tentative :
+Si bien sûr tout fonctionnement promptement, l’utilisateur sera alors dirigé vers le menu des membres Nutritia. Pour plus de détail sur ce dernier, consulter la section Menu des membres.
+2.	Connexion
+Ce bouton permet de valider si le nom d’utilisateur et le mot de passe saisie correspondent, relativement aux informations stockées dans la base de données. En cas d’erreur, le champ erroné sera mis en rouge auquel cas l’utilisateur pourra corriger le tir avant de tenter une nouvelle connexion. Il n’y a pas de limite au nombre de tentatives de connexion erronés.
+3.	S’inscrire
+Le bouton « S’inscrire » permet à l’utilisateur de passer à la fenêtre de création de profil. À partir de cette fenêtre, il sera appelé à fournir diverses informations personnelles telles que son nom, prénom, mais aussi la taille et masse. Par ailleurs, il sera aussi possible de fournir de l’Information supplémentaire comme par exemple des préférences alimentaires (végétarien par exemple). Voir la section Création/Modification d’un profil pour de plus amples détails.
+
+#MenuAdmin
+Le menu administrateur permet à l’utilisateur d’accéder aux fonctionnalités réservées aux administrateurs. À partir de ce menu, il peut ainsi visiter la fenêtre de dons, de gestion des aliments et plats, de gestion des administrateurs et la fenêtre de bannissement de membres. Voir les sections Gestion des aliments et plats ainsi que celle de Bannissement des membres pour plus d’informations sur ces fonctionnalités.
+
+#Votes
+1.	Filtre permettant l’affichage de tous les plats
+L’ensemble des plats s’afficheront dans la section du bas en ordre alphabétique.
+2.	Filtre permettant l’affichage des nouveautés
+Par défaut, les dix plats les plus récents s’afficheront dans la section du bas.
+3.	Filtre permettant l’affichage des plats les plus populaires
+Par défaut, les dix plats les plus populaires (Meilleures notes) s’afficheront dans la section du bas.
+4.	Barre de recherche
+La barre de recherche permet de rechercher un plat en particulier par son nom. De plus, elle s’effectue dans le filtre actuel. Par exemple, si l’utilisateur est actuellement dans les plats les plus populaires, la recherche s’effectuera sur ceux-ci.
+5.	Nombre de résultats
+Ce champ a un effet sur les boutons (Filtres) nouveautés et plus populaires. En fait, l’utilisateur doit entrer un chiffre dans ce champ et lorsqu’il appuie sur un des deux boutons, le nombre de plats affichés par défaut (dix) sera changé pour celui qui vient d’être entré.
+6.	Nom du plat
+Le nom du plat est affiché.
+7.	Image du plat
+Un aperçu du plat est affiché.
+8.	Informations sur le plat
+Cette section affiche la note courante du plat (Moyenne de toutes les notes), le nombre de votes ainsi que l’auteur du plat (Le membre ayant ajouté le plat).
+9.	Ingrédients
+Essentiellement, le bouton agit exactement de la même façon que dans le menu. Voir la section Menu & Liste d’épicerie (section Menus) pour de plus amples détails.
+10. Voter sur un plat
+ 
+Figure 18 – Fenêtre de sélection d’une note pour un plat.
+En appuyant sur le bouton cœur, cette fenêtre apparaîtra. L’utilisateur peut choisir une note dans la liste déroulante et confirmer son vote en appuyant sur le bouton Confirmer ou encore annuler en appuyant sur le bouton Annuler. Lorsqu’un membre passe au vote, en temps réel, tous les autres membres étant dans la fenêtre de votes verront leur écran se rafraîchir pour afficher la nouvelle note des plats.

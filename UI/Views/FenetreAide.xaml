@@ -98,7 +98,7 @@
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="{Resx Votes}" />
-                        <TextBlock Name="Vote" TextWrapping="Wrap">
+                        <TextBlock Name="Votes" TextWrapping="Wrap">
 
                         </TextBlock>
                     </StackPanel>
@@ -149,6 +149,16 @@
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="Langage" />
                         <TextBlock Name="Langage" TextWrapping="Wrap">
+
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Style="{StaticResource tabItem}" Name="tiMenuAdmin" Header="{Resx MenuAdmin}">
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx MenuAdmin}" />
+                        <TextBlock Name="MenuAdmin" TextWrapping="Wrap">
 
                         </TextBlock>
                     </StackPanel>

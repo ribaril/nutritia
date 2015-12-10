@@ -47,7 +47,7 @@ namespace Nutritia.UI.Views
                     tcAide.SelectedItem = tiCalculatrice;
                     break;
                 case "FenetreVotes":
-                    tcAide.SelectedItem = tiParametre;
+                    tcAide.SelectedItem = tiVotes;
                     break;
                 case "FenetreGenerateurMenus":
                     tcAide.SelectedItem = tiGenerationMenu;
@@ -60,6 +60,9 @@ namespace Nutritia.UI.Views
                     break;
                 case "ModificationProfil":
                     tcAide.SelectedItem = tiProfil;
+                    break;
+                case "MenuAdministrateur":
+                    tcAide.SelectedItem = tiMenuAdmin;
                     break;
                 default:
                     tcAide.SelectedItem = tiNutritia;

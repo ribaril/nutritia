@@ -144,6 +144,9 @@
   <data name="ListeEpicerie" xml:space="preserve">
     <value>Liste d'épicerie</value>
   </data>
+  <data name="MenuAdmin" xml:space="preserve">
+    <value>Administration</value>
+  </data>
   <data name="MenuConnecte" xml:space="preserve">
     <value>Menu connecté</value>
   </data>

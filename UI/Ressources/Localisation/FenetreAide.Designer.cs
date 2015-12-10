@@ -142,6 +142,15 @@ namespace Nutritia.UI.Ressources.Localisation {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Administration.
+        /// </summary>
+        public static string MenuAdmin {
+            get {
+                return ResourceManager.GetString("MenuAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Menu connecté.
         /// </summary>
         public static string MenuConnecte {
