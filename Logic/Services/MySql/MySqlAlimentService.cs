@@ -19,7 +19,7 @@ namespace Nutritia
         public IList<Aliment> RetrieveAll()
         {
             IList<Aliment> resultat = new List<Aliment>();
-            string requete = "SELECT * FROM Aliments a INNER JOIN CategoriesAlimentaires ca ON ca.idCategorieAlimentaire = a.idCategorieAlimentaire INNER JOIN UnitesMesure um ON um.idUniteMesure = a.idUniteMesure";
+            string requete = "SELECT * FROM Aliments a INNER JOIN CategoriesAlimentaires ca ON ca.idCategorieAlimentaire = a.idCategorieAlimentaire INNER JOIN UnitesMesure um ON um.idUniteMesure = a.idUniteMesure ORDER BY a.nom asc";
 
             try
             {

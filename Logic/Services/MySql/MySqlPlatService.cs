@@ -37,7 +37,7 @@ namespace Nutritia
             {
                 connexion = new MySqlConnexion();
 
-                string requete = "SELECT * FROM Plats p INNER JOIN TypesPlats tp ON tp.idTypePlat = p.idTypePlat INNER JOIN Membres m ON m.idMembre = p.idMembre";
+                string requete = "SELECT * FROM Plats p INNER JOIN TypesPlats tp ON tp.idTypePlat = p.idTypePlat INNER JOIN Membres m ON m.idMembre = p.idMembre ORDER BY p.nom asc";
 
                 DataSet dataSetPlats = connexion.Query(requete);
                 DataTable tablePlats = dataSetPlats.Tables[0];
