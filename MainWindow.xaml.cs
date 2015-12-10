@@ -302,7 +302,7 @@ namespace Nutritia
             sbNotifs.AppendLine("     Nouveaux plats").AppendLine("-----------------------------------------").AppendLine();
             foreach (var plat in NvPlatAffichable)
             {
-                sbNotifs.Append("+ ").AppendLine(plat.Nom).AppendLine();
+                sbNotifs.Append("+ ").AppendLine(plat.Nom);
             }
 
             sbNotifs.AppendLine("-----------------------------------------").AppendLine("Voulez-vous ouvrir ces ").AppendLine("plats avec la calculatrice ?");
@@ -464,7 +464,7 @@ namespace Nutritia
 
         private void MettreAJourNbrNotif()
         {
-            string txtNbrNotif = (toolBarNotif.Items.Count - 2).ToString(); // Moins l'icone de notification et le num de notif
+            string txtNbrNotif = (toolBarNotif.Items.Count).ToString();
 
             if (txtNbrNotif == "0")
                 txtNbrNotif = "";

@@ -171,6 +171,9 @@
   <data name="VosParametres" xml:space="preserve">
     <value>Vos paramètres</value>
   </data>
+  <data name="Votes" xml:space="preserve">
+    <value>Votes</value>
+  </data>
   <data name="VotreListeEpicerie" xml:space="preserve">
     <value>Votre liste d'épicerie</value>
   </data>

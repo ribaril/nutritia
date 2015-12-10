@@ -538,6 +538,7 @@
     <Compile Include="UI\Views\FenetreRecuDon.xaml.cs">
       <DependentUpon>FenetreRecuDon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Views\MessageBoxManager.cs" />
     <Compile Include="UI\Views\StackPlatAliment.xaml.cs">
       <DependentUpon>StackPlatAliment.xaml</DependentUpon>
     </Compile>

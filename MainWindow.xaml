@@ -46,18 +46,19 @@
                         <TextBlock Text="{Resx Aide}" FontSize="20" FontFamily="Berlin"/>
                     </DockPanel>
                 </Button>
-                <ToolBar Name="toolBarNotif" Width="65" Height="30">
+                <Image ToolTipService.ShowDuration="12000" Width="24" Height="24" Margin="2" Source="UI/Images/notifIcon.png" >
+                    <Image.ToolTip>
+                        <ToolTip StaysOpen="True" HorizontalOffset="10"
+                                    ToolTipService.InitialShowDelay="0" ToolTipService.BetweenShowDelay="0">
+                            <TextBlock>Nouvelle Notification</TextBlock>
+                        </ToolTip>
+                    </Image.ToolTip>
+                </Image>
+                <TextBlock Name="nbrNotif" Text="" Foreground="DarkGreen"/>
+                <ToolBar Name="toolBarNotif" Width="15">
                     <!--<Button Name="btnNotification" VerticalAlignment="Top">-->
                    
-                            <Image ToolTipService.ShowDuration="12000" Width="25" Margin="2" Source="UI/Images/notifIcon.png" >
-                                <Image.ToolTip>
-                                    <ToolTip StaysOpen="True" HorizontalOffset="10"
-                                    ToolTipService.InitialShowDelay="0" ToolTipService.BetweenShowDelay="0">
-                                        <TextBlock>Nouvelle Notification</TextBlock>
-                                    </ToolTip>
-                                </Image.ToolTip>
-                            </Image>
-                            <TextBlock Name="nbrNotif" Text="" Foreground="DarkGreen"/>
+                            
                         
                     <!--</Button>-->
                 </ToolBar>

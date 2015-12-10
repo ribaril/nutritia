@@ -1,6 +1,36 @@
-#AjoutPlat
+#Nutritia
+Bienvenue dans notre application Nutritia.
+Lorsque vous ne savez plus quoi faire pour manger santé, Nutritia est la pour vous aider.
+Grâce à son système de génération de menu, vous n'aurez plus à vous creuser la tête pour savoir quoi manger.
+Nutritia prend en compte vos différentrs régimes alimentaires. Il vous aidera dans vos différents objectifs.
+De plus, la communauté autour de Nutritia est grandissante et met en commun de nombreux plats qui peuvent être les votres.
+Bref, Nutritia c'est ce qu'il vous faut.
 
-#InfoSuspenssion
+#MenuPrincipal
+Vous voici dans le menu principal de l'application.
+
+D'ici, vous pouvez déja faire de nombreuses actions :
+
+1 - Vous inscrire pour profiter de nos services premium :
+	+Avoir un compte premium vous donne accès à une génération
+	de menu.
+	+qui tient compte de toutes vos préférences alimentaires.
+	+Vous pourrez aussi ajouter vos propres recettes maisons afin 
+	qu'elles aient une chance d'apparaitre dans votre menu.
+	+Vous pourrez aussi voter des plats et accéder au best of des
+	utilisateurs.
+		
+2 - Vous connecter pour accéder à votre compte premium.
+		
+3 - Aller à la calculatrice pour calculer la nutrition de différents plats ou aliments.
+
+4 - Et enfin, vous pourrez génerer des menus sans pouvoir les enregistrer ni en qu'il dépendent de vos restrictions.
+
+#MonProfil
+Afin de s’identifier à un profil d’utilisateur, il faut saisir à l’écran deux informations, soit le nom d’utilisateur associé à un profil ainsi que le mot de passe correspondant. Il est important de noter qu’un utilisateur préalablement banni ne pourra se connecter. Ce dernier recevra alors le message suivant suite à la tentative :
+Si bien sûr tout fonctionnement promptement, l’utilisateur sera alors dirigé vers le menu des membres Nutritia. Pour plus de détail sur ce dernier, consulter la section Menu des membres.
+Ce bouton permet de valider si le nom d’utilisateur et le mot de passe saisie correspondent, relativement aux informations stockées dans la base de données. En cas d’erreur, le champ erroné sera mis en rouge auquel cas l’utilisateur pourra corriger le tir avant de tenter une nouvelle connexion. Il n’y a pas de limite au nombre de tentatives de connexion erronés.
+Le bouton « S’inscrire » permet à l’utilisateur de passer à la fenêtre de création de profil. À partir de cette fenêtre, il sera appelé à fournir diverses informations personnelles telles que son nom, prénom, mais aussi la taille et masse. Par ailleurs, il sera aussi possible de fournir de l’Information supplémentaire comme par exemple des préférences alimentaires (végétarien par exemple). Voir la section Création/Modification d’un profil pour de plus amples détails.
 
 #CalculatriceNutrionnelle
 Bienvenue dans la calculatrice nutritionnelle. Elle vous confère l'aperçu d'un menu que vous avez créé vous-même.
@@ -31,43 +61,55 @@ Ctrl + Delete -> Supprimer tous les plats ou aliments du plateau.
 Survoler les plats et aliments pour voir la valeur nutritive atomique de l'élément, de son poids total et de ses mensurations nutritives.
 Vous pouvez apercevoir une icône à droite dans une ligne de plat ou d'aliment, elle indique si l'élément est un plat (couteau fourchette) ou un aliment (panier d'épicerie).
 
+#AjoutPlat
+Vous êtes présentement dans l'ajout de plat. Grâce à cette fenêtre, vous pourrez entrer vos propres plats familliaux.
+
+Cet écran est divisé entre quatre sections. Chacune a son utilité.
+
+1.	Informations relatives au plat
+Dans cette partie du sous-écran, on retrouve les informations courantes relatives au plat. Ceci inclus le nom de celui-ci, mais aussi le type auquel il appartient. Tout comme pour les contextes d’ajout et de modification d’aliments, il est aussi possible de fournir une image pour un plat.
+2.	Confirmer l’ajout
+Le bouton de confirmation permet de créer le plat courant. Il permet aussi de confirmer le contenu des différents champs de saisies, mais aussi des sélections requises comme le type de plat. Il est d’ailleurs impossible de créer un plat sans lui assigner au moins un aliment pour la composition.
+3.	Accordéon d’aliments
+L’accordéon contient la liste de tous les aliments présents dans la base de données utilisée actuellement par l’application. Cet accordéon regroupe aussi tous ces aliments par catégories alimentaires. Si l’utilisateur clique sur un aliment, ceci ajoute alors cet aliment dans la composition du plat, plus bas. Si cet aliment est déjà présent dans la composition du plat, un multiplicateur apparaît près du nom de l’aliment, signalant alors la quantité pour cet aliment.
+4.	Composition du plat
+La composition du plat est essentiellement une liste d’aliments composant le plat courant. Ceci permet à l’utilisateur de connaître le contenu d’un plat. Un clic sur un aliment dans la composition du plat a pour effet de réduire la valeur du multiplicateur (quantité) pour cet aliment. Si cet aliment n’a plus de multiplicateur, alors ce dernier est simplement retiré de la liste.
+
+#InfoSuspenssion
+Vous avez probablement été banni par un administrateur pour mauvaise utilisation de l'ajout de plat.
+Un membre banni n’a plus accès au contexte connecté de l’application, c’est-à-dire que l’accès au vote et à l’ajout de plat n’est plus accessible. De plus, l’utilisation du générateur de menu est restreint à la simple génération sans restriction ni préférence et sans la possibilité d’enregistrer un menu. Vous avez donc accès à l’application dans le contexte non-connécté.
+
 #EnvoyerDon
+La section Faire un don permet à l’utilisateur d’envoyer un don par carte de crédit pour supporter le développement du logiciel Nutritia. Le bouton Confirmer reste désactivé tant et aussi longtemps que les champs de saisies restent vide. Le type de carte de crédit est détecté automatiquement et l’image correspondante au type de carte mise en évidence.
+Chaque champ valide également les données pour empêcher de faire une erreur. Il est impossible d’écrire des caractères autres que des chiffres dans le champ du numéro de carte et du code de sécurité. La date d’expiration de la carte est aussi validée avant de permettre l’envoie d’un don.
+Si l’utilisateur a correctement saisie les informations dans chacun des champs, mais que certains champs de saisies restent invalides, il faut vérifier à la présence d’espaces blancs. Il sera alors nécessaire de les supprimer pour être ensuite conforme aux exigences.
+Une fois les informations validées, l’utilisateur doit appuyer sur le bouton Confirmer et un reçu lui sera présenté. Le numéro du propriétaire de la carte, le montant du don, le type de carte utilisée, ainsi que la date et l’heure de la transaction sont présentés sur cette page. Les mêmes informations (ainsi que le numéro de transaction) sont encodées sous forme d’un code QR. L’utilisateur peut utiliser le code QR pour faire une sauvegarde de ces informations pour ses états financiers.
 
 #GenerationMenu
+Tout d’abord, la fonctionnalité Menu & Liste d’épicerie permet de générer des menus de façons complètement aléatoire (utilisateur non-membre) ou encore en respectant les conditions de santés et les préférences d’un membre.
+Avant de procéder à la génération d’un menu, l’utilisateur doit sélectionner une période, c’est-à-dire, le nombre de plats qui seront générés. De plus, celui-ci doit indiquer combien de personnes seront présentes à table pour ce menu en particulier. Le système ajustera les portions en fonction de ce nombre.
+En tant que membre, un utilisateur peut sauvegarder un menu généré. Si le menu est apprécié, il ne s’agit simplement qu’à appuyer sur le bouton disquette. Une fenêtre apparaîtra demandant de saisir un nom pour ce menu. Il doit être unique et on ne peut pas avoir deux mens avec le même nom. Si une tentative de sauvegarde implique un nom déjà utilisé, le logiciel le signalera en affichant un message d’erreur rouge en haut du champ de saisie.
+Les menus précédemment créés par l’utilisateur s’afficheront les uns en dessous des autres avec leur date de création à côté. Pour en ouvrir un, il suffit de cocher le bouton radio correspondant au menu désiré et d’appuyer sur le bouton Ouvrir. Par la suite, le menu s’affichera.
+La génération de menus consiste à générer un menu en fonction des informations préalables telles que la période et le nombre de personnes.
+Le bouton Liste d’épicerie permet de générer une liste d’épicerie en fonction du menu généré. Voir la section sur la liste d’épicerie plus basse.
+En cochant la case à cocher (Par défaut), les images des plats seront affichées. Sinon, pour un gain d’espace, les images ne seront pas affichées.
+Lorsqu’un membre a une restriction alimentaire telle que le diabète, cholestérol, haute/basse pression, perte de poids, gain de poids, gain musculaire, contrôle glycémique et contrôle du cholestérol, il peut choisir de « tricher ». Les différents plats qui ne sont pas admis à la génération s’affichent ici. Lorsqu’il coche une case et qu’il enregistre son choix, le plat sera à nouveau admis à la génération.
+Lorsqu’un menu est généré, il s’affiche dans cette section. En fait, celle-ci apparaît en dessous de la série de boutons lors d’une génération.
+Le nom du plat est affiché ainsi que son type. Dans l’exemple, il s’agit d’une génération d’un dîner/souper, mais dans le cas d’une semaine par exemple, le texte rouge afficherait en plus sa journée. Par exemple, Jour 1 (Entrée) etc.
+Il s’agit d’un aperçu du plat. (Il est uniquement présent lorsque la case à cocher permettant d’afficher ou non les plats est coché).
+Le bouton de rafraîchissement d’un plat permet de régénérer uniquement ce plat dans le menu.
+Le bouton ingrédients ouvre une fenêtre affichant l’ensemble des ingrédients d’un plat. De plus, lors d’un survol d’un ingrédient avec votre souris, une info-bulle apparaît affichant les valeurs nutritionnelles de cet ingrédient. Le bouton Calculatrice, pour sa part, ouvre la calculatrice nutritionnelle avec ce plat dans le plateau.
 
 #ListeEpicerie
+Cette partie présente la liste d’épicerie du menu ayant précédemment été générée sous forme d’un tableau. Le bouton « poubelle » permet de retirer un article de la liste.
+Essentiellement, l’information présentée dans cette partie est la même que celle dans le tableau. Elle est seulement plus conviviale pour une utilisation à l’épicerie par exemple.
+Pour l’instant, dans la version 1.0 du logiciel, le bouton n’a aucun effet. Dans une version ultérieure, il sera possible d’imprimer la liste conviviale.
 
 #MenuConnecte
 
-#MenuPrincipal
-Vous voici dans le menu principal de l'application.
-
-D'ici, vous pouvez déja faire de nombreuses actions :
-
-1 - Vous inscrire pour profiter de nos services premium :
-	+Avoir un compte premium vous donne accès à une génération
-	de menu.
-	+qui tient compte de toutes vos préférences alimentaires.
-	+Vous pourrez aussi ajouter vos propres recettes maisons afin 
-	qu'elles aient une chance d'apparaitre dans votre menu.
-	+Vous pourrez aussi voter des plats et accéder au best of des
-	utilisateurs.
-		
-2 - Vous connecter pour accéder à votre compte premium.
-		
-3 - Aller à la calculatrice pour calculer la nutrition de différents plats ou aliments.
-
-4 - Et enfin, vous pourrez génerer des menus sans pouvoir les enregistrer ni en qu'il dépendent de vos restrictions.
 #VosParametres
 
-#MonProfil
-
 #Langage
-
-#Nutritia
-Bienvenue dans notre application Nutritia.
-Lorsque vous ne savez plus quoi faire pour manger santé, Nutritia est la pour vous aider.
-Grâce à son système de génération de menu, vous n'aurez plus à vous creuser la tête pour savoir quoi manger.
-Nutritia prend en compte vos différentrs régimes alimentaires. Il vous aidera dans vos différents objectifs.
-De plus, la communauté autour de Nutritia est grandissante et met en commun de nombreux plats qui peuvent être les votres.
-Bref, Nutritia c'est ce qu'il vous faut.
+L’utilisateur a le choix entre français et anglais. Une fois la langue sélectionné, il ne faut pas oublier de cliquer sur le bouton Enregistrer pour que le changement prenne effet. Une fois enregistré, l’affichage de l’interface changera immédiatement à la langue choisie.
+Le logiciel Nutritia est par défaut en français. Le paramètre de langue n’est pas enregistré sauf si vous êtes connecté à votre compte, la langue sera remis à français si l’utilisateur lance une nouvelle instance de Nutritia.
+Votre compte de membre enregistre votre paramètre de langue d’affichage. Si vous vous connecter à votre compte, l’interface sera changé automatiquement à votre langue de préférence. Si vous changé le paramètre de langue d’affichage une fois connecté, le changement sera enregistré à votre compte.

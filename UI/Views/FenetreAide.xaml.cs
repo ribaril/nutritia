@@ -28,6 +28,15 @@ namespace Nutritia.UI.Views
 
             switch (nomFenetre)
             {
+                case "Bannissement":
+                    tcAide.SelectedItem = tiSuspenssion;
+                    break;
+                case "MenuPrincipal":
+                    tcAide.SelectedItem = tiMenuPrincipal;
+                    break;
+                case "FenetreConnexion":
+                    tcAide.SelectedItem = tiConnexion;
+                    break;
                 case "AjoutPlat":
                     tcAide.SelectedItem = tiAjoutPlat;
                     break;
@@ -37,9 +46,6 @@ namespace Nutritia.UI.Views
                 case "FenetreCalculatriceNutritionelle":
                     tcAide.SelectedItem = tiCalculatrice;
                     break;
-                case "FenetreConnexion":
-                    tcAide.SelectedItem = tiConnexion;
-                    break;
                 case "FenetreVotes":
                     tcAide.SelectedItem = tiParametre;
                     break;
@@ -48,9 +54,6 @@ namespace Nutritia.UI.Views
                     break;
                 case "FenetreListeEpicerie":
                     tcAide.SelectedItem = tiListeEpicerie;
-                    break;
-                case "MenuPrincipal":
-                    tcAide.SelectedItem = tiMenuPrincipal;
                     break;
                 case "MenuPrincipalConnecte":
                     tcAide.SelectedItem = tiMenuConnecte;
