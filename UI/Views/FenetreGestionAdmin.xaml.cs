@@ -44,6 +44,7 @@ namespace Nutritia.UI.Views
 
             //filterDataGrid.ItemsSource = s.ConvertAll(x => new { Value = x });
             listMembres = new ObservableCollection<Membre>(serviceMembre.RetrieveAll());
+            listMembres.Remove(listMembres.FirstOrDefault(x => x.NomUtilisateur == App.MembreCourant.NomUtilisateur));
             filterDataGrid.DataGridCollection = CollectionViewSource.GetDefaultView(listMembres);
             filterDataGrid.DataGridCollection.Filter = new Predicate<object>(Filter);
             listAdmins = new ObservableCollection<Membre>(listMembres.Where(m => m.EstAdministrateur).ToList());
@@ -77,6 +78,7 @@ namespace Nutritia.UI.Views
         {
             dgAdmin.SelectedIndex = -1;
             listMembres = new ObservableCollection<Membre>(serviceMembre.RetrieveAll());
+            listMembres.Remove(listMembres.FirstOrDefault(x => x.NomUtilisateur == App.MembreCourant.NomUtilisateur));
             listAdmins = new ObservableCollection<Membre>(listMembres.Where(m => m.EstAdministrateur).ToList());
             filterDataGrid.DataGridCollection = CollectionViewSource.GetDefaultView(listMembres);
             adminDepart = listAdmins.ToList();
