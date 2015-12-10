@@ -32,8 +32,6 @@ namespace Nutritia
         private Thread tNotif { get; set; }
         private Thread ThreadNotif { get; set; }
 
-        static private bool Debug = false;
-
         // Permet d'interargir avec le threas asyncrone pour sauvegardé les nouveau plats dan la BD
         static public List<Plat> NouveauxPlats { get; set; }
         public List<Plat> NvPlatAffichable { get; set; }
@@ -45,6 +43,8 @@ namespace Nutritia
 
         private DateTime previousTime;
         private DateTime currentTime;
+
+        VersionLogiciel latestVersionLogiciel;
 
         public MainWindow()
         {
@@ -217,16 +217,19 @@ namespace Nutritia
             App.Current.MainWindow.Height = App.APP_HEIGHT;
             App.Current.MainWindow.WindowState = WindowState.Normal;
 
-            if (String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
-                ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipal());
+            if (presenteurContenu.Content is FenetreListeEpicerie)
+                ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new FenetreGenerateurMenus(FenetreListeEpicerie.MenuGenere, FenetreListeEpicerie.NbColonnesMenu));
             else
             {
-                if (presenteurContenu.Content is Bannissement || presenteurContenu.Content is GestionAdmin || presenteurContenu.Content is GestionRepertoire)
-                    ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuAdministrateur());
-                else if (presenteurContenu.Content is FenetreListeEpicerie)
-                    ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new FenetreGenerateurMenus());
+                if (String.IsNullOrEmpty(App.MembreCourant.NomUtilisateur))
+                    ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipal());
                 else
-                    ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
+                {
+                    if (presenteurContenu.Content is Bannissement || presenteurContenu.Content is GestionAdmin || presenteurContenu.Content is GestionRepertoire || presenteurContenu.Content is FenetreDons)
+                        ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuAdministrateur());
+                    else
+                        ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
+                }
             }
         }
 
@@ -270,7 +273,7 @@ namespace Nutritia
             {
                 IVersionLogicielService serviceMembre = ServiceFactory.Instance.GetService<IVersionLogicielService>();
 
-                VersionLogiciel latestVersionLogiciel = serviceMembre.RetrieveLatest();
+                latestVersionLogiciel = serviceMembre.RetrieveLatest();
 
                 //Ne devrait pas s'exécuter
                 if (String.IsNullOrEmpty(latestVersionLogiciel.Version))
@@ -283,7 +286,7 @@ namespace Nutritia
 
                 if (versionBD > versionLocal && MessageNouvelleVersion == "")
                 {
-                    MessageNouvelleVersion = "Version: " + latestVersionLogiciel.Version + " disponible.\nLien de téléchargement: " + latestVersionLogiciel.DownloadLink;
+                    MessageNouvelleVersion = "Version: " + latestVersionLogiciel.Version + " disponible.";
                     Dispatcher.Invoke(DessinerNotificationNvnvVersion);
                 }
 
@@ -440,11 +443,16 @@ namespace Nutritia
 
         private void btnNouvelleVersion_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(
-                     MessageNouvelleVersion,
+            if (MessageBox.Show(
+                     MessageNouvelleVersion + "\n Voulez-vous la télécharger ?",
                      "Nouvelle version disponible",
-                     MessageBoxButton.OK,
-                     MessageBoxImage.Information);
+                     MessageBoxButton.YesNo,
+                     MessageBoxImage.Information) == MessageBoxResult.Yes)
+            {
+                Process p = new Process();
+                p.StartInfo.FileName = latestVersionLogiciel.DownloadLink + "/download/v" + latestVersionLogiciel.Version + "/Nutritia.zip";
+                p.Start();
+            }
 
             toolBarNotif.Items.Remove((Button)sender);
 
@@ -477,10 +485,6 @@ namespace Nutritia
             {
                 FenetreAide fenetreAide = new FenetreAide(presenteurContenu.Content.GetType().Name);
                 fenetreAide.Show();
-            }
-            if (e.Key == Key.F2)
-            {
-                Debug = !Debug;
             }
         }
 
