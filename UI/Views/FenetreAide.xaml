@@ -144,21 +144,41 @@
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Style="{StaticResource tabItem}" Name="tiLangue" Header="{Resx Langage}">
-                <ScrollViewer PreviewMouseWheel="ScrollFocus">
-                    <StackPanel>
-                        <Label Style="{StaticResource fontSousTitre}" Content="Langage" />
-                        <TextBlock Name="Langage" TextWrapping="Wrap">
-
-                        </TextBlock>
-                    </StackPanel>
-                </ScrollViewer>
-            </TabItem>
             <TabItem Style="{StaticResource tabItem}" Name="tiMenuAdmin" Header="{Resx MenuAdmin}">
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="{Resx MenuAdmin}" />
                         <TextBlock Name="MenuAdmin" TextWrapping="Wrap">
+
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Style="{StaticResource tabItem}" Name="tiGestionAlimentsPlats" Header="{Resx GestionAlimentsPlats}">
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx GestionAlimentsPlats}" />
+                        <TextBlock Name="GestionAlimentsPlats" TextWrapping="Wrap">
+
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Style="{StaticResource tabItem}" Name="tiAdminDons" Header="{Resx Dons}">
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx Dons}" />
+                        <TextBlock Name="AdminDons" TextWrapping="Wrap">
+
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Style="{StaticResource tabItem}" Name="tiGestionAdmins" Header="{Resx GestionAdmins}">
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx GestionAdmins}" />
+                        <TextBlock Name="GestionAdmins" TextWrapping="Wrap">
 
                         </TextBlock>
                     </StackPanel>

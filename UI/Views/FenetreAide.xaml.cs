@@ -64,6 +64,15 @@ namespace Nutritia.UI.Views
                 case "MenuAdministrateur":
                     tcAide.SelectedItem = tiMenuAdmin;
                     break;
+                case "GestionRepertoire":
+                    tcAide.SelectedItem = tiGestionAlimentsPlats;
+                    break;
+                case "FenetreDons":
+                    tcAide.SelectedItem = tiAdminDons;
+                    break;
+                case "GestionAdmins":
+                    tcAide.SelectedItem = tiGestionAdmins;
+                    break;
                 default:
                     tcAide.SelectedItem = tiNutritia;
                     break;

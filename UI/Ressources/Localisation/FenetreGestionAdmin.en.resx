@@ -129,6 +129,9 @@
   <data name="Compte" xml:space="preserve">
     <value>Account</value>
   </data>
+  <data name="GestionAdmins" xml:space="preserve">
+    <value>Manage administrators</value>
+  </data>
   <data name="InfoMembre" xml:space="preserve">
     <value>Information of the selected member</value>
   </data>
