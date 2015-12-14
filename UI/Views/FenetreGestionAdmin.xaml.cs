@@ -44,6 +44,9 @@ namespace Nutritia.UI.Views
 
             //filterDataGrid.ItemsSource = s.ConvertAll(x => new { Value = x });
             listMembres = new ObservableCollection<Membre>(serviceMembre.RetrieveAll());
+
+            currentTime = previousTime = listMembres.Max(m => m.DerniereMaj);
+
             listMembres.Remove(listMembres.FirstOrDefault(x => x.NomUtilisateur == App.MembreCourant.NomUtilisateur));
             filterDataGrid.DataGridCollection = CollectionViewSource.GetDefaultView(listMembres);
             filterDataGrid.DataGridCollection.Filter = new Predicate<object>(Filter);
@@ -51,8 +54,6 @@ namespace Nutritia.UI.Views
             //adminsSysteme = new ObservableCollection<Membre>(serviceMembre.RetrieveAdmins());
             dgAdmin.ItemsSource = listAdmins;
             adminDepart = listAdmins.ToList();
-
-            currentTime = previousTime = listMembres.Max(m => m.DerniereMaj);
 
             dbPoolingThread = new Thread(PoolDB);
             dbPoolingThread.IsBackground = true;
