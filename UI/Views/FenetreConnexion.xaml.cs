@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Forms;
 
 namespace Nutritia.UI.Views
 {
@@ -47,12 +48,21 @@ namespace Nutritia.UI.Views
                 // On sauvegarde les données du membre dans la variable de session seulement s'il n'est pas banni.
                 if(membreValidation.EstBanni)
                 {
+                    MessageBoxManager.Yes = "Aide";
+                    MessageBoxManager.No = "Ok";
+                    MessageBoxManager.Register();
                     MessageBoxResult resultat;
                     resultat = MessageBox.Show(Nutritia.UI.Ressources.Localisation.FenetreConnexion.Bannissement
                                                 , Nutritia.UI.Ressources.Localisation.FenetreConnexion.ConnexionImpossible
-                                                , MessageBoxButton.OK
-                                                , MessageBoxImage.Warning
-                                                , MessageBoxResult.OK);
+                                                , MessageBoxButton.YesNo
+                                                , MessageBoxImage.Warning);
+                    MessageBoxManager.Unregister();
+
+                    if(resultat == MessageBoxResult.Yes)
+                    {
+                        FenetreAide fenetreAide = new FenetreAide("Bannissement");
+                        fenetreAide.Show();
+                    }
                 }
                 else
                 {

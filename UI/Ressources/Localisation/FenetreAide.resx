@@ -132,17 +132,29 @@
   <data name="Don" xml:space="preserve">
     <value>Don</value>
   </data>
+  <data name="Dons" xml:space="preserve">
+    <value>Dons</value>
+  </data>
   <data name="EnvoyerUnDon" xml:space="preserve">
     <value>Envoyer un don</value>
   </data>
   <data name="GenerationMenu" xml:space="preserve">
     <value>Génération de menu</value>
   </data>
+  <data name="GestionAdmins" xml:space="preserve">
+    <value>Gestion des administrateurs</value>
+  </data>
+  <data name="GestionAlimentsPlats" xml:space="preserve">
+    <value>Gestion aliments plats</value>
+  </data>
   <data name="Langage" xml:space="preserve">
     <value>Langage</value>
   </data>
   <data name="ListeEpicerie" xml:space="preserve">
     <value>Liste d'épicerie</value>
+  </data>
+  <data name="MenuAdmin" xml:space="preserve">
+    <value>Administration</value>
   </data>
   <data name="MenuConnecte" xml:space="preserve">
     <value>Menu connecté</value>
@@ -170,6 +182,9 @@
   </data>
   <data name="VosParametres" xml:space="preserve">
     <value>Vos paramètres</value>
+  </data>
+  <data name="Votes" xml:space="preserve">
+    <value>Votes</value>
   </data>
   <data name="VotreListeEpicerie" xml:space="preserve">
     <value>Votre liste d'épicerie</value>

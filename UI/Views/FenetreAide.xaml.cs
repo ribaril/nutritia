@@ -28,6 +28,15 @@ namespace Nutritia.UI.Views
 
             switch (nomFenetre)
             {
+                case "Bannissement":
+                    tcAide.SelectedItem = tiSuspenssion;
+                    break;
+                case "MenuPrincipal":
+                    tcAide.SelectedItem = tiMenuPrincipal;
+                    break;
+                case "FenetreConnexion":
+                    tcAide.SelectedItem = tiConnexion;
+                    break;
                 case "AjoutPlat":
                     tcAide.SelectedItem = tiAjoutPlat;
                     break;
@@ -37,11 +46,8 @@ namespace Nutritia.UI.Views
                 case "FenetreCalculatriceNutritionelle":
                     tcAide.SelectedItem = tiCalculatrice;
                     break;
-                case "FenetreConnexion":
-                    tcAide.SelectedItem = tiConnexion;
-                    break;
                 case "FenetreVotes":
-                    tcAide.SelectedItem = tiParametre;
+                    tcAide.SelectedItem = tiVotes;
                     break;
                 case "FenetreGenerateurMenus":
                     tcAide.SelectedItem = tiGenerationMenu;
@@ -49,14 +55,23 @@ namespace Nutritia.UI.Views
                 case "FenetreListeEpicerie":
                     tcAide.SelectedItem = tiListeEpicerie;
                     break;
-                case "MenuPrincipal":
-                    tcAide.SelectedItem = tiMenuPrincipal;
-                    break;
                 case "MenuPrincipalConnecte":
                     tcAide.SelectedItem = tiMenuConnecte;
                     break;
                 case "ModificationProfil":
                     tcAide.SelectedItem = tiProfil;
+                    break;
+                case "MenuAdministrateur":
+                    tcAide.SelectedItem = tiMenuAdmin;
+                    break;
+                case "GestionRepertoire":
+                    tcAide.SelectedItem = tiGestionAlimentsPlats;
+                    break;
+                case "FenetreDons":
+                    tcAide.SelectedItem = tiAdminDons;
+                    break;
+                case "GestionAdmins":
+                    tcAide.SelectedItem = tiGestionAdmins;
                     break;
                 default:
                     tcAide.SelectedItem = tiNutritia;

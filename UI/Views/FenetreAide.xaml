@@ -24,102 +24,11 @@
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Style="{StaticResource tabItem}" Name="tiAjoutPlat" Header="{Resx AjoutPlat}">
-                <ScrollViewer PreviewMouseWheel="ScrollFocus">
-                    <StackPanel>
-                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx AjoutPlat}" />
-                        <TextBlock Name="AjoutPlat" TextWrapping="Wrap">
-
-                        </TextBlock>
-                    </StackPanel>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Style="{StaticResource tabItem}" Name="tiSuspenssion" Header="{Resx Suspension}">
-                <ScrollViewer PreviewMouseWheel="ScrollFocus">
-                    <StackPanel>
-                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx Suspension}" />
-                        <TextBlock Name="InfoSuspenssion" TextWrapping="Wrap">
-
-                        </TextBlock>
-                    </StackPanel>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Style="{StaticResource tabItem}" Name="tiCalculatrice" Header="{Resx Calculatrice}">
-                <ScrollViewer PreviewMouseWheel="ScrollFocus">
-                    <StackPanel>
-                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx CalculatriceNutritionnelle}" />
-                        <TextBlock Name="CalculatriceNutrionnelle" TextWrapping="Wrap">
-
-                        </TextBlock>
-                    </StackPanel>
-                </ScrollViewer>
-            </TabItem>
-
-            <TabItem Style="{StaticResource tabItem}" Name="tiConnexion" Header="{Resx Connexion}">
-                <ScrollViewer PreviewMouseWheel="ScrollFocus">
-                    <StackPanel>
-                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx SeConnecter}" />
-                        <TextBlock Name="SeConnecter" TextWrapping="Wrap">
-
-                        </TextBlock>
-                    </StackPanel>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Style="{StaticResource tabItem}" Name="tiDon" Header="{Resx Don}">
-                <ScrollViewer PreviewMouseWheel="ScrollFocus">
-                    <StackPanel>
-                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx EnvoyerUnDon}" />
-                        <TextBlock Name="EnvoyerDon" TextWrapping="Wrap">
-
-                        </TextBlock>
-                    </StackPanel>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Style="{StaticResource tabItem}" Name="tiGenerationMenu" Header="{Resx GenerationMenu}">
-                <ScrollViewer PreviewMouseWheel="ScrollFocus">
-                    <StackPanel>
-                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx GenerationMenu}" />
-                        <TextBlock Name="GenerationMenu" TextWrapping="Wrap">
-
-                        </TextBlock>
-                    </StackPanel>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Style="{StaticResource tabItem}" Name="tiListeEpicerie" Header="{Resx ListeEpicerie}">
-                <ScrollViewer PreviewMouseWheel="ScrollFocus">
-                    <StackPanel>
-                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx VotreListeEpicerie}" />
-                        <TextBlock Name="ListeEpicerie" TextWrapping="Wrap">
-
-                        </TextBlock>
-                    </StackPanel>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Style="{StaticResource tabItem}" Name="tiMenuConnecte" Header="{Resx MenuConnecte}">
-                <ScrollViewer PreviewMouseWheel="ScrollFocus">
-                    <StackPanel>
-                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx MenuConnecte}" />
-                        <TextBlock Name="MenuConnecte" TextWrapping="Wrap">
-
-                        </TextBlock>
-                    </StackPanel>
-                </ScrollViewer>
-            </TabItem>
             <TabItem Style="{StaticResource tabItem}" Name="tiMenuPrincipal" Header="{Resx MenuPrincipal}">
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="{Resx MenuPrincipal}" />
                         <TextBlock Name="MenuPrincipal" TextWrapping="Wrap">
-
-                        </TextBlock>
-                    </StackPanel>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Style="{StaticResource tabItem}" Name="tiParametre" Header="{Resx Parametre}">
-                <ScrollViewer PreviewMouseWheel="ScrollFocus">
-                    <StackPanel>
-                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx VosParametres}" />
-                        <TextBlock Name="VosParametres" TextWrapping="Wrap">
 
                         </TextBlock>
                     </StackPanel>
@@ -135,11 +44,141 @@
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Style="{StaticResource tabItem}" Name="tiLangue" Header="{Resx Langage}">
+            <TabItem Style="{StaticResource tabItem}" Name="tiConnexion" Header="{Resx Connexion}">
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
-                        <Label Style="{StaticResource fontSousTitre}" Content="Langage" />
-                        <TextBlock Name="Langage" TextWrapping="Wrap">
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx SeConnecter}" />
+                        <TextBlock Name="SeConnecter" TextWrapping="Wrap">
+
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Style="{StaticResource tabItem}" Name="tiCalculatrice" Header="{Resx Calculatrice}">
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx CalculatriceNutritionnelle}" />
+                        <TextBlock Name="CalculatriceNutrionnelle" TextWrapping="Wrap">
+
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Style="{StaticResource tabItem}" Name="tiGenerationMenu" Header="{Resx GenerationMenu}">
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx GenerationMenu}" />
+                        <TextBlock Name="GenerationMenu" TextWrapping="Wrap">
+
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Style="{StaticResource tabItem}" Name="tiMenuConnecte" Header="{Resx MenuConnecte}">
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx MenuConnecte}" />
+                        <TextBlock Name="MenuConnecte" TextWrapping="Wrap">
+
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Style="{StaticResource tabItem}" Name="tiAjoutPlat" Header="{Resx AjoutPlat}">
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx AjoutPlat}" />
+                        <TextBlock Name="AjoutPlat" TextWrapping="Wrap">
+
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Style="{StaticResource tabItem}" Name="tiVotes" Header="{Resx Votes}">
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx Votes}" />
+                        <TextBlock Name="Votes" TextWrapping="Wrap">
+
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Style="{StaticResource tabItem}" Name="tiSuspenssion" Header="{Resx Suspension}">
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx Suspension}" />
+                        <TextBlock Name="InfoSuspenssion" TextWrapping="Wrap">
+
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Style="{StaticResource tabItem}" Name="tiDon" Header="{Resx Don}">
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx EnvoyerUnDon}" />
+                        <TextBlock Name="EnvoyerDon" TextWrapping="Wrap">
+
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Style="{StaticResource tabItem}" Name="tiListeEpicerie" Header="{Resx ListeEpicerie}">
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx VotreListeEpicerie}" />
+                        <TextBlock Name="ListeEpicerie" TextWrapping="Wrap">
+
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Style="{StaticResource tabItem}" Name="tiParametre" Header="{Resx Parametre}">
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx VosParametres}" />
+                        <TextBlock Name="VosParametres" TextWrapping="Wrap">
+
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Style="{StaticResource tabItem}" Name="tiMenuAdmin" Header="{Resx MenuAdmin}">
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx MenuAdmin}" />
+                        <TextBlock Name="MenuAdmin" TextWrapping="Wrap">
+
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Style="{StaticResource tabItem}" Name="tiGestionAlimentsPlats" Header="{Resx GestionAlimentsPlats}">
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx GestionAlimentsPlats}" />
+                        <TextBlock Name="GestionAlimentsPlats" TextWrapping="Wrap">
+
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Style="{StaticResource tabItem}" Name="tiAdminDons" Header="{Resx Dons}">
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx Dons}" />
+                        <TextBlock Name="AdminDons" TextWrapping="Wrap">
+
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Style="{StaticResource tabItem}" Name="tiGestionAdmins" Header="{Resx GestionAdmins}">
+                <ScrollViewer PreviewMouseWheel="ScrollFocus">
+                    <StackPanel>
+                        <Label Style="{StaticResource fontSousTitre}" Content="{Resx GestionAdmins}" />
+                        <TextBlock Name="GestionAdmins" TextWrapping="Wrap">
 
                         </TextBlock>
                     </StackPanel>

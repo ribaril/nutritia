@@ -460,9 +460,6 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="UI\Views\FenetreAjoutPlatAdmin.xaml.cs">
-      <DependentUpon>FenetreAjoutPlatAdmin.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UI\Views\FenetreAjoutPlatMembre.xaml.cs">
       <DependentUpon>FenetreAjoutPlatMembre.xaml</DependentUpon>
     </Compile>
@@ -538,6 +535,7 @@
     <Compile Include="UI\Views\FenetreRecuDon.xaml.cs">
       <DependentUpon>FenetreRecuDon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Helper\MessageBoxManager.cs" />
     <Compile Include="UI\Views\StackPlatAliment.xaml.cs">
       <DependentUpon>StackPlatAliment.xaml</DependentUpon>
     </Compile>
@@ -578,10 +576,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Pages\Information.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Views\FenetreAjoutPlatAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
