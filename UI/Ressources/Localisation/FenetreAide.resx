@@ -132,11 +132,20 @@
   <data name="Don" xml:space="preserve">
     <value>Don</value>
   </data>
+  <data name="Dons" xml:space="preserve">
+    <value>Dons</value>
+  </data>
   <data name="EnvoyerUnDon" xml:space="preserve">
     <value>Envoyer un don</value>
   </data>
   <data name="GenerationMenu" xml:space="preserve">
     <value>Génération de menu</value>
+  </data>
+  <data name="GestionAdmins" xml:space="preserve">
+    <value>Gestion des administrateurs</value>
+  </data>
+  <data name="GestionAlimentsPlats" xml:space="preserve">
+    <value>Gestion aliments plats</value>
   </data>
   <data name="Langage" xml:space="preserve">
     <value>Langage</value>

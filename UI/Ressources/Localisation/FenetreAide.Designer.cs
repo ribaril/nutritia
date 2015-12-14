@@ -106,6 +106,15 @@ namespace Nutritia.UI.Ressources.Localisation {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Dons.
+        /// </summary>
+        public static string Dons {
+            get {
+                return ResourceManager.GetString("Dons", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Envoyer un don.
         /// </summary>
         public static string EnvoyerUnDon {
@@ -120,6 +129,24 @@ namespace Nutritia.UI.Ressources.Localisation {
         public static string GenerationMenu {
             get {
                 return ResourceManager.GetString("GenerationMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Gestion des administrateurs.
+        /// </summary>
+        public static string GestionAdmins {
+            get {
+                return ResourceManager.GetString("GestionAdmins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Gestion aliments plats.
+        /// </summary>
+        public static string GestionAlimentsPlats {
+            get {
+                return ResourceManager.GetString("GestionAlimentsPlats", resourceCulture);
             }
         }
         

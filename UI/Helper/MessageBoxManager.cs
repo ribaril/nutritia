@@ -1,3 +1,6 @@
+// http://stackoverflow.com/questions/4264664/how-to-change-the-button-text-for-yes-and-no-buttons-in-the-messagebox-show
+// Réponse de user3256312
+
 #pragma warning disable 0618
 using System;
 using System.Text;
