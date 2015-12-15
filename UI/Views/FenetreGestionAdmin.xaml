@@ -61,7 +61,11 @@
                     <DataGridTextColumn Width="*" IsReadOnly="True" Header="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreGestionAdmin, Key=Compte}" Binding="{Binding NomUtilisateur}"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Margin="10" Style="{StaticResource nonTransparent}" Click="Button_Click" Content="{Resx Accepter}"/>
+            <Button Margin="10" Style="{StaticResource nonTransparent}" Click="Button_Click" Content="{Resx Accepter}">
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource toolTipNutritia}" Content="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreGestionAdmin, Key=TooltipAccepter}"/>
+                </Button.ToolTip>
+            </Button>
         </StackPanel>
     </Grid>
 </UserControl>
