@@ -36,6 +36,11 @@ namespace Nutritia.UI.Views
             Erreur = false;
         }
 
+        /// <summary>
+        /// Méthode permettant de valider et de créer un profil d'utilisateur.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Valider_Inserer(object sender, RoutedEventArgs e)
         {
             /*-----------------------------------Validation des différents champs de saisie-----------------------------------*/
@@ -367,7 +372,7 @@ namespace Nutritia.UI.Views
         }
         
         /// <summary>
-        /// Méthode qui gère l'insertion de données dans la variable de login MembreCourant ainsi que l'insertio en BD.
+        /// Méthode qui gère l'insertion de données dans la variable de login MembreCourant ainsi que l'insertion en BD.
         /// </summary>
         private void Inserer_Donnees()
         {

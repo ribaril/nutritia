@@ -152,14 +152,7 @@ namespace Nutritia.UI.Views
             btnControl.Height = 32;
             btnControl.Name = "btn" + ((int)unAliment.IdAliment).ToString();
             btnControl.ToolTip = Produire_Aide_Contextuelle(unAliment);
-
-            if (plus)
-            {
-                //listeAlimentsPlateau.Add(unAliment);
-                btnControl.Click += Ajout_Aliment_Plateau;
-
-            }
-
+            btnControl.Click += Ajout_Aliment_Plateau;
 
             StackPanel stackLigne = new StackPanel();
             stackLigne.Orientation = Orientation.Horizontal;
@@ -167,7 +160,7 @@ namespace Nutritia.UI.Views
             stackLigne.Width = 275;
 
             Image imgBouton = new Image();
-            imgBouton.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/" + (plus ? "plusIcon" : "minusIcon") + ".png"));
+            imgBouton.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/plusIcon.png"));
             imgBouton.Width = 15;
             imgBouton.Height = 15;
             stackLigne.Children.Add(imgBouton);
@@ -227,6 +220,69 @@ namespace Nutritia.UI.Views
         }
 
         /// <summary>
+        /// Méthode permettant de modifier le multiplicateur d'un aliment dans le plateau d'un plat.
+        /// </summary>
+        /// <param name="unAliment"></param>
+        /// <returns></returns>
+        private StackPanel Modifier_Quantite_Bouton_Plateau(Aliment unAliment)
+        {
+            StackPanel stackLigne = new StackPanel();
+            stackLigne.Orientation = Orientation.Horizontal;
+            stackLigne.HorizontalAlignment = HorizontalAlignment.Left;
+            stackLigne.Width = 275;
+
+            Image imgBouton = new Image();
+            imgBouton.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/minusIcon.png"));
+            imgBouton.Width = 15;
+            imgBouton.Height = 15;
+            stackLigne.Children.Add(imgBouton);
+
+            Label lblQuantite = new Label();
+            lblQuantite.Content = unAliment.Quantite.ToString() + "x";
+            lblQuantite.Style = (Style)(this.Resources["fontNutitia"]);
+            lblQuantite.FontSize = 12;
+            lblQuantite.Width = 40;
+            stackLigne.Children.Add(lblQuantite);
+
+            Label lblNom = new Label();
+            lblNom.Content = unAliment.Nom;
+            lblNom.Style = (Style)(this.Resources["fontNutitia"]);
+            lblNom.FontSize = 12;
+            lblNom.Width = 230;
+            stackLigne.Children.Add(lblNom);
+
+            return stackLigne;
+        }
+
+        /// <summary>
+        /// Méthode permettant de retirer le multiplicateur d'un aliment dans le plateau d'un plat.
+        /// </summary>
+        /// <param name="unAliment"></param>
+        /// <returns></returns>
+        private StackPanel Modifier_Bouton_Retrait_Plateau(Aliment unAliment)
+        {
+            StackPanel stackLigne = new StackPanel();
+            stackLigne.Orientation = Orientation.Horizontal;
+            stackLigne.HorizontalAlignment = HorizontalAlignment.Left;
+            stackLigne.Width = 275;
+
+            Image imgBouton = new Image();
+            imgBouton.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/minusIcon.png"));
+            imgBouton.Width = 15;
+            imgBouton.Height = 15;
+            stackLigne.Children.Add(imgBouton);
+
+            Label lblNom = new Label();
+            lblNom.Content = unAliment.Nom;
+            lblNom.Style = (Style)(this.Resources["fontNutitia"]);
+            lblNom.FontSize = 12;
+            lblNom.Width = 230;
+            stackLigne.Children.Add(lblNom);
+
+            return stackLigne;
+        }
+
+        /// <summary>
         /// Méthode d'ajout d'un aliment au plateau d'un plat.
         /// </summary>
         /// <param name="sender"></param>
@@ -268,33 +324,7 @@ namespace Nutritia.UI.Views
                         {
                             if (btnPlateau.Name == btnSender.Name)
                             {
-                                StackPanel stackLigne = new StackPanel();
-                                stackLigne.Orientation = Orientation.Horizontal;
-                                stackLigne.HorizontalAlignment = HorizontalAlignment.Left;
-                                stackLigne.Width = 275;
-
-                                Image imgBouton = new Image();
-                                imgBouton.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/minusIcon.png"));
-                                imgBouton.Width = 15;
-                                imgBouton.Height = 15;
-                                stackLigne.Children.Add(imgBouton);
-
-                                Label lblQuantite = new Label();
-                                lblQuantite.Content = alimentVerif.Quantite.ToString() + "x";
-                                lblQuantite.Style = (Style)(this.Resources["fontNutitia"]);
-                                lblQuantite.FontSize = 12;
-                                lblQuantite.Width = 40;
-                                stackLigne.Children.Add(lblQuantite);
-
-                                Label lblNom = new Label();
-                                lblNom.Content = alimentVerif.Nom;
-                                lblNom.Style = (Style)(this.Resources["fontNutitia"]);
-                                lblNom.FontSize = 12;
-                                lblNom.Width = 230;
-                                stackLigne.Children.Add(lblNom);
-
-                                btnPlateau.Content = stackLigne;
-                                //btnPlateau.Click += Retirer_Aliment_Plateau;
+                                btnPlateau.Content = Modifier_Quantite_Bouton_Plateau(alimentVerif);
                             }
                         }
                     }
@@ -327,54 +357,11 @@ namespace Nutritia.UI.Views
                     {
                         if (listeAlimentsPlateau[i].Quantite == 1)
                         {
-                            StackPanel stackLigne = new StackPanel();
-                            stackLigne.Orientation = Orientation.Horizontal;
-                            stackLigne.HorizontalAlignment = HorizontalAlignment.Left;
-                            stackLigne.Width = 275;
-
-                            Image imgBouton = new Image();
-                            imgBouton.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/minusIcon.png"));
-                            imgBouton.Width = 15;
-                            imgBouton.Height = 15;
-                            stackLigne.Children.Add(imgBouton);
-
-                            Label lblNom = new Label();
-                            lblNom.Content = listeAlimentsPlateau[i].Nom;
-                            lblNom.Style = (Style)(this.Resources["fontNutitia"]);
-                            lblNom.FontSize = 12;
-                            lblNom.Width = 230;
-                            stackLigne.Children.Add(lblNom);
-
-                            btnSender.Content = stackLigne;
+                            btnSender.Content = Modifier_Bouton_Retrait_Plateau(listeAlimentsPlateau[i]);
                         }
                         else
                         {
-                            StackPanel stackLigne = new StackPanel();
-                            stackLigne.Orientation = Orientation.Horizontal;
-                            stackLigne.HorizontalAlignment = HorizontalAlignment.Left;
-                            stackLigne.Width = 275;
-
-                            Image imgBouton = new Image();
-                            imgBouton.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/minusIcon.png"));
-                            imgBouton.Width = 15;
-                            imgBouton.Height = 15;
-                            stackLigne.Children.Add(imgBouton);
-
-                            Label lblQuantite = new Label();
-                            lblQuantite.Content = listeAlimentsPlateau[i].Quantite.ToString() + "x";
-                            lblQuantite.Style = (Style)(this.Resources["fontNutitia"]);
-                            lblQuantite.FontSize = 12;
-                            lblQuantite.Width = 40;
-                            stackLigne.Children.Add(lblQuantite);
-
-                            Label lblNom = new Label();
-                            lblNom.Content = listeAlimentsPlateau[i].Nom;
-                            lblNom.Style = (Style)(this.Resources["fontNutitia"]);
-                            lblNom.FontSize = 12;
-                            lblNom.Width = 230;
-                            stackLigne.Children.Add(lblNom);
-
-                            btnSender.Content = stackLigne;
+                            btnSender.Content = Modifier_Quantite_Bouton_Plateau(listeAlimentsPlateau[i]); ;
                         }
 
                     }

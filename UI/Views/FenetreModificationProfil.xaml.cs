@@ -168,6 +168,11 @@ namespace Nutritia.UI.Views
             #endregion
         }
 
+        /// <summary>
+        /// Méthode permettant de valider et modifier un profil d'utilisateur.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Valider_Modifier(object sender, RoutedEventArgs e)
         {
             /*-----------------------------------Validation des différents champs de saisie-----------------------------------*/
@@ -875,6 +880,7 @@ namespace Nutritia.UI.Views
         }
 
         #endregion
+
         private void CultureManager_UICultureChanged(object sender, EventArgs e)
         {
             App.Current.MainWindow.Title = FenetreProfil.Titre;

@@ -65,9 +65,6 @@ namespace Nutritia.UI.Views
             listeAlimentsModifPlat = ServiceFactory.Instance.GetService<IAlimentService>().RetrieveAll();
             listePlats = ServiceFactory.Instance.GetService<IPlatService>().RetrieveAll();
 
-            //listeAliments = listeAliments.OrderBy(aliment => aliment.Nom).ToList();
-            //listePlats = listePlats.OrderBy(plat => plat.Nom).ToList();
-
             Construire_Accordeon(accordeon_aliments);
             Construire_Accordeon(accordeon_aliments_modif);
         }
@@ -208,7 +205,7 @@ namespace Nutritia.UI.Views
         #endregion
 
         /// <summary>
-        /// Création et insertion d'un nouvel aliment dans la base de données.
+        /// Création et modification d'aliments dans la base de données.
         /// Inclue aussi les méthodes de validations des différents champs de saisie.
         /// </summary>
         #region InsertionModificationAliment
@@ -244,10 +241,9 @@ namespace Nutritia.UI.Views
             {
                 Erreur_Champ();
             }
-            // Si tout c'est bien passé, alors on insère les données et passe au menu des membres.
+            // Si tout c'est bien passé, alors on insère les données.
             else
             {
-                //Inserer_Donnees();
                 Inserer_Aliment();
 
                 accordeon_aliments.Items.Clear();
@@ -762,6 +758,49 @@ namespace Nutritia.UI.Views
         }
 
         /// <summary>
+        /// Méthode qui copie dans le répertoire de l'application l'image de l'aliment.
+        /// </summary>
+        /// <param name="unAliment"></param>
+        /// <param name="uneImage"></param>
+        /// <returns></returns>
+        private string Sauvegarder_Image_Aliment(Aliment unAliment, Image uneImage)
+        {
+            string chemin = uneImage.Source.ToString();
+            int position = chemin.LastIndexOf('/');
+            string image = chemin.Substring(position + 1);
+            string actuel;
+
+            int positionPack = chemin.IndexOf("pack");
+
+            if (positionPack == -1)
+            {
+                chemin = chemin.Substring(8);
+                actuel = Directory.GetCurrentDirectory();
+
+                actuel += cheminSauvegarde;
+
+                bool dossierExiste = System.IO.Directory.Exists(actuel);
+                if (!dossierExiste)
+                    System.IO.Directory.CreateDirectory(actuel);
+
+                actuel += image;
+
+                if (!File.Exists(actuel))
+                {
+                    System.IO.File.Copy(chemin, actuel);
+                }
+
+                unAliment.ImageURL = "pack://application:,,,/UI/Images/" + image;
+            }
+            else
+            {
+                unAliment.ImageURL = chemin;
+            }
+
+            return unAliment.ImageURL;
+        }
+
+        /// <summary>
         /// Méthode d'insertion dans la base de données d'un nouvel aliment.
         /// </summary>
         private void Inserer_Aliment()
@@ -789,41 +828,13 @@ namespace Nutritia.UI.Views
             nouvelAliment.Sodium = double.Parse(Sodium.Text);
 
             //----------------------------------------Enregistrement du chemin de l'image----------------------------------------
-            string chemin = img_alim.Source.ToString();
-            int position = chemin.LastIndexOf('/');
-            string image = chemin.Substring(position + 1);
-            string actuel;
+            nouvelAliment.ImageURL = Sauvegarder_Image_Aliment(nouvelAliment, img_alim);
 
-            int positionPack = chemin.IndexOf("pack");
-
-            if (positionPack == -1)
-            {
-                chemin = chemin.Substring(8);
-                actuel = Directory.GetCurrentDirectory();
-
-                actuel += cheminSauvegarde;
-
-                bool dossierExiste = System.IO.Directory.Exists(actuel);
-                if (!dossierExiste)
-                    System.IO.Directory.CreateDirectory(actuel);
-
-                actuel += image;
-
-                if (!File.Exists(actuel))
-                {
-                    System.IO.File.Copy(chemin, actuel);
-                }
-
-                nouvelAliment.ImageURL = "pack://application:,,,/UI/Images/" + image;
-            }
-            else
-            {
-                nouvelAliment.ImageURL = chemin;
-            }
-
-            //----------------------------------------Insertion en BD----------------------------------------
+            //----------------------------------------Insertion en BD et mise à jour des données locales----------------------------------------
             ServiceFactory.Instance.GetService<IAlimentService>().Insert(nouvelAliment);
             listeAliments = ServiceFactory.Instance.GetService<IAlimentService>().RetrieveAll();
+            listeAlimentsAjoutPlat = ServiceFactory.Instance.GetService<IAlimentService>().RetrieveAll();
+            listeAlimentsModifPlat = ServiceFactory.Instance.GetService<IAlimentService>().RetrieveAll();
 
             //----------------------------------------Remise à neuf des champs de saisie----------------------------------------
             Nom_alim.Text = "";
@@ -869,37 +880,7 @@ namespace Nutritia.UI.Views
             modifAliment.Sodium = double.Parse(Sodium_modif.Text);
 
             //----------------------------------------Enregistrement du chemin de l'image----------------------------------------
-            string chemin = img_alim_modif.Source.ToString();
-            int position = chemin.LastIndexOf('/');
-            string image = chemin.Substring(position + 1);
-            string actuel;
-
-            int positionPack = chemin.IndexOf("pack");
-
-            if (positionPack == -1)
-            {
-                chemin = chemin.Substring(8);
-                actuel = Directory.GetCurrentDirectory();
-
-                actuel += cheminSauvegarde;
-
-                bool dossierExiste = System.IO.Directory.Exists(actuel);
-                if (!dossierExiste)
-                    System.IO.Directory.CreateDirectory(actuel);
-
-                actuel += image;
-
-                if (!File.Exists(actuel))
-                {
-                    System.IO.File.Copy(chemin, actuel);
-                }
-
-                modifAliment.ImageURL = "pack://application:,,,/UI/Images/" + image;
-            }
-            else
-            {
-                modifAliment.ImageURL = chemin;
-            }
+            modifAliment.ImageURL = Sauvegarder_Image_Aliment(modifAliment, img_alim_modif);
 
             //----------------------------------------Update en BD----------------------------------------
             ServiceFactory.Instance.GetService<IAlimentService>().Update(modifAliment);
@@ -1093,6 +1074,10 @@ namespace Nutritia.UI.Views
 
         #endregion
 
+        /// <summary>
+        /// Création et modification de plats dans la base de données.
+        /// Inclue aussi les méthodes de validations des différents champs de saisie.
+        /// </summary>
         #region InsertionModificationPlat
 
         /// <summary>
@@ -1130,7 +1115,7 @@ namespace Nutritia.UI.Views
             {
                 if (unAliment.Categorie == categorie)
                 {
-                    Button btnAliment = Creer_Bouton_Aliment(true, unAliment, unAccordeon);
+                    Button btnAliment = Creer_Bouton_Aliment(unAliment, unAccordeon);
                     stackCategorie.Children.Add(btnAliment);
                 }
             }
@@ -1145,7 +1130,7 @@ namespace Nutritia.UI.Views
         /// <param name="plus"></param>
         /// <param name="unAliment"></param>
         /// <returns></returns>
-        Button Creer_Bouton_Aliment(bool plus, Aliment unAliment, Accordion unAccordeon)
+        Button Creer_Bouton_Aliment(Aliment unAliment, Accordion unAccordeon)
         {
             Button btnControl = new Button();
 
@@ -1158,19 +1143,14 @@ namespace Nutritia.UI.Views
             btnControl.Name = "btn" + ((int)unAliment.IdAliment).ToString();
             btnControl.ToolTip = Produire_Aide_Contextuelle(unAliment);
 
-            if (plus)
+            if (unAccordeon.Name == "accordeon_aliments")
             {
+                btnControl.Click += Ajout_Aliment_Plateau;
+            }
 
-                if (unAccordeon.Name == "accordeon_aliments")
-                {
-                    btnControl.Click += Ajout_Aliment_Plateau;
-                }
-
-                if (unAccordeon.Name == "accordeon_aliments_modif")
-                {
-                    btnControl.Click += Ajout_Aliment_Plateau_Modif;
-                }
-
+            if (unAccordeon.Name == "accordeon_aliments_modif")
+            {
+                btnControl.Click += Ajout_Aliment_Plateau_Modif;
             }
 
 
@@ -1180,7 +1160,7 @@ namespace Nutritia.UI.Views
             stackLigne.Width = 275;
 
             Image imgBouton = new Image();
-            imgBouton.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/" + (plus ? "plusIcon" : "minusIcon") + ".png"));
+            imgBouton.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/plusIcon.png"));
             imgBouton.Width = 15;
             imgBouton.Height = 15;
             stackLigne.Children.Add(imgBouton);
@@ -1202,11 +1182,11 @@ namespace Nutritia.UI.Views
         /// </summary>
         /// <param name="unBouton"></param>
         /// <param name="unAliment"></param>
-        void Creer_Bouton_Retrait(Button unBouton, Aliment unAliment, StackPanel unStackPanel)
+        private void Creer_Bouton_Retrait(Button unBouton, Aliment unAliment, StackPanel unStackPanel)
         {
             Button btnControl = new Button();
 
-            // Création du bouton pour supprimer ou ajouter un Plat/Aliment
+            // Création du bouton pour supprimer aliment
             btnControl.HorizontalContentAlignment = HorizontalAlignment.Left;
             Thickness margin = btnControl.Margin;
             margin.Left = 0;
@@ -1244,7 +1224,7 @@ namespace Nutritia.UI.Views
         /// </summary>
         /// <param name="unBouton"></param>
         /// <param name="unAliment"></param>
-        void Creer_Bouton_Retrait_Modif(Button unBouton, Aliment unAliment, StackPanel unStackPanel)
+        private void Creer_Bouton_Retrait_Modif(Button unBouton, Aliment unAliment, StackPanel unStackPanel)
         {
             Button btnControl = new Button();
 
@@ -1279,6 +1259,69 @@ namespace Nutritia.UI.Views
             btnControl.Content = stackLigne;
 
             unStackPanel.Children.Add(btnControl);
+        }
+
+        /// <summary>
+        /// Méthode permettant de modifier le multiplicateur d'un aliment dans le plateau d'un plat.
+        /// </summary>
+        /// <param name="unAliment"></param>
+        /// <returns></returns>
+        private StackPanel Modifier_Quantite_Bouton_Plateau(Aliment unAliment)
+        {
+            StackPanel stackLigne = new StackPanel();
+            stackLigne.Orientation = Orientation.Horizontal;
+            stackLigne.HorizontalAlignment = HorizontalAlignment.Left;
+            stackLigne.Width = 275;
+
+            Image imgBouton = new Image();
+            imgBouton.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/minusIcon.png"));
+            imgBouton.Width = 15;
+            imgBouton.Height = 15;
+            stackLigne.Children.Add(imgBouton);
+
+            Label lblQuantite = new Label();
+            lblQuantite.Content = unAliment.Quantite.ToString() + "x";
+            lblQuantite.Style = (Style)(this.Resources["fontNutitia"]);
+            lblQuantite.FontSize = 12;
+            lblQuantite.Width = 40;
+            stackLigne.Children.Add(lblQuantite);
+
+            Label lblNom = new Label();
+            lblNom.Content = unAliment.Nom;
+            lblNom.Style = (Style)(this.Resources["fontNutitia"]);
+            lblNom.FontSize = 12;
+            lblNom.Width = 230;
+            stackLigne.Children.Add(lblNom);
+
+            return stackLigne;
+        }
+
+        /// <summary>
+        /// Méthode permettant de retirer le multiplicateur d'un aliment dans le plateau d'un plat.
+        /// </summary>
+        /// <param name="unAliment"></param>
+        /// <returns></returns>
+        private StackPanel Modifier_Bouton_Retrait_Plateau(Aliment unAliment)
+        {
+            StackPanel stackLigne = new StackPanel();
+            stackLigne.Orientation = Orientation.Horizontal;
+            stackLigne.HorizontalAlignment = HorizontalAlignment.Left;
+            stackLigne.Width = 275;
+
+            Image imgBouton = new Image();
+            imgBouton.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/minusIcon.png"));
+            imgBouton.Width = 15;
+            imgBouton.Height = 15;
+            stackLigne.Children.Add(imgBouton);
+
+            Label lblNom = new Label();
+            lblNom.Content = unAliment.Nom;
+            lblNom.Style = (Style)(this.Resources["fontNutitia"]);
+            lblNom.FontSize = 12;
+            lblNom.Width = 230;
+            stackLigne.Children.Add(lblNom);
+
+            return stackLigne;
         }
 
         /// <summary>
@@ -1343,32 +1386,7 @@ namespace Nutritia.UI.Views
 
                                     if (btnPlateau.Name == btnSender.Name)
                                     {
-                                        StackPanel stackLigne = new StackPanel();
-                                        stackLigne.Orientation = Orientation.Horizontal;
-                                        stackLigne.HorizontalAlignment = HorizontalAlignment.Left;
-                                        stackLigne.Width = 275;
-
-                                        Image imgBouton = new Image();
-                                        imgBouton.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/minusIcon.png"));
-                                        imgBouton.Width = 15;
-                                        imgBouton.Height = 15;
-                                        stackLigne.Children.Add(imgBouton);
-
-                                        Label lblQuantite = new Label();
-                                        lblQuantite.Content = listeAlimentsPlateau[j].Quantite.ToString() + "x";
-                                        lblQuantite.Style = (Style)(this.Resources["fontNutitia"]);
-                                        lblQuantite.FontSize = 12;
-                                        lblQuantite.Width = 40;
-                                        stackLigne.Children.Add(lblQuantite);
-
-                                        Label lblNom = new Label();
-                                        lblNom.Content = listeAlimentsPlateau[j].Nom;
-                                        lblNom.Style = (Style)(this.Resources["fontNutitia"]);
-                                        lblNom.FontSize = 12;
-                                        lblNom.Width = 230;
-                                        stackLigne.Children.Add(lblNom);
-
-                                        btnPlateau.Content = stackLigne;
+                                        btnPlateau.Content = Modifier_Quantite_Bouton_Plateau(listeAlimentsPlateau[j]);
                                     }
                                 }
                             }
@@ -1440,32 +1458,7 @@ namespace Nutritia.UI.Views
 
                                     if (btnPlateau.Name == btnSender.Name)
                                     {
-                                        StackPanel stackLigne = new StackPanel();
-                                        stackLigne.Orientation = Orientation.Horizontal;
-                                        stackLigne.HorizontalAlignment = HorizontalAlignment.Left;
-                                        stackLigne.Width = 275;
-
-                                        Image imgBouton = new Image();
-                                        imgBouton.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/minusIcon.png"));
-                                        imgBouton.Width = 15;
-                                        imgBouton.Height = 15;
-                                        stackLigne.Children.Add(imgBouton);
-
-                                        Label lblQuantite = new Label();
-                                        lblQuantite.Content = listeAlimentsPlateauModification[j].Quantite.ToString() + "x";
-                                        lblQuantite.Style = (Style)(this.Resources["fontNutitia"]);
-                                        lblQuantite.FontSize = 12;
-                                        lblQuantite.Width = 40;
-                                        stackLigne.Children.Add(lblQuantite);
-
-                                        Label lblNom = new Label();
-                                        lblNom.Content = listeAlimentsPlateauModification[j].Nom;
-                                        lblNom.Style = (Style)(this.Resources["fontNutitia"]);
-                                        lblNom.FontSize = 12;
-                                        lblNom.Width = 230;
-                                        stackLigne.Children.Add(lblNom);
-
-                                        btnPlateau.Content = stackLigne;
+                                        btnPlateau.Content = Modifier_Quantite_Bouton_Plateau(listeAlimentsPlateauModification[j]);
                                     }
                                 }
                             }
@@ -1503,54 +1496,11 @@ namespace Nutritia.UI.Views
                     {
                         if (listeAlimentsPlateau[i].Quantite == 1)
                         {
-                            StackPanel stackLigne = new StackPanel();
-                            stackLigne.Orientation = Orientation.Horizontal;
-                            stackLigne.HorizontalAlignment = HorizontalAlignment.Left;
-                            stackLigne.Width = 275;
-
-                            Image imgBouton = new Image();
-                            imgBouton.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/minusIcon.png"));
-                            imgBouton.Width = 15;
-                            imgBouton.Height = 15;
-                            stackLigne.Children.Add(imgBouton);
-
-                            Label lblNom = new Label();
-                            lblNom.Content = listeAlimentsPlateau[i].Nom;
-                            lblNom.Style = (Style)(this.Resources["fontNutitia"]);
-                            lblNom.FontSize = 12;
-                            lblNom.Width = 230;
-                            stackLigne.Children.Add(lblNom);
-
-                            btnSender.Content = stackLigne;
+                            btnSender.Content = Modifier_Bouton_Retrait_Plateau(listeAlimentsPlateau[i]);
                         }
                         else
                         {
-                            StackPanel stackLigne = new StackPanel();
-                            stackLigne.Orientation = Orientation.Horizontal;
-                            stackLigne.HorizontalAlignment = HorizontalAlignment.Left;
-                            stackLigne.Width = 275;
-
-                            Image imgBouton = new Image();
-                            imgBouton.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/minusIcon.png"));
-                            imgBouton.Width = 15;
-                            imgBouton.Height = 15;
-                            stackLigne.Children.Add(imgBouton);
-
-                            Label lblQuantite = new Label();
-                            lblQuantite.Content = listeAlimentsPlateau[i].Quantite.ToString() + "x";
-                            lblQuantite.Style = (Style)(this.Resources["fontNutitia"]);
-                            lblQuantite.FontSize = 12;
-                            lblQuantite.Width = 40;
-                            stackLigne.Children.Add(lblQuantite);
-
-                            Label lblNom = new Label();
-                            lblNom.Content = listeAlimentsPlateau[i].Nom;
-                            lblNom.Style = (Style)(this.Resources["fontNutitia"]);
-                            lblNom.FontSize = 12;
-                            lblNom.Width = 230;
-                            stackLigne.Children.Add(lblNom);
-
-                            btnSender.Content = stackLigne;
+                            btnSender.Content = Modifier_Quantite_Bouton_Plateau(listeAlimentsPlateau[i]);
                         }
 
                     }
@@ -1586,54 +1536,11 @@ namespace Nutritia.UI.Views
                     {
                         if (listeAlimentsPlateauModification[i].Quantite == 1)
                         {
-                            StackPanel stackLigne = new StackPanel();
-                            stackLigne.Orientation = Orientation.Horizontal;
-                            stackLigne.HorizontalAlignment = HorizontalAlignment.Left;
-                            stackLigne.Width = 275;
-
-                            Image imgBouton = new Image();
-                            imgBouton.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/minusIcon.png"));
-                            imgBouton.Width = 15;
-                            imgBouton.Height = 15;
-                            stackLigne.Children.Add(imgBouton);
-
-                            Label lblNom = new Label();
-                            lblNom.Content = listeAlimentsPlateauModification[i].Nom;
-                            lblNom.Style = (Style)(this.Resources["fontNutitia"]);
-                            lblNom.FontSize = 12;
-                            lblNom.Width = 230;
-                            stackLigne.Children.Add(lblNom);
-
-                            btnSender.Content = stackLigne;
+                            btnSender.Content = Modifier_Bouton_Retrait_Plateau(listeAlimentsPlateauModification[i]);
                         }
                         else
                         {
-                            StackPanel stackLigne = new StackPanel();
-                            stackLigne.Orientation = Orientation.Horizontal;
-                            stackLigne.HorizontalAlignment = HorizontalAlignment.Left;
-                            stackLigne.Width = 275;
-
-                            Image imgBouton = new Image();
-                            imgBouton.Source = new BitmapImage(new Uri("pack://application:,,,/UI/Images/minusIcon.png"));
-                            imgBouton.Width = 15;
-                            imgBouton.Height = 15;
-                            stackLigne.Children.Add(imgBouton);
-
-                            Label lblQuantite = new Label();
-                            lblQuantite.Content = listeAlimentsPlateauModification[i].Quantite.ToString() + "x";
-                            lblQuantite.Style = (Style)(this.Resources["fontNutitia"]);
-                            lblQuantite.FontSize = 12;
-                            lblQuantite.Width = 40;
-                            stackLigne.Children.Add(lblQuantite);
-
-                            Label lblNom = new Label();
-                            lblNom.Content = listeAlimentsPlateauModification[i].Nom;
-                            lblNom.Style = (Style)(this.Resources["fontNutitia"]);
-                            lblNom.FontSize = 12;
-                            lblNom.Width = 230;
-                            stackLigne.Children.Add(lblNom);
-
-                            btnSender.Content = stackLigne;
+                            btnSender.Content = Modifier_Quantite_Bouton_Plateau(listeAlimentsPlateauModification[i]);
                         }
 
                     }
@@ -1989,6 +1896,49 @@ namespace Nutritia.UI.Views
         }
 
         /// <summary>
+        /// Méthode qui copie dans le répertoire de l'application l'image du plat.
+        /// </summary>
+        /// <param name="unAliment"></param>
+        /// <param name="uneImage"></param>
+        /// <returns></returns>
+        private string Sauvegarder_Image_Plat(Plat unPlat, Image uneImage)
+        {
+            string chemin = uneImage.Source.ToString();
+            int position = chemin.LastIndexOf('/');
+            string image = chemin.Substring(position + 1);
+            string actuel;
+
+            int positionPack = chemin.IndexOf("pack");
+
+            if (positionPack == -1)
+            {
+                chemin = chemin.Substring(8);
+                actuel = Directory.GetCurrentDirectory();
+
+                actuel += cheminSauvegarde;
+
+                bool dossierExiste = System.IO.Directory.Exists(actuel);
+                if (!dossierExiste)
+                    System.IO.Directory.CreateDirectory(actuel);
+
+                actuel += image;
+
+                if (!File.Exists(actuel))
+                {
+                    System.IO.File.Copy(chemin, actuel);
+                }
+
+                unPlat.ImageUrl = "pack://application:,,,/UI/Images/" + image;
+            }
+            else
+            {
+                unPlat.ImageUrl = chemin;
+            }
+
+            return unPlat.ImageUrl;
+        }
+
+        /// <summary>
         /// Méthode d'insertion dans la base de données d'un nouvel aliment.
         /// </summary>
         private void Inserer_Plat()
@@ -2017,36 +1967,7 @@ namespace Nutritia.UI.Views
             nouveauPlat.ListeIngredients = listeAlimentsPlateau;
 
             //----------------------------------------Enregistrement du chemin de l'image----------------------------------------
-            string chemin = img_plat.Source.ToString();
-            int position = chemin.LastIndexOf('/');
-            string image = chemin.Substring(position + 1);
-            string actuel;
-
-            int positionPack = chemin.IndexOf("pack");
-
-            if (positionPack == -1)
-            {
-                chemin = chemin.Substring(8);
-                actuel = Directory.GetCurrentDirectory();
-                actuel += cheminSauvegarde;
-
-                bool dossierExiste = System.IO.Directory.Exists(actuel);
-                if (!dossierExiste)
-                    System.IO.Directory.CreateDirectory(actuel);
-
-                actuel += image;
-
-                if (!File.Exists(actuel))
-                {
-                    System.IO.File.Copy(chemin, actuel);
-                }
-
-                nouveauPlat.ImageUrl = "pack://application:,,,/UI/Images/" + image;
-            }
-            else
-            {
-                nouveauPlat.ImageUrl = chemin;
-            }
+            nouveauPlat.ImageUrl = Sauvegarder_Image_Plat(nouveauPlat, img_plat);
 
             //----------------------------------------Insertion en BD----------------------------------------
             ServiceFactory.Instance.GetService<IPlatService>().Insert(nouveauPlat);
@@ -2092,40 +2013,7 @@ namespace Nutritia.UI.Views
             modifPlat.ListeIngredients = listeAlimentsPlateauModification;
 
             //----------------------------------------Enregistrement du chemin de l'image----------------------------------------
-            string chemin = img_plat_modif.Source.ToString();
-            int position = chemin.LastIndexOf('/');
-            string image = chemin.Substring(position + 1);
-            string actuel;
-
-            int positionPack = chemin.IndexOf("pack");
-
-            if (positionPack == -1)
-            {
-                chemin = chemin.Substring(8);
-                actuel = Directory.GetCurrentDirectory();
-                //int positionDest = actuel.LastIndexOf('\\');
-                //actuel = actuel.Substring(0, actuel.Length - (actuel.Length - positionDest));
-                //positionDest = actuel.LastIndexOf('\\');
-                //actuel = actuel.Substring(0, actuel.Length - (actuel.Length - positionDest));
-                actuel += cheminSauvegarde;
-
-                bool dossierExiste = System.IO.Directory.Exists(actuel);
-                if (!dossierExiste)
-                    System.IO.Directory.CreateDirectory(actuel);
-
-                actuel += image;
-
-                if (!File.Exists(actuel))
-                {
-                    System.IO.File.Copy(chemin, actuel);
-                }
-
-                modifPlat.ImageUrl = "pack://application:,,,/UI/Images/" + image;
-            }
-            else
-            {
-                modifPlat.ImageUrl = chemin;
-            }
+            modifPlat.ImageUrl = Sauvegarder_Image_Plat(modifPlat, img_plat_modif);
 
             //----------------------------------------Modification en BD----------------------------------------
             ServiceFactory.Instance.GetService<IPlatService>().Update(modifPlat);
