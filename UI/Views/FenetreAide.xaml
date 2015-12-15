@@ -114,7 +114,7 @@
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Style="{StaticResource tabItem}" Name="tiDon" Header="{Resx Don}">
+            <TabItem Style="{StaticResource tabItem}" Name="tiDon" Header="{Resx EnvoiDon}">
                 <ScrollViewer PreviewMouseWheel="ScrollFocus">
                     <StackPanel>
                         <Label Style="{StaticResource fontSousTitre}" Content="{Resx EnvoyerUnDon}" />

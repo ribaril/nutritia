@@ -97,20 +97,20 @@ namespace Nutritia.UI.Ressources.Localisation {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Don.
-        /// </summary>
-        public static string Don {
-            get {
-                return ResourceManager.GetString("Don", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Dons.
         /// </summary>
         public static string Dons {
             get {
                 return ResourceManager.GetString("Dons", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Envoi de don.
+        /// </summary>
+        public static string EnvoiDon {
+            get {
+                return ResourceManager.GetString("EnvoiDon", resourceCulture);
             }
         }
         
