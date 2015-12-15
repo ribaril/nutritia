@@ -652,7 +652,13 @@ namespace Nutritia.UI.Views
 			{
 				double mesure = aliment.Mesure;
 				double quantite = aliment.Quantite;
-				
+
+                // Cas ou c'Est un simple aliment atomique qui est calculé et pas un plat
+                if ((quantite / mesure) <= 1)
+                {
+                    mesure = 1.0d;
+                    quantite = 1.0d;
+                }
 
 				dValeurNutritive["Calorie"] += aliment.Energie * (quantite / mesure);
 				dValeurNutritive["Glucides"] += aliment.Glucide * (quantite / mesure);
