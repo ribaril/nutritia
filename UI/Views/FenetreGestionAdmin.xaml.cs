@@ -42,16 +42,18 @@ namespace Nutritia.UI.Views
             // Header de la fenetre
             App.Current.MainWindow.Title = Nutritia.UI.Ressources.Localisation.FenetreGestionAdmin.Titre;
 
-            //filterDataGrid.ItemsSource = s.ConvertAll(x => new { Value = x });
+
             listMembres = new ObservableCollection<Membre>(serviceMembre.RetrieveAll());
 
             currentTime = previousTime = listMembres.Max(m => m.DerniereMaj);
 
             listMembres.Remove(listMembres.FirstOrDefault(x => x.NomUtilisateur == App.MembreCourant.NomUtilisateur));
+
             filterDataGrid.DataGridCollection = CollectionViewSource.GetDefaultView(listMembres);
             filterDataGrid.DataGridCollection.Filter = new Predicate<object>(Filter);
+
             listAdmins = new ObservableCollection<Membre>(listMembres.Where(m => m.EstAdministrateur).ToList());
-            //adminsSysteme = new ObservableCollection<Membre>(serviceMembre.RetrieveAdmins());
+
             dgAdmin.ItemsSource = listAdmins;
             adminDepart = listAdmins.ToList();
 
@@ -102,60 +104,17 @@ namespace Nutritia.UI.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            adminFin = listAdmins.ToList();
+            adminFin = listMembres.Where(x => x.EstAdministrateur == true).ToList();
             membreModifie = adminDepart.Union(adminFin).Except(adminDepart.Intersect(adminFin)).ToList();
-            //membreModifie = adminDepart.Except(adminFin).ToList();
 
             foreach (Membre m in membreModifie)
             {
                 serviceMembre.Update(m);
             }
             if (membreModifie.Count != 0)
-                adminDepart = listAdmins.ToList();
+                adminDepart = adminFin;
         }
 
-        private Membre MemberFromDataContext(CheckBox box)
-        {
-            var context = box.DataContext;
-            if (context is Membre)
-            {
-                return context as Membre;
-            }
-            return null;
-        }
-
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            if (sender is CheckBox)
-            {
-                CheckBox box = sender as CheckBox;
-                Membre membre = MemberFromDataContext(box);
-                if (membre != null)
-                {
-                    if (!listAdmins.Any(x => x == membre))
-                    {
-                        membre.EstAdministrateur = true;
-                        listAdmins.Add(membre);
-                    }
-                }
-            }
-        }
-
-        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            if (sender is CheckBox)
-            {
-                CheckBox box = sender as CheckBox;
-                var context = box.DataContext;
-                Membre membre = MemberFromDataContext(box);
-                if (membre != null)
-                {
-                    membre.EstAdministrateur = false;
-                    listAdmins.Remove(membre);
-                    filterDataGrid.DataGridCollection.Refresh();
-                }
-            }
-        }
 
         private void CultureManager_UICultureChanged(object sender, EventArgs e)
         {

@@ -25,7 +25,13 @@
                         <DataGridTemplateColumn Header="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreGestionAdmin, Key=Admin}" IsReadOnly="False" Width="50">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <CheckBox HorizontalAlignment="Center" IsChecked="{Binding EstAdministrateur}" IsEnabled="{Binding EstBanni, Converter={StaticResource oppositeConverter}}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"></CheckBox>
+                                    <CheckBox HorizontalAlignment="Center" IsChecked="{Binding Path=EstAdministrateur, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                              IsEnabled="{Binding EstBanni, Converter={StaticResource oppositeConverter}}" 
+                                              ToolTipService.ShowOnDisabled="True" ToolTipService.IsEnabled="{Binding EstBanni}">
+                                        <CheckBox.ToolTip>
+                                            <ToolTip Style="{StaticResource toolTipNutritia}" Content="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreGestionAdmin, Key=TooltipBan}"/>
+                                        </CheckBox.ToolTip>
+                                    </CheckBox>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -48,7 +54,7 @@
                     <DataGridTemplateColumn Header="{Resx ResxName=Nutritia.UI.Ressources.Localisation.FenetreGestionAdmin, Key=Admin}" IsReadOnly="False" Width="50">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox HorizontalAlignment="Center" IsChecked="{Binding EstAdministrateur}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"></CheckBox>
+                                <CheckBox HorizontalAlignment="Center" IsChecked="{Binding Path=EstAdministrateur, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

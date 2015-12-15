@@ -144,4 +144,7 @@
   <data name="Titre" xml:space="preserve">
     <value>Nutritia - Manage administrators</value>
   </data>
+  <data name="TooltipBan" xml:space="preserve">
+    <value>You can't promote a banned account.</value>
+  </data>
 </root>
