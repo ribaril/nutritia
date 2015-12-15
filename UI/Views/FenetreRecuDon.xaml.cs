@@ -17,11 +17,11 @@ using System.Windows.Shapes;
 namespace Nutritia.UI.Views
 {
     /// <summary>
-    /// Interaction logic for RecuDon.xaml
+    /// Fenêtre pour afficher un recu pour un don
     /// </summary>
     public partial class FenetreRecuDon : Window
     {
-        public FenetreRecuDon(Transaction transaction)
+        public FenetreRecuDon(Don transaction)
         {
             InitializeComponent();
             lblDate.Content = transaction.DateHeureTransaction.ToString("dd/MM/yy");

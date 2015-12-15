@@ -22,7 +22,7 @@ namespace Nutritia.UI.Pages
     /// <summary>
     /// Interaction logic for Don.xaml
     /// </summary>
-    public partial class Don : Page
+    public partial class EnvoiDon : Page
     {
         private IDonService donService;
         private int valeurDon;
@@ -32,7 +32,7 @@ namespace Nutritia.UI.Pages
         public bool isCSCGood = false;
         private ModePaiement modePaiement;
 
-        public Don()
+        public EnvoiDon()
         {
             donService = ServiceFactory.Instance.GetService<IDonService>();
             InitializeComponent();
@@ -52,14 +52,14 @@ namespace Nutritia.UI.Pages
                 MontreLabelErreur();
                 if (isNomGood && isNoCarteGood && isExpirationGood && isCSCGood)
                 {
-                    Transaction transaction = new Transaction(txtProprietaire.Text, valeurDon, modePaiement);
+                    Don don = new Don(txtProprietaire.Text, valeurDon, modePaiement);
                     if (String.IsNullOrWhiteSpace(App.MembreCourant.NomUtilisateur))
-                        donService.Insert(transaction);
+                        donService.Insert(don);
                     else
-                        donService.Insert(App.MembreCourant, transaction);
+                        donService.Insert(App.MembreCourant, don);
                     VideChamps();
 
-                    (new FenetreRecuDon(transaction)).ShowDialog();
+                    (new FenetreRecuDon(don)).ShowDialog();
                 }
                 else
                     SystemSounds.Beep.Play();

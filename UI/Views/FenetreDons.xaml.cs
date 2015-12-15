@@ -27,7 +27,7 @@ namespace Nutritia.UI.Views
         private DateTime previousTime;
         private DateTime currentTime;
         private Thread dbPoolingThread;
-        List<Transaction> transactions;
+        List<Don> transactions;
 
         public FenetreDons()
         {

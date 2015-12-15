@@ -33,7 +33,7 @@ namespace Nutritia.UI.Views
 
         private void btnDon_Click(object sender, RoutedEventArgs e)
         {
-            FrmNavigation.NavigationService.Navigate(new Uri("UI/Pages/Don.xaml", UriKind.Relative));
+            FrmNavigation.NavigationService.Navigate(new Uri("UI/Pages/EnvoiDon.xaml", UriKind.Relative));
         }
 
         private void ChangeColor(object sender, RoutedEventArgs e)
