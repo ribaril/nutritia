@@ -26,13 +26,13 @@ namespace Nutritia.UI.Pages
     {
         #region NestedClassLangue
         //Nested class Langue
-        public class Langue : INotifyPropertyChanged
+        public class LangueUI : INotifyPropertyChanged
         {
             public event PropertyChangedEventHandler PropertyChanged;
 
-            private string nom;
-            private string codeISO;
+            private Langue langueSys;
             private bool actif;
+            private string nom;
 
             public string Nom
             {
@@ -45,15 +45,7 @@ namespace Nutritia.UI.Pages
                 }
             }
 
-            public string CodeISO
-            {
-                get { return codeISO; }
-                set
-                {
-                    codeISO = value;
-                    OnPropertyChanged(new PropertyChangedEventArgs("CodeISO"));
-                }
-            }
+
             public bool Actif
             {
                 get { return actif; }
@@ -64,10 +56,20 @@ namespace Nutritia.UI.Pages
                 }
             }
 
-            public Langue(string nom, string code, bool actif = false)
+            public Langue LangueSys
+            {
+                get { return langueSys; }
+                set
+                {
+                    langueSys = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("LangueSys"));
+                }
+            }
+
+            public LangueUI(string nom, Langue langue, bool actif = false)
             {
                 this.Nom = nom;
-                this.CodeISO = code;
+                this.langueSys = langue;
                 this.Actif = actif;
             }
 
@@ -82,21 +84,21 @@ namespace Nutritia.UI.Pages
 
             public override string ToString()
             {
-                return Nom.ToString();
+                return langueSys.Nom;
             }
         }
         #endregion
 
-        private ObservableCollection<Langue> mapLangue;
+        private ObservableCollection<LangueUI> mapLangue;
 
-        Langue francais = new Langue(Nutritia.UI.Ressources.Localisation.Pages.MenuGeneral.LangueFrancais, "fr-CA");
-        Langue anglais = new Langue(Nutritia.UI.Ressources.Localisation.Pages.MenuGeneral.LangueAnglais, "en-US");
+        LangueUI francais = new LangueUI(Nutritia.UI.Ressources.Localisation.Pages.MenuGeneral.LangueFrancais, Langue.FrancaisCanada);
+        LangueUI anglais = new LangueUI(Nutritia.UI.Ressources.Localisation.Pages.MenuGeneral.LangueAnglais, Langue.AnglaisUSA);
 
         public MenuGeneral()
         {
             CultureManager.UICultureChanged += CultureManager_UICultureChanged;
 
-            mapLangue = new ObservableCollection<Langue>();
+            mapLangue = new ObservableCollection<LangueUI>();
             string codeLangueActif;
 
             if (App.MembreCourant.IdMembre != null)
@@ -111,7 +113,7 @@ namespace Nutritia.UI.Pages
 
             mapLangue.Add(francais);
             mapLangue.Add(anglais);
-            mapLangue.FirstOrDefault(l => l.CodeISO == codeLangueActif).Actif = true;
+            mapLangue.FirstOrDefault(l => l.LangueSys.IETF == codeLangueActif).Actif = true;
 
             InitializeComponent();
 
@@ -120,19 +122,18 @@ namespace Nutritia.UI.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Langue langue = mapLangue.FirstOrDefault(l => l.Actif == true);
-            //Properties.Settings.Default.Langue = langue.CodeISO;
-            //Properties.Settings.Default.Save();
+            LangueUI langue = mapLangue.FirstOrDefault(l => l.Actif == true);
+
             if (App.MembreCourant.IdMembre != null)
             {
-                App.MembreCourant.LangueMembre = Nutritia.Langue.LangueFromIETF(langue.CodeISO);
+                App.MembreCourant.LangueMembre = langue.LangueSys;
                 new MySqlMembreService().Update(App.MembreCourant);
             }
             else
             {
-                App.LangueInstance = Nutritia.Langue.LangueFromIETF(langue.CodeISO);
+                App.LangueInstance = langue.LangueSys;
             }
-            CultureManager.UICulture = new CultureInfo(langue.CodeISO);
+            CultureManager.UICulture = new CultureInfo(langue.LangueSys.IETF);
         }
 
         private void CultureManager_UICultureChanged(object sender, EventArgs e)

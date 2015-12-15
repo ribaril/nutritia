@@ -21,7 +21,7 @@ namespace Nutritia.UI.Views
     /// <summary>
     /// Interaction logic for GestionAdmin.xaml
     /// </summary>
-    public partial class GestionAdmin : UserControl
+    public partial class FenetreGestionAdmin : UserControl
     {
         private IMembreService serviceMembre = new MySqlMembreService();
         private ObservableCollection<Membre> listMembres;
@@ -33,7 +33,7 @@ namespace Nutritia.UI.Views
         private DateTime previousTime;
         private DateTime currentTime;
 
-        public GestionAdmin()
+        public FenetreGestionAdmin()
         {
             CultureManager.UICultureChanged += CultureManager_UICultureChanged;
 

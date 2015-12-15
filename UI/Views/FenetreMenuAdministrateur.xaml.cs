@@ -19,9 +19,9 @@ namespace Nutritia.UI.Views
     /// <summary>
     /// Interaction logic for MenuAdministrateur.xaml
     /// </summary>
-    public partial class MenuAdministrateur : UserControl
+    public partial class FenetreMenuAdministrateur : UserControl
     {
-        public MenuAdministrateur()
+        public FenetreMenuAdministrateur()
         {
             CultureManager.UICultureChanged += CultureManager_UICultureChanged;
 
@@ -49,7 +49,7 @@ namespace Nutritia.UI.Views
 
             if (mainWindow is MainWindow)
             {
-                (mainWindow as MainWindow).ChangerVue(new GestionAdmin());
+                (mainWindow as MainWindow).ChangerVue(new FenetreGestionAdmin());
             }
         }
 

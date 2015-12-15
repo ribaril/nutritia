@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Nutritia.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="Langue" Type="System.String" Scope="User">
-      <Value Profile="(Default)">fr</Value>
-    </Setting>
     <Setting Name="NewVersionNotification" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
