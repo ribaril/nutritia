@@ -32,7 +32,7 @@
                 <Label Grid.Row="0" Content="{Resx Description}" Width="250" Height="30" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,180,0,0"></Label>
                 <TextBox Name="Description" Grid.Row="0" Width="250" Height="80" MaxLength="200" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,205,0,0"></TextBox>
 
-                <GroupBox x:Name="compo_plat" Header="{Resx CompositionPlat}" FontSize="13" HorizontalAlignment="Right"  Grid.Row="2" VerticalAlignment="Top" Height="160" Width="250" Margin="0,170,20,0">
+                <GroupBox x:Name="compo_plat" Header="{Resx CompositionPlat}" Foreground="DarkGreen" FontSize="13" FontFamily="Berlin Sans FB Demi" HorizontalAlignment="Right"  Grid.Row="2" VerticalAlignment="Top" Height="160" Width="250" Margin="0,170,20,0">
                     <ScrollViewer>
                         <StackPanel Name="composition_plat">
                         </StackPanel>
