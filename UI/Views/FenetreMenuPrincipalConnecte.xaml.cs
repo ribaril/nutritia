@@ -80,7 +80,7 @@ namespace Nutritia.UI.Views
 
         private void btnGestAdmin_Click(object sender, RoutedEventArgs e)
         {
-            ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuAdministrateur());
+            ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new FenetreMenuAdministrateur());
         }
 
         private void CultureManager_UICultureChanged(object sender, EventArgs e)

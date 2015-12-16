@@ -17,20 +17,24 @@ using System.Windows.Shapes;
 namespace Nutritia.UI.Views
 {
     /// <summary>
-    /// Interaction logic for RecuDon.xaml
+    /// Fenêtre pour afficher un recu pour un don
     /// </summary>
     public partial class FenetreRecuDon : Window
     {
-        public FenetreRecuDon(Transaction transaction)
+        /// <summary>
+        /// Constructeur
+        /// </summary>
+        /// <param name="don">Objet Don pour initialiser les labels de la fenêtre</param>
+        public FenetreRecuDon(Don don)
         {
             InitializeComponent();
-            lblDate.Content = transaction.DateHeureTransaction.ToString("dd/MM/yy");
-            lblHeure.Content = transaction.DateHeureTransaction.ToString("HH:mm");
-            lblModePaiement.Content = transaction.ModePaiementTransaction.ToString();
-            lblMontant.Content = transaction.Montant.ToString() + "$";
-            lblNom.Content = transaction.NomAuteur;
+            lblDate.Content = don.DateHeureTransaction.ToString("dd/MM/yy");
+            lblHeure.Content = don.DateHeureTransaction.ToString("HH:mm");
+            lblModePaiement.Content = don.ModePaiementTransaction.ToString();
+            lblMontant.Content = don.Montant.ToString() + "$";
+            lblNom.Content = don.NomAuteur;
             //lblNoTransaction.Content += " " + transaction.NoTransaction.ToString();
-            imgQrCode.Source = QrCodeHelper.getQrBitmap(transaction.ToString());
+            imgQrCode.Source = QrCodeHelper.getQrBitmap(don.ToString());
         }
     }
 }

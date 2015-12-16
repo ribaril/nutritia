@@ -144,4 +144,10 @@
   <data name="Titre" xml:space="preserve">
     <value>Nutritia - Gestion administrateurs</value>
   </data>
+  <data name="TooltipAccepter" xml:space="preserve">
+    <value>Appliquer les changements sur les droits d'administration.</value>
+  </data>
+  <data name="TooltipBan" xml:space="preserve">
+    <value>Vous ne pouvez pas promouvoir un compte bannis.</value>
+  </data>
 </root>

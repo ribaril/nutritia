@@ -129,11 +129,11 @@
   <data name="Connexion" xml:space="preserve">
     <value>Connexion</value>
   </data>
-  <data name="Don" xml:space="preserve">
-    <value>Don</value>
-  </data>
   <data name="Dons" xml:space="preserve">
     <value>Dons</value>
+  </data>
+  <data name="EnvoiDon" xml:space="preserve">
+    <value>Envoi de don</value>
   </data>
   <data name="EnvoyerUnDon" xml:space="preserve">
     <value>Envoyer un don</value>

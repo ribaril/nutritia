@@ -96,7 +96,7 @@
     <Compile Include="Logic\Model\Entities\Preference.cs" />
     <Compile Include="Logic\Model\Entities\RestrictionAlimentaire.cs" />
     <Compile Include="Logic\Model\Entities\Session.cs" />
-    <Compile Include="Logic\Model\Entities\Transaction.cs" />
+    <Compile Include="Logic\Model\Entities\Don.cs" />
     <Compile Include="Logic\Model\Entities\VersionLogiciel.cs" />
     <Compile Include="Logic\Services\Definitions\IAlimentService.cs" />
     <Compile Include="Logic\Services\Definitions\IDonService.cs" />
@@ -134,8 +134,8 @@
     <Compile Include="Toolkit\Services\ServiceFactory.cs" />
     <Compile Include="Toolkit\QrCodeHelper.cs" />
     <Compile Include="UI\Converter\BoolToOppositeBoolConverter.cs" />
-    <Compile Include="UI\Pages\Don.xaml.cs">
-      <DependentUpon>Don.xaml</DependentUpon>
+    <Compile Include="UI\Pages\EnvoiDon.xaml.cs">
+      <DependentUpon>EnvoiDon.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Pages\Information.xaml.cs">
       <DependentUpon>Information.xaml</DependentUpon>
@@ -555,7 +555,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UI\Pages\Don.xaml">
+    <Page Include="UI\Pages\EnvoiDon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

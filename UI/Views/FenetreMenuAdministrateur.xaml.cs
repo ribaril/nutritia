@@ -18,11 +18,15 @@ namespace Nutritia.UI.Views
 {
     /// <summary>
     /// Interaction logic for MenuAdministrateur.xaml
+    /// Fenêtre principal avec les options des administrateurs
     /// </summary>
-    public partial class MenuAdministrateur : UserControl
+    public partial class FenetreMenuAdministrateur : UserControl
     {
-        public MenuAdministrateur()
+        public FenetreMenuAdministrateur()
         {
+            //Enregistre un delegate exécuté lorsque la langue d'affichage change.
+            //Utilisé pour avoir du code plus complexe dans les cas où l'UI ne peut pas changer
+            //automatiquement. Par example, le header des fenêtres.
             CultureManager.UICultureChanged += CultureManager_UICultureChanged;
 
             InitializeComponent();
@@ -31,9 +35,9 @@ namespace Nutritia.UI.Views
             App.Current.MainWindow.Title = Nutritia.UI.Ressources.Localisation.FenetreMenuAdministrateur.Titre;
         }
 
+
         private void btnRepertoire_Click(object sender, RoutedEventArgs e)
         {
-
             IApplicationService mainWindow = ServiceFactory.Instance.GetService<IApplicationService>();
 
             if (mainWindow is MainWindow)
@@ -49,7 +53,7 @@ namespace Nutritia.UI.Views
 
             if (mainWindow is MainWindow)
             {
-                (mainWindow as MainWindow).ChangerVue(new GestionAdmin());
+                (mainWindow as MainWindow).ChangerVue(new FenetreGestionAdmin());
             }
         }
 
@@ -65,6 +69,7 @@ namespace Nutritia.UI.Views
 
         private void CultureManager_UICultureChanged(object sender, EventArgs e)
         {
+            //Change le titre de la mainwindow correctement lorsque la langue d'affichage change.
             App.Current.MainWindow.Title = Nutritia.UI.Ressources.Localisation.FenetreMenuAdministrateur.Titre;
         }
 

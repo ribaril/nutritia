@@ -61,7 +61,7 @@ namespace Nutritia.UI.Views
                 case "ModificationProfil":
                     tcAide.SelectedItem = tiProfil;
                     break;
-                case "MenuAdministrateur":
+                case "FenetreMenuAdministrateur":
                     tcAide.SelectedItem = tiMenuAdmin;
                     break;
                 case "GestionRepertoire":
@@ -70,7 +70,7 @@ namespace Nutritia.UI.Views
                 case "FenetreDons":
                     tcAide.SelectedItem = tiAdminDons;
                     break;
-                case "GestionAdmins":
+                case "FenetreGestionAdmin":
                     tcAide.SelectedItem = tiGestionAdmins;
                     break;
                 default:

@@ -18,12 +18,14 @@ namespace Nutritia.UI.Pages
 {
     /// <summary>
     /// Interaction logic for Information.xaml
+    /// Page d'information général du logiciel
     /// </summary>
     public partial class Information : Page
     {
         public Information()
         {
             InitializeComponent();
+            //Change le contenu de lblVersion pour le numéro de version du logiciel.
             lblVersion.Content = " " + FileVersionInfo.GetVersionInfo(App.ResourceAssembly.Location).FileVersion;
         }
     }

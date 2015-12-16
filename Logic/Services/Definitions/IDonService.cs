@@ -9,9 +9,9 @@ namespace Nutritia
 {
     public interface IDonService
     {
-        IList<Transaction> RetrieveAll();
-        void Insert(Transaction don);
-        void Insert(Membre membre, Transaction don);
+        IList<Don> RetrieveAll();
+        void Insert(Don don);
+        void Insert(Membre membre, Don don);
         DateTime LastTimeDon();
     }
 }

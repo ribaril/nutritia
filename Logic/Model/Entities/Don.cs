@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Nutritia.Logic.Model.Entities
 {
 
-    public class Transaction
+    public class Don
     {
 
         private Guid noTransaction;
@@ -21,12 +21,12 @@ namespace Nutritia.Logic.Model.Entities
         public double Montant { get; private set; }
         public ModePaiement ModePaiementTransaction { get; private set; }
 
-        public Transaction()
+        public Don()
         {
             noTransaction = Guid.NewGuid();
         }
 
-        public Transaction(string nom, double montant, ModePaiement modePaiement)
+        public Don(string nom, double montant, ModePaiement modePaiement)
             : this()
         {
             NomAuteur = nom;
@@ -34,7 +34,7 @@ namespace Nutritia.Logic.Model.Entities
             ModePaiementTransaction = modePaiement;
         }
 
-        public Transaction(string nom, double montant, ModePaiement modePaiement, DateTime dateHeure)
+        public Don(string nom, double montant, ModePaiement modePaiement, DateTime dateHeure)
             : this(nom, montant, modePaiement)
         {
             DateHeureTransaction = dateHeure;

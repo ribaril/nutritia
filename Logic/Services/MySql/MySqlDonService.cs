@@ -13,9 +13,9 @@ namespace Nutritia
     {
         private MySqlConnexion connexion;
 
-        public IList<Transaction> RetrieveAll()
+        public IList<Don> RetrieveAll()
         {
-            IList<Transaction> resultat = new List<Transaction>();
+            IList<Don> resultat = new List<Don>();
 
             try
             {
@@ -37,7 +37,7 @@ namespace Nutritia
             return resultat;
         }
 
-        public void Insert(Transaction don)
+        public void Insert(Don don)
         {
             try
             {
@@ -51,17 +51,17 @@ namespace Nutritia
             }
         }
 
-        private Transaction ConstruireDon(DataRow don)
+        private Don ConstruireDon(DataRow don)
         {
             DateTime DateHeureTransaction = (DateTime)don["dateDon"];
             float Montant = (float)don["montant"];
             string NomAuteur = (string)don["Auteur"];
             ModePaiement mode = ModePaiement.StringToValue((string)don["ModePaiement"]);
-            return new Transaction(NomAuteur, Montant, mode, DateHeureTransaction);
+            return new Don(NomAuteur, Montant, mode, DateHeureTransaction);
         }
 
 
-        public void Insert(Membre membre, Transaction transaction)
+        public void Insert(Membre membre, Don transaction)
         {
             Insert(transaction);
 

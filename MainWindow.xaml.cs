@@ -225,8 +225,8 @@ namespace Nutritia
                     ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipal());
                 else
                 {
-                    if (presenteurContenu.Content is Bannissement || presenteurContenu.Content is GestionAdmin || presenteurContenu.Content is GestionRepertoire || presenteurContenu.Content is FenetreDons)
-                        ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuAdministrateur());
+                    if (presenteurContenu.Content is Bannissement || presenteurContenu.Content is FenetreGestionAdmin || presenteurContenu.Content is GestionRepertoire || presenteurContenu.Content is FenetreDons)
+                        ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new FenetreMenuAdministrateur());
                     else
                         ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
                 }
@@ -433,9 +433,9 @@ namespace Nutritia
                 else
                 {
                     if (presenteurContenu.Content is Bannissement
-                    || presenteurContenu.Content is GestionAdmin
+                    || presenteurContenu.Content is FenetreGestionAdmin
                     || presenteurContenu.Content is GestionRepertoire
-                    || presenteurContenu.Content is MenuAdministrateur)
+                    || presenteurContenu.Content is FenetreMenuAdministrateur)
                         ServiceFactory.Instance.GetService<IApplicationService>().ChangerVue(new MenuPrincipalConnecte());
                 }
 
