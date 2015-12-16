@@ -38,6 +38,8 @@ namespace Nutritia
             menuService = new MySqlMenuService();
         }
 
+        #region ServicesMembres
+
         /// <summary>
         /// Méthode permettant d'obtenir l'ensemble des membres sauvegardés dans la base de données.
         /// </summary>
@@ -323,6 +325,10 @@ namespace Nutritia
 
         }
 
+        /// <summary>
+        /// Méthode permettant d'obtenir la liste de tous les membres avec les droits d'administration.
+        /// </summary>
+        /// <returns>Une liste d'objet Membre</returns>
         public IList<Membre> RetrieveAdmins()
         {
             IList<Membre> resultat = new List<Membre>();
@@ -395,29 +401,10 @@ namespace Nutritia
             return resultat;
         }
 
-        private Langue LangueFromId(int id)
-        {
-            Langue langue;
-            try
-            {
-                using (MySqlConnexion connexion = (String.IsNullOrWhiteSpace(stringConnexion)) ? new MySqlConnexion() : new MySqlConnexion(stringConnexion))
-                {
-
-                    string requete = string.Format("SELECT IETF FROM Langues WHERE idLangue = {0}", id);
-                    using (DataSet dataSetLangue = connexion.Query(requete))
-                    using (DataTable tableLangue = dataSetLangue.Tables[0])
-                    {
-                        langue = Langue.LangueFromIETF(tableLangue.Rows[0]["IETF"].ToString());
-                    }
-                }
-            }
-            catch (MySqlException)
-            {
-                throw;
-            }
-            return langue;
-        }
-
+        /// <summary>
+        /// Méthode permettant d'obtenir la date de la dernière modification d'un membre dans la base de données.
+        /// </summary>
+        /// <returns>Un objet DateTime.</returns>
         public DateTime LastUpdatedTime()
         {
             DateTime time;
@@ -441,6 +428,42 @@ namespace Nutritia
             }
             return time;
         }
+
+        #endregion
+
+        //------------------------------------------------------------------------------------------------------------------------------------------------------------
+        //                                                      Méthode non-relative aux services membres.
+        //------------------------------------------------------------------------------------------------------------------------------------------------------------
+        
+        /// <summary>
+        /// Méthode permettant d'obtenir un objet Langue en fonction d'un id.
+        /// </summary>
+        /// <param name="id">Id de la langue désirée.</param>
+        /// <returns>Un objet Langue.</returns>
+        private Langue LangueFromId(int id)
+        {
+            Langue langue;
+            try
+            {
+                using (MySqlConnexion connexion = (String.IsNullOrWhiteSpace(stringConnexion)) ? new MySqlConnexion() : new MySqlConnexion(stringConnexion))
+                {
+
+                    string requete = string.Format("SELECT IETF FROM Langues WHERE idLangue = {0}", id);
+                    using (DataSet dataSetLangue = connexion.Query(requete))
+                    using (DataTable tableLangue = dataSetLangue.Tables[0])
+                    {
+                        langue = Langue.LangueFromIETF(tableLangue.Rows[0]["IETF"].ToString());
+                    }
+                }
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+            return langue;
+        }
+
+        
 
     }
 }

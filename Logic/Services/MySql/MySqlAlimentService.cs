@@ -130,7 +130,7 @@ namespace Nutritia
         /// <summary>
         /// Méthode d'insertion d'un nouvel aliment dans la base de données.
         /// </summary>
-        /// <param name="unAliment"></param>
+        /// <param name="unAliment">L'aliment à insérer dans la base de données.</param>
         public void Insert(Aliment unAliment)
         {
             string requeteCategoriesAlim = string.Format("SELECT * FROM CategoriesAlimentaires WHERE categorieAlimentaire = '{0}'", unAliment.Categorie);
@@ -202,8 +202,8 @@ namespace Nutritia
         /// <summary>
         /// Méthode permettant d'obtenir l'id pour une valeur nutritionnelle désirée.
         /// </summary>
-        /// <param name="uneValeur"></param>
-        /// <returns></returns>
+        /// <param name="uneValeur">Nom de la valeur nutritionnelle dont on veut l'id.</param>
+        /// <returns>Un int contenant l'id de la valeur nutritionnelle désirée.</returns>
         private int Associer_Valeur_Nutritionnelle(String uneValeur)
         {
             int idValeur = 0;
@@ -236,9 +236,9 @@ namespace Nutritia
         /// <summary>
         /// Insertion d'une valeur nutritionnelle dans la table de correspondance "AlimentsValeursNutritionnelles".
         /// </summary>
-        /// <param name="idValeur"></param>
-        /// <param name="idAliment"></param>
-        /// <param name="valeur"></param>
+        /// <param name="idValeur">l'id de la valeur nutritionnelle.</param>
+        /// <param name="idAliment">L'id de l'aliment correspondant.</param>
+        /// <param name="valeur">La valeur nutritionnelle.</param>
         private void Inserer_Valeur_Nutritionnelle(int idValeur, int idAliment, double valeur)
         {
             try
@@ -265,7 +265,7 @@ namespace Nutritia
         /// <summary>
         /// Méthode de mise à jour d'un aliment dans la base de données.
         /// </summary>
-        /// <param name="unAliment"></param>
+        /// <param name="unAliment">Aliment qu'il faut mettre à jour dans la base de données.</param>
         public void Update(Aliment unAliment)
         {
             string requeteCategoriesAlim = string.Format("SELECT * FROM CategoriesAlimentaires WHERE categorieAlimentaire = '{0}'", unAliment.Categorie);

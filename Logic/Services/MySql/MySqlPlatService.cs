@@ -161,7 +161,7 @@ namespace Nutritia
         }
 
         /// <summary>
-        /// Méthode permettant d'obtenir les aliments d'un plat.
+        /// Méthode permettant d'obtenir les aliments pour un plat spécifique.
         /// </summary>
         /// <param name="args">Les arguments permettant de retrouver les aliments du plat.</param>
         /// <returns>Une liste contenant les aliments.</returns>
@@ -185,7 +185,7 @@ namespace Nutritia
         }
 
         /// <summary>
-        /// Méthode permettant de mettre à jour un plat dans la base de données.
+        /// Méthode permettant de mettre à jour un plat dans la base de données suite à un vote.
         /// </summary>
         /// <param name="plat">Le plat à mettre à jour.</param>
         public void UpdateVote(Plat plat)
@@ -218,9 +218,9 @@ namespace Nutritia
         }
 
         /// <summary>
-        /// Méthode de mise à jour d'un plat dans la base de données.
+        /// Méthode de mise à jour d'un plat modifié dans la base de données.
         /// </summary>
-        /// <param name="unAliment"></param>
+        /// <param name="unPlat">Le plat à mettre à jour.</param>
         public void Update(Plat unPlat)
         {
             try
@@ -305,7 +305,7 @@ namespace Nutritia
         /// <summary>
         /// Méthode d'insertion d'un nouveau plat dans la base de données.
         /// </summary>
-        /// <param name="unAliment"></param>
+        /// <param name="unPlat">Le plat à insérer dans la base de donnée.</param>
         public void Insert(Plat unPlat)
         {
             try
@@ -363,6 +363,10 @@ namespace Nutritia
             }
         }
 
+        /// <summary>
+        /// Méthode permettant d'obtenir la date de la dernière modification d'un plat dans la base de données.
+        /// </summary>
+        /// <returns>Un objet DateTime.</returns>
         public DateTime LastUpdatedTime()
         {
             DateTime time;
